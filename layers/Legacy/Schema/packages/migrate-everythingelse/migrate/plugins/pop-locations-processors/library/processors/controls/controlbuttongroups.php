@@ -9,9 +9,9 @@ class PoP_Locations_Module_Processor_CustomControlButtonGroups extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_TOGGLEMAP],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_TOGGLETAGMAP],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLETAGMAP],
         );
     }
 
@@ -20,16 +20,16 @@ class PoP_Locations_Module_Processor_CustomControlButtonGroups extends PoP_Modul
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_TOGGLEMAP:
-                $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TOGGLEMAP];
+            case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP:
+                $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEMAP];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP:
-                $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP];
+            case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP:
+                $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_TOGGLETAGMAP:
-                $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TOGGLETAGMAP];
+            case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLETAGMAP:
+                $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP];
                 break;
         }
         

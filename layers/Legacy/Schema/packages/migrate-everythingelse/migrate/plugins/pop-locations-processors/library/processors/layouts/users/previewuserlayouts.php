@@ -8,17 +8,17 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS],
         );
     }
 
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USERBOTTOM];
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERBOTTOM];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -27,9 +27,9 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     public function getQuicklinkgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER];
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER];
         }
 
         return parent::getQuicklinkgroupTopSubmodule($component);
@@ -40,9 +40,9 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         $ret = parent::getBelowexcerptLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS];
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS];
                 break;
         }
 
@@ -52,11 +52,11 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     public function getUseravatarSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
-                return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE];
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
+                return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE];
             
-            case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
-                return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_40];
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
+                return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_40];
         }
 
         return parent::getUseravatarSubmodule($component);
@@ -65,7 +65,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return true;
         }
 
@@ -77,8 +77,8 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';
                 break;
         }

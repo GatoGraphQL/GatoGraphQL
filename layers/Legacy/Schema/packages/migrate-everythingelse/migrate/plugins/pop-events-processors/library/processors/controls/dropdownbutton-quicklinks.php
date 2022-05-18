@@ -7,7 +7,7 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS],
+            [self::class, self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS],
         );
     }
 
@@ -16,9 +16,9 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
-                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
-                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_ICAL];
+            case self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
+                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_GOOGLECALENDAR];
+                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_ICAL];
                 break;
         }
         
@@ -28,7 +28,7 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
     public function getBtnClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
+            case self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'btn btn-compact btn-link';
         }
         
@@ -38,7 +38,7 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
+            case self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'fa-thumb-tack';
         }
 

@@ -9,9 +9,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_LINKS],
-            [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS],
-            [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLINKS],
+            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS],
+            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS],
+            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLINKS],
         );
     }
 
@@ -20,24 +20,24 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
         $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
-            self::MODULE_SIMPLEFILTERINPUTCONTAINER_LINKS => [
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
-                [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
-                [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_CUSTOMPOSTDATES],
-                [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS => [
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_HASHTAGS],
+                [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
+                [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES],
+                [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERPOST],
             ],
-            self::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS => [
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
-                [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_CUSTOMPOSTDATES],
-                [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS => [
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_HASHTAGS],
+                [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES],
+                [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERPOST],
             ],
-            self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLINKS => [
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
-                [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_CUSTOMPOSTDATES],
-                [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLINKS => [
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
+                [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
+                [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES],
+                [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERPOST],
             ],
         ];
         // Add the link access filter
@@ -46,12 +46,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
             array_splice(
                 $ret,
                 array_search(
-                    [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                     $ret
                 ),
                 0,
                 [
-                    [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_LINKACCESS],
+                    [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_LINKACCESS],
                 ]
             );
         }
@@ -71,8 +71,8 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
     // public function getFilter(array $component)
     // {
     //     $filters = array(
-    //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_LINKS => POP_FILTER_LINKS,
-    //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS => POP_FILTER_AUTHORLINKS,
+    //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS => POP_FILTER_LINKS,
+    //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS => POP_FILTER_AUTHORLINKS,
     //     );
     //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;

@@ -16,7 +16,7 @@ class PoPTheme_Wassup_Events_SocialNetwork_Module_SideInfoContentPageSectionComp
 
         // Past single event
         $components = array(
-            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_RECOMMENDEDBYSIDEBAR],
+            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_RECOMMENDEDBYSIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -32,7 +32,7 @@ class PoPTheme_Wassup_Events_SocialNetwork_Module_SideInfoContentPageSectionComp
 
         // Future and current single event
         $components = array(
-            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_RECOMMENDEDBYSIDEBAR],
+            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SINGLE_EVENT_RECOMMENDEDBYSIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [

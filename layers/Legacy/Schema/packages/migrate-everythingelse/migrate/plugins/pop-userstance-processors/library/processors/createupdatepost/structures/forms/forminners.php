@@ -7,14 +7,14 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_STANCE],
+            [self::class, self::COMPONENT_FORMINNER_STANCE],
         );
     }
 
     protected function getFeaturedimageInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+            case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
@@ -23,7 +23,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
     protected function getCoauthorsInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+            case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
@@ -32,7 +32,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
     protected function getTitleInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+            case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
@@ -41,8 +41,8 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
     protected function getEditorInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_STANCE:
-                return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
+            case self::COMPONENT_FORMINNER_STANCE:
+                return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
         }
 
         return parent::getEditorInput($component);
@@ -50,9 +50,9 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
     protected function getStatusInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+            case self::COMPONENT_FORMINNER_STANCE:
                 // Stances are always published immediately, independently of value of GD_CONF_CREATEUPDATEPOST_MODERATE
-                return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT];
+                return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT];
         }
 
         return parent::getStatusInput($component);
@@ -63,12 +63,12 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
         $ret = parent::getLayoutSubmodules($component);
         
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+            case self::COMPONENT_FORMINNER_STANCE:
                 return array_merge(
                     $ret,
                     array(
-                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
-                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
+                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
+                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
                     )
                 );
         }

@@ -7,7 +7,7 @@ class PoP_Module_Processor_PostCardLayouts extends PoP_Module_Processor_PostCard
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTPOST_CARD],
+            [self::class, self::COMPONENT_LAYOUTPOST_CARD],
         );
     }
 }

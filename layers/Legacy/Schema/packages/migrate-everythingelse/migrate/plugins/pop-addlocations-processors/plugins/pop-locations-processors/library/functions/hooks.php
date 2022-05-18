@@ -12,7 +12,7 @@ class PoP_AddLocations_LocationsProcessors_Hooks
 
     public function getControlLayout($layout)
     {
-        return [PoP_Module_Processor_TypeaheadAnchorControls::class, PoP_Module_Processor_TypeaheadAnchorControls::MODULE_ANCHORCONTROL_CREATELOCATION];
+        return [PoP_Module_Processor_TypeaheadAnchorControls::class, PoP_Module_Processor_TypeaheadAnchorControls::COMPONENT_ANCHORCONTROL_CREATELOCATION];
     }
 }
 

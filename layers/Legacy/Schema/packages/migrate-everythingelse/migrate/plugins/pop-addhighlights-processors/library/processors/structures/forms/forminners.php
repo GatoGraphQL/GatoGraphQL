@@ -7,14 +7,14 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_HIGHLIGHT],
+            [self::class, self::COMPONENT_FORMINNER_HIGHLIGHT],
         );
     }
 
     protected function getFeaturedimageInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_HIGHLIGHT:
+            case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return null;
         }
 
@@ -23,7 +23,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     protected function getCoauthorsInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_HIGHLIGHT:
+            case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return null;
         }
 
@@ -32,7 +32,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     protected function getTitleInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_HIGHLIGHT:
+            case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return null;
         }
 
@@ -41,8 +41,8 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     protected function getEditorInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_HIGHLIGHT:
-                return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
+            case self::COMPONENT_FORMINNER_HIGHLIGHT:
+                return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
         }
 
         return parent::getEditorInput($component);
@@ -50,9 +50,9 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     protected function getStatusInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_HIGHLIGHT:
+            case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 // Highlights are always published immediately, independently of value of GD_CONF_CREATEUPDATEPOST_MODERATE
-                return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT];
+                return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT];
         }
 
         return parent::getStatusInput($component);
@@ -63,13 +63,13 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
         $ret = parent::getLayoutSubmodules($component);
         
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_HIGHLIGHT:
+            case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return array_merge(
                     $ret,
                     array(
-                        [PoP_AddHighlights_Module_Processor_FormComponentGroups::class, PoP_AddHighlights_Module_Processor_FormComponentGroups::MODULE_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST],
-                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR],
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH],
+                        [PoP_AddHighlights_Module_Processor_FormComponentGroups::class, PoP_AddHighlights_Module_Processor_FormComponentGroups::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST],
+                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_HIGHLIGHTEDITOR],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH],
                     )
                 );
         }

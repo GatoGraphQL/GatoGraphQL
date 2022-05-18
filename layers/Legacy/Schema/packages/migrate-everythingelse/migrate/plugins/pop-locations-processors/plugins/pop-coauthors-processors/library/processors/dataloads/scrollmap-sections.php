@@ -10,14 +10,14 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -25,7 +25,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -34,8 +34,8 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
         return parent::getFilterSubmodule($component);
@@ -44,7 +44,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
@@ -56,7 +56,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
@@ -68,7 +68,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsSingleauthors($ret);
                 break;
         }
@@ -79,7 +79,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
@@ -89,8 +89,8 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
                 break;
         }
         parent::initModelProps($component, $props);

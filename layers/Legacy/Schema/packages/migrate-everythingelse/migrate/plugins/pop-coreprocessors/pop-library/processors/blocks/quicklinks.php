@@ -7,7 +7,7 @@ class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_EVERYTHING_QUICKLINKS],
+            [self::class, self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksB
         $ret = parent::getInnerSubmodules($component);
         
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVERYTHING_QUICKLINKS:
-                $ret[] = [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS];
+            case self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS:
+                $ret[] = [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::COMPONENT_FORM_EVERYTHINGQUICKLINKS];
                 break;
         }
     

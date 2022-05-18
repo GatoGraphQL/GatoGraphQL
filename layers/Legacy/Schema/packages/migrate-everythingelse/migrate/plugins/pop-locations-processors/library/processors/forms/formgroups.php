@@ -10,16 +10,16 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP],
-            [self::class, self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP],
+            [self::class, self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP],
+            [self::class, self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP],
-            self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
+            self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP],
+            self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -32,8 +32,8 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
     public function getInfo(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
-            case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('If you can\'t find the location in the input below, click on the "+" button to add a new one.', 'em-popprocessors');
         }
 
@@ -45,8 +45,8 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
-            case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 // Make it mandatory?
                 if (\PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_FormGroups:locations:mandatory',

@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
         $ret[] = $this->getLocationsTypeaheadSubmodule($component);
         $ret[] = $this->getMapSubmodule($component);
-        $ret[] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::MODULE_MAP_ADDMARKER];
+        $ret[] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::COMPONENT_MAP_ADDMARKER];
 
         return $ret;
     }
@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
     public function getMapSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::MODULE_MAP_INDIVIDUAL];
+        return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::COMPONENT_MAP_INDIVIDUAL];
     }
 
     public function getLocationsTypeaheadSubmodule(array $component)
@@ -65,7 +65,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret['addmarker-module'] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::MODULE_MAP_ADDMARKER];
+        $ret['addmarker-module'] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::COMPONENT_MAP_ADDMARKER];
 
         $locations_typeahead = $this->getLocationsTypeaheadSubmodule($component);
         $map_component = $this->getMapSubmodule($component);

@@ -7,7 +7,7 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY],
+            [self::class, self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
-                $ret[] = [PoP_UserCommunities_Module_Processor_CheckboxFormInputs::class, PoP_UserCommunities_Module_Processor_CheckboxFormInputs::MODULE_FILTERINPUT_FILTERBYCOMMUNITY];
+            case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
+                $ret[] = [PoP_UserCommunities_Module_Processor_CheckboxFormInputs::class, PoP_UserCommunities_Module_Processor_CheckboxFormInputs::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY];
                 break;
         }
 
@@ -27,7 +27,7 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
+            case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
                 return 'isCommunity';
         }
 

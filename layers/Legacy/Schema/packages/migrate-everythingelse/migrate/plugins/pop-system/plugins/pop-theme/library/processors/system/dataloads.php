@@ -10,7 +10,7 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadCo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME],
+            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME],
         );
     }
 
@@ -19,7 +19,7 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadCo
 
         // The actionexecution is triggered directly
         switch ($component[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME:
                 return true;
         }
 
@@ -29,7 +29,7 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadCo
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME:
                 return $this->instanceManager->getInstance(GenerateThemeMutationResolverBridge::class);
         }
 

@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
     public function getLoggedinUseravatarSubmodule()
     {
         if (defined('POP_USERAVATARPROCESSORS_INITIALIZED')) {
-            return [PoP_Module_Processor_LoggedInUserAvatars::class, PoP_Module_Processor_LoggedInUserAvatars::MODULE_LAYOUT_LOGGEDINUSERAVATAR];
+            return [PoP_Module_Processor_LoggedInUserAvatars::class, PoP_Module_Processor_LoggedInUserAvatars::COMPONENT_LAYOUT_LOGGEDINUSERAVATAR];
         }
 
         return null;

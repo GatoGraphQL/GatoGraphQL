@@ -11,11 +11,11 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageInners extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_LOGIN],
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_LOSTPWD],
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_LOSTPWDRESET],
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_LOGOUT],
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_LOGIN],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_LOSTPWD],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_LOSTPWDRESET],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_LOGOUT],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD],
         );
     }
 
@@ -24,11 +24,11 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageInners extends PoP_Module
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_FEEDBACKMESSAGEINNER_LOGIN => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN],
-            self::MODULE_FEEDBACKMESSAGEINNER_LOSTPWD => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWD],
-            self::MODULE_FEEDBACKMESSAGEINNER_LOSTPWDRESET => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWDRESET],
-            self::MODULE_FEEDBACKMESSAGEINNER_LOGOUT => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT],
-            self::MODULE_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_LOGIN => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_LOSTPWD => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWD],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_LOSTPWDRESET => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWDRESET],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_LOGOUT => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

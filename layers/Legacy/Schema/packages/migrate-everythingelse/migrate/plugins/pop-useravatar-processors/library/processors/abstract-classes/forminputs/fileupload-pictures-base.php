@@ -18,12 +18,12 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
 
     public function getDownloadpictureSubmodule(array $component)
     {
-        return [PoP_Module_Processor_DownloadPictureFileUpload::class, PoP_Module_Processor_DownloadPictureFileUpload::MODULE_FILEUPLOAD_PICTURE_DOWNLOAD];
+        return [PoP_Module_Processor_DownloadPictureFileUpload::class, PoP_Module_Processor_DownloadPictureFileUpload::COMPONENT_FILEUPLOAD_PICTURE_DOWNLOAD];
     }
 
     public function getUploadpictureSubmodule(array $component)
     {
-        return [PoP_Module_Processor_UploadPictureFileUpload::class, PoP_Module_Processor_UploadPictureFileUpload::MODULE_FILEUPLOAD_PICTURE_UPLOAD];
+        return [PoP_Module_Processor_UploadPictureFileUpload::class, PoP_Module_Processor_UploadPictureFileUpload::COMPONENT_FILEUPLOAD_PICTURE_UPLOAD];
     }
 
     public function getDefaultAvatarUserId(array $component, array &$props)

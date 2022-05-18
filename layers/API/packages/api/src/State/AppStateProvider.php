@@ -62,7 +62,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
         $state['dataoutputitems'] = [
             DataOutputItems::DATASET_MODULE_SETTINGS,
-            DataOutputItems::MODULE_DATA,
+            DataOutputItems::COMPONENT_DATA,
             DataOutputItems::DATABASES,
         ];
 

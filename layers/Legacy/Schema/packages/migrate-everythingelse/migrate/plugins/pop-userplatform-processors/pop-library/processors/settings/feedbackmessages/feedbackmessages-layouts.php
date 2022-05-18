@@ -8,7 +8,7 @@ class PoP_Module_Processor_SettingsFeedbackMessageLayouts extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_Module_Processor_SettingsFeedbackMessageLayouts extends PoP_Module_Pro
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SETTINGS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Alright, everything set up', 'poptheme-wassup');
                 $ret['success'] = sprintf(
                     '%s %s',

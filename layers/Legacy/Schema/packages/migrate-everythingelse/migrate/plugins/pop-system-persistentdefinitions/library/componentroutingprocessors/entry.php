@@ -12,7 +12,7 @@ class PoPSystem_PersistentDefinitions_Module_EntryComponentRoutingProcessor exte
         $ret = array();
 
         $routemodules = array(
-            POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE => [PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions::class, PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE],
+            POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE => [PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions::class, PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions::COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];

@@ -32,15 +32,15 @@ class FilterInputHookSet extends AbstractHookSet
         return [
             [
                 FilterInputComponentProcessor::class,
-                FilterInputComponentProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_AUTHOR_IDS
             ],
             [
                 FilterInputComponentProcessor::class,
-                FilterInputComponentProcessor::MODULE_FILTERINPUT_AUTHOR_SLUG
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_AUTHOR_SLUG
             ],
             [
                 FilterInputComponentProcessor::class,
-                FilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS
             ],
         ];
     }

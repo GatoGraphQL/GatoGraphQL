@@ -8,8 +8,8 @@ class Wassup_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT],
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_POST],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_POST],
         );
     }
 
@@ -18,14 +18,14 @@ class Wassup_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modu
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT:
                 $ret = array_merge(
                     $ret,
                     FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_HIGHLIGHT)
                 );
                 break;
 
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_POST:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_POST:
                 $ret = array_merge(
                     $ret,
                     FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POST)

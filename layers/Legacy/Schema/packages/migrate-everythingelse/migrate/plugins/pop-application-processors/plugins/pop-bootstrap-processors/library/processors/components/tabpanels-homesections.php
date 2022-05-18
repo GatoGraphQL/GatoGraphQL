@@ -7,7 +7,7 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_HOMECONTENT],
+            [self::class, self::COMPONENT_TABPANEL_HOMECONTENT],
         );
     }
 
@@ -16,15 +16,15 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
         $ret = parent::getPanelSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_HOMECONTENT:
+            case self::COMPONENT_TABPANEL_HOMECONTENT:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
-                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
-                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
-                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
-                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_LIST],
+                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
+                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
+                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
+                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
+                        [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST],
                     )
                 );
                 break;
@@ -36,21 +36,21 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
     public function getPanelHeaders(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_HOMECONTENT:
+            case self::COMPONENT_TABPANEL_HOMECONTENT:
                 return [
                     [
-                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' => [
-                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
-                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
+                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
+                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
                         ],
                     ],
                     [
-                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_LIST],
+                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST],
                         'subheader-submodules' => [
-                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
-                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
-                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_LIST],
+                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
+                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
+                            [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST],
                         ],
                     ],
                 ];

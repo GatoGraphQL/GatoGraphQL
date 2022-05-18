@@ -10,20 +10,20 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_POSTSOCIALMEDIA_POSTWRAPPER],
-            [self::class, self::MODULE_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER],
-            [self::class, self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER],
-            [self::class, self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER],
+            [self::class, self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER],
+            [self::class, self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER],
         );
     }
 
     public function getSocialmediaModule(array $component)
     {
         $socialmedias = array(
-            self::MODULE_POSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA],
-            self::MODULE_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA_COUNTER],
-            self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_SUBJUGATEDPOSTSOCIALMEDIA],
-            self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
+            self::COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_POSTSOCIALMEDIA],
+            self::COMPONENT_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_POSTSOCIALMEDIA_COUNTER],
+            self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA],
+            self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
         );
 
         if ($socialmedia = $socialmedias[$component[1]] ?? null) {

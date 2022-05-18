@@ -7,7 +7,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Mod
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Mod
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -28,8 +28,8 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Mod
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCOMMUNITYMEMBERS];
+            case self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

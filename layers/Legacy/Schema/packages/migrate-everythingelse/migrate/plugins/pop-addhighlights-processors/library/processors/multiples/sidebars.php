@@ -10,10 +10,10 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
         );
     }
 
@@ -23,19 +23,19 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
 
         switch ($component[1]) {
          // Add also the filter block for the Single Related Content, etc
-            case self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
                 $filters = array(
-                    self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
                 );
                 $ret[] = $filters[$component[1]];
-                $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR];
+                $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR];
                 break;
 
             default:
                 $inners = array(
-                    self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
-                    self::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR],
-                    self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
                 );
                 if ($inner = $inners[$component[1]] ?? null) {
                     $ret[] = $inner;
@@ -49,10 +49,10 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public function getScreen(array $component)
     {
         $screens = array(
-            self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR => POP_SCREEN_HIGHLIGHTS,
-            self::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR => POP_SCREEN_MYHIGHLIGHTS,
-            self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => POP_SCREEN_SINGLE,
-            self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
+            self::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR => POP_SCREEN_HIGHLIGHTS,
+            self::COMPONENT_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR => POP_SCREEN_MYHIGHLIGHTS,
+            self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => POP_SCREEN_SINGLE,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
         );
         if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
@@ -64,12 +64,12 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public function getScreengroup(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR:
-            case self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
-            case self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
 
-            case self::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
@@ -79,9 +79,9 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public function initWebPlatformModelProps(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
                 $inners = array(
-                    self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
                 );
                 $subComponent = $inners[$component[1]];
 

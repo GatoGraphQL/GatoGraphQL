@@ -46,72 +46,72 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT],
-            [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT],
+            [self::class, self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19:
                 // if ($grid = $this->getProp($component, $props, 'layout-grid')) {
                 //     return $grid;
                 // }
@@ -122,26 +122,26 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
                     'divider' => 3,
                 );
 
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT:
-            case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT:
+            case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT:
                 // if ($grid = $this->getProp($component, $props, 'layout-grid')) {
                 //     return $grid;
                 // }
@@ -161,46 +161,46 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
-            self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS03_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS04_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS05_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS06_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS07_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS08_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS09_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS10_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS11_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS12_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS13_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS14_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS15_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS16_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
+            self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
         );
         if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] =$layout;

@@ -9,14 +9,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_ADDPOSTLINK],
+            [self::class, self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_ADDPOSTLINK:
+            case self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK:
                 return TranslationAPIFacade::getInstance()->__('as Link', 'poptheme-wassup');
         }
 
@@ -25,7 +25,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_ADDPOSTLINK:
+            case self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK:
                 return 'fa-link';
         }
 
@@ -35,9 +35,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_ADDPOSTLINK:
+            case self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK:
                 $routes = array(
-                    self::MODULE_ANCHORCONTROL_ADDPOSTLINK => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
+                    self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
                 );
                 $route = $routes[$component[1]];
 
@@ -49,7 +49,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_ADDPOSTLINK:
+            case self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -61,7 +61,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_ADDPOSTLINK:
+            case self::COMPONENT_ANCHORCONTROL_ADDPOSTLINK:
                 $this->appendProp($component, $props, 'class', 'btn btn-info aslink');
                 break;
         }

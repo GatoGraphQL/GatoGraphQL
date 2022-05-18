@@ -11,7 +11,7 @@ class PoP_Module_SideInfoFrameOptionsPageSectionComponentRoutingProcessor extend
 
         // Default
         $ret[] = [
-        	'component' => [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+        	'component' => [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
         ];
 
         return $ret;

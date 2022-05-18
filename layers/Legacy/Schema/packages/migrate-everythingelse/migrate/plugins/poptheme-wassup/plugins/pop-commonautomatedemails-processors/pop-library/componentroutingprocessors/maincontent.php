@@ -14,14 +14,14 @@ class PoP_CommonAutomatedEmails_Module_MainContentComponentRoutingProcessor exte
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_AUTOMATEDEMAIL_SCREEN_SECTION);
 
         $routemodules_single = array(
-            POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL => [PoPTheme_Wassup_AE_Module_Processor_ContentBlocks::class, PoPTheme_Wassup_AE_Module_Processor_ContentBlocks::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST],
+            POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL => [PoPTheme_Wassup_AE_Module_Processor_ContentBlocks::class, PoPTheme_Wassup_AE_Module_Processor_ContentBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST],
         );
         foreach ($routemodules_single as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         $routemodules_details = array(
-            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],
+            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -35,7 +35,7 @@ class PoP_CommonAutomatedEmails_Module_MainContentComponentRoutingProcessor exte
             }
         }
         $routemodules_simpleview = array(
-            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW],
+            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -49,7 +49,7 @@ class PoP_CommonAutomatedEmails_Module_MainContentComponentRoutingProcessor exte
             }
         }
         $routemodules_fullview = array(
-            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW],
+            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -63,7 +63,7 @@ class PoP_CommonAutomatedEmails_Module_MainContentComponentRoutingProcessor exte
             }
         }
         $routemodules_thumbnail = array(
-            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL],
+            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -77,7 +77,7 @@ class PoP_CommonAutomatedEmails_Module_MainContentComponentRoutingProcessor exte
             }
         }
         $routemodules_list = array(
-            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
+            POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => [PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

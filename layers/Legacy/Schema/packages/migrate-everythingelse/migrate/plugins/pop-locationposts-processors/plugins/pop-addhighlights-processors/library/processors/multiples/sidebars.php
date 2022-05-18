@@ -7,7 +7,7 @@ class PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples extends 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR],
         );
     }
 
@@ -16,12 +16,12 @@ class PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples extends 
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR:
                 $filters = array(
-                    self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
                 );
                 $ret[] = $filters[$component[1]];
-                $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
+                $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
                 break;
         }
 
@@ -31,7 +31,7 @@ class PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples extends 
     public function getScreen(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR:
                 return POP_SCREEN_SINGLEHIGHLIGHTS;
         }
         
@@ -41,7 +41,7 @@ class PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples extends 
     public function getScreengroup(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
         

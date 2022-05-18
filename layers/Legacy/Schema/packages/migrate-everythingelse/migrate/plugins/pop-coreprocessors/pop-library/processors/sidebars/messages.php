@@ -9,18 +9,18 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MESSAGE_NOREFERENCES],
-            [self::class, self::MODULE_MESSAGE_NOCONTACT],
+            [self::class, self::COMPONENT_MESSAGE_NOREFERENCES],
+            [self::class, self::COMPONENT_MESSAGE_NOCONTACT],
         );
     }
 
     public function getMessage(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MESSAGE_NOREFERENCES:
+            case self::COMPONENT_MESSAGE_NOREFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Nothing here', 'pop-coreprocessors');
 
-            case self::MODULE_MESSAGE_NOCONTACT:
+            case self::COMPONENT_MESSAGE_NOCONTACT:
                 return TranslationAPIFacade::getInstance()->__('No contact details', 'pop-coreprocessors');
         }
 

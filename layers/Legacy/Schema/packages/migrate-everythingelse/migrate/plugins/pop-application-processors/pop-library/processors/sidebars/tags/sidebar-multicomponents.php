@@ -8,8 +8,8 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_TAGLEFT],
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_TAGRIGHT],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_TAGRIGHT],
         );
     }
 
@@ -18,12 +18,12 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_SIDEBARMULTICOMPONENT_TAGLEFT:
-                $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_TAGSOCIALMEDIA];
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT:
+                $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_TAGSOCIALMEDIA];
                 break;
 
-            case self::MODULE_SIDEBARMULTICOMPONENT_TAGRIGHT:
-                $ret[] = [GD_Custom_Module_Processor_TagWidgets::class, GD_Custom_Module_Processor_TagWidgets::MODULE_WIDGETCOMPACT_TAGINFO];
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_TAGRIGHT:
+                $ret[] = [GD_Custom_Module_Processor_TagWidgets::class, GD_Custom_Module_Processor_TagWidgets::COMPONENT_WIDGETCOMPACT_TAGINFO];
                 break;
         }
 

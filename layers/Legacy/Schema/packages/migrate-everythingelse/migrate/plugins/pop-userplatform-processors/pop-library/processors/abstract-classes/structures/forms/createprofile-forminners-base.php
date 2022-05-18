@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
     protected function getMandatoryLayouts(array $component, array &$props)
     {
         $ret = parent::getMandatoryLayouts($component, $props);
-        $ret[] = [PoP_Module_Processor_NoLabelProfileFormGroups::class, PoP_Module_Processor_NoLabelProfileFormGroups::MODULE_FORMINPUTGROUP_CUP_DISPLAYEMAIL];
+        $ret[] = [PoP_Module_Processor_NoLabelProfileFormGroups::class, PoP_Module_Processor_NoLabelProfileFormGroups::COMPONENT_FORMINPUTGROUP_CUP_DISPLAYEMAIL];
         return $ret;
     }
 
@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
     {
 
         // For the Creation, set the Display Email by default on Yes
-        $this->setProp([PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs::MODULE_FORMINPUT_CUP_DISPLAYEMAIL], $props, 'default-value', true);
+        $this->setProp([PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL], $props, 'default-value', true);
         parent::initModelProps($component, $props);
     }
 }

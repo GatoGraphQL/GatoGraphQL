@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_MemberPrivilegesLayouts extends GD_URE_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_LAYOUTUSER_MEMBERPRIVILEGES],
+            [self::class, self::COMPONENT_URE_LAYOUTUSER_MEMBERPRIVILEGES],
         );
     }
 }

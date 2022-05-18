@@ -15,17 +15,17 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SUBMENU_AUTHOR],
-            [self::class, self::MODULE_SUBMENU_TAG],
-            [self::class, self::MODULE_SUBMENU_SINGLE],
+            [self::class, self::COMPONENT_SUBMENU_AUTHOR],
+            [self::class, self::COMPONENT_SUBMENU_TAG],
+            [self::class, self::COMPONENT_SUBMENU_SINGLE],
         );
     }
     public function getClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_AUTHOR:
-            case self::MODULE_SUBMENU_TAG:
-            case self::MODULE_SUBMENU_SINGLE:
+            case self::COMPONENT_SUBMENU_AUTHOR:
+            case self::COMPONENT_SUBMENU_TAG:
+            case self::COMPONENT_SUBMENU_SINGLE:
                 return 'btn btn-default btn-sm';
         }
 
@@ -34,9 +34,9 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public function getXsClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_AUTHOR:
-            case self::MODULE_SUBMENU_TAG:
-            case self::MODULE_SUBMENU_SINGLE:
+            case self::COMPONENT_SUBMENU_AUTHOR:
+            case self::COMPONENT_SUBMENU_TAG:
+            case self::COMPONENT_SUBMENU_SINGLE:
                 return 'btn btn-default btn-sm btn-block';
         }
 
@@ -45,9 +45,9 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public function getDropdownClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_AUTHOR:
-            case self::MODULE_SUBMENU_TAG:
-            case self::MODULE_SUBMENU_SINGLE:
+            case self::COMPONENT_SUBMENU_AUTHOR:
+            case self::COMPONENT_SUBMENU_TAG:
+            case self::COMPONENT_SUBMENU_SINGLE:
                 return 'btn-default';
         }
 
@@ -62,7 +62,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $route = \PoP\Root\App::getState('route');
 
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_AUTHOR:
+            case self::COMPONENT_SUBMENU_AUTHOR:
                 $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:author:mainsubheaders',
                     array(
@@ -78,7 +78,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                     $ret
                 );
 
-            case self::MODULE_SUBMENU_TAG:
+            case self::COMPONENT_SUBMENU_TAG:
                 $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:tag:mainsubheaders',
                     array()
@@ -92,7 +92,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                     $ret
                 );
 
-            case self::MODULE_SUBMENU_SINGLE:
+            case self::COMPONENT_SUBMENU_SINGLE:
                 $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:single:mainsubheaders',
                     array()
@@ -118,7 +118,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_AUTHOR:
+            case self::COMPONENT_SUBMENU_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $url = RequestUtils::addRoute($url, $route);
@@ -126,11 +126,11 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 // Allow URE to add the Organization/Community content source attribute
                 return \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
-            case self::MODULE_SUBMENU_TAG:
+            case self::COMPONENT_SUBMENU_TAG:
                 $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, $route);
 
-            case self::MODULE_SUBMENU_SINGLE:
+            case self::COMPONENT_SUBMENU_SINGLE:
                 $url = $customPostTypeAPI->getPermalink(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, $route);
         }

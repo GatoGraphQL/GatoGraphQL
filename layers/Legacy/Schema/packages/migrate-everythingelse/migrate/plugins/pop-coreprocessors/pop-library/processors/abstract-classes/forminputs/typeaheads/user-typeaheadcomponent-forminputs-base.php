@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
 
     // protected function getComponentTemplateResource(array $component) {
 
-    //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
+    //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }
     protected function getValueKey(array $component, array &$props)
     {
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     }
     // protected function getLayoutSubmodule(array $component) {
 
-    //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
+    //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }
     protected function getTokenizerKeys(array $component, array &$props)
     {

@@ -12,14 +12,14 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST],
+            [self::class, self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST => POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL,
+            self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST => POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -29,19 +29,19 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
+            case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Add the Sidebar on the top
                 $pid = App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID);
                 if ($layout = \PoP\Root\App::applyFilters(
                     'PoPTheme_Wassup_AE_Module_Processor_ContentDataloads:singlepost:sidebar',
-                    [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
+                    [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                     $pid
                 )
                 ) {
                     $ret[] = $layout;
                 }
 
-                $ret[] = [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE];
+                $ret[] = [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE];
                 break;
         }
 
@@ -51,7 +51,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
+            case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 return $this->getObjectIDFromURLParam($component, $props, $data_properties);
         }
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
@@ -60,7 +60,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
     protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
+            case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
@@ -69,7 +69,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
+            case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Decide on the typeResolver based on the type of the single element
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }

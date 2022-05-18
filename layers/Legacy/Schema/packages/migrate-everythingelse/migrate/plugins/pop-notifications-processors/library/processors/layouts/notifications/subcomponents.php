@@ -7,7 +7,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT],
+            [self::class, self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
-                $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::MODULE_SCROLLLAYOUT_POSTCOMMENT];
+            case self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT:
+                $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::COMPONENT_SCROLLLAYOUT_POSTCOMMENT];
                 break;
         }
 
@@ -27,7 +27,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
     public function getSubcomponentField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
+            case self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 return 'commentObjectID';
         }
 
@@ -37,7 +37,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
     public function isIndividual(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
+            case self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 return false;
         }
 
@@ -47,13 +47,13 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
     public function initWebPlatformModelProps(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
-                // Make the comment shine whenever added, similar to PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_ADD
+            case self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT:
+                // Make the comment shine whenever added, similar to PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_ADD
                 // but without adding the scrollTop effect
-                $this->appendProp([PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST], $props, 'class', 'pop-highlight');
+                $this->appendProp([PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_LIST], $props, 'class', 'pop-highlight');
 
                 // Make it beep
-                $this->mergeJsmethodsProp([PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST], $props, array('beep'));
+                $this->mergeJsmethodsProp([PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_LIST], $props, array('beep'));
                 break;
         }
 

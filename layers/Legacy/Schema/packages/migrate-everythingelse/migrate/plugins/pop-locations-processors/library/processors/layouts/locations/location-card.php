@@ -7,7 +7,7 @@ class GD_EM_Module_Processor_LocationTypeaheadsSelectedLayouts extends GD_EM_Mod
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTLOCATION_CARD],
+            [self::class, self::COMPONENT_LAYOUTLOCATION_CARD],
         );
     }
 }

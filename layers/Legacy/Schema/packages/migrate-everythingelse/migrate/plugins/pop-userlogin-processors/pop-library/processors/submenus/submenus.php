@@ -7,14 +7,14 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SUBMENU_ACCOUNT],
+            [self::class, self::COMPONENT_SUBMENU_ACCOUNT],
         );
     }
 
     public function getClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 // Using btn-link instead of btn-success because the 'active' cannot be calculated on runtime, and btn-link does not paint the active in any different way
                 return 'btn btn-link';
         }
@@ -24,7 +24,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     public function getXsClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 // Using btn-link instead of btn-success because the 'active' cannot be calculated on runtime, and btn-link does not paint the active in any different way
                 return 'btn btn-default btn-block';
         }
@@ -34,7 +34,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     public function getDropdownClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 return 'btn-link';
         }
 
@@ -44,7 +44,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     public function getRoutes(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 $ret = array(
                     POP_USERLOGIN_ROUTE_LOGIN => array(),
                 );
@@ -61,7 +61,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
@@ -73,7 +73,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
@@ -85,7 +85,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMENU_ACCOUNT:
+            case self::COMPONENT_SUBMENU_ACCOUNT:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
                 break;
         }

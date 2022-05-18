@@ -11,9 +11,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
-            [self::class, self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION],
-            [self::class, self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
+            [self::class, self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION],
+            [self::class, self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION],
         );
     }
 
@@ -22,16 +22,16 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
-                $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::MODULE_LAYOUT_USERSTANCEPOSTINTERACTION];
+            case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
+                $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERSTANCEPOSTINTERACTION];
                 break;
 
-            case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
-                $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::MODULE_USERSTANCE_LAYOUT_USERPOSTINTERACTION];
+            case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
+                $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::COMPONENT_USERSTANCE_LAYOUT_USERPOSTINTERACTION];
                 break;
 
-            case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
-                $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::MODULE_USERSTANCE_LAYOUT_USERFULLVIEWINTERACTION];
+            case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
+                $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::COMPONENT_USERSTANCE_LAYOUT_USERFULLVIEWINTERACTION];
                 break;
         }
 
@@ -41,9 +41,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
-            case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
-            case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
+            case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
+            case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
+            case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
@@ -53,9 +53,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
-            case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
-            case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
+            case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
+            case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
+            case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction clearfix');
                 break;
         }

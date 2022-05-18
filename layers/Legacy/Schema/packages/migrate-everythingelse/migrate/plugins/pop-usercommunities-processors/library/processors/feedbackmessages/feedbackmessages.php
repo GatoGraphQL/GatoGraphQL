@@ -9,18 +9,18 @@ class GD_URE_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
-            [self::class, self::MODULE_FEEDBACKMESSAGE_INVITENEWMEMBERS],
-            [self::class, self::MODULE_FEEDBACKMESSAGE_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_INVITENEWMEMBERS],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_UPDATEMYCOMMUNITIES],
-            self::MODULE_FEEDBACKMESSAGE_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_INVITENEWMEMBERS],
-            self::MODULE_FEEDBACKMESSAGE_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_EDITMEMBERSHIP],
+            self::COMPONENT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEMYCOMMUNITIES],
+            self::COMPONENT_FEEDBACKMESSAGE_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWMEMBERS],
+            self::COMPONENT_FEEDBACKMESSAGE_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_EDITMEMBERSHIP],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

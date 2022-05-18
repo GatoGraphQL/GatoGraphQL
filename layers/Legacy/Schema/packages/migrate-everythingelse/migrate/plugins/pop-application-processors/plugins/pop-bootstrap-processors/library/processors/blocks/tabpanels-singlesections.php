@@ -15,11 +15,11 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY],
         );
     }
 
@@ -28,11 +28,11 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDCONTENT],
-            self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEAUTHORS],
-            self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERECOMMENDEDBY],
-            self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEUPVOTEDBY],
-            self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEDOWNVOTEDBY],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDCONTENT],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLEAUTHORS],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERECOMMENDEDBY],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLEUPVOTEDBY],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLEDOWNVOTEDBY],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -44,17 +44,17 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     protected function getControlgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUPOSTLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST];
 
          // Single Authors has no filter, so show only the Share control
-            case self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUSHARE];
 
-            case self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUUSERLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST];
         }
 
         return parent::getControlgroupBottomSubmodule($component);
@@ -63,13 +63,13 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CONTENT];
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_CONTENT];
 
-            case self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
         return parent::getDelegatorfilterSubmodule($component);
@@ -80,11 +80,11 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
-            case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($component, $props, 'show-controls-bottom', false);

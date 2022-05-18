@@ -554,7 +554,7 @@ class Engine implements EngineInterface
         // which is done through an action, called through getData()
         // Data = dbobjectids (data-ids) + feedback + database
         if (
-            in_array(DataOutputItems::MODULE_DATA, $dataoutputitems)
+            in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems)
             || in_array(DataOutputItems::DATABASES, $dataoutputitems)
         ) {
             $data = array_merge(
@@ -713,7 +713,7 @@ class Engine implements EngineInterface
         // Starting from what components must do the rendering. Allow for empty arrays (eg: componentPaths[]=somewhatevervalue)
         $not_excluded_component_sets = $this->getComponentFilterManager()->getNotExcludedComponentSets();
         if (!is_null($not_excluded_component_sets)) {
-            // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
+            // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::COMPONENT_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::COMPONENT_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
             foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
@@ -1382,7 +1382,7 @@ class Engine implements EngineInterface
 
         $ret = [];
 
-        if (in_array(DataOutputItems::MODULE_DATA, $dataoutputitems)) {
+        if (in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems)) {
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 

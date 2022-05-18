@@ -23,9 +23,9 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
     public function getMapSubmodule(array $component)
     {
         if ($this->isPostMap($component)) {
-            return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::MODULE_EM_MAP_POST];
+            return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::COMPONENT_EM_MAP_POST];
         } elseif ($this->isUserMap($component)) {
-            return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::MODULE_EM_MAP_USER];
+            return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::COMPONENT_EM_MAP_USER];
         }
 
         return null;

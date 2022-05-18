@@ -9,15 +9,15 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET],
+            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
-                return [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET];
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
+                return [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET];
         }
 
         return parent::getComponentSubmodule($component);
@@ -28,7 +28,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 $this->appendProp($component, $props, 'class', 'pop-uniqueornone-selectabletypeahead-formgroup');
 
                 $component = $this->getComponentSubmodule($component);
@@ -48,7 +48,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return '';
         }
 

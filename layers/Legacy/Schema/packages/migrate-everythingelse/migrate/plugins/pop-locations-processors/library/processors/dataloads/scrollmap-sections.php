@@ -28,27 +28,27 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_EVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_USERS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
+            self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_DATALOAD_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -56,18 +56,18 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SEARCHUSERS_SCROLLMAP],
-            self::MODULE_DATALOAD_USERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_USERS_SCROLLMAP],
-            self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP],
-            self::MODULE_DATALOAD_EVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_EVENTS_SCROLLMAP],
-            self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_PASTEVENTS_SCROLLMAP],
-            self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP],
-            self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHOREVENTS_SCROLLMAP],
-            self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORPASTEVENTS_SCROLLMAP],
-            self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGEVENTS_SCROLLMAP],
-            self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP],
-            self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_USERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_USERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_USERS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_EVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_PASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHOREVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHORPASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -76,25 +76,25 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_USERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+            case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_USERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
 
-            case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
-                return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_EVENTS];
+            case self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
+                return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_EVENTS];
 
-            case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
-                return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_AUTHOREVENTS];
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+                return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHOREVENTS];
 
-            case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
-                return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTS];
+            case self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
+                return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGEVENTS];
         }
 
         return parent::getFilterSubmodule($component);
@@ -103,23 +103,23 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_USERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLLMAP],
 
-            [self::class, self::MODULE_DATALOAD_EVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
 
-            [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
 
-            [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
         );
         $horizontalmaps = array(
-            [self::class, self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
@@ -133,14 +133,14 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
     //             return UserRequestNature::USER;
 
-    //         case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
     //             return TagRequestNature::TAG;
     //     }
 
@@ -153,15 +153,15 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
         switch ($component[1]) {
          // Filter by the Profile/Community
-            case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorcontent($ret);
                 break;
 
-            case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsTagcontent($ret);
                 break;
         }
@@ -174,9 +174,9 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
                 $this->addPastEventImmutableDataloadQueryArgs($ret);
                 break;
         }
@@ -187,20 +187,20 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
                 return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
 
-            case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_USERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_USERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
@@ -210,30 +210,30 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('events', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('events', 'poptheme-wassup'));
                 break;
 
-            case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'past events', TranslationAPIFacade::getInstance()->__('organizations', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'past events', TranslationAPIFacade::getInstance()->__('organizations', 'poptheme-wassup'));
                 break;
 
-            case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_USERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_USERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
                 // if ($filter_component = $this->getFilterSubmodule($component)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
@@ -248,14 +248,14 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
         // Events: choose to only select past/future
         $past = array(
-            [self::class, self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
         );
         $future = array(
-            [self::class, self::MODULE_DATALOAD_EVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP],
         );
         if (in_array($component, $past)) {
             $daterange_class = 'daterange-past opens-right';
@@ -263,7 +263,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             $daterange_class = 'daterange-future opens-right';
         }
         if ($daterange_class) {
-            $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
+            $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
 
         parent::initModelProps($component, $props);

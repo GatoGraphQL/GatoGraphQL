@@ -10,18 +10,18 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS],
-            [self::class, self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD],
+            [self::class, self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS],
+            [self::class, self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS:
                 return TranslationAPIFacade::getInstance()->__('View all', 'pop-notifications-processors');
 
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 return TranslationAPIFacade::getInstance()->__('Mark all as read', 'pop-notifications-processors');
         }
 
@@ -30,10 +30,10 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS:
                 return getRouteIcon(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS, false);
 
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 return getRouteIcon(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD, false);
         }
 
@@ -43,11 +43,11 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 $routes = array(
-                    self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
-                    self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
+                    self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
+                    self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
                 );
                 $route = $routes[$component[1]];
 
@@ -59,14 +59,14 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
+            case self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 // Only if the user is logged in on any one domain
                 $this->appendProp($component, $props, 'class', 'visible-loggedin-anydomain');
 

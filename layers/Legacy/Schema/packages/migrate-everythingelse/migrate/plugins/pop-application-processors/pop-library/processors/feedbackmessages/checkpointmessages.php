@@ -7,14 +7,14 @@ class PoP_Application_Module_Processor_UserCheckpointMessages extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CHECKPOINTMESSAGE_DOMAIN],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_DOMAIN],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_CHECKPOINTMESSAGE_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageInners::class, PoP_Application_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_DOMAIN],
+            self::COMPONENT_CHECKPOINTMESSAGE_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageInners::class, PoP_Application_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_DOMAIN],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

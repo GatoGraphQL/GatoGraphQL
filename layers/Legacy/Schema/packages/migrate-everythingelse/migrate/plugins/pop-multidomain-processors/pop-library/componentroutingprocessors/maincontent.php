@@ -12,7 +12,7 @@ class MultiDomain_Module_MainContentComponentRoutingProcessor extends \PoP\Appli
         $ret = array();
 
         $components = array(
-            POP_MULTIDOMAIN_ROUTE_EXTERNAL => [PoP_Module_Processor_MultidomainCodes::class, PoP_Module_Processor_MultidomainCodes::MODULE_CODE_EXTERNAL],
+            POP_MULTIDOMAIN_ROUTE_EXTERNAL => [PoP_Module_Processor_MultidomainCodes::class, PoP_Module_Processor_MultidomainCodes::COMPONENT_CODE_EXTERNAL],
         );
         foreach ($components as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];

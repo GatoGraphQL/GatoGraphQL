@@ -9,7 +9,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MODAL_QUICKVIEW],
+            [self::class, self::COMPONENT_MODAL_QUICKVIEW],
         );
     }
 
@@ -18,7 +18,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_MODAL_QUICKVIEW:
+            case self::COMPONENT_MODAL_QUICKVIEW:
                 $this->addJsmethod($ret, 'customQuickView');
                 $this->addJsmethod($ret, 'destroyPageOnModalClose', 'close');
                 break;
@@ -34,14 +34,14 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_MODAL_QUICKVIEW:
+            case self::COMPONENT_MODAL_QUICKVIEW:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $quickview_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_QUICKVIEW];
-                $quickviewsideinfo_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_QUICKVIEWSIDEINFO];
+                $quickview_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_QUICKVIEW];
+                $quickviewsideinfo_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO];
                 if ($load_component) {
                     $ret[] = $quickview_component;
                     $ret[] = $quickviewsideinfo_component;
@@ -70,7 +70,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         $ret = parent::getBodyClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_MODAL_QUICKVIEW:
+            case self::COMPONENT_MODAL_QUICKVIEW:
                 $ret .= ' pop-pagesection-group quickviewpagesection-group row';
                 break;
         }

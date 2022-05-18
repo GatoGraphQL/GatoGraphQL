@@ -21,15 +21,15 @@ class PoPTheme_Wassup_ApplicationProcessors_WebPlatform_PageSectionHooks
     public function initModelPropsHover(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        $processor->mergeJsmethodsProp([PoP_ContactUs_Module_Processor_Blocks::class, PoP_ContactUs_Module_Processor_Blocks::MODULE_BLOCK_CONTACTUS], $props, array('resetOnUserLogout'));
+        $processor->mergeJsmethodsProp([PoP_ContactUs_Module_Processor_Blocks::class, PoP_ContactUs_Module_Processor_Blocks::COMPONENT_BLOCK_CONTACTUS], $props, array('resetOnUserLogout'));
     }
 
     public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
-                $processor->mergeJsmethodsProp([PoP_Module_Processor_CommentsBlocks::class, PoP_Module_Processor_CommentsBlocks::MODULE_BLOCK_ADDCOMMENT], $props, array('destroyPageOnSuccess'));
+            case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
+                $processor->mergeJsmethodsProp([PoP_Module_Processor_CommentsBlocks::class, PoP_Module_Processor_CommentsBlocks::COMPONENT_BLOCK_ADDCOMMENT], $props, array('destroyPageOnSuccess'));
                 break;
         }
     }

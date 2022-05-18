@@ -17,24 +17,24 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
-            self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS,
-            self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY,
-            self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY,
-            self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_UPVOTEDBY,
-            self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS,
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS,
+            self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY,
+            self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY,
+            self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_UPVOTEDBY,
+            self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -42,12 +42,12 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP],
-            self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORFOLLOWINGUSERS_SCROLLMAP],
-            self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SINGLERECOMMENDEDBY_SCROLLMAP],
-            self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SINGLEUPVOTEDBY_SCROLLMAP],
-            self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SINGLEDOWNVOTEDBY_SCROLLMAP],
-            self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHORFOLLOWINGUSERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SINGLERECOMMENDEDBY_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SINGLEUPVOTEDBY_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SINGLEDOWNVOTEDBY_SCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -56,13 +56,13 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
         return parent::getFilterSubmodule($component);
@@ -71,14 +71,14 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
 
-            [self::class, self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
 
-            [self::class, self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
@@ -90,16 +90,16 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
     //             return UserRequestNature::USER;
 
-    //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
     //             return TagRequestNature::TAG;
 
-    //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
@@ -111,27 +111,27 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsTagsubscribers($ret);
                 break;
 
-            case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowers($ret);
                 break;
 
-            case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowingusers($ret);
                 break;
 
-            case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsRecommendedby($ret);
                 break;
 
-            case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsUpvotedby($ret);
                 break;
 
-            case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsDownvotedby($ret);
                 break;
         }
@@ -142,12 +142,12 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
@@ -157,16 +157,16 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
                 break;
 
-            case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('followers', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('followers', 'poptheme-wassup'));
                 break;
         }
 

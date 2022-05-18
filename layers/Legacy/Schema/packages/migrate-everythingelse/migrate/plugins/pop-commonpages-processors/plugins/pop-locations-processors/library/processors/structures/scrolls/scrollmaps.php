@@ -7,7 +7,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps exte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_WHOWEARE_MAP],
+            [self::class, self::COMPONENT_SCROLL_WHOWEARE_MAP],
         );
     }
 
@@ -15,7 +15,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps exte
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_WHOWEARE_MAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_WHOWEARE_MAP],
+            self::COMPONENT_SCROLL_WHOWEARE_MAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_MAP],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

@@ -8,17 +8,17 @@ class PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW],
         );
     }
 
     public function getQuicklinkgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW:
-            case self::MODULE_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
         return parent::getQuicklinkgroupTopSubmodule($component);
@@ -29,8 +29,8 @@ class PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Module
         $ret = parent::getAbovecontentSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW:
-                $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW:
+                $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT];
                 break;
         }
 

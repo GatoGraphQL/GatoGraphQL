@@ -7,7 +7,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE],
         );
     }
 
@@ -16,7 +16,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE:
                 $ret = array_merge(
                     $ret,
                     UserStance_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_STANCE)

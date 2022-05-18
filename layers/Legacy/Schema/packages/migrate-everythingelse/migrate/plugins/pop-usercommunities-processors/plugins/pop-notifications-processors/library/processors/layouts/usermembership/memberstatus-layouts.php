@@ -8,14 +8,14 @@ class Wassup_URE_AAL_Module_Processor_MemberStatusLayouts extends GD_URE_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_UREAAL_LAYOUTUSER_MEMBERSTATUS],
+            [self::class, self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERSTATUS],
         );
     }
 
     public function getDescription(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_UREAAL_LAYOUTUSER_MEMBERSTATUS:
+            case self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERSTATUS:
                 return sprintf(
                     '<em>%s</em>',
                     TranslationAPIFacade::getInstance()->__('Status:', 'poptheme-wassup')

@@ -7,7 +7,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_LINKS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_LINKS],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_LINKS => [PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_LINKS],
+            self::COMPONENT_BLOCK_TABPANEL_LINKS => [PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_LINKS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -28,8 +28,8 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_LINKS:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_LINKS:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -38,8 +38,8 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_LINKS:
-                return [PoP_ContentPostLinks_Module_Processor_CustomFilters::class, PoP_ContentPostLinks_Module_Processor_CustomFilters::MODULE_FILTER_LINKS];
+            case self::COMPONENT_BLOCK_TABPANEL_LINKS:
+                return [PoP_ContentPostLinks_Module_Processor_CustomFilters::class, PoP_ContentPostLinks_Module_Processor_CustomFilters::COMPONENT_FILTER_LINKS];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

@@ -7,7 +7,7 @@ class PoP_Module_Processor_PostAdditionalLayouts extends PoP_Module_Processor_Po
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL],
+            [self::class, self::COMPONENT_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL],
         );
     }
 }

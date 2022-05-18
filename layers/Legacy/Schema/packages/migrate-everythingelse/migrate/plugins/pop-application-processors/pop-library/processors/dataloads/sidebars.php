@@ -13,8 +13,8 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_TAG_SIDEBAR],
-            [self::class, self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_TAG_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR],
         );
     }
 
@@ -26,12 +26,12 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
-            self::MODULE_DATALOAD_TAG_SIDEBAR => $vertical ?
-                [Wassup_Module_Processor_CustomVerticalTagSidebars::class, Wassup_Module_Processor_CustomVerticalTagSidebars::MODULE_VERTICALSIDEBAR_TAG] :
-                [PoP_Module_Processor_CustomTagLayoutSidebars::class, PoP_Module_Processor_CustomTagLayoutSidebars::MODULE_LAYOUT_TAGSIDEBAR_HORIZONTAL],
-            self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR => $vertical ?
-                [Wassup_Module_Processor_CustomVerticalSingleSidebars::class, Wassup_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_POST] :
-                [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
+            self::COMPONENT_DATALOAD_TAG_SIDEBAR => $vertical ?
+                [Wassup_Module_Processor_CustomVerticalTagSidebars::class, Wassup_Module_Processor_CustomVerticalTagSidebars::COMPONENT_VERTICALSIDEBAR_TAG] :
+                [PoP_Module_Processor_CustomTagLayoutSidebars::class, PoP_Module_Processor_CustomTagLayoutSidebars::COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL],
+            self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR => $vertical ?
+                [Wassup_Module_Processor_CustomVerticalSingleSidebars::class, Wassup_Module_Processor_CustomVerticalSingleSidebars::COMPONENT_VERTICALSIDEBAR_SINGLE_POST] :
+                [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
         );
 
         if ($block_inner = $block_inners[$component[1]] ?? null) {
@@ -44,10 +44,10 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_TAG_SIDEBAR:
+    //         case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
     //             return TagRequestNature::TAG;
 
-    //         case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
+    //         case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
@@ -57,8 +57,8 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
-            case self::MODULE_DATALOAD_TAG_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
+            case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -68,10 +68,10 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_TAG_SIDEBAR:
+            case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
-            case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 

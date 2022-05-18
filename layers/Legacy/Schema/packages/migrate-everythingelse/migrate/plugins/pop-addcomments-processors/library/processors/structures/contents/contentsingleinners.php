@@ -7,7 +7,7 @@ class PoP_Module_Processor_CommentContentInners extends PoP_Module_Processor_Con
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENTINNER_COMMENTSINGLE],
+            [self::class, self::COMPONENT_CONTENTINNER_COMMENTSINGLE],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_CommentContentInners extends PoP_Module_Processor_Con
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_CONTENTINNER_COMMENTSINGLE:
-                $ret[] = [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST];
+            case self::COMPONENT_CONTENTINNER_COMMENTSINGLE:
+                $ret[] = [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_LIST];
                 break;
         }
 

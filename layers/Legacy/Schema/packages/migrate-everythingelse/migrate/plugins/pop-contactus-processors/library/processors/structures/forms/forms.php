@@ -8,14 +8,14 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_CONTACTUS],
+            [self::class, self::COMPONENT_FORM_CONTACTUS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_CONTACTUS => [PoP_ContactUs_Module_Processor_GFFormInners::class, PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS],
+            self::COMPONENT_FORM_CONTACTUS => [PoP_ContactUs_Module_Processor_GFFormInners::class, PoP_ContactUs_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -28,7 +28,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORM_CONTACTUS:
+            case self::COMPONENT_FORM_CONTACTUS:
                 $email = '';
                 if (defined('POP_EMAILSENDER_INITIALIZED')) {
                     $email = PoP_EmailSender_Utils::getFromEmail();

@@ -8,14 +8,14 @@ class PoP_SocialNetwork_Module_Processor_TextFormInputs extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_MESSAGESUBJECT],
+            [self::class, self::COMPONENT_FORMINPUT_MESSAGESUBJECT],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_MESSAGESUBJECT:
+            case self::COMPONENT_FORMINPUT_MESSAGESUBJECT:
                 return  TranslationAPIFacade::getInstance()->__('Subject', 'pop-genericforms');
         }
         
@@ -25,7 +25,7 @@ class PoP_SocialNetwork_Module_Processor_TextFormInputs extends PoP_Module_Proce
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_MESSAGESUBJECT:
+            case self::COMPONENT_FORMINPUT_MESSAGESUBJECT:
                 return true;
         }
 

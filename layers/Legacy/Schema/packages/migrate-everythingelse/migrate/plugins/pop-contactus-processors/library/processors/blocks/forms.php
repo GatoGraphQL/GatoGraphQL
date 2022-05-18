@@ -7,14 +7,14 @@ class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_CONTACTUS],
+            [self::class, self::COMPONENT_BLOCK_CONTACTUS],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_CONTACTUS => POP_CONTACTUS_ROUTE_CONTACTUS,
+            self::COMPONENT_BLOCK_CONTACTUS => POP_CONTACTUS_ROUTE_CONTACTUS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -24,8 +24,8 @@ class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlo
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_CONTACTUS:
-                $ret[] = [PoP_ContactUs_Module_Processor_Dataloads::class, PoP_ContactUs_Module_Processor_Dataloads::MODULE_DATALOAD_CONTACTUS];
+            case self::COMPONENT_BLOCK_CONTACTUS:
+                $ret[] = [PoP_ContactUs_Module_Processor_Dataloads::class, PoP_ContactUs_Module_Processor_Dataloads::COMPONENT_DATALOAD_CONTACTUS];
                 break;
         }
     

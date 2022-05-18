@@ -32,32 +32,32 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLGROUP_COMMENTS],
-            [self::class, self::MODULE_CONTROLGROUP_TAGLIST],
-            [self::class, self::MODULE_CONTROLGROUP_POSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_BLOCKPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_BLOCKRELOAD],
-            [self::class, self::MODULE_CONTROLGROUP_BLOCKLOADLATEST],
-            [self::class, self::MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_SUBMENUPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_SUBMENUPOSTLISTMAIN],
-            [self::class, self::MODULE_CONTROLGROUP_USERLIST],
-            [self::class, self::MODULE_CONTROLGROUP_BLOCKUSERLIST],
-            [self::class, self::MODULE_CONTROLGROUP_SUBMENUUSERLIST],
-            [self::class, self::MODULE_CONTROLGROUP_SUBMENUUSERLISTMAIN],
-            [self::class, self::MODULE_CONTROLGROUP_SUBMENUSHARE],
-            [self::class, self::MODULE_CONTROLGROUP_SHARE],
-            [self::class, self::MODULE_CONTROLGROUP_MYPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_MYBLOCKPOSTLIST],
-            [self::class, self::MODULE_CONTROLGROUP_ACCOUNT],
-            [self::class, self::MODULE_CONTROLGROUP_CREATEACCOUNT],
-            [self::class, self::MODULE_CONTROLGROUP_CREATEPOST],
-            [self::class, self::MODULE_CONTROLGROUP_CREATERESETPOST],
-            [self::class, self::MODULE_CONTROLGROUP_EDITPOST],
-            [self::class, self::MODULE_CONTROLGROUP_USERPOSTINTERACTION],
+            [self::class, self::COMPONENT_CONTROLGROUP_COMMENTS],
+            [self::class, self::COMPONENT_CONTROLGROUP_TAGLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_POSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKAUTHORPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKRELOAD],
+            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKLOADLATEST],
+            [self::class, self::COMPONENT_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLISTMAIN],
+            [self::class, self::COMPONENT_CONTROLGROUP_USERLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKUSERLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUUSERLISTMAIN],
+            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUSHARE],
+            [self::class, self::COMPONENT_CONTROLGROUP_SHARE],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKPOSTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_ACCOUNT],
+            [self::class, self::COMPONENT_CONTROLGROUP_CREATEACCOUNT],
+            [self::class, self::COMPONENT_CONTROLGROUP_CREATEPOST],
+            [self::class, self::COMPONENT_CONTROLGROUP_CREATERESETPOST],
+            [self::class, self::COMPONENT_CONTROLGROUP_EDITPOST],
+            [self::class, self::COMPONENT_CONTROLGROUP_USERPOSTINTERACTION],
         );
     }
 
@@ -66,25 +66,25 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_CONTROLGROUP_COMMENTS:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_COMMENTS:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
                 
-            case self::MODULE_CONTROLGROUP_POSTLIST:
-            case self::MODULE_CONTROLGROUP_USERLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE];
+            case self::COMPONENT_CONTROLGROUP_POSTLIST:
+            case self::COMPONENT_CONTROLGROUP_USERLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE];
                 break;
 
-            case self::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST:
+            case self::COMPONENT_CONTROLGROUP_BLOCKAUTHORPOSTLIST:
                 // Allow URE to add the Switch Organization/Organization+Members if the author is an organization
                 $layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomControlGroups:blockauthorpostlist:layouts',
                     array(
-                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK],
-                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER],
-                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE]
+                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK],
+                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER],
+                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE]
                     )
                 );
                 if ($layouts) {
@@ -95,95 +95,95 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
                 }
                 break;
 
-            case self::MODULE_CONTROLGROUP_BLOCKPOSTLIST:
-            case self::MODULE_CONTROLGROUP_BLOCKUSERLIST:
-            case self::MODULE_CONTROLGROUP_TAGLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE];
+            case self::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST:
+            case self::COMPONENT_CONTROLGROUP_BLOCKUSERLIST:
+            case self::COMPONENT_CONTROLGROUP_TAGLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE];
                 break;
 
-            case self::MODULE_CONTROLGROUP_BLOCKRELOAD:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
+            case self::COMPONENT_CONTROLGROUP_BLOCKRELOAD:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
                 break;
 
-            case self::MODULE_CONTROLGROUP_BLOCKLOADLATEST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_LOADLATESTBLOCK];
+            case self::COMPONENT_CONTROLGROUP_BLOCKLOADLATEST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK];
                 break;
 
-            case self::MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_CURRENTURL];
+            case self::COMPONENT_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_CURRENTURL];
                 break;
 
-            case self::MODULE_CONTROLGROUP_SUBMENUPOSTLIST:
-            case self::MODULE_CONTROLGROUP_SUBMENUUSERLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE];
+            case self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST:
+            case self::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE];
                 break;
 
-            case self::MODULE_CONTROLGROUP_SUBMENUPOSTLISTMAIN:
-            case self::MODULE_CONTROLGROUP_SUBMENUUSERLISTMAIN:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE];
+            case self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLISTMAIN:
+            case self::COMPONENT_CONTROLGROUP_SUBMENUUSERLISTMAIN:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE];
                 break;
 
-            case self::MODULE_CONTROLGROUP_SUBMENUSHARE:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_SHARE];
+            case self::COMPONENT_CONTROLGROUP_SUBMENUSHARE:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_SHARE];
                 break;
 
-            case self::MODULE_CONTROLGROUP_SHARE:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_SHARE];
+            case self::COMPONENT_CONTROLGROUP_SHARE:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_SHARE];
                 break;
 
-            case self::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
 
-            case self::MODULE_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
 
-            case self::MODULE_CONTROLGROUP_MYPOSTLIST:
-                $ret[] = [PoP_Module_Processor_CustomControlButtonGroups::class, PoP_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_ADDPOST];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_MYPOSTLIST:
+                $ret[] = [PoP_Module_Processor_CustomControlButtonGroups::class, PoP_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDPOST];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
 
-            case self::MODULE_CONTROLGROUP_MYBLOCKPOSTLIST:
-                $ret[] = [PoP_Module_Processor_CustomControlButtonGroups::class, PoP_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_ADDPOST];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_MYBLOCKPOSTLIST:
+                $ret[] = [PoP_Module_Processor_CustomControlButtonGroups::class, PoP_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDPOST];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
 
-            case self::MODULE_CONTROLGROUP_ACCOUNT:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS];
+            case self::COMPONENT_CONTROLGROUP_ACCOUNT:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS];
                 break;
 
-            case self::MODULE_CONTROLGROUP_CREATEACCOUNT:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS];
+            case self::COMPONENT_CONTROLGROUP_CREATEACCOUNT:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS];
                 break;
 
-            case self::MODULE_CONTROLGROUP_CREATEPOST:
-            case self::MODULE_CONTROLGROUP_EDITPOST:
+            case self::COMPONENT_CONTROLGROUP_CREATEPOST:
+            case self::COMPONENT_CONTROLGROUP_EDITPOST:
                 // Empty because their inner layouts will be added through the hook below, by PoP Section Processors
                 break;
 
-            case self::MODULE_CONTROLGROUP_CREATERESETPOST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RESETEDITOR];
+            case self::COMPONENT_CONTROLGROUP_CREATERESETPOST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RESETEDITOR];
                 break;
 
-            case self::MODULE_CONTROLGROUP_USERPOSTINTERACTION:
+            case self::COMPONENT_CONTROLGROUP_USERPOSTINTERACTION:
                 // Allow TPPDebate to add the "What do you think about TPP?" before these layouts
                 if ($layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomControlGroups:userpostinteraction:layouts',
                     array(
-                        [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT],
+                        [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT],
                     ),
                     $component
                 )

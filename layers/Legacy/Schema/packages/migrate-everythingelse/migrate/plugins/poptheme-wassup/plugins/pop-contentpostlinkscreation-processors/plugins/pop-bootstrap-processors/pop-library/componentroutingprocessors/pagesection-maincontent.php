@@ -12,7 +12,7 @@ class PoPTheme_Wassup_CPLC_Bootstrap_Module_MainPageSectionComponentRoutingProce
         $ret = array();
 
         $routemodules = array(
-            POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYLINKS],
+            POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYLINKS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

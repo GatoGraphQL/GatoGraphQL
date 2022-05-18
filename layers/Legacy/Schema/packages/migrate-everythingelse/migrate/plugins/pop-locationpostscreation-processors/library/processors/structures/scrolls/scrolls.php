@@ -8,8 +8,8 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
         );
     }
 
@@ -17,8 +17,8 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
-            self::MODULE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -33,19 +33,19 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
 
         // Extra classes
         $thumbnails = array(
-            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_THUMBNAIL],
+            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL],
         );
         $lists = array(
-            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_LIST],
+            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_LIST],
         );
         $details = array(
-            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_DETAILS],
+            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_DETAILS],
         );
         $navigators = array(
-            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_NAVIGATOR],
+            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR],
         );
         $addons = array(
-            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_ADDONS],
+            [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_ADDONS],
         );
 
         $extra_class = '';

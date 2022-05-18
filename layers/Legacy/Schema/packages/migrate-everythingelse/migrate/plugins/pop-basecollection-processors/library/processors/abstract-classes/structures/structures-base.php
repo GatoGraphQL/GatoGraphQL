@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
     {
         $ret = parent::getSubComponents($component);
 
-        // Sometimes there's no inner. Eg: self::MODULE_CONTENT_ADDCONTENTFAQ
+        // Sometimes there's no inner. Eg: self::COMPONENT_CONTENT_ADDCONTENTFAQ
         if ($inner = $this->getInnerSubmodule($component)) {
             $ret[] = $inner;
         }

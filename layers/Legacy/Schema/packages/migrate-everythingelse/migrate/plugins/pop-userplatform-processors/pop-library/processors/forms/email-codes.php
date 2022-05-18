@@ -10,29 +10,29 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CODE_EMAILNOTIFICATIONS_LABEL],
-            [self::class, self::MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL],
-            [self::class, self::MODULE_CODE_EMAILDIGESTS_LABEL],
+            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL],
+            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL],
+            [self::class, self::COMPONENT_CODE_EMAILDIGESTS_LABEL],
         );
     }
 
     public function getCode(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_EMAILNOTIFICATIONS_LABEL:
-            case self::MODULE_CODE_EMAILDIGESTS_LABEL:
+            case self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL:
+            case self::COMPONENT_CODE_EMAILDIGESTS_LABEL:
                 $titles = array(
-                    self::MODULE_CODE_EMAILNOTIFICATIONS_LABEL => TranslationAPIFacade::getInstance()->__('Email notifications', 'pop-coreprocessors'),
-                    self::MODULE_CODE_EMAILDIGESTS_LABEL => TranslationAPIFacade::getInstance()->__('Email digests', 'pop-coreprocessors'),
+                    self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL => TranslationAPIFacade::getInstance()->__('Email notifications', 'pop-coreprocessors'),
+                    self::COMPONENT_CODE_EMAILDIGESTS_LABEL => TranslationAPIFacade::getInstance()->__('Email digests', 'pop-coreprocessors'),
                 );
                 return sprintf(
                     '<h3>%s</h3>',
                     $titles[$component[1]]
                 );
 
-            case self::MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL:
+            case self::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL:
                 $titles = array(
-                    self::MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL => TranslationAPIFacade::getInstance()->__('General:', 'pop-coreprocessors'),
+                    self::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL => TranslationAPIFacade::getInstance()->__('General:', 'pop-coreprocessors'),
                 );
                 return sprintf(
                     '<h4>%s</h4>',

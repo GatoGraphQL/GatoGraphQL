@@ -7,7 +7,7 @@ class PoP_Module_Processor_AuthorContactLayouts extends PoP_Module_Processor_Aut
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_AUTHOR_CONTACT],
+            [self::class, self::COMPONENT_LAYOUT_AUTHOR_CONTACT],
         );
     }
 }

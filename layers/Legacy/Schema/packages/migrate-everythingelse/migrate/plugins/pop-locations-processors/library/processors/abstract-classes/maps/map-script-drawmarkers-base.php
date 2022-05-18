@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_MapDrawMarkerScriptsBase extends PoPEngine_Q
 
     public function getMapdivSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAP_DIV];
+        return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array

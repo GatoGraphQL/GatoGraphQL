@@ -8,14 +8,14 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_WHYFLAG],
+            [self::class, self::COMPONENT_FORMINPUT_WHYFLAG],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_WHYFLAG:
+            case self::COMPONENT_FORMINPUT_WHYFLAG:
                 return TranslationAPIFacade::getInstance()->__('Please explain why this post is inappropriate', 'pop-genericforms');
         }
         
@@ -25,7 +25,7 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_WHYFLAG:
+            case self::COMPONENT_FORMINPUT_WHYFLAG:
                 return true;
         }
         
@@ -35,7 +35,7 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_WHYFLAG:
+            case self::COMPONENT_FORMINPUT_WHYFLAG:
                 return true;
         }
 

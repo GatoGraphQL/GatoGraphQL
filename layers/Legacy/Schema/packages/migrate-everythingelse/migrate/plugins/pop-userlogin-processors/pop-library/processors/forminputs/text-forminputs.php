@@ -13,34 +13,34 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_LOGIN_USERNAME],
-            [self::class, self::MODULE_FORMINPUT_LOGIN_PWD],
-            [self::class, self::MODULE_FORMINPUT_LOSTPWD_USERNAME],
-            [self::class, self::MODULE_FORMINPUT_LOSTPWDRESET_CODE],
-            [self::class, self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD],
-            [self::class, self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT],
+            [self::class, self::COMPONENT_FORMINPUT_LOGIN_USERNAME],
+            [self::class, self::COMPONENT_FORMINPUT_LOGIN_PWD],
+            [self::class, self::COMPONENT_FORMINPUT_LOSTPWD_USERNAME],
+            [self::class, self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE],
+            [self::class, self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD],
+            [self::class, self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOGIN_USERNAME:
+            case self::COMPONENT_FORMINPUT_LOGIN_USERNAME:
                 return TranslationAPIFacade::getInstance()->__('Username or email', 'pop-coreprocessors');
             
-            case self::MODULE_FORMINPUT_LOGIN_PWD:
+            case self::COMPONENT_FORMINPUT_LOGIN_PWD:
                 return TranslationAPIFacade::getInstance()->__('Password', 'pop-coreprocessors');
             
-            case self::MODULE_FORMINPUT_LOSTPWD_USERNAME:
+            case self::COMPONENT_FORMINPUT_LOSTPWD_USERNAME:
                 return TranslationAPIFacade::getInstance()->__('Username or email', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_CODE:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
                 return TranslationAPIFacade::getInstance()->__('Code', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
                 return TranslationAPIFacade::getInstance()->__('New password', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
                 return TranslationAPIFacade::getInstance()->__('Repeat password', 'pop-coreprocessors');
         }
         
@@ -50,9 +50,9 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_CODE:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
                 return true;
         }
         
@@ -63,7 +63,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_FORMINPUT_LOSTPWDRESET_CODE:
+    //         case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
                 
     //             return 'code';
     //     }
@@ -74,9 +74,9 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
     public function getType(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOGIN_PWD:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
+            case self::COMPONENT_FORMINPUT_LOGIN_PWD:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
                 return 'password';
         }
         
@@ -86,12 +86,12 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOGIN_USERNAME:
-            case self::MODULE_FORMINPUT_LOGIN_PWD:
-            case self::MODULE_FORMINPUT_LOSTPWD_USERNAME:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_CODE:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
-            case self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
+            case self::COMPONENT_FORMINPUT_LOGIN_USERNAME:
+            case self::COMPONENT_FORMINPUT_LOGIN_PWD:
+            case self::COMPONENT_FORMINPUT_LOSTPWD_USERNAME:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
+            case self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
                 return true;
         }
 

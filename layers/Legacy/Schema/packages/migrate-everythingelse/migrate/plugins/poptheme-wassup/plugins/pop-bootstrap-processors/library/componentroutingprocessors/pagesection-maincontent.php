@@ -16,7 +16,7 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
 
         // Single
         $routemodules = array(
-            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS],
+            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -38,19 +38,19 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
         $ret = array();
 
         $ret[UserRequestNature::USER][] = [
-            'component' => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCONTENT],
+            'component' => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],
         ];
         $ret[TagRequestNature::TAG][] = [
-            'component' => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
+            'component' => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],
         ];
         $ret[RequestNature::HOME][] = [
-            'component' => [PoP_Module_Processor_HomeTabPanelSectionBlocks::class, PoP_Module_Processor_HomeTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_HOMECONTENT],
+            'component' => [PoP_Module_Processor_HomeTabPanelSectionBlocks::class, PoP_Module_Processor_HomeTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_HOMECONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],

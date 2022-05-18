@@ -7,7 +7,7 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],
+            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
         $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
-            self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => [
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => [
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
@@ -36,7 +36,7 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
     // public function getFilter(array $component)
     // {
     //     $filters = array(
-    //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
+    //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
     //     );
     //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;

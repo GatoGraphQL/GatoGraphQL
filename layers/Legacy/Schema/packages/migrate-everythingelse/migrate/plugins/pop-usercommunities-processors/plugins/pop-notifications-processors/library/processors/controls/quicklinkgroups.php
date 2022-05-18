@@ -7,7 +7,7 @@ class GD_URE_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_C
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY],
+            [self::class, self::COMPONENT_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY],
         );
     }
 
@@ -16,9 +16,9 @@ class GD_URE_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_C
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY:
-                $ret[] = [GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::class, GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::MODULE_UREAAL_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP];
-                $ret[] = [GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::class, GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::MODULE_UREAAL_QUICKLINKBUTTONGROUP_VIEWALLMEMBERS];
+            case self::COMPONENT_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY:
+                $ret[] = [GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::class, GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::COMPONENT_UREAAL_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP];
+                $ret[] = [GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::class, GD_URE_AAL_Module_Processor_QuicklinkButtonGroups::COMPONENT_UREAAL_QUICKLINKBUTTONGROUP_VIEWALLMEMBERS];
                 break;
         }
 

@@ -372,7 +372,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars['dataoutputitems'] = array(
             \PoP\ComponentModel\Constants\DataOutputItems::META,
             \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
-            \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+            \PoP\ComponentModel\Constants\DataOutputItems::COMPONENT_DATA,
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );

@@ -11,24 +11,24 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTERNAME],
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTEREMAIL],
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTERNAME],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTERNAME:
+            case self::COMPONENT_FORMINPUT_NEWSLETTERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
             
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
                 return TranslationAPIFacade::getInstance()->__('Your Email', 'pop-genericforms');
 
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return TranslationAPIFacade::getInstance()->__('Verification code', 'pop-genericforms');
         }
         
@@ -38,9 +38,9 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
         
@@ -50,7 +50,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     public function isHidden(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
         
@@ -61,11 +61,11 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     
     //     switch ($component[1]) {
         
-    //         case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+    //         case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
             
     //             return 'email';
         
-    //         case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+    //         case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
             
     //             return 'code';
     //     }
@@ -76,10 +76,10 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTERNAME:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+            case self::COMPONENT_FORMINPUT_NEWSLETTERNAME:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
 

@@ -27,7 +27,7 @@ class PoP_TrendingTags_SidebarHooks
             POP_SCREEN_TAGS,
         );
         if (in_array($screengroup, $includeScreengroups) && !in_array($screen, $exclude_screens)) {
-            $components[] = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
+            $components[] = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST];
         }
 
         return $components;

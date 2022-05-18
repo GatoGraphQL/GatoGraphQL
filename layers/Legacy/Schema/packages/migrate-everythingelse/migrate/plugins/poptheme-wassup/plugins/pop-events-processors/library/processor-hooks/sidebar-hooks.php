@@ -23,7 +23,7 @@ class PoPTheme_Wassup_EM_SidebarHooks
             )
         );
         if (in_array($screengroup, $includeScreengroups)/* && !in_array($screen, $exclude_screens)*/) {
-            $components[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
+            $components[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS];
         }
 
         return $components;

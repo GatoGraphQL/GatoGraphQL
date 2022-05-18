@@ -8,14 +8,14 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_POST_CREATE],
+            [self::class, self::COMPONENT_BUTTON_POST_CREATE],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_POST_CREATE => [Wassup_Module_Processor_ButtonInners::class, Wassup_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POST_CREATE],
+            self::COMPONENT_BUTTON_POST_CREATE => [Wassup_Module_Processor_ButtonInners::class, Wassup_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POST_CREATE],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -27,9 +27,9 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
     public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_POST_CREATE:
+            case self::COMPONENT_BUTTON_POST_CREATE:
                 return array(
-                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                 );
         }
 
@@ -39,7 +39,7 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_POST_CREATE:
+            case self::COMPONENT_BUTTON_POST_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -52,7 +52,7 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
     public function getTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_BUTTON_POST_CREATE => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
+            self::COMPONENT_BUTTON_POST_CREATE => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;
@@ -64,7 +64,7 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
     public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_POST_CREATE => 'addpostURL',
+            self::COMPONENT_BUTTON_POST_CREATE => 'addpostURL',
         );
         if ($field = $fields[$component[1]] ?? null) {
             return $field;

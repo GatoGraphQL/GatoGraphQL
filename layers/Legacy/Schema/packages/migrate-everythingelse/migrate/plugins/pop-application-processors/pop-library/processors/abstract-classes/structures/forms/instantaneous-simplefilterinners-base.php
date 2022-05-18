@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
     {
 
         // Use a special Search button, so it doesn't share the $props with the Search from the filter
-        return [PoPTheme_Wassup_Module_Processor_SubmitButtons::class, PoPTheme_Wassup_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH];
+        return [PoPTheme_Wassup_Module_Processor_SubmitButtons::class, PoPTheme_Wassup_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH];
     }
 
     public function getTriggerInternaltarget(array $component, array &$props)

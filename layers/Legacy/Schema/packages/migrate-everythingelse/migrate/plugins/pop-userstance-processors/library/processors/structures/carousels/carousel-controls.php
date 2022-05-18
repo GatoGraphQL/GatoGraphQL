@@ -15,18 +15,18 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELCONTROLS_STANCES],
-            [self::class, self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES],
-            [self::class, self::MODULE_CAROUSELCONTROLS_TAGSTANCES],
+            [self::class, self::COMPONENT_CAROUSELCONTROLS_STANCES],
+            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES],
+            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES],
         );
     }
 
     public function getControlClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES:
-            case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
-            case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
                 return 'btn btn-link btn-compact';
         }
 
@@ -36,9 +36,9 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES:
-            case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
-            case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
                 return POP_TARGET_QUICKVIEW;
         }
 
@@ -47,9 +47,9 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     public function getTitleClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES:
-            case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
-            case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
                 return 'btn btn-link btn-compact';
         }
 
@@ -60,10 +60,10 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteTitle(POP_USERSTANCE_ROUTE_STANCES);
 
-            case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
                 // Allow URE to override adding "+Members"
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                     $name
                 );
 
-            case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
                 $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('%s tagged with “%s”', 'pop-userstance-processors'),
@@ -93,14 +93,14 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);
 
-            case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
-                    self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES => POP_USERSTANCE_ROUTE_STANCES,
+                    self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );
 
                 // Allow URE to override adding "+Members" param
@@ -109,10 +109,10 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                     RequestUtils::addRoute($url, $routes[$component[1]])
                 );
 
-            case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
+            case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
                 $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 $routes = array(
-                    self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
+                    self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );
 
                 return \PoP\Root\App::applyFilters(

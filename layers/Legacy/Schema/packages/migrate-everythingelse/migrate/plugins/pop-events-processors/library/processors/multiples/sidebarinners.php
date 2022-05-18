@@ -15,17 +15,17 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS],
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS],
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR],
             
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS],
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS],
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS_CALENDAR],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS_CALENDAR],
             
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS],
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],
-            [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],
+            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR],
         );
     }
 
@@ -34,37 +34,37 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS:
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_SECTIONWITHMAP];
-                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_EVENTS];
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS:
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_SECTIONWITHMAP];
+                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_EVENTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR:
-                $ret[] = [GD_Custom_EM_Module_Processor_ButtonGroups::class, GD_Custom_EM_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_CALENDARSECTION];
-                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_EVENTSCALENDAR];
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR:
+                $ret[] = [GD_Custom_EM_Module_Processor_ButtonGroups::class, GD_Custom_EM_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_CALENDARSECTION];
+                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_EVENTSCALENDAR];
                 break;
 
-            case self::MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS:
-            case self::MODULE_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGSECTIONWITHMAP];
-                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGEVENTS];
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS:
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGSECTIONWITHMAP];
+                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGEVENTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR:
-                $ret[] = [GD_Custom_EM_Module_Processor_ButtonGroups::class, GD_Custom_EM_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGCALENDARSECTION];
-                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGEVENTSCALENDAR];
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR:
+                $ret[] = [GD_Custom_EM_Module_Processor_ButtonGroups::class, GD_Custom_EM_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGCALENDARSECTION];
+                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGEVENTSCALENDAR];
                 break;
 
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS:
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORSECTIONWITHMAP];
-                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_AUTHOREVENTS];
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS:
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORSECTIONWITHMAP];
+                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_AUTHOREVENTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR:
-                $ret[] = [GD_Custom_EM_Module_Processor_ButtonGroups::class, GD_Custom_EM_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORCALENDARSECTION];
-                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_AUTHOREVENTS];
+            case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR:
+                $ret[] = [GD_Custom_EM_Module_Processor_ButtonGroups::class, GD_Custom_EM_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORCALENDARSECTION];
+                $ret[] = [PoP_Events_Module_Processor_CustomDelegatorFilters::class, PoP_Events_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_AUTHOREVENTS];
                 break;
         }
         

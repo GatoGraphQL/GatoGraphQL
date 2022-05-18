@@ -7,13 +7,13 @@ class PoP_Module_Processor_TypeaheadButtonControls extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONCONTROL_TYPEAHEADSEARCH],
+            [self::class, self::COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH],
         );
     }
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_TYPEAHEADSEARCH:
+            case self::COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH:
                 return 'fa-search';
         }
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_TypeaheadButtonControls extends PoP_Module_Processor_
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_TYPEAHEADSEARCH:
+            case self::COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH:
                 $this->addJsmethod($ret, 'typeaheadSearchBtn');
                 break;
         }

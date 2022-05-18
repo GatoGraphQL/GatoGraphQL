@@ -26,52 +26,52 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS03],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS04],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS05],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS06],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS07],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS08],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS09],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS10],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS11],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS12],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS13],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS14],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS15],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS16],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS03],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS04],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS05],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS06],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS07],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS08],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS09],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS10],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS11],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS12],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS13],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS14],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS15],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS16],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS17],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS18],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS19],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS03 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS03,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS04 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS04,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS05 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS05,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS06 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS06,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS07 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS07,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS08 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS08,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS09 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS09,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS10 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS10,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS11 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS11,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS12 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS12,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS13 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS13,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS14 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS14,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS15 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS15,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS16 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS16,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS17,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS03 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS03,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS04 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS04,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS05 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS05,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS06 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS06,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS07 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS07,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS08 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS08,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS09 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS09,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS10 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS10,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS11 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS11,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS12 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS12,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS13 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS13,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS14 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS14,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS15 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS15,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS16 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS16,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS17,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -81,26 +81,26 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS00],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS01],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS02],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS03 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS03],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS04 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS04],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS05 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS05],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS06 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS06],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS07 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS07],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS08 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS08],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS09 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS09],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS10 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS10],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS11 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS11],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS12 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS12],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS13 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS13],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS14 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS14],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS15 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS15],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS16 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS16],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS17],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS18],
-            self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCATEGORYPOSTS19],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS00],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS01],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS02],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS03 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS03],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS04 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS04],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS05 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS05],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS06 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS06],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS07 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS07],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS08 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS08],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS09 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS09],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS10 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS10],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS11 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS11],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS12 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS12],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS13 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS13],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS14 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS14],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS15 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS15],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS16 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS16],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS17],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS18],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS19],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -112,27 +112,27 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS03:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS04:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS05:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS06:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS07:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS08:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS09:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS10:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS11:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS12:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS13:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS14:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS15:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS16:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18:
-            case self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCONTENT];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS03:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS04:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS05:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS06:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS07:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS08:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS09:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS10:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS11:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS12:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS13:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS14:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS15:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS16:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS17:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS18:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS19:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGCONTENT];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

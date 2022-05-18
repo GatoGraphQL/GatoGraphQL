@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
     public function getMapscriptSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::MODULE_MAP_SCRIPT];
+        return [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::COMPONENT_MAP_SCRIPT];
     }
 
     public function getLocationModule(array $component)
@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         $ret = parent::getSubComponents($component);
 
         if ($this->initMarkers($component)) {
-            $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
+            $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
             $ret[] = $this->getMapscriptSubmodule($component);
         }
 
@@ -129,7 +129,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         // If we don't initialize the markers, simply do not send the moduleoutputname for those modules, and they will not be drawn
         if ($this->initMarkers($component)) {
             $map_script = $this->getMapscriptSubmodule($component);
-            $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
+            $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_script);
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);
         }

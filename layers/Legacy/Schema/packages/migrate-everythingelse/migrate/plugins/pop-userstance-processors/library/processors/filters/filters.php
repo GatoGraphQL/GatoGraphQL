@@ -15,30 +15,30 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTER_STANCES],
-            [self::class, self::MODULE_FILTER_AUTHORSTANCES],
-            [self::class, self::MODULE_FILTER_MYSTANCES],
-            [self::class, self::MODULE_FILTER_STANCES_AUTHORROLE],
-            [self::class, self::MODULE_FILTER_STANCES_STANCE],
-            [self::class, self::MODULE_FILTER_AUTHORSTANCES_STANCE],
-            [self::class, self::MODULE_FILTER_STANCES_GENERALSTANCE],
-            [self::class, self::MODULE_FILTER_TAGSTANCES],
-            [self::class, self::MODULE_FILTER_TAGSTANCES_STANCE],
+            [self::class, self::COMPONENT_FILTER_STANCES],
+            [self::class, self::COMPONENT_FILTER_AUTHORSTANCES],
+            [self::class, self::COMPONENT_FILTER_MYSTANCES],
+            [self::class, self::COMPONENT_FILTER_STANCES_AUTHORROLE],
+            [self::class, self::COMPONENT_FILTER_STANCES_STANCE],
+            [self::class, self::COMPONENT_FILTER_AUTHORSTANCES_STANCE],
+            [self::class, self::COMPONENT_FILTER_STANCES_GENERALSTANCE],
+            [self::class, self::COMPONENT_FILTER_TAGSTANCES],
+            [self::class, self::COMPONENT_FILTER_TAGSTANCES_STANCE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FILTER_STANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES],
-            self::MODULE_FILTER_AUTHORSTANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES],
-            self::MODULE_FILTER_MYSTANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYSTANCES],
-            self::MODULE_FILTER_STANCES_AUTHORROLE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_AUTHORROLE],
-            self::MODULE_FILTER_STANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_STANCE],
-            self::MODULE_FILTER_AUTHORSTANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE],
-            self::MODULE_FILTER_STANCES_GENERALSTANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE],
-            self::MODULE_FILTER_TAGSTANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES],
-            self::MODULE_FILTER_TAGSTANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_STANCE],
+            self::COMPONENT_FILTER_STANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES],
+            self::COMPONENT_FILTER_AUTHORSTANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORSTANCES],
+            self::COMPONENT_FILTER_MYSTANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYSTANCES],
+            self::COMPONENT_FILTER_STANCES_AUTHORROLE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES_AUTHORROLE],
+            self::COMPONENT_FILTER_STANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES_STANCE],
+            self::COMPONENT_FILTER_AUTHORSTANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE],
+            self::COMPONENT_FILTER_STANCES_GENERALSTANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE],
+            self::COMPONENT_FILTER_TAGSTANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES],
+            self::COMPONENT_FILTER_TAGSTANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES_STANCE],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

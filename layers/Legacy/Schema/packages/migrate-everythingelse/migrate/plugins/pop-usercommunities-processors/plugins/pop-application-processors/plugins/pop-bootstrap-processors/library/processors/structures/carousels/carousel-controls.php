@@ -12,14 +12,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS],
+            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS],
         );
     }
 
     public function getControlClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return 'btn btn-link btn-compact';
         }
 
@@ -29,7 +29,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     public function getTitleClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return 'btn btn-link btn-compact';
         }
 
@@ -38,7 +38,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Members', 'poptheme-wassup');
         }
 
@@ -48,11 +48,11 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
-                    self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+                    self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
                 );
                 return RequestUtils::addRoute($url, $routes[$component[1]] ?? null);
         }

@@ -9,9 +9,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
     public function getComponentsToProcess(): array
     {
         return array(
-            [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK],
-            [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
-            [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
+            [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK],
+            [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
+            [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
         );
     }
 
@@ -20,15 +20,15 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK:
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 $ret = array_merge(
                     $ret,
                     FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POSTLINK)
                 );
                 break;
 
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
                 $ret = array_merge(
                     $ret,
                     FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_POSTLINK)
@@ -42,8 +42,8 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
     public function getWrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
                 return 'row';
         }
     
@@ -53,10 +53,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
     public function getWidgetwrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 return 'col-xsm-4';
             
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
                 return 'col-xsm-6';
         }
     

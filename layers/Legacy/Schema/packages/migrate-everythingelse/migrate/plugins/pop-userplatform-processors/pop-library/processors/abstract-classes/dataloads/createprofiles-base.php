@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_CreateProfileDataloadsBase extends PoP_Modul
 {
     protected function getFeedbackmessageModule(array $component)
     {
-        return [PoP_Module_Processor_ProfileFeedbackMessages::class, PoP_Module_Processor_ProfileFeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATEPROFILE];
+        return [PoP_Module_Processor_ProfileFeedbackMessages::class, PoP_Module_Processor_ProfileFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATEPROFILE];
     }
 }

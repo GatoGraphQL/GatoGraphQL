@@ -8,16 +8,16 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_EVENT_UPDATE],
-            [self::class, self::MODULE_BLOCK_EVENT_CREATE],
+            [self::class, self::COMPONENT_BLOCK_EVENT_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_EVENT_CREATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_EVENT_CREATE => POP_EVENTSCREATION_ROUTE_ADDEVENT,
-            self::MODULE_BLOCK_EVENT_UPDATE => POP_EVENTSCREATION_ROUTE_EDITEVENT,
+            self::COMPONENT_BLOCK_EVENT_CREATE => POP_EVENTSCREATION_ROUTE_ADDEVENT,
+            self::COMPONENT_BLOCK_EVENT_UPDATE => POP_EVENTSCREATION_ROUTE_EDITEVENT,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -27,8 +27,8 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
         $ret = parent::getInnerSubmodules($component);
 
         $block_inners = array(
-            self::MODULE_BLOCK_EVENT_UPDATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENT_UPDATE],
-            self::MODULE_BLOCK_EVENT_CREATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENT_CREATE],
+            self::COMPONENT_BLOCK_EVENT_UPDATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENT_UPDATE],
+            self::COMPONENT_BLOCK_EVENT_CREATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENT_CREATE],
         );
         if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
@@ -40,7 +40,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
     protected function isCreate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVENT_CREATE:
+            case self::COMPONENT_BLOCK_EVENT_CREATE:
                 return true;
         }
 
@@ -49,7 +49,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
     protected function isUpdate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVENT_UPDATE:
+            case self::COMPONENT_BLOCK_EVENT_UPDATE:
                 return true;
         }
 
@@ -59,8 +59,8 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVENT_UPDATE:
-            case self::MODULE_BLOCK_EVENT_CREATE:
+            case self::COMPONENT_BLOCK_EVENT_UPDATE:
+            case self::COMPONENT_BLOCK_EVENT_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     $this->appendProp($component, $props, 'class', 'addons-nocontrols');
                 }

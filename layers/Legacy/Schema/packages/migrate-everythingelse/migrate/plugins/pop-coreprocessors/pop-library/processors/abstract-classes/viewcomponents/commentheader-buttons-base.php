@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_CommentHeaderViewComponentButtonsBase extend
 {
     public function getHeaderSubmodule(array $component): ?array
     {
-        return [PoP_Module_Processor_ReplyCommentViewComponentHeaders::class, PoP_Module_Processor_ReplyCommentViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL];
+        return [PoP_Module_Processor_ReplyCommentViewComponentHeaders::class, PoP_Module_Processor_ReplyCommentViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL];
     }
 }

@@ -8,8 +8,8 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN],
-            [self::class, self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS],
+            [self::class, self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN],
+            [self::class, self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS],
         );
     }
 
@@ -18,13 +18,13 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
-                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
-                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_ICAL];
+            case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
+                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_GOOGLECALENDAR];
+                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_ICAL];
                 break;
 
-            case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN:
-                $ret[] = [GD_EM_Module_Processor_DropdownButtonQuicklinks::class, GD_EM_Module_Processor_DropdownButtonQuicklinks::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS];
+            case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN:
+                $ret[] = [GD_EM_Module_Processor_DropdownButtonQuicklinks::class, GD_EM_Module_Processor_DropdownButtonQuicklinks::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS];
                 break;
         }
 
@@ -34,7 +34,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
+            case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
                 foreach ($this->getSubComponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'btn btn-link btn-compact');
                 }

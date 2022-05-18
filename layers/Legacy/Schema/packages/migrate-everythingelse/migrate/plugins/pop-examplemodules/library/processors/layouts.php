@@ -15,11 +15,11 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EXAMPLE_404],
-            [self::class, self::MODULE_EXAMPLE_HOMEWELCOME],
-            [self::class, self::MODULE_EXAMPLE_COMMENT],
-            [self::class, self::MODULE_EXAMPLE_AUTHORPROPERTIES],
-            [self::class, self::MODULE_EXAMPLE_TAGPROPERTIES],
+            [self::class, self::COMPONENT_EXAMPLE_404],
+            [self::class, self::COMPONENT_EXAMPLE_HOMEWELCOME],
+            [self::class, self::COMPONENT_EXAMPLE_COMMENT],
+            [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
+            [self::class, self::COMPONENT_EXAMPLE_TAGPROPERTIES],
         );
     }
 
@@ -33,18 +33,18 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
         $ret = parent::getDataFields($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_EXAMPLE_COMMENT:
+            case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = 'content';
                 break;
 
-            case self::MODULE_EXAMPLE_AUTHORPROPERTIES:
+            case self::COMPONENT_EXAMPLE_AUTHORPROPERTIES:
                 $ret = array_merge(
                     $ret,
                     array('displayName', 'description', 'url')
                 );
                 break;
 
-            case self::MODULE_EXAMPLE_TAGPROPERTIES:
+            case self::COMPONENT_EXAMPLE_TAGPROPERTIES:
                 $ret = array_merge(
                     $ret,
                     array('name', 'slug', 'description', 'count')
@@ -63,11 +63,11 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
         $ret = parent::getRelationalSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_EXAMPLE_COMMENT:
+            case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = new RelationalModuleField(
                     'author',
                     [
-                        [self::class, self::MODULE_EXAMPLE_AUTHORPROPERTIES],
+                        [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
                     ]
                 );
                 break;

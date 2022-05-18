@@ -10,8 +10,8 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION],
         );
     }
 
@@ -21,7 +21,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Subscription Successful!', 'pop-genericforms');
                 $ret['success'] = sprintf(
                     TranslationAPIFacade::getInstance()->__("To make sure you get the newsletter, please add <strong>%s</strong> in your contact list. Thanks!", 'pop-genericforms'),
@@ -31,7 +31,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
                 $ret['empty-email'] = TranslationAPIFacade::getInstance()->__('Email is missing or format is incorrect.', 'pop-genericforms');
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Unsubscription successful', 'pop-genericforms');
                 $ret['success'] = sprintf(
                     '%s<br/>%s',

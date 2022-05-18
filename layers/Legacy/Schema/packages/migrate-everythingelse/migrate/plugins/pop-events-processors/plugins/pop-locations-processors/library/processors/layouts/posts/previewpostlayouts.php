@@ -10,19 +10,19 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS],
         );
     }
 
     public function getQuicklinkgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
         return parent::getQuicklinkgroupTopSubmodule($component);
@@ -33,14 +33,14 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         $ret = parent::getBelowthumbLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIME];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIME];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
                 break;
         }
 
@@ -52,9 +52,9 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         $ret = parent::getBottomSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
                 break;
         }
 
@@ -64,14 +64,14 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public function getPostThumbSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_XSMALL];
         }
 
         return parent::getPostThumbSubmodule($component);
@@ -80,9 +80,9 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public function authorPositions(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE,
                     GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT,
@@ -95,9 +95,9 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public function getTitleBeforeauthors(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 return array(
                     'belowcontent' => TranslationAPIFacade::getInstance()->__('posted by', 'poptheme-wassup')
                 );
@@ -109,7 +109,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 return true;
         }
 
@@ -122,16 +122,16 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 $ret[GD_JS_CLASSES]['authors-belowcontent'] = 'pull-right';
                 break;
         }

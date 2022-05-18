@@ -9,9 +9,9 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTEDIT],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTVIEW],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTPREVIEW],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTEDIT],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW],
         );
     }
 
@@ -20,16 +20,16 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTEDIT:
-                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTEDIT];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTEDIT:
+                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTEDIT];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTVIEW:
-                $ret[] = [GD_ContentCreation_Module_Processor_ButtonWrappers::class, GD_ContentCreation_Module_Processor_ButtonWrappers::MODULE_BUTTONWRAPPER_POSTVIEW];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW:
+                $ret[] = [GD_ContentCreation_Module_Processor_ButtonWrappers::class, GD_ContentCreation_Module_Processor_ButtonWrappers::COMPONENT_BUTTONWRAPPER_POSTVIEW];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTPREVIEW:
-                $ret[] = [GD_ContentCreation_Module_Processor_ButtonWrappers::class, GD_ContentCreation_Module_Processor_ButtonWrappers::MODULE_BUTTONWRAPPER_POSTPREVIEW];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW:
+                $ret[] = [GD_ContentCreation_Module_Processor_ButtonWrappers::class, GD_ContentCreation_Module_Processor_ButtonWrappers::COMPONENT_BUTTONWRAPPER_POSTPREVIEW];
                 break;
         }
         

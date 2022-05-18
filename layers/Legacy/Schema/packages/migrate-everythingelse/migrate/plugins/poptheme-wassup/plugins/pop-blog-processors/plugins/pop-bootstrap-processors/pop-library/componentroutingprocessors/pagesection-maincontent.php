@@ -17,11 +17,11 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionComponentRoutingProce
 
         // Page modules
         $routemodules = array(
-            POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_CONTENT],
-            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_POSTS],
-            POP_BLOG_ROUTE_SEARCHCONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SEARCHCONTENT],
-            UsersModuleConfiguration::getUsersRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_USERS],
-            POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SEARCHUSERS],
+            POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_CONTENT],
+            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_POSTS],
+            POP_BLOG_ROUTE_SEARCHCONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT],
+            UsersModuleConfiguration::getUsersRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_USERS],
+            POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SEARCHUSERS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -34,8 +34,8 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionComponentRoutingProce
 
         // Author route modules
         $routemodules = array(
-            POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCONTENT],
-            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORPOSTS],
+            POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCONTENT],
+            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORPOSTS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -48,8 +48,8 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionComponentRoutingProce
 
         // Tag route modules
         $routemodules = array(
-            POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
-            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGPOSTS],
+            POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCONTENT],
+            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGPOSTS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

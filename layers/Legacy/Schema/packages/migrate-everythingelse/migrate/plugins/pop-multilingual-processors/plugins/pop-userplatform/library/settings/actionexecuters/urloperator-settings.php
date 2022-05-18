@@ -12,7 +12,7 @@ function gdQtInitsettings()
     /** @var SettingsMutationResolver */
     $actionExecuterSettings = $instanceManager->getInstance(SettingsMutationResolver::class);
     $actionExecuterSettings->add(
-    	[GD_QT_Module_Processor_SelectFormInputs::class, GD_QT_Module_Processor_SelectFormInputs::MODULE_QT_FORMINPUT_LANGUAGE],
+    	[GD_QT_Module_Processor_SelectFormInputs::class, GD_QT_Module_Processor_SelectFormInputs::COMPONENT_QT_FORMINPUT_LANGUAGE],
     	new GD_QT_Settings_UrlOperator_Language()
     );
 }

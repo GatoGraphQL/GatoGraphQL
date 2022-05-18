@@ -8,8 +8,8 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE],
-            [self::class, self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED],
+            [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE],
+            [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED],
         );
     }
 
@@ -18,12 +18,12 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
-                $ret[] = [PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::class, PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::MODULE_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE];
+            case self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
+                $ret[] = [PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::class, PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE];
                 break;
 
-            case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED:
-                $ret[] = [PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::class, PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::MODULE_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED];
+            case self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED:
+                $ret[] = [PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::class, PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED];
                 break;
         }
 
@@ -33,8 +33,8 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
-            case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED:
+            case self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
+            case self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED:
                 return 'hasLink';
         }
 

@@ -28,7 +28,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $form_data['newsletter'] = $componentprocessor_manager->getProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER]);
+        $form_data['newsletter'] = $componentprocessor_manager->getProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]);
         return $form_data;
     }
 
@@ -42,12 +42,12 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         array_splice(
             $components, 
             array_search(
-                [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL], 
+                [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_USERWEBSITEURL], 
                 $components
             )+2, 
             0, 
             array(
-                [PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::class, PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::MODULE_FORMINPUTGROUP_CUP_NEWSLETTER],
+                [PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::class, PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER],
             )
         );
         

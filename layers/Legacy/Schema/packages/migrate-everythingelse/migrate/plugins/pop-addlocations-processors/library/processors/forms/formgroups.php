@@ -13,26 +13,26 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONNAME],
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONADDRESS],
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONTOWN],
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONSTATE],
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONPOSTCODE],
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONREGION],
-            [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONCOUNTRY],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONNAME],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONADDRESS],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONTOWN],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONSTATE],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONPOSTCODE],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONREGION],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONCOUNTRY],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONNAME => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONNAME],
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONADDRESS => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONADDRESS],
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONTOWN => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONTOWN],
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONSTATE => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONSTATE],
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONPOSTCODE => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE],
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONREGION => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONREGION],
-            self::MODULE_FORMINPUTGROUP_EM_LOCATIONCOUNTRY => [GD_EM_Module_Processor_CreateLocationSelectFormInputs::class, GD_EM_Module_Processor_CreateLocationSelectFormInputs::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONNAME => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONNAME],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONADDRESS => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONTOWN => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONTOWN],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONSTATE => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONSTATE],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONPOSTCODE => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONREGION => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONREGION],
+            self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONCOUNTRY => [GD_EM_Module_Processor_CreateLocationSelectFormInputs::class, GD_EM_Module_Processor_CreateLocationSelectFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY],
         );
 
         if ($component = $components[$component[1]] ?? null) {

@@ -12,12 +12,12 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
 
         );
     }
@@ -25,12 +25,12 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT],
-            self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT],
-            self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT],
-            self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT],
-            self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT],
-            self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {
@@ -43,15 +43,15 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT:
-            case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT:
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT:
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
-            case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT:
-            case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT:
-            case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT:
-            case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT:
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT:
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT:
                 $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }

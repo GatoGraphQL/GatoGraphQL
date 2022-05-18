@@ -8,16 +8,16 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_MYMEMBERS_TABLE_EDIT],
-            [self::class, self::MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT],
+            [self::class, self::COMPONENT_BLOCK_MYMEMBERS_SCROLL_FULLVIEW],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
-            self::MODULE_BLOCK_MYMEMBERS_TABLE_EDIT => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
+            self::COMPONENT_BLOCK_MYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
+            self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -25,8 +25,8 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     protected function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_BLOCK_MYMEMBERS_TABLE_EDIT => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT],
-            self::MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT],
+            self::COMPONENT_BLOCK_MYMEMBERS_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
         );
         return $inners[$component[1]] ?? null;
     }
@@ -34,8 +34,8 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_MYMEMBERS_TABLE_EDIT:
-            case self::MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT:
+            case self::COMPONENT_BLOCK_MYMEMBERS_SCROLL_FULLVIEW:
                 return true;
         }
 
@@ -46,9 +46,9 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_MYMEMBERS_TABLE_EDIT:
-            case self::MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW:
-                return [GD_URE_Module_Processor_CustomControlGroups::class, GD_URE_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYBLOCKMEMBERS];
+            case self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT:
+            case self::COMPONENT_BLOCK_MYMEMBERS_SCROLL_FULLVIEW:
+                return [GD_URE_Module_Processor_CustomControlGroups::class, GD_URE_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS];
         }
 
         return parent::getControlgroupTopSubmodule($component);

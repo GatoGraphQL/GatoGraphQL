@@ -14,10 +14,10 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionComponentRou
         $ret = array();
 
         $routemodules = array(
-            POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORFOLLOWERS],
-            POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORFOLLOWINGUSERS],
-            POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORSUBSCRIBEDTOTAGS],
-            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS],
+            POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORFOLLOWERS],
+            POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORFOLLOWINGUSERS],
+            POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORSUBSCRIBEDTOTAGS],
+            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -30,7 +30,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionComponentRou
 
         // Tag route modules
         $routemodules = array(
-            POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS],
+            POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -43,9 +43,9 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionComponentRou
 
         // Single route modules
         $routemodules = array(
-            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY],
-            POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY],
-            POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY],
+            POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY],
+            POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY],
+            POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY],
         );
         foreach ($routemodules as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [

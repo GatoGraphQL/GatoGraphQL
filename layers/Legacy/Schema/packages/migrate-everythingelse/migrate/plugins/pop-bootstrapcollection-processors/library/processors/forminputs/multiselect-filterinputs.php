@@ -38,16 +38,16 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS],
-            [self::class, self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS],
+            [self::class, self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS],
+            [self::class, self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputProcessor::class, PoP_Module_Processor_MultiSelectFilterInputProcessor::FILTERINPUT_MODERATEDPOSTSTATUS],
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputProcessor::class, PoP_Module_Processor_MultiSelectFilterInputProcessor::FILTERINPUT_UNMODERATEDPOSTSTATUS],
+            self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputProcessor::class, PoP_Module_Processor_MultiSelectFilterInputProcessor::FILTERINPUT_MODERATEDPOSTSTATUS],
+            self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputProcessor::class, PoP_Module_Processor_MultiSelectFilterInputProcessor::FILTERINPUT_UNMODERATEDPOSTSTATUS],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -55,8 +55,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
-    //         case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
+    //         case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
+    //         case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
     //             return true;
     //     }
 
@@ -66,8 +66,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
-            case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
+            case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
+            case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status', 'pop-coreprocessors');
         }
 
@@ -77,10 +77,10 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
+            case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
                 return GD_FormInput_ModeratedStatus::class;
 
-            case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
+            case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 return GD_FormInput_UnmoderatedStatus::class;
         }
 
@@ -90,8 +90,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
-            case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
+            case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
+            case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 // Add a nice name, so that the URL params when filtering make sense
                 return 'status';
         }
@@ -102,8 +102,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => $this->customPostModeratedStatusEnumTypeResolver,
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => $this->customPostUnmoderatedStatusEnumTypeResolver,
+            self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => $this->customPostModeratedStatusEnumTypeResolver,
+            self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => $this->customPostUnmoderatedStatusEnumTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -111,8 +111,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS,
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS
+            self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS,
+            self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
@@ -123,8 +123,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => $translationAPI->__('', ''),
             default => null,
         };
     }

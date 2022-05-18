@@ -8,14 +8,14 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABLE_MYSTANCES],
+            [self::class, self::COMPONENT_TABLE_MYSTANCES],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::MODULE_TABLEINNER_MYSTANCES],
+            self::COMPONENT_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYSTANCES],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -30,7 +30,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         $ret = parent::getHeaderTitles($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABLE_MYSTANCES:
+            case self::COMPONENT_TABLE_MYSTANCES:
                 $ret[] = PoP_UserStance_PostNameUtils::getNameUc();
                 $ret[] = TranslationAPIFacade::getInstance()->__('Date', 'pop-userstance-processors');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'pop-userstance-processors');
@@ -43,7 +43,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_TABLE_MYSTANCES:
+            case self::COMPONENT_TABLE_MYSTANCES:
                 $this->appendProp($component, $props, 'class', 'table-mystances');
                 break;
         }

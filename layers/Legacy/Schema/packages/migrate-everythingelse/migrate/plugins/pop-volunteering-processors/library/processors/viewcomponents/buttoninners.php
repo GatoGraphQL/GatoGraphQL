@@ -10,18 +10,18 @@ class PoP_Volunteering_Module_Processor_ViewComponentButtonInners extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN],
-            [self::class, self::MODULE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG],
         );
     }
     
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL:
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN:
-            case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG:
                 return 'fa-fw fa-leaf';
         }
         
@@ -31,11 +31,11 @@ class PoP_Volunteering_Module_Processor_ViewComponentButtonInners extends PoP_Mo
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL:
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Volunteer!', 'pop-coreprocessors');
 
-            case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG:
                 return TranslationAPIFacade::getInstance()->__('Click to Volunteer', 'pop-coreprocessors');
         }
         

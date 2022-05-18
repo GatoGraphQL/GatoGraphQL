@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_CustomContentInners extends PoP_Module_Processor_C
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_CONTENTINNER_MEMBER],
+            [self::class, self::COMPONENT_URE_CONTENTINNER_MEMBER],
         );
     }
 
@@ -16,8 +16,8 @@ class GD_URE_Module_Processor_CustomContentInners extends PoP_Module_Processor_C
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_URE_CONTENTINNER_MEMBER:
-                $ret[] = [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_HEADER];
+            case self::COMPONENT_URE_CONTENTINNER_MEMBER:
+                $ret[] = [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_HEADER];
                 break;
         }
 

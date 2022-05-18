@@ -7,7 +7,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners extend
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners extend
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

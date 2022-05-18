@@ -7,7 +7,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC],
+            [self::class, self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 $ret = array_merge(
                     $ret,
                     FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)
@@ -30,7 +30,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
     public function getWrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 return 'row';
         }
     
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
     public function getWidgetwrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 return 'col-xsm-4';
         }
     

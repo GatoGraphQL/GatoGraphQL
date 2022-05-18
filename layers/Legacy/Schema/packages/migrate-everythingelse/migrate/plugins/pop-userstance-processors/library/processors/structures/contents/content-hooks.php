@@ -16,14 +16,14 @@ class PoPTheme_UserStance_ContentHooks
 
     public function contentInner($inner, array $component)
     {
-        if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
+        if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE] || $component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_USERPOSTINTERACTION]) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
-                if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
-                    return [UserStance_Module_Processor_SingleContentInners::class, UserStance_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_STANCESINGLE];
-                } elseif (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION])) {
-                    return [UserStance_Module_Processor_SingleContentInners::class, UserStance_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION];
+                if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE])) {
+                    return [UserStance_Module_Processor_SingleContentInners::class, UserStance_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_STANCESINGLE];
+                } elseif (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_USERPOSTINTERACTION])) {
+                    return [UserStance_Module_Processor_SingleContentInners::class, UserStance_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION];
                 }
             }
         }

@@ -7,7 +7,7 @@ class PoP_Module_Processor_LazyLoadingRemoveLayouts extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCRIPT_LAZYLOADINGREMOVE],
+            [self::class, self::COMPONENT_SCRIPT_LAZYLOADINGREMOVE],
         );
     }
 }

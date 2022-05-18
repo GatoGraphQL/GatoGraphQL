@@ -11,18 +11,18 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
                     POP_HOOK_SCROLLINNER_AUTOMATEDEMAILS_THUMBNAIL_GRID,
@@ -32,10 +32,10 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
                     )
                 );
 
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -50,11 +50,11 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS],
-            self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_THUMBNAIL],
-            self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_LIST],
-            self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_SIMPLEVIEW],
-            self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS],
+            self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_LIST],
+            self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW => [PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {
@@ -67,11 +67,11 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW:
-            case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW:
                 // Add an extra space at the bottom of each post
                 $this->appendProp($component, $props, 'class', 'email-scrollelem-post');
         }

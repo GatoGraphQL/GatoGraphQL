@@ -11,10 +11,10 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGET_FORM_FEATUREDIMAGE],
-            [self::class, self::MODULE_WIDGET_FORM_METAINFORMATION],
-            [self::class, self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS],
-            [self::class, self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS],
+            [self::class, self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE],
+            [self::class, self::COMPONENT_WIDGET_FORM_METAINFORMATION],
+            [self::class, self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS],
+            [self::class, self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS],
         );
     }
 
@@ -23,39 +23,39 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
-                $ret[] = [GD_ContentCreation_Module_Processor_FormInputGroups::class, GD_ContentCreation_Module_Processor_FormInputGroups::MODULE_FORMCOMPONENTGROUP_FEATUREDIMAGE];
+            case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
+                $ret[] = [GD_ContentCreation_Module_Processor_FormInputGroups::class, GD_ContentCreation_Module_Processor_FormInputGroups::COMPONENT_FORMCOMPONENTGROUP_FEATUREDIMAGE];
                 break;
 
-            case self::MODULE_WIDGET_FORM_METAINFORMATION:
-                $ret[] = [PoP_RelatedPosts_Module_Processor_FormComponentGroups::class, PoP_RelatedPosts_Module_Processor_FormComponentGroups::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES];
+            case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
+                $ret[] = [PoP_RelatedPosts_Module_Processor_FormComponentGroups::class, PoP_RelatedPosts_Module_Processor_FormComponentGroups::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES];
                 if (defined('POP_COAUTHORSPROCESSORS_INITIALIZED')) {
-                    $ret[] = [GD_CAP_Module_Processor_FormComponentGroups::class, GD_CAP_Module_Processor_FormComponentGroups::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS];
+                    $ret[] = [GD_CAP_Module_Processor_FormComponentGroups::class, GD_CAP_Module_Processor_FormComponentGroups::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS];
                 }
                 if (defined('POP_ADDPOSTLINKSPROCESSORS_INITIALIZED')) {
-                    $ret[] = [PoP_AddPostLinks_Module_Processor_FormInputGroups::class, PoP_AddPostLinks_Module_Processor_FormInputGroups::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK];
+                    $ret[] = [PoP_AddPostLinks_Module_Processor_FormInputGroups::class, PoP_AddPostLinks_Module_Processor_FormInputGroups::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK];
                 }
                 break;
 
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
-                // $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES];
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
+                // $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_CATEGORIES];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_APPLIESTO];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_APPLIESTO];
                 }
                 if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
                 }
                 break;
 
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_CATEGORIES];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_APPLIESTO];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_APPLIESTO];
                 }
                 break;
         }
@@ -66,10 +66,10 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGET_FORM_FEATUREDIMAGE => TranslationAPIFacade::getInstance()->__('Featured Image', 'poptheme-wassup'),
-            self::MODULE_WIDGET_FORM_METAINFORMATION => TranslationAPIFacade::getInstance()->__('Meta information', 'poptheme-wassup'),
-            self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS => TranslationAPIFacade::getInstance()->__('Link details', 'poptheme-wassup'),
-            self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS => TranslationAPIFacade::getInstance()->__('Post details', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE => TranslationAPIFacade::getInstance()->__('Featured Image', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_FORM_METAINFORMATION => TranslationAPIFacade::getInstance()->__('Meta information', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS => TranslationAPIFacade::getInstance()->__('Link details', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS => TranslationAPIFacade::getInstance()->__('Post details', 'poptheme-wassup'),
         );
 
         return $titles[$component[1]] ?? null;
@@ -78,10 +78,10 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
-            case self::MODULE_WIDGET_FORM_METAINFORMATION:
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
+            case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
+            case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS:
                 if ($class = $this->getProp($component, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
                 }
@@ -95,10 +95,10 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
-            case self::MODULE_WIDGET_FORM_METAINFORMATION:
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
+            case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
+            case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS:
                 return 'panel-body';
         }
 
@@ -107,10 +107,10 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
-            case self::MODULE_WIDGET_FORM_METAINFORMATION:
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
+            case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
+            case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS:
                 return '';
         }
 
@@ -120,20 +120,20 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
-                $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER], $props, 'setbtn-class', 'btn btn-sm btn-link');
-                $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER], $props, 'removebtn-class', 'btn btn-sm btn-link');
-                $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER], $props, 'options-class', '');
+            case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
+                $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER], $props, 'setbtn-class', 'btn btn-sm btn-link');
+                $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER], $props, 'removebtn-class', 'btn btn-sm btn-link');
+                $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER], $props, 'options-class', '');
                 break;
 
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS:
                 // If the widget has nothing inside, then hide it
                 if (!PoP_ApplicationProcessors_Utils::addCategories() && !PoP_ApplicationProcessors_Utils::addAppliesto()) {
                     $this->appendProp($component, $props, 'class', 'hidden');
                 }
                 break;
 
-            case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
                 // If the widget has nothing inside, then hide it
                 if (!PoP_ApplicationProcessors_Utils::addCategories() && !PoP_ApplicationProcessors_Utils::addAppliesto() && !PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
                     $this->appendProp($component, $props, 'class', 'hidden');

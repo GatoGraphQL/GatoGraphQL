@@ -10,10 +10,10 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENTINNER_EMBEDPREVIEW],
-            [self::class, self::MODULE_CONTENTINNER_EMBED],
-            [self::class, self::MODULE_CONTENTINNER_API],
-            [self::class, self::MODULE_CONTENTINNER_COPYSEARCHURL],
+            [self::class, self::COMPONENT_CONTENTINNER_EMBEDPREVIEW],
+            [self::class, self::COMPONENT_CONTENTINNER_EMBED],
+            [self::class, self::COMPONENT_CONTENTINNER_API],
+            [self::class, self::COMPONENT_CONTENTINNER_COPYSEARCHURL],
         );
     }
 
@@ -22,20 +22,20 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_CONTENTINNER_EMBEDPREVIEW:
-                $ret[] = [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW];
+            case self::COMPONENT_CONTENTINNER_EMBEDPREVIEW:
+                $ret[] = [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_EMBEDPREVIEW];
                 break;
 
-            case self::MODULE_CONTENTINNER_EMBED:
-                $ret[] = [PoP_Module_Processor_ShareTextareaFormInputs::class, PoP_Module_Processor_ShareTextareaFormInputs::MODULE_FORMINPUT_EMBEDCODE];
+            case self::COMPONENT_CONTENTINNER_EMBED:
+                $ret[] = [PoP_Module_Processor_ShareTextareaFormInputs::class, PoP_Module_Processor_ShareTextareaFormInputs::COMPONENT_FORMINPUT_EMBEDCODE];
                 break;
 
-            case self::MODULE_CONTENTINNER_API:
-                $ret[] = [PoP_Module_Processor_ShareTextFormInputs::class, PoP_Module_Processor_ShareTextFormInputs::MODULE_FORMINPUT_API];
+            case self::COMPONENT_CONTENTINNER_API:
+                $ret[] = [PoP_Module_Processor_ShareTextFormInputs::class, PoP_Module_Processor_ShareTextFormInputs::COMPONENT_FORMINPUT_API];
                 break;
 
-            case self::MODULE_CONTENTINNER_COPYSEARCHURL:
-                $ret[] = [PoP_Module_Processor_ShareTextFormInputs::class, PoP_Module_Processor_ShareTextFormInputs::MODULE_FORMINPUT_COPYSEARCHURL];
+            case self::COMPONENT_CONTENTINNER_COPYSEARCHURL:
+                $ret[] = [PoP_Module_Processor_ShareTextFormInputs::class, PoP_Module_Processor_ShareTextFormInputs::COMPONENT_FORMINPUT_COPYSEARCHURL];
                 break;
         }
 

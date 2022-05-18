@@ -9,18 +9,18 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELINNER_STANCES],
-            [self::class, self::MODULE_CAROUSELINNER_AUTHORSTANCES],
-            [self::class, self::MODULE_CAROUSELINNER_TAGSTANCES],
+            [self::class, self::COMPONENT_CAROUSELINNER_STANCES],
+            [self::class, self::COMPONENT_CAROUSELINNER_AUTHORSTANCES],
+            [self::class, self::COMPONENT_CAROUSELINNER_TAGSTANCES],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_STANCES:
-            case self::MODULE_CAROUSELINNER_AUTHORSTANCES:
-            case self::MODULE_CAROUSELINNER_TAGSTANCES:
+            case self::COMPONENT_CAROUSELINNER_STANCES:
+            case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELINNER_TAGSTANCES:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12',
@@ -36,15 +36,15 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_STANCES:
-            case self::MODULE_CAROUSELINNER_AUTHORSTANCES:
-            case self::MODULE_CAROUSELINNER_TAGSTANCES:
-                $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED];
+            case self::COMPONENT_CAROUSELINNER_STANCES:
+            case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
+            case self::COMPONENT_CAROUSELINNER_TAGSTANCES:
+                $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED];
                 break;
                 
-         // case self::MODULE_CAROUSELINNER_AUTHORSTANCES:
+         // case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
 
-         //     $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED];
+         //     $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED];
          //     break;
         }
 

@@ -11,18 +11,18 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_NAME],
-            [self::class, self::MODULE_FORMINPUT_EMAIL],
+            [self::class, self::COMPONENT_FORMINPUT_NAME],
+            [self::class, self::COMPONENT_FORMINPUT_EMAIL],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NAME:
+            case self::COMPONENT_FORMINPUT_NAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
 
-            case self::MODULE_FORMINPUT_EMAIL:
+            case self::COMPONENT_FORMINPUT_EMAIL:
                 return TranslationAPIFacade::getInstance()->__('Your Email', 'pop-genericforms');
         }
 
@@ -32,8 +32,8 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NAME:
-            case self::MODULE_FORMINPUT_EMAIL:
+            case self::COMPONENT_FORMINPUT_NAME:
+            case self::COMPONENT_FORMINPUT_EMAIL:
                 return true;
         }
 
@@ -50,11 +50,11 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
             $user_id = \PoP\Root\App::getState('current-user-id');
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             switch ($component[1]) {
-                case self::MODULE_FORMINPUT_NAME:
+                case self::COMPONENT_FORMINPUT_NAME:
                     $options['selected'] = $userTypeAPI->getUserDisplayName($user_id);
                     break;
 
-                case self::MODULE_FORMINPUT_EMAIL:
+                case self::COMPONENT_FORMINPUT_EMAIL:
                     $options['selected'] = $userTypeAPI->getUserEmail($user_id);
                     break;
             }
@@ -68,8 +68,8 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NAME:
-            case self::MODULE_FORMINPUT_EMAIL:
+            case self::COMPONENT_FORMINPUT_NAME:
+            case self::COMPONENT_FORMINPUT_EMAIL:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
@@ -81,8 +81,8 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NAME:
-            case self::MODULE_FORMINPUT_EMAIL:
+            case self::COMPONENT_FORMINPUT_NAME:
+            case self::COMPONENT_FORMINPUT_EMAIL:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
@@ -94,8 +94,8 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_NAME:
-            case self::MODULE_FORMINPUT_EMAIL:
+            case self::COMPONENT_FORMINPUT_NAME:
+            case self::COMPONENT_FORMINPUT_EMAIL:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always

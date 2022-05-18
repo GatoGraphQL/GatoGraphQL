@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_StanceReferencesScriptFrameLayoutsBase exten
     public function getScriptSubmodule(array $component)
     {
         return $this->doAppend($component) ? 
-        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_STANCES] : 
-        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_STANCESEMPTY];
+        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_STANCES] : 
+        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_STANCESEMPTY];
     }
 }

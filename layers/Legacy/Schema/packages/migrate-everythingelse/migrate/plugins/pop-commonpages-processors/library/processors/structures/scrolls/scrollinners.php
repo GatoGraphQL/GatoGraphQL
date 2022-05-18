@@ -10,17 +10,17 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_WHOWEARE_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_WHOWEARE_LIST],
-            [self::class, self::MODULE_SCROLLINNER_WHOWEARE_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
                     POP_HOOK_SCROLLINNER_THUMBNAIL_GRID,
@@ -30,9 +30,9 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
                     )
                 );
 
-            case self::MODULE_SCROLLINNER_WHOWEARE_DETAILS:
-            case self::MODULE_SCROLLINNER_WHOWEARE_LIST:
-            case self::MODULE_SCROLLINNER_WHOWEARE_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_DETAILS:
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_LIST:
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -47,20 +47,20 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL:
-                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_THUMBNAIL];
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
+                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL];
                 break;
 
-            case self::MODULE_SCROLLINNER_WHOWEARE_LIST:
-                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_LIST];
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_LIST:
+                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_LIST];
                 break;
                 
-            case self::MODULE_SCROLLINNER_WHOWEARE_FULLVIEW:
-                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_FULLUSER];
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW:
+                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER];
                 break;
 
-            case self::MODULE_SCROLLINNER_WHOWEARE_DETAILS:
-                $ret[] = [GD_ClusterCommonPages_Module_Processor_CustomPreviewUserLayouts::class, GD_ClusterCommonPages_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_SPONSOR_DETAILS];
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_DETAILS:
+                $ret[] = [GD_ClusterCommonPages_Module_Processor_CustomPreviewUserLayouts::class, GD_ClusterCommonPages_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_SPONSOR_DETAILS];
                 break;
         }
 

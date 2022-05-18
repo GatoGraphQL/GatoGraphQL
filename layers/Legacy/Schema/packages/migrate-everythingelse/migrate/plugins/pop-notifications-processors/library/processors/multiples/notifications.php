@@ -9,7 +9,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_LATESTNOTIFICATIONS],
+            [self::class, self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS],
         );
     }
 
@@ -18,7 +18,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         $ret = parent::getSubComponents($component);
 
         $inners = array(
-            self::MODULE_MULTIPLE_LATESTNOTIFICATIONS => [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTNOTIFICATIONS],
+            self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS => [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -34,7 +34,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         switch ($component[1]) {
          // Display the dataset also when the block triggers event 'rendered', meaning
          // to do if after the user has logged in with the hover login block
-            case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
+            case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $ret['displayBlockDatasetCount']['display-datasetcount-when'] = array(
                     'oncreated',
                     'onrendered',
@@ -51,11 +51,11 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
+            case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $module_path_manager = ModulePathManagerFacade::getInstance();
                 $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();
                 $module_propagation_current_path[] = $component;
-                $module_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTNOTIFICATIONS];
+                $module_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS];
                 return $module_propagation_current_path;
         }
 
@@ -67,7 +67,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
+            case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 // Only add if the count is > 0
                 if ($dbobjectids) {
                     if ($count = count($dbobjectids)) {
@@ -85,7 +85,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
+            case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $this->addJsmethod($ret, 'displayBlockDatasetCount');
                 break;
         }
@@ -96,14 +96,14 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
+            case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $this->appendProp($component, $props, 'class', 'hidden');
                 $this->mergeProp(
                     $component,
                     $props,
                     'params',
                     array(
-                        'data-datasetcount-target' => '#'.AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//[self::class, self::MODULE_ID_NOTIFICATIONSCOUNT],
+                        'data-datasetcount-target' => '#'.AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//[self::class, self::COMPONENT_ID_NOTIFICATIONSCOUNT],
                     )
                 );
                 break;

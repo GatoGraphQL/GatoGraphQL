@@ -10,18 +10,18 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE],
-            [self::class, self::MODULE_BLOCK_INVITENEWMEMBERS],
-            [self::class, self::MODULE_BLOCK_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_INVITENEWMEMBERS],
+            [self::class, self::COMPONENT_BLOCK_EDITMEMBERSHIP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
-            self::MODULE_BLOCK_INVITENEWMEMBERS => POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS,
-            self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE => POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES,
+            self::COMPONENT_BLOCK_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
+            self::COMPONENT_BLOCK_INVITENEWMEMBERS => POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS,
+            self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE => POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -30,7 +30,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_INVITENEWMEMBERS:
+            case self::COMPONENT_BLOCK_INVITENEWMEMBERS:
                 return sprintf(
                     '<div class="alert alert-info"><p>%s</p><ul><li>%s</li><li>%s</li></ul></div>',
                     sprintf(
@@ -50,9 +50,9 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE],
-            self::MODULE_BLOCK_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_INVITENEWMEMBERS],
-            self::MODULE_BLOCK_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_EDITMEMBERSHIP],
+            self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE],
+            self::COMPONENT_BLOCK_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_INVITENEWMEMBERS],
+            self::COMPONENT_BLOCK_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_EDITMEMBERSHIP],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -64,8 +64,8 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
     protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE:
-            case self::MODULE_BLOCK_EDITMEMBERSHIP:
+            case self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE:
+            case self::COMPONENT_BLOCK_EDITMEMBERSHIP:
                 return true;
         }
 

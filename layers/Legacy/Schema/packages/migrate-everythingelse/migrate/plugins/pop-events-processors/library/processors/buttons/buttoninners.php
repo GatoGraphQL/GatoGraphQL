@@ -9,18 +9,18 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_BUTTONINNER_GOOGLECALENDAR],
-            [self::class, self::MODULE_EM_BUTTONINNER_ICAL],
+            [self::class, self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR],
+            [self::class, self::COMPONENT_EM_BUTTONINNER_ICAL],
         );
     }
 
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_BUTTONINNER_GOOGLECALENDAR:
+            case self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR:
                 return 'fa-fw fa-thumb-tack';
             
-            case self::MODULE_EM_BUTTONINNER_ICAL:
+            case self::COMPONENT_EM_BUTTONINNER_ICAL:
                 return 'fa-fw fa-download';
         }
 
@@ -30,10 +30,10 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_BUTTONINNER_GOOGLECALENDAR:
+            case self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Google Calendar', 'em-popprocessors');
             
-            case self::MODULE_EM_BUTTONINNER_ICAL:
+            case self::COMPONENT_EM_BUTTONINNER_ICAL:
                 return TranslationAPIFacade::getInstance()->__('iCal', 'em-popprocessors');
         }
 

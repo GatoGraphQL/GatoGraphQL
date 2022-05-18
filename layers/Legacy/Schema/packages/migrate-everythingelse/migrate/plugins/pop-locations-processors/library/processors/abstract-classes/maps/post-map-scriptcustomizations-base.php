@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
 
     public function getAuthorsModule(array $component)
     {
-        return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
+        return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
     }
     public function getAuthorsSeparator(array $component, array &$props)
     {

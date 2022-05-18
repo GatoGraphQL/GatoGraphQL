@@ -11,10 +11,10 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR],
         );
     }
 
@@ -23,10 +23,10 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $filters = array(
-                    self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORLOCATIONPOSTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORLOCATIONPOSTS_SIDEBAR],
                 );
                 $ret[] = $filters[$component[1]];
 
@@ -38,9 +38,9 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
 
             default:
                 $inners = array(
-                    self::MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR],
-                    self::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_TAGLOCATIONPOSTS_SIDEBAR],
-                    self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR => [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_TAGLOCATIONPOSTS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR => [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
                 );
                 if ($inner = $inners[$component[1]] ?? null) {
                     $ret[] = $inner;
@@ -54,16 +54,16 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
     public function getScreen(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREEN_AUTHORSECTION;
 
-            case self::MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR:
                 return POP_SCREEN_SECTION;
 
-            case self::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR:
                 return POP_SCREEN_TAGSECTION;
 
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
                 return POP_SCREEN_SINGLE;
         }
 
@@ -73,12 +73,12 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
     public function getScreengroup(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
 
-            case self::MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR:
-            case self::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR:
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
@@ -88,9 +88,9 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
     public function initWebPlatformModelProps(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
                 $inners = array(
-                    self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR => [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR => [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
                 );
                 $subComponent = $inners[$component[1]];
 

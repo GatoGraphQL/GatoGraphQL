@@ -20,20 +20,20 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTWRAPPER_CATEGORIES],
-            [self::class, self::MODULE_LAYOUTWRAPPER_APPLIESTO],
-            [self::class, self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS],
-            [self::class, self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_CATEGORIES],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_APPLIESTO],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_DETAILS],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW],
         );
     }
 
@@ -42,60 +42,60 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_CATEGORIES:
-                $ret[] = [Wassup_Module_Processor_CategoriesLayouts::class, Wassup_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_CATEGORIES];
+            case self::COMPONENT_LAYOUTWRAPPER_CATEGORIES:
+                $ret[] = [Wassup_Module_Processor_CategoriesLayouts::class, Wassup_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_CATEGORIES];
                 break;
 
-            case self::MODULE_LAYOUTWRAPPER_APPLIESTO:
-                $ret[] = [Wassup_Module_Processor_CategoriesLayouts::class, Wassup_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_APPLIESTO];
+            case self::COMPONENT_LAYOUTWRAPPER_APPLIESTO:
+                $ret[] = [Wassup_Module_Processor_CategoriesLayouts::class, Wassup_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_APPLIESTO];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTS_DETAILS];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_REFERENCEDBY_SIMPLEVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCEDBY_SIMPLEVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_REFERENCEDBY_FULLVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCEDBY_FULLVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_REFERENCEDBY_DETAILS];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCEDBY_DETAILS];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
-                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
+                $ret[] = [Wassup_Module_Processor_Widgets::class, Wassup_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW];
                 break;
         }
 
@@ -107,22 +107,22 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         $ret = parent::getConditionFailedSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
-                $ret[] = [PoP_Module_Processor_HighlightReferencesFramesLayouts::class, PoP_Module_Processor_HighlightReferencesFramesLayouts::MODULE_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT];
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
+                $ret[] = [PoP_Module_Processor_HighlightReferencesFramesLayouts::class, PoP_Module_Processor_HighlightReferencesFramesLayouts::COMPONENT_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
-                $ret[] = [PoP_Module_Processor_ReferencesFramesLayouts::class, PoP_Module_Processor_ReferencesFramesLayouts::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
+                $ret[] = [PoP_Module_Processor_ReferencesFramesLayouts::class, PoP_Module_Processor_ReferencesFramesLayouts::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
-                $ret[] = [PoP_Module_Processor_ReferencesFramesLayouts::class, PoP_Module_Processor_ReferencesFramesLayouts::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
+                $ret[] = [PoP_Module_Processor_ReferencesFramesLayouts::class, PoP_Module_Processor_ReferencesFramesLayouts::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
-                $ret[] = [PoP_Module_Processor_ReferencesFramesLayouts::class, PoP_Module_Processor_ReferencesFramesLayouts::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
+                $ret[] = [PoP_Module_Processor_ReferencesFramesLayouts::class, PoP_Module_Processor_ReferencesFramesLayouts::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW];
                 break;
         }
 
@@ -132,18 +132,18 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
                 $this->appendProp($component, $props, 'class', 'referencedby clearfix');
                 break;
         }
@@ -154,26 +154,26 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_CATEGORIES:
+            case self::COMPONENT_LAYOUTWRAPPER_CATEGORIES:
                 return 'hasTopics';
 
-            case self::MODULE_LAYOUTWRAPPER_APPLIESTO:
+            case self::COMPONENT_LAYOUTWRAPPER_APPLIESTO:
                 return 'hasAppliesto';
 
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
                 return 'hasHighlights';
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
-            case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
                 return 'hasReferencedBy';
         }
 

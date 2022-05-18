@@ -7,7 +7,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebarInners extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_TAG],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_TAG],
         );
     }
 
@@ -16,7 +16,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebarInners extends PoP_Module_
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_TAG:
+            case self::COMPONENT_VERTICALSIDEBARINNER_TAG:
                 $ret = array_merge(
                     $ret,
                     FullTagSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_TAG)

@@ -8,15 +8,15 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT],
-            [self::class, self::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT],
+            [self::class, self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT],
+            [self::class, self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT],
         );
     }
 
     public function doAppend(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
+            case self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return false;
         }
         
@@ -26,9 +26,9 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
     public function getLayoutSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT:
-            case self::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
-                return [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
+            case self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
+                return [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
         }
         
         return parent::getLayoutSubmodule($component);

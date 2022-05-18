@@ -8,16 +8,16 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Mod
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
-            [self::class, self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY],
-            self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP],
+            self::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITY => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY],
+            self::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

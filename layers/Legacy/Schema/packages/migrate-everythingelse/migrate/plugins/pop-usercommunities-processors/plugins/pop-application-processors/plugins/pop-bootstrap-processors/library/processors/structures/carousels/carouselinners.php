@@ -7,14 +7,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELINNER_AUTHORMEMBERS],
+            [self::class, self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS:
                 return array(
                     'row-items' => 12,
                     // Allow ThemeStyle Expansive to change the class
@@ -31,8 +31,8 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_AUTHORMEMBERS:
-                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_USER_AVATAR];
+            case self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS:
+                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_USER_AVATAR];
                 break;
         }
 

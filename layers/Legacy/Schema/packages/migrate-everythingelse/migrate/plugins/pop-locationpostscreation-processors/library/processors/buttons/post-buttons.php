@@ -7,14 +7,14 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_LOCATIONPOST_CREATE],
+            [self::class, self::COMPONENT_BUTTON_LOCATIONPOST_CREATE],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_LOCATIONPOST_CREATE => [PoP_LocationPostsCreation_Module_Processor_ButtonInners::class, PoP_LocationPostsCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_LOCATIONPOST_CREATE],
+            self::COMPONENT_BUTTON_LOCATIONPOST_CREATE => [PoP_LocationPostsCreation_Module_Processor_ButtonInners::class, PoP_LocationPostsCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_LOCATIONPOST_CREATE],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -26,9 +26,9 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
     public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_LOCATIONPOST_CREATE:
+            case self::COMPONENT_BUTTON_LOCATIONPOST_CREATE:
                 return array(
-                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                 );
         }
 
@@ -38,7 +38,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_LOCATIONPOST_CREATE:
+            case self::COMPONENT_BUTTON_LOCATIONPOST_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -51,7 +51,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
     public function getTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_BUTTON_LOCATIONPOST_CREATE => PoP_LocationPosts_PostNameUtils::getNameUc(),
+            self::COMPONENT_BUTTON_LOCATIONPOST_CREATE => PoP_LocationPosts_PostNameUtils::getNameUc(),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;
@@ -63,7 +63,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
     public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_LOCATIONPOST_CREATE => 'addLocationPostURL',
+            self::COMPONENT_BUTTON_LOCATIONPOST_CREATE => 'addLocationPostURL',
         );
         if ($field = $fields[$component[1]] ?? null) {
             return $field;

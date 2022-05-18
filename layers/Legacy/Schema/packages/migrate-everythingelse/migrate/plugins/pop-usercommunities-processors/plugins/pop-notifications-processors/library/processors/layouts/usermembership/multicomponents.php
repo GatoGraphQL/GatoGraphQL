@@ -7,7 +7,7 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP],
+            [self::class, self::COMPONENT_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP],
         );
     }
 
@@ -16,10 +16,10 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
-                $ret[] = [Wassup_URE_AAL_Module_Processor_MemberStatusLayouts::class, Wassup_URE_AAL_Module_Processor_MemberStatusLayouts::MODULE_UREAAL_LAYOUTUSER_MEMBERSTATUS];
-                $ret[] = [Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts::class, Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts::MODULE_UREAAL_LAYOUTUSER_MEMBERPRIVILEGES];
-                $ret[] = [Wassup_URE_AAL_Module_Processor_MemberTagsLayouts::class, Wassup_URE_AAL_Module_Processor_MemberTagsLayouts::MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS];
+            case self::COMPONENT_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
+                $ret[] = [Wassup_URE_AAL_Module_Processor_MemberStatusLayouts::class, Wassup_URE_AAL_Module_Processor_MemberStatusLayouts::COMPONENT_UREAAL_LAYOUTUSER_MEMBERSTATUS];
+                $ret[] = [Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts::class, Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts::COMPONENT_UREAAL_LAYOUTUSER_MEMBERPRIVILEGES];
+                $ret[] = [Wassup_URE_AAL_Module_Processor_MemberTagsLayouts::class, Wassup_URE_AAL_Module_Processor_MemberTagsLayouts::COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS];
                 break;
         }
 
@@ -29,7 +29,7 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
+            case self::COMPONENT_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
                 $this->appendProp($component, $props, 'class', 'pop-usermembership');
                 foreach ($this->getSubComponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'item');

@@ -8,16 +8,16 @@ class PoP_SocialNetwork_Module_Processor_FormGroups extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_MESSAGESUBJECT],
-            [self::class, self::MODULE_FORMINPUTGROUP_MESSAGETOUSER],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_MESSAGESUBJECT],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_MESSAGETOUSER],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_MESSAGESUBJECT => [PoP_SocialNetwork_Module_Processor_TextFormInputs::class, PoP_SocialNetwork_Module_Processor_TextFormInputs::MODULE_FORMINPUT_MESSAGESUBJECT],
-            self::MODULE_FORMINPUTGROUP_MESSAGETOUSER => [PoP_SocialNetwork_Module_Processor_TextareaFormInputs::class, PoP_SocialNetwork_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGETOUSER],
+            self::COMPONENT_FORMINPUTGROUP_MESSAGESUBJECT => [PoP_SocialNetwork_Module_Processor_TextFormInputs::class, PoP_SocialNetwork_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_MESSAGESUBJECT],
+            self::COMPONENT_FORMINPUTGROUP_MESSAGETOUSER => [PoP_SocialNetwork_Module_Processor_TextareaFormInputs::class, PoP_SocialNetwork_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_MESSAGETOUSER],
         );
 
         if ($component = $components[$component[1]] ?? null) {

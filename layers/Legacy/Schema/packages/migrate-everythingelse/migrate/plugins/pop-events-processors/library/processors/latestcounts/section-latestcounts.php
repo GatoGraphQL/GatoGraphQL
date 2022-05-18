@@ -15,26 +15,26 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LATESTCOUNT_EVENTS],
-            [self::class, self::MODULE_LATESTCOUNT_AUTHOR_EVENTS],
-            [self::class, self::MODULE_LATESTCOUNT_TAG_EVENTS],
-            [self::class, self::MODULE_LATESTCOUNT_PASTEVENTS],
-            [self::class, self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS],
-            [self::class, self::MODULE_LATESTCOUNT_TAG_PASTEVENTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_EVENTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_TAG_EVENTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_PASTEVENTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_TAG_PASTEVENTS],
         );
     }
 
     public function getObjectName(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_EVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
                 return TranslationAPIFacade::getInstance()->__('event', 'poptheme-wassup');
 
-            case self::MODULE_LATESTCOUNT_PASTEVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_PASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('past event', 'poptheme-wassup');
         }
 
@@ -44,14 +44,14 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
     public function getObjectNames(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_EVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
                 return TranslationAPIFacade::getInstance()->__('events', 'poptheme-wassup');
 
-            case self::MODULE_LATESTCOUNT_PASTEVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_PASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('past events', 'poptheme-wassup');
         }
 
@@ -65,16 +65,16 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_EVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
                 $ret[] = $event_post_type . '-' . Scopes::FUTURE;
                 $ret[] = $event_post_type . '-' . Scopes::CURRENT;
                 break;
 
-            case self::MODULE_LATESTCOUNT_PASTEVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_PASTEVENTS:
                 $ret[] = $event_post_type . '-' . Scopes::PAST;
                 break;
         }
@@ -85,8 +85,8 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
     public function isAuthor(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS:
                 return true;
         }
 
@@ -96,8 +96,8 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
     public function isTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_TAG_EVENTS:
-            case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_PASTEVENTS:
                 return true;
         }
 

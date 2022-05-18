@@ -8,8 +8,8 @@ class PoP_Module_Processor_PostAuthorLayouts extends PoP_Module_Processor_PostAu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTAUTHORS],
-            [self::class, self::MODULE_LAYOUT_SIMPLEPOSTAUTHORS],
+            [self::class, self::COMPONENT_LAYOUT_POSTAUTHORS],
+            [self::class, self::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS],
         );
     }
 
@@ -18,12 +18,12 @@ class PoP_Module_Processor_PostAuthorLayouts extends PoP_Module_Processor_PostAu
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTAUTHORS:
-                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_POSTAUTHOR];
+            case self::COMPONENT_LAYOUT_POSTAUTHORS:
+                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_POSTAUTHOR];
                 break;
             
-            case self::MODULE_LAYOUT_SIMPLEPOSTAUTHORS:
-                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_USER_AVATAR26];
+            case self::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS:
+                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_USER_AVATAR26];
                 break;
         }
 

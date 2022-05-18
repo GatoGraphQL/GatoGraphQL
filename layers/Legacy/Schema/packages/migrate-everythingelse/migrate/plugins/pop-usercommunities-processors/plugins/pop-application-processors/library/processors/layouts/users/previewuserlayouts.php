@@ -7,15 +7,15 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS],
         );
     }
 
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER_EDITMEMBERS];
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -25,8 +25,8 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
-                case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
-                    return [PoP_Module_Processor_UserAvatarLayouts::class, PoP_Module_Processor_UserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE];
+                case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+                    return [PoP_Module_Processor_UserAvatarLayouts::class, PoP_Module_Processor_UserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE];
             }
         }
 
@@ -36,7 +36,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
     public function showShortDescription(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return false;
         }
 
@@ -46,7 +46,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return true;
         }
 

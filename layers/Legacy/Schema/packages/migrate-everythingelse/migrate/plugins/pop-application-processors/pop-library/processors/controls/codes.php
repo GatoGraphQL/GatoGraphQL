@@ -8,17 +8,17 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
+            [self::class, self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
         );
     }
 
     public function getCode(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
+            case self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Allow TPP Debate website to override this label with "Agree?"
                 $labels = array(
-                    self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL => \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomCodes:updownvote:label', TranslationAPIFacade::getInstance()->__('Important?', 'poptheme-wassup')),
+                    self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL => \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomCodes:updownvote:label', TranslationAPIFacade::getInstance()->__('Important?', 'poptheme-wassup')),
                 );
 
                 return sprintf(
@@ -33,7 +33,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
+            case self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Artificial property added to identify the template when adding module-resources
                 $this->setProp($component, $props, 'resourceloader', 'functionbutton');
                 break;

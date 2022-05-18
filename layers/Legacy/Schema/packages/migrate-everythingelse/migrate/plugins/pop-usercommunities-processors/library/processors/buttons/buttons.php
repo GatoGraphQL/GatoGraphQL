@@ -8,15 +8,15 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_BUTTON_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
-                return [GD_URE_Module_Processor_ButtonInners::class, GD_URE_Module_Processor_ButtonInners::MODULE_URE_BUTTONINNER_EDITMEMBERSHIP];
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
+                return [GD_URE_Module_Processor_ButtonInners::class, GD_URE_Module_Processor_ButtonInners::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP];
         }
 
         return parent::getButtoninnerSubmodule($component);
@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return 'editMembershipURL';
         }
 
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return POP_TARGET_ADDONS;
         }
 
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'ure-popprocessors');
         }
         
@@ -57,7 +57,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 $ret .= ' btn btn-xs btn-default';
                 break;
         }

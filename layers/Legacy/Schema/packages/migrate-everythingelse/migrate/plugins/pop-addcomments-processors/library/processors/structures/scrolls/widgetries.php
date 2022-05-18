@@ -9,8 +9,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGET_POSTCOMMENTS],
-            [self::class, self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT],
+            [self::class, self::COMPONENT_WIDGET_POSTCOMMENTS],
+            [self::class, self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT],
         );
     }
 
@@ -19,12 +19,12 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
-                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
+                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
                 break;
 
-            case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
-                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT];
+            case self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
+                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT];
                 break;
         }
 
@@ -34,8 +34,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGET_POSTCOMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
-            self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
+            self::COMPONENT_WIDGET_POSTCOMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
+            self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
         );
 
         return $titles[$component[1]] ?? null;
@@ -43,8 +43,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGET_POSTCOMMENTS => 'fa-comments',
-            self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => 'fa-comments',
+            self::COMPONENT_WIDGET_POSTCOMMENTS => 'fa-comments',
+            self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => 'fa-comments',
         );
 
         return $fontawesomes[$component[1]] ?? null;
@@ -52,8 +52,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
-            case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
@@ -63,8 +63,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
-            case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
@@ -74,8 +74,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
-            case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
@@ -85,8 +85,8 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getTitleWrapperClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
-            case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
@@ -96,7 +96,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getTitleClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
 
                 return '';
         }
@@ -106,10 +106,10 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getQuicklinkgroupSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_POSTCOMMENTS:
-            case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS:
+            case self::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
-                return [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
+                return [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
         }
 
         return parent::getQuicklinkgroupSubmodule($component);

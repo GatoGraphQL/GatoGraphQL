@@ -15,30 +15,30 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -46,15 +46,15 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     protected function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_COMMUNITIES_SCROLL_LIST => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST],
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -63,15 +63,15 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_COMMUNITIES_SCROLL_LIST:
-            case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKUSERLIST];
+            case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKUSERLIST];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -80,7 +80,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+            case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 // // Artificial property added to identify the template when adding module-resources
                 // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-users-carousel');

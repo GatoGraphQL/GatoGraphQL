@@ -8,15 +8,15 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK],
+            [self::class, self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
-                return [PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::MODULE_ADDPOSTLINKS_FORMINPUT_LINK];
+            case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
+                return [PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK];
         }
 
         return parent::getComponentSubmodule($component);
@@ -25,7 +25,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
     public function getInfo(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
+            case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 return TranslationAPIFacade::getInstance()->__('The URL from an external webpage, directly referenced by this post.', 'poptheme-wassup');
         }
 
@@ -35,7 +35,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
+            case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 $component = $this->getComponentSubmodule($component);
                 $this->setProp($component, $props, 'placeholder', 'https://...');
                 break;

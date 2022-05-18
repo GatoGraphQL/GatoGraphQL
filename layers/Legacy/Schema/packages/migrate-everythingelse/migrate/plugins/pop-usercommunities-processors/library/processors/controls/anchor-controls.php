@@ -13,18 +13,18 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY],
-            [self::class, self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER],
+            [self::class, self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY],
+            [self::class, self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Show Content from: Community + Members', 'ure-popprocessors');
 
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 return TranslationAPIFacade::getInstance()->__('Show Content from: Community', 'ure-popprocessors');
         }
 
@@ -33,13 +33,13 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
     public function getText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
                 return
             '<i class="fa fa-fw fa-user-circle"></i>'.
             '+'.
             '<i class="fa fa-fw fa-users"></i>';
 
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 return '<i class="fa fa-fw fa-user-circle"></i>';
         }
 
@@ -48,11 +48,11 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
     public function getHref(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 $sources = array(
-                    self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
-                    self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
+                    self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
+                    self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
                 $source = $sources[$component[1]];
 
@@ -71,11 +71,11 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
-            case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
+            case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 $sources = array(
-                    self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
-                    self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
+                    self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
+                    self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
                 $source = $sources[$component[1]];
 

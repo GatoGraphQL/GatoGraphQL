@@ -7,7 +7,7 @@ class GD_EM_Module_Processor_CreateLocationFrames extends GD_EM_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FRAME_CREATELOCATIONMAP],
+            [self::class, self::COMPONENT_FRAME_CREATELOCATIONMAP],
         );
     }
 }

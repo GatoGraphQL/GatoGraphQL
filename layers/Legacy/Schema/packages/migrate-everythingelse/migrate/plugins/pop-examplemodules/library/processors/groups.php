@@ -12,9 +12,9 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EXAMPLE_HOME],
-            [self::class, self::MODULE_EXAMPLE_AUTHOR],
-            [self::class, self::MODULE_EXAMPLE_TAG],
+            [self::class, self::COMPONENT_EXAMPLE_HOME],
+            [self::class, self::COMPONENT_EXAMPLE_AUTHOR],
+            [self::class, self::COMPONENT_EXAMPLE_TAG],
         );
     }
 
@@ -23,24 +23,24 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_EXAMPLE_HOME:
+            case self::COMPONENT_EXAMPLE_HOME:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 if ($pageTypeAPI->getHomeStaticPageID()) {
-                    $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_HOMESTATICPAGE];
+                    $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_HOMESTATICPAGE];
                 } else {
-                    $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_HOMEWELCOME];
-                    $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_LATESTPOSTS];
+                    $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_HOMEWELCOME];
+                    $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_LATESTPOSTS];
                 }
                 break;
 
-            case self::MODULE_EXAMPLE_AUTHOR:
-                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_AUTHORDESCRIPTION];
-                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_AUTHORLATESTPOSTS];
+            case self::COMPONENT_EXAMPLE_AUTHOR:
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_AUTHORDESCRIPTION];
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS];
                 break;
 
-            case self::MODULE_EXAMPLE_TAG:
-                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_TAGDESCRIPTION];
-                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_TAGLATESTPOSTS];
+            case self::COMPONENT_EXAMPLE_TAG:
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_TAGDESCRIPTION];
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_TAGLATESTPOSTS];
                 break;
         }
 

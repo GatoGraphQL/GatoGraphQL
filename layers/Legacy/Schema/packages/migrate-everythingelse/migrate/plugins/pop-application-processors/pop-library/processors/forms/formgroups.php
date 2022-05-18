@@ -9,8 +9,8 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT],
-            [self::class, self::MODULE_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT],
+            [self::class, self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT],
         );
     }
 
@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
         $ret = parent::getLabelClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
+            case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
                 $ret .= ' col-sm-2';
                 break;
         }
@@ -32,7 +32,7 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
         $ret = parent::getFormcontrolClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
+            case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
                 $ret .= ' col-sm-10';
                 break;
         }
@@ -43,7 +43,7 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
     public function getInfo(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT:
+            case self::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT:
                 return TranslationAPIFacade::getInstance()->__('Do you need volunteers? Each time a user applies to volunteer, you will get a notification email with the volunteer\'s contact information.', 'poptheme-wassup');
         }
         
@@ -53,11 +53,11 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
     public function getComponentSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
-                return [PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs::class, PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT];
+            case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
+                return [PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs::class, PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT];
 
-            case self::MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT:
-                return [GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT];
+            case self::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT:
+                return [GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT];
         }
         
         return parent::getComponentSubmodule($component);

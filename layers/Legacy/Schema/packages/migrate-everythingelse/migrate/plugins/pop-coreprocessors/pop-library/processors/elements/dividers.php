@@ -8,15 +8,15 @@ class PoP_Module_Processor_Dividers extends PoP_Module_Processor_DividersBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DIVIDER],
-            [self::class, self::MODULE_COLLAPSIBLEDIVIDER],
+            [self::class, self::COMPONENT_DIVIDER],
+            [self::class, self::COMPONENT_COLLAPSIBLEDIVIDER],
         );
     }
 
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_COLLAPSIBLEDIVIDER:
+            case self::COMPONENT_COLLAPSIBLEDIVIDER:
                 $this->setProp($component, $props, 'class', 'collapse');
                 break;
         }

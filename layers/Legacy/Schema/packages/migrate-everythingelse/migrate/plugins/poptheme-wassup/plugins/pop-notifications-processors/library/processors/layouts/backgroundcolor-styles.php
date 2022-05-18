@@ -8,16 +8,16 @@ class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends Po
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES],
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES],
         );
     }
 
     public function getElemTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
                 return '#ps-top .preview.notification-layout';
         }
 
@@ -27,8 +27,8 @@ class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends Po
     public function getElemStyles(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
                 return array(
                     'background-color' => \PoP\Root\App::applyFilters(
                         'PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor',

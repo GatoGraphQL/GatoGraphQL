@@ -44,53 +44,53 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_HIGHLIGHTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_USERS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_USER_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_HIGHLIGHTS_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_USERS_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_USER_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_TAGS_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_USERS_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_USER_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_USERS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_USER_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_HIGHLIGHTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_USERS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_USER_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_CONTENT_LIST],
-            [self::class, self::MODULE_SCROLLINNER_HIGHLIGHTS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_USERS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_USER_LIST],
-            [self::class, self::MODULE_SCROLLINNER_TAGS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_POSTS_LINE],
-            [self::class, self::MODULE_SCROLLINNER_AUTHORCONTENT_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_AUTHORPOSTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_USERS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_USER_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_USERS_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_USER_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_TAGS_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_USERS_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_USER_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_USERS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_USER_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_USERS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_USER_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_USERS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_USER_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_TAGS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_POSTS_LINE],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTHORCONTENT_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_CONTENT_THUMBNAIL:
-            case self::MODULE_SCROLLINNER_HIGHLIGHTS_THUMBNAIL:
-            case self::MODULE_SCROLLINNER_POSTS_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
                     POP_HOOK_SCROLLINNER_THUMBNAIL_GRID,
@@ -100,46 +100,46 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
                     )
                 );
 
-            case self::MODULE_SCROLLINNER_USERS_THUMBNAIL:
-            case self::MODULE_SCROLLINNER_USER_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_USERS_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_USER_THUMBNAIL:
                 return array(
                     'row-items' => 3,
                     'class' => 'col-xsm-4'
                 );
 
-            case self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_HIGHLIGHTS_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_POSTS_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_USERS_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_USER_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_CONTENT_ADDONS:
-            case self::MODULE_SCROLLINNER_HIGHLIGHTS_ADDONS:
-            case self::MODULE_SCROLLINNER_POSTS_ADDONS:
-            case self::MODULE_SCROLLINNER_USERS_ADDONS:
-            case self::MODULE_SCROLLINNER_USER_ADDONS:
-            case self::MODULE_SCROLLINNER_CONTENT_DETAILS:
-            case self::MODULE_SCROLLINNER_POSTS_DETAILS:
-            case self::MODULE_SCROLLINNER_TAGS_DETAILS:
-            case self::MODULE_SCROLLINNER_USERS_DETAILS:
-            case self::MODULE_SCROLLINNER_USER_DETAILS:
-            case self::MODULE_SCROLLINNER_CONTENT_SIMPLEVIEW:
-            case self::MODULE_SCROLLINNER_POSTS_SIMPLEVIEW:
-            case self::MODULE_SCROLLINNER_CONTENT_FULLVIEW:
-            case self::MODULE_SCROLLINNER_HIGHLIGHTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_POSTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_USERS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_USER_FULLVIEW:
-            case self::MODULE_SCROLLINNER_CONTENT_LIST:
-            case self::MODULE_SCROLLINNER_HIGHLIGHTS_LIST:
-            case self::MODULE_SCROLLINNER_POSTS_LIST:
-            case self::MODULE_SCROLLINNER_TAGS_LIST:
-            case self::MODULE_SCROLLINNER_USERS_LIST:
-            case self::MODULE_SCROLLINNER_USER_LIST:
-            case self::MODULE_SCROLLINNER_POSTS_LINE:
-            case self::MODULE_SCROLLINNER_AUTHORCONTENT_FULLVIEW:
-            case self::MODULE_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_AUTHORPOSTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_POSTS_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_USERS_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_USER_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_CONTENT_ADDONS:
+            case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_ADDONS:
+            case self::COMPONENT_SCROLLINNER_POSTS_ADDONS:
+            case self::COMPONENT_SCROLLINNER_USERS_ADDONS:
+            case self::COMPONENT_SCROLLINNER_USER_ADDONS:
+            case self::COMPONENT_SCROLLINNER_CONTENT_DETAILS:
+            case self::COMPONENT_SCROLLINNER_POSTS_DETAILS:
+            case self::COMPONENT_SCROLLINNER_TAGS_DETAILS:
+            case self::COMPONENT_SCROLLINNER_USERS_DETAILS:
+            case self::COMPONENT_SCROLLINNER_USER_DETAILS:
+            case self::COMPONENT_SCROLLINNER_CONTENT_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLINNER_POSTS_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLINNER_CONTENT_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_POSTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_USERS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_USER_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_CONTENT_LIST:
+            case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_LIST:
+            case self::COMPONENT_SCROLLINNER_POSTS_LIST:
+            case self::COMPONENT_SCROLLINNER_TAGS_LIST:
+            case self::COMPONENT_SCROLLINNER_USERS_LIST:
+            case self::COMPONENT_SCROLLINNER_USER_LIST:
+            case self::COMPONENT_SCROLLINNER_POSTS_LINE:
+            case self::COMPONENT_SCROLLINNER_AUTHORCONTENT_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -154,44 +154,44 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
-            self::MODULE_SCROLLINNER_CONTENT_ADDONS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_ADDONS],
-            self::MODULE_SCROLLINNER_USERS_NAVIGATOR => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_NAVIGATOR],
-            self::MODULE_SCROLLINNER_USER_NAVIGATOR => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_NAVIGATOR],
-            self::MODULE_SCROLLINNER_USERS_ADDONS => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_ADDONS],
-            self::MODULE_SCROLLINNER_USER_ADDONS => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_ADDONS],
-            self::MODULE_SCROLLINNER_CONTENT_DETAILS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_DETAILS],
-            self::MODULE_SCROLLINNER_USERS_DETAILS => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_DETAILS],
-            self::MODULE_SCROLLINNER_USER_DETAILS => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_DETAILS],
-            self::MODULE_SCROLLINNER_CONTENT_THUMBNAIL => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_THUMBNAIL],
-            self::MODULE_SCROLLINNER_USERS_THUMBNAIL => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_THUMBNAIL],
-            self::MODULE_SCROLLINNER_USER_THUMBNAIL => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_THUMBNAIL],
-            self::MODULE_SCROLLINNER_CONTENT_LIST => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_LIST],
-            self::MODULE_SCROLLINNER_USERS_LIST => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_LIST],
-            self::MODULE_SCROLLINNER_USER_LIST => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_LIST],
-            self::MODULE_SCROLLINNER_CONTENT_SIMPLEVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW],
-            self::MODULE_SCROLLINNER_CONTENT_FULLVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_FULLVIEW],
-            self::MODULE_SCROLLINNER_USERS_FULLVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_FULLUSER],
-            self::MODULE_SCROLLINNER_USER_FULLVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_FULLUSER],
-            self::MODULE_SCROLLINNER_AUTHORCONTENT_FULLVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW],
-            self::MODULE_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW],
-            self::MODULE_SCROLLINNER_HIGHLIGHTS_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            self::MODULE_SCROLLINNER_POSTS_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
-            self::MODULE_SCROLLINNER_HIGHLIGHTS_ADDONS => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            self::MODULE_SCROLLINNER_POSTS_ADDONS => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS],
-            self::MODULE_SCROLLINNER_POSTS_DETAILS => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS],
-            self::MODULE_SCROLLINNER_TAGS_DETAILS => [PoP_Module_ProcessorTagMultipleComponents::class, PoP_Module_ProcessorTagMultipleComponents::MODULE_LAYOUT_TAG_DETAILS],
-            self::MODULE_SCROLLINNER_HIGHLIGHTS_THUMBNAIL => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            self::MODULE_SCROLLINNER_POSTS_THUMBNAIL => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL],
-            self::MODULE_SCROLLINNER_HIGHLIGHTS_LIST => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            self::MODULE_SCROLLINNER_POSTS_LIST => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            self::MODULE_SCROLLINNER_TAGS_LIST => [PoP_Module_Processor_TagLayouts::class, PoP_Module_Processor_TagLayouts::MODULE_LAYOUT_TAG],
-            self::MODULE_SCROLLINNER_POSTS_LINE => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LINE],
-            self::MODULE_SCROLLINNER_POSTS_SIMPLEVIEW => [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
-            self::MODULE_SCROLLINNER_POSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_POST],
-            self::MODULE_SCROLLINNER_HIGHLIGHTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_HIGHLIGHT],
-            self::MODULE_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT],
-            self::MODULE_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_AUTHORLAYOUT_FULLVIEW_POST],
+            self::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
+            self::COMPONENT_SCROLLINNER_CONTENT_ADDONS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS],
+            self::COMPONENT_SCROLLINNER_USERS_NAVIGATOR => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_NAVIGATOR],
+            self::COMPONENT_SCROLLINNER_USER_NAVIGATOR => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR],
+            self::COMPONENT_SCROLLINNER_USERS_ADDONS => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS],
+            self::COMPONENT_SCROLLINNER_USER_ADDONS => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS],
+            self::COMPONENT_SCROLLINNER_CONTENT_DETAILS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS],
+            self::COMPONENT_SCROLLINNER_USERS_DETAILS => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_DETAILS],
+            self::COMPONENT_SCROLLINNER_USER_DETAILS => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS],
+            self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_USERS_THUMBNAIL => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_USER_THUMBNAIL => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_CONTENT_LIST => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_LIST],
+            self::COMPONENT_SCROLLINNER_USERS_LIST => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_LIST],
+            self::COMPONENT_SCROLLINNER_USER_LIST => [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_LIST],
+            self::COMPONENT_SCROLLINNER_CONTENT_SIMPLEVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_CONTENT_FULLVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_USERS_FULLVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER],
+            self::COMPONENT_SCROLLINNER_USER_FULLVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER],
+            self::COMPONENT_SCROLLINNER_AUTHORCONTENT_FULLVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
+            self::COMPONENT_SCROLLINNER_POSTS_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_ADDONS => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
+            self::COMPONENT_SCROLLINNER_POSTS_ADDONS => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS],
+            self::COMPONENT_SCROLLINNER_POSTS_DETAILS => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS],
+            self::COMPONENT_SCROLLINNER_TAGS_DETAILS => [PoP_Module_ProcessorTagMultipleComponents::class, PoP_Module_ProcessorTagMultipleComponents::COMPONENT_LAYOUT_TAG_DETAILS],
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
+            self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_LIST => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
+            self::COMPONENT_SCROLLINNER_POSTS_LIST => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            self::COMPONENT_SCROLLINNER_TAGS_LIST => [PoP_Module_Processor_TagLayouts::class, PoP_Module_Processor_TagLayouts::COMPONENT_LAYOUT_TAG],
+            self::COMPONENT_SCROLLINNER_POSTS_LINE => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_LINE],
+            self::COMPONENT_SCROLLINNER_POSTS_SIMPLEVIEW => [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_POSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_POST],
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_HIGHLIGHT],
+            self::COMPONENT_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT],
+            self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_AUTHORLAYOUT_FULLVIEW_POST],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

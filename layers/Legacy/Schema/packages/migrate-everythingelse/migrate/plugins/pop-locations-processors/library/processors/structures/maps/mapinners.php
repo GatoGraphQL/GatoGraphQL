@@ -8,8 +8,8 @@ class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_MAPINNER_POST],
-            [self::class, self::MODULE_EM_MAPINNER_USER],
+            [self::class, self::COMPONENT_EM_MAPINNER_POST],
+            [self::class, self::COMPONENT_EM_MAPINNER_USER],
         );
     }
 
@@ -18,12 +18,12 @@ class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersB
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_EM_MAPINNER_POST:
-                $ret[] = [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::MODULE_MAP_SCRIPT_POST];
+            case self::COMPONENT_EM_MAPINNER_POST:
+                $ret[] = [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::COMPONENT_MAP_SCRIPT_POST];
                 break;
 
-            case self::MODULE_EM_MAPINNER_USER:
-                $ret[] = [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::MODULE_MAP_SCRIPT_USER];
+            case self::COMPONENT_EM_MAPINNER_USER:
+                $ret[] = [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::COMPONENT_MAP_SCRIPT_USER];
                 break;
         }
 

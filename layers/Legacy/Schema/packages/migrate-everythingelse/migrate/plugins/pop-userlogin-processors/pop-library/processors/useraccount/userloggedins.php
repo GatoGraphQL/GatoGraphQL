@@ -9,18 +9,18 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME],
-            [self::class, self::MODULE_USERACCOUNT_USERLOGGEDINPROMPT],
+            [self::class, self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME],
+            [self::class, self::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT],
         );
     }
 
     public function getTitleTop(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
+            case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 return TranslationAPIFacade::getInstance()->__('Welcome', 'pop-coreprocessors');
 
-            case self::MODULE_USERACCOUNT_USERLOGGEDINPROMPT:
+            case self::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT:
                 return TranslationAPIFacade::getInstance()->__('You are already logged in as', 'pop-coreprocessors');
         }
 
@@ -31,7 +31,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_USERACCOUNT_USERLOGGEDINPROMPT:
+            case self::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT:
                 return sprintf(
                     '<p><a href="%s">%s</a></p>',
                     $cmsuseraccountapi->getLogoutURL(),
@@ -47,7 +47,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
+            case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
@@ -59,7 +59,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
+            case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
                 break;
@@ -71,7 +71,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
+            case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->appendProp($component, $props, 'class', 'visible-loggedin');
                 break;
         }

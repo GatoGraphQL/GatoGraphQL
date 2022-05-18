@@ -7,7 +7,7 @@ class UserStance_Module_Processor_Layouts extends UserStance_Module_Processor_St
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTSTANCE],
+            [self::class, self::COMPONENT_LAYOUTSTANCE],
         );
     }
 }

@@ -8,7 +8,7 @@ class PoP_Core_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_Core_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Proces
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Invite successful!', 'pop-coreprocessors');
                 break;
         }

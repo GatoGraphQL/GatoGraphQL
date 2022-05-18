@@ -10,20 +10,20 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_AUTHORSTANCES],
-            [self::class, self::MODULE_TABPANEL_AUTHORSTANCES_PRO],
-            [self::class, self::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL],
-            [self::class, self::MODULE_TABPANEL_AUTHORSTANCES_AGAINST],
+            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES],
+            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO],
+            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL],
+            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST],
         );
     }
 
     protected function getDefaultActivepanelFormat(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_AUTHORSTANCES:
-            case self::MODULE_TABPANEL_AUTHORSTANCES_PRO:
-            case self::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL:
-            case self::MODULE_TABPANEL_AUTHORSTANCES_AGAINST:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_AUTHORSTANCES);
         }
 
@@ -35,46 +35,46 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
         $ret = parent::getPanelSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_AUTHORSTANCES:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_AUTHORSTANCES_PRO:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_AUTHORSTANCES_AGAINST:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
-                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
+                        [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
                     )
                 );
                 break;
@@ -86,61 +86,61 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
     public function getPanelHeaders(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_AUTHORSTANCES:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_AUTHORSTANCES_PRO:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_AUTHORSTANCES_AGAINST:
+            case self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
+                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
-                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
+                            [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
                         ),
                     ],
                 );

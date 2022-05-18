@@ -62,7 +62,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         return match ($fieldName) {
             'post' => [
                 CommonCustomPostFilterInputContainerComponentProcessor::class,
-                CommonCustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS
+                CommonCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS
             ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
@@ -92,7 +92,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
                 if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputComponentProcessor::class,
-                        FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS
+                        FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS
                     ]);
                     $adminFieldArgNames[] = $customPostStatusFilterInputName;
                 }

@@ -24,7 +24,7 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
     public function getSubComponents(array $component): array
     {
         switch ($component[1]) {
-            case self::MODULE_FRAME_CREATELOCATIONMAP:
+            case self::COMPONENT_FRAME_CREATELOCATIONMAP:
                 return array(
                     $this->getMapdivSubmodule($component),
                     $this->getFormSubmodule($component)
@@ -36,12 +36,12 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
 
     public function getFormSubmodule(array $component)
     {
-        return [GD_EM_Module_Processor_CreateLocationForms::class, GD_EM_Module_Processor_CreateLocationForms::MODULE_FORM_CREATELOCATION];
+        return [GD_EM_Module_Processor_CreateLocationForms::class, GD_EM_Module_Processor_CreateLocationForms::COMPONENT_FORM_CREATELOCATION];
     }
 
     public function getMapdivSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAP_DIV];
+        return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array

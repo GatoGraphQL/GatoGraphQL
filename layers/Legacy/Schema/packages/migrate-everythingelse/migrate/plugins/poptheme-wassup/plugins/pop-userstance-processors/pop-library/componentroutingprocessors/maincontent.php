@@ -15,7 +15,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $ret = array();
 
         $routemodules = array(
-            POP_USERSTANCE_ROUTE_ADDOREDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE],
+            POP_USERSTANCE_ROUTE_ADDOREDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE],
         );
         foreach ($routemodules as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
@@ -23,9 +23,9 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
 
         // Default
         $routemodules = array(
-            POP_USERSTANCE_ROUTE_ADDSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_STANCE_CREATE],
-            POP_USERSTANCE_ROUTE_EDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_STANCE_UPDATE],
-            POP_USERSTANCE_ROUTE_ADDOREDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_STANCE_CREATEORUPDATE],
+            POP_USERSTANCE_ROUTE_ADDSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_CREATE],
+            POP_USERSTANCE_ROUTE_EDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_UPDATE],
+            POP_USERSTANCE_ROUTE_ADDOREDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_CREATEORUPDATE],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
@@ -35,7 +35,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_myvotes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_MYSTANCES);
 
         $routemodules_typeahead = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_TYPEAHEAD],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_TYPEAHEAD],
         );
         foreach ($routemodules_typeahead as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -50,7 +50,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         }
 
         $routemodules_navigator = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_SCROLL_NAVIGATOR],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_SCROLL_NAVIGATOR],
         );
         foreach ($routemodules_navigator as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -73,7 +73,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         }
 
         $routemodules_addons = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_SCROLL_ADDONS],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_SCROLL_ADDONS],
         );
         foreach ($routemodules_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -88,16 +88,16 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         }
 
         $routemodules_fullview = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_GENERAL_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_ARTICLE_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -111,16 +111,16 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_thumbnail = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_GENERAL_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_ARTICLE_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -134,16 +134,16 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_list = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_GENERAL_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_PRO_ARTICLE_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -157,7 +157,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_mycontent = array(
-            POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_MySectionBlocks::class, UserStance_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYSTANCES_TABLE_EDIT],
+            POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_MySectionBlocks::class, UserStance_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYSTANCES_TABLE_EDIT],
         );
         foreach ($routemodules_mycontent as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -171,7 +171,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_mycontent_previews = array(
-            POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_MySectionBlocks::class, UserStance_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
+            POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_MySectionBlocks::class, UserStance_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
         );
         foreach ($routemodules_mycontent_previews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -189,10 +189,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_authorvotes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_AUTHORSTANCES);
 
         $routemodules_fullview = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -206,10 +206,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_thumbnail = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -223,10 +223,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_list = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_PRO_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -240,7 +240,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_carousels = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_CAROUSEL],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -258,10 +258,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_votes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_TAGSTANCES);
 
         $routemodules_fullview = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_PRO_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_AGAINST_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -275,10 +275,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_thumbnail = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_PRO_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_AGAINST_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -292,10 +292,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_list = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_PRO_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_AGAINST_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -309,7 +309,7 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_carousels = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_CAROUSEL],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -327,10 +327,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_singlevotes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_SINGLESTANCES);
 
         $routemodules_fullview = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_FULLVIEW],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_FULLVIEW],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -344,10 +344,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_thumbnail = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_THUMBNAIL],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_THUMBNAIL],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -361,10 +361,10 @@ class UserStance_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
             }
         }
         $routemodules_list = array(
-            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_LIST],
-            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_LIST],
+            POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [

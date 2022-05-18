@@ -8,7 +8,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONINNER_LOCATIONPOSTLINK_CREATE],
+            [self::class, self::COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE],
         );
     }
 
@@ -16,7 +16,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
     {
         if (defined('POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK') && POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK) {
             $routes = array(
-                self::MODULE_BUTTONINNER_LOCATIONPOSTLINK_CREATE => POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK,
+                self::COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE => POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK,
             );
             if ($route = $routes[$component[1]] ?? null) {
                 return 'fa-fw '.getRouteIcon($route, false);
@@ -29,7 +29,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
     public function getBtnTitle(array $component)
     {
         $titles = array(
-            self::MODULE_BUTTONINNER_LOCATIONPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'pop-locationpostlinkscreation-processors'),
+            self::COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'pop-locationpostlinkscreation-processors'),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;

@@ -8,15 +8,15 @@ class PoP_Module_Processor_CommentsLayouts extends PoP_Module_Processor_CommentL
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_COMMENT_LIST],
-            [self::class, self::MODULE_LAYOUT_COMMENT_ADD],
+            [self::class, self::COMPONENT_LAYOUT_COMMENT_LIST],
+            [self::class, self::COMPONENT_LAYOUT_COMMENT_ADD],
         );
     }
 
     public function isRuntimeAdded(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_COMMENT_ADD:
+            case self::COMPONENT_LAYOUT_COMMENT_ADD:
                 return true;
         }
 

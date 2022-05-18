@@ -12,7 +12,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR],
         );
     }
 
@@ -24,9 +24,9 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
         $vertical = ($orientation == 'vertical');
 
         $inners = array(
-            self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR => $vertical ?
-                [UserStance_Module_Processor_CustomVerticalSingleSidebars::class, UserStance_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_STANCE] :
-                [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
+            self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR => $vertical ?
+                [UserStance_Module_Processor_CustomVerticalSingleSidebars::class, UserStance_Module_Processor_CustomVerticalSingleSidebars::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE] :
+                [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -38,7 +38,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR:
+    //         case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
@@ -48,7 +48,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -58,7 +58,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 

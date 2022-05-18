@@ -7,7 +7,7 @@ class PoP_Module_Processor_HideIfEmpties extends PoP_Module_Processor_HideIfEmpt
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_HIDEIFEMPTY],
+            [self::class, self::COMPONENT_HIDEIFEMPTY],
         );
     }
 }

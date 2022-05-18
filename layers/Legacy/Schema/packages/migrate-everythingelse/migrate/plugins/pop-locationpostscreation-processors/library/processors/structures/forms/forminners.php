@@ -7,13 +7,13 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_LOCATIONPOST],
+            [self::class, self::COMPONENT_FORMINNER_LOCATIONPOST],
         );
     }
     protected function volunteering(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOST:
+            case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return true;
         }
 
@@ -22,8 +22,8 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
     protected function getLocationsInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOST:
-                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP];
+            case self::COMPONENT_FORMINNER_LOCATIONPOST:
+                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
 
         return parent::getLocationsInput($component);
@@ -40,12 +40,12 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOST:
+            case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return array_merge(
                     $ret,
                     array(
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE],
-                        [GD_Custom_EM_Module_Processor_FormMultipleComponents::class, GD_Custom_EM_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE],
+                        [GD_Custom_EM_Module_Processor_FormMultipleComponents::class, GD_Custom_EM_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE],
                     )
                 );
         }
@@ -58,7 +58,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
 
         // Allow RIPESS Asia to set an initial value for the Add Project form
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOST:
+            case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return \PoP\Root\App::applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $component);
         }
 
@@ -68,13 +68,13 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOST:
+            case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 // Make it into left/right columns
                 $rightsides = array(
-                    self::MODULE_FORMINNER_LOCATIONPOST => [GD_Custom_EM_Module_Processor_FormMultipleComponents::class, GD_Custom_EM_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE],
+                    self::COMPONENT_FORMINNER_LOCATIONPOST => [GD_Custom_EM_Module_Processor_FormMultipleComponents::class, GD_Custom_EM_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE],
                 );
 
-                $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
+                $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE];
 
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
                 if (!($form_left_class = $this->getProp($component, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {

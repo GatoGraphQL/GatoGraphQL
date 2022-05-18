@@ -7,14 +7,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomDelegatorFilters exten
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DELEGATORFILTER_MYCONTENTPOSTLINKS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYCONTENTPOSTLINKS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLINKS],
+            self::COMPONENT_DELEGATORFILTER_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

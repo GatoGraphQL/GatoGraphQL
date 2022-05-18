@@ -22,30 +22,30 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_ADDONS],
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_EVENTS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_PASTEVENTS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_EVENTS_THUMBNAIL:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
                     POP_HOOK_SCROLLINNER_THUMBNAIL_GRID,
@@ -55,20 +55,20 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
                     )
                 );
 
-            case self::MODULE_SCROLLINNER_EVENTS_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR:
-            case self::MODULE_SCROLLINNER_EVENTS_ADDONS:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_ADDONS:
-            case self::MODULE_SCROLLINNER_EVENTS_DETAILS:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_DETAILS:
-            case self::MODULE_SCROLLINNER_EVENTS_SIMPLEVIEW:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW:
-            case self::MODULE_SCROLLINNER_EVENTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_EVENTS_LIST:
-            case self::MODULE_SCROLLINNER_PASTEVENTS_LIST:
-            case self::MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW:
-            case self::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR:
+            case self::COMPONENT_SCROLLINNER_EVENTS_ADDONS:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS:
+            case self::COMPONENT_SCROLLINNER_EVENTS_DETAILS:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS:
+            case self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_EVENTS_LIST:
+            case self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST:
+            case self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -83,29 +83,29 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR],
-            self::MODULE_SCROLLINNER_EVENTS_NAVIGATOR => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR],
+            self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR],
 
-            self::MODULE_SCROLLINNER_PASTEVENTS_ADDONS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS],
-            self::MODULE_SCROLLINNER_EVENTS_ADDONS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS],
+            self::COMPONENT_SCROLLINNER_EVENTS_ADDONS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS],
 
-            self::MODULE_SCROLLINNER_PASTEVENTS_DETAILS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS],
-            self::MODULE_SCROLLINNER_EVENTS_DETAILS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS],
+            self::COMPONENT_SCROLLINNER_EVENTS_DETAILS => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS],
 
-            self::MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL],
-            self::MODULE_SCROLLINNER_EVENTS_THUMBNAIL => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL],
 
-            self::MODULE_SCROLLINNER_PASTEVENTS_LIST => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST],
-            self::MODULE_SCROLLINNER_EVENTS_LIST => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST],
+            self::COMPONENT_SCROLLINNER_EVENTS_LIST => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST],
 
-            self::MODULE_SCROLLINNER_EVENTS_SIMPLEVIEW => [GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],
-            self::MODULE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW => [GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW => [GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW => [GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],
 
-            self::MODULE_SCROLLINNER_EVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_EVENT],
-            self::MODULE_SCROLLINNER_PASTEVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_PASTEVENT],
+            self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_EVENT],
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT],
 
-            self::MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_EVENT],
-            self::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_PASTEVENT],
+            self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_EVENT],
+            self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT],
         );
         if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;

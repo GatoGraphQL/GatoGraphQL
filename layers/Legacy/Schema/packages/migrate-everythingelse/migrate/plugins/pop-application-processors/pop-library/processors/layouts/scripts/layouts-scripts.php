@@ -8,15 +8,15 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCRIPT_HIGHLIGHTS],
-            [self::class, self::MODULE_SCRIPT_HIGHLIGHTSEMPTY],
+            [self::class, self::COMPONENT_SCRIPT_HIGHLIGHTS],
+            [self::class, self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY],
         );
     }
     
     public function doAppend(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SCRIPT_HIGHLIGHTSEMPTY:
+            case self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY:
                 return false;
         }
         
@@ -28,11 +28,11 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_SCRIPT_HIGHLIGHTS:
-            case self::MODULE_SCRIPT_HIGHLIGHTSEMPTY:
+            case self::COMPONENT_SCRIPT_HIGHLIGHTS:
+            case self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY:
                 $classes = array(
-                    self::MODULE_SCRIPT_HIGHLIGHTS => 'highlights',
-                    self::MODULE_SCRIPT_HIGHLIGHTSEMPTY => 'highlights',
+                    self::COMPONENT_SCRIPT_HIGHLIGHTS => 'highlights',
+                    self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY => 'highlights',
                 );
                 $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
                 break;

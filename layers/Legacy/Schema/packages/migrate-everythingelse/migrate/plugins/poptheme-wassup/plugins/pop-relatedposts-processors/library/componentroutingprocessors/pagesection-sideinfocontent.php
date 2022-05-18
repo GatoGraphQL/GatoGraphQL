@@ -12,7 +12,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_SideInfoContentPageSectionComponentRou
         $ret = array();
 
         $components = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR],
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];

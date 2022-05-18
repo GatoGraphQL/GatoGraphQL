@@ -35,7 +35,7 @@ class PoPTheme_UserStance_LayoutHooks
         if (!\PoP\Root\App::getState(['routing', 'is-custompost'])) {
             array_unshift(
                 $layouts,
-                [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE]
+                [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE]
             );
         }
         return $layouts;
@@ -45,7 +45,7 @@ class PoPTheme_UserStance_LayoutHooks
     {
 
         // Add the poststance at the end
-        $layouts[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT];
+        $layouts[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT];
         return $layouts;
     }
 
@@ -55,7 +55,7 @@ class PoPTheme_UserStance_LayoutHooks
         // Add the poststance at the beginning
         array_unshift(
             $layouts,
-            [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT]
+            [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT]
         );
         return $layouts;
     }

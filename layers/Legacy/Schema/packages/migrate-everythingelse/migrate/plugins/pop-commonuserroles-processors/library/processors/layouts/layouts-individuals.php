@@ -7,7 +7,7 @@ class GD_URE_Custom_Module_Processor_ProfileIndividualLayouts extends GD_URE_Cus
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS],
+            [self::class, self::COMPONENT_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS],
         );
     }
 }

@@ -10,20 +10,20 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_COMMENTS_LIST],
-            [self::class, self::MODULE_SCROLLINNER_COMMENTS_ADD],
-            [self::class, self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS],
-            [self::class, self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE],
+            [self::class, self::COMPONENT_SCROLLINNER_COMMENTS_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_COMMENTS_ADD],
+            [self::class, self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS],
+            [self::class, self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_COMMENTS_LIST:
-            case self::MODULE_SCROLLINNER_COMMENTS_ADD:
-            case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS:
-            case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE:
+            case self::COMPONENT_SCROLLINNER_COMMENTS_LIST:
+            case self::COMPONENT_SCROLLINNER_COMMENTS_ADD:
+            case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS:
+            case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -38,16 +38,16 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_COMMENTS_LIST:
-            case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS:
-                $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::MODULE_LAYOUT_COMMENTFRAME_LIST];
+            case self::COMPONENT_SCROLLINNER_COMMENTS_LIST:
+            case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS:
+                $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::COMPONENT_LAYOUT_COMMENTFRAME_LIST];
                 break;
 
-            case self::MODULE_SCROLLINNER_COMMENTS_ADD:
-                $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::MODULE_LAYOUT_COMMENTFRAME_ADD];
+            case self::COMPONENT_SCROLLINNER_COMMENTS_ADD:
+                $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::COMPONENT_LAYOUT_COMMENTFRAME_ADD];
                 break;
 
-            case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE:
+            case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE:
                 // No need for anything, since this is the layout container, to be filled when the lazyload request comes back
                 break;
         }

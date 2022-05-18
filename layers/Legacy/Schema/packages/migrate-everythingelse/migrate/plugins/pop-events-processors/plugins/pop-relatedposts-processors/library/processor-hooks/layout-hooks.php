@@ -13,7 +13,7 @@ class PoP_Events_RelatedPosts_ProcessorHooks
 
     public function getFooterSubmodules($layouts)
     {
-        $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY];
+        $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY];
         return $layouts;
     }
 }

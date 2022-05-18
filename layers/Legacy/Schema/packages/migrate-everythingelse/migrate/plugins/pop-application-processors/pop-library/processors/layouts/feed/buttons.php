@@ -8,14 +8,14 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY],
+            [self::class, self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
+            self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -27,7 +27,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('Comments, responses and highlights', 'poptheme-wassup');
         }
 
@@ -39,7 +39,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $ret .= ' btn btn-default';
                 break;
         }
@@ -50,7 +50,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 // We use the "previousmodules-ids" to obtain the url to point to
                 return null;
         }
@@ -61,7 +61,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
 
                 if ($collapse_component = $this->getProp($component, $props, 'target-module')) {

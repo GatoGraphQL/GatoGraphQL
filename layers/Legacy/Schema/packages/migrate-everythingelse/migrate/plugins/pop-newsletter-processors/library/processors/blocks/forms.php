@@ -10,18 +10,18 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_NEWSLETTER],
-            [self::class, self::MODULE_BLOCKCODE_NEWSLETTER],
-            [self::class, self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION],
+            [self::class, self::COMPONENT_BLOCK_NEWSLETTER],
+            [self::class, self::COMPONENT_BLOCKCODE_NEWSLETTER],
+            [self::class, self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
-            self::MODULE_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
-            self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
+            self::COMPONENT_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
+            self::COMPONENT_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
+            self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -29,7 +29,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
+            case self::COMPONENT_BLOCK_NEWSLETTER:
                 return '';
         }
 
@@ -41,17 +41,17 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
-                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTER];
+            case self::COMPONENT_BLOCK_NEWSLETTER:
+                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTER];
                 break;
 
-            case self::MODULE_BLOCKCODE_NEWSLETTER:
-                $ret[] = [GenericForms_Module_Processor_PageCodes::class, GenericForms_Module_Processor_PageCodes::MODULE_PAGECODE_NEWSLETTER];
-                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTER];
+            case self::COMPONENT_BLOCKCODE_NEWSLETTER:
+                $ret[] = [GenericForms_Module_Processor_PageCodes::class, GenericForms_Module_Processor_PageCodes::COMPONENT_PAGECODE_NEWSLETTER];
+                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTER];
                 break;
 
-            case self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
-                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION];
+            case self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION:
+                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION];
                 break;
         }
 
@@ -66,8 +66,8 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
             ''
         );
         switch ($component[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
-                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'class', 'form-inline');
+            case self::COMPONENT_BLOCK_NEWSLETTER:
+                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'class', 'form-inline');
                 if ($newsletter_description) {
                     $title_tag = \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_GFBlocks:newsletter:titletag',
@@ -78,7 +78,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                         $title_tag,
                         $newsletter_description
                     );
-                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description', $description);
+                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'description', $description);
                 }
 
                 if ($description_bottom = \PoP\Root\App::applyFilters(
@@ -92,26 +92,26 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                         $description_bottom
                     );
 
-                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description-bottom', $description_bottom);
+                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'description-bottom', $description_bottom);
                 }
                 break;
 
-            case self::MODULE_BLOCKCODE_NEWSLETTER:
-                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'class', 'alert alert-info');
+            case self::COMPONENT_BLOCKCODE_NEWSLETTER:
+                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'class', 'alert alert-info');
 
                 if ($newsletter_description) {
                     $description = sprintf(
                         '<p>%s</p>',
                         $newsletter_description
                     );
-                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description', $description);
+                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'description', $description);
                 }
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
-            case self::MODULE_BLOCKCODE_NEWSLETTER:
+            case self::COMPONENT_BLOCK_NEWSLETTER:
+            case self::COMPONENT_BLOCKCODE_NEWSLETTER:
                 $this->appendProp($component, $props, 'class', 'block-newsletter');
                 break;
         }

@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_UserCommunityLayouts extends GD_URE_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_LAYOUT_COMMUNITIES],
+            [self::class, self::COMPONENT_URE_LAYOUT_COMMUNITIES],
         );
     }
 
@@ -16,8 +16,8 @@ class GD_URE_Module_Processor_UserCommunityLayouts extends GD_URE_Module_Process
         $ret = parent::getLayoutSubmodules($component);
     
         switch ($component[1]) {
-            case self::MODULE_URE_LAYOUT_COMMUNITIES:
-                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_ADDONS];
+            case self::COMPONENT_URE_LAYOUT_COMMUNITIES:
+                $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS];
                 break;
         }
         

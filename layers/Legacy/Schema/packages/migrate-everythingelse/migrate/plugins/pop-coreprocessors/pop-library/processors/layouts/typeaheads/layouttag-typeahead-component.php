@@ -7,7 +7,7 @@ class PoP_Module_Processor_TagTypeaheadComponentLayouts extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTTAG_TYPEAHEAD_COMPONENT],
+            [self::class, self::COMPONENT_LAYOUTTAG_TYPEAHEAD_COMPONENT],
         );
     }
 }

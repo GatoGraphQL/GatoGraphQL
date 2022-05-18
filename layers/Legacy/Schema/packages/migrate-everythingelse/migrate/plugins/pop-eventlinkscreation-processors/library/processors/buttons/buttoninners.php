@@ -8,14 +8,14 @@ class PoP_EventLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONINNER_EVENTLINK_CREATE],
+            [self::class, self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE],
         );
     }
 
     public function getFontawesome(array $component, array &$props)
     {
         $routes = array(
-            self::MODULE_BUTTONINNER_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
+            self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
         );
         if ($route = $routes[$component[1]] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
@@ -27,7 +27,7 @@ class PoP_EventLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Pr
     public function getBtnTitle(array $component)
     {
         $titles = array(
-            self::MODULE_BUTTONINNER_EVENTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'poptheme-wassup'),//TranslationAPIFacade::getInstance()->__('Event link', 'poptheme-wassup'),
+            self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'poptheme-wassup'),//TranslationAPIFacade::getInstance()->__('Event link', 'poptheme-wassup'),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;

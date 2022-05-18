@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_
 
     protected function getContentSubmodule(array $component)
     {
-        return [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_PAGECONTENT];
+        return [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_PAGECONTENT];
     }
 
     protected function getInnerSubmodules(array $component): array

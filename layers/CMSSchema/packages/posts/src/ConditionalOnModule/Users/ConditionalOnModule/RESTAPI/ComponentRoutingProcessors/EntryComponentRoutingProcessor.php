@@ -42,7 +42,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadComponentProcessor::class,
-                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+                FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

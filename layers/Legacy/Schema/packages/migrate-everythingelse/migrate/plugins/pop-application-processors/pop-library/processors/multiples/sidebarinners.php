@@ -26,26 +26,26 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
         );
     }
 
@@ -55,103 +55,103 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
 
         switch ($component[1]) {
          // Trending Tags has no filter
-            case self::MODULE_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGS];
-                $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_TRENDINGTAGSDESCRIPTION];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGS];
+                $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGS];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGS];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORTAGS];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORTAGS];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGS];
                 break;
                     
-            case self::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_SECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_CONTENT];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_SECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_CONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_SECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_POSTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_SECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_POSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_SECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_CATEGORYPOSTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_SECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_USERS];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_USERS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_USERS];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_USERS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_USERS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_USERS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYCONTENT];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYCONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYPOSTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYPOSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYCATEGORYPOSTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGMAINCONTENT];
+            case self::COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGCONTENT];
+            case self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGCONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGPOSTS];
+            case self::COMPONENT_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGPOSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_TAGCATEGORYPOSTS];
+            case self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_HOMESECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_HOMECONTENT];
+            case self::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_HOMESECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_HOMECONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT];
+            case self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_AUTHORCONTENT];
+            case self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_AUTHORCONTENT];
                 break;
 
-            case self::MODULE_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_AUTHORPOSTS];
+            case self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_AUTHORPOSTS];
                 break;
 
-            case self::MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_AUTHORSECTION];
-                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_AUTHORCATEGORYPOSTS];
+            case self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_AUTHORSECTION];
+                $ret[] = [PoP_Module_Processor_CustomDelegatorFilters::class, PoP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS];
                 break;
         }
         

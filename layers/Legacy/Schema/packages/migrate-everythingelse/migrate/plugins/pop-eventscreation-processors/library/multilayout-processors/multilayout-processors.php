@@ -19,10 +19,10 @@ class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayo
             switch ($handle) {
                 case POP_MULTILAYOUT_HANDLE_POSTCONTENT:
                     $pasts = array(
-                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
+                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
                     );
                     $defaults = array( // <= Future and Current Events
-                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT],
+                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT],
                     );
 
                     // TODO: Split past/non-past on a level below, using the conditionalOnDataFieldSubmodule

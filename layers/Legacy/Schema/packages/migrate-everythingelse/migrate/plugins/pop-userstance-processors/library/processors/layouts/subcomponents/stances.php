@@ -8,18 +8,18 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SUBCOMPONENT_STANCES],
-            [self::class, self::MODULE_LAZYSUBCOMPONENT_STANCES],
+            [self::class, self::COMPONENT_SUBCOMPONENT_STANCES],
+            [self::class, self::COMPONENT_LAZYSUBCOMPONENT_STANCES],
         );
     }
 
     public function getSubcomponentField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
                 return 'stances';
 
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 return 'stancesLazy';
         }
     }
@@ -29,12 +29,12 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES];
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
+                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_STANCES];
                 break;
 
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE];
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
+                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE];
                 break;
         }
 
@@ -44,8 +44,8 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     public function isIndividual(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 return false;
         }
 
@@ -55,8 +55,8 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 $this->appendProp($component, $props, 'class', 'referencedby clearfix');
                 break;
         }

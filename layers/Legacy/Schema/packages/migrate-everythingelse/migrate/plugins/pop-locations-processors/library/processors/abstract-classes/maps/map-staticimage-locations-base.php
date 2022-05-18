@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
 
     public function getUrlparamSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::MODULE_MAP_STATICIMAGE_URLPARAM];
+        return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::COMPONENT_MAP_STATICIMAGE_URLPARAM];
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array

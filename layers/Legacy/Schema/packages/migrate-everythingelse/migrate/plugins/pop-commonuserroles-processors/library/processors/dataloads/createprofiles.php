@@ -13,16 +13,16 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE],
-            [self::class, self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
-            self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
+            self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
+            self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -30,8 +30,8 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
@@ -41,13 +41,13 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
                 }
                 return $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolverBridge::class);
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class);
                 }
@@ -62,12 +62,12 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
-                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::MODULE_FORM_PROFILEORGANIZATION_CREATE];
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
+                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::COMPONENT_FORM_PROFILEORGANIZATION_CREATE];
                 break;
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
-                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::MODULE_FORM_PROFILEINDIVIDUAL_CREATE];
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
+                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE];
                 break;
         }
 

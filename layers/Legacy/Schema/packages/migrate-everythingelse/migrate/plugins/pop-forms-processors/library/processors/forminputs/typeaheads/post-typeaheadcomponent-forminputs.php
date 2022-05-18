@@ -11,14 +11,14 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TYPEAHEAD_COMPONENT_CONTENT],
+            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_CONTENT],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_CONTENT:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_CONTENT:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Content:', 'pop-coreprocessors');
         }
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_CONTENT:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_CONTENT:
                 return RouteUtils::getRouteURL(POP_BLOG_ROUTE_CONTENT);
         }
 
@@ -48,7 +48,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
         // bring the posts ordering by comment count
         if (defined('POP_COMMENTS_INITIALIZED')) {
             $ret[] = [
-                'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
+                'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERPOST],
                 'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:comment-count').'|DESC',
             ];
         }
@@ -64,7 +64,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
             $url,
             [
                 [
-                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

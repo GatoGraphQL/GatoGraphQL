@@ -7,14 +7,14 @@ class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS => [PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS],
+            self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS => [PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -27,7 +27,7 @@ class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Proc
     public function useModuleConfiguration(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS:
+            case self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS:
                 return false;
         }
 

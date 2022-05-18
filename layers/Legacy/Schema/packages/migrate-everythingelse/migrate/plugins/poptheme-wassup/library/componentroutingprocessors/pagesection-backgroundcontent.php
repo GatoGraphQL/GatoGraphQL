@@ -10,7 +10,7 @@ class PoP_Module_BackgroundContentPageSectionComponentRoutingProcessor extends P
         $ret = array();
 
         $ret[] = [
-        	'component' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_BACKGROUND],
+        	'component' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::COMPONENT_FRAME_BACKGROUND],
         ];
 
         return $ret;

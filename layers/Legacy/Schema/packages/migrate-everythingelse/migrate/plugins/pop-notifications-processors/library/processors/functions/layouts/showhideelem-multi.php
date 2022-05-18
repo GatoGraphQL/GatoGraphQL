@@ -8,8 +8,8 @@ class GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES],
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES],
         );
     }
 
@@ -18,14 +18,14 @@ class GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_P
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES:
-                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES];
-                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES];
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES:
+                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES];
+                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES];
                 break;
             
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES:
-                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES];
-                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES];
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES:
+                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES];
+                $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES];
                 break;
         }
 

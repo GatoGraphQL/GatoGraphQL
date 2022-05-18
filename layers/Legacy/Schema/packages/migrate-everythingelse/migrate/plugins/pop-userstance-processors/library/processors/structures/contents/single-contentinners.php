@@ -10,19 +10,19 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION],
-            [self::class, self::MODULE_CONTENTINNER_STANCESINGLE],
+            [self::class, self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION],
+            [self::class, self::COMPONENT_CONTENTINNER_STANCESINGLE],
         );
     }
 
     protected function getCommentssingleLayouts(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
+            case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $layouts = array(
-                    [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
-                    [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER],
-                    [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS],
+                    [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
+                    [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER],
+                    [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS],
                 );
                 break;
         }
@@ -35,16 +35,16 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
+            case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
                     $this->getCommentssingleLayouts($component)
                 );
                 break;
 
-            case self::MODULE_CONTENTINNER_STANCESINGLE:
-                $ret[] = [UserStance_Module_Processor_Layouts::class, UserStance_Module_Processor_Layouts::MODULE_LAYOUTSTANCE];
-                $ret[] = [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST];
+            case self::COMPONENT_CONTENTINNER_STANCESINGLE:
+                $ret[] = [UserStance_Module_Processor_Layouts::class, UserStance_Module_Processor_Layouts::COMPONENT_LAYOUTSTANCE];
+                $ret[] = [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST];
                 break;
         }
 
@@ -54,11 +54,11 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
+            case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction-single');
                 break;
 
-            case self::MODULE_CONTENTINNER_STANCESINGLE:
+            case self::COMPONENT_CONTENTINNER_STANCESINGLE:
                 $this->appendProp($component, $props, 'class', 'alert');
                 break;
         }
@@ -70,7 +70,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
     {
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CONTENTINNER_STANCESINGLE:
+            case self::COMPONENT_CONTENTINNER_STANCESINGLE:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if (POP_USERSTANCE_TERM_STANCE_PRO && $taxonomyapi->hasTerm(POP_USERSTANCE_TERM_STANCE_PRO, POP_USERSTANCE_TAXONOMY_STANCE, $post_id)) {
                     $class = 'alert-success';

@@ -29,18 +29,18 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS],
-            [self::class, self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES],
+            [self::class, self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS],
+            [self::class, self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
+            [self::class, self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_INDIVIDUALINTERESTS],
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_INDIVIDUALINTERESTS],
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONTYPES],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -48,9 +48,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
-    //         case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
-    //         case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
+    //         case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
+    //         case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
+    //         case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES:
     //             return true;
     //     }
 
@@ -60,17 +60,17 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
+            case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
 
-            case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 // Allow AgendaUrbana to Override
                 return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:categories',
                     TranslationAPIFacade::getInstance()->__('Organization Categories', 'poptheme-wassup')
                 );
 
-            case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 // Allow AgendaUrbana to Override
                 return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:types',
@@ -84,13 +84,13 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
+            case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
 
-            case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 return GD_FormInput_OrganizationCategories::class;
 
-            case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 return GD_FormInput_OrganizationTypes::class;
         }
 
@@ -100,13 +100,13 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
+            case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return 'interests';
 
-            case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 return 'categories';
 
-            case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 return 'types';
         }
 
@@ -116,9 +116,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $this->stringScalarTypeResolver,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $this->stringScalarTypeResolver,
+            self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $this->stringScalarTypeResolver,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -126,9 +126,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match($component[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES
+            self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
@@ -139,9 +139,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $translationAPI->__('', ''),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),
+            self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => $translationAPI->__('', ''),
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),
             default => null,
         };
     }

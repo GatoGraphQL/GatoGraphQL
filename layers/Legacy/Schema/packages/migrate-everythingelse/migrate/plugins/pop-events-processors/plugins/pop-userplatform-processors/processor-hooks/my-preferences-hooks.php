@@ -15,12 +15,12 @@ class PoP_EventsProcessors_MyPreferencesHooks
         array_splice(
             $components, 
             array_search(
-                [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILDIGESTS_LABEL], 
+                [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::COMPONENT_CODE_EMAILDIGESTS_LABEL], 
                 $components
             )+1, 
             0, 
             array(
-                [PoP_Events_Module_Processor_EmailFormGroups::class, PoP_Events_Module_Processor_EmailFormGroups::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
+                [PoP_Events_Module_Processor_EmailFormGroups::class, PoP_Events_Module_Processor_EmailFormGroups::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
             )
         );
         return $components;

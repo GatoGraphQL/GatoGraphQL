@@ -7,7 +7,7 @@ class PoP_Module_Processor_PostTypeaheadComponentLayouts extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
+            [self::class, self::COMPONENT_LAYOUTPOST_TYPEAHEAD_COMPONENT],
         );
     }
 }

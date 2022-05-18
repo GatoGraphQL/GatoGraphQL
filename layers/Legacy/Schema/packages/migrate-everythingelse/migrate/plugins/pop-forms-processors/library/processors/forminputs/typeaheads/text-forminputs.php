@@ -12,10 +12,10 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEAD],
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH],
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADPROFILES],
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEAD],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT],
         );
     }
 
@@ -23,13 +23,13 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 return sprintf(TranslationAPIFacade::getInstance()->__('Search %s', 'pop-coreprocessors'), $cmsapplicationapi->getSiteName());
 
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADPROFILES:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES:
                 return TranslationAPIFacade::getInstance()->__('Author(s)', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT:
                 // return TranslationAPIFacade::getInstance()->__('Responded/Annotated by', 'pop-coreprocessors');
                 // return TranslationAPIFacade::getInstance()->__('Post title', 'pop-coreprocessors');
                 return TranslationAPIFacade::getInstance()->__('In response to', 'pop-coreprocessors');
@@ -43,7 +43,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 $this->addJsmethod($ret, 'typeaheadSearchInput');
                 break;
         }
@@ -53,11 +53,11 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 // Comment Leo 08/12/2017: Assign the input the "searchfor" name, so that it works to perform search
                 // even when JS is disabled or fails
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                return $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH])->getName([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH]);
+                return $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH])->getName([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH]);
         }
         
         return parent::getName($component);

@@ -16,16 +16,16 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_STANCES_NAVIGATOR],
-            [self::class, self::MODULE_SCROLL_STANCES_ADDONS],
-            [self::class, self::MODULE_SCROLL_STANCES_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_STANCES_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_STANCES_LIST],
-            [self::class, self::MODULE_SCROLL_AUTHORSTANCES_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_AUTHORSTANCES_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_AUTHORSTANCES_LIST],
-            [self::class, self::MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_STANCES_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLL_STANCES_ADDONS],
+            [self::class, self::COMPONENT_SCROLL_STANCES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_STANCES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_STANCES_LIST],
+            [self::class, self::COMPONENT_SCROLL_AUTHORSTANCES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTHORSTANCES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_AUTHORSTANCES_LIST],
+            [self::class, self::COMPONENT_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW],
         );
     }
 
@@ -33,16 +33,16 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],
-            self::MODULE_SCROLL_STANCES_NAVIGATOR => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_STANCES_NAVIGATOR],
-            self::MODULE_SCROLL_STANCES_ADDONS => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_STANCES_ADDONS],
-            self::MODULE_SCROLL_STANCES_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_STANCES_FULLVIEW],
-            self::MODULE_SCROLL_STANCES_THUMBNAIL => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_STANCES_THUMBNAIL],
-            self::MODULE_SCROLL_STANCES_LIST => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_STANCES_LIST],
-            self::MODULE_SCROLL_AUTHORSTANCES_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORSTANCES_FULLVIEW],
-            self::MODULE_SCROLL_AUTHORSTANCES_THUMBNAIL => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORSTANCES_THUMBNAIL],
-            self::MODULE_SCROLL_AUTHORSTANCES_LIST => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORSTANCES_LIST],
-            self::MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW],
+            self::COMPONENT_SCROLL_MYSTANCES_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_STANCES_NAVIGATOR => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_STANCES_NAVIGATOR],
+            self::COMPONENT_SCROLL_STANCES_ADDONS => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_STANCES_ADDONS],
+            self::COMPONENT_SCROLL_STANCES_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_STANCES_FULLVIEW],
+            self::COMPONENT_SCROLL_STANCES_THUMBNAIL => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_STANCES_THUMBNAIL],
+            self::COMPONENT_SCROLL_STANCES_LIST => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_STANCES_LIST],
+            self::COMPONENT_SCROLL_AUTHORSTANCES_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORSTANCES_FULLVIEW],
+            self::COMPONENT_SCROLL_AUTHORSTANCES_THUMBNAIL => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORSTANCES_THUMBNAIL],
+            self::COMPONENT_SCROLL_AUTHORSTANCES_LIST => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORSTANCES_LIST],
+            self::COMPONENT_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -56,24 +56,24 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     {
         // Extra classes
         $independentitem_thumbnails = array(
-            [self::class, self::MODULE_SCROLL_STANCES_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_AUTHORSTANCES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_STANCES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_AUTHORSTANCES_THUMBNAIL],
         );
         $independentitem_lists = array(
-            [self::class, self::MODULE_SCROLL_STANCES_LIST],
-            [self::class, self::MODULE_SCROLL_AUTHORSTANCES_LIST],
+            [self::class, self::COMPONENT_SCROLL_STANCES_LIST],
+            [self::class, self::COMPONENT_SCROLL_AUTHORSTANCES_LIST],
         );
         $navigators = array(
-            [self::class, self::MODULE_SCROLL_STANCES_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLL_STANCES_NAVIGATOR],
         );
         $addons = array(
-            [self::class, self::MODULE_SCROLL_STANCES_ADDONS],
+            [self::class, self::COMPONENT_SCROLL_STANCES_ADDONS],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_STANCES_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_AUTHORSTANCES_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_STANCES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTHORSTANCES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW],
         );
 
         $extra_class = '';

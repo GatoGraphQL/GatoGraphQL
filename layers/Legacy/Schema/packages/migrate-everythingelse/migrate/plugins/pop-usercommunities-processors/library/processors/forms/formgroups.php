@@ -13,12 +13,12 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_MEMBERTAGS],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS],
-            [self::class, self::MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES],
-            [self::class, self::MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS],
-            [self::class, self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_MEMBERTAGS],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS],
+            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES],
+            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERTAGS],
+            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS],
         );
     }
 
@@ -27,9 +27,9 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         $ret = parent::getLabelClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
-            case self::MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS:
-            case self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERTAGS:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS:
                 $ret .= ' col-sm-2';
                 break;
         }
@@ -41,9 +41,9 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         $ret = parent::getFormcontrolClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
-            case self::MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS:
-            case self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERTAGS:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS:
                 $ret .= ' col-sm-10';
                 break;
         }
@@ -54,12 +54,12 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES],
-            self::MODULE_URE_FORMINPUTGROUP_MEMBERTAGS => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERTAGS],
-            self::MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_SelectFormInputs::class, GD_URE_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_MEMBERSTATUS],
-            self::MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES],
-            self::MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::MODULE_URE_FILTERINPUT_MEMBERTAGS],
-            self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::MODULE_URE_FILTERINPUT_MEMBERSTATUS],
+            self::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES],
+            self::COMPONENT_URE_FORMINPUTGROUP_MEMBERTAGS => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERTAGS],
+            self::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_SelectFormInputs::class, GD_URE_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERSTATUS],
+            self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES],
+            self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERTAGS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_MEMBERTAGS],
+            self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -72,13 +72,13 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
     public function getInfo(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS:
+            case self::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status "Active" if the user is truly your member, or "Rejected" otherwise. Rejected users will not appear as your community\'s members, or contribute content.');
 
-            case self::MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES:
+            case self::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('"Contribute content" will add the member\'s content to your profile.', 'ure-popprocessors');
 
-            case self::MODULE_URE_FORMINPUTGROUP_MEMBERTAGS:
+            case self::COMPONENT_URE_FORMINPUTGROUP_MEMBERTAGS:
                 return TranslationAPIFacade::getInstance()->__('What is the type of relationship from this member to your community.', 'ure-popprocessors');
         }
 

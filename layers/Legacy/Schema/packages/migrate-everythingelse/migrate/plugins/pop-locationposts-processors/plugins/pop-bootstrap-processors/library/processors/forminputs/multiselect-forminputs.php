@@ -9,15 +9,15 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES],
-            [self::class, self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES],
+            [self::class, self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES],
+            [self::class, self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES],
         );
     }
 
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES:
+    //         case self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES:
     //             return true;
     //     }
         
@@ -27,8 +27,8 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
-            case self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES:
+            case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
+            case self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'pop-locationposts-processors');
         }
         
@@ -38,8 +38,8 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
-            case self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES:
+            case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
+            case self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES:
                 return GD_FormInput_LocationPostCategories::class;
         }
         
@@ -49,7 +49,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
+            case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
                 return 'locationpostcategories';
         }
         
@@ -59,7 +59,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
+            case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
                 return 'categories';
         }
         

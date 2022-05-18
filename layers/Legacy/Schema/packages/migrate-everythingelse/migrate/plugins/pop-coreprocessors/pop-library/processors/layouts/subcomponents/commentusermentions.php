@@ -7,7 +7,7 @@ class PoP_Module_Processor_CommentUserMentionsLayouts extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_COMMENTUSERMENTIONS],
+            [self::class, self::COMPONENT_LAYOUT_COMMENTUSERMENTIONS],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_CommentUserMentionsLayouts extends PoP_Module_Process
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_COMMENTUSERMENTIONS:
-                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_USER_AVATAR40];
+            case self::COMPONENT_LAYOUT_COMMENTUSERMENTIONS:
+                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_USER_AVATAR40];
                 break;
         }
 

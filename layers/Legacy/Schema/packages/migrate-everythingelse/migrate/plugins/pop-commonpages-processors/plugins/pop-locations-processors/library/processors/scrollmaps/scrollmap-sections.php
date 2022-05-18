@@ -7,14 +7,14 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP],
+            [self::class, self::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_WHOWEARE_MAP],
+            self::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_WHOWEARE_MAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -23,7 +23,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_M
     protected function isUserMap(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP:
+            case self::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP:
                 return true;
         }
 

@@ -10,20 +10,20 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONGROUP_STANCES],
-            [self::class, self::MODULE_BUTTONGROUP_MYSTANCES],
-            [self::class, self::MODULE_BUTTONGROUP_AUTHORSTANCES],
-            [self::class, self::MODULE_BUTTONGROUP_TAGSTANCES],
+            [self::class, self::COMPONENT_BUTTONGROUP_STANCES],
+            [self::class, self::COMPONENT_BUTTONGROUP_MYSTANCES],
+            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORSTANCES],
+            [self::class, self::COMPONENT_BUTTONGROUP_TAGSTANCES],
         );
     }
 
     protected function getHeadersdataScreen(array $component, array &$props)
     {
         $screens = array(
-            self::MODULE_BUTTONGROUP_STANCES => POP_USERSTANCE_SCREEN_STANCES,
-            self::MODULE_BUTTONGROUP_MYSTANCES => POP_USERSTANCE_SCREEN_MYSTANCES,
-            self::MODULE_BUTTONGROUP_AUTHORSTANCES => POP_USERSTANCE_SCREEN_AUTHORSTANCES,
-            self::MODULE_BUTTONGROUP_TAGSTANCES => POP_USERSTANCE_SCREEN_TAGSTANCES,
+            self::COMPONENT_BUTTONGROUP_STANCES => POP_USERSTANCE_SCREEN_STANCES,
+            self::COMPONENT_BUTTONGROUP_MYSTANCES => POP_USERSTANCE_SCREEN_MYSTANCES,
+            self::COMPONENT_BUTTONGROUP_AUTHORSTANCES => POP_USERSTANCE_SCREEN_AUTHORSTANCES,
+            self::COMPONENT_BUTTONGROUP_TAGSTANCES => POP_USERSTANCE_SCREEN_TAGSTANCES,
         );
         if ($screen = $screens[$component[1]] ?? null) {
             return $screen;

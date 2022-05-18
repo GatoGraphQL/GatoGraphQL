@@ -12,25 +12,25 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LATESTCOUNT_TAG_CONTENT],
-            [self::class, self::MODULE_LATESTCOUNT_CONTENT],
-            [self::class, self::MODULE_LATESTCOUNT_AUTHOR_CONTENT],
-            [self::class, self::MODULE_LATESTCOUNT_SINGLE_CONTENT],
+            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CONTENT],
+            [self::class, self::COMPONENT_LATESTCOUNT_CONTENT],
+            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CONTENT],
+            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_CONTENT],
         );
     }
 
     public function getClasses(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_TAG_CONTENT:
+            case self::COMPONENT_LATESTCOUNT_TAG_CONTENT:
                 return array(
                     'tag'.\PoP\Root\App::getState(['routing', 'queried-object-id'])
                 );
             
-            case self::MODULE_LATESTCOUNT_CONTENT:
+            case self::COMPONENT_LATESTCOUNT_CONTENT:
                 return GD_LatestCounts_Utils::getAllcontentClasses($component, $props);
             
-            case self::MODULE_LATESTCOUNT_AUTHOR_CONTENT:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_CONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $ret = array(
                     'author'.$author
@@ -44,7 +44,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
 
                 return GD_LatestCounts_Utils::authorFilters($ret, $component, $props);
             
-            case self::MODULE_LATESTCOUNT_SINGLE_CONTENT:
+            case self::COMPONENT_LATESTCOUNT_SINGLE_CONTENT:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $ret = array(
                     'single'.$post_id

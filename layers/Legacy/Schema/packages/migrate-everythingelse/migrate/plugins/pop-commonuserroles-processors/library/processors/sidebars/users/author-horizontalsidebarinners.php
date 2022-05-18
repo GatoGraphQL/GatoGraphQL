@@ -8,8 +8,8 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION],
-            [self::class, self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL],
+            [self::class, self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION],
+            [self::class, self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL],
         );
     }
 
@@ -18,14 +18,14 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
                 $ret = array_merge(
                     $ret,
                     URE_FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_ORGANIZATION)
                 );
                 break;
 
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
                 $ret = array_merge(
                     $ret,
                     URE_FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_INDIVIDUAL)
@@ -39,8 +39,8 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
     public function getWrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
                 return 'row';
         }
     
@@ -50,8 +50,8 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
     public function getWidgetwrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
                 return 'col-xsm-4';
         }
     

@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP],
         );
     }
 
@@ -16,8 +16,8 @@ class GD_URE_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP:
-                $ret[] = [GD_URE_Module_Processor_Buttons::class, GD_URE_Module_Processor_Buttons::MODULE_URE_BUTTON_EDITMEMBERSHIP];
+            case self::COMPONENT_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP:
+                $ret[] = [GD_URE_Module_Processor_Buttons::class, GD_URE_Module_Processor_Buttons::COMPONENT_URE_BUTTON_EDITMEMBERSHIP];
                 break;
         }
         

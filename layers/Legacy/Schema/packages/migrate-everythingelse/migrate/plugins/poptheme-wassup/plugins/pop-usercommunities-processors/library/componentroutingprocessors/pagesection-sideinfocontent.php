@@ -13,7 +13,7 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionComponent
         $ret = array();
 
         $components = array(
-            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR],
+            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -27,8 +27,8 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionComponent
         }
 
         $components = array(
-            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR],
-            POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR],
+            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR],
+            POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];

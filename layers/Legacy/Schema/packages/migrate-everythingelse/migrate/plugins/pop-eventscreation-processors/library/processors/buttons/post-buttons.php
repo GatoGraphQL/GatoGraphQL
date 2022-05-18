@@ -8,14 +8,14 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_EVENT_CREATE],
+            [self::class, self::COMPONENT_BUTTON_EVENT_CREATE],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_EVENT_CREATE => [GD_Custom_EM_Module_Processor_ButtonInners::class, GD_Custom_EM_Module_Processor_ButtonInners::MODULE_BUTTONINNER_EVENT_CREATE],
+            self::COMPONENT_BUTTON_EVENT_CREATE => [GD_Custom_EM_Module_Processor_ButtonInners::class, GD_Custom_EM_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_EVENT_CREATE],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -27,9 +27,9 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
     public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_EVENT_CREATE:
+            case self::COMPONENT_BUTTON_EVENT_CREATE:
                 return array(
-                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                 );
         }
 
@@ -39,7 +39,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_EVENT_CREATE:
+            case self::COMPONENT_BUTTON_EVENT_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -52,7 +52,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
     public function getTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_BUTTON_EVENT_CREATE => TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup'),
+            self::COMPONENT_BUTTON_EVENT_CREATE => TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup'),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;
@@ -64,7 +64,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
     public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_EVENT_CREATE => 'addEventURL',
+            self::COMPONENT_BUTTON_EVENT_CREATE => 'addEventURL',
         );
         if ($field = $fields[$component[1]] ?? null) {
             return $field;

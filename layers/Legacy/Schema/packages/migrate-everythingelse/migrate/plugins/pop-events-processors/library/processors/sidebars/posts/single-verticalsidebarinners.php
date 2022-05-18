@@ -8,8 +8,8 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_EVENT],
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_PASTEVENT],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT],
         );
     }
 
@@ -18,14 +18,14 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modul
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_EVENT:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT:
                 $ret = array_merge(
                     $ret,
                     EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_EVENT)
                 );
                 break;
 
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_PASTEVENT:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT:
                 $ret = array_merge(
                     $ret,
                     EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_PASTEVENT)

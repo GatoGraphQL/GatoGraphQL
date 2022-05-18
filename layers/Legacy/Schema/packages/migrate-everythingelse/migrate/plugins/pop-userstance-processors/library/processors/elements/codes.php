@@ -14,28 +14,28 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CODE_REFERENCEDAFTERREADING],
-            [self::class, self::MODULE_CODE_AUTHORREFERENCEDAFTERREADING],
-            [self::class, self::MODULE_CODE_STANCECOUNT_GENERAL],
-            [self::class, self::MODULE_CODE_STANCECOUNT_ARTICLE],
-            [self::class, self::MODULE_CODE_STANCECOUNT],
-            [self::class, self::MODULE_CODE_POSTSTANCE],
+            [self::class, self::COMPONENT_CODE_REFERENCEDAFTERREADING],
+            [self::class, self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING],
+            [self::class, self::COMPONENT_CODE_STANCECOUNT_GENERAL],
+            [self::class, self::COMPONENT_CODE_STANCECOUNT_ARTICLE],
+            [self::class, self::COMPONENT_CODE_STANCECOUNT],
+            [self::class, self::COMPONENT_CODE_POSTSTANCE],
         );
     }
 
     public function getCode(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_REFERENCEDAFTERREADING:
+            case self::COMPONENT_CODE_REFERENCEDAFTERREADING:
                 return TranslationAPIFacade::getInstance()->__('After reading', 'pop-userstance-processors');
 
-            case self::MODULE_CODE_AUTHORREFERENCEDAFTERREADING:
+            case self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING:
                 return sprintf(
                     '<span class="pop-pulltextleft">%s</span>',
                     TranslationAPIFacade::getInstance()->__(', after reading', 'pop-userstance-processors')
                 );
 
-            case self::MODULE_CODE_STANCECOUNT_GENERAL:
+            case self::COMPONENT_CODE_STANCECOUNT_GENERAL:
                 return sprintf(
                     '<strong>%s</strong>',
                     sprintf(
@@ -44,7 +44,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                     )
                 );
 
-            case self::MODULE_CODE_STANCECOUNT_ARTICLE:
+            case self::COMPONENT_CODE_STANCECOUNT_ARTICLE:
                 return sprintf(
                     '<strong>%s</strong>',
                     sprintf(
@@ -53,13 +53,13 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                     )
                 );
 
-            case self::MODULE_CODE_STANCECOUNT:
+            case self::COMPONENT_CODE_STANCECOUNT:
                 return sprintf(
                     '<strong>%s</strong>',
                     TranslationAPIFacade::getInstance()->__('Combined: ', 'pop-userstance-processors')
                 );
 
-            case self::MODULE_CODE_POSTSTANCE:
+            case self::COMPONENT_CODE_POSTSTANCE:
                 return sprintf(
                     '<em>%s</em>',
                     TranslationAPIFacade::getInstance()->__('Stance from our users: ', 'pop-userstance-processors')
@@ -72,12 +72,12 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
     public function getHtmlTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_REFERENCEDAFTERREADING:
-            case self::MODULE_CODE_AUTHORREFERENCEDAFTERREADING:
-                // case self::MODULE_CODE_STANCECOUNT_GENERAL:
-                // case self::MODULE_CODE_STANCECOUNT_ARTICLE:
-                // case self::MODULE_CODE_STANCECOUNT:
-            case self::MODULE_CODE_POSTSTANCE:
+            case self::COMPONENT_CODE_REFERENCEDAFTERREADING:
+            case self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING:
+                // case self::COMPONENT_CODE_STANCECOUNT_GENERAL:
+                // case self::COMPONENT_CODE_STANCECOUNT_ARTICLE:
+                // case self::COMPONENT_CODE_STANCECOUNT:
+            case self::COMPONENT_CODE_POSTSTANCE:
                 return 'span';
         }
 
@@ -89,16 +89,16 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-         // case self::MODULE_CODE_STANCECOUNT_GENERAL:
-         // case self::MODULE_CODE_STANCECOUNT_ARTICLE:
-         // case self::MODULE_CODE_STANCECOUNT:
-            case self::MODULE_CODE_POSTSTANCE:
+         // case self::COMPONENT_CODE_STANCECOUNT_GENERAL:
+         // case self::COMPONENT_CODE_STANCECOUNT_ARTICLE:
+         // case self::COMPONENT_CODE_STANCECOUNT:
+            case self::COMPONENT_CODE_POSTSTANCE:
                 $this->appendProp($component, $props, 'class', 'btn btn-span');
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_CODE_STANCECOUNT:
+            case self::COMPONENT_CODE_STANCECOUNT:
                 $this->appendProp($component, $props, 'class', 'pop-stance-combined');
                 break;
         }

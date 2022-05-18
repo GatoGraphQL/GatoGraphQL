@@ -11,7 +11,7 @@ class GD_StaticSearchUtils
         $searchcontent_url = RouteUtils::getRouteURL(POP_BLOG_ROUTE_SEARCHCONTENT);
         $filter_params = array(
             [
-                'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 'value' => $query_wildcard,
             ],
         );
@@ -25,7 +25,7 @@ class GD_StaticSearchUtils
         $searchusers_url = RouteUtils::getRouteURL(POP_BLOG_ROUTE_SEARCHUSERS);
         $filter_params = array(
             [
-                'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
+                'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_NAME],
                 'value' => $query_wildcard,
             ],
         );

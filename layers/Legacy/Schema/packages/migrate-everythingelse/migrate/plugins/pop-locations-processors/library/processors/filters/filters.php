@@ -7,14 +7,14 @@ class PoP_Locations_Module_Processor_CustomFilters extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTER_LOCATIONS],
+            [self::class, self::COMPONENT_FILTER_LOCATIONS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FILTER_LOCATIONS => [PoP_Locations_Module_Processor_CustomFilterInners::class, PoP_Locations_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_LOCATIONS],
+            self::COMPONENT_FILTER_LOCATIONS => [PoP_Locations_Module_Processor_CustomFilterInners::class, PoP_Locations_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_LOCATIONS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

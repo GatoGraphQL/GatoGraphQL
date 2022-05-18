@@ -22,22 +22,22 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_EVENTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLL_EVENTS_ADDONS],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_ADDONS],
-            [self::class, self::MODULE_SCROLL_EVENTS_DETAILS],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_DETAILS],
-            [self::class, self::MODULE_SCROLL_EVENTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLL_EVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_EVENTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_EVENTS_LIST],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_LIST],
-            [self::class, self::MODULE_SCROLL_AUTHOREVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_AUTHOREVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTHORPASTEVENTS_FULLVIEW],
         );
     }
 
@@ -45,22 +45,22 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_EVENTS_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_NAVIGATOR],
-            self::MODULE_SCROLL_PASTEVENTS_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR],
-            self::MODULE_SCROLL_EVENTS_ADDONS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_ADDONS],
-            self::MODULE_SCROLL_PASTEVENTS_ADDONS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_ADDONS],
-            self::MODULE_SCROLL_EVENTS_DETAILS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_DETAILS],
-            self::MODULE_SCROLL_PASTEVENTS_DETAILS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_DETAILS],
-            self::MODULE_SCROLL_EVENTS_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_SIMPLEVIEW],
-            self::MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW],
-            self::MODULE_SCROLL_EVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_FULLVIEW],
-            self::MODULE_SCROLL_PASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_FULLVIEW],
-            self::MODULE_SCROLL_EVENTS_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_THUMBNAIL],
-            self::MODULE_SCROLL_PASTEVENTS_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL],
-            self::MODULE_SCROLL_EVENTS_LIST => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_LIST],
-            self::MODULE_SCROLL_PASTEVENTS_LIST => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_PASTEVENTS_LIST],
-            self::MODULE_SCROLL_AUTHOREVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW],
-            self::MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
+            self::COMPONENT_SCROLL_EVENTS_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR],
+            self::COMPONENT_SCROLL_PASTEVENTS_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR],
+            self::COMPONENT_SCROLL_EVENTS_ADDONS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_ADDONS],
+            self::COMPONENT_SCROLL_PASTEVENTS_ADDONS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS],
+            self::COMPONENT_SCROLL_EVENTS_DETAILS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_DETAILS],
+            self::COMPONENT_SCROLL_PASTEVENTS_DETAILS => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS],
+            self::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_EVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW],
+            self::COMPONENT_SCROLL_PASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW],
+            self::COMPONENT_SCROLL_EVENTS_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL],
+            self::COMPONENT_SCROLL_PASTEVENTS_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL],
+            self::COMPONENT_SCROLL_EVENTS_LIST => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_LIST],
+            self::COMPONENT_SCROLL_PASTEVENTS_LIST => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_PASTEVENTS_LIST],
+            self::COMPONENT_SCROLL_AUTHOREVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW],
+            self::COMPONENT_SCROLL_AUTHORPASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -75,34 +75,34 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_EVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_THUMBNAIL],
         );
         $lists = array(
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_LIST],
-            [self::class, self::MODULE_SCROLL_EVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_LIST],
         );
         $details = array(
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_DETAILS],
-            [self::class, self::MODULE_SCROLL_EVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_DETAILS],
         );
         $navigators = array(
-            [self::class, self::MODULE_SCROLL_EVENTS_NAVIGATOR],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_NAVIGATOR],
         );
         $addons = array(
-            [self::class, self::MODULE_SCROLL_EVENTS_ADDONS],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_ADDONS],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_ADDONS],
         );
         $simpleviews = array(
-            [self::class, self::MODULE_SCROLL_EVENTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_EVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_PASTEVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_AUTHOREVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_EVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_PASTEVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTHOREVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTHORPASTEVENTS_FULLVIEW],
         );
 
         $extra_class = '';

@@ -9,8 +9,8 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_PAGE_ADDONTABS],
-            [self::class, self::MODULE_PAGE_BODYTABS],
+            [self::class, self::COMPONENT_PAGE_ADDONTABS],
+            [self::class, self::COMPONENT_PAGE_BODYTABS],
         );
     }
 
@@ -21,8 +21,8 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_PAGE_ADDONTABS:
-            case self::MODULE_PAGE_BODYTABS:
+            case self::COMPONENT_PAGE_ADDONTABS:
+            case self::COMPONENT_PAGE_BODYTABS:
                 if ($tab_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
                     $ret[] = $tab_component;
                 }
@@ -35,10 +35,10 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
     public function getBtnClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_PAGE_ADDONTABS:
+            case self::COMPONENT_PAGE_ADDONTABS:
                 return 'btn btn-warning btn-sm';
 
-            case self::MODULE_PAGE_BODYTABS:
+            case self::COMPONENT_PAGE_BODYTABS:
                 return 'btn btn-inverse btn-sm';
         }
 

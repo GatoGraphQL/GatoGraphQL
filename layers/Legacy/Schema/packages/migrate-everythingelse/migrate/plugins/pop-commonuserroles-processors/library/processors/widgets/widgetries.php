@@ -9,8 +9,8 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS],
-            [self::class, self::MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS],
+            [self::class, self::COMPONENT_URE_WIDGET_PROFILEORGANIZATION_DETAILS],
+            [self::class, self::COMPONENT_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS],
         );
     }
 
@@ -19,12 +19,12 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS:
-                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS];
+            case self::COMPONENT_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS:
+                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS];
                 break;
 
-            case self::MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS:
-                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::MODULE_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS];
+            case self::COMPONENT_URE_WIDGET_PROFILEORGANIZATION_DETAILS:
+                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS];
                 break;
         }
 
@@ -34,8 +34,8 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
-            self::MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
+            self::COMPONENT_URE_WIDGET_PROFILEORGANIZATION_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
+            self::COMPONENT_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
         );
 
         return $titles[$component[1]] ?? null;
@@ -43,8 +43,8 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
     public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS => 'fa-info-circle',
-            self::MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS => 'fa-info-circle',
+            self::COMPONENT_URE_WIDGET_PROFILEORGANIZATION_DETAILS => 'fa-info-circle',
+            self::COMPONENT_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS => 'fa-info-circle',
 
         );
 

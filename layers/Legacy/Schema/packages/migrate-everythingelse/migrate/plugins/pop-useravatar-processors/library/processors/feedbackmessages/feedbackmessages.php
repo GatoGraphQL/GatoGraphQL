@@ -7,14 +7,14 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_USERAVATAR_UPDATE],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
+            self::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

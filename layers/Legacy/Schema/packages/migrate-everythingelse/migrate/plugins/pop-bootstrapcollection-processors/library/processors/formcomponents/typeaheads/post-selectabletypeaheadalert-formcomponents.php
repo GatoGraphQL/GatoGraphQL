@@ -7,15 +7,15 @@ class PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents extends Po
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
+            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
         );
     }
     
     public function getHiddeninputModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
-                return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES];
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
+                return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES];
         }
 
         return parent::getHiddeninputModule($component);
@@ -24,7 +24,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents extends Po
     public function isMultiple(array $component): bool
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
                 return true;
         }
 

@@ -8,16 +8,16 @@ class PoP_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_CREATEPROFILE],
-            [self::class, self::MODULE_FEEDBACKMESSAGE_UPDATEPROFILE],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CREATEPROFILE],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_UPDATEPROFILE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_CREATEPROFILE => [PoP_Module_Processor_ProfileFeedbackMessageInners::class, PoP_Module_Processor_ProfileFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_CREATEPROFILE],
-            self::MODULE_FEEDBACKMESSAGE_UPDATEPROFILE => [PoP_Module_Processor_ProfileFeedbackMessageInners::class, PoP_Module_Processor_ProfileFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_UPDATEPROFILE],
+            self::COMPONENT_FEEDBACKMESSAGE_CREATEPROFILE => [PoP_Module_Processor_ProfileFeedbackMessageInners::class, PoP_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_CREATEPROFILE],
+            self::COMPONENT_FEEDBACKMESSAGE_UPDATEPROFILE => [PoP_Module_Processor_ProfileFeedbackMessageInners::class, PoP_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEPROFILE],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

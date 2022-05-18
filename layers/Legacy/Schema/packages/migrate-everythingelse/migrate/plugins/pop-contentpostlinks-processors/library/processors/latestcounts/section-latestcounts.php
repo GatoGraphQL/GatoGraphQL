@@ -9,18 +9,18 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LATESTCOUNT_POSTLINKS],
-            [self::class, self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS],
-            [self::class, self::MODULE_LATESTCOUNT_TAG_POSTLINKS],
+            [self::class, self::COMPONENT_LATESTCOUNT_POSTLINKS],
+            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS],
+            [self::class, self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS],
         );
     }
 
     public function getObjectName(array $component, array &$props)
     {
         $cats = array(
-            self::MODULE_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
-            self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
-            self::MODULE_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
+            self::COMPONENT_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
+            self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
         if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
@@ -32,9 +32,9 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     public function getObjectNames(array $component, array &$props)
     {
         $cats = array(
-            self::MODULE_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
-            self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
-            self::MODULE_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
+            self::COMPONENT_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
+            self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
         if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
@@ -49,9 +49,9 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         $ret = parent::getSectionClasses($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_POSTLINKS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS:
-            case self::MODULE_LATESTCOUNT_TAG_POSTLINKS:
+            case self::COMPONENT_LATESTCOUNT_POSTLINKS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS:
+            case self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS:
                 $ret[] = 'post-'.POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
                 break;
         }
@@ -62,7 +62,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     public function isAuthor(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS:
                 return true;
         }
 
@@ -72,7 +72,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     public function isTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_TAG_POSTLINKS:
+            case self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS:
                 return true;
         }
 

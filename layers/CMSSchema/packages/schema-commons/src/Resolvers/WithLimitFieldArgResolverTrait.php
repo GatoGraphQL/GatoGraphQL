@@ -27,7 +27,7 @@ trait WithLimitFieldArgResolverTrait
         if ($this->limitFilterInputName === null) {
             $this->limitFilterInputName = FilterInputHelper::getFilterInputName([
                 CommonFilterInputComponentProcessor::class,
-                CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_LIMIT
+                CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_LIMIT
             ]);
         }
         if ($fieldArgName !== $this->limitFilterInputName) {

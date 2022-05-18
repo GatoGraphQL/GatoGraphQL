@@ -10,7 +10,7 @@ function gdCapSharewithprofiles($post_id)
     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // Was the Share With Profiles field added to the form?
-    $coauthors = $componentprocessor_manager->getProcessor([GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS])->getValue([GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS]);
+    $coauthors = $componentprocessor_manager->getProcessor([GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS])->getValue([GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS]);
     $pluginapi = PoP_AddCoauthors_APIFactory::getInstance();
     $pluginapi->addCoauthors($post_id, $coauthors);
 }

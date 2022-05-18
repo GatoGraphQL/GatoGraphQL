@@ -7,7 +7,7 @@ class PoP_ContentPostLinks_Module_Processor_Layouts extends Wassup_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_LINK_ACCESS],
+            [self::class, self::COMPONENT_LAYOUT_LINK_ACCESS],
         );
     }
 }

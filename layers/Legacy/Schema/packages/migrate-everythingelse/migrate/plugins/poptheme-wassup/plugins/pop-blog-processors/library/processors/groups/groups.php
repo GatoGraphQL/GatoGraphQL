@@ -12,28 +12,28 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
                 $inners = array(
-                    self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS],
-                    self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW],
-                    self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW],
-                    self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
-                    self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST],
+                    self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS],
+                    self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW],
+                    self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW],
+                    self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
+                    self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST],
                 );
                 return $inners[$component[1]];
         }
@@ -44,11 +44,11 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
                 $subComponent = $this->getInnerSubmodule($component);
                 $this->setProp([$subComponent], $props, 'title-htmltag', 'h2');
                 break;
@@ -60,11 +60,11 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public function initRequestProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
                 $subComponent = $this->getInnerSubmodule($component);
 
                 // Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
@@ -81,11 +81,11 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
                 $ret[] = $this->getInnerSubmodule($component);
                 break;
         }

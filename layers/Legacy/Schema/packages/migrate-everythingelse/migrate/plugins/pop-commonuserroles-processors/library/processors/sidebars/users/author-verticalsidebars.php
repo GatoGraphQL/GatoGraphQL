@@ -8,16 +8,16 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION],
-            [self::class, self::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION => [GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::MODULE_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION],
-            self::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL => [GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::MODULE_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL],
+            self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION => [GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION],
+            self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL => [GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {
@@ -30,8 +30,8 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION:
-            case self::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL:
+            case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION:
+            case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;
         }

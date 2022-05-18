@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserMapScriptCustomizations extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_SCRIPTCUSTOMIZATION_USER],
+            [self::class, self::COMPONENT_MAP_SCRIPTCUSTOMIZATION_USER],
         );
     }
 }

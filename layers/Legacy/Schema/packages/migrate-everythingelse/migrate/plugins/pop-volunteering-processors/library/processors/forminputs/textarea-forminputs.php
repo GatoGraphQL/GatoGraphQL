@@ -8,14 +8,14 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_WHYVOLUNTEER],
+            [self::class, self::COMPONENT_FORMINPUT_WHYVOLUNTEER],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_WHYVOLUNTEER:
+            case self::COMPONENT_FORMINPUT_WHYVOLUNTEER:
                 return TranslationAPIFacade::getInstance()->__('Why do you want to volunteer?', 'pop-genericforms');
         }
         
@@ -25,7 +25,7 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_WHYVOLUNTEER:
+            case self::COMPONENT_FORMINPUT_WHYVOLUNTEER:
                 return true;
         }
         
@@ -35,7 +35,7 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_WHYVOLUNTEER:
+            case self::COMPONENT_FORMINPUT_WHYVOLUNTEER:
                 return true;
         }
 

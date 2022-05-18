@@ -10,10 +10,10 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCES],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCES_LINE],
-            [self::class, self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT],
-            [self::class, self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT],
         );
     }
 
@@ -22,20 +22,20 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_REFERENCES:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_REFERENCES];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCES];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_REFERENCES_LINE];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCES_LINE];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_AUTHOR_CONTACT];
+            case self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_AUTHOR_CONTACT];
                 break;
 
-            case self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
-                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT];
+            case self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
+                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT];
                 break;
         }
 
@@ -47,8 +47,8 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         $ret = parent::getConditionFailedSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
-                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT];
+            case self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
+                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT];
                 break;
         }
 
@@ -58,8 +58,8 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_REFERENCES:
-            case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
                 $this->appendProp($component, $props, 'class', 'references');
                 break;
         }
@@ -70,11 +70,11 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_REFERENCES:
-            case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
                 return 'hasReferences';
 
-            case self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT:
+            case self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT:
                 return 'hasContact';
         }
 

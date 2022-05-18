@@ -7,7 +7,7 @@ class PoP_Module_Processor_StickyPostLayouts extends PoP_Module_Processor_FullVi
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLVIEW_STICKY],
+            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_STICKY],
         );
     }
 }

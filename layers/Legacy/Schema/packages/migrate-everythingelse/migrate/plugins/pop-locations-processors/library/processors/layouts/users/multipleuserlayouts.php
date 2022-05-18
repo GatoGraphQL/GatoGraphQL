@@ -7,15 +7,15 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
         );
     }
 
     public function getDefaultLayoutSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS:
-                return [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS];
+            case self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS:
+                return [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS];
         }
 
         return parent::getDefaultLayoutSubmodule($component);
@@ -25,9 +25,9 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
     {
         $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS:
                 $handles = array(
-                    self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS => POP_MULTILAYOUT_HANDLE_USERCONTENT,
+                    self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS => POP_MULTILAYOUT_HANDLE_USERCONTENT,
                 );
                 return $multilayout_manager->getLayoutComponents($handles[$component[1]], POP_FORMAT_MAP);
         }

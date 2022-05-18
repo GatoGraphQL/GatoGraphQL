@@ -15,11 +15,11 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_AUTHOR_CONTENT],
-            [self::class, self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT],
-            [self::class, self::MODULE_BLOCK_TAG_CONTENT],
-            [self::class, self::MODULE_BLOCK_SINGLE_CONTENT],
-            [self::class, self::MODULE_BLOCK_PAGE_CONTENT],
+            [self::class, self::COMPONENT_BLOCK_AUTHOR_CONTENT],
+            [self::class, self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT],
+            [self::class, self::COMPONENT_BLOCK_TAG_CONTENT],
+            [self::class, self::COMPONENT_BLOCK_SINGLE_CONTENT],
+            [self::class, self::COMPONENT_BLOCK_PAGE_CONTENT],
         );
     }
 
@@ -27,9 +27,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     {
         return match($component[1]) {
             // The Page Content block uses whichever is the current page
-            self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
-            self::MODULE_BLOCK_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
-            self::MODULE_BLOCK_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
+            self::COMPONENT_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
+            self::COMPONENT_BLOCK_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
+            self::COMPONENT_BLOCK_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -38,7 +38,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
+            case self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 return sprintf(
@@ -56,13 +56,13 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTHOR_CONTENT:
-            case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
+            case self::COMPONENT_BLOCK_AUTHOR_CONTENT:
+            case self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
-            case self::MODULE_BLOCK_SINGLE_CONTENT:
-            case self::MODULE_BLOCK_PAGE_CONTENT:
+            case self::COMPONENT_BLOCK_SINGLE_CONTENT:
+            case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($post_id);
         }
@@ -73,8 +73,8 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_PAGE_CONTENT:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SHARE];
+            case self::COMPONENT_BLOCK_PAGE_CONTENT:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SHARE];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -85,11 +85,11 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_AUTHOR_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_AUTHOR_CONTENT],
-            self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT],
-            self::MODULE_BLOCK_TAG_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_TAG_CONTENT],
-            self::MODULE_BLOCK_SINGLE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLE_CONTENT],
-            self::MODULE_BLOCK_PAGE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_PAGE_CONTENT],
+            self::COMPONENT_BLOCK_AUTHOR_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_AUTHOR_CONTENT],
+            self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT],
+            self::COMPONENT_BLOCK_TAG_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_TAG_CONTENT],
+            self::COMPONENT_BLOCK_SINGLE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_SINGLE_CONTENT],
+            self::COMPONENT_BLOCK_PAGE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_PAGE_CONTENT],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -101,11 +101,11 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TAG_CONTENT:
+            case self::COMPONENT_BLOCK_TAG_CONTENT:
                 $this->appendProp($component, $props, 'class', 'block-tag-content');
                 break;
 
-            case self::MODULE_BLOCK_PAGE_CONTENT:
+            case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 $this->appendProp($component, $props, 'class', 'block-singleabout-content');
                 $inners = $this->getInnerSubmodules($component);
                 foreach ($inners as $inner) {
@@ -113,7 +113,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
                 }
                 break;
 
-            case self::MODULE_BLOCK_SINGLE_CONTENT:
+            case self::COMPONENT_BLOCK_SINGLE_CONTENT:
                 $this->appendProp($component, $props, 'class', 'block-single-content');
                 break;
         }
@@ -125,7 +125,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SINGLE_CONTENT:
+            case self::COMPONENT_BLOCK_SINGLE_CONTENT:
                 
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -142,7 +142,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $ret = parent::getBlocksectionsClasses($component);
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_PAGE_CONTENT:
+            case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 $ret['blocksection-inners'] = 'row row-item';
                 break;
         }
@@ -154,16 +154,16 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_BLOCK_AUTHOR_CONTENT:
-    //         case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
+    //         case self::COMPONENT_BLOCK_AUTHOR_CONTENT:
+    //         case self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT:
 
     //             return UserRequestNature::USER;
 
-    //         case self::MODULE_BLOCK_TAG_CONTENT:
+    //         case self::COMPONENT_BLOCK_TAG_CONTENT:
 
     //             return TagRequestNature::TAG;
 
-    //         case self::MODULE_BLOCK_SINGLE_CONTENT:
+    //         case self::COMPONENT_BLOCK_SINGLE_CONTENT:
 
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }

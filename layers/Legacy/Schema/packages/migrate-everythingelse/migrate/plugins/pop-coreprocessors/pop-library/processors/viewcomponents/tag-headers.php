@@ -8,15 +8,15 @@ class PoP_Module_Processor_TagViewComponentHeaders extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_HEADER_TAG],
-            [self::class, self::MODULE_VIEWCOMPONENT_HEADER_TAG_URL],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_TAG],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL],
         );
     }
 
     public function headerShowUrl(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_HEADER_TAG_URL:
+            case self::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL:
                 // Add the URL in the header? Sometimes yes (eg: Addon) sometimes not (eg: modal)
                 return true;
         }
@@ -27,7 +27,7 @@ class PoP_Module_Processor_TagViewComponentHeaders extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_HEADER_TAG_URL:
+            case self::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL:
                 $this->appendProp($component, $props, 'class', 'alert alert-warning alert-sm');
                 break;
         }

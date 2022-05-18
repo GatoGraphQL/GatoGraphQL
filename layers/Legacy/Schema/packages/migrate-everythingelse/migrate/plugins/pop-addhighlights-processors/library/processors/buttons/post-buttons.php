@@ -9,16 +9,16 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_HIGHLIGHT_CREATE],
-            [self::class, self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN],
+            [self::class, self::COMPONENT_BUTTON_HIGHLIGHT_CREATE],
+            [self::class, self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::MODULE_BUTTONINNER_HIGHLIGHT_CREATE],
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN],
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE],
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -30,10 +30,10 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATE:
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 return array(
-                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                 );
         }
 
@@ -43,8 +43,8 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATE:
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 return POP_TARGET_ADDONS;
         }
 
@@ -56,7 +56,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 $ret .= 'btn btn-link';
                 break;
         }
@@ -68,8 +68,8 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => $extract,
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => $extract,
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => $extract,
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => $extract,
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;
@@ -81,8 +81,8 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
         );
         if ($field = $fields[$component[1]] ?? null) {
             return $field;

@@ -8,8 +8,8 @@ class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
-            [self::class, self::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
+            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
+            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
         );
     }
 
@@ -18,14 +18,14 @@ class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Proc
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE:
-                $ret[] = [UserStance_Module_Processor_FormComponentGroupsGroups::class, UserStance_Module_Processor_FormComponentGroupsGroups::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET];
-                $ret[] = [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_STANCEEDITOR];
+            case self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE:
+                $ret[] = [UserStance_Module_Processor_FormComponentGroupsGroups::class, UserStance_Module_Processor_FormComponentGroupsGroups::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET];
+                $ret[] = [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_STANCEEDITOR];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE:
-                $ret[] = [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_BUTTONGROUP_STANCE];
-                $ret[] = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
+            case self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE:
+                $ret[] = [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_STANCE];
+                $ret[] = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
                 break;
         }
 

@@ -10,27 +10,27 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS],
-            [self::class, self::MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW],
-            [self::class, self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE],
+            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS],
+            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
-                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS];
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
+                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS];
 
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
-                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW];
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
+                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW];
 
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
-                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW];
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
+                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW];
 
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
-                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE];
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
+                return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE];
         }
 
         return parent::getInnerSubmodule($component);
@@ -39,10 +39,10 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
     public function addFetchedData(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 return false;
         }
 
@@ -52,9 +52,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
+            case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 $classes = array(
-                    self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE => 'references',
+                    self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE => 'references',
                 );
 
                 $this->setProp($component, $props, 'appendable', true);

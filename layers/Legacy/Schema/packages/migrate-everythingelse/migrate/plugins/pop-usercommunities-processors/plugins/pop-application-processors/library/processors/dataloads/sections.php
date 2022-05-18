@@ -23,34 +23,34 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD],
-            [self::class, self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD],
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD => POP_USERCOMMUNITIES_ROUTE_COMMUNITYPLUSMEMBERS,
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD => POP_USERCOMMUNITIES_ROUTE_COMMUNITYPLUSMEMBERS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -58,17 +58,17 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD => [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT],
-            self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD => [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT],
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::MODULE_SCROLL_COMMUNITIES_DETAILS],
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::MODULE_SCROLL_COMMUNITIES_FULLVIEW],
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::MODULE_SCROLL_COMMUNITIES_THUMBNAIL],
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::MODULE_SCROLL_COMMUNITIES_LIST],
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_DETAILS],
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_THUMBNAIL],
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_LIST],
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomCarousels::class, PoP_UserCommunities_Module_Processor_CustomCarousels::MODULE_CAROUSEL_AUTHORMEMBERS],
+            self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD => [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT],
+            self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD => [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::COMPONENT_SCROLL_COMMUNITIES_LIST],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_DETAILS],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_FULLVIEW],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_THUMBNAIL],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_LIST],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomCarousels::class, PoP_UserCommunities_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_AUTHORMEMBERS],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -77,21 +77,21 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST:
-                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::MODULE_FILTER_COMMUNITIES];
+            case self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST:
+                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_COMMUNITIES];
 
-            case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+            case self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
 
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCOMMUNITYMEMBERS];
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
 
         return parent::getFilterSubmodule($component);
@@ -102,27 +102,27 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
 
         // Add the format attr
         $details = array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
         );
         $fullviews = array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
         );
         $thumbnails = array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
         );
         $lists = array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
         );
         $typeaheads = array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD],
-            [self::class, self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD],
         );
         $carousels = array(
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
@@ -144,12 +144,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
-    //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-    //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-    //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-    //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-    //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+    //         case self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
+    //         case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+    //         case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+    //         case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+    //         case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+    //         case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
     //             return UserRequestNature::USER;
     //     }
 
@@ -161,15 +161,15 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 $ret['orderby'] = NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:registrationdate');
                 $ret['order'] = 'DESC';
                 break;
-            case self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST:
                 $ret['role'] = GD_URE_ROLE_COMMUNITY;
                 break;
         }
@@ -183,12 +183,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
 
         switch ($component[1]) {
              // Members of the Community
-            case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+            case self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a Community opting out from having members)
                 if (gdUreIsCommunity($author)) {
@@ -205,7 +205,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         $ret = parent::getObjectIDOrIDs($component, $props, $data_properties);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
                 // Also include the current author
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 array_unshift($ret, $author);
@@ -218,17 +218,17 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
-            case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+            case self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
@@ -238,19 +238,19 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('members', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('members', 'poptheme-wassup'));
                 break;
 
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('communities', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('communities', 'poptheme-wassup'));
                 break;
         }
 
@@ -263,11 +263,11 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
 
         switch ($component[1]) {
          // Members of the Community
-            case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
+            case self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {

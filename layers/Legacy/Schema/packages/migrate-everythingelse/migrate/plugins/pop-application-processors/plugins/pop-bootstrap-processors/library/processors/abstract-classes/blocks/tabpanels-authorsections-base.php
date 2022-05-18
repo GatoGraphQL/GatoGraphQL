@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_AuthorTabPanelSectionBlocksBase extends PoP_
 
     protected function getControlgroupBottomSubmodule(array $component)
     {
-        return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUUSERLIST];
+        return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST];
     }
 
     public function initModelProps(array $component, array &$props): void

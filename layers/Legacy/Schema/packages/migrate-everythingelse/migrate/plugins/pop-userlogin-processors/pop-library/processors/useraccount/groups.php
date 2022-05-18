@@ -7,14 +7,14 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_LOGGEDINUSERDATA],
+            [self::class, self::COMPONENT_GROUP_LOGGEDINUSERDATA],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_GROUP_LOGGEDINUSERDATA => POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
+            self::COMPONENT_GROUP_LOGGEDINUSERDATA => POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -24,7 +24,7 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_GROUP_LOGGEDINUSERDATA:
+            case self::COMPONENT_GROUP_LOGGEDINUSERDATA:
                 $ret = array_merge(
                     $ret,
                     PoP_Module_Processor_UserAccountUtils::getLoginComponents()
@@ -38,7 +38,7 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_GROUP_LOGGEDINUSERDATA:
+            case self::COMPONENT_GROUP_LOGGEDINUSERDATA:
                 $this->appendProp($component, $props, 'class', 'hidden');
                 break;
         }

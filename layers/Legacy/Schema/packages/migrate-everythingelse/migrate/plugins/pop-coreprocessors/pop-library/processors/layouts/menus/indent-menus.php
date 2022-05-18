@@ -7,7 +7,7 @@ class PoP_Module_Processor_IndentMenuLayouts extends PoP_Module_Processor_Indent
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MENU_INDENT],
+            [self::class, self::COMPONENT_LAYOUT_MENU_INDENT],
         );
     }
 }

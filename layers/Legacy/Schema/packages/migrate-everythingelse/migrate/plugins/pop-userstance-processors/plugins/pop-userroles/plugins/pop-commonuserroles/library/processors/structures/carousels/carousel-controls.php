@@ -11,16 +11,16 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS],
-            [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS],
+            [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS],
+            [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS],
         );
     }
 
     public function getControlClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return 'btn btn-link btn-compact';
         }
 
@@ -30,8 +30,8 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return POP_TARGET_QUICKVIEW;
         }
 
@@ -40,8 +40,8 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     public function getTitleClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return 'btn btn-link btn-compact';
         }
 
@@ -50,10 +50,10 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).TranslationAPIFacade::getInstance()->__('By organizations', 'pop-userstance-processors');
 
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).TranslationAPIFacade::getInstance()->__('By individuals', 'pop-userstance-processors');
         }
 
@@ -63,10 +63,10 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS);
 
-            case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
+            case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS);
         }
 

@@ -7,14 +7,14 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_LOCATIONPOST],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_SINGLE_LOCATIONPOST],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_VERTICALSIDEBAR_SINGLE_LOCATIONPOST => [GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners::MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST],
+            self::COMPONENT_VERTICALSIDEBAR_SINGLE_LOCATIONPOST => [GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {
@@ -27,7 +27,7 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBAR_SINGLE_LOCATIONPOST:
+            case self::COMPONENT_VERTICALSIDEBAR_SINGLE_LOCATIONPOST:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;
         }

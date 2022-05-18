@@ -7,14 +7,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSEL_AUTHORMEMBERS],
+            [self::class, self::COMPONENT_CAROUSEL_AUTHORMEMBERS],
         );
     }
 
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
                 $this->appendProp($component, $props, 'class', 'slide');
                 $this->appendProp($component, $props, 'class', 'widget widget-info');
                 break;
@@ -26,8 +26,8 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
-                return [PoP_UserCommunities_Module_Processor_CustomCarouselInners::class, PoP_UserCommunities_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_AUTHORMEMBERS];
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
+                return [PoP_UserCommunities_Module_Processor_CustomCarouselInners::class, PoP_UserCommunities_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_AUTHORMEMBERS];
         }
 
         return parent::getInnerSubmodule($component);
@@ -36,7 +36,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
     public function getMode(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
                 return 'static';
         }
 
@@ -47,8 +47,8 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
     public function getControlsTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
-                return [PoP_UserCommunities_Module_Processor_CustomCarouselControls::class, PoP_UserCommunities_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS];
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
+                return [PoP_UserCommunities_Module_Processor_CustomCarouselControls::class, PoP_UserCommunities_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS];
         }
 
         return parent::getControlsTopSubmodule($component);

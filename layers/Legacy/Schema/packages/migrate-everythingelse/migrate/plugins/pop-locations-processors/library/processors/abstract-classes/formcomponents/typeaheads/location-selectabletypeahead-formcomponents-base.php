@@ -7,12 +7,12 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
 
     public function getInputSubmodule(array $component)
     {
-        return [GD_EM_Module_Processor_InputGroupFormComponents::class, GD_EM_Module_Processor_InputGroupFormComponents::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION];
+        return [GD_EM_Module_Processor_InputGroupFormComponents::class, GD_EM_Module_Processor_InputGroupFormComponents::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION];
     }
 
     public function getSuggestionsLayoutSubmodule(array $component)
     {
-        return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::MODULE_EM_LAYOUT_LOCATIONNAME];
+        return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONNAME];
     }
     public function getSuggestionsFontawesome(array $component, array &$props)
     {

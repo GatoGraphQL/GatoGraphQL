@@ -7,7 +7,7 @@ class UserStance_Module_Processor_TableInners extends PoP_Module_Processor_Table
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABLEINNER_MYSTANCES],
+            [self::class, self::COMPONENT_TABLEINNER_MYSTANCES],
         );
     }
 
@@ -17,10 +17,10 @@ class UserStance_Module_Processor_TableInners extends PoP_Module_Processor_Table
 
         // Main layout
         switch ($component[1]) {
-            case self::MODULE_TABLEINNER_MYSTANCES:
-                $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT];
-                $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::MODULE_LAYOUTPOST_DATE];
-                $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::MODULE_LAYOUTPOST_STATUS];
+            case self::COMPONENT_TABLEINNER_MYSTANCES:
+                $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT];
+                $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::COMPONENT_LAYOUTPOST_DATE];
+                $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::COMPONENT_LAYOUTPOST_STATUS];
                 break;
         }
 

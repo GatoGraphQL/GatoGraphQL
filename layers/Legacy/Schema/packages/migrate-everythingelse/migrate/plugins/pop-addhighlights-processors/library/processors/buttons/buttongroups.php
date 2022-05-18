@@ -8,16 +8,16 @@ class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONGROUP_HIGHLIGHTS],
-            [self::class, self::MODULE_BUTTONGROUP_MYHIGHLIGHTS],
+            [self::class, self::COMPONENT_BUTTONGROUP_HIGHLIGHTS],
+            [self::class, self::COMPONENT_BUTTONGROUP_MYHIGHLIGHTS],
         );
     }
 
     protected function getHeadersdataScreen(array $component, array &$props)
     {
         $screens = array(
-            self::MODULE_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
-            self::MODULE_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
+            self::COMPONENT_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
+            self::COMPONENT_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
         );
         if ($screen = $screens[$component[1]] ?? null) {
             return $screen;

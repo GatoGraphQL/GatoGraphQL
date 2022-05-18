@@ -16,9 +16,9 @@ class PoPTheme_Wassup_EM_WebPlatform_PageSectionHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS:
+            case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
                 $processor->mergeJsmethodsProp(
-                    [GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::MODULE_BLOCK_CREATELOCATION],
+                    [GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::COMPONENT_BLOCK_CREATELOCATION],
                     $props,
                     array(
                         'createLocationModalBlock',

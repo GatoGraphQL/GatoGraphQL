@@ -9,7 +9,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WINDOW_ADDONS],
+            [self::class, self::COMPONENT_WINDOW_ADDONS],
         );
     }
 
@@ -26,14 +26,14 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_WINDOW_ADDONS:
+            case self::COMPONENT_WINDOW_ADDONS:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $addons_component = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS];
-                $addontabs_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_ADDONTABS];
+                $addons_component = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS];
+                $addontabs_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_ADDONTABS];
                 if ($load_component) {
                     return array(
                         $addons_component,
@@ -66,7 +66,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_WINDOW_ADDONS:
+            case self::COMPONENT_WINDOW_ADDONS:
                 list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($component);
                 $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
                 $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
@@ -84,7 +84,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_WINDOW_ADDONS:
+            case self::COMPONENT_WINDOW_ADDONS:
                 list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($component);
                 $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
                 $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);

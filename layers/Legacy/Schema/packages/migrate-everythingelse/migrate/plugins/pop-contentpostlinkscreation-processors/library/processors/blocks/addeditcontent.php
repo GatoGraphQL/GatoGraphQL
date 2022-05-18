@@ -8,16 +8,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE],
-            [self::class, self::MODULE_BLOCK_CONTENTPOSTLINK_CREATE],
+            [self::class, self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
-            self::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK,
+            self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
+            self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -27,8 +27,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
         $ret = parent::getInnerSubmodules($component);
 
         $block_inners = array(
-            self::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE],
-            self::MODULE_BLOCK_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE],
+            self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE],
+            self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE],
         );
         if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
@@ -40,7 +40,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
     protected function isCreate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_CONTENTPOSTLINK_CREATE:
+            case self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE:
                 return true;
         }
 
@@ -49,7 +49,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
     protected function isUpdate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE:
+            case self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE:
                 return true;
         }
 
@@ -59,8 +59,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE:
-            case self::MODULE_BLOCK_CONTENTPOSTLINK_CREATE:
+            case self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE:
+            case self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE:
                 $this->appendProp($component, $props, 'class', 'block-createupdate-contentpost');
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     $this->appendProp($component, $props, 'class', 'addons-nocontrols');

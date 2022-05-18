@@ -27,42 +27,42 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_FOLLOWUSER_FULL],
-            [self::class, self::MODULE_BUTTONINNER_UNFOLLOWUSER_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_UNFOLLOWUSER_FULL],
-            [self::class, self::MODULE_BUTTONINNER_RECOMMENDPOST_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL],
-            [self::class, self::MODULE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_UNRECOMMENDPOST_FULL],
-            [self::class, self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_FULL],
-            [self::class, self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL],
-            [self::class, self::MODULE_BUTTONINNER_UPVOTEPOST_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_UPVOTEPOST_FULL],
-            [self::class, self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_FULL],
-            [self::class, self::MODULE_BUTTONINNER_DOWNVOTEPOST_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_DOWNVOTEPOST_FULL],
-            [self::class, self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW],
-            [self::class, self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_RECOMMENDPOST_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_UPVOTEPOST_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_UPVOTEPOST_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_FULL],
+            [self::class, self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW],
+            [self::class, self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_FULL],
         );
     }
 
     public function getTag(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_FULL:
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_FULL:
-            case self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_FULL:
-            case self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
-            case self::MODULE_BUTTONINNER_UPVOTEPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_FULL:
-            case self::MODULE_BUTTONINNER_DOWNVOTEPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_FULL:
+            case self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
+            case self::COMPONENT_BUTTONINNER_UPVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
                 return 'h4';
         }
 
@@ -72,32 +72,32 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW:
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_FULL:
-            case self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW:
-            case self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_FULL:
-            case self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_FULL:
+            case self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
                 return 'fa-fw fa-hand-o-right';
 
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_FULL:
                 return 'fa-fw fa-thumbs-o-up';
 
-            case self::MODULE_BUTTONINNER_UPVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UPVOTEPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UPVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UPVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_FULL:
                 return 'fa-fw fa-thumbs-up';
 
-            case self::MODULE_BUTTONINNER_DOWNVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_DOWNVOTEPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
                 return 'fa-fw fa-thumbs-down';
         }
 
@@ -107,24 +107,24 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW:
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Follow', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Following', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_FULL:
                 return TranslationAPIFacade::getInstance()->__('Recommend', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW:
-            case self::MODULE_BUTTONINNER_SUBSCRIBETOTAG_FULL:
-            case self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
+            case self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_SUBSCRIBETOTAG_FULL:
+            case self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-coreprocessors');
         }
 
@@ -134,10 +134,10 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
     public function getBtntitleClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW:
-            case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNFOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_FULL:
                 return 'visible';
         }
         
@@ -147,28 +147,28 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
     public function getTextField(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL:
                 return 'recommendPostCount';
 
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNRECOMMENDPOST_FULL:
                 return 'recommendPostCountPlus1';
 
-            case self::MODULE_BUTTONINNER_UPVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UPVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UPVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UPVOTEPOST_FULL:
                 return 'upvotePostCount';
 
-            case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNDOUPVOTEPOST_FULL:
                 return 'upvotePostCountPlus1';
 
-            case self::MODULE_BUTTONINNER_DOWNVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_DOWNVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_DOWNVOTEPOST_FULL:
                 return 'downvotePostCount';
 
-            case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW:
-            case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
+            case self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW:
+            case self::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
                 return 'downvotePostCountPlus1';
         }
         

@@ -10,14 +10,14 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TYPEAHEAD_COMPONENT_TAGS],
+            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_TAGS:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS:
                 return getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), true).TranslationAPIFacade::getInstance()->__('Tags:', 'pop-coreprocessors');
         }
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_TAGS:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS:
                 return RouteUtils::getRouteURL(PostTagsModuleConfiguration::getPostTagsRoute());
         }
 

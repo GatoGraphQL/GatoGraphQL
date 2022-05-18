@@ -12,31 +12,31 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN],
-            [self::class, self::MODULE_BUTTON_PRINT_SOCIALMEDIA],
-            [self::class, self::MODULE_BUTTON_POSTPERMALINK],
-            [self::class, self::MODULE_BUTTON_POSTCOMMENTS],
-            [self::class, self::MODULE_BUTTON_POSTCOMMENTS_LABEL],
+            [self::class, self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA],
+            [self::class, self::COMPONENT_BUTTON_POSTPERMALINK],
+            [self::class, self::COMPONENT_BUTTON_POSTCOMMENTS],
+            [self::class, self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
-                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN];
+            case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
+                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN];
 
-            case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
-                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_PRINT_SOCIALMEDIA];
+            case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
+                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_PRINT_SOCIALMEDIA];
 
-            case self::MODULE_BUTTON_POSTPERMALINK:
-                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTPERMALINK];
+            case self::COMPONENT_BUTTON_POSTPERMALINK:
+                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTPERMALINK];
 
-            case self::MODULE_BUTTON_POSTCOMMENTS:
-                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTCOMMENTS];
+            case self::COMPONENT_BUTTON_POSTCOMMENTS:
+                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTCOMMENTS];
 
-            case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
-                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL];
+            case self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL:
+                return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL];
         }
 
         return parent::getButtoninnerSubmodule($component);
@@ -45,12 +45,12 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
-            case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
+            case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
+            case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 return 'printURL';
 
-            case self::MODULE_BUTTON_POSTCOMMENTS:
-            case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTON_POSTCOMMENTS:
+            case self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL:
                 return 'commentsURL';
         }
 
@@ -60,21 +60,21 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
-            case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
+            case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
+            case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 return TranslationAPIFacade::getInstance()->__('Print', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTON_POSTEDIT:
+            case self::COMPONENT_BUTTON_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTON_POSTVIEW:
+            case self::COMPONENT_BUTTON_POSTVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTON_POSTPERMALINK:
+            case self::COMPONENT_BUTTON_POSTPERMALINK:
                 return TranslationAPIFacade::getInstance()->__('Permalink', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTON_POSTCOMMENTS:
-            case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTON_POSTCOMMENTS:
+            case self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
         }
 
@@ -84,8 +84,8 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
-            case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
+            case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
+            case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 return GD_URLPARAM_TARGET_PRINT;
         }
 
@@ -97,13 +97,13 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
+            case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-print';
                 break;
 
-            case self::MODULE_BUTTON_POSTPERMALINK:
-            case self::MODULE_BUTTON_POSTCOMMENTS:
-            case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTON_POSTPERMALINK:
+            case self::COMPONENT_BUTTON_POSTCOMMENTS:
+            case self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL:
                 $ret .= ' btn btn-link';
                 break;
         }
@@ -114,7 +114,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
+            case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding module-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;

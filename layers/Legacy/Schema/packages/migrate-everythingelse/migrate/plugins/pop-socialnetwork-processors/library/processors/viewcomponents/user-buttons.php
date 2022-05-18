@@ -10,8 +10,8 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL],
         );
     }
 
@@ -19,8 +19,8 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
 
     //             return true;
     //     }
@@ -31,8 +31,8 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -44,8 +44,8 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Send message', 'pop-coreprocessors');
         }
 
@@ -57,12 +57,12 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 // $ret .= 'btn btn-sm btn-success btn-block btn-important';
                 $ret .= 'btn btn-info btn-block btn-important';
                 break;
 
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
                 $ret .= 'btn btn-compact btn-link';
                 break;
         }
@@ -73,7 +73,7 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 $this->appendProp($component, $props, 'class', 'pop-hidden-print');
                 break;
         }
@@ -83,8 +83,8 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 return POP_TARGET_ADDONS;
         }
 
@@ -95,8 +95,8 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 return 'contactURL';
         }
 

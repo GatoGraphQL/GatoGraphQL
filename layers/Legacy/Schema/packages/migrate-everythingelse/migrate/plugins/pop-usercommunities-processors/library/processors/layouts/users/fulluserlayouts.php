@@ -7,16 +7,16 @@ class GD_UserCommunities_Module_Processor_CustomFullUserLayouts extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLUSER_COMMUNITY],
+            [self::class, self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY],
         );
     }
 
     public function getSidebarSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FULLUSER_COMMUNITY:
+            case self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY:
                 $sidebars = array(
-                    self::MODULE_LAYOUT_FULLUSER_COMMUNITY => [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
+                    self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY => [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
                 );
 
                 return $sidebars[$component[1]];

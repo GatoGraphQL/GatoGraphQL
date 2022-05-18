@@ -38,16 +38,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_LINKCATEGORIES],
-            [self::class, self::MODULE_FILTERINPUT_LINKACCESS],
+            [self::class, self::COMPONENT_FILTERINPUT_LINKCATEGORIES],
+            [self::class, self::COMPONENT_FILTERINPUT_LINKACCESS],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_LINKCATEGORIES => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::FILTERINPUT_LINKCATEGORIES],
-            self::MODULE_FILTERINPUT_LINKACCESS => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::FILTERINPUT_LINKACCESS],
+            self::COMPONENT_FILTERINPUT_LINKCATEGORIES => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::FILTERINPUT_LINKCATEGORIES],
+            self::COMPONENT_FILTERINPUT_LINKACCESS => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor::FILTERINPUT_LINKACCESS],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -55,8 +55,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_LINKCATEGORIES:
-    //         case self::MODULE_FILTERINPUT_LINKACCESS:
+    //         case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
+    //         case self::COMPONENT_FILTERINPUT_LINKACCESS:
     //             return true;
     //     }
 
@@ -66,10 +66,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_LINKCATEGORIES:
+            case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
 
-            case self::MODULE_FILTERINPUT_LINKACCESS:
+            case self::COMPONENT_FILTERINPUT_LINKACCESS:
                 return TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup');
         }
 
@@ -79,10 +79,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_LINKCATEGORIES:
+            case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
                 return GD_FormInput_LinkCategories::class;
 
-            case self::MODULE_FILTERINPUT_LINKACCESS:
+            case self::COMPONENT_FILTERINPUT_LINKACCESS:
                 return GD_FormInput_LinkAccess::class;
         }
 
@@ -92,7 +92,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_LINKACCESS:
+            case self::COMPONENT_FILTERINPUT_LINKACCESS:
                 return 'linkaccess';
         }
 
@@ -102,10 +102,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_LINKCATEGORIES:
+            case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
                 return 'categories';
 
-            case self::MODULE_FILTERINPUT_LINKACCESS:
+            case self::COMPONENT_FILTERINPUT_LINKACCESS:
                 return 'access';
         }
 
@@ -115,8 +115,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_LINKCATEGORIES => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_LINKACCESS => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_LINKCATEGORIES => $this->idScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_LINKACCESS => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -124,7 +124,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
+            self::COMPONENT_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
@@ -133,8 +133,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_LINKCATEGORIES => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_LINKACCESS => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_LINKCATEGORIES => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_LINKACCESS => $translationAPI->__('', ''),
             default => null,
         };
     }

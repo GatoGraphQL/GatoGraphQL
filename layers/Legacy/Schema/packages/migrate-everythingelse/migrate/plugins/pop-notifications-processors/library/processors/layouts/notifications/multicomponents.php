@@ -9,7 +9,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM],
+            [self::class, self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM],
         );
     }
 
@@ -21,7 +21,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
         $ret = parent::getConditionalOnDataFieldSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
+            case self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge(
                     $ret,
                     \PoP\Root\App::applyFilters(

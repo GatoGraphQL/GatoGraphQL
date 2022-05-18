@@ -14,7 +14,7 @@ class PoPTheme_Wassup_CPL_Bootstrap_Module_MainPageSectionComponentRoutingProces
         $ret = array();
 
         $routemodules = array(
-            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_LINKS],
+            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_LINKS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -26,7 +26,7 @@ class PoPTheme_Wassup_CPL_Bootstrap_Module_MainPageSectionComponentRoutingProces
         }
 
         $routemodules = array(
-            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHORLINKS],
+            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORLINKS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_CPL_Bootstrap_Module_MainPageSectionComponentRoutingProces
         }
 
         $routemodules = array(
-            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGLINKS],
+            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGLINKS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

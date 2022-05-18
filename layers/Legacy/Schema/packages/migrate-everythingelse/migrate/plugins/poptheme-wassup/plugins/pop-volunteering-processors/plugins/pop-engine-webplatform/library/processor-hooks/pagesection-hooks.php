@@ -16,10 +16,10 @@ class PoPTheme_Wassup_Volunteering_WebPlatform_PageSectionHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
-                $processor->mergeJsmethodsProp([PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::MODULE_BLOCK_VOLUNTEER], $props, array('destroyPageOnSuccess'));
+            case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
+                $processor->mergeJsmethodsProp([PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::COMPONENT_BLOCK_VOLUNTEER], $props, array('destroyPageOnSuccess'));
                 $processor->mergeProp(
-                    [PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::MODULE_BLOCK_VOLUNTEER],
+                    [PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::COMPONENT_BLOCK_VOLUNTEER],
                     $props,
                     'params',
                     array(

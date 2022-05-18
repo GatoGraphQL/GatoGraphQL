@@ -7,7 +7,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners exte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR],
         );
     }
 
@@ -16,9 +16,9 @@ class PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners exte
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
-                $ret[] = [PoPSPEM_Module_Processor_CustomDelegatorFilters::class, PoPSPEM_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYLOCATIONPOSTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
+                $ret[] = [PoPSPEM_Module_Processor_CustomDelegatorFilters::class, PoPSPEM_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYLOCATIONPOSTS];
                 break;
         }
         

@@ -11,13 +11,13 @@ class UserStance_FullViewSidebarSettings
 
         switch ($section) {
             case GD_SIDEBARSECTION_STANCE:
-                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER];
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_POST_AUTHORS];
+                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER];
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_POST_AUTHORS];
                 break;
 
             case GD_COMPACTSIDEBARSECTION_STANCE:
-                $ret[] = [UserStance_Module_Processor_CustomPostMultipleSidebarComponents::class, UserStance_Module_Processor_CustomPostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_STANCELEFT];
-                $ret[] = [UserStance_Module_Processor_CustomPostMultipleSidebarComponents::class, UserStance_Module_Processor_CustomPostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_STANCERIGHT];
+                $ret[] = [UserStance_Module_Processor_CustomPostMultipleSidebarComponents::class, UserStance_Module_Processor_CustomPostMultipleSidebarComponents::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT];
+                $ret[] = [UserStance_Module_Processor_CustomPostMultipleSidebarComponents::class, UserStance_Module_Processor_CustomPostMultipleSidebarComponents::COMPONENT_SIDEBARMULTICOMPONENT_STANCERIGHT];
                 break;
         }
         

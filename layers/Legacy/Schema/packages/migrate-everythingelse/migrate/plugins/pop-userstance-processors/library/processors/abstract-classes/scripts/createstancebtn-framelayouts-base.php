@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts
 {
     public function getScriptSubmodule(array $component)
     {
-        return [PoP_Module_Processor_StanceScriptsLayouts::class, PoP_Module_Processor_StanceScriptsLayouts::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON];
+        return [PoP_Module_Processor_StanceScriptsLayouts::class, PoP_Module_Processor_StanceScriptsLayouts::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON];
     }
 }

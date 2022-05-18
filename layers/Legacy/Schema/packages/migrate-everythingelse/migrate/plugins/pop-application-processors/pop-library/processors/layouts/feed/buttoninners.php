@@ -8,14 +8,14 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
+            [self::class, self::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
     }
 
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return sprintf(
                     '<span class="collapsed">%s</span><span class="expanded">%s</span>',
                     TranslationAPIFacade::getInstance()->__('Show comments, responses and highlights', 'poptheme-wassup'),
@@ -29,7 +29,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
     public function getTextField(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return 'userPostActivityCount';
             return 'commentCount';
         }
@@ -40,7 +40,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
     public function getTextfieldOpen(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('(', 'poptheme-wassup');
         }
 
@@ -49,7 +49,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
     public function getTextfieldClose(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__(')', 'poptheme-wassup');
         }
 
@@ -59,7 +59,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
+            case self::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
                 break;
         }

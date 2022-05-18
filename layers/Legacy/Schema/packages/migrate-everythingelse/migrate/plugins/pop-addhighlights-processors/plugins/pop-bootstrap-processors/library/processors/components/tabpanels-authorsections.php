@@ -7,14 +7,14 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_AUTHORHIGHLIGHTS],
+            [self::class, self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS],
         );
     }
 
     protected function getDefaultActivepanelFormat(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_AUTHORHIGHLIGHTS:
+            case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
         }
 
@@ -26,14 +26,14 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
         $ret = parent::getPanelSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_AUTHORHIGHLIGHTS:
+            case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
-                        // [self::class, self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_DETAILS],
-                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
+                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
+                        // [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_DETAILS],
+                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
+                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
                     )
                 );
                 break;
@@ -45,16 +45,16 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
     public function getPanelHeaders(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_AUTHORHIGHLIGHTS:
+            case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
+                        'header-submodule' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
+                        'header-submodule' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
+                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
+                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
                         ),
                     ],
                 );

@@ -7,7 +7,7 @@ class PoP_Module_Processor_DropdownMenuLayouts extends PoP_Module_Processor_Drop
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MENU_DROPDOWN],
+            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWN],
         );
     }
 }

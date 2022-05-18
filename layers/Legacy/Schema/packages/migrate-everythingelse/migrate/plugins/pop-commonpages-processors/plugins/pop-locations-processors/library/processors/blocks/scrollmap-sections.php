@@ -7,14 +7,14 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_WHOWEARE_SCROLLMAP],
+            [self::class, self::COMPONENT_BLOCK_WHOWEARE_SCROLLMAP],
         );
     }
 
     protected function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_BLOCK_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLLMAP],
+            self::COMPONENT_BLOCK_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;

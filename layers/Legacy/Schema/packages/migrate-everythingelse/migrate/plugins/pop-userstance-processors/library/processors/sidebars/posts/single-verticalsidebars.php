@@ -7,14 +7,14 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebars extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE => [UserStance_Module_Processor_CustomVerticalSingleSidebarInners::class, UserStance_Module_Processor_CustomVerticalSingleSidebarInners::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE],
+            self::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE => [UserStance_Module_Processor_CustomVerticalSingleSidebarInners::class, UserStance_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {
@@ -27,7 +27,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebars extends PoP_Modul
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE:
+            case self::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;
         }

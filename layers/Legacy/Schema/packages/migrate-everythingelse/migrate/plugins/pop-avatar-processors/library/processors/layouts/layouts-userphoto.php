@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserPhotoLayouts extends PoP_Module_Processor_UserPho
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_AUTHOR_USERPHOTO],
+            [self::class, self::COMPONENT_LAYOUT_AUTHOR_USERPHOTO],
         );
     }
 }

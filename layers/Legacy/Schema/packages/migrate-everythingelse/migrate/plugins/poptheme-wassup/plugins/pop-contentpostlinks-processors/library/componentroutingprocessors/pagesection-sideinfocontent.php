@@ -12,7 +12,7 @@ class PoPTheme_Wassup_ContentPostLinks_Module_SideInfoContentPageSectionComponen
         $ret = array();
 
         $components = array(
-            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_SidebarMultiples::class, PoP_ContentPostLinks_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR],
+            POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_SidebarMultiples::class, PoP_ContentPostLinks_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_POSTLINKS_SIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];

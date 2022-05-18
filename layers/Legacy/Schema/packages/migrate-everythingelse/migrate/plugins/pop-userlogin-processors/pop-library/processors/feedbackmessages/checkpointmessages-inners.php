@@ -10,10 +10,10 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
-            [self::class, self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDIN],
-            [self::class, self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT],
-            [self::class, self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
         );
     }
 
@@ -22,10 +22,10 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN],
-            self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDIN],
-            self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT],
-            self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDIN],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

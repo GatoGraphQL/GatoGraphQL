@@ -9,7 +9,7 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
 
     public function getMapSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::MODULE_MAP_SIDEBARINDIVIDUAL];
+        return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::COMPONENT_MAP_SIDEBARINDIVIDUAL];
     }
 
     public function getConditionSucceededSubmodules(array $component)
@@ -35,7 +35,7 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
     {
         $ret = parent::getConditionFailedSubmodules($component);
 
-        $ret[] = [GD_EM_Module_Processor_WidgetMessages::class, GD_EM_Module_Processor_WidgetMessages::MODULE_EM_MESSAGE_NOLOCATION];
+        $ret[] = [GD_EM_Module_Processor_WidgetMessages::class, GD_EM_Module_Processor_WidgetMessages::COMPONENT_EM_MESSAGE_NOLOCATION];
 
         return $ret;
     }

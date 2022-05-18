@@ -15,30 +15,30 @@ class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DELEGATORFILTER_STANCES],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORSTANCES],
-            [self::class, self::MODULE_DELEGATORFILTER_MYSTANCES],
-            [self::class, self::MODULE_DELEGATORFILTER_STANCES_AUTHORROLE],
-            [self::class, self::MODULE_DELEGATORFILTER_STANCES_STANCE],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORSTANCES_STANCE],
-            [self::class, self::MODULE_DELEGATORFILTER_STANCES_GENERALSTANCE],
-            [self::class, self::MODULE_DELEGATORFILTER_TAGSTANCES],
-            [self::class, self::MODULE_DELEGATORFILTER_TAGSTANCES_STANCE],
+            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYSTANCES],
+            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES_AUTHORROLE],
+            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES_STANCE],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES_STANCE],
+            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES_GENERALSTANCE],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGSTANCES],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_STANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES],
-            self::MODULE_DELEGATORFILTER_AUTHORSTANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES],
-            self::MODULE_DELEGATORFILTER_MYSTANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYSTANCES],
-            self::MODULE_DELEGATORFILTER_STANCES_AUTHORROLE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_AUTHORROLE],
-            self::MODULE_DELEGATORFILTER_STANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
-            self::MODULE_DELEGATORFILTER_AUTHORSTANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE],
-            self::MODULE_DELEGATORFILTER_STANCES_GENERALSTANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE],
-            self::MODULE_DELEGATORFILTER_TAGSTANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES],
-            self::MODULE_DELEGATORFILTER_TAGSTANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
+            self::COMPONENT_DELEGATORFILTER_STANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES],
+            self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES],
+            self::COMPONENT_DELEGATORFILTER_MYSTANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYSTANCES],
+            self::COMPONENT_DELEGATORFILTER_STANCES_AUTHORROLE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_AUTHORROLE],
+            self::COMPONENT_DELEGATORFILTER_STANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
+            self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE],
+            self::COMPONENT_DELEGATORFILTER_STANCES_GENERALSTANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE],
+            self::COMPONENT_DELEGATORFILTER_TAGSTANCES => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES],
+            self::COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

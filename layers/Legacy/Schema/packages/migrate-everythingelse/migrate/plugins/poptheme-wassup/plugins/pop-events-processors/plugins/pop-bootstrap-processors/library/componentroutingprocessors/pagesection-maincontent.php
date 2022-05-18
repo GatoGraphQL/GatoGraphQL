@@ -14,9 +14,9 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
         $ret = array();
 
         $routemodules = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_EVENTS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_PASTEVENTS],
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_EVENTSCALENDAR],
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_EVENTS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_PASTEVENTS],
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_EVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -28,9 +28,9 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
         }
 
         $routemodules = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHOREVENTS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS],
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR],
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS],
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -42,9 +42,9 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
         }
 
         $routemodules = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGEVENTS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGPASTEVENTS],
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR],
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGEVENTS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGPASTEVENTS],
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGEVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

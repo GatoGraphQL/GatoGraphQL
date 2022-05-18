@@ -8,16 +8,16 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTER_INDIVIDUALS],
-            [self::class, self::MODULE_FILTER_ORGANIZATIONS],
+            [self::class, self::COMPONENT_FILTER_INDIVIDUALS],
+            [self::class, self::COMPONENT_FILTER_ORGANIZATIONS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FILTER_INDIVIDUALS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS],
-            self::MODULE_FILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_ORGANIZATIONS],
+            self::COMPONENT_FILTER_INDIVIDUALS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_INDIVIDUALS],
+            self::COMPONENT_FILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_ORGANIZATIONS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

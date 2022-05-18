@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_CommentHiddenInputAlertFormComponentsBase ex
 {
     public function getSelectedModule(array $component)
     {
-        return [PoP_Module_Processor_CommentCardLayouts::class, PoP_Module_Processor_CommentCardLayouts::MODULE_LAYOUTCOMMENT_CARD];
+        return [PoP_Module_Processor_CommentCardLayouts::class, PoP_Module_Processor_CommentCardLayouts::COMPONENT_LAYOUTCOMMENT_CARD];
     }
 }

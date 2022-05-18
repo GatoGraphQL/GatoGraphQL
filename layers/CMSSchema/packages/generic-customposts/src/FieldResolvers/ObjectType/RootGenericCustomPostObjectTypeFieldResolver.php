@@ -155,7 +155,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'genericCustomPost' => [
                 CommonCustomPostFilterInputContainerComponentProcessor::class,
-                CommonCustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE
+                CommonCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE
             ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
@@ -199,7 +199,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
                 if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputComponentProcessor::class,
-                        FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS
+                        FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS
                     ]);
                     $adminFieldArgNames[] = $customPostStatusFilterInputName;
                 }

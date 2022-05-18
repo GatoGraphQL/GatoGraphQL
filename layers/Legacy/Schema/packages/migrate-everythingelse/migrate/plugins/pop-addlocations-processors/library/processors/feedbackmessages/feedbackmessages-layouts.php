@@ -8,7 +8,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessageLayouts extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessageLayouts extends PoP_Modu
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Location added successfully!', 'em-popprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('More locations to add?', 'em-popprocessors');
                 $ret['empty-town'] = TranslationAPIFacade::getInstance()->__('City is missing.', 'em-popprocessors');

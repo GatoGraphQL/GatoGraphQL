@@ -8,9 +8,9 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL],
         );
     }
 
@@ -19,15 +19,15 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
                     $ret,
                     FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)
                 );
                 break;
 
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 $ret = array_merge(
                     $ret,
                     FullUserSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_GENERICUSER)
@@ -41,8 +41,8 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
     public function getWrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'row';
         }
     
@@ -52,10 +52,10 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
     public function getWidgetwrapperClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
                 return 'col-xsm-4';
 
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'col-xsm-6';
         }
     

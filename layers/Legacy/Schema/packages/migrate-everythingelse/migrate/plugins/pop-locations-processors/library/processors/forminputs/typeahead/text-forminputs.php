@@ -8,14 +8,14 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
         }
 
@@ -25,7 +25,7 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 // Use the label as placeholder
                 $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Name or Address', 'em-popprocessors'));
                 break;

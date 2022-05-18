@@ -7,7 +7,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD],
+            [self::class, self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD],
         );
     }
 
@@ -17,9 +17,9 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
+    //         case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
 
-    //             $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD];
+    //             $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD];
     //             break;
     //     }
 
@@ -31,9 +31,9 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
-                $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD];
-                // $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD];
+            case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
+                $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD];
+                // $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD];
                 break;
         }
 
@@ -43,7 +43,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
+            case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
                 return 'isStatusNotRead';
         }
 

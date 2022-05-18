@@ -7,7 +7,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTGROUP_EVENTSCOPE],
+            [self::class, self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         $ret = parent::getLabelClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
+            case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
                 $ret .= ' col-sm-2';
                 break;
         }
@@ -28,7 +28,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         $ret = parent::getFormcontrolClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
+            case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
                 $ret .= ' col-sm-10';
                 break;
         }
@@ -39,7 +39,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
     public function getComponentSubname(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
+            case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
                 return 'readable';
         }
 
@@ -49,7 +49,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FILTERINPUTGROUP_EVENTSCOPE => [PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE],
+            self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE => [PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_EVENTSCOPE],
         );
 
         if ($component = $components[$component[1]] ?? null) {

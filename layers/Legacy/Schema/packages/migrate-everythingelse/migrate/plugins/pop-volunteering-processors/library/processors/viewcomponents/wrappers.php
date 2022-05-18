@@ -9,9 +9,9 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY],
         );
     }
 
@@ -20,16 +20,16 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
-                $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG];
+            case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
+                $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG];
                 break;
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
-                $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG];
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
+                $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG];
                 break;
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
-                $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY];
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
+                $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY];
                 break;
         }
 
@@ -39,9 +39,9 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
+            case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
                 return 'volunteersNeeded';
         }
 
@@ -53,9 +53,9 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         $ret = parent::getConditionFailedSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
-                $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::MODULE_HIDEIFEMPTY];
+            case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
+                $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::COMPONENT_HIDEIFEMPTY];
                 break;
         }
 
@@ -65,9 +65,9 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
-            case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
+            case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
                 $this->appendProp($component, $props, 'class', 'volunteer-wrapper');
                 break;
         }

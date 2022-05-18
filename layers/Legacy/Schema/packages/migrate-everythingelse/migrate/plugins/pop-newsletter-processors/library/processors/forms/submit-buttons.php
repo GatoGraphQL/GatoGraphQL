@@ -9,18 +9,18 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE],
-            [self::class, self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION],
+            [self::class, self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE],
+            [self::class, self::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
+            case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-genericforms');
 
-            case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
+            case self::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Confirm unsubscription', 'pop-genericforms');
         }
 
@@ -30,8 +30,8 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
     public function getBtnClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
-            case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
+            case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
+            case self::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return 'btn btn-info';
         }
 
@@ -41,8 +41,8 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
     public function getLoadingText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
-            case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
+            case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
+            case self::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms');
         }
         

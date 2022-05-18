@@ -9,22 +9,22 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID],
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_USERID],
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID],
         );
     }
 
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID:
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_USERID:
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID:
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID:
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID:
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID:
                 $names = array(
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID => \PoPCMSSchema\Posts\Constants\InputNames::POST_ID,
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_USERID => \PoPCMSSchema\Users\Constants\InputNames::USER_ID,
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID,
+                    self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID => \PoPCMSSchema\Posts\Constants\InputNames::POST_ID,
+                    self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID => \PoPCMSSchema\Users\Constants\InputNames::USER_ID,
+                    self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID,
                 );
 
                 return $names[$component[1]];

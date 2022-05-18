@@ -10,14 +10,14 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST],
+            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST => POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL,
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST => POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -26,7 +26,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
                 $pid = App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID);
                 return sprintf(
                     '<p>%s</p><h1>%s</h1>',
@@ -46,8 +46,8 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
-                $ret[] = [PoPTheme_Wassup_AE_Module_Processor_ContentDataloads::class, PoPTheme_Wassup_AE_Module_Processor_ContentDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST];
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
+                $ret[] = [PoPTheme_Wassup_AE_Module_Processor_ContentDataloads::class, PoPTheme_Wassup_AE_Module_Processor_ContentDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST];
                 break;
         }
 

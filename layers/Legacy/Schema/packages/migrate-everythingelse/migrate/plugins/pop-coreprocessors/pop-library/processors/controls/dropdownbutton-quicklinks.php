@@ -11,10 +11,10 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE],
-            [self::class, self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE],
-            [self::class, self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO],
-            [self::class, self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE],
         );
     }
 
@@ -24,20 +24,20 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
 
         $components = array();
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
-                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
-                $components[] = [PoP_Module_Processor_UserQuickLinkLayouts::class, PoP_Module_Processor_UserQuickLinkLayouts::MODULE_LAYOUTUSER_QUICKLINKS];
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+                $components[] = [PoP_Module_Processor_UserQuickLinkLayouts::class, PoP_Module_Processor_UserQuickLinkLayouts::COMPONENT_LAYOUTUSER_QUICKLINKS];
                 break;
         }
 
@@ -58,10 +58,10 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public function getBtnClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 return 'btn btn-compact btn-link';
         }
 
@@ -71,12 +71,12 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 return TranslationAPIFacade::getInstance()->__('Options', 'pop-coreprocessors');
 
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
                 return TranslationAPIFacade::getInstance()->__('Contact/Links', 'pop-coreprocessors');
         }
 
@@ -86,12 +86,12 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 return 'fa-angle-down';
 
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
                 return 'fa-link';
         }
 
@@ -101,10 +101,10 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
-            case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+            case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 $this->appendProp($component, $props, 'class', 'pull-right');
                 break;
         }

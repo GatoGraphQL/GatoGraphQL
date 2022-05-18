@@ -8,16 +8,16 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR],
         );
     }
 
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
-            case self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
                 return 'fa-folder-open-o';
         }
 
@@ -27,8 +27,8 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
-            case self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
                 $this->mergeProp(
                     $component,
                     $props,
@@ -42,7 +42,7 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
                 $this->appendProp($component, $props, 'class', 'btn btn-default btn-background');
                 break;
         }

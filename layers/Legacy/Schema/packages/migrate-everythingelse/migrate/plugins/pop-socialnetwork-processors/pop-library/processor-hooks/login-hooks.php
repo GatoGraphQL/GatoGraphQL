@@ -12,11 +12,11 @@ class PoP_SocialNetowrkProcessors_LoginProcessorHooks
 
     public function getLoginComponents($components)
     {
-        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_FOLLOWSUSERS];
-        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_RECOMMENDSPOSTS];
-        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_SUBSCRIBESTOTAGS];
-        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_UPVOTESPOSTS];
-        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_DOWNVOTESPOSTS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_FOLLOWSUSERS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_RECOMMENDSPOSTS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_UPVOTESPOSTS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_DOWNVOTESPOSTS];
         return $components;
     }
 }

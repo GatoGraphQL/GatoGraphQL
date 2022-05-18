@@ -27,7 +27,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadComponentProcessor::class,
-                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
+                FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
             ],
         );
         foreach ($routeComponents as $route => $component) {

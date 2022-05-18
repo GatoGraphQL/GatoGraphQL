@@ -20,14 +20,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_HOME],
-            [self::class, self::MODULE_BLOCK_404],
-            [self::class, self::MODULE_BLOCK_BACKGROUNDMENU],
-            [self::class, self::MODULE_BLOCK_SINGLEPOST],
-            [self::class, self::MODULE_BLOCK_AUTHOR],
-            [self::class, self::MODULE_BLOCK_AUTHORDESCRIPTION],
-            [self::class, self::MODULE_BLOCK_AUTHORSUMMARY],
-            [self::class, self::MODULE_BLOCK_TAG],
+            [self::class, self::COMPONENT_BLOCK_HOME],
+            [self::class, self::COMPONENT_BLOCK_404],
+            [self::class, self::COMPONENT_BLOCK_BACKGROUNDMENU],
+            [self::class, self::COMPONENT_BLOCK_SINGLEPOST],
+            [self::class, self::COMPONENT_BLOCK_AUTHOR],
+            [self::class, self::COMPONENT_BLOCK_AUTHORDESCRIPTION],
+            [self::class, self::COMPONENT_BLOCK_AUTHORSUMMARY],
+            [self::class, self::COMPONENT_BLOCK_TAG],
         );
     }
 
@@ -36,21 +36,21 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
                 if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-                    return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
+                    return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUSHARE];
                 }
                 break;
 
-            case self::MODULE_BLOCK_AUTHOR:
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
+            case self::COMPONENT_BLOCK_AUTHOR:
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUSHARE];
 
-            case self::MODULE_BLOCK_TAG:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
+            case self::COMPONENT_BLOCK_TAG:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUSHARE];
         }
 
         return parent::getControlgroupBottomSubmodule($component);
@@ -61,14 +61,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $ret = parent::getBlocksectionsClasses($component);
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_404:
-            case self::MODULE_BLOCK_BACKGROUNDMENU:
+            case self::COMPONENT_BLOCK_404:
+            case self::COMPONENT_BLOCK_BACKGROUNDMENU:
                 $ret['blocksection-extensions'] = 'row';
                 break;
 
-            case self::MODULE_BLOCK_SINGLEPOST:
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-            case self::MODULE_BLOCK_AUTHORSUMMARY:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+            case self::COMPONENT_BLOCK_AUTHORSUMMARY:
                 // Make the background white, with the #6acada border
                 $ret['blocksection-extensions'] = 'row row-item';
                 break;
@@ -82,11 +82,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
         // switch ($component[1]) {
 
-        //     case self::MODULE_BLOCK_SINGLEPOST:
-        //     case self::MODULE_BLOCK_AUTHOR:
-        //     case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-        //     case self::MODULE_BLOCK_AUTHORSUMMARY:
-        //     case self::MODULE_BLOCK_TAG:
+        //     case self::COMPONENT_BLOCK_SINGLEPOST:
+        //     case self::COMPONENT_BLOCK_AUTHOR:
+        //     case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+        //     case self::COMPONENT_BLOCK_AUTHORSUMMARY:
+        //     case self::COMPONENT_BLOCK_TAG:
 
         //         $blocktarget = $this->get_activeblock_selector($component, $props);
         //         if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
@@ -99,7 +99,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         // }
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_HOME:
+            case self::COMPONENT_BLOCK_HOME:
                 $this->appendProp($component, $props, 'class', 'blockgroup-home');
 
                 if (PoP_ApplicationProcessors_Utils::narrowBodyHome()) {
@@ -108,66 +108,66 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
                 break;
 
-            case self::MODULE_BLOCK_AUTHOR:
+            case self::COMPONENT_BLOCK_AUTHOR:
                 $this->appendProp($component, $props, 'class', 'blockgroup-author');
                 break;
 
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 $this->appendProp($component, $props, 'class', 'blockgroup-singlepost');
                 break;
 
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
                 $this->appendProp($component, $props, 'class', 'blockgroup-author-description');
                 break;
 
-            case self::MODULE_BLOCK_TAG:
+            case self::COMPONENT_BLOCK_TAG:
                 $this->appendProp($component, $props, 'class', 'blockgroup-tag');
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_404:
-            case self::MODULE_BLOCK_BACKGROUNDMENU:
+            case self::COMPONENT_BLOCK_404:
+            case self::COMPONENT_BLOCK_BACKGROUNDMENU:
                 foreach ($this->getSubComponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'col-xs-12 col-sm-4');
                 }
                 break;
 
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 foreach ($this->getSubComponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'col-xs-12');
                 }
 
                 // Hide the Title, but not for the Comments
-                $this->setProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT]], $props, 'title', '');
+                $this->setProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_SINGLE_CONTENT]], $props, 'title', '');
                 break;
 
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-                $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT]], $props, 'class', 'col-xs-12');
-                $this->setProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT]], $props, 'title', '');
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+                $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT]], $props, 'class', 'col-xs-12');
+                $this->setProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT]], $props, 'title', '');
                 break;
 
-            case self::MODULE_BLOCK_AUTHORSUMMARY:
-                $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT]], $props, 'title', '');
-                $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT]], $props, 'class', 'col-xs-12');
-                $this->appendProp([[PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST]], $props, 'class', 'col-xs-12');
+            case self::COMPONENT_BLOCK_AUTHORSUMMARY:
+                $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT]], $props, 'title', '');
+                $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT]], $props, 'class', 'col-xs-12');
+                $this->appendProp([[PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST]], $props, 'class', 'col-xs-12');
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_BACKGROUNDMENU:
-            case self::MODULE_BLOCK_404:
+            case self::COMPONENT_BLOCK_BACKGROUNDMENU:
+            case self::COMPONENT_BLOCK_404:
                 $submodule_descriptions = array(
                     [
-                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_SECTIONS],
+                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_SECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup'),
                     ],
                     [
-                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS],
+                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('My Content', 'poptheme-wassup'),
                     ],
                     [
-                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
+                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_ADDCONTENT],
                         'description' => TranslationAPIFacade::getInstance()->__('Add Content', 'poptheme-wassup'),
                     ],
                 );
@@ -185,9 +185,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
                 break;
 
-            case self::MODULE_BLOCK_HOME:
-            case self::MODULE_BLOCK_AUTHOR:
-            case self::MODULE_BLOCK_TAG:
+            case self::COMPONENT_BLOCK_HOME:
+            case self::COMPONENT_BLOCK_AUTHOR:
+            case self::COMPONENT_BLOCK_TAG:
 
                 // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
@@ -211,7 +211,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($component, $props, 'show-submenu', false);
@@ -226,18 +226,18 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public function getSubmenuSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 if ($submenu = PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu()) {
                     return $submenu;
                 }
                 break;
 
-            case self::MODULE_BLOCK_AUTHOR:
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
+            case self::COMPONENT_BLOCK_AUTHOR:
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::COMPONENT_SUBMENU_AUTHOR];
 
-            case self::MODULE_BLOCK_TAG:
-                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
+            case self::COMPONENT_BLOCK_TAG:
+                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::COMPONENT_SUBMENU_TAG];
         }
 
         return parent::getSubmenuSubmodule($component);
@@ -246,7 +246,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     protected function getDescription(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_404:
+            case self::COMPONENT_BLOCK_404:
                 return sprintf(
                     '<p>%s</p>',
                     TranslationAPIFacade::getInstance()->__('Aiyoooo, it seems there is nothing here. Where else would you like to go?', 'poptheme-wassup')
@@ -261,20 +261,20 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_404:
+            case self::COMPONENT_BLOCK_404:
                 return TranslationAPIFacade::getInstance()->__('Oops, this page doesn\'t exist!', 'poptheme-wassup');
 
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($post_id);
 
-            case self::MODULE_BLOCK_AUTHOR:
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-            case self::MODULE_BLOCK_AUTHORSUMMARY:
+            case self::COMPONENT_BLOCK_AUTHOR:
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+            case self::COMPONENT_BLOCK_AUTHORSUMMARY:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
-            case self::MODULE_BLOCK_TAG:
+            case self::COMPONENT_BLOCK_TAG:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle(true, false);
         }
 
@@ -288,12 +288,12 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_HOME:
+            case self::COMPONENT_BLOCK_HOME:
                 // Allow TPPDebate to override this
                 if ($top_components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:home_tops',
                     array(
-                        [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOMETOP]
+                        [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOMETOP]
                     )
                 )) {
                     $ret = array_merge(
@@ -308,11 +308,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
                 break;
 
-            case self::MODULE_BLOCK_AUTHOR:
+            case self::COMPONENT_BLOCK_AUTHOR:
                 if ($top_components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:author_tops',
                     array(
-                        [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHORTOP],
+                        [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHORTOP],
                     )
                 )) {
                     $ret = array_merge(
@@ -327,11 +327,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
                 break;
 
-            case self::MODULE_BLOCK_TAG:
+            case self::COMPONENT_BLOCK_TAG:
                 if ($top_components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:tag_tops',
                     array(
-                        [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA],
+                        [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_TAG_WIDGETAREA],
                     )
                 )) {
                     $ret = array_merge(
@@ -346,27 +346,27 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
                 break;
 
-            case self::MODULE_BLOCK_404:
-            case self::MODULE_BLOCK_BACKGROUNDMENU:
-                $ret[] = [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_SECTIONS];
-                $ret[] = [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS];
-                $ret[] = [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT];
+            case self::COMPONENT_BLOCK_404:
+            case self::COMPONENT_BLOCK_BACKGROUNDMENU:
+                $ret[] = [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_SECTIONS];
+                $ret[] = [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS];
+                $ret[] = [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_ADDCONTENT];
                 break;
 
-            case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-                $ret[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT];
+            case self::COMPONENT_BLOCK_AUTHORDESCRIPTION:
+                $ret[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT];
                 break;
 
-            case self::MODULE_BLOCK_AUTHORSUMMARY:
-                $ret[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT];
-                $ret[] = [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST];
+            case self::COMPONENT_BLOCK_AUTHORSUMMARY:
+                $ret[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT];
+                $ret[] = [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST];
                 break;
 
-            case self::MODULE_BLOCK_SINGLEPOST:
+            case self::COMPONENT_BLOCK_SINGLEPOST:
                 // Allow TPPDebate to override this, adding the "What do you think about TPP" Create Block
                 $components = array(
-                    [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
-                    [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT],
+                    [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_SINGLE_CONTENT],
+                    [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT],
                 );
                 $components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:single',

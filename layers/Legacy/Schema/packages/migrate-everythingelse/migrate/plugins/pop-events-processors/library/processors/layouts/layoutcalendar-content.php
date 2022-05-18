@@ -7,7 +7,7 @@ class PoP_Module_Processor_CalendarContentLayouts extends PoP_Module_Processor_C
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTCALENDAR_CONTENT_POPOVER],
+            [self::class, self::COMPONENT_LAYOUTCALENDAR_CONTENT_POPOVER],
         );
     }
 }

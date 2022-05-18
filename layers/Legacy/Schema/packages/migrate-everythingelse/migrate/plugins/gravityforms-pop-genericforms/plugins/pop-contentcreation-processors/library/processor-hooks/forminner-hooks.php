@@ -21,10 +21,10 @@ class PoP_ContentCreation_Module_Processor_GFFormInnerHooks
     public function getLayoutSubmodules($layouts, array $component)
     {
         switch ($component[1]) {
-            case PoP_ContentCreation_Module_Processor_GFFormInners::MODULE_FORMINNER_FLAG:
-                $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID];
-                $layouts[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETURL];
-                $layouts[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_POSTTITLE];
+            case PoP_ContentCreation_Module_Processor_GFFormInners::COMPONENT_FORMINNER_FLAG:
+                $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID];
+                $layouts[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_TARGETURL];
+                $layouts[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_POSTTITLE];
                 break;
         }
 
@@ -35,10 +35,10 @@ class PoP_ContentCreation_Module_Processor_GFFormInnerHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_ContentCreation_Module_Processor_GFFormInners::MODULE_FORMINNER_FLAG:
+            case PoP_ContentCreation_Module_Processor_GFFormInners::COMPONENT_FORMINNER_FLAG:
                 // Form ID
                 $form_id = PoP_ContentCreation_GFHelpers::getFlagFormId();
-                $processor->setProp([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID], $props, 'default-value'/*'selected-value'*/, $form_id);
+                $processor->setProp([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID], $props, 'default-value'/*'selected-value'*/, $form_id);
                 break;
         }
     }

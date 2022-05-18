@@ -7,14 +7,14 @@ class PoP_Events_Module_Processor_EmailFormGroups extends PoP_Module_Processor_N
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS => [PoP_Events_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Events_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
+            self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS => [PoP_Events_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Events_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -27,7 +27,7 @@ class PoP_Events_Module_Processor_EmailFormGroups extends PoP_Module_Processor_N
     public function useModuleConfiguration(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
+            case self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
                 return false;
         }
 

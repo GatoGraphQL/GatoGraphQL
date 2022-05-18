@@ -10,10 +10,10 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
     }
 
@@ -21,10 +21,10 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW],
-            self::MODULE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
-            self::MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW],
-            self::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
@@ -38,12 +38,12 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
 
         // Extra classes
         $simpleviews = array(
-            [self::class, self::MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
 
         $extra_class = '';

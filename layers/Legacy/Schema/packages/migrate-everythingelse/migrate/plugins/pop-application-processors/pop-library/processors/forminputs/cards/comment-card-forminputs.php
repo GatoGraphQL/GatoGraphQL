@@ -7,15 +7,15 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENT],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_COMMENT],
         );
     }
 
     public function getTriggerSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
-                return [PoP_Module_Processor_CommentHiddenInputAlertFormComponents::class, PoP_Module_Processor_CommentHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT];
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENT:
+                return [PoP_Module_Processor_CommentHiddenInputAlertFormComponents::class, PoP_Module_Processor_CommentHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT];
         }
 
         return parent::getTriggerSubmodule($component);
@@ -24,7 +24,7 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENT:
                 return 'self';
         }
 

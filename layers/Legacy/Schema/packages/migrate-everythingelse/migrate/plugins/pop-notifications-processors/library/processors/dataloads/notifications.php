@@ -11,7 +11,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_LATESTNOTIFICATIONS],
+            [self::class, self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS],
         );
     }
 
@@ -20,7 +20,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         parent::addHeaddatasetmoduleDataProperties($ret, $component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 // If the user is not logged in, then do not load the data
                 if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
@@ -32,7 +32,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     protected function getStatusSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return null;
         }
 
@@ -42,7 +42,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
         
@@ -52,7 +52,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class);
         }
         

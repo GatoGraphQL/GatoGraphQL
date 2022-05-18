@@ -7,7 +7,7 @@ class PoP_ContentPostLinks_Module_Processor_LinkContentLayouts extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_CONTENT_LINK],
+            [self::class, self::COMPONENT_LAYOUT_CONTENT_LINK],
         );
     }
 }

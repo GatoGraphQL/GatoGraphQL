@@ -8,14 +8,14 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH],
+            [self::class, self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH:
+            case self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH:
                 return TranslationAPIFacade::getInstance()->__('Search', 'poptheme-wassup');
         }
 
@@ -25,7 +25,7 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
     public function getBtnClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH:
+            case self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH:
                 return 'btn btn-info';
         }
 
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH:
+            case self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH:
                 return 'fa fa-search';
         }
 

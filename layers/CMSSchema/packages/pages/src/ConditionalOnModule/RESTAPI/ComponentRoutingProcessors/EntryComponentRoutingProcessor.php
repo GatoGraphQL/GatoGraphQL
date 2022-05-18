@@ -27,7 +27,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret[RequestNature::PAGE][] = [
             'component' => [
                 FieldDataloadComponentProcessor::class,
-                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,
+                FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query')

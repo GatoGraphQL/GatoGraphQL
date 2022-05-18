@@ -10,7 +10,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE],
+            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE],
         );
     }
 
@@ -18,7 +18,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     {
         // The actionexecution is triggered directly
         switch ($component[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
                 return true;
         }
 
@@ -28,7 +28,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
                 return $this->instanceManager->getInstance(SaveDefinitionFileMutationResolverBridge::class);
         }
 

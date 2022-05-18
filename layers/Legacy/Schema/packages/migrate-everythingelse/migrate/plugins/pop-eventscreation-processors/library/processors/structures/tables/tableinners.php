@@ -8,8 +8,8 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABLEINNER_MYEVENTS],
-            [self::class, self::MODULE_TABLEINNER_MYPASTEVENTS],
+            [self::class, self::COMPONENT_TABLEINNER_MYEVENTS],
+            [self::class, self::COMPONENT_TABLEINNER_MYPASTEVENTS],
         );
     }
 
@@ -19,16 +19,16 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
 
         // Main layout
         switch ($component[1]) {
-            case self::MODULE_TABLEINNER_MYEVENTS:
-                $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT];
-                $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::MODULE_EM_LAYOUTEVENT_TABLECOL];
-                $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::MODULE_LAYOUTPOST_STATUS];
+            case self::COMPONENT_TABLEINNER_MYEVENTS:
+                $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT];
+                $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::COMPONENT_EM_LAYOUTEVENT_TABLECOL];
+                $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::COMPONENT_LAYOUTPOST_STATUS];
                 break;
 
-            case self::MODULE_TABLEINNER_MYPASTEVENTS:
-                $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT];
-                $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::MODULE_EM_LAYOUTEVENT_TABLECOL];
-                $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::MODULE_LAYOUTPOST_STATUS];
+            case self::COMPONENT_TABLEINNER_MYPASTEVENTS:
+                $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT];
+                $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::COMPONENT_EM_LAYOUTEVENT_TABLECOL];
+                $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::COMPONENT_LAYOUTPOST_STATUS];
                 break;
         }
 

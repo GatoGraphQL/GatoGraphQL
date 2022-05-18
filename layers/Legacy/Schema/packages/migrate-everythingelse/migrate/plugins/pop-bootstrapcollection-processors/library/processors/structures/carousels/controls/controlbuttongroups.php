@@ -7,7 +7,7 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL],
+            [self::class, self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL],
         );
     }
 
@@ -16,9 +16,9 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
-                $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV];
-                $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT];
+            case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
+                $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV];
+                $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT];
                 break;
         }
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
+            case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 // Pass the needed props down the line
                 if ($target = $this->getProp($component, $props, 'carousel-target')) {
                     foreach ($this->getSubComponents($component) as $subComponent) {
@@ -46,7 +46,7 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
+            case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 $this->addJsmethod($ret, 'carouselControls');
                 break;
         }

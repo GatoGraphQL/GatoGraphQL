@@ -10,20 +10,20 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_INDIVIDUAL],
-            [self::class, self::MODULE_MAP_SIDEBARINDIVIDUAL],
-            [self::class, self::MODULE_MAP_INDIVIDUAL_POST],
-            [self::class, self::MODULE_MAP_INDIVIDUAL_USER],
+            [self::class, self::COMPONENT_MAP_INDIVIDUAL],
+            [self::class, self::COMPONENT_MAP_SIDEBARINDIVIDUAL],
+            [self::class, self::COMPONENT_MAP_INDIVIDUAL_POST],
+            [self::class, self::COMPONENT_MAP_INDIVIDUAL_USER],
         );
     }
 
     public function getMapdivSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MAP_INDIVIDUAL_POST:
-            case self::MODULE_MAP_INDIVIDUAL_USER:
-            case self::MODULE_MAP_SIDEBARINDIVIDUAL:
-                return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
+            case self::COMPONENT_MAP_INDIVIDUAL_POST:
+            case self::COMPONENT_MAP_INDIVIDUAL_USER:
+            case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
+                return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAPSTATICIMAGE_USERORPOST_DIV];
         }
 
         return parent::getMapdivSubmodule($component);
@@ -32,10 +32,10 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
     public function getDrawmarkersSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MAP_INDIVIDUAL_POST:
-            case self::MODULE_MAP_INDIVIDUAL_USER:
-            case self::MODULE_MAP_SIDEBARINDIVIDUAL:
-                return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS];
+            case self::COMPONENT_MAP_INDIVIDUAL_POST:
+            case self::COMPONENT_MAP_INDIVIDUAL_USER:
+            case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
+                return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::COMPONENT_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS];
         }
 
         return parent::getDrawmarkersSubmodule($component);
@@ -44,7 +44,7 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
     public function openOnemarkerInfowindow(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MAP_SIDEBARINDIVIDUAL:
+            case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
                 return false;
         }
 

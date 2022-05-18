@@ -15,36 +15,36 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONLAT],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONLNG],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONNAME],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONADDRESS],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONTOWN],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONSTATE],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE],
-            [self::class, self::MODULE_FORMINPUT_EM_LOCATIONREGION],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONLAT],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONLNG],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONNAME],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE],
+            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONREGION],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
                 return TranslationAPIFacade::getInstance()->__('Name', 'em-popprocessors');
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONADDRESS:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS:
                 return TranslationAPIFacade::getInstance()->__('Address', 'em-popprocessors');
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN:
                 return TranslationAPIFacade::getInstance()->__('City', 'em-popprocessors');
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONSTATE:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE:
                 return TranslationAPIFacade::getInstance()->__('State', 'em-popprocessors');
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE:
                 return TranslationAPIFacade::getInstance()->__('Post code', 'em-popprocessors');
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONREGION:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONREGION:
                 return TranslationAPIFacade::getInstance()->__('Region', 'em-popprocessors');
         }
 
@@ -54,8 +54,8 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
-            case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN:
                 return true;
         }
 
@@ -65,8 +65,8 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public function isHidden(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
-            case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONLAT:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONLNG:
                 return true;
         }
 
@@ -76,14 +76,14 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
-            case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
-            case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
-            case self::MODULE_FORMINPUT_EM_LOCATIONADDRESS:
-            case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
-            case self::MODULE_FORMINPUT_EM_LOCATIONSTATE:
-            case self::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE:
-            case self::MODULE_FORMINPUT_EM_LOCATIONREGION:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONLAT:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONLNG:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONREGION:
                 return true;
         }
 
@@ -95,35 +95,35 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     //     switch ($component[1]) {
 
     //          // Names needed by EM to create the Location
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONLAT:
 
     //             return 'location_latitude';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONLNG:
 
     //             return 'location_longitude';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
 
     //             return 'location_name';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONADDRESS:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS:
 
     //             return 'location_address';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN:
 
     //             return 'location_town';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONSTATE:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE:
 
     //             return 'location_state';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE:
 
     //             return 'location_postcode';
 
-    //         case self::MODULE_FORMINPUT_EM_LOCATIONREGION:
+    //         case self::COMPONENT_FORMINPUT_EM_LOCATIONREGION:
 
     //             return 'location_region';
     //     }
@@ -134,20 +134,20 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONLAT:
                 $this->appendProp($component, $props, 'class', 'address-lat');
                 break;
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONLNG:
                 $this->appendProp($component, $props, 'class', 'address-lng');
                 break;
 
-            case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
-            case self::MODULE_FORMINPUT_EM_LOCATIONADDRESS:
-            case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
-            case self::MODULE_FORMINPUT_EM_LOCATIONSTATE:
-            case self::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE:
-            case self::MODULE_FORMINPUT_EM_LOCATIONREGION:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE:
+            case self::COMPONENT_FORMINPUT_EM_LOCATIONREGION:
                 $this->appendProp($component, $props, 'class', 'address-input');
                 break;
         }

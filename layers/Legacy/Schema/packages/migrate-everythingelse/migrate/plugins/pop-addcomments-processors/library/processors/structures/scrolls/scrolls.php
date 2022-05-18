@@ -12,27 +12,27 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_COMMENTS_LIST],
-            [self::class, self::MODULE_SCROLL_COMMENTS_ADD],
-            [self::class, self::MODULE_SCROLLLAYOUT_POSTCOMMENT],
-            [self::class, self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE],
+            [self::class, self::COMPONENT_SCROLL_COMMENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_COMMENTS_ADD],
+            [self::class, self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT],
+            [self::class, self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLL_COMMENTS_LIST:
-                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_SCROLLINNER_COMMENTS_LIST];
+            case self::COMPONENT_SCROLL_COMMENTS_LIST:
+                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::COMPONENT_SCROLLINNER_COMMENTS_LIST];
 
-            case self::MODULE_SCROLL_COMMENTS_ADD:
-                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_SCROLLINNER_COMMENTS_ADD];
+            case self::COMPONENT_SCROLL_COMMENTS_ADD:
+                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::COMPONENT_SCROLLINNER_COMMENTS_ADD];
 
-            case self::MODULE_SCROLLLAYOUT_POSTCOMMENT:
-                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS];
+            case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT:
+                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS];
 
-            case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
-                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE];
+            case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
+                return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE];
         }
 
         return parent::getInnerSubmodule($component);
@@ -41,8 +41,8 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
     public function addFetchedData(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLLAYOUT_POSTCOMMENT:
-            case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
+            case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT:
+            case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 return false;
         }
 
@@ -52,15 +52,15 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLL_COMMENTS_LIST:
+            case self::COMPONENT_SCROLL_COMMENTS_LIST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $this->appendProp($component, $props, 'class', 'pop-commentpost-'.$post_id);
                 $this->appendProp($component, $props, 'class', 'pop-postcomment');
                 break;
 
-            case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
+            case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 $classes = array(
-                    self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE => 'comments',
+                    self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE => 'comments',
                 );
 
                 $this->setProp($component, $props, 'appendable', true);
@@ -75,8 +75,8 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
     public function getFetchmoreButtonSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLL_COMMENTS_LIST:
-            case self::MODULE_SCROLL_COMMENTS_ADD:
+            case self::COMPONENT_SCROLL_COMMENTS_LIST:
+            case self::COMPONENT_SCROLL_COMMENTS_ADD:
                 return null;
         }
 

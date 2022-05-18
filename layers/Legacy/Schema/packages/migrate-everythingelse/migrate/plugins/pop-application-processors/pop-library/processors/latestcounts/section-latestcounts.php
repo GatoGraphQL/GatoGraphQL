@@ -9,9 +9,9 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LATESTCOUNT_POSTS],
-            [self::class, self::MODULE_LATESTCOUNT_AUTHOR_POSTS],
-            [self::class, self::MODULE_LATESTCOUNT_TAG_POSTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_POSTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_TAG_POSTS],
         );
     }
 
@@ -20,9 +20,9 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         $ret = parent::getSectionClasses($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_POSTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_POSTS:
-            case self::MODULE_LATESTCOUNT_TAG_POSTS:
+            case self::COMPONENT_LATESTCOUNT_POSTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_POSTS:
                 foreach (gdDataloadAllcontentCategories() as $cat) {
                     $ret[] = 'post-'.$cat;
                 }
@@ -35,7 +35,7 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     public function isAuthor(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_AUTHOR_POSTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS:
                 return true;
         }
     
@@ -45,7 +45,7 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     public function isTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LATESTCOUNT_TAG_POSTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_POSTS:
                 return true;
         }
     

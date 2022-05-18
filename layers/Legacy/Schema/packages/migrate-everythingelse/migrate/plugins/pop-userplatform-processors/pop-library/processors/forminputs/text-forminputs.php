@@ -13,34 +13,34 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION],
-            [self::class, self::MODULE_FORMINPUT_CUP_FACEBOOK],
-            [self::class, self::MODULE_FORMINPUT_CUP_TWITTER],
-            [self::class, self::MODULE_FORMINPUT_CUP_LINKEDIN],
-            [self::class, self::MODULE_FORMINPUT_CUP_YOUTUBE],
-            [self::class, self::MODULE_FORMINPUT_CUP_INSTAGRAM],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_FACEBOOK],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_TWITTER],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_LINKEDIN],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_YOUTUBE],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_INSTAGRAM],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
+            case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Short description', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_CUP_FACEBOOK:
+            case self::COMPONENT_FORMINPUT_CUP_FACEBOOK:
                 return TranslationAPIFacade::getInstance()->__('Facebook URL', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_CUP_TWITTER:
+            case self::COMPONENT_FORMINPUT_CUP_TWITTER:
                 return TranslationAPIFacade::getInstance()->__('Twitter URL', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_CUP_LINKEDIN:
+            case self::COMPONENT_FORMINPUT_CUP_LINKEDIN:
                 return TranslationAPIFacade::getInstance()->__('LinkedIn URL', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_CUP_YOUTUBE:
+            case self::COMPONENT_FORMINPUT_CUP_YOUTUBE:
                 return TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_CUP_INSTAGRAM:
+            case self::COMPONENT_FORMINPUT_CUP_INSTAGRAM:
                 return TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors');
         }
 
@@ -50,22 +50,22 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
+            case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return 'shortDescription';
 
-            case self::MODULE_FORMINPUT_CUP_FACEBOOK:
+            case self::COMPONENT_FORMINPUT_CUP_FACEBOOK:
                 return 'facebook';
 
-            case self::MODULE_FORMINPUT_CUP_TWITTER:
+            case self::COMPONENT_FORMINPUT_CUP_TWITTER:
                 return 'twitter';
 
-            case self::MODULE_FORMINPUT_CUP_LINKEDIN:
+            case self::COMPONENT_FORMINPUT_CUP_LINKEDIN:
                 return 'linkedin';
 
-            case self::MODULE_FORMINPUT_CUP_YOUTUBE:
+            case self::COMPONENT_FORMINPUT_CUP_YOUTUBE:
                 return 'youtube';
 
-            case self::MODULE_FORMINPUT_CUP_INSTAGRAM:
+            case self::COMPONENT_FORMINPUT_CUP_INSTAGRAM:
                 return 'instagram';
         }
 
@@ -77,11 +77,11 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     {
         // Remove the html code from the placeholder
         $placeholders = array(
-            self::MODULE_FORMINPUT_CUP_FACEBOOK => TranslationAPIFacade::getInstance()->__('Facebook URL', 'pop-coreprocessors'),
-            self::MODULE_FORMINPUT_CUP_TWITTER => TranslationAPIFacade::getInstance()->__('Twitter URL', 'pop-coreprocessors'),
-            self::MODULE_FORMINPUT_CUP_LINKEDIN => TranslationAPIFacade::getInstance()->__('LinkedIn URL', 'pop-coreprocessors'),
-            self::MODULE_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
-            self::MODULE_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
+            self::COMPONENT_FORMINPUT_CUP_FACEBOOK => TranslationAPIFacade::getInstance()->__('Facebook URL', 'pop-coreprocessors'),
+            self::COMPONENT_FORMINPUT_CUP_TWITTER => TranslationAPIFacade::getInstance()->__('Twitter URL', 'pop-coreprocessors'),
+            self::COMPONENT_FORMINPUT_CUP_LINKEDIN => TranslationAPIFacade::getInstance()->__('LinkedIn URL', 'pop-coreprocessors'),
+            self::COMPONENT_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
+            self::COMPONENT_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
         );
         if ($placeholder = $placeholders[$component[1]] ?? null) {
             $this->setProp($component, $props, 'placeholder', $placeholder);

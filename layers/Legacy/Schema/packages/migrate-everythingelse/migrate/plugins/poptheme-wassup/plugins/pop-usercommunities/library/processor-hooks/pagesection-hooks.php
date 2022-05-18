@@ -23,7 +23,7 @@ class PoPTheme_Wassup_UserCommunities_PageSectionHooks
     //     return array_merge(
     //         $headerTitles,
     //         array(
-    //             GD_URE_Module_Processor_ProfileBlocks::MODULE_BLOCK_INVITENEWMEMBERS => RouteUtils::getRouteTitle(POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS),
+    //             GD_URE_Module_Processor_ProfileBlocks::COMPONENT_BLOCK_INVITENEWMEMBERS => RouteUtils::getRouteTitle(POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS),
     //         )
     //     );
     // }
@@ -32,8 +32,8 @@ class PoPTheme_Wassup_UserCommunities_PageSectionHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS:
-                $processor->setProp([GD_URE_Module_Processor_ProfileBlocks::class, GD_URE_Module_Processor_ProfileBlocks::MODULE_BLOCK_INVITENEWMEMBERS], $props, 'title', '');
+            case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
+                $processor->setProp([GD_URE_Module_Processor_ProfileBlocks::class, GD_URE_Module_Processor_ProfileBlocks::COMPONENT_BLOCK_INVITENEWMEMBERS], $props, 'title', '');
                 break;
         }
     }

@@ -12,8 +12,8 @@ class PoPTheme_Wassup_CommonUserRoles_Module_SideInfoContentPageSectionComponent
         $ret = array();
 
         $components = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_SidebarMultiples::class, GD_URE_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SidebarMultiples::class, GD_URE_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_SidebarMultiples::class, GD_URE_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SidebarMultiples::class, GD_URE_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR],
         );
         foreach ($components as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];

@@ -9,9 +9,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS],
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST],
         );
     }
 
@@ -19,10 +19,10 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function getAuthorModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
         return parent::getAuthorModule($component);
@@ -31,9 +31,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-                return [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+                return [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -44,8 +44,8 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         $ret = parent::getBelowthumbLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
         }
 
@@ -57,8 +57,8 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         $ret = parent::getBottomSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
                 break;
         }
 
@@ -70,8 +70,8 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         $ret = parent::getAbovecontentSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
         }
 
@@ -81,12 +81,12 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function getPostThumbSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL];
 
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
         }
 
         return parent::getPostThumbSubmodule($component);
@@ -95,8 +95,8 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function showExcerpt(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
 
@@ -106,9 +106,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function getTitleHtmlmarkup(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return 'h3';
         }
 
@@ -118,9 +118,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function authorPositions(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE,
                 );
@@ -132,7 +132,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function horizontalLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
 
@@ -142,7 +142,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 return true;
         }
 
@@ -155,19 +155,19 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 $ret[GD_JS_CLASSES]['excerpt'] = 'email-excerpt';
                 $ret[GD_JS_CLASSES]['authors-abovetitle'] = 'email-authors-abovetitle';
                 break;
 
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }

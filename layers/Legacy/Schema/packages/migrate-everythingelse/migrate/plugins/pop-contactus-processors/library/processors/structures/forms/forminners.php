@@ -7,7 +7,7 @@ class PoP_ContactUs_Module_Processor_GFFormInners extends PoP_Module_Processor_F
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_CONTACTUS],
+            [self::class, self::COMPONENT_FORMINNER_CONTACTUS],
         );
     }
 
@@ -16,15 +16,15 @@ class PoP_ContactUs_Module_Processor_GFFormInners extends PoP_Module_Processor_F
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_CONTACTUS:
+            case self::COMPONENT_FORMINNER_CONTACTUS:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_Forms_Module_Processor_FormGroups::class, PoP_Forms_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_NAME],
-                        [PoP_Forms_Module_Processor_FormGroups::class, PoP_Forms_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_EMAIL],
-                        [PoP_ContactUs_Module_Processor_FormGroups::class, PoP_ContactUs_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_SUBJECT],
-                        [PoP_ContactUs_Module_Processor_FormGroups::class, PoP_ContactUs_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_MESSAGE],
-                        [PoP_ContactUs_Module_Processor_SubmitButtons::class, PoP_ContactUs_Module_Processor_SubmitButtons::MODULE_GF_SUBMITBUTTON_SENDMESSAGE],
+                        [PoP_Forms_Module_Processor_FormGroups::class, PoP_Forms_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_NAME],
+                        [PoP_Forms_Module_Processor_FormGroups::class, PoP_Forms_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_EMAIL],
+                        [PoP_ContactUs_Module_Processor_FormGroups::class, PoP_ContactUs_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_SUBJECT],
+                        [PoP_ContactUs_Module_Processor_FormGroups::class, PoP_ContactUs_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_MESSAGE],
+                        [PoP_ContactUs_Module_Processor_SubmitButtons::class, PoP_ContactUs_Module_Processor_SubmitButtons::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE],
                     )
                 );
                 if (defined('POP_FORMSWEBPLATFORM_INITIALIZED')) {
@@ -32,12 +32,12 @@ class PoP_ContactUs_Module_Processor_GFFormInners extends PoP_Module_Processor_F
                         array_splice(
                             $ret,
                             array_search(
-                                [PoP_ContactUs_Module_Processor_SubmitButtons::class, PoP_ContactUs_Module_Processor_SubmitButtons::MODULE_GF_SUBMITBUTTON_SENDMESSAGE],
+                                [PoP_ContactUs_Module_Processor_SubmitButtons::class, PoP_ContactUs_Module_Processor_SubmitButtons::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE],
                                 $ret
                             ),
                             0,
                             [
-                                [PoP_Captcha_Module_Processor_FormInputGroups::class, PoP_Captcha_Module_Processor_FormInputGroups::MODULE_FORMINPUTGROUP_CAPTCHA],
+                                [PoP_Captcha_Module_Processor_FormInputGroups::class, PoP_Captcha_Module_Processor_FormInputGroups::COMPONENT_FORMINPUTGROUP_CAPTCHA],
                             ]
                         );
                     }

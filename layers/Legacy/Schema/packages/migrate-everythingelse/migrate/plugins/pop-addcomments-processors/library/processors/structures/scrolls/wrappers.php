@@ -8,8 +8,8 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETWRAPPER_POSTCOMMENTS],
-            [self::class, self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT],
         );
     }
 
@@ -18,12 +18,12 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
-                $ret[] = [PoP_Module_Processor_CommentsWidgets::class, PoP_Module_Processor_CommentsWidgets::MODULE_WIDGET_POSTCOMMENTS];
+            case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
+                $ret[] = [PoP_Module_Processor_CommentsWidgets::class, PoP_Module_Processor_CommentsWidgets::COMPONENT_WIDGET_POSTCOMMENTS];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
-                $ret[] = [PoP_Module_Processor_CommentsWidgets::class, PoP_Module_Processor_CommentsWidgets::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT];
+            case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
+                $ret[] = [PoP_Module_Processor_CommentsWidgets::class, PoP_Module_Processor_CommentsWidgets::COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT];
                 break;
         }
 
@@ -33,8 +33,8 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
-            case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
+            case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
                 $this->appendProp($component, $props, 'class', 'postcomments clearfix');
                 break;
         }
@@ -45,8 +45,8 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
-            case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
+            case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
+            case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
                 return 'hasComments';
         }
 

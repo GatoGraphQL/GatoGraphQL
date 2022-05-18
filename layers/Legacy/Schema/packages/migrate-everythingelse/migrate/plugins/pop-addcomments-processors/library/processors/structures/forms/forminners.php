@@ -7,7 +7,7 @@ class PoP_Module_Processor_CommentsFormInners extends PoP_Module_Processor_FormI
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_ADDCOMMENT],
+            [self::class, self::COMPONENT_FORMINNER_ADDCOMMENT],
         );
     }
 
@@ -16,14 +16,14 @@ class PoP_Module_Processor_CommentsFormInners extends PoP_Module_Processor_FormI
         $ret = parent::getLayoutSubmodules($component);
     
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_ADDCOMMENT:
+            case self::COMPONENT_FORMINNER_ADDCOMMENT:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_AddComment_Module_Processor_FormInputGroups::class, PoP_AddComment_Module_Processor_FormInputGroups::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST],
-                        [PoP_AddComment_Module_Processor_FormInputGroups::class, PoP_AddComment_Module_Processor_FormInputGroups::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT],
-                        [PoP_Module_Processor_CommentFormGroups::class, PoP_Module_Processor_CommentFormGroups::MODULE_FORMINPUTGROUP_COMMENTEDITOR],
-                        [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SUBMIT],
+                        [PoP_AddComment_Module_Processor_FormInputGroups::class, PoP_AddComment_Module_Processor_FormInputGroups::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST],
+                        [PoP_AddComment_Module_Processor_FormInputGroups::class, PoP_AddComment_Module_Processor_FormInputGroups::COMPONENT_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT],
+                        [PoP_Module_Processor_CommentFormGroups::class, PoP_Module_Processor_CommentFormGroups::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR],
+                        [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SUBMIT],
                     )
                 );
                 break;

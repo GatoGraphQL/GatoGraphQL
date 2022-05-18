@@ -8,7 +8,7 @@
 function gdCustomEmAddrelatedpostButtons($buttons)
 {
     if (defined('POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST') && POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST) {
-        $buttons[] = [PoP_LocationPostsCreation_Module_Processor_Buttons::class, PoP_LocationPostsCreation_Module_Processor_Buttons::MODULE_BUTTON_LOCATIONPOST_CREATE];
+        $buttons[] = [PoP_LocationPostsCreation_Module_Processor_Buttons::class, PoP_LocationPostsCreation_Module_Processor_Buttons::COMPONENT_BUTTON_LOCATIONPOST_CREATE];
     }
 
     return $buttons;

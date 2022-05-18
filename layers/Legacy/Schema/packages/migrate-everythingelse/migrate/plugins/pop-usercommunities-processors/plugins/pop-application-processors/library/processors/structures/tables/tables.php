@@ -8,16 +8,16 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABLE_MYMEMBERS],
+            [self::class, self::COMPONENT_TABLE_MYMEMBERS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_TABLE_MYMEMBERS:
+            case self::COMPONENT_TABLE_MYMEMBERS:
                 $inners = array(
-                    self::MODULE_TABLE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_TableInners::class, PoP_UserCommunities_Module_Processor_TableInners::MODULE_TABLEINNER_MYMEMBERS],
+                    self::COMPONENT_TABLE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_TableInners::class, PoP_UserCommunities_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYMEMBERS],
                 );
 
                 return $inners[$component[1]];
@@ -31,7 +31,7 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
         $ret = parent::getHeaderTitles($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABLE_MYMEMBERS:
+            case self::COMPONENT_TABLE_MYMEMBERS:
                 $ret[] = TranslationAPIFacade::getInstance()->__('User', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Privileges', 'poptheme-wassup');

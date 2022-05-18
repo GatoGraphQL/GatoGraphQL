@@ -21,20 +21,20 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_STANCE_UPDATE],
-            [self::class, self::MODULE_DATALOAD_STANCE_CREATE],
-            [self::class, self::MODULE_DATALOAD_STANCE_CREATEORUPDATE],
-            [self::class, self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
+            [self::class, self::COMPONENT_DATALOAD_STANCE_UPDATE],
+            [self::class, self::COMPONENT_DATALOAD_STANCE_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
-            self::MODULE_DATALOAD_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
-            self::MODULE_DATALOAD_STANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
-            self::MODULE_DATALOAD_STANCE_UPDATE => POP_USERSTANCE_ROUTE_EDITSTANCE,
+            self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
+            self::COMPONENT_DATALOAD_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
+            self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
+            self::COMPONENT_DATALOAD_STANCE_UPDATE => POP_USERSTANCE_ROUTE_EDITSTANCE,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -42,9 +42,9 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_STANCE_CREATE:
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
@@ -54,8 +54,8 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     protected function getFeedbackmessageModule(array $component)
     {
         $feedbacks = array(
-            self::MODULE_DATALOAD_STANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATECONTENT],
-            self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATECONTENT],
+            self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
+            self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
         );
 
         if ($feedback = $feedbacks[$component[1]] ?? null) {
@@ -68,12 +68,12 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATE:
                 return $this->instanceManager->getInstance(CreateStanceMutationResolverBridge::class);
-            case self::MODULE_DATALOAD_STANCE_UPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_UPDATE:
                 return $this->instanceManager->getInstance(UpdateStanceMutationResolverBridge::class);
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return $this->instanceManager->getInstance(CreateOrUpdateStanceMutationResolverBridge::class);
         }
 
@@ -85,11 +85,11 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_UPDATE:
-            case self::MODULE_DATALOAD_STANCE_CREATE:
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                $ret[] = [UserStance_Module_Processor_CreateUpdatePostForms::class, UserStance_Module_Processor_CreateUpdatePostForms::MODULE_FORM_STANCE];
+            case self::COMPONENT_DATALOAD_STANCE_UPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+                $ret[] = [UserStance_Module_Processor_CreateUpdatePostForms::class, UserStance_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_STANCE];
                 break;
         }
 
@@ -99,7 +99,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     protected function isCreate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATE:
                 return true;
         }
 
@@ -108,7 +108,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     protected function isUpdate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_UPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_UPDATE:
                 return true;
         }
 
@@ -120,8 +120,8 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $this->addJsmethod($ret, 'deleteBlockFeedbackValueOnUserLoggedInOut');
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedInOut');
                 break;
@@ -133,8 +133,8 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 if (!\PoP\Root\App::getState('is-user-logged-in')) {
                     return [];
                 }
@@ -142,10 +142,10 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                     'status' => array(Status::PUBLISHED, Status::DRAFT),
                     'authors' => [\PoP\Root\App::getState('current-user-id')],
                 );
-                if ($component[1] == self::MODULE_DATALOAD_STANCE_CREATEORUPDATE) {
+                if ($component[1] == self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE) {
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);
                 }
-                elseif ($component[1] == self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE) {
+                elseif ($component[1] == self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE) {
                     $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $post_id);
                 }
@@ -164,9 +164,9 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATE:
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
@@ -176,8 +176,8 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_AddPost::class);
         }
 
@@ -189,8 +189,8 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $ret['executeFetchBlockSuccess']['processblock-ifhasdata'] = true;
                 break;
         }
@@ -202,14 +202,14 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     {
         $name = PoP_UserStance_PostNameUtils::getNameUc();
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_STANCE_CREATE:
-            case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-            case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
+            case self::COMPONENT_DATALOAD_STANCE_CREATE:
+            case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
+            case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
+                $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
                 break;
 
-            case self::MODULE_DATALOAD_STANCE_UPDATE:
-                $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
+            case self::COMPONENT_DATALOAD_STANCE_UPDATE:
+                $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
                 break;
         }
 

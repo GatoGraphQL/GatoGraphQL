@@ -14,8 +14,8 @@ class Wassup_EM_Blog_Module_MainContentComponentRoutingProcessor extends \PoP\Ap
 
         // Page modules
         $routemodules_map = array(
-            UsersModuleConfiguration::getUsersRoute() => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_USERS_SCROLLMAP],
-            POP_BLOG_ROUTE_SEARCHUSERS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SEARCHUSERS_SCROLLMAP],
+            UsersModuleConfiguration::getUsersRoute() => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_USERS_SCROLLMAP],
+            POP_BLOG_ROUTE_SEARCHUSERS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -30,7 +30,7 @@ class Wassup_EM_Blog_Module_MainContentComponentRoutingProcessor extends \PoP\Ap
         }
 
         $routemodules_horizontalmap = array(
-            UsersModuleConfiguration::getUsersRoute() => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP],
+            UsersModuleConfiguration::getUsersRoute() => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP],
         );
         foreach ($routemodules_horizontalmap as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

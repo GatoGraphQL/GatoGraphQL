@@ -8,16 +8,16 @@ class PoP_Module_Processor_DomainFeedbackMessageAlertLayouts extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY],
         );
     }
 
     public function getLayoutSubmodule(array $component)
     {
         $layouts = array(
-            self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST => [PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST],
-            self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY => [PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST => [PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY => [PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

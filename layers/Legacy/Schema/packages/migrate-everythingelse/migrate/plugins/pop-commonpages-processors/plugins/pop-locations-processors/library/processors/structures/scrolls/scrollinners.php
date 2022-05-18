@@ -7,14 +7,14 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_WHOWEARE_MAP],
+            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_MAP],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_WHOWEARE_MAP:
+            case self::COMPONENT_SCROLLINNER_WHOWEARE_MAP:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -29,7 +29,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_SCROLLINNER_WHOWEARE_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS],
+            self::COMPONENT_SCROLLINNER_WHOWEARE_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
         );
         if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;

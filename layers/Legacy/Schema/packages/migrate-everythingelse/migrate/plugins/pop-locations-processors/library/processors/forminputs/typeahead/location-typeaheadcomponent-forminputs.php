@@ -9,14 +9,14 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS],
+            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS],
         );
     }
 
     protected function getLimit(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return 8;
         }
 
@@ -27,7 +27,7 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONS);
         }
 
@@ -47,7 +47,7 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
             $url, 
             [
                 [
-                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

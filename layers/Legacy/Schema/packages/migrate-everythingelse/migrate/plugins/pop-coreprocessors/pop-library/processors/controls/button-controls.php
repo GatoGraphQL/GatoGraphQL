@@ -11,19 +11,19 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP],
-            [self::class, self::MODULE_BUTTONCONTROL_RELOADBLOCK],
-            [self::class, self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK],
-            [self::class, self::MODULE_BUTTONCONTROL_RESETEDITOR],
+            [self::class, self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP],
+            [self::class, self::COMPONENT_BUTTONCONTROL_RELOADBLOCK],
+            [self::class, self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK],
+            [self::class, self::COMPONENT_BUTTONCONTROL_RESETEDITOR],
         );
     }
     public function getText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
-            case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
-            case self::MODULE_BUTTONCONTROL_RESETEDITOR:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 return null;
         }
 
@@ -33,12 +33,12 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
-            case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
                 return TranslationAPIFacade::getInstance()->__('Refresh', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTONCONTROL_RESETEDITOR:
+            case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Reset', 'pop-coreprocessors');
         }
 
@@ -48,12 +48,12 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
-            case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
                 return 'fa-refresh';
 
-            case self::MODULE_BUTTONCONTROL_RESETEDITOR:
+            case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 return 'fa-repeat';
         }
 
@@ -62,7 +62,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public function getBtnClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_RESETEDITOR:
+            case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 return 'btn btn-compact btn-link';
         }
 
@@ -71,9 +71,9 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
-            case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
                 $this->appendProp($component, $props, 'class', 'btn btn-compact btn-link');
                 $this->mergeProp(
                     $component,
@@ -85,7 +85,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 );
                 break;
 
-            case self::MODULE_BUTTONCONTROL_RESETEDITOR:
+            case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 $this->appendProp($component, $props, 'class', 'pop-reset');
                 break;
         }
@@ -98,19 +98,19 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
                 $this->addJsmethod($ret, 'reloadBlockGroup');
                 break;
 
-            case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
                 $this->addJsmethod($ret, 'reloadBlock');
                 break;
 
-            case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
+            case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
                 $this->addJsmethod($ret, 'loadLatestBlock');
                 break;
 
-            case self::MODULE_BUTTONCONTROL_RESETEDITOR:
+            case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 $this->addJsmethod($ret, 'reset');
                 break;
         }

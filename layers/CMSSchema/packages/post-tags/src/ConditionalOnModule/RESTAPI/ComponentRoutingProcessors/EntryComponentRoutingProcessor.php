@@ -44,7 +44,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret[TagRequestNature::TAG][] = [
             'component' => [
                 PostTagFieldDataloadComponentProcessor::class,
-                PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
+                PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -74,7 +74,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $routeComponents = array(
             $moduleConfiguration->getPostTagsRoute() => [
                 PostTagFieldDataloadComponentProcessor::class,
-                PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+                PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -96,7 +96,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 TagPostFieldDataloadComponentProcessor::class,
-                TagPostFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+                TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

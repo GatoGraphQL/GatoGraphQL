@@ -7,7 +7,7 @@ class PoP_Module_Processor_ControlMulticomponents extends PoP_Module_Processor_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS],
         );
     }
 
@@ -16,9 +16,9 @@ class PoP_Module_Processor_ControlMulticomponents extends PoP_Module_Processor_M
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS:
-                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLETABS];
-                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLETABSXS];
+            case self::COMPONENT_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS:
+                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLETABS];
+                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLETABSXS];
                 break;
         }
 

@@ -8,7 +8,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGET_MENU_ABOUT],
+            [self::class, self::COMPONENT_WIDGET_MENU_ABOUT],
         );
     }
 
@@ -17,8 +17,8 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGET_MENU_ABOUT:
-                $ret[] = [PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::MODULE_LAYOUT_MENU_INDENT];
+            case self::COMPONENT_WIDGET_MENU_ABOUT:
+                $ret[] = [PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::COMPONENT_LAYOUT_MENU_INDENT];
                 break;
         }
 
@@ -30,7 +30,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
         $menu = TranslationAPIFacade::getInstance()->__('Section links', 'poptheme-wassup');
 
         $titles = array(
-            self::MODULE_WIDGET_MENU_ABOUT => $menu,
+            self::COMPONENT_WIDGET_MENU_ABOUT => $menu,
         );
 
         return $titles[$component[1]] ?? null;
@@ -40,7 +40,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
         $menu = 'fa-sitemap';
 
         $fontawesomes = array(
-            self::MODULE_WIDGET_MENU_ABOUT => $menu,
+            self::COMPONENT_WIDGET_MENU_ABOUT => $menu,
         );
 
         return $fontawesomes[$component[1]] ?? null;
@@ -49,7 +49,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_MENU_ABOUT:
+            case self::COMPONENT_WIDGET_MENU_ABOUT:
                 return 'panel-body';
         }
 
@@ -58,7 +58,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_MENU_ABOUT:
+            case self::COMPONENT_WIDGET_MENU_ABOUT:
                 return '';
         }
 

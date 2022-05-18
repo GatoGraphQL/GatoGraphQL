@@ -8,16 +8,16 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_POST_UPDATE],
-            [self::class, self::MODULE_BLOCK_POST_CREATE],
+            [self::class, self::COMPONENT_BLOCK_POST_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_POST_CREATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
-            self::MODULE_BLOCK_POST_UPDATE => POP_POSTSCREATION_ROUTE_EDITPOST,
+            self::COMPONENT_BLOCK_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
+            self::COMPONENT_BLOCK_POST_UPDATE => POP_POSTSCREATION_ROUTE_EDITPOST,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -27,8 +27,8 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
         $ret = parent::getInnerSubmodules($component);
 
         $block_inners = array(
-            self::MODULE_BLOCK_POST_UPDATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_POST_UPDATE],
-            self::MODULE_BLOCK_POST_CREATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_POST_CREATE],
+            self::COMPONENT_BLOCK_POST_UPDATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_POST_UPDATE],
+            self::COMPONENT_BLOCK_POST_CREATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_POST_CREATE],
         );
         if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
@@ -40,7 +40,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     protected function isCreate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_POST_CREATE:
+            case self::COMPONENT_BLOCK_POST_CREATE:
                 return true;
         }
 
@@ -49,7 +49,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     protected function isUpdate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_POST_UPDATE:
+            case self::COMPONENT_BLOCK_POST_UPDATE:
                 return true;
         }
 
@@ -59,8 +59,8 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_POST_UPDATE:
-            case self::MODULE_BLOCK_POST_CREATE:
+            case self::COMPONENT_BLOCK_POST_UPDATE:
+            case self::COMPONENT_BLOCK_POST_CREATE:
                 $this->appendProp($component, $props, 'class', 'block-createupdate-contentpost');
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     $this->appendProp($component, $props, 'class', 'addons-nocontrols');

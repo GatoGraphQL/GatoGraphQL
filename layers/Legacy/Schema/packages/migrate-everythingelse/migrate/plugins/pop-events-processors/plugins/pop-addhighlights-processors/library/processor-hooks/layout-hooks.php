@@ -13,7 +13,7 @@ class PoP_Events_AddHighlights_ProcessorHooks
 
     public function getFooterSubmodules($layouts)
     {
-        $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS];
+        $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS];
         return $layouts;
     }
 }

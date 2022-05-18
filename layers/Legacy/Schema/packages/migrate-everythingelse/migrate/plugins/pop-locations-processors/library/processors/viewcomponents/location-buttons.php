@@ -12,12 +12,12 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS],
         );
     }
 
@@ -28,8 +28,8 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         // Do it so, initializes them twice, which leads to problems, like when searching it displays markers from the previous state
         // (which were initialized then drawn then initialized again and remained there in the memory)
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
                 return false;
         }
 
@@ -39,13 +39,13 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getLocationModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
-                return [PoP_Module_Processor_LocationViewComponentLinks::class, PoP_Module_Processor_LocationViewComponentLinks::MODULE_VIEWCOMPONENT_LINK_LOCATIONICONNAME];
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+                return [PoP_Module_Processor_LocationViewComponentLinks::class, PoP_Module_Processor_LocationViewComponentLinks::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME];
         }
 
         return parent::getLocationModule($component);
@@ -54,9 +54,9 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getLocationComplementModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
-                return [PoP_Module_Processor_LocationAddressLayouts::class, PoP_Module_Processor_LocationAddressLayouts::MODULE_EM_LAYOUT_LOCATIONADDRESS];
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+                return [PoP_Module_Processor_LocationAddressLayouts::class, PoP_Module_Processor_LocationAddressLayouts::COMPONENT_EM_LAYOUT_LOCATIONADDRESS];
         }
 
         return parent::getLocationComplementModule($component);
@@ -64,8 +64,8 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getJoinSeparator(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return '<br/>';
         }
 
@@ -74,8 +74,8 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getEachSeparator(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return '<br/>';
         }
 
@@ -84,8 +84,8 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getComplementSeparator(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return '<br/>';
         }
 
@@ -95,21 +95,21 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
-            self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
-            self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
         );
 
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return $buttoninners[$component[1]];
         }
 
@@ -120,17 +120,17 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
 
-    //             return [PoP_Module_Processor_PostViewComponentHeaders::class, PoP_Module_Processor_PostViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_POST];
+    //             return [PoP_Module_Processor_PostViewComponentHeaders::class, PoP_Module_Processor_PostViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_POST];
 
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
-    //         case self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
+    //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
 
-    //             return [PoP_Module_Processor_UserViewComponentHeaders::class, PoP_Module_Processor_UserViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_USER];
+    //             return [PoP_Module_Processor_UserViewComponentHeaders::class, PoP_Module_Processor_UserViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_USER];
     //     }
 
     //     return parent::getHeaderSubmodule($component);

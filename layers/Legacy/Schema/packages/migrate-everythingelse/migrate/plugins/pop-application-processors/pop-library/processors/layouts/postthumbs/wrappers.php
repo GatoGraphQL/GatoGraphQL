@@ -21,21 +21,21 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED],
-            [self::class, self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FAVICON],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_XSMALL],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
 
         );
     }
@@ -45,21 +45,21 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
         $ret = parent::getConditionSucceededSubmodules($component);
 
         $layouts = array(
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FAVICON],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED],
-            self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FAVICON => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_FAVICON],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_XSMALL => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_XSMALL],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED],
+            self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {
@@ -72,21 +72,21 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FAVICON:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_XSMALL:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 return 'hasFeaturedImage';
         }
 
@@ -96,17 +96,17 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED:
-            case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_XSMALL:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED:
+            case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 $this->appendProp($component, $props, 'class', 'wrapper-featuredimage');
                 break;
         }

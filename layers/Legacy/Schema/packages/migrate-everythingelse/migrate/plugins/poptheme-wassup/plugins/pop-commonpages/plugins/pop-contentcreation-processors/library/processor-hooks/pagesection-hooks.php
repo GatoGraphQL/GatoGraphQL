@@ -18,7 +18,7 @@ class PoPTheme_Wassup_CommonPages_ContentCreation_PageSectionHooks
     //         TranslationAPIFacade::getInstance()->__('FAQs', 'poptheme-wassup')
     //     );
 
-    //     $headerTitles[GD_CommonPages_Module_Processor_CustomBlocks::MODULE_BLOCK_ADDCONTENTFAQ] = $faqs;
+    //     $headerTitles[GD_CommonPages_Module_Processor_CustomBlocks::COMPONENT_BLOCK_ADDCONTENTFAQ] = $faqs;
 
     //     return $headerTitles;
     // }

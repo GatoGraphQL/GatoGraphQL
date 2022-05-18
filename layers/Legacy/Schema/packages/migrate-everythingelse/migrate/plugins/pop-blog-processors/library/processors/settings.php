@@ -11,28 +11,28 @@ $componentprocessor_manager->overrideProcessorClass(
     PostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+        PostFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
     ]
 );
 $componentprocessor_manager->overrideProcessorClass(
     UserFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        UserFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
+        UserFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
     ]
 );
 $componentprocessor_manager->overrideProcessorClass(
     UserPostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        UserPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+        UserPostFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
     ]
 );
 $componentprocessor_manager->overrideProcessorClass(
     FieldDataloadComponentProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
-        TagPostFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+        PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );

@@ -8,14 +8,14 @@ class GD_QT_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Selec
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QT_FORMINPUT_LANGUAGE],
+            [self::class, self::COMPONENT_QT_FORMINPUT_LANGUAGE],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_QT_FORMINPUT_LANGUAGE:
+            case self::COMPONENT_QT_FORMINPUT_LANGUAGE:
                 return TranslationAPIFacade::getInstance()->__('Language', 'poptheme-wassup');
         }
         
@@ -25,7 +25,7 @@ class GD_QT_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Selec
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_QT_FORMINPUT_LANGUAGE:
+            case self::COMPONENT_QT_FORMINPUT_LANGUAGE:
                 return GD_QT_FormInput_Languages::class;
         }
         

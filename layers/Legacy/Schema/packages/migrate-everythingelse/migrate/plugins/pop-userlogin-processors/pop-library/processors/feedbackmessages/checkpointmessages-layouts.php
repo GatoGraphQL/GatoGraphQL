@@ -11,10 +11,10 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN],
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN],
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT],
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN],
         );
     }
 
@@ -26,7 +26,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN:
                 // User already logged in (cannot welcome the person, can't say "Hi Peter!" since this message will be recorded at the beginning, when we still don't have the person logged in)
                 $ret['error-header'] = TranslationAPIFacade::getInstance()->__('Login/Register', 'pop-coreprocessors');
                 $ret['userloggedin'] = sprintf(
@@ -36,9 +36,9 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
                 );
                 break;
 
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN:
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT:
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN:
                 $ret['error-header'] = TranslationAPIFacade::getInstance()->__('Login/Register', 'pop-coreprocessors');
                 $ret['usernotloggedin'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You are not logged in yet, please %1$s first to %2$s.', 'poptheme-wassup'),
@@ -62,7 +62,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT:
                 $ret['usercannotedit'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You have no permissions to %1$s.', 'pop-coreprocessors'),
                     $action
@@ -70,7 +70,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
                 $ret['nonceinvalid'] = TranslationAPIFacade::getInstance()->__('The URL is invalid, please reload the page and try again.', 'pop-coreprocessors');
                 break;
 
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN:
                 $ret['userisnotadmin'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Only site administrators can %1$s.', 'pop-coreprocessors'),
                     $action

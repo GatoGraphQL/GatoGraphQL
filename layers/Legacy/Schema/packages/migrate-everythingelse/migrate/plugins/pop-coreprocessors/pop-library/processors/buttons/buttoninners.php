@@ -12,28 +12,28 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN],
-            [self::class, self::MODULE_BUTTONINNER_PRINT_SOCIALMEDIA],
-            [self::class, self::MODULE_BUTTONINNER_POSTPERMALINK],
-            [self::class, self::MODULE_BUTTONINNER_POSTCOMMENTS],
-            [self::class, self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL],
+            [self::class, self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_BUTTONINNER_PRINT_SOCIALMEDIA],
+            [self::class, self::COMPONENT_BUTTONINNER_POSTPERMALINK],
+            [self::class, self::COMPONENT_BUTTONINNER_POSTCOMMENTS],
+            [self::class, self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL],
         );
     }
 
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
+            case self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
                 return 'fa-fw fa-print';
 
-            case self::MODULE_BUTTONINNER_PRINT_SOCIALMEDIA:
+            case self::COMPONENT_BUTTONINNER_PRINT_SOCIALMEDIA:
                 return 'fa-fw fa-print fa-lg';
 
-            case self::MODULE_BUTTONINNER_POSTPERMALINK:
+            case self::COMPONENT_BUTTONINNER_POSTPERMALINK:
                 return 'fa-fw fa-link';
 
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS:
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return 'fa-fw fa-comments';
         }
 
@@ -43,13 +43,13 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
+            case self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Print', 'pop-coreprocessors');
 
-            case self::MODULE_BUTTONINNER_POSTPERMALINK:
+            case self::COMPONENT_BUTTONINNER_POSTPERMALINK:
                 return TranslationAPIFacade::getInstance()->__('Permalink', 'pop-coreprocessors');
         }
 
@@ -59,8 +59,8 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public function getTextField(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS:
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return 'commentCount';
         }
 
@@ -70,7 +70,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public function getTextfieldOpen(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('(', 'pop-coreprocessors');
         }
 
@@ -80,7 +80,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public function getTextfieldClose(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
+            case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__(')', 'pop-coreprocessors');
         }
 

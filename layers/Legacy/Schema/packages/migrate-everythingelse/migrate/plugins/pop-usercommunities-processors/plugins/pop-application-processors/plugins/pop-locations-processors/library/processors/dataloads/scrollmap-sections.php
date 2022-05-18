@@ -12,16 +12,16 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -29,8 +29,8 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP],
-            self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -39,11 +39,11 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP:
-                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::MODULE_FILTER_COMMUNITIES];
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP:
+                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_COMMUNITIES];
 
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCOMMUNITYMEMBERS];
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
 
         return parent::getFilterSubmodule($component);
@@ -52,8 +52,8 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
@@ -65,7 +65,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
     //             return UserRequestNature::USER;
     //     }
 
@@ -76,11 +76,11 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 $ret['orderby'] = NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:registrationdate');
                 $ret['order'] = 'DESC';
                 break;
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP:
                 $ret['role'] = GD_URE_ROLE_COMMUNITY;
                 break;
         }
@@ -94,7 +94,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
 
         switch ($component[1]) {
          // Members of the Community
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (gdUreIsCommunity($author)) {
@@ -109,8 +109,8 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
@@ -121,7 +121,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     {
         switch ($component[1]) {
          // Members of the Community
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {
@@ -131,12 +131,12 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
         }
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('members', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('members', 'poptheme-wassup'));
                 break;
 
-            case self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('communities', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('communities', 'poptheme-wassup'));
                 break;
         }
 

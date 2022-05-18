@@ -32,7 +32,7 @@ class PoP_UserState_Utils
 
     //     // Allow POPSYSTEM_CHECKPOINTCONFIGURATION_SYSTEMACCESSVALID to not be static => it can't be cached, but to not retrieve the logged-in user data, which:
     //     // 1. It doesn't need
-    //     // 2. It creates trouble: it adds PoP_Module_Processor_UserAccountGroups::MODULE_GROUP_LOGGEDINUSERDATA to the output, bringing extra stuff that we don't want, making these pages (eg: /generate-theme/) not have
+    //     // 2. It creates trouble: it adds PoP_Module_Processor_UserAccountGroups::COMPONENT_GROUP_LOGGEDINUSERDATA to the output, bringing extra stuff that we don't want, making these pages (eg: /generate-theme/) not have
     //     // the minimum set of templates anymore (eg: it adds "layout-followuser-hide-styles":"layout-styles", so we couldn't use this page to calculate $js/css_loadingframe_resources_pack anymore)
     //     if (isset($checkpoint_configuration['requires-user-state'])) {
 

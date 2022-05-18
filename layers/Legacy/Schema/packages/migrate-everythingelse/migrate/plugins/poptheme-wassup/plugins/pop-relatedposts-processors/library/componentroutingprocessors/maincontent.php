@@ -15,7 +15,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentComponentRoutingProcessor e
         $default_format_singlesection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLESECTION);
 
         $routemodules_details = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS],
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -29,7 +29,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentComponentRoutingProcessor e
             }
         }
         $routemodules_simpleview = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW],
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -43,7 +43,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentComponentRoutingProcessor e
             }
         }
         $routemodules_fullview = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW],
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -57,7 +57,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentComponentRoutingProcessor e
             }
         }
         $routemodules_thumbnail = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL],
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -71,7 +71,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentComponentRoutingProcessor e
             }
         }
         $routemodules_list = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST],
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [

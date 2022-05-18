@@ -12,11 +12,11 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CODE_HOMEWELCOME],
-            [self::class, self::MODULE_CODE_EMPTY],
-            [self::class, self::MODULE_CODE_TRENDINGTAGSDESCRIPTION],
-            [self::class, self::MODULE_CODE_404],
-            [self::class, self::MODULE_CODE_EMPTYSIDEINFO],
+            [self::class, self::COMPONENT_CODE_HOMEWELCOME],
+            [self::class, self::COMPONENT_CODE_EMPTY],
+            [self::class, self::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION],
+            [self::class, self::COMPONENT_CODE_404],
+            [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO],
         );
     }
 
@@ -25,8 +25,8 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_CODE_EMPTYSIDEINFO:
-                // Comment Leo 07/12/2017: this function closes the sideinfo for [self::class, self::MODULE_CODE_EMPTYSIDEINFO], and it must take place immediately,
+            case self::COMPONENT_CODE_EMPTYSIDEINFO:
+                // Comment Leo 07/12/2017: this function closes the sideinfo for [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO], and it must take place immediately,
                 // or otherwise the sideinfo will show and then disappear a few seconds later and it looks ugly (eg: in Verticals homepage, where there is no sideinfo)
                 $this->addJsmethod($ret, 'closePageSectionOnTabpaneShown', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
                 break;
@@ -38,7 +38,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     public function getHtmlTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_404:
+            case self::COMPONENT_CODE_404:
                 return 'p';
         }
 
@@ -54,7 +54,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         $li = '<li>%s</li>';
 
         switch ($component[1]) {
-            case self::MODULE_CODE_HOMEWELCOME:
+            case self::COMPONENT_CODE_HOMEWELCOME:
                 $code = sprintf(
                     '<h3 class="media-heading">%s</h3>',
                     PoP_ApplicationProcessors_Utils::getWelcomeTitle(false)
@@ -71,7 +71,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                 $code .= gdGetWebsiteDescription(false);
                 return $code;
 
-            case self::MODULE_CODE_TRENDINGTAGSDESCRIPTION:
+            case self::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION:
                 return sprintf(
                     '<div class="bg-warning text-warning">%s</div>',
                     \PoP\Root\App::applyFilters(
@@ -84,7 +84,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                     )
                 );
 
-            case self::MODULE_CODE_404:
+            case self::COMPONENT_CODE_404:
                 return TranslationAPIFacade::getInstance()->__('Oops, page not found.', 'pop-application-processors');
         }
 
@@ -94,7 +94,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_HOMEWELCOME:
+            case self::COMPONENT_CODE_HOMEWELCOME:
                 $this->appendProp($component, $props, 'class', 'block-homewelcome');
                 break;
         }

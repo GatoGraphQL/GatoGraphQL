@@ -9,22 +9,22 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::MODULE_LAYOUT_ORGANIZATIONTYPES],
-            [self::class, self::MODULE_LAYOUT_INDIVIDUALINTERESTS],
+            [self::class, self::COMPONENT_LAYOUT_ORGANIZATIONCATEGORIES],
+            [self::class, self::COMPONENT_LAYOUT_ORGANIZATIONTYPES],
+            [self::class, self::COMPONENT_LAYOUT_INDIVIDUALINTERESTS],
         );
     }
 
     public function getCategoriesField(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_LAYOUT_ORGANIZATIONCATEGORIES:
                 return 'organizationCategoriesByName';
 
-            case self::MODULE_LAYOUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_LAYOUT_ORGANIZATIONTYPES:
                 return 'organizationTypesByName';
 
-            case self::MODULE_LAYOUT_INDIVIDUALINTERESTS:
+            case self::COMPONENT_LAYOUT_INDIVIDUALINTERESTS:
                 return 'individualInterestsByName';
         }
         
@@ -33,7 +33,7 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public function getLabelClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_LAYOUT_ORGANIZATIONTYPES:
                 return 'label-primary';
         }
         

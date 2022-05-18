@@ -7,7 +7,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageInners extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUSER],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageInners extends PoP_Modul
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

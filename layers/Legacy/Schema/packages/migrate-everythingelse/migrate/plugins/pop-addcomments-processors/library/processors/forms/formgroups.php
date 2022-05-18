@@ -7,14 +7,14 @@ class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormCo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_COMMENTEDITOR],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR],
+            self::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR],
         );
 
         if ($component = $components[$component[1]] ?? null) {

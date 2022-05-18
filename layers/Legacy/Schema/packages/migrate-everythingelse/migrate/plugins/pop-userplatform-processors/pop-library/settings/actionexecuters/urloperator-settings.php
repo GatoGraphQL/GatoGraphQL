@@ -12,7 +12,7 @@ function gdFormatInitsettings()
     /** @var SettingsMutationResolver */
     $actionExecuterSettings = $instanceManager->getInstance(SettingsMutationResolver::class);
     $actionExecuterSettings->add(
-    	[GD_UserPlatform_Module_Processor_SelectFormInputs::class, GD_UserPlatform_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_SETTINGSFORMAT],
+    	[GD_UserPlatform_Module_Processor_SelectFormInputs::class, GD_UserPlatform_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_SETTINGSFORMAT],
     	new GD_Settings_UrlOperator_Format()
     );
 }

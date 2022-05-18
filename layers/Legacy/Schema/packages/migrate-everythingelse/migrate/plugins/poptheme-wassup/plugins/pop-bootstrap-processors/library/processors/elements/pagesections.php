@@ -33,20 +33,20 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_PAGESECTION_QUICKVIEW],
-            [self::class, self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO],
-            [self::class, self::MODULE_PAGESECTION_ADDONTABS],
-            [self::class, self::MODULE_PAGESECTION_BACKGROUND],
-            [self::class, self::MODULE_PAGESECTION_FRAMECOMPONENTS],
-            [self::class, self::MODULE_PAGESECTION_HOLE],
-            [self::class, self::MODULE_PAGESECTION_HOVER],
-            [self::class, self::MODULE_PAGESECTION_NAVIGATOR],
-            [self::class, self::MODULE_PAGESECTION_SIDE],
-            [self::class, self::MODULE_PAGESECTION_TOP],
-            [self::class, self::MODULE_PAGESECTION_BODYSIDEINFO],
-            [self::class, self::MODULE_PAGESECTION_MODALS],
-            [self::class, self::MODULE_PAGESECTION_BODYTABS],
-            [self::class, self::MODULE_PAGESECTION_BODY],
+            [self::class, self::COMPONENT_PAGESECTION_QUICKVIEW],
+            [self::class, self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO],
+            [self::class, self::COMPONENT_PAGESECTION_ADDONTABS],
+            [self::class, self::COMPONENT_PAGESECTION_BACKGROUND],
+            [self::class, self::COMPONENT_PAGESECTION_FRAMECOMPONENTS],
+            [self::class, self::COMPONENT_PAGESECTION_HOLE],
+            [self::class, self::COMPONENT_PAGESECTION_HOVER],
+            [self::class, self::COMPONENT_PAGESECTION_NAVIGATOR],
+            [self::class, self::COMPONENT_PAGESECTION_SIDE],
+            [self::class, self::COMPONENT_PAGESECTION_TOP],
+            [self::class, self::COMPONENT_PAGESECTION_BODYSIDEINFO],
+            [self::class, self::COMPONENT_PAGESECTION_MODALS],
+            [self::class, self::COMPONENT_PAGESECTION_BODYTABS],
+            [self::class, self::COMPONENT_PAGESECTION_BODY],
         );
     }
 
@@ -57,46 +57,46 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_PAGESECTION_QUICKVIEW:
-            case self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO:
-            case self::MODULE_PAGESECTION_ADDONTABS:
-            case self::MODULE_PAGESECTION_HOLE:
-            case self::MODULE_PAGESECTION_HOVER:
-            case self::MODULE_PAGESECTION_NAVIGATOR:
-            case self::MODULE_PAGESECTION_SIDE:
-            case self::MODULE_PAGESECTION_TOP:
-            case self::MODULE_PAGESECTION_BODYSIDEINFO:
-            case self::MODULE_PAGESECTION_MODALS:
-            case self::MODULE_PAGESECTION_BODYTABS:
-            case self::MODULE_PAGESECTION_BODY:
+            case self::COMPONENT_PAGESECTION_QUICKVIEW:
+            case self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO:
+            case self::COMPONENT_PAGESECTION_ADDONTABS:
+            case self::COMPONENT_PAGESECTION_HOLE:
+            case self::COMPONENT_PAGESECTION_HOVER:
+            case self::COMPONENT_PAGESECTION_NAVIGATOR:
+            case self::COMPONENT_PAGESECTION_SIDE:
+            case self::COMPONENT_PAGESECTION_TOP:
+            case self::COMPONENT_PAGESECTION_BODYSIDEINFO:
+            case self::COMPONENT_PAGESECTION_MODALS:
+            case self::COMPONENT_PAGESECTION_BODYTABS:
+            case self::COMPONENT_PAGESECTION_BODY:
                 // If not told to be empty, then add the page submodule
                 $componentAtts = count($component) >= 3 ? $component[2] : null;
                 if (!($componentAtts && $componentAtts['empty'])) {
                     $subComponents = array(
-                        self::MODULE_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEW],
-                        self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEWSIDEINFO],
-                        self::MODULE_PAGESECTION_ADDONTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::MODULE_PAGE_ADDONTABS],
-                        self::MODULE_PAGESECTION_HOLE => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_HOLE],
-                        self::MODULE_PAGESECTION_HOVER => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_HOVER],
-                        self::MODULE_PAGESECTION_NAVIGATOR => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_NAVIGATOR],
-                        self::MODULE_PAGESECTION_SIDE => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_SIDE],
-                        self::MODULE_PAGESECTION_TOP => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_TOP],
-                        self::MODULE_PAGESECTION_BODYSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_BODYSIDEINFO],
-                        self::MODULE_PAGESECTION_MODALS => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_MODALS],
-                        self::MODULE_PAGESECTION_BODYTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::MODULE_PAGE_BODYTABS],
-                        self::MODULE_PAGESECTION_BODY => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_BODY],
+                        self::COMPONENT_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_QUICKVIEW],
+                        self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_QUICKVIEWSIDEINFO],
+                        self::COMPONENT_PAGESECTION_ADDONTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::COMPONENT_PAGE_ADDONTABS],
+                        self::COMPONENT_PAGESECTION_HOLE => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_HOLE],
+                        self::COMPONENT_PAGESECTION_HOVER => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_HOVER],
+                        self::COMPONENT_PAGESECTION_NAVIGATOR => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_NAVIGATOR],
+                        self::COMPONENT_PAGESECTION_SIDE => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_SIDE],
+                        self::COMPONENT_PAGESECTION_TOP => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_TOP],
+                        self::COMPONENT_PAGESECTION_BODYSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_BODYSIDEINFO],
+                        self::COMPONENT_PAGESECTION_MODALS => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_MODALS],
+                        self::COMPONENT_PAGESECTION_BODYTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::COMPONENT_PAGE_BODYTABS],
+                        self::COMPONENT_PAGESECTION_BODY => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_BODY],
                     );
                     $ret[] = $subComponents[$component[1]];
                 }
                 break;
 
-            case self::MODULE_PAGESECTION_FRAMECOMPONENTS:
+            case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_FRAMECOMPONENTS];
+                $subComponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_FRAMECOMPONENTS];
                 $componentAtts = array();
 
                 // Requested a different target: load nothing
@@ -114,8 +114,8 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 }
                 break;
 
-            case self::MODULE_PAGESECTION_BACKGROUND:
-                $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_BACKGROUND];
+            case self::COMPONENT_PAGESECTION_BACKGROUND:
+                $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_BACKGROUND];
                 break;
         }
 
@@ -125,46 +125,46 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     public function getID(array $component, array &$props): string
     {
         switch ($component[1]) {
-            case self::MODULE_PAGESECTION_HOVER:
+            case self::COMPONENT_PAGESECTION_HOVER:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_HOVER;
 
-            case self::MODULE_PAGESECTION_NAVIGATOR:
+            case self::COMPONENT_PAGESECTION_NAVIGATOR:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
 
-            case self::MODULE_PAGESECTION_SIDE:
+            case self::COMPONENT_PAGESECTION_SIDE:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_SIDE;
 
-            case self::MODULE_PAGESECTION_TOP:
+            case self::COMPONENT_PAGESECTION_TOP:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_TOP;
 
-            case self::MODULE_PAGESECTION_ADDONTABS:
+            case self::COMPONENT_PAGESECTION_ADDONTABS:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_ADDONTABS;
 
-            case self::MODULE_PAGESECTION_BODYSIDEINFO:
+            case self::COMPONENT_PAGESECTION_BODYSIDEINFO:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_BODYSIDEINFO;
 
-            case self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO:
+            case self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO;
 
-            case self::MODULE_PAGESECTION_BODY:
+            case self::COMPONENT_PAGESECTION_BODY:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_BODY;
 
-            case self::MODULE_PAGESECTION_QUICKVIEW:
+            case self::COMPONENT_PAGESECTION_QUICKVIEW:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEW;
 
-            case self::MODULE_PAGESECTION_BACKGROUND:
+            case self::COMPONENT_PAGESECTION_BACKGROUND:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_BACKGROUND;
 
-            case self::MODULE_PAGESECTION_FRAMECOMPONENTS:
+            case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS;
 
-            case self::MODULE_PAGESECTION_HOLE:
+            case self::COMPONENT_PAGESECTION_HOLE:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_HOLE;
 
-            case self::MODULE_PAGESECTION_MODALS:
+            case self::COMPONENT_PAGESECTION_MODALS:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_MODALS;
 
-            case self::MODULE_PAGESECTION_BODYTABS:
+            case self::COMPONENT_PAGESECTION_BODYTABS:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
         }
 
@@ -174,7 +174,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_PAGESECTION_QUICKVIEW:
+            case self::COMPONENT_PAGESECTION_QUICKVIEW:
                 $this->appendProp($component, $props, 'class', 'offcanvas body tab-content');
                 $this->mergeProp(
                     $component,
@@ -187,7 +187,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 );
                 break;
 
-            case self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO:
+            case self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO:
                 $this->appendProp($component, $props, 'class', 'offcanvas sideinfo tab-content');
                 $this->mergeProp(
                     $component,
@@ -203,15 +203,15 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         }
 
         switch ($component[1]) {
-            case self::MODULE_PAGESECTION_FRAMECOMPONENTS:
+            case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
                 $this->appendProp($component, $props, 'class', 'framecomponents');
                 break;
 
-            case self::MODULE_PAGESECTION_HOLE:
+            case self::COMPONENT_PAGESECTION_HOLE:
                 $this->appendProp($component, $props, 'class', 'hole');
                 break;
 
-            case self::MODULE_PAGESECTION_MODALS:
+            case self::COMPONENT_PAGESECTION_MODALS:
                 $this->appendProp($component, $props, 'class', 'modals');
                 $this->mergeProp(
                     $component,
@@ -230,7 +230,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             $moduleFullName => &$props[$moduleFullName],
         );
         switch ($component[1]) {
-            case self::MODULE_PAGESECTION_BODYSIDEINFO:
+            case self::COMPONENT_PAGESECTION_BODYSIDEINFO:
                 // Allow the Sideinfo's permanent Events Calendar to be lazy-load
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
@@ -240,7 +240,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 );
                 break;
 
-            case self::MODULE_PAGESECTION_BODY:
+            case self::COMPONENT_PAGESECTION_BODY:
                 // Allow for compatibility for the Users Carousel in the Homepage to not be lazy-load
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:main',
@@ -250,7 +250,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 );
                 break;
 
-            case self::MODULE_PAGESECTION_HOVER:
+            case self::COMPONENT_PAGESECTION_HOVER:
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:hover',
                     $component,
@@ -259,7 +259,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 );
                 break;
 
-            case self::MODULE_PAGESECTION_MODALS:
+            case self::COMPONENT_PAGESECTION_MODALS:
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomModalPageSections:get_props_block_initial:modals',
                     $component,
@@ -277,7 +277,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_PAGESECTION_ADDONTABS:
+            case self::COMPONENT_PAGESECTION_ADDONTABS:
                 $this->addJsmethod($ret, 'scrollbarHorizontal');
                 break;
         }

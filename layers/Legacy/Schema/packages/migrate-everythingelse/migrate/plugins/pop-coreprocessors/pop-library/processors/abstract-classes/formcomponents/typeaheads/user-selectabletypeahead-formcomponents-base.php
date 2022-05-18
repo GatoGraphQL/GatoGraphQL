@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
 
     public function getTriggerSubmodule(array $component): ?array
     {
-        return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_CARD];
+        return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_CARD];
     }
 
     public function initModelProps(array $component, array &$props): void

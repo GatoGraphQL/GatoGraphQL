@@ -8,16 +8,16 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebars extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_HORIZONTALSIDEBAR_AUTHOR_ORGANIZATION],
-            [self::class, self::MODULE_HORIZONTALSIDEBAR_AUTHOR_INDIVIDUAL],
+            [self::class, self::COMPONENT_HORIZONTALSIDEBAR_AUTHOR_ORGANIZATION],
+            [self::class, self::COMPONENT_HORIZONTALSIDEBAR_AUTHOR_INDIVIDUAL],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_HORIZONTALSIDEBAR_AUTHOR_ORGANIZATION => [GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION],
-            self::MODULE_HORIZONTALSIDEBAR_AUTHOR_INDIVIDUAL => [GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL],
+            self::COMPONENT_HORIZONTALSIDEBAR_AUTHOR_ORGANIZATION => [GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION],
+            self::COMPONENT_HORIZONTALSIDEBAR_AUTHOR_INDIVIDUAL => [GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {

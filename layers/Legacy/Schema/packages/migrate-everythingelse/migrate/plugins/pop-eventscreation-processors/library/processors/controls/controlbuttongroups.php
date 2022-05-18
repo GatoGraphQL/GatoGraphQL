@@ -11,11 +11,11 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDEVENT],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_EVENTLINKS],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_TAGEVENTLINKS],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_MYEVENTLINKS],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_AUTHOREVENTLINKS],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS],
         );
     }
 
@@ -24,27 +24,27 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_ADDEVENT:
-                $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDEVENT];
+            case self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT:
+                $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT];
                 if (defined('POP_EVENTLINKSCREATIONPROCESSORS_INITIALIZED')) {
-                    $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK];
+                    $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK];
                 }
                 break;
         
-            case self::MODULE_CONTROLBUTTONGROUP_EVENTLINKS:
-                $ret[] = [PoP_Events_Module_Processor_CustomAnchorControls::class, PoP_Events_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS];
+            case self::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS:
+                $ret[] = [PoP_Events_Module_Processor_CustomAnchorControls::class, PoP_Events_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS];
                 break;
         
-            case self::MODULE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS:
-                $ret[] = [PoP_Events_Module_Processor_CustomAnchorControls::class, PoP_Events_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS];
+            case self::COMPONENT_CONTROLBUTTONGROUP_AUTHOREVENTLINKS:
+                $ret[] = [PoP_Events_Module_Processor_CustomAnchorControls::class, PoP_Events_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS];
                 break;
         
-            case self::MODULE_CONTROLBUTTONGROUP_TAGEVENTLINKS:
-                $ret[] = [PoP_Events_Module_Processor_CustomAnchorControls::class, PoP_Events_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS];
+            case self::COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS:
+                $ret[] = [PoP_Events_Module_Processor_CustomAnchorControls::class, PoP_Events_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS];
                 break;
         
-            case self::MODULE_CONTROLBUTTONGROUP_MYEVENTLINKS:
-                $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS];
+            case self::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS:
+                $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS];
                 break;
         }
         

@@ -9,18 +9,18 @@ class PoP_ContentCreation_Module_Processor_ViewComponentButtonInners extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN],
         );
     }
     
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA:
                 return 'fa-fw fa-flag fa-lg';
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN:
                 return 'fa-fw fa-flag';
         }
         
@@ -30,7 +30,7 @@ class PoP_ContentCreation_Module_Processor_ViewComponentButtonInners extends PoP
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Flag as inappropriate', 'pop-coreprocessors');
         }
         

@@ -9,16 +9,16 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_ADDONSPOSTEDIT],
-            [self::class, self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT],
+            [self::class, self::COMPONENT_BUTTON_ADDONSPOSTEDIT],
+            [self::class, self::COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_ADDONSPOSTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
-            self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
+            self::COMPONENT_BUTTON_ADDONSPOSTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT],
+            self::COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -30,8 +30,8 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_ADDONSPOSTEDIT => 'editURL',
-            self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => 'editURL',
+            self::COMPONENT_BUTTON_ADDONSPOSTEDIT => 'editURL',
+            self::COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT => 'editURL',
         );
         if ($field = $fields[$component[1]] ?? null) {
             return $field;
@@ -43,8 +43,8 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_BUTTON_ADDONSPOSTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
-            self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
+            self::COMPONENT_BUTTON_ADDONSPOSTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
+            self::COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;
@@ -56,10 +56,10 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_ADDONSPOSTEDIT:
+            case self::COMPONENT_BUTTON_ADDONSPOSTEDIT:
                 return POP_TARGET_ADDONS;
 
-            case self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT:
+            case self::COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -74,8 +74,8 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTON_ADDONSPOSTEDIT:
-            case self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT:
+            case self::COMPONENT_BUTTON_ADDONSPOSTEDIT:
+            case self::COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT:
                 $ret .= ' btn btn-xs btn-default';
                 break;
         }

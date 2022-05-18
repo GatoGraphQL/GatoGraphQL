@@ -9,7 +9,7 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORLINKS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORLINKS],
         );
     }
 
@@ -21,15 +21,15 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends 
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
                 switch ($component[1]) {
-                    case self::MODULE_BLOCK_TABPANEL_AUTHORLINKS:
-                        $ret[] = [GD_URE_Module_Processor_ControlGroups::class, GD_URE_Module_Processor_ControlGroups::MODULE_URE_CONTROLGROUP_CONTENTSOURCE];
+                    case self::COMPONENT_BLOCK_TABPANEL_AUTHORLINKS:
+                        $ret[] = [GD_URE_Module_Processor_ControlGroups::class, GD_URE_Module_Processor_ControlGroups::COMPONENT_URE_CONTROLGROUP_CONTENTSOURCE];
                         break;
                 }
             }
         }
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORLINKS],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORLINKS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -41,8 +41,8 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends 
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_AUTHORLINKS:
-                return [PoP_ContentPostLinks_Module_Processor_CustomFilters::class, PoP_ContentPostLinks_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORLINKS];
+            case self::COMPONENT_BLOCK_TABPANEL_AUTHORLINKS:
+                return [PoP_ContentPostLinks_Module_Processor_CustomFilters::class, PoP_ContentPostLinks_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORLINKS];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

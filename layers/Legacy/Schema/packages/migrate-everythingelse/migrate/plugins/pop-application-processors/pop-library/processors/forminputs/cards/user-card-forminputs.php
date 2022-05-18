@@ -7,15 +7,15 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_USER],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_USER],
         );
     }
 
     public function getTriggerSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_USER:
-                return [PoP_Module_Processor_UserHiddenInputAlertFormComponents::class, PoP_Module_Processor_UserHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER];
+            case self::COMPONENT_FORMCOMPONENT_CARD_USER:
+                return [PoP_Module_Processor_UserHiddenInputAlertFormComponents::class, PoP_Module_Processor_UserHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER];
         }
 
         return parent::getTriggerSubmodule($component);
@@ -24,7 +24,7 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_USER:
+            case self::COMPONENT_FORMCOMPONENT_CARD_USER:
                 return 'self';
         }
 

@@ -26,14 +26,14 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_EVENTSCOPE],
+            [self::class, self::COMPONENT_FILTERINPUT_EVENTSCOPE],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_EVENTSCOPE => [PoP_Events_Module_Processor_FilterInputProcessor::class, PoP_Events_Module_Processor_FilterInputPrDATEsor::FILTERINPUT_EVENTSCOPE],
+            self::COMPONENT_FILTERINPUT_EVENTSCOPE => [PoP_Events_Module_Processor_FilterInputProcessor::class, PoP_Events_Module_Processor_FilterInputPrDATEsor::FILTERINPUT_EVENTSCOPE],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -41,7 +41,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_EVENTSCOPE:
+    //         case self::COMPONENT_FILTERINPUT_EVENTSCOPE:
     //             return true;
     //     }
 
@@ -51,7 +51,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_EVENTSCOPE:
+            case self::COMPONENT_FILTERINPUT_EVENTSCOPE:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
         }
 
@@ -61,10 +61,10 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_EVENTSCOPE:
+            case self::COMPONENT_FILTERINPUT_EVENTSCOPE:
                 // Add a nice name, so that the URL params when filtering make sense
                 $names = array(
-                    self::MODULE_FILTERINPUT_EVENTSCOPE => 'scope',
+                    self::COMPONENT_FILTERINPUT_EVENTSCOPE => 'scope',
                 );
                 return $names[$component[1]];
         }
@@ -75,7 +75,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_EVENTSCOPE => $this->dateScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_EVENTSCOPE => $this->dateScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -84,7 +84,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_EVENTSCOPE => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_EVENTSCOPE => $translationAPI->__('', ''),
             default => null,
         };
     }

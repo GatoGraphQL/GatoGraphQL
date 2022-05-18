@@ -7,14 +7,14 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP],
+            [self::class, self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -22,7 +22,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
     protected function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -31,7 +31,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
+            case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
 
@@ -41,8 +41,8 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKUSERLIST];
+            case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKUSERLIST];
         }
 
         return parent::getControlgroupTopSubmodule($component);

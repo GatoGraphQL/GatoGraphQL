@@ -9,8 +9,8 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP],
         );
     }
 
@@ -19,8 +19,8 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY:
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
                 $action = $this->getProp($component, $props, 'action');
                 $ret['usernotloggedin'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You are not logged in yet, please %1$s first to %2$s.', 'poptheme-wassup'),
@@ -39,7 +39,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
                 $ret['editingnotcommunitymember'] = TranslationAPIFacade::getInstance()->__('This user is not a member of your community.', 'ure-popprocessors');
                 $ret['nonceinvalid'] = TranslationAPIFacade::getInstance()->__('The URL is invalid, please reload the page and try again.', 'pop-coreprocessors');
                 break;

@@ -16,8 +16,8 @@ class PoPTheme_Wassup_SocialNetwork_PageSectionHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
-                $processor->setProp([PoP_SocialNetwork_Module_Processor_Blocks::class, PoP_SocialNetwork_Module_Processor_Blocks::MODULE_BLOCK_CONTACTUSER], $props, 'title', '');
+            case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
+                $processor->setProp([PoP_SocialNetwork_Module_Processor_Blocks::class, PoP_SocialNetwork_Module_Processor_Blocks::COMPONENT_BLOCK_CONTACTUSER], $props, 'title', '');
                 break;
         }
     }

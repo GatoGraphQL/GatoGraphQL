@@ -8,8 +8,8 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_SHARE],
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE],
         );
     }
 
@@ -18,10 +18,10 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 $components = array();
-                $components[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_PRINT];
+                $components[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_PRINT];
 
                 // Allow PoP Generic Forms Processors to add modules
                 $components = \PoP\Root\App::applyFilters(
@@ -42,8 +42,8 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
     public function getBtnClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'btn btn-compact btn-link';
         }
         
@@ -53,8 +53,8 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'fa-share';
         }
 

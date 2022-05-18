@@ -8,7 +8,7 @@ if (!\PoP\Application\Environment::disableCustomCMSCode()) {
         UserStance_Module_Processor_CustomSectionDataloads::class,
         UserStance_WP_Module_Processor_CustomSectionDataloads::class,
         [
-            UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL,
+            UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_CAROUSEL,
         ]
     );
 }

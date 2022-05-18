@@ -25,36 +25,36 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_HEADER],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER],
 
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_ADDONS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LIST],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LINE],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_RELATED],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LINE],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT],
 
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT],
 
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT],
         );
     }
 
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
                 return 'editURL';
         }
 
@@ -64,9 +64,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -79,19 +79,19 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
-                return [PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::class, PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+                return [PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::class, PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_HIGHLIGHTEDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
-                return [PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::class, PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+                return [PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::class, PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_HIGHLIGHTCONTENT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -100,8 +100,8 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function showPosttitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 return false;
         }
 
@@ -111,9 +111,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getContentSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
-                return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POSTCOMPACT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+                return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT];
         }
 
         return parent::getContentSubmodule($component);
@@ -122,18 +122,18 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getQuicklinkgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
         return parent::getQuicklinkgroupTopSubmodule($component);
@@ -144,31 +144,31 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         $ret = parent::getBottomSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 $ret = array_merge(
                     $ret,
                     $this->getDetailsfeedBottomSubmodules($component)
@@ -184,18 +184,18 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         $ret = parent::getBelowthumbLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
                 break;
         }
@@ -206,32 +206,32 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getPostThumbSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HEADER:
-            case self::MODULE_LAYOUT_PREVIEWPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LINE:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LINE:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_XSMALL];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 return null;
         }
 
@@ -241,8 +241,8 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function showExcerpt(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
 
@@ -252,11 +252,11 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getTitleHtmlmarkup(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 return 'h3';
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LINE:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LINE:
                 return 'span';
         }
 
@@ -267,12 +267,12 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
-                case self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS:
-                case self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST:
-                case self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
-                case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
-                case self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED:
-                    return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR];
+                case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
+                case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
+                case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
+                case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+                case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED:
+                    return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR];
             }
         }
 
@@ -282,33 +282,33 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function authorPositions(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE
                 );
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT
                 );
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HEADER:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LINE:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LINE:
                 return array();
         }
 
@@ -318,8 +318,8 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function horizontalLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
 
@@ -329,16 +329,16 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_HEADER:
-            case self::MODULE_LAYOUT_PREVIEWPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LINE:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LINE:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
                 return true;
         }
 
@@ -350,29 +350,29 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 $ret[GD_JS_CLASSES]['authors'] = 'pull-right authors-bottom';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 $ret[GD_JS_CLASSES]['content'] = 'well';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }
@@ -383,7 +383,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function getTitleBeforeauthors(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 return array(
                     'belowcontent' => TranslationAPIFacade::getInstance()->__('added by', 'poptheme-wassup')
                 );
@@ -395,11 +395,11 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_HEADER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
                 $this->appendProp($component, $props, 'class', 'alert alert-info alert-sm');
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 $this->appendProp($component, $props, 'class', 'well well-highlight');
                 break;
         }

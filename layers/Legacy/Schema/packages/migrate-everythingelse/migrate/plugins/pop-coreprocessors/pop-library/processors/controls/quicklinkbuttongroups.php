@@ -13,13 +13,13 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTPERMALINK],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_USERSHARE],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_USERCONTACTINFO],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_COMMENTS],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_TAGSHARE],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE],
         );
     }
 
@@ -28,32 +28,32 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE:
-                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE:
+                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTPERMALINK:
-                $ret[] = [PoP_Module_Processor_ButtonWrappers::class, PoP_Module_Processor_ButtonWrappers::MODULE_BUTTONWRAPPER_POSTPERMALINK];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK:
+                $ret[] = [PoP_Module_Processor_ButtonWrappers::class, PoP_Module_Processor_ButtonWrappers::COMPONENT_BUTTONWRAPPER_POSTPERMALINK];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_USERSHARE:
-                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE:
+                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_USERCONTACTINFO:
-                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO:
+                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_COMMENTS:
-                $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_POSTCOMMENTS];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS:
+                $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_POSTCOMMENTS];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL:
-                $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_POSTCOMMENTS_LABEL];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL:
+                $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_POSTCOMMENTS_LABEL];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_TAGSHARE:
-                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE:
+                $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE];
                 break;
         }
         

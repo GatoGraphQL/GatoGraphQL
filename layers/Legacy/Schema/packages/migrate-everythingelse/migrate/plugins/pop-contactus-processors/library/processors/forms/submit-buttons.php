@@ -8,14 +8,14 @@ class PoP_ContactUs_Module_Processor_SubmitButtons extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GF_SUBMITBUTTON_SENDMESSAGE],
+            [self::class, self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_GF_SUBMITBUTTON_SENDMESSAGE:
+            case self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE:
                 return TranslationAPIFacade::getInstance()->__('Send Message', 'pop-genericforms');
         }
 
@@ -25,7 +25,7 @@ class PoP_ContactUs_Module_Processor_SubmitButtons extends PoP_Module_Processor_
     public function getLoadingText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_GF_SUBMITBUTTON_SENDMESSAGE:
+            case self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE:
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms');
         }
         

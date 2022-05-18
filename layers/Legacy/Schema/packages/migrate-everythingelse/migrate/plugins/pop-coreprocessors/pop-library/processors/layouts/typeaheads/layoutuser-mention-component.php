@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserMentionComponentLayouts extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTUSER_MENTION_COMPONENT],
+            [self::class, self::COMPONENT_LAYOUTUSER_MENTION_COMPONENT],
         );
     }
 }

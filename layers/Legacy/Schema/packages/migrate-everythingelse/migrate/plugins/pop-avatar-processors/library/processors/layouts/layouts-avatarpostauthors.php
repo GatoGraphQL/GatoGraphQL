@@ -11,30 +11,30 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR],
-            [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR26],
-            [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR60],
-            [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR82],
-            [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR120],
+            [self::class, self::COMPONENT_LAYOUTPOST_AUTHORAVATAR],
+            [self::class, self::COMPONENT_LAYOUTPOST_AUTHORAVATAR26],
+            [self::class, self::COMPONENT_LAYOUTPOST_AUTHORAVATAR60],
+            [self::class, self::COMPONENT_LAYOUTPOST_AUTHORAVATAR82],
+            [self::class, self::COMPONENT_LAYOUTPOST_AUTHORAVATAR120],
         );
     }
 
     public function getAvatarSize(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTPOST_AUTHORAVATAR:
+            case self::COMPONENT_LAYOUTPOST_AUTHORAVATAR:
                 return GD_AVATAR_SIZE_40;
 
-            case self::MODULE_LAYOUTPOST_AUTHORAVATAR26:
+            case self::COMPONENT_LAYOUTPOST_AUTHORAVATAR26:
                 return GD_AVATAR_SIZE_26;
 
-            case self::MODULE_LAYOUTPOST_AUTHORAVATAR60:
+            case self::COMPONENT_LAYOUTPOST_AUTHORAVATAR60:
                 return GD_AVATAR_SIZE_60;
 
-            case self::MODULE_LAYOUTPOST_AUTHORAVATAR82:
+            case self::COMPONENT_LAYOUTPOST_AUTHORAVATAR82:
                 return GD_AVATAR_SIZE_82;
 
-            case self::MODULE_LAYOUTPOST_AUTHORAVATAR120:
+            case self::COMPONENT_LAYOUTPOST_AUTHORAVATAR120:
                 return GD_AVATAR_SIZE_120;
         }
         

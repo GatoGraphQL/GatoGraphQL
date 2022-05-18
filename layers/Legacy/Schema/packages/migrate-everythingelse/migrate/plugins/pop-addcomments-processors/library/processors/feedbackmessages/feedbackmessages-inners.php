@@ -7,7 +7,7 @@ class PoP_Module_Processor_CommentsFeedbackMessageInners extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_ADDCOMMENT],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_ADDCOMMENT],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_Module_Processor_CommentsFeedbackMessageInners extends PoP_Module_Proc
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_FEEDBACKMESSAGEINNER_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageAlertLayouts::class, PoP_Module_Processor_CommentsFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_ADDCOMMENT],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageAlertLayouts::class, PoP_Module_Processor_CommentsFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ADDCOMMENT],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

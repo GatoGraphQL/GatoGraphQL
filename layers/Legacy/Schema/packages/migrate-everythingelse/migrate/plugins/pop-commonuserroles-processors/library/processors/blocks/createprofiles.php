@@ -9,16 +9,16 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE],
-            [self::class, self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE],
+            [self::class, self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE],
+            [self::class, self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
-            self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
+            self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
+            self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -28,14 +28,14 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
-                $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE];
-                $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT];
+            case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
+                $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE];
+                $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT];
                 break;
 
-            case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
-                $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE];
-                $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT];
+            case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
+                $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE];
+                $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT];
                 break;
         }
 
@@ -45,9 +45,9 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
-            case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEACCOUNT];
+            case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
+            case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEACCOUNT];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -56,9 +56,9 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     public function getSubmenuSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
-            case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
-                return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::MODULE_SUBMENU_ACCOUNT];
+            case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
+            case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
+                return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::COMPONENT_SUBMENU_ACCOUNT];
         }
 
         return parent::getSubmenuSubmodule($component);
@@ -69,19 +69,19 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
-            case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
+            case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
+            case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 $this->setProp(
                     array(
-                        [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEACCOUNT],
-                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],
-                        [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS],
+                        [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEACCOUNT],
+                        [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],
+                        [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS],
                     ),
                     $props,
                     'target',
                     '#'.$this->getFrontendId($component, $props).' .collapse'
                 );
-                $this->appendProp([PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT], $props, 'class', 'well');
+                $this->appendProp([PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT], $props, 'class', 'well');
                 break;
         }
 

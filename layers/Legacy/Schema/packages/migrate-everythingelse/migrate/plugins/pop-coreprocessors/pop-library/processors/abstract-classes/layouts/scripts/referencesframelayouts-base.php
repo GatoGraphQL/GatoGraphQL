@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_ReferencesScriptFrameLayoutsBase extends PoP
     public function getScriptSubmodule(array $component)
     {
         return $this->doAppend($component) ? 
-        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_REFERENCES] : 
-        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_REFERENCESEMPTY];
+        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_REFERENCES] : 
+        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_REFERENCESEMPTY];
     }
 }

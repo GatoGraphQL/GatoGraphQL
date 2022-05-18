@@ -8,8 +8,8 @@ class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR],
         );
     }
 
@@ -18,14 +18,14 @@ class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Modul
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR:
-                $ret[] = [PoP_AddHighlights_Module_Processor_ButtonGroups::class, PoP_AddHighlights_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_HIGHLIGHTS];
-                $ret[] = [PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::class, PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_HIGHLIGHTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR:
+                $ret[] = [PoP_AddHighlights_Module_Processor_ButtonGroups::class, PoP_AddHighlights_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_HIGHLIGHTS];
+                $ret[] = [PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::class, PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_HIGHLIGHTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR:
-                $ret[] = [PoP_AddHighlights_Module_Processor_ButtonGroups::class, PoP_AddHighlights_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYHIGHLIGHTS];
-                $ret[] = [PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::class, PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYHIGHLIGHTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR:
+                $ret[] = [PoP_AddHighlights_Module_Processor_ButtonGroups::class, PoP_AddHighlights_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYHIGHLIGHTS];
+                $ret[] = [PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::class, PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYHIGHLIGHTS];
                 break;
         }
         

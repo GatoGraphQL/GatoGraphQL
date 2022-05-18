@@ -11,16 +11,16 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS],
-            [self::class, self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG],
+            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return TranslationAPIFacade::getInstance()->__('Invite new members', 'poptheme-wassup');
         }
 
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     public function getText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
                 return null;
         }
 
@@ -38,8 +38,8 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return 'fa-user-plus';
         }
 
@@ -51,8 +51,8 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS);
         }
 
@@ -62,8 +62,8 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return POP_TARGET_MODALS;
         }
 
@@ -75,11 +75,11 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
                 $this->appendProp($component, $props, 'class', 'btn btn-compact btn-link');
                 break;
 
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 $this->appendProp($component, $props, 'class', 'btn btn-success btn-important btn-block');
                 $this->setProp($component, $props, 'make-title', true);
                 break;
@@ -93,7 +93,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         $ret = parent::getClasses($component);
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 $ret[GD_JS_CLASSES]['text'] = '';
                 break;
         }

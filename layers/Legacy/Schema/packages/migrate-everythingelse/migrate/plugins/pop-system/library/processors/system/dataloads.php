@@ -14,9 +14,9 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOADACTION_SYSTEM_BUILD],
-            [self::class, self::MODULE_DATALOADACTION_SYSTEM_GENERATE],
-            [self::class, self::MODULE_DATALOADACTION_SYSTEM_INSTALL],
+            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_BUILD],
+            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_GENERATE],
+            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_INSTALL],
         );
     }
 
@@ -25,9 +25,9 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
 
         // The actionexecution is triggered directly
         switch ($component[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
-            case self::MODULE_DATALOADACTION_SYSTEM_GENERATE:
-            case self::MODULE_DATALOADACTION_SYSTEM_INSTALL:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_BUILD:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_GENERATE:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_INSTALL:
                 return true;
         }
 
@@ -37,13 +37,13 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_BUILD:
                 return $this->instanceManager->getInstance(BuildSystemMutationResolverBridge::class);
 
-            case self::MODULE_DATALOADACTION_SYSTEM_GENERATE:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_GENERATE:
                 return $this->instanceManager->getInstance(GenerateSystemMutationResolverBridge::class);
 
-            case self::MODULE_DATALOADACTION_SYSTEM_INSTALL:
+            case self::COMPONENT_DATALOADACTION_SYSTEM_INSTALL:
                 return $this->instanceManager->getInstance(InstallSystemMutationResolverBridge::class);
         }
 

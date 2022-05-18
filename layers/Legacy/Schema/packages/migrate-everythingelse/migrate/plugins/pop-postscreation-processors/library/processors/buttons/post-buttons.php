@@ -8,14 +8,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE],
+            [self::class, self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::class, PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_CONTENTPOSTLINK_CREATE],
+            self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::class, PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_CONTENTPOSTLINK_CREATE],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -27,9 +27,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
     public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE:
+            case self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE:
                 return array(
-                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                 );
         }
 
@@ -39,7 +39,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE:
+            case self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -53,7 +53,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(
-            self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
+            self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
         if ($title = $titles[$component[1]] ?? null) {
             return $title;
@@ -65,7 +65,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
     public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => 'addContentPostLinkURL',
+            self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => 'addContentPostLinkURL',
         );
         if ($field = $fields[$component[1]] ?? null) {
             return $field;

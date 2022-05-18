@@ -9,9 +9,9 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_STANCEEDIT],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_STANCEVIEW],
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEEDIT],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEVIEW],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE],
         );
     }
 
@@ -20,19 +20,19 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_QUICKLINKBUTTONGROUP_STANCEEDIT:
-                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_STANCEEDIT];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEEDIT:
+                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::COMPONENT_BUTTON_STANCEEDIT];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_STANCEVIEW:
-                $ret[] = [UserStance_Module_Processor_ButtonWrappers::class, UserStance_Module_Processor_ButtonWrappers::MODULE_BUTTONWRAPPER_STANCEVIEW];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEVIEW:
+                $ret[] = [UserStance_Module_Processor_ButtonWrappers::class, UserStance_Module_Processor_ButtonWrappers::COMPONENT_BUTTONWRAPPER_STANCEVIEW];
                 break;
 
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE:
-                $ret[] = [UserStance_Custom_Module_Processor_Codes::class, UserStance_Custom_Module_Processor_Codes::MODULE_CODE_POSTSTANCE];
-                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_POSTSTANCES_PRO];
-                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_POSTSTANCES_NEUTRAL];
-                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_POSTSTANCES_AGAINST];
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE:
+                $ret[] = [UserStance_Custom_Module_Processor_Codes::class, UserStance_Custom_Module_Processor_Codes::COMPONENT_CODE_POSTSTANCE];
+                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::COMPONENT_BUTTON_POSTSTANCES_PRO];
+                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL];
+                $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::COMPONENT_BUTTON_POSTSTANCES_AGAINST];
                 break;
         }
 
@@ -42,7 +42,7 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE:
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE:
                 $this->appendProp($component, $props, 'class', 'pop-stance-count');
                 break;
         }

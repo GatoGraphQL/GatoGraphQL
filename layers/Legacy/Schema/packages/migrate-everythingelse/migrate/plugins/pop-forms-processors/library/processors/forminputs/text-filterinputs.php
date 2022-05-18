@@ -30,18 +30,18 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_SEARCH],
-            [self::class, self::MODULE_FILTERINPUT_HASHTAGS],
-            [self::class, self::MODULE_FILTERINPUT_NAME],
+            [self::class, self::COMPONENT_FILTERINPUT_SEARCH],
+            [self::class, self::COMPONENT_FILTERINPUT_HASHTAGS],
+            [self::class, self::COMPONENT_FILTERINPUT_NAME],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
-            self::MODULE_FILTERINPUT_NAME => [UserFilterInputProcessor::class, UserFilterInputProcessor::FILTERINPUT_NAME],
-            self::MODULE_FILTERINPUT_HASHTAGS => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERINPUT_HASHTAGS],
+            self::COMPONENT_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
+            self::COMPONENT_FILTERINPUT_NAME => [UserFilterInputProcessor::class, UserFilterInputProcessor::FILTERINPUT_NAME],
+            self::COMPONENT_FILTERINPUT_HASHTAGS => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERINPUT_HASHTAGS],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -49,9 +49,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_SEARCH:
-    //         case self::MODULE_FILTERINPUT_HASHTAGS:
-    //         case self::MODULE_FILTERINPUT_NAME:
+    //         case self::COMPONENT_FILTERINPUT_SEARCH:
+    //         case self::COMPONENT_FILTERINPUT_HASHTAGS:
+    //         case self::COMPONENT_FILTERINPUT_NAME:
     //             return true;
     //     }
 
@@ -61,13 +61,13 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_SEARCH:
+            case self::COMPONENT_FILTERINPUT_SEARCH:
                 return TranslationAPIFacade::getInstance()->__('Search', 'pop-coreprocessors');
 
-            case self::MODULE_FILTERINPUT_HASHTAGS:
+            case self::COMPONENT_FILTERINPUT_HASHTAGS:
                 return TranslationAPIFacade::getInstance()->__('Hashtags', 'pop-coreprocessors');
 
-            case self::MODULE_FILTERINPUT_NAME:
+            case self::COMPONENT_FILTERINPUT_NAME:
                 return TranslationAPIFacade::getInstance()->__('Name', 'pop-coreprocessors');
         }
 
@@ -77,14 +77,14 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_SEARCH:
-            case self::MODULE_FILTERINPUT_HASHTAGS:
-            case self::MODULE_FILTERINPUT_NAME:
+            case self::COMPONENT_FILTERINPUT_SEARCH:
+            case self::COMPONENT_FILTERINPUT_HASHTAGS:
+            case self::COMPONENT_FILTERINPUT_NAME:
                 // Add a nice name, so that the URL params when filtering make sense
                 $names = array(
-                    self::MODULE_FILTERINPUT_SEARCH => 'searchfor',
-                    self::MODULE_FILTERINPUT_HASHTAGS => 'tags',
-                    self::MODULE_FILTERINPUT_NAME => 'nombre',
+                    self::COMPONENT_FILTERINPUT_SEARCH => 'searchfor',
+                    self::COMPONENT_FILTERINPUT_HASHTAGS => 'tags',
+                    self::COMPONENT_FILTERINPUT_NAME => 'nombre',
                 );
                 return $names[$component[1]];
         }
@@ -95,9 +95,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_HASHTAGS => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_HASHTAGS => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -106,9 +106,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_HASHTAGS => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_NAME => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_SEARCH => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_HASHTAGS => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_NAME => $translationAPI->__('', ''),
             default => null,
         };
     }

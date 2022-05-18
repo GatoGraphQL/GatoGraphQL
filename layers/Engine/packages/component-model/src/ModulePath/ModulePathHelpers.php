@@ -47,7 +47,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     public function stringifyModulePath(array $componentPath): string
     {
         return implode(
-            ModulePath::MODULE_SEPARATOR,
+            ModulePath::COMPONENT_SEPARATOR,
             array_map(
                 [$this->getModuleHelpers(), 'getModuleOutputName'],
                 $componentPath
@@ -60,7 +60,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         return array_map(
             [$this->getModuleHelpers(), 'getModuleFromOutputName'],
             explode(
-                ModulePath::MODULE_SEPARATOR,
+                ModulePath::COMPONENT_SEPARATOR,
                 $componentPath_as_string
             )
         );
@@ -89,7 +89,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
             $paths,
             function ($item) use ($paths) {
                 foreach ($paths as $path) {
-                    if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ModulePath::MODULE_SEPARATOR) {
+                    if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ModulePath::COMPONENT_SEPARATOR) {
                         return false;
                     }
                 }

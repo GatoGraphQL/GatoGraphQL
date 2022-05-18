@@ -7,14 +7,14 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_EVENT],
+            [self::class, self::COMPONENT_FORMINNER_EVENT],
         );
     }
 
     protected function volunteering(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENT:
+            case self::COMPONENT_FORMINNER_EVENT:
                 return true;
         }
 
@@ -23,8 +23,8 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
     protected function getLocationsInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENT:
-                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
+            case self::COMPONENT_FORMINNER_EVENT:
+                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
         }
 
         return parent::getLocationsInput($component);
@@ -41,12 +41,12 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENT:
+            case self::COMPONENT_FORMINNER_EVENT:
                 return array_merge(
                     $ret,
                     array(
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE],
-                        [GD_EM_Custom_Module_Processor_FormMultipleComponents::class, GD_EM_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE],
+                        [GD_EM_Custom_Module_Processor_FormMultipleComponents::class, GD_EM_Custom_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE],
                     )
                 );
         }
@@ -57,16 +57,16 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENT:
-                $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
+            case self::COMPONENT_FORMINNER_EVENT:
+                $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 
                 // Make it into left/right columns
                 $rightsides = array(
-                    self::MODULE_FORMINNER_EVENT => [GD_EM_Custom_Module_Processor_FormMultipleComponents::class, GD_EM_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE],
+                    self::COMPONENT_FORMINNER_EVENT => [GD_EM_Custom_Module_Processor_FormMultipleComponents::class, GD_EM_Custom_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE],
                 );
                 $leftside = $this->isLink($component) ?
-                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
-                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
+                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
+                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE];
                 if (!($form_left_class = $this->getProp($component, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
                 }

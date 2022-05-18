@@ -8,14 +8,14 @@ class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitBu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_SUBMITBUTTON_ADDLOCATION],
+            [self::class, self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_SUBMITBUTTON_ADDLOCATION:
+            case self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Add Location', 'em-popprocessors');
         }
 
@@ -25,7 +25,7 @@ class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitBu
     public function getLoadingText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_SUBMITBUTTON_ADDLOCATION:
+            case self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Adding Location...', 'pop-coreprocessors');
         }
         

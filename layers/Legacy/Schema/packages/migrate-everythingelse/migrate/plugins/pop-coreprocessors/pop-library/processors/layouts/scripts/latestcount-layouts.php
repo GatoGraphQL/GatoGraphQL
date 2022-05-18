@@ -7,7 +7,7 @@ class PoP_Module_Processor_LatestCountScriptsLayouts extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_LATESTCOUNTSCRIPT],
+            [self::class, self::COMPONENT_LAYOUT_LATESTCOUNTSCRIPT],
         );
     }
 }

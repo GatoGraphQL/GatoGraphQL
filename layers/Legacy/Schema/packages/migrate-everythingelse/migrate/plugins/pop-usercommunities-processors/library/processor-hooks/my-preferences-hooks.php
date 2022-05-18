@@ -15,7 +15,7 @@ class PoP_UserCommunitiesProcessors_MyPreferencesHooks
         return array_merge(
             $components,
             array(
-                [PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups::class, PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups::MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
+                [PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups::class, PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups::COMPONENT_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
             )
         );
     }

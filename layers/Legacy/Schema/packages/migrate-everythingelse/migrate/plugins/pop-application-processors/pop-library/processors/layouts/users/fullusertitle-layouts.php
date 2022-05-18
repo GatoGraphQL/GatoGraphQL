@@ -7,7 +7,7 @@ class PoP_Module_Processor_CustomFullUserTitleLayouts extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLUSERTITLE],
+            [self::class, self::COMPONENT_LAYOUT_FULLUSERTITLE],
         );
     }
 }

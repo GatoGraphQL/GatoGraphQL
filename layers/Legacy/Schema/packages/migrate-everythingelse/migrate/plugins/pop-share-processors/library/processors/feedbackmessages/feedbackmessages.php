@@ -7,14 +7,14 @@ class PoP_Share_Module_Processor_FeedbackMessages extends PoP_Module_Processor_F
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageInners::class, PoP_Share_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_SHAREBYEMAIL],
+            self::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageInners::class, PoP_Share_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_SHAREBYEMAIL],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

@@ -25,25 +25,25 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
     public function getModuleCssResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
         switch ($component[1]) {
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_WELCOME:
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_COMPACTWELCOME:
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_DESCRIPTION:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_WELCOME:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_COMPACTWELCOME:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_DESCRIPTION:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_GROUPHOMEWELCOME];
                 break;
 
-            case PoP_Module_ProcessorTagMultipleComponents::MODULE_LAYOUT_TAG_DETAILS:
+            case PoP_Module_ProcessorTagMultipleComponents::COMPONENT_LAYOUT_TAG_DETAILS:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_QUICKLINKGROUPS];
                 break;
 
-            case PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHOR:
+            case PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_AUTHOR:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_GROUPAUTHOR];
                 break;
 
-            case PoP_Module_Processor_UserForms::MODULE_FORM_MYPREFERENCES:
+            case PoP_Module_Processor_UserForms::COMPONENT_FORM_MYPREFERENCES:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_FORMMYPREFERENCES];
                 break;
 
-            case PoP_Module_Processor_CommentsBlocks::MODULE_BLOCK_COMMENTS_SCROLL:
+            case PoP_Module_Processor_CommentsBlocks::COMPONENT_BLOCK_COMMENTS_SCROLL:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_BLOCKCOMMENTS];
                 break;
         }

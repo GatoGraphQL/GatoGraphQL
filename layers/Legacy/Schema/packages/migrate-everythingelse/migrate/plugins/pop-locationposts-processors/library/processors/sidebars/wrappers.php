@@ -7,7 +7,7 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES],
         );
     }
 
@@ -16,8 +16,8 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
-                $ret[] = [GD_Custom_EM_Module_Processor_Layouts::class, GD_Custom_EM_Module_Processor_Layouts::MODULE_LAYOUT_LOCATIONPOST_CATEGORIES];
+            case self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
+                $ret[] = [GD_Custom_EM_Module_Processor_Layouts::class, GD_Custom_EM_Module_Processor_Layouts::COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES];
                 break;
         }
 
@@ -29,8 +29,8 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         $ret = parent::getConditionFailedSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
-                $ret[] = [GD_Custom_Module_Processor_WidgetMessages::class, GD_Custom_Module_Processor_WidgetMessages::MODULE_MESSAGE_NOCATEGORIES];
+            case self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
+                $ret[] = [GD_Custom_Module_Processor_WidgetMessages::class, GD_Custom_Module_Processor_WidgetMessages::COMPONENT_MESSAGE_NOCATEGORIES];
                 break;
         }
 
@@ -40,7 +40,7 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
+            case self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 return 'has-locationpostcategories';
         }
 

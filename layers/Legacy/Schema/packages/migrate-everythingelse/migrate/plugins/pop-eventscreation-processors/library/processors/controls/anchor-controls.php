@@ -11,18 +11,18 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS],
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('My Past Events', 'poptheme-wassup');
 
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 return TranslationAPIFacade::getInstance()->__('Add Event', 'poptheme-wassup');
         }
 
@@ -31,10 +31,10 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return getRouteIcon(POP_EVENTSCREATION_ROUTE_MYPASTEVENTS, false);
 
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 return 'fa-plus';
         }
 
@@ -44,11 +44,11 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 $routes = array(
-                    self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
-                    self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT => POP_EVENTSCREATION_ROUTE_ADDEVENT,
+                    self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
+                    self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT => POP_EVENTSCREATION_ROUTE_ADDEVENT,
                 );
                 $route = $routes[$component[1]];
 
@@ -60,7 +60,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -73,11 +73,11 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;
 
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 $this->appendProp($component, $props, 'class', 'btn btn-primary');
                 break;
         }

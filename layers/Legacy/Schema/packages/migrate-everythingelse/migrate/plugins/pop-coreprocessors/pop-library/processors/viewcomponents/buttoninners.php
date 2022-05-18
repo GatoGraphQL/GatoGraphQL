@@ -10,20 +10,20 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL],
         );
     }
     
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
                 return 'fa-fw fa-reply';
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT:
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL:
                 return 'fa-fw fa-comments';
         }
         
@@ -33,11 +33,11 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
                 return TranslationAPIFacade::getInstance()->__('Reply', 'pop-coreprocessors');
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT:
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL:
                 return TranslationAPIFacade::getInstance()->__('Write a comment', 'pop-coreprocessors');
         }
         

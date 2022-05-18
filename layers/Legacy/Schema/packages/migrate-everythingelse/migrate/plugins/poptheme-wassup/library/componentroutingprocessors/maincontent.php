@@ -17,14 +17,14 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
 
         // Author
         $components = array(
-            POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
+            POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT],
         );
         foreach ($components as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = ['component' => $component];
         }
         // Tag
         $components = array(
-            POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT],
+            POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_TAG_CONTENT],
         );
         foreach ($components as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
@@ -33,7 +33,7 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
         // Single main content
         $default_format_singleusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
         $routemodules_userdetails = array(
-            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS],
+            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS],
         );
         foreach ($routemodules_userdetails as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -47,7 +47,7 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
             }
         }
         $routemodules_userfullview = array(
-            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW],
+            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_userfullview as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -61,7 +61,7 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
             }
         }
         $routemodules_userthumbnail = array(
-            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL],
+            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_userthumbnail as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -75,7 +75,7 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
             }
         }
         $routemodules_userlist = array(
-            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST],
+            POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST],
         );
         foreach ($routemodules_userlist as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
@@ -101,17 +101,17 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
 
         // 404
         $ret[RequestNature::NOTFOUND][] = [
-            'component' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_404]
+            'component' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_404]
         ];
 
         // Single
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT]
+            'component' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_SINGLE_CONTENT]
         ];
 
         // Page
         $ret[PageRequestNature::PAGE][] = [
-            'component' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_PAGE_CONTENT]
+            'component' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_PAGE_CONTENT]
         ];
 
         return $ret;

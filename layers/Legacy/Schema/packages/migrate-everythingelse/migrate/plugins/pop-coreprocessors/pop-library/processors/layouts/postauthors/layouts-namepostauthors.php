@@ -7,7 +7,7 @@ class PoP_Module_Processor_PostAuthorNameLayouts extends PoP_Module_Processor_Po
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTPOST_AUTHORNAME],
+            [self::class, self::COMPONENT_LAYOUTPOST_AUTHORNAME],
         );
     }
 }

@@ -7,7 +7,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return 'editURL';
         }
 
@@ -26,7 +26,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -39,8 +39,8 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -49,8 +49,8 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function getPostThumbSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
         }
 
         return parent::getPostThumbSubmodule($component);
@@ -59,7 +59,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function authorPositions(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return array();
         }
 
@@ -69,7 +69,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return true;
         }
 

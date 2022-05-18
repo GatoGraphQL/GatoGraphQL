@@ -7,7 +7,7 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST],
         );
     }
 
@@ -16,7 +16,7 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Mo
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST:
                 $ret = array_merge(
                     $ret,
                     Custom_EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_LOCATIONPOST)

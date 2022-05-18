@@ -7,7 +7,7 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL],
+            [self::class, self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
-                $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
+            case self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL:
+                $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
                 break;
         }
 
@@ -27,7 +27,7 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
+            case self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL:
                 if ($target = $this->getProp($component, $props, 'carousel-target')) {
                     foreach ($this->getSubComponents($component) as $subComponent) {
                         $this->setProp([$subComponent], $props, 'carousel-target', $target);

@@ -9,9 +9,9 @@ class PoP_Locations_Module_Processor_CustomScrolls extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_LOCATIONS],
-            [self::class, self::MODULE_SCROLL_STATICIMAGE],
-            [self::class, self::MODULE_SCROLL_STATICIMAGE_USERORPOST],
+            [self::class, self::COMPONENT_SCROLL_LOCATIONS],
+            [self::class, self::COMPONENT_SCROLL_STATICIMAGE],
+            [self::class, self::COMPONENT_SCROLL_STATICIMAGE_USERORPOST],
         );
     }
 
@@ -19,9 +19,9 @@ class PoP_Locations_Module_Processor_CustomScrolls extends PoP_Module_Processor_
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_LOCATIONS => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_LOCATIONS],
-            self::MODULE_SCROLL_STATICIMAGE => [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE],
-            self::MODULE_SCROLL_STATICIMAGE_USERORPOST => [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST],
+            self::COMPONENT_SCROLL_LOCATIONS => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_LOCATIONS],
+            self::COMPONENT_SCROLL_STATICIMAGE => [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE],
+            self::COMPONENT_SCROLL_STATICIMAGE_USERORPOST => [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE_USERORPOST],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

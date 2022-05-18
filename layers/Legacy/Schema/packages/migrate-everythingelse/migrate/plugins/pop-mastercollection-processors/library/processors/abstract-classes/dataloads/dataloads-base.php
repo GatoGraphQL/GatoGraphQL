@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
     protected function getStatusSubmodule(array $component)
     {
-        return [PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS];
+        return [PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS];
     }
 
     public function getSubComponents(array $component): array

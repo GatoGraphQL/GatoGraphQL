@@ -8,7 +8,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts extends PoP_Modu
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Message sent successfully!', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__("Your message has been sent to the user by email.", 'pop-genericforms');
                 $ret['empty-name'] = TranslationAPIFacade::getInstance()->__('Name is missing.', 'pop-genericforms');

@@ -12,7 +12,7 @@ class PoPTheme_Wassup_PoPSW_Module_MainContentComponentRoutingProcessor extends 
         $ret = array();
 
         $routemodules = array(
-            POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL => [GD_Core_Module_Processor_HTMLCodes::class, GD_Core_Module_Processor_HTMLCodes::MODULE_CODE_APPSHELL],
+            POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL => [GD_Core_Module_Processor_HTMLCodes::class, GD_Core_Module_Processor_HTMLCodes::COMPONENT_CODE_APPSHELL],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];

@@ -17,7 +17,7 @@ class PoP_Events_PageSectionHooks
     public function initModelPropsSideinfo(array $component, $props_in_array, $processor)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $subComponent = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
+        $subComponent = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS];
         // if (in_array($subComponent, $processor->getSubComponents($component))) {
 
         $props = &$props_in_array[0];
@@ -42,8 +42,8 @@ class PoP_Events_PageSectionHooks
         $processor->setProp($subComponent, $props, 'add-titlelink', true);
         
         // For the Events scroll
-        $processor->setProp([PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_EVENTS_SCROLL_ADDONS], $props, 'limit', 6);
-        $processor->setProp([PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_ADDONS], $props, 'show-fetchmore', false);
+        $processor->setProp([PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS], $props, 'limit', 6);
+        $processor->setProp([PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_ADDONS], $props, 'show-fetchmore', false);
 
         $link = sprintf(
             '<div class="text-center"><a href="%s" class="btn btn-link">%s</a></div>',

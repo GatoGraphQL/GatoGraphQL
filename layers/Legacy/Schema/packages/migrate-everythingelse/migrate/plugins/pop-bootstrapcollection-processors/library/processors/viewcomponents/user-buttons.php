@@ -12,20 +12,20 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN],
         );
     }
 
     public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
-            self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
-            self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
         );
         if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
@@ -37,12 +37,12 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
 
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('API Data', 'pop-coreprocessors');
         }
 
@@ -54,11 +54,11 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
         $ret = parent::getBtnClass($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-embed';
                 break;
 
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-api';
                 break;
         }
@@ -69,10 +69,10 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN:
                 $this->mergeProp(
                     $component,
                     $props,
@@ -85,8 +85,8 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
         }
 
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding module-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
@@ -102,15 +102,15 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             switch ($component[1]) {
-                case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
-                case self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
-                case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
-                case self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN:
                     $modals = array(
-                        self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED],
-                        self::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED],
-                        self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_API],
-                        self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_API],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_EMBED],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_EMBED],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_API],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_API],
                     );
 
                     $modal = $modals[$component[1]];

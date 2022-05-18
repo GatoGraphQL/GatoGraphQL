@@ -8,15 +8,15 @@ class PoP_Module_Processor_TagLayouts extends PoP_Module_Processor_TagLayoutsBas
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_TAG],
-            [self::class, self::MODULE_LAYOUT_TAGH4],
+            [self::class, self::COMPONENT_LAYOUT_TAG],
+            [self::class, self::COMPONENT_LAYOUT_TAGH4],
         );
     }
 
     public function getHtmlTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_TAGH4:
+            case self::COMPONENT_LAYOUT_TAGH4:
                 return 'h4';
         }
     

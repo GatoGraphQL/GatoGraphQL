@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_UpdateProfileDataloadsBase extends PoP_Modul
 {
     protected function getFeedbackmessageModule(array $component)
     {
-        return [PoP_Module_Processor_ProfileFeedbackMessages::class, PoP_Module_Processor_ProfileFeedbackMessages::MODULE_FEEDBACKMESSAGE_UPDATEPROFILE];
+        return [PoP_Module_Processor_ProfileFeedbackMessages::class, PoP_Module_Processor_ProfileFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_UPDATEPROFILE];
     }
 
     public function getJsmethods(array $component, array &$props)

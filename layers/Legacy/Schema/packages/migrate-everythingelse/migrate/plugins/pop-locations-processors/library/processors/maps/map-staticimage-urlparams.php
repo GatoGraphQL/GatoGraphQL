@@ -7,7 +7,7 @@ class PoP_Module_Processor_MapStaticImageURLParams extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_STATICIMAGE_URLPARAM],
+            [self::class, self::COMPONENT_MAP_STATICIMAGE_URLPARAM],
         );
     }
 }

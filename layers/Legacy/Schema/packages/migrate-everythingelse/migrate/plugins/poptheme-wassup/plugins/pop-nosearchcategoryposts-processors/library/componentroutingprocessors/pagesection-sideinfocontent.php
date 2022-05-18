@@ -37,17 +37,17 @@ class PoPTheme_Wassup_NoSearchCategoryPosts_Module_SideInfoContentPageSectionCom
         );
         foreach ($routes as $route) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR]
+                'component' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR]
             ];
         }
         foreach ($routes as $route) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR]
+                'component' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR]
             ];
         }
         foreach ($routes as $route) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR]
+                'component' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR]
             ];
         }
 

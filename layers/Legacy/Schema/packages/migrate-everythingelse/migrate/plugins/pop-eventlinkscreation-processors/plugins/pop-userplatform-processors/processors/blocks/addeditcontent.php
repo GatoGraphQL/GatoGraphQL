@@ -8,16 +8,16 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_EVENTLINK_UPDATE],
-            [self::class, self::MODULE_BLOCK_EVENTLINK_CREATE],
+            [self::class, self::COMPONENT_BLOCK_EVENTLINK_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_EVENTLINK_CREATE],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
-            self::MODULE_BLOCK_EVENTLINK_UPDATE => POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK,
+            self::COMPONENT_BLOCK_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
+            self::COMPONENT_BLOCK_EVENTLINK_UPDATE => POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -27,8 +27,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
         $ret = parent::getInnerSubmodules($component);
 
         $block_inners = array(
-            self::MODULE_BLOCK_EVENTLINK_UPDATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENTLINK_UPDATE],
-            self::MODULE_BLOCK_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENTLINK_CREATE],
+            self::COMPONENT_BLOCK_EVENTLINK_UPDATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENTLINK_UPDATE],
+            self::COMPONENT_BLOCK_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENTLINK_CREATE],
         );
         if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
@@ -40,7 +40,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
     protected function isCreate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVENTLINK_CREATE:
+            case self::COMPONENT_BLOCK_EVENTLINK_CREATE:
                 return true;
         }
 
@@ -49,7 +49,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
     protected function isUpdate(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVENTLINK_UPDATE:
+            case self::COMPONENT_BLOCK_EVENTLINK_UPDATE:
                 return true;
         }
 
@@ -59,8 +59,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_EVENTLINK_UPDATE:
-            case self::MODULE_BLOCK_EVENTLINK_CREATE:
+            case self::COMPONENT_BLOCK_EVENTLINK_UPDATE:
+            case self::COMPONENT_BLOCK_EVENTLINK_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     $this->appendProp($component, $props, 'class', 'addons-nocontrols');
                 }

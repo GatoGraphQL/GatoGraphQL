@@ -25,7 +25,7 @@ class FilterInputHookSet extends AbstractHookSet
             ...$filterInputModules,
             [
                 FilterInputComponentProcessor::class,
-                FilterInputComponentProcessor::MODULE_FILTERINPUT_CATEGORY_IDS
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CATEGORY_IDS
             ],
         ];
     }

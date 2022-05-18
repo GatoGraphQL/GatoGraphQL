@@ -8,15 +8,15 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMGROUP_EMBEDPREVIEW],
+            [self::class, self::COMPONENT_FORMGROUP_EMBEDPREVIEW],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMGROUP_EMBEDPREVIEW:
-                return [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_USERINPUTEMBEDPREVIEW];
+            case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:
+                return [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW];
         }
         
         return parent::getComponentSubmodule($component);
@@ -25,7 +25,7 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMGROUP_EMBEDPREVIEW:
+            case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Preview', 'poptheme-wassup');
         }
         

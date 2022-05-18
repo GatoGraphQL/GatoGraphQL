@@ -7,7 +7,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_LOGIN],
+            [self::class, self::COMPONENT_GROUP_LOGIN],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_GROUP_LOGIN:
-                $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN];
+            case self::COMPONENT_GROUP_LOGIN:
+                $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::COMPONENT_BLOCK_LOGIN];
                 $ret = array_merge(
                     $ret,
                     PoP_Module_Processor_UserAccountUtils::getLoginComponents()
@@ -31,7 +31,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_GROUP_LOGIN:
+            case self::COMPONENT_GROUP_LOGIN:
                 $this->appendProp($component, $props, 'class', 'blockgroup-login');
 
                 // Make the Login Block and others show the submenu

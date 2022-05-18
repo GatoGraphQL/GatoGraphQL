@@ -8,16 +8,16 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks extend
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLLMAP],
-            [self::class, self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLLMAP],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
-            self::MODULE_BLOCK_COMMUNITIES_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLLMAP => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -25,8 +25,8 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks extend
     protected function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_BLOCK_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
-            self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -35,9 +35,9 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks extend
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_COMMUNITIES_SCROLLMAP:
-            case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKUSERLIST];
+            case self::COMPONENT_BLOCK_COMMUNITIES_SCROLLMAP:
+            case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKUSERLIST];
         }
 
         return parent::getControlgroupTopSubmodule($component);

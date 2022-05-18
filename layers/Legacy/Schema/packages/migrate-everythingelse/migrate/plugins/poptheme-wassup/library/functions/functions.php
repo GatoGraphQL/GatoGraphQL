@@ -17,7 +17,7 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
 function getWassupFramecomponentComponents($components)
 {
     if (\PoP\Root\App::applyFilters('poptheme_wassup_loadlatest', true)) {
-        $components[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
+        $components[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::COMPONENT_MULTIPLE_LATESTCOUNTS];
     }
 
     return $components;
@@ -54,8 +54,8 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 //     // Only if not in Side or Top pageSections
 //     $pagesection_settings_id = $props['pagesection-moduleoutputname'];
 //     $include = array(
-//         [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODY],
-//         [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO],
+//         [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY],
+//         [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO],
 //     );
 //     if (in_array($pagesection_settings_id, $include)) {
 

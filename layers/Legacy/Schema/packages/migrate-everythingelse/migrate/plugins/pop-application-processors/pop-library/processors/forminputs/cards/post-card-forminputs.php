@@ -8,19 +8,19 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_POST],
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_POST],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST],
         );
     }
 
     public function getTriggerSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_POST:
-                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST];
+            case self::COMPONENT_FORMCOMPONENT_CARD_POST:
+                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST];
 
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
-                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST];
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST:
+                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST];
         }
 
         return parent::getTriggerSubmodule($component);
@@ -29,10 +29,10 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_POST:
+            case self::COMPONENT_FORMCOMPONENT_CARD_POST:
                 return 'self';
 
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST:
                 return 'customPost';
         }
 

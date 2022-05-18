@@ -13,12 +13,12 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_CUP_SHORTDESCRIPTION],
-            [self::class, self::MODULE_FORMINPUTGROUP_CUP_FACEBOOK],
-            [self::class, self::MODULE_FORMINPUTGROUP_CUP_TWITTER],
-            [self::class, self::MODULE_FORMINPUTGROUP_CUP_LINKEDIN],
-            [self::class, self::MODULE_FORMINPUTGROUP_CUP_YOUTUBE],
-            [self::class, self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_SHORTDESCRIPTION],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_FACEBOOK],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_TWITTER],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_LINKEDIN],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_YOUTUBE],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM],
         );
     }
 
@@ -27,11 +27,11 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
         $ret = parent::getLabel($component, $props);
 
         $icons = array(
-            self::MODULE_FORMINPUTGROUP_CUP_FACEBOOK => 'fa-facebook',
-            self::MODULE_FORMINPUTGROUP_CUP_TWITTER => 'fa-twitter',
-            self::MODULE_FORMINPUTGROUP_CUP_LINKEDIN => 'fa-linkedin',
-            self::MODULE_FORMINPUTGROUP_CUP_YOUTUBE => 'fa-youtube',
-            self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM => 'fa-instagram',
+            self::COMPONENT_FORMINPUTGROUP_CUP_FACEBOOK => 'fa-facebook',
+            self::COMPONENT_FORMINPUTGROUP_CUP_TWITTER => 'fa-twitter',
+            self::COMPONENT_FORMINPUTGROUP_CUP_LINKEDIN => 'fa-linkedin',
+            self::COMPONENT_FORMINPUTGROUP_CUP_YOUTUBE => 'fa-youtube',
+            self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => 'fa-instagram',
         );
 
         if ($icon = $icons[$component[1]] ?? null) {
@@ -48,12 +48,12 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_CUP_SHORTDESCRIPTION => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION],
-            self::MODULE_FORMINPUTGROUP_CUP_FACEBOOK => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_FACEBOOK],
-            self::MODULE_FORMINPUTGROUP_CUP_TWITTER => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_TWITTER],
-            self::MODULE_FORMINPUTGROUP_CUP_LINKEDIN => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_LINKEDIN],
-            self::MODULE_FORMINPUTGROUP_CUP_YOUTUBE => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_YOUTUBE],
-            self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_INSTAGRAM],
+            self::COMPONENT_FORMINPUTGROUP_CUP_SHORTDESCRIPTION => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION],
+            self::COMPONENT_FORMINPUTGROUP_CUP_FACEBOOK => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_FACEBOOK],
+            self::COMPONENT_FORMINPUTGROUP_CUP_TWITTER => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_TWITTER],
+            self::COMPONENT_FORMINPUTGROUP_CUP_LINKEDIN => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_LINKEDIN],
+            self::COMPONENT_FORMINPUTGROUP_CUP_YOUTUBE => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_YOUTUBE],
+            self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_INSTAGRAM],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -68,12 +68,12 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
 
         // Override the placeholders
         $placeholders = array(
-            self::MODULE_FORMINPUTGROUP_CUP_SHORTDESCRIPTION => TranslationAPIFacade::getInstance()->__('Define yourself in just 1 line...', 'pop-coreprocessors'),
-            self::MODULE_FORMINPUTGROUP_CUP_FACEBOOK => 'https://www.facebook.com/...',
-            self::MODULE_FORMINPUTGROUP_CUP_TWITTER => 'https://twitter.com/...',
-            self::MODULE_FORMINPUTGROUP_CUP_LINKEDIN => 'https://www.linkedin.com/...',
-            self::MODULE_FORMINPUTGROUP_CUP_YOUTUBE => 'https://www.youtube.com/...',
-            self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM => 'https://www.instagram.com/...',
+            self::COMPONENT_FORMINPUTGROUP_CUP_SHORTDESCRIPTION => TranslationAPIFacade::getInstance()->__('Define yourself in just 1 line...', 'pop-coreprocessors'),
+            self::COMPONENT_FORMINPUTGROUP_CUP_FACEBOOK => 'https://www.facebook.com/...',
+            self::COMPONENT_FORMINPUTGROUP_CUP_TWITTER => 'https://twitter.com/...',
+            self::COMPONENT_FORMINPUTGROUP_CUP_LINKEDIN => 'https://www.linkedin.com/...',
+            self::COMPONENT_FORMINPUTGROUP_CUP_YOUTUBE => 'https://www.youtube.com/...',
+            self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => 'https://www.instagram.com/...',
         );
         if ($placeholder = $placeholders[$component[1]] ?? null) {
             $component = $this->getComponentSubmodule($component);

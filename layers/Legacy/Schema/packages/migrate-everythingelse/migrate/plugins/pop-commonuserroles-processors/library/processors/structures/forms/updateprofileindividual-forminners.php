@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_UpdateProfileIndividualFormInners extends GD_URE_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_PROFILEINDIVIDUAL_UPDATE],
+            [self::class, self::COMPONENT_FORMINNER_PROFILEINDIVIDUAL_UPDATE],
         );
     }
 }

@@ -11,27 +11,27 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLLINNER_COMMUNITIES_DETAILS],
-            [self::class, self::MODULE_SCROLLINNER_COMMUNITIES_FULLVIEW],
-            [self::class, self::MODULE_SCROLLINNER_COMMUNITIES_THUMBNAIL],
-            [self::class, self::MODULE_SCROLLINNER_COMMUNITIES_LIST],
+            [self::class, self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS],
+            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_SCROLLINNER_COMMUNITIES_THUMBNAIL:
+            case self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL:
                 return array(
                     'row-items' => 3,
                     'class' => 'col-xsm-4'
                 );
 
-            case self::MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW:
-            case self::MODULE_SCROLLINNER_COMMUNITIES_DETAILS:
-            case self::MODULE_SCROLLINNER_COMMUNITIES_FULLVIEW:
-            case self::MODULE_SCROLLINNER_COMMUNITIES_LIST:
+            case self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW:
+            case self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS:
+            case self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW:
+            case self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST:
                 return array(
                     'row-items' => 1,
                     'class' => 'col-sm-12'
@@ -46,11 +46,11 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_SCROLLINNER_COMMUNITIES_DETAILS => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS],
-            self::MODULE_SCROLLINNER_COMMUNITIES_THUMBNAIL => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL],
-            self::MODULE_SCROLLINNER_COMMUNITIES_LIST => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_LIST],
-            self::MODULE_SCROLLINNER_COMMUNITIES_FULLVIEW => [GD_UserCommunities_Module_Processor_CustomFullUserLayouts::class, GD_UserCommunities_Module_Processor_CustomFullUserLayouts::MODULE_LAYOUT_FULLUSER_COMMUNITY],
-            self::MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_FULLUSER],
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS],
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL],
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_LIST],
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW => [GD_UserCommunities_Module_Processor_CustomFullUserLayouts::class, GD_UserCommunities_Module_Processor_CustomFullUserLayouts::COMPONENT_LAYOUT_FULLUSER_COMMUNITY],
+            self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

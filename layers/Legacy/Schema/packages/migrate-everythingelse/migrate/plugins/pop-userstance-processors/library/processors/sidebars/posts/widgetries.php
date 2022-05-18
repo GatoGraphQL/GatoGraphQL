@@ -7,7 +7,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETCOMPACT_STANCEINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_STANCEINFO],
         );
     }
 
@@ -16,8 +16,8 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_STANCEINFO:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_WIDGETPUBLISHED];
+            case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_WIDGETPUBLISHED];
                 break;
         }
 
@@ -27,7 +27,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGETCOMPACT_STANCEINFO => PoP_UserStance_PostNameUtils::getNameUc(),
+            self::COMPONENT_WIDGETCOMPACT_STANCEINFO => PoP_UserStance_PostNameUtils::getNameUc(),
         );
 
         return $titles[$component[1]] ?? null;
@@ -35,7 +35,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_STANCEINFO => 'fa-commenting-o',
+            self::COMPONENT_WIDGETCOMPACT_STANCEINFO => 'fa-commenting-o',
         );
 
         return $fontawesomes[$component[1]] ?? null;
@@ -44,7 +44,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_STANCEINFO:
+            case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 return 'list-group list-group-sm';
         }
 
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_STANCEINFO:
+            case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_STANCEINFO:
+            case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 return 'panel panel-default panel-sm';
         }
 

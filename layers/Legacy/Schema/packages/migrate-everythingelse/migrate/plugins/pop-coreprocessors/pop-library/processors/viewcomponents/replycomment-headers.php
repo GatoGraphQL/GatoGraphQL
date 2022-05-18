@@ -8,19 +8,19 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT],
-            [self::class, self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL],
         );
     }
 
     public function getPostSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
-                return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST];
+            case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
+                return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST];
         
-            case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL:
-                return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL];
+            case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL:
+                return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL];
         }
         
         return parent::getPostSubmodule($component);
@@ -29,9 +29,9 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
     public function getCommentSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
-            case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL:
-                return [PoP_Module_Processor_CommentClippedViewComponentHeaders::class, PoP_Module_Processor_CommentClippedViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED];
+            case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
+            case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL:
+                return [PoP_Module_Processor_CommentClippedViewComponentHeaders::class, PoP_Module_Processor_CommentClippedViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED];
         }
         
         return parent::getCommentSubmodule($component);

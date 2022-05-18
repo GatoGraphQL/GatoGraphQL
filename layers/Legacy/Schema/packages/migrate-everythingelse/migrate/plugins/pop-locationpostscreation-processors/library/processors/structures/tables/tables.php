@@ -8,16 +8,16 @@ class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABLE_MYLOCATIONPOSTS],
+            [self::class, self::COMPONENT_TABLE_MYLOCATIONPOSTS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_TABLE_MYLOCATIONPOSTS:
+            case self::COMPONENT_TABLE_MYLOCATIONPOSTS:
                 $inners = array(
-                    self::MODULE_TABLE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_TableInners::class, GD_Custom_EM_Module_Processor_TableInners::MODULE_TABLEINNER_MYLOCATIONPOSTS],
+                    self::COMPONENT_TABLE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_TableInners::class, GD_Custom_EM_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYLOCATIONPOSTS],
                 );
 
                 return $inners[$component[1]];
@@ -31,7 +31,7 @@ class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBa
         $ret = parent::getHeaderTitles($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABLE_MYLOCATIONPOSTS:
+            case self::COMPONENT_TABLE_MYLOCATIONPOSTS:
                 $ret[] = PoP_LocationPosts_PostNameUtils::getNameUc();
                 $ret[] = TranslationAPIFacade::getInstance()->__('Date', 'pop-locationpostscreation-processors');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'pop-locationpostscreation-processors');

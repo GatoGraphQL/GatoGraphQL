@@ -21,54 +21,54 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_FAVICON],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_XSMALL],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED],
-            [self::class, self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_FAVICON],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_XSMALL],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED],
+            [self::class, self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
         );
     }
 
     protected function getThumbFieldArgs(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_FAVICON:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FAVICON:
                 return ['size' => 'favicon'];
 
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
                 return ['size' => 'large', 'addDescription' => true];
 
-            case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
                 return ['size' => 'thumb-pagewide'];
 
-            case self::MODULE_LAYOUT_POSTTHUMB_XSMALL:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_XSMALL:
                 return ['size' => 'thumb-xs'];
 
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
                 return ['size' => 'thumb-sm'];
 
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
                 return ['size' => 'thumb-md'];
 
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 return ['size' => 'thumb-feed'];
         }
 
@@ -78,15 +78,15 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 return 'thumbFullSrc';
 
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
                 return 'editURL';
         }
 
@@ -96,7 +96,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -111,19 +111,19 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         $ret = parent::getExtraThumbLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
-                // case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDLARGE_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
+                // case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDLARGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-                    $ret[] = [PoP_Module_Processor_VolunteerTagLayouts::class, PoP_Module_Processor_VolunteerTagLayouts::MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER];
+                    $ret[] = [PoP_Module_Processor_VolunteerTagLayouts::class, PoP_Module_Processor_VolunteerTagLayouts::COMPONENT_LAYOUT_POSTADDITIONAL_VOLUNTEER];
                 }
                 break;
 
-            case self::MODULE_LAYOUT_POSTTHUMB_XSMALL:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_XSMALL:
                 // Override the parent since we don't want to show the multipost-labels here, this thumb is too small
                 return array();
         }
@@ -134,9 +134,9 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function getThumbLinkClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
                 return 'thumbnail';
         }
 
@@ -146,7 +146,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function getThumbImgClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
                 return 'img-responsive';
         }
 
@@ -156,12 +156,12 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function getDbobjectParams(array $component): array
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 return array(
                     'data-size' => 'thumbFullDimensions',
                 );
@@ -173,11 +173,11 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED:
-            case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
-            case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
+            case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 // Artificial property added to identify the template when adding module-resources
                 $this->setProp($component, $props, 'resourceloader', 'thumb-feed');
 

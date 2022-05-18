@@ -8,14 +8,14 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_FLAG],
+            [self::class, self::COMPONENT_FORM_FLAG],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::MODULE_FORMINNER_FLAG],
+            self::COMPONENT_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::COMPONENT_FORMINNER_FLAG],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -28,7 +28,7 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORM_FLAG:
+            case self::COMPONENT_FORM_FLAG:
                 // Add the description
                 $description = sprintf(
                     '<p><em>%s</em></p>',

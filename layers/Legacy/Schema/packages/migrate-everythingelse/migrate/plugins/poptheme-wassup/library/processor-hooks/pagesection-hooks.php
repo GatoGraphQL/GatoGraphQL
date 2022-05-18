@@ -16,7 +16,7 @@ class PoPTheme_Wassup_PageSectionHooks
     {
         $props = &$props_in_array[0];
 
-        $subComponent = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
+        $subComponent = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST];
         // if (in_array($subComponent, $processor->getSubComponents($component))) {
 
         // We need to lazy-load it, so that it doesn't change the ETag value
@@ -35,12 +35,12 @@ class PoPTheme_Wassup_PageSectionHooks
         // }
 
         // Formatting
-        $processor->setProp([PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_TAGS_LIST], $props, 'show-fetchmore', false);
+        $processor->setProp([PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_TAGS_LIST], $props, 'show-fetchmore', false);
         $processor->setProp($subComponent, $props, 'title-htmltag', 'h4');
         $processor->setProp($subComponent, $props, 'add-titlelink', true);
 
         // Limit to only few elems
-        $processor->setProp([PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST], $props, 'limit', 5);
+        $processor->setProp([PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST], $props, 'limit', 5);
         // }
     }
 }

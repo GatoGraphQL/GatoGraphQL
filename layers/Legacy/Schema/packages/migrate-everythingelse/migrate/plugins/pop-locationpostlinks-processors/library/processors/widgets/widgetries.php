@@ -8,7 +8,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS],
+            [self::class, self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS],
         );
     }
 
@@ -17,24 +17,24 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
-                // $ret[] = [GD_Custom_EM_Module_Processor_FormGroups::class, GD_Custom_EM_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES];
+            case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
+                // $ret[] = [GD_Custom_EM_Module_Processor_FormGroups::class, GD_Custom_EM_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_CATEGORIES];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_APPLIESTO];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_APPLIESTO];
                 }
-                $ret[] = [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP];
+                $ret[] = [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP];
 
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-                    $ret[] = [PoPTheme_Wassup_Module_Processor_FormGroups::class, PoPTheme_Wassup_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT];
+                    $ret[] = [PoPTheme_Wassup_Module_Processor_FormGroups::class, PoPTheme_Wassup_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT];
                 }
 
                 // Comment Leo 16/01/2016: There's no need to ask for the LinkAccess since we don't show it anyway
-                // if ($component == [self::class, self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS]) {
-                //     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
+                // if ($component == [self::class, self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS]) {
+                //     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
                 // }
                 break;
         }
@@ -46,7 +46,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     {
         $locationpost = PoP_LocationPosts_PostNameUtils::getNameUc();
         $titles = array(
-            self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS => sprintf(TranslationAPIFacade::getInstance()->__('%s link details', 'pop-locationpostlinks-processors'), $locationpost),
+            self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS => sprintf(TranslationAPIFacade::getInstance()->__('%s link details', 'pop-locationpostlinks-processors'), $locationpost),
         );
 
         return $titles[$component[1]] ?? null;
@@ -55,7 +55,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 if ($class = $this->getProp($component, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
                 }
@@ -69,7 +69,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 return 'panel-body';
         }
 
@@ -78,7 +78,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 return '';
         }
 
@@ -88,11 +88,11 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
+            case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 // Typeahead map: make it small
-                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'wrapper-class', '');
-                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'map-class', 'spacing-bottom-md');
-                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'typeahead-class', '');
+                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'wrapper-class', '');
+                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'map-class', 'spacing-bottom-md');
+                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'typeahead-class', '');
                 break;
         }
 

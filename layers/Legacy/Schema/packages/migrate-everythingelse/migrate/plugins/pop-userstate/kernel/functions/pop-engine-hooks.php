@@ -56,7 +56,7 @@ class PoP_UserState_EngineHooks
                 [
                     Params::DATA_OUTPUT_ITEMS => [
                         DataOutputItems::META,
-                        DataOutputItems::MODULE_DATA,
+                        DataOutputItems::COMPONENT_DATA,
                         DataOutputItems::DATABASES,
                     ],
                     Params::MODULEFILTER => POP_MODULEFILTER_USERSTATE,

@@ -24,48 +24,48 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DELEGATORFILTER_TAGS],
-            [self::class, self::MODULE_DELEGATORFILTER_CONTENT],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORCONTENT],
-            [self::class, self::MODULE_DELEGATORFILTER_POSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_CATEGORYPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORCATEGORYPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_TAGPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_TAGCATEGORYPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_USERS],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS],
-            [self::class, self::MODULE_DELEGATORFILTER_MYCONTENT],
-            [self::class, self::MODULE_DELEGATORFILTER_MYPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_MYCATEGORYPOSTS],
-            [self::class, self::MODULE_DELEGATORFILTER_TAGMAINCONTENT],
-            [self::class, self::MODULE_DELEGATORFILTER_TAGCONTENT],
-            [self::class, self::MODULE_DELEGATORFILTER_HOMECONTENT],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_CONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_POSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_USERS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYCONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_TAGCONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_HOMECONTENT],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_TAGS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS],
-            self::MODULE_DELEGATORFILTER_CONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_CONTENT],
-            self::MODULE_DELEGATORFILTER_AUTHORCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
-            self::MODULE_DELEGATORFILTER_POSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_POSTS],
-            self::MODULE_DELEGATORFILTER_CATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS],
-            self::MODULE_DELEGATORFILTER_AUTHORPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS],
-            self::MODULE_DELEGATORFILTER_AUTHORCATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
-            self::MODULE_DELEGATORFILTER_TAGPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS],
-            self::MODULE_DELEGATORFILTER_TAGCATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
-            self::MODULE_DELEGATORFILTER_USERS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_USERS],
-            self::MODULE_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS],
-            self::MODULE_DELEGATORFILTER_MYCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYCONTENT],
-            self::MODULE_DELEGATORFILTER_MYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYPOSTS],
-            self::MODULE_DELEGATORFILTER_MYCATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS],
-            self::MODULE_DELEGATORFILTER_TAGMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT],
-            self::MODULE_DELEGATORFILTER_TAGCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT],
-            self::MODULE_DELEGATORFILTER_HOMECONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_CONTENT],
-            self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
+            self::COMPONENT_DELEGATORFILTER_TAGS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS],
+            self::COMPONENT_DELEGATORFILTER_CONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CONTENT],
+            self::COMPONENT_DELEGATORFILTER_AUTHORCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
+            self::COMPONENT_DELEGATORFILTER_POSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_POSTS],
+            self::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS],
+            self::COMPONENT_DELEGATORFILTER_AUTHORPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS],
+            self::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
+            self::COMPONENT_DELEGATORFILTER_TAGPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS],
+            self::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
+            self::COMPONENT_DELEGATORFILTER_USERS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_USERS],
+            self::COMPONENT_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS],
+            self::COMPONENT_DELEGATORFILTER_MYCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCONTENT],
+            self::COMPONENT_DELEGATORFILTER_MYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYPOSTS],
+            self::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS],
+            self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT],
+            self::COMPONENT_DELEGATORFILTER_TAGCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT],
+            self::COMPONENT_DELEGATORFILTER_HOMECONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CONTENT],
+            self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -83,14 +83,14 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         // on runtime, and not when initializing the JS
         switch ($component[1]) {
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
-            case self::MODULE_DELEGATORFILTER_HOMECONTENT:
+            case self::COMPONENT_DELEGATORFILTER_HOMECONTENT:
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
 
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
-            case self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT:
+            case self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT:
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
-            case self::MODULE_DELEGATORFILTER_TAGMAINCONTENT:
+            case self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT:
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter';
         }
 

@@ -8,14 +8,14 @@ class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TOPIC],
+            [self::class, self::COMPONENT_FORMINPUT_TOPIC],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TOPIC:
+            case self::COMPONENT_FORMINPUT_TOPIC:
                 return TranslationAPIFacade::getInstance()->__('Topic', 'pop-genericforms');
         }
         
@@ -25,7 +25,7 @@ class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processo
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TOPIC:
+            case self::COMPONENT_FORMINPUT_TOPIC:
                 return GD_FormInput_ContactUs_Topics::class;
         }
         

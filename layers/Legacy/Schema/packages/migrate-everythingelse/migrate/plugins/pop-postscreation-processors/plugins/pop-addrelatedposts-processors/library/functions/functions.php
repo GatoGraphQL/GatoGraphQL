@@ -8,7 +8,7 @@
 function popPostscreationAddrelatedpostButtons($buttons)
 {
     if (defined('POP_POSTSCREATION_ROUTE_ADDPOST') && POP_POSTSCREATION_ROUTE_ADDPOST) {
-        $buttons[] = [Wassup_Module_Processor_PostButtons::class, Wassup_Module_Processor_PostButtons::MODULE_BUTTON_POST_CREATE];
+        $buttons[] = [Wassup_Module_Processor_PostButtons::class, Wassup_Module_Processor_PostButtons::COMPONENT_BUTTON_POST_CREATE];
     }
     
     return $buttons;

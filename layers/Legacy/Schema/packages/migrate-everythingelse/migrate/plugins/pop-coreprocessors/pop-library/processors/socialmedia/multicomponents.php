@@ -15,15 +15,15 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA],
-            [self::class, self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA],
-            [self::class, self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA],
-            [self::class, self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS],
-            [self::class, self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS],
-            [self::class, self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS],
-            [self::class, self::MODULE_MULTICOMPONENT_POSTOPTIONS],
-            [self::class, self::MODULE_MULTICOMPONENT_USEROPTIONS],
-            [self::class, self::MODULE_MULTICOMPONENT_TAGOPTIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA],
+            [self::class, self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA],
+            [self::class, self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA],
+            [self::class, self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_POSTOPTIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_USEROPTIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_TAGOPTIONS],
         );
     }
 
@@ -33,36 +33,36 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
 
         $components = array();
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
-            case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
-            case self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
+            case self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
+            case self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
+            case self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
                 break;
 
-            case self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+            case self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
-                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+            case self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS:
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
-                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+            case self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS:
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_POSTOPTIONS:
-                $components[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA];
-                $components[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS];
+            case self::COMPONENT_MULTICOMPONENT_POSTOPTIONS:
+                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA];
+                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_USEROPTIONS:
-                $components[] = [self::class, self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA];
-                $components[] = [self::class, self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS];
+            case self::COMPONENT_MULTICOMPONENT_USEROPTIONS:
+                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA];
+                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
-                $components[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA];
-                $components[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS];
+            case self::COMPONENT_MULTICOMPONENT_TAGOPTIONS:
+                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA];
+                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS];
                 break;
         }
 
@@ -83,21 +83,21 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
-            case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
-            case self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
+            case self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
+            case self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
+            case self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
                 $this->appendProp($component, $props, 'class', 'sm-group');
                 break;
 
-            case self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-            case self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
-            case self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
+            case self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
+            case self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS:
+            case self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS:
                 $this->appendProp($component, $props, 'class', 'secinteractions-group');
                 break;
 
-            case self::MODULE_MULTICOMPONENT_POSTOPTIONS:
-            case self::MODULE_MULTICOMPONENT_USEROPTIONS:
-            case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
+            case self::COMPONENT_MULTICOMPONENT_POSTOPTIONS:
+            case self::COMPONENT_MULTICOMPONENT_USEROPTIONS:
+            case self::COMPONENT_MULTICOMPONENT_TAGOPTIONS:
                 $this->appendProp($component, $props, 'class', 'options-group');
                 foreach ($this->getSubComponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'inline');

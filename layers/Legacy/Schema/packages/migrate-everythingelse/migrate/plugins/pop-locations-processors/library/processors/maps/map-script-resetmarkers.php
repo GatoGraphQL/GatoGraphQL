@@ -7,7 +7,7 @@ class PoP_Module_Processor_MapResetMarkerScripts extends PoP_Module_Processor_Ma
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_SCRIPT_RESETMARKERS],
+            [self::class, self::COMPONENT_MAP_SCRIPT_RESETMARKERS],
         );
     }
 }

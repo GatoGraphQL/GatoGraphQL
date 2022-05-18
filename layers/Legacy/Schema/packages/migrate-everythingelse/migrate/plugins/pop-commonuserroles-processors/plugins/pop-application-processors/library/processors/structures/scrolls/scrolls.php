@@ -10,10 +10,10 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_ORGANIZATIONS_DETAILS],
-            [self::class, self::MODULE_SCROLL_INDIVIDUALS_DETAILS],
-            [self::class, self::MODULE_SCROLL_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_INDIVIDUALS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW],
         );
     }
 
@@ -21,10 +21,10 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS],
-            self::MODULE_SCROLL_INDIVIDUALS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_INDIVIDUALS_DETAILS],
-            self::MODULE_SCROLL_ORGANIZATIONS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_ORGANIZATIONS_FULLVIEW],
-            self::MODULE_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS],
+            self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_INDIVIDUALS_DETAILS],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW],
+            self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -39,12 +39,12 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
 
         // Extra classes
         $details = array(
-            [self::class, self::MODULE_SCROLL_ORGANIZATIONS_DETAILS],
-            [self::class, self::MODULE_SCROLL_INDIVIDUALS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_INDIVIDUALS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW],
         );
 
         $extra_class = '';

@@ -7,7 +7,7 @@ class PoP_Module_Processor_CommentCardLayouts extends PoP_Module_Processor_Comme
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTCOMMENT_CARD],
+            [self::class, self::COMPONENT_LAYOUTCOMMENT_CARD],
         );
     }
 }

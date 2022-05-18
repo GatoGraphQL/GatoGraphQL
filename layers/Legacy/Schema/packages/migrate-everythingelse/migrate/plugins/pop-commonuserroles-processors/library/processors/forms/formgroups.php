@@ -15,15 +15,15 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTPERSON],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_LASTNAME],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES],
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_ORGANIZATIONTYPES],
-            [self::class, self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS],
-            [self::class, self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES],
-            [self::class, self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES],
+            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS],
+            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES],
+            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES],
         );
     }
 
@@ -32,9 +32,9 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         $ret = parent::getLabelClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
-            case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
-            case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
                 $ret .= ' col-sm-2';
                 break;
         }
@@ -46,9 +46,9 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         $ret = parent::getFormcontrolClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
-            case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
-            case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
                 $ret .= ' col-sm-10';
                 break;
         }
@@ -59,15 +59,15 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTPERSON => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON],
-            self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER],
-            self::MODULE_URE_FORMINPUTGROUP_CUP_LASTNAME => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_LASTNAME],
-            self::MODULE_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS],
-            self::MODULE_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
-            self::MODULE_URE_FORMINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES],
-            self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS],
-            self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
-            self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON],
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_CONTACTNUMBER],
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_LASTNAME],
+            self::COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS],
+            self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
+            self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS],
+            self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
+            self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
 
         if ($component = $components[$component[1]] ?? null) {

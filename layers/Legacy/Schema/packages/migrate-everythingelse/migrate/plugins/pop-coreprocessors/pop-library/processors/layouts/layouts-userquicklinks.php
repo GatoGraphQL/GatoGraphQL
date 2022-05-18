@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserQuickLinkLayouts extends PoP_Module_Processor_Use
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTUSER_QUICKLINKS],
+            [self::class, self::COMPONENT_LAYOUTUSER_QUICKLINKS],
         );
     }
 }

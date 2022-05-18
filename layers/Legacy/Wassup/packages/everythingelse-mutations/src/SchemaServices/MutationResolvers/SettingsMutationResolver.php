@@ -36,7 +36,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
         $cmsService = CMSServiceFacade::getInstance();
 
         // Return the redirect. Use Hard redirect
-        // $redirect_to = $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL]);
+        // $redirect_to = $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_BROWSERURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_BROWSERURL]);
         // if (!$redirect_to) {
         //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         //     $redirect_to = $cmsengineapi->getHomeURL();

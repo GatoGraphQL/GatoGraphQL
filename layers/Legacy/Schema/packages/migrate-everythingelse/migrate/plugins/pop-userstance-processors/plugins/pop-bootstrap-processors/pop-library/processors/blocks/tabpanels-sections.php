@@ -17,17 +17,17 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_PRO],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_PRO_GENERAL],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_PRO_ARTICLE],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE],
-            [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE],
-            [self::class, self::MODULE_BLOCK_TABPANEL_MYSTANCES],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYSTANCES],
         );
     }
 
@@ -36,17 +36,17 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_STANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES],
-            self::MODULE_BLOCK_TABPANEL_STANCES_PRO => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_PRO],
-            self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_AGAINST],
-            self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_NEUTRAL],
-            self::MODULE_BLOCK_TABPANEL_STANCES_PRO_GENERAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_PRO_GENERAL],
-            self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_AGAINST_GENERAL],
-            self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_NEUTRAL_GENERAL],
-            self::MODULE_BLOCK_TABPANEL_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_PRO_ARTICLE],
-            self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_AGAINST_ARTICLE],
-            self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_NEUTRAL_ARTICLE],
-            self::MODULE_BLOCK_TABPANEL_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYSTANCES],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_PRO],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_AGAINST],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_NEUTRAL],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_PRO_GENERAL],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_AGAINST_GENERAL],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_NEUTRAL_GENERAL],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_PRO_ARTICLE],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_AGAINST_ARTICLE],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_NEUTRAL_ARTICLE],
+            self::COMPONENT_BLOCK_TABPANEL_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYSTANCES],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -58,20 +58,20 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_STANCES:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_PRO:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_PRO_GENERAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_PRO_ARTICLE:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
 
-            case self::MODULE_BLOCK_TABPANEL_MYSTANCES:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_MYSTANCES:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -80,24 +80,24 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_STANCES:
-                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES];
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES:
+                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES];
 
-            case self::MODULE_BLOCK_TABPANEL_STANCES_PRO:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_PRO_ARTICLE:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE:
-                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_STANCE];
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE:
+                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_STANCE];
 
-            case self::MODULE_BLOCK_TABPANEL_STANCES_PRO_GENERAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL:
-            case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL:
-                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_GENERALSTANCE];
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL:
+            case self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL:
+                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_GENERALSTANCE];
 
-            case self::MODULE_BLOCK_TABPANEL_MYSTANCES:
-                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_MYSTANCES];
+            case self::COMPONENT_BLOCK_TABPANEL_MYSTANCES:
+                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_MYSTANCES];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

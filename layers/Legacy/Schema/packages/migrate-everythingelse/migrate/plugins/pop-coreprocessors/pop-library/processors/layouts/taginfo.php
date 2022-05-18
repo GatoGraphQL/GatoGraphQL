@@ -7,7 +7,7 @@ class PoP_Module_Processor_TagInfoLayouts extends PoP_Module_Processor_TagInfoLa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_TAGINFO],
+            [self::class, self::COMPONENT_LAYOUT_TAGINFO],
         );
     }
 }

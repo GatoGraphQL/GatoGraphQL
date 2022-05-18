@@ -12,10 +12,10 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
         $ret = array();
 
         $routemodules = array(
-            POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION => [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::MODULE_BLOCK_PROFILEORGANIZATION_CREATE],
-            POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL => [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE],
-            POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION => [GD_URE_Module_Processor_UpdateProfileBlocks::class, GD_URE_Module_Processor_UpdateProfileBlocks::MODULE_BLOCK_PROFILEORGANIZATION_UPDATE],
-            POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL => [GD_URE_Module_Processor_UpdateProfileBlocks::class, GD_URE_Module_Processor_UpdateProfileBlocks::MODULE_BLOCK_PROFILEINDIVIDUAL_UPDATE],
+            POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION => [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE],
+            POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL => [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE],
+            POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION => [GD_URE_Module_Processor_UpdateProfileBlocks::class, GD_URE_Module_Processor_UpdateProfileBlocks::COMPONENT_BLOCK_PROFILEORGANIZATION_UPDATE],
+            POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL => [GD_URE_Module_Processor_UpdateProfileBlocks::class, GD_URE_Module_Processor_UpdateProfileBlocks::COMPONENT_BLOCK_PROFILEINDIVIDUAL_UPDATE],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
@@ -25,8 +25,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
         $default_format_myusers = PoP_Application_Utils::getDefaultformatByScreen(POP_URE_SCREEN_MYUSERS);
 
         $routemodules_navigator = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR],
         );
         foreach ($routemodules_navigator as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -49,8 +49,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
         }
 
         $routemodules_addons = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_ADDONS],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_ADDONS],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_ADDONS],
         );
         foreach ($routemodules_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -65,8 +65,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
         }
 
         $routemodules_typeahead = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_INDIVIDUALS_TYPEAHEAD],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD],
         );
         foreach ($routemodules_typeahead as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -81,8 +81,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
         }
 
         $routemodules_details = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_DETAILS],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_DETAILS],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -96,8 +96,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
             }
         }
         $routemodules_fullview = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -111,8 +111,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
             }
         }
         $routemodules_thumbnail = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -126,8 +126,8 @@ class PoP_CommonUserRolesProcessors_Module_MainContentComponentRoutingProcessor 
             }
         }
         $routemodules_list = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_LIST],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_LIST],
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

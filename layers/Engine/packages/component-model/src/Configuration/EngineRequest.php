@@ -149,7 +149,7 @@ class EngineRequest
         return [
             DataOutputItems::META,
             DataOutputItems::DATASET_MODULE_SETTINGS,
-            DataOutputItems::MODULE_DATA,
+            DataOutputItems::COMPONENT_DATA,
             DataOutputItems::DATABASES,
             DataOutputItems::SESSION,
         ];
@@ -163,7 +163,7 @@ class EngineRequest
         return [
             DataOutputItems::META,
             DataOutputItems::DATASET_MODULE_SETTINGS,
-            DataOutputItems::MODULE_DATA,
+            DataOutputItems::COMPONENT_DATA,
             DataOutputItems::DATABASES,
             DataOutputItems::SESSION,
         ];

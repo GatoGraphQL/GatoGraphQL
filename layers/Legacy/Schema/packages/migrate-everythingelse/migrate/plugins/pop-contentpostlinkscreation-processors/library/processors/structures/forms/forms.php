@@ -7,14 +7,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_CONTENTPOSTLINK],
+            [self::class, self::COMPONENT_FORM_CONTENTPOSTLINK],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_CONTENTPOSTLINK => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_CONTENTPOSTLINK],
+            self::COMPONENT_FORM_CONTENTPOSTLINK => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_CONTENTPOSTLINK],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORM_CONTENTPOSTLINK:
+            case self::COMPONENT_FORM_CONTENTPOSTLINK:
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
                 if (!($form_row_classs = $this->getProp($component, $props, 'form-row-class')/*$this->get_general_prop($props, 'form-row-class')*/)) {
                     $form_row_classs = 'row';

@@ -9,18 +9,18 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES],
-            [self::class, self::MODULE_URE_FORMINPUT_MEMBERTAGS],
+            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES],
+            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERTAGS],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('Privileges', 'ure-popprocessors');
 
-            case self::MODULE_URE_FORMINPUT_MEMBERTAGS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERTAGS:
                 return TranslationAPIFacade::getInstance()->__('Tags', 'ure-popprocessors');
         }
         
@@ -30,10 +30,10 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return GD_URE_FormInput_MemberPrivileges::class;
             
-            case self::MODULE_URE_FORMINPUT_MEMBERTAGS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERTAGS:
                 return GD_URE_FormInput_MemberTags::class;
         }
         
@@ -43,10 +43,10 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return 'memberprivileges';
 
-            case self::MODULE_URE_FORMINPUT_MEMBERTAGS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERTAGS:
                 return 'membertags';
         }
         

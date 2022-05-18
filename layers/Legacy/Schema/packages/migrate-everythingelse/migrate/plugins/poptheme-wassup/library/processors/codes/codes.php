@@ -13,24 +13,24 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_HTMLCODE_HOMEWELCOMETOP],
-            [self::class, self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM],
-            [self::class, self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP],
-            [self::class, self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM],
-            [self::class, self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP],
-            [self::class, self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
+            [self::class, self::COMPONENT_HTMLCODE_HOMEWELCOMETOP],
+            [self::class, self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM],
+            [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP],
+            [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM],
+            [self::class, self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP],
+            [self::class, self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
         );
     }
 
     public function getHtmlTag(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
-            case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
-            case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
-            case self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM:
-            case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM:
-            case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM:
+            case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
+            case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP:
+            case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP:
+            case self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM:
+            case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM:
+            case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM:
                 return null;
         }
 
@@ -40,12 +40,12 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
     protected function isStaticCode(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
-            case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
-            case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
-            case self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM:
-            case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM:
-            case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM:
+            case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
+            case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP:
+            case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP:
+            case self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM:
+            case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM:
+            case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM:
                 return false;
         }
 
@@ -58,13 +58,13 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             switch ($component[1]) {
-                case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
-                case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
-                case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
+                case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
+                case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP:
+                case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP:
                     $subComponents = array(
-                        self::MODULE_HTMLCODE_HOMEWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME],
-                        self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME],
-                        self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
+                        self::COMPONENT_HTMLCODE_HOMEWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME],
+                        self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME],
+                        self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT],
                     );
                     $subComponent = $subComponents[$component[1]];
 
@@ -79,7 +79,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                         '<i class="fa fa-close"></i>'
                     );
 
-                    if ($component == [self::class, self::MODULE_HTMLCODE_HOMEWELCOMETOP] || $component == [self::class, self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP]) {
+                    if ($component == [self::class, self::COMPONENT_HTMLCODE_HOMEWELCOMETOP] || $component == [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP]) {
                              // Allow qTrans to add the language links
                         $description = \PoP\Root\App::applyFilters(
                             'PoP_Module_Processor_HTMLCodes:homewelcometitle',
@@ -89,24 +89,24 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                     }
                     return $description;
 
-                case self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM:
-                case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM:
-                case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM:
+                case self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM:
+                case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM:
+                case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM:
                     $welcometitle = PoP_ApplicationProcessors_Utils::getWelcomeTitle();
                     $titles = array(
-                        self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM => $welcometitle,
-                        self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM => $welcometitle,
-                        self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM => '<i class="fa fa-fw fa-info"></i>'.TranslationAPIFacade::getInstance()->__('Show description', 'poptheme-wassup'),
+                        self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM => $welcometitle,
+                        self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM => $welcometitle,
+                        self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM => '<i class="fa fa-fw fa-info"></i>'.TranslationAPIFacade::getInstance()->__('Show description', 'poptheme-wassup'),
                     );
                     $markups = array(
-                        self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM => 'h2',
-                        self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM => 'h4',
-                        self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM => 'h4',
+                        self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM => 'h2',
+                        self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM => 'h4',
+                        self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM => 'h4',
                     );
                     $classes = array(
-                        self::MODULE_HTMLCODE_HOMEWELCOMEBOTTOM => '',
-                        self::MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM => '',
-                        self::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM => 'btn btn-default btn-block btn-lg',
+                        self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM => '',
+                        self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM => '',
+                        self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM => 'btn btn-default btn-block btn-lg',
                     );
 
                     // This value must be set by the parent module

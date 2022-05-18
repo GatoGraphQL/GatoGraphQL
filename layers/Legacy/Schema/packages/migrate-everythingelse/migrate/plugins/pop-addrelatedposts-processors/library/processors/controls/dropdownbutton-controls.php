@@ -8,7 +8,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $ret = array_merge(
                     $ret,
                     \PoP\Root\App::applyFilters(
@@ -34,7 +34,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     public function getBtnClass(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'btn btn-compact btn-link';
         }
 
@@ -44,7 +44,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'fa-reply';
         }
 
@@ -54,7 +54,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return TranslationAPIFacade::getInstance()->__('Reply with...', 'pop-coreprocessors').' <span class="caret"></span>';
         }
 
@@ -64,7 +64,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $this->appendProp($component, $props, 'class', 'pop-addrelatedpost-dropdown');
                 break;
         }

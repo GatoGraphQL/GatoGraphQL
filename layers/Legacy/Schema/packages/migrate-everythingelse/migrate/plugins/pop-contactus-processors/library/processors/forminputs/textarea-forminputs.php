@@ -8,14 +8,14 @@ class PoP_ContactUs_Module_Processor_TextareaFormInputs extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_MESSAGE],
+            [self::class, self::COMPONENT_FORMINPUT_MESSAGE],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_MESSAGE:
+            case self::COMPONENT_FORMINPUT_MESSAGE:
                 return TranslationAPIFacade::getInstance()->__('Message', 'pop-genericforms');
         }
         
@@ -25,7 +25,7 @@ class PoP_ContactUs_Module_Processor_TextareaFormInputs extends PoP_Module_Proce
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_MESSAGE:
+            case self::COMPONENT_FORMINPUT_MESSAGE:
                 return true;
         }
         
@@ -35,7 +35,7 @@ class PoP_ContactUs_Module_Processor_TextareaFormInputs extends PoP_Module_Proce
     public function clearInput(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_MESSAGE:
+            case self::COMPONENT_FORMINPUT_MESSAGE:
                 return true;
         }
 

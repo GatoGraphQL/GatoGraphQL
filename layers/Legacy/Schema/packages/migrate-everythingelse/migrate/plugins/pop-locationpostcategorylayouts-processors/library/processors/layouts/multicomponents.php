@@ -7,7 +7,7 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_LOCATIONMAP],
+            [self::class, self::COMPONENT_MULTICOMPONENT_LOCATIONMAP],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
-                $ret[] = [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST];
+            case self::COMPONENT_MULTICOMPONENT_LOCATIONMAP:
+                $ret[] = [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE_USERORPOST];
                 break;
         }
 
@@ -27,8 +27,8 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
-                $this->setProp([PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST], $props, 'staticmap-size', '480x150');
+            case self::COMPONENT_MULTICOMPONENT_LOCATIONMAP:
+                $this->setProp([PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE_USERORPOST], $props, 'staticmap-size', '480x150');
                 break;
         }
 

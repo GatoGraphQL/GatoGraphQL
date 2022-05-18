@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponen
 {
     public function getSelectedModule(array $component)
     {
-        return [GD_EM_Module_Processor_LocationTypeaheadsSelectedLayouts::class, GD_EM_Module_Processor_LocationTypeaheadsSelectedLayouts::MODULE_LAYOUTLOCATION_CARD];
+        return [GD_EM_Module_Processor_LocationTypeaheadsSelectedLayouts::class, GD_EM_Module_Processor_LocationTypeaheadsSelectedLayouts::COMPONENT_LAYOUTLOCATION_CARD];
     }
 }

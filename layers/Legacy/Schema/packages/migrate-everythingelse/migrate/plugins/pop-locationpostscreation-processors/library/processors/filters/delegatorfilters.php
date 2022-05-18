@@ -7,14 +7,14 @@ class PoPSPEM_Module_Processor_CustomDelegatorFilters extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DELEGATORFILTER_MYLOCATIONPOSTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYLOCATIONPOSTS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_CustomSimpleFilterInners::class, PoPSPEM_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS],
+            self::COMPONENT_DELEGATORFILTER_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_CustomSimpleFilterInners::class, PoPSPEM_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

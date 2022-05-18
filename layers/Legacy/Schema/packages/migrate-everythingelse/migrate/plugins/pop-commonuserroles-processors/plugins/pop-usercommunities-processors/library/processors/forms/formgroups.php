@@ -8,14 +8,14 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],
+            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY],
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -28,7 +28,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
     public function getInfo(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY:
+            case self::COMPONENT_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Become a Community: all the content posted by your members will also appear under your Organization\'s profile.');
         }
 

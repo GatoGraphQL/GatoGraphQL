@@ -10,18 +10,18 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLEMAP],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLETAGMAP],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEMAP],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
                 return TranslationAPIFacade::getInstance()->__('Toggle Map', 'poptheme-wassup');
         }
 
@@ -30,9 +30,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
                 return 'fa-map-marker';
         }
 
@@ -41,9 +41,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     public function getHref(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
                 // Assume there is only one .collapse.map in this block
                 // return '#'.$props['block-id'].' > .blocksection-inners .collapse.map';
                 return $this->getProp($component, $props, 'target');
@@ -57,9 +57,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
                 // It will add class "in" through .js if there is no cookie
                 $this->addJsmethod($ret, 'cookieToggleClass');
                 break;
@@ -71,9 +71,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
                 $this->appendProp($component, $props, 'class', 'pop-togglemap-btn');
                 $this->appendProp($component, $props, 'class', 'btn btn-default btn-sm');
                 $this->mergeProp(
@@ -101,8 +101,8 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
         switch ($component[1]) {
          // The map is initially toggled non-visible
-            case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
-            case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
                 $this->mergeProp(
                     $component,
                     $props,

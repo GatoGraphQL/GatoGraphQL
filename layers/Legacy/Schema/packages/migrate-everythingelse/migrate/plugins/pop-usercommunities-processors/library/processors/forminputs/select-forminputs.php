@@ -8,14 +8,14 @@ class GD_URE_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Sele
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMINPUT_MEMBERSTATUS],
+            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERSTATUS],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status', 'ure-popprocessors');
         }
         
@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Sele
     public function isMandatory(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERSTATUS:
                 return true;
         }
         
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Sele
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERSTATUS:
                 return GD_URE_FormInput_MemberStatus::class;
         }
         
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Sele
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_URE_FORMINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FORMINPUT_MEMBERSTATUS:
                 return 'memberstatus';
         }
         

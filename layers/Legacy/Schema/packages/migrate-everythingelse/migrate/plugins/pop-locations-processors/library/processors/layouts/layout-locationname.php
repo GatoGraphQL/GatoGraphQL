@@ -8,15 +8,15 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_LAYOUT_LOCATIONNAME],
-            [self::class, self::MODULE_EM_LAYOUT_LOCATIONICONNAME],
+            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONNAME],
+            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME],
         );
     }
 
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_EM_LAYOUT_LOCATIONICONNAME:
+            case self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME:
                 return 'fa-fw fa-map-marker';
         }
         

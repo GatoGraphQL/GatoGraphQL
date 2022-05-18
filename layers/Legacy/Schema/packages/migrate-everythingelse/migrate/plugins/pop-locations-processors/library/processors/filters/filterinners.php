@@ -7,7 +7,7 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_LOCATIONS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_LOCATIONS],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
         $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
-            self::MODULE_FILTERINPUTCONTAINER_LOCATIONS => [
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
+            self::COMPONENT_FILTERINPUTCONTAINER_LOCATIONS => [
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
@@ -36,7 +36,7 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
     // public function getFilter(array $component)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
+    //         self::COMPONENT_FILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
     //     );
     //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;

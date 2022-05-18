@@ -8,19 +8,19 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLUSER_ORGANIZATION],
-            [self::class, self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL],
+            [self::class, self::COMPONENT_LAYOUT_FULLUSER_ORGANIZATION],
+            [self::class, self::COMPONENT_LAYOUT_FULLUSER_INDIVIDUAL],
         );
     }
 
     public function getSidebarSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FULLUSER_ORGANIZATION:
-            case self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL:
+            case self::COMPONENT_LAYOUT_FULLUSER_ORGANIZATION:
+            case self::COMPONENT_LAYOUT_FULLUSER_INDIVIDUAL:
                 $sidebars = array(
-                    self::MODULE_LAYOUT_FULLUSER_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION],
-                    self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
+                    self::COMPONENT_LAYOUT_FULLUSER_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION],
+                    self::COMPONENT_LAYOUT_FULLUSER_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
                 );
 
                 return $sidebars[$component[1]];

@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_CommentsScriptFrameLayoutsBase extends PoP_M
     public function getScriptSubmodule(array $component)
     {
         return $this->doAppend($component) ? 
-        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_COMMENTS] : 
-        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_COMMENTSEMPTY];
+        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_COMMENTS] : 
+        	[PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_COMMENTSEMPTY];
     }
 }

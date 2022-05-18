@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_SingleCommentScriptFrameLayoutsBase extends 
 {
     public function getScriptSubmodule(array $component)
     {
-        return [PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_SINGLECOMMENT];
+        return [PoP_Module_Processor_ScriptsLayouts::class, PoP_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_SINGLECOMMENT];
     }
 }

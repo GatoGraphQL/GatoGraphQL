@@ -5,7 +5,7 @@ class UserStance_WP_Module_Processor_CustomSectionDataloads extends UserStance_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORSTANCES_CAROUSEL],
         );
     }
 
@@ -15,7 +15,7 @@ class UserStance_WP_Module_Processor_CustomSectionDataloads extends UserStance_M
         
         switch ($component[1]) {
             // Order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
-            case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
+            case self::COMPONENT_DATALOAD_AUTHORSTANCES_CAROUSEL:
                 // General thought: menu_order = 0. Article-related thought: menu_order = 1. So order ASC.
                 $ret['orderby'] = [
                   'menu_order' => 'ASC', 

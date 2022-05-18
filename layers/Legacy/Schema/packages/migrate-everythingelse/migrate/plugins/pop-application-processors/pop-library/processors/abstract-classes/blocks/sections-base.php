@@ -35,10 +35,10 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // if (\PoP\Root\App::getState('nature') == $this->getNature($component)) {
         switch (\PoP\Root\App::getState('nature')) {
             case UserRequestNature::USER:
-                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
+                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::COMPONENT_SUBMENU_AUTHOR];
 
             case TagRequestNature::TAG:
-                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
+                return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::COMPONENT_SUBMENU_TAG];
 
             case CustomPostRequestNature::CUSTOMPOST:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu();

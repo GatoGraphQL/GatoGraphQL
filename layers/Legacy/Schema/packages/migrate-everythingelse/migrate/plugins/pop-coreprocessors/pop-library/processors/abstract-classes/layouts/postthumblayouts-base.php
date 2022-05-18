@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         // Add the MultiLayout item always, since the layouts will also be referenced by the MultLayout
         // If not on the MultiLayout page (eg: All Content) this will be hidden using css
         return array(
-            [PoP_Module_Processor_PostAdditionalLayouts::class, PoP_Module_Processor_PostAdditionalLayouts::MODULE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL]
+            [PoP_Module_Processor_PostAdditionalLayouts::class, PoP_Module_Processor_PostAdditionalLayouts::COMPONENT_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL]
         );
     }
 

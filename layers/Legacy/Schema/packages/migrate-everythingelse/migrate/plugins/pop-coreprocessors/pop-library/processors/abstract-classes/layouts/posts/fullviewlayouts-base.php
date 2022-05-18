@@ -58,7 +58,7 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     public function getContentSubmodules(array $component)
     {
         return array(
-            [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POSTFEED],
+            [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTFEED],
         );
     }
 

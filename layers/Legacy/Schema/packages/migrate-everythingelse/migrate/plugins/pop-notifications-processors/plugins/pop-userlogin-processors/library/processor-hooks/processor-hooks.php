@@ -23,7 +23,7 @@ class AAL_PoPProcessors_ProcessorHooks
 
         // Add the Notifications since the last time the user fetched content from website
         if ($this->enableLatestnotifications()) {
-            $components[] = [AAL_PoPProcessors_Module_Processor_Multiples::class, AAL_PoPProcessors_Module_Processor_Multiples::MODULE_MULTIPLE_LATESTNOTIFICATIONS];
+            $components[] = [AAL_PoPProcessors_Module_Processor_Multiples::class, AAL_PoPProcessors_Module_Processor_Multiples::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS];
         }
         return $components;
     }

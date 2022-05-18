@@ -7,7 +7,7 @@ class PoP_Module_Processor_NotificationActionIconLayouts extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_NOTIFICATIONICON],
+            [self::class, self::COMPONENT_LAYOUT_NOTIFICATIONICON],
         );
     }
 }

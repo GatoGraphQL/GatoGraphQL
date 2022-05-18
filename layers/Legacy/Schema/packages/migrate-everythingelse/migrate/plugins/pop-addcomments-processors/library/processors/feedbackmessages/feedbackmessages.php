@@ -8,16 +8,16 @@ class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_COMMENTS],
-            [self::class, self::MODULE_FEEDBACKMESSAGE_ADDCOMMENT],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_COMMENTS],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_COMMENTS => [PoP_Module_Processor_ListCommentsFeedbackMessageInners::class, PoP_Module_Processor_ListCommentsFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_COMMENTS],
-            self::MODULE_FEEDBACKMESSAGE_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageInners::class, PoP_Module_Processor_CommentsFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_ADDCOMMENT],
+            self::COMPONENT_FEEDBACKMESSAGE_COMMENTS => [PoP_Module_Processor_ListCommentsFeedbackMessageInners::class, PoP_Module_Processor_ListCommentsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_COMMENTS],
+            self::COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageInners::class, PoP_Module_Processor_CommentsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_ADDCOMMENT],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

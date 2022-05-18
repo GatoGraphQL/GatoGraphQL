@@ -9,16 +9,16 @@ class PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners extends PoP_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL],
         );
     }
     
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
                 return 'fa-fw fa-envelope-o';
         }
         
@@ -28,8 +28,8 @@ class PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners extends PoP_M
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
                 return TranslationAPIFacade::getInstance()->__('Send message', 'pop-coreprocessors');
         }
         

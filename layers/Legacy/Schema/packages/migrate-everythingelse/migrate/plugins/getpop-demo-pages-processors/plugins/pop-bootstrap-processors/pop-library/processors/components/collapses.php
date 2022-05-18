@@ -9,7 +9,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP],
+            [self::class, self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP],
         );
     }
 
@@ -18,10 +18,10 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         $ret = parent::getPanelSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-                    $ret[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR];
-                    $ret[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP];
+                    $ret[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR];
+                    $ret[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP];
                 }
                 break;
         }
@@ -32,7 +32,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
     protected function lazyLoadInactivePanels(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return true;
         }
 
@@ -42,7 +42,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
     public function getPanelHeaderType(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'heading';
         }
 
@@ -52,7 +52,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
     public function closeParent(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return false;
         }
 
@@ -77,7 +77,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         '</div>';
 
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 $ret = array();
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
                     $events_title = sprintf(
@@ -92,8 +92,8 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
                         TranslationAPIFacade::getInstance()->__('Events Map', 'getpopdemo-processors'),
                         TranslationAPIFacade::getInstance()->__('Or, if you prefer, you can browse the events by their location.', 'getpopdemo-processors')
                     );
-                    $ret[\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR])] = $events_title;
-                    $ret[\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP])] = $map_title;
+                    $ret[\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR])] = $events_title;
+                    $ret[\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP])] = $map_title;
                 }
 
                 return $ret;
@@ -105,7 +105,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
     public function getPaneltitleHtmltag(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'span';
         }
 
@@ -115,15 +115,15 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
+            case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 $this->appendProp($component, $props, 'class', 'collapse-hometop');
 
                 // Format
-                $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR]], $props, 'title-htmltag', 'h3');
-                $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR]], $props, 'add-titlelink', true);
-                $this->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
-                $this->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP]], $props, 'add-titlelink', true);
-                $this->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP]], $props, 'collapsible', true);
+                $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR]], $props, 'title-htmltag', 'h3');
+                $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR]], $props, 'add-titlelink', true);
+                $this->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
+                $this->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP]], $props, 'add-titlelink', true);
+                $this->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP]], $props, 'collapsible', true);
                 break;
         }
 

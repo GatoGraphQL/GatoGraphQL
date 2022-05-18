@@ -31,7 +31,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret[UserRequestNature::USER][] = [
             'component' => [
                 FieldDataloadComponentProcessor::class,
-                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
+                FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -60,8 +60,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
             $moduleConfiguration->getUsersRoute() => [
                 FieldDataloadComponentProcessor::class,
                 $componentModelModuleConfiguration->enableAdminSchema() ?
-                    FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
-                    : FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
+                    FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
+                    : FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

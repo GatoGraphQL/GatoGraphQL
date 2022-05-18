@@ -11,26 +11,26 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
         );
     }
     
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA:
                 return 'fa-fw fa-code fa-lg';
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
                 return 'fa-fw fa-code';
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA:
                 return 'fa-fw fa-cog fa-lg';
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN:
                 return 'fa-fw fa-cog';
         }
         
@@ -40,10 +40,10 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
     public function getBtnTitle(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
 
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('API Data', 'pop-coreprocessors');
         }
         

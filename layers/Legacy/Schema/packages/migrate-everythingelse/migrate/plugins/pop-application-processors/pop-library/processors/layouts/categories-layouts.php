@@ -8,18 +8,18 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_CATEGORIES],
-            [self::class, self::MODULE_LAYOUT_APPLIESTO],
+            [self::class, self::COMPONENT_LAYOUT_CATEGORIES],
+            [self::class, self::COMPONENT_LAYOUT_APPLIESTO],
         );
     }
 
     public function getCategoriesField(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CATEGORIES:
+            case self::COMPONENT_LAYOUT_CATEGORIES:
                 return 'topicsByName';
 
-            case self::MODULE_LAYOUT_APPLIESTO:
+            case self::COMPONENT_LAYOUT_APPLIESTO:
                 return 'appliestoByName';
         }
         
@@ -28,7 +28,7 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public function getLabelClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_APPLIESTO:
+            case self::COMPONENT_LAYOUT_APPLIESTO:
                 return 'label-primary';
         }
         

@@ -8,8 +8,8 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLGROUP_MYMEMBERS],
-            [self::class, self::MODULE_CONTROLGROUP_MYBLOCKMEMBERS],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYMEMBERS],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS],
         );
     }
 
@@ -18,16 +18,16 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_CONTROLGROUP_MYMEMBERS:
-                $ret[] = [GD_URE_Module_Processor_CustomControlButtonGroups::class, GD_URE_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_MYMEMBERS:
+                $ret[] = [GD_URE_Module_Processor_CustomControlButtonGroups::class, GD_URE_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
 
-            case self::MODULE_CONTROLGROUP_MYBLOCKMEMBERS:
-                $ret[] = [GD_URE_Module_Processor_CustomControlButtonGroups::class, GD_URE_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+            case self::COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS:
+                $ret[] = [GD_URE_Module_Processor_CustomControlButtonGroups::class, GD_URE_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
         }
 

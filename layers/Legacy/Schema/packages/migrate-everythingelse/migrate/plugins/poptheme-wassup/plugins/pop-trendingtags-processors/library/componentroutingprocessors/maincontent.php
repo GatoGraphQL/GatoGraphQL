@@ -14,7 +14,7 @@ class PoPTheme_Wassup_TrendingTags_Module_MainContentComponentRoutingProcessor e
         $default_format_tags = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGS);
 
         $routemodules_tagdetails = array(
-            POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS],
+            POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS],
         );
         foreach ($routemodules_tagdetails as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -28,7 +28,7 @@ class PoPTheme_Wassup_TrendingTags_Module_MainContentComponentRoutingProcessor e
             }
         }
         $routemodules_taglist = array(
-            POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST],
+            POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST],
         );
         foreach ($routemodules_taglist as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

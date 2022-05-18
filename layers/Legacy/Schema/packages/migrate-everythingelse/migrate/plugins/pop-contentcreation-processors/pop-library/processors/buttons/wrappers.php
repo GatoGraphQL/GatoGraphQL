@@ -10,8 +10,8 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONWRAPPER_POSTVIEW],
-            [self::class, self::MODULE_BUTTONWRAPPER_POSTPREVIEW],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTVIEW],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW],
         );
     }
 
@@ -20,12 +20,12 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTONWRAPPER_POSTVIEW:
-                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTVIEW];
+            case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
+                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTVIEW];
                 break;
 
-            case self::MODULE_BUTTONWRAPPER_POSTPREVIEW:
-                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTPREVIEW];
+            case self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW:
+                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTPREVIEW];
                 break;
         }
 
@@ -35,10 +35,10 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONWRAPPER_POSTVIEW:
+            case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
 
-            case self::MODULE_BUTTONWRAPPER_POSTPREVIEW:
+            case self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('not', ['field' => FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED])], 'not-published');
         }
 

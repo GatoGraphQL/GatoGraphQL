@@ -7,14 +7,14 @@ class GenericForms_Module_Processor_PageCodes extends PoP_Module_Processor_HTMLP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_PAGECODE_NEWSLETTER],
+            [self::class, self::COMPONENT_PAGECODE_NEWSLETTER],
         );
     }
 
     public function getPageId(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_PAGECODE_NEWSLETTER:
+            case self::COMPONENT_PAGECODE_NEWSLETTER:
                 return POP_NEWSLETTER_CODEPAGE_NEWSLETTER;
         }
     

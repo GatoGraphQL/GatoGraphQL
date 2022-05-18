@@ -8,8 +8,8 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWNOTIFICATION_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_LIST],
         );
     }
     
@@ -17,8 +17,8 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
-                case self::MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS:
-                    return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR60];
+                case self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_DETAILS:
+                    return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR60];
             }
         }
 

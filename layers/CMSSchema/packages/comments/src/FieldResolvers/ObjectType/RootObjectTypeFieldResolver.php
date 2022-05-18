@@ -149,7 +149,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'comment' => [SingleCommentFilterInputContainerComponentProcessor::class, SingleCommentFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
+            'comment' => [SingleCommentFilterInputContainerComponentProcessor::class, SingleCommentFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -200,7 +200,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 if ($moduleConfiguration->treatCommentStatusAsAdminData()) {
                     $commentStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputComponentProcessor::class,
-                        FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS
+                        FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS
                     ]);
                     $adminFieldArgNames[] = $commentStatusFilterInputName;
                 }

@@ -12,11 +12,11 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGET_CATEGORIES],
-            [self::class, self::MODULE_WIDGET_APPLIESTO],
-            [self::class, self::MODULE_WIDGETCOMPACT_GENERICINFO],
-            [self::class, self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO],
-            [self::class, self::MODULE_WIDGETCOMPACT_POSTINFO],
+            [self::class, self::COMPONENT_WIDGET_CATEGORIES],
+            [self::class, self::COMPONENT_WIDGET_APPLIESTO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_GENERICINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_POSTINFO],
         );
     }
 
@@ -25,26 +25,26 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGET_CATEGORIES:
-                $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+            case self::COMPONENT_WIDGET_CATEGORIES:
+                $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 break;
 
-            case self::MODULE_WIDGET_APPLIESTO:
-                $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+            case self::COMPONENT_WIDGET_APPLIESTO:
+                $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 break;
 
-            case self::MODULE_WIDGETCOMPACT_GENERICINFO:
-            case self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_WIDGETPUBLISHED];
+            case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
+            case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_WIDGETPUBLISHED];
                 break;
 
-            case self::MODULE_WIDGETCOMPACT_POSTINFO:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_WIDGETPUBLISHED];
+            case self::COMPONENT_WIDGETCOMPACT_POSTINFO:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_WIDGETPUBLISHED];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
                 break;
         }
@@ -55,11 +55,11 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGET_CATEGORIES => TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup'),
-            self::MODULE_WIDGET_APPLIESTO => TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup'),
-            self::MODULE_WIDGETCOMPACT_GENERICINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
-            self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO => TranslationAPIFacade::getInstance()->__('Highlight', 'poptheme-wassup'),
-            self::MODULE_WIDGETCOMPACT_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_CATEGORIES => TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_APPLIESTO => TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_GENERICINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO => TranslationAPIFacade::getInstance()->__('Highlight', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
 
         return $titles[$component[1]] ?? null;
@@ -67,12 +67,12 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGET_CATEGORIES => 'fa-info-circle',
-            self::MODULE_WIDGET_APPLIESTO => 'fa-info-circle',
-            self::MODULE_WIDGETCOMPACT_GENERICINFO => 'fa-info-circle',
-            self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO => 'fa-bullseye',
-            // self::MODULE_WIDGETCOMPACT_POSTINFO => 'fa-flash',
-            self::MODULE_WIDGETCOMPACT_POSTINFO => 'fa-circle',
+            self::COMPONENT_WIDGET_CATEGORIES => 'fa-info-circle',
+            self::COMPONENT_WIDGET_APPLIESTO => 'fa-info-circle',
+            self::COMPONENT_WIDGETCOMPACT_GENERICINFO => 'fa-info-circle',
+            self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO => 'fa-bullseye',
+            // self::COMPONENT_WIDGETCOMPACT_POSTINFO => 'fa-flash',
+            self::COMPONENT_WIDGETCOMPACT_POSTINFO => 'fa-circle',
         );
 
         return $fontawesomes[$component[1]] ?? null;
@@ -81,9 +81,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_GENERICINFO:
-            case self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO:
-            case self::MODULE_WIDGETCOMPACT_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
+            case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_POSTINFO:
                 return 'list-group list-group-sm';
         }
 
@@ -92,9 +92,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_GENERICINFO:
-            case self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO:
-            case self::MODULE_WIDGETCOMPACT_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
+            case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_POSTINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
@@ -103,9 +103,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_GENERICINFO:
-            case self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO:
-            case self::MODULE_WIDGETCOMPACT_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
+            case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_POSTINFO:
                 return 'panel panel-default panel-sm';
         }
 

@@ -9,8 +9,8 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER],
-            [self::class, self::MODULE_FILTERINPUTGROUP_POSTDATES],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER],
+            [self::class, self::COMPONENT_FILTERINPUTGROUP_POSTDATES],
         );
     }
 
@@ -19,7 +19,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         $ret = parent::getLabelClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_POSTDATES:
+            case self::COMPONENT_FILTERINPUTGROUP_POSTDATES:
                 $ret .= ' col-sm-2';
                 break;
         }
@@ -31,7 +31,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         $ret = parent::getFormcontrolClass($component);
 
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTGROUP_POSTDATES:
+            case self::COMPONENT_FILTERINPUTGROUP_POSTDATES:
                 $ret .= ' col-sm-10';
                 break;
         }
@@ -42,8 +42,8 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     public function getComponentSubname(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER:
-            case self::MODULE_FILTERINPUTGROUP_POSTDATES:
+            case self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER:
+            case self::COMPONENT_FILTERINPUTGROUP_POSTDATES:
                 return 'readable';
         }
 
@@ -53,8 +53,8 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER => [PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER],
-            self::MODULE_FILTERINPUTGROUP_POSTDATES => [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_CUSTOMPOSTDATES],
+            self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER => [PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER],
+            self::COMPONENT_FILTERINPUTGROUP_POSTDATES => [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES],
         );
 
         if ($component = $components[$component[1]] ?? null) {
@@ -67,7 +67,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER:
+            case self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER:
                 $this->setProp($this->getComponentSubmodule($component), $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Click here...', 'pop-coreprocessors'));
                 break;
         }

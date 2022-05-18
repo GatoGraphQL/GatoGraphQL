@@ -26,52 +26,52 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_POSTSOCIALMEDIA_FB],
-            [self::class, self::MODULE_USERSOCIALMEDIA_FB],
-            [self::class, self::MODULE_TAGSOCIALMEDIA_FB],
-            [self::class, self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::MODULE_USERSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::MODULE_POSTSOCIALMEDIA_TWITTER],
-            [self::class, self::MODULE_USERSOCIALMEDIA_TWITTER],
-            [self::class, self::MODULE_TAGSOCIALMEDIA_TWITTER],
-            [self::class, self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::MODULE_POSTSOCIALMEDIA_LINKEDIN],
-            [self::class, self::MODULE_USERSOCIALMEDIA_LINKEDIN],
-            [self::class, self::MODULE_TAGSOCIALMEDIA_LINKEDIN],
-            [self::class, self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW],
-            [self::class, self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW],
-            [self::class, self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_FB],
+            [self::class, self::COMPONENT_USERSOCIALMEDIA_FB],
+            [self::class, self::COMPONENT_TAGSOCIALMEDIA_FB],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW],
+            [self::class, self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW],
+            [self::class, self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_TWITTER],
+            [self::class, self::COMPONENT_USERSOCIALMEDIA_TWITTER],
+            [self::class, self::COMPONENT_TAGSOCIALMEDIA_TWITTER],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW],
+            [self::class, self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW],
+            [self::class, self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN],
+            [self::class, self::COMPONENT_USERSOCIALMEDIA_LINKEDIN],
+            [self::class, self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN],
+            [self::class, self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW],
+            [self::class, self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW],
+            [self::class, self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW],
         );
     }
 
     public function getProvider(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_POSTSOCIALMEDIA_FB:
-            case self::MODULE_USERSOCIALMEDIA_FB:
-            case self::MODULE_TAGSOCIALMEDIA_FB:
-            case self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB:
+            case self::COMPONENT_USERSOCIALMEDIA_FB:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW:
                 return GD_SOCIALMEDIA_PROVIDER_FACEBOOK;
 
-            case self::MODULE_USERSOCIALMEDIA_TWITTER:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW:
                 return GD_SOCIALMEDIA_PROVIDER_TWITTER;
 
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
                 return GD_SOCIALMEDIA_PROVIDER_LINKEDIN;
         }
 
@@ -81,28 +81,28 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public function getShareurlField(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_POSTSOCIALMEDIA_FB:
-            case self::MODULE_USERSOCIALMEDIA_FB:
-            case self::MODULE_TAGSOCIALMEDIA_FB:
-            case self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB:
+            case self::COMPONENT_USERSOCIALMEDIA_FB:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'facebook']);
 
-            case self::MODULE_USERSOCIALMEDIA_TWITTER:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'twitter']);
 
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'linkedin']);
         }
 
@@ -112,28 +112,28 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_POSTSOCIALMEDIA_FB:
-            case self::MODULE_USERSOCIALMEDIA_FB:
-            case self::MODULE_TAGSOCIALMEDIA_FB:
-            case self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB:
+            case self::COMPONENT_USERSOCIALMEDIA_FB:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Facebook', 'pop-coreprocessors');
 
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Twitter', 'pop-coreprocessors');
 
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('LinkedIn', 'pop-coreprocessors');
         }
 
@@ -142,29 +142,29 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public function getShortname(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_POSTSOCIALMEDIA_FB:
-            case self::MODULE_USERSOCIALMEDIA_FB:
-            case self::MODULE_TAGSOCIALMEDIA_FB:
-            case self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB:
+            case self::COMPONENT_USERSOCIALMEDIA_FB:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW:
                 return 'facebook';
 
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW:
                 return 'twitter';
 
 
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
                 return 'linkedin';
         }
 
@@ -173,34 +173,34 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_POSTSOCIALMEDIA_FB:
-            case self::MODULE_USERSOCIALMEDIA_FB:
-            case self::MODULE_TAGSOCIALMEDIA_FB:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB:
+            case self::COMPONENT_USERSOCIALMEDIA_FB:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB:
                 return 'fa-facebook fa-lg';
 
-            case self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_FB_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW:
                 return 'fa-facebook';
 
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER:
                 return 'fa-twitter fa-lg';
 
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW:
                 return 'fa-twitter';
 
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
                 return 'fa-linkedin fa-lg';
 
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
                 return 'fa-linkedin';
         }
 
@@ -210,15 +210,15 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_POSTSOCIALMEDIA_FB:
-            case self::MODULE_USERSOCIALMEDIA_FB:
-            case self::MODULE_TAGSOCIALMEDIA_FB:
-            case self::MODULE_POSTSOCIALMEDIA_TWITTER:
-            case self::MODULE_USERSOCIALMEDIA_TWITTER:
-            case self::MODULE_TAGSOCIALMEDIA_TWITTER:
-            case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
-            case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_POSTSOCIALMEDIA_FB:
+            case self::COMPONENT_USERSOCIALMEDIA_FB:
+            case self::COMPONENT_TAGSOCIALMEDIA_FB:
+            case self::COMPONENT_POSTSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_USERSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_TAGSOCIALMEDIA_TWITTER:
+            case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
+            case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
                 // Artificial property added to identify the template when adding module-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmediaproviders');
                 $this->appendProp($component, $props, 'class', 'socialmediaproviders-changebg icon-only');

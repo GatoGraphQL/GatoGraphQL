@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
     {
         $ret = parent::getAbovecontentSubmodules($component);
 
-        $ret[] = [GD_Custom_Module_Processor_PostThumbLayoutWrappers::class, GD_Custom_Module_Processor_PostThumbLayoutWrappers::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER];
+        $ret[] = [GD_Custom_Module_Processor_PostThumbLayoutWrappers::class, GD_Custom_Module_Processor_PostThumbLayoutWrappers::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER];
 
         return $ret;
     }
@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
     public function getAuthorAvatarModule(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR82];
+            return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR82];
         }
 
         return null;
@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
 
     public function getContentSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MaxHeightLayoutMultipleComponents::class, PoP_Module_Processor_MaxHeightLayoutMultipleComponents::MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT];
+        return [PoP_Module_Processor_MaxHeightLayoutMultipleComponents::class, PoP_Module_Processor_MaxHeightLayoutMultipleComponents::COMPONENT_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT];
     }
     
 

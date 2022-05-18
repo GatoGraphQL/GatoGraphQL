@@ -7,7 +7,7 @@ class PoP_Module_Processor_Status extends PoP_Module_Processor_StatusBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_STATUS],
+            [self::class, self::COMPONENT_STATUS],
         );
     }
 }

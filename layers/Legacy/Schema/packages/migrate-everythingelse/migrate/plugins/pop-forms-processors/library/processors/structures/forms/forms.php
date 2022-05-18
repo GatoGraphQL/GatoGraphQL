@@ -8,15 +8,15 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_EVERYTHINGQUICKLINKS],
+            [self::class, self::COMPONENT_FORM_EVERYTHINGQUICKLINKS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORM_EVERYTHINGQUICKLINKS:
-                return [PoP_Core_Module_Processor_FormInners::class, PoP_Core_Module_Processor_FormInners::MODULE_FORMINNER_EVERYTHINGQUICKLINKS];
+            case self::COMPONENT_FORM_EVERYTHINGQUICKLINKS:
+                return [PoP_Core_Module_Processor_FormInners::class, PoP_Core_Module_Processor_FormInners::COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS];
         }
 
         return parent::getInnerSubmodule($component);
@@ -25,7 +25,7 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
     public function getMethod(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORM_EVERYTHINGQUICKLINKS:
+            case self::COMPONENT_FORM_EVERYTHINGQUICKLINKS:
                 return 'GET';
         }
 
@@ -36,7 +36,7 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_FORM_EVERYTHINGQUICKLINKS:
+            case self::COMPONENT_FORM_EVERYTHINGQUICKLINKS:
                 // Dataload source: search posts (it will never every trigger to fetch this url, it is just a placeholder
                 // to trigger using js, eg: typeaheadSearch)
                 return RouteUtils::getRouteURL(POP_BLOG_ROUTE_SEARCHCONTENT);

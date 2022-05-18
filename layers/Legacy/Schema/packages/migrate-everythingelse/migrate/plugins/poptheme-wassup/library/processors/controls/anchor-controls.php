@@ -14,28 +14,28 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABS],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABSXS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
                 return TranslationAPIFacade::getInstance()->__('Toggle sidebar', 'pop-coreprocessors');
 
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return TranslationAPIFacade::getInstance()->__('Go back', 'pop-coreprocessors');
 
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 return TranslationAPIFacade::getInstance()->__('Toggle tabs', 'pop-coreprocessors');
         }
 
@@ -44,7 +44,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     public function getText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return null;
         }
 
@@ -53,16 +53,16 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     public function getIcon(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
                 return 'glyphicon-arrow-right';
 
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return 'glyphicon-arrow-left';
 
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 return 'glyphicon-time';
         }
 
@@ -74,7 +74,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
                 $this->mergeProp(
                     $component,
                     $props,
@@ -86,17 +86,17 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 );
                 break;
 
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 $mode = '';
                 $classs = '';
                 $xs = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS],
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
                 );
                 $tablet = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO],
                 );
                 if (in_array($component, $xs)) {
                     $mode = 'xs';
@@ -106,7 +106,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 }
 
                 $back = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
                 );
                 if (in_array($component, $back)) {
                     $classs .= ' btn btn-lg btn-link';
@@ -125,10 +125,10 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 );
                 break;
 
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 $xs = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABSXS],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS],
                 );
                 if (in_array($component, $xs)) {
                     $mode = 'xs';
@@ -159,12 +159,12 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 $this->addJsmethod($ret, 'offcanvasToggle');
                 break;
         }

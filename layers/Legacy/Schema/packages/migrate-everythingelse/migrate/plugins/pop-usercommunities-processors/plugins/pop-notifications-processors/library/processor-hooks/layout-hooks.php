@@ -26,7 +26,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
         $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
             'isUserNotification',
             [
-                [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
+                [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
             ]
         );
         return $conditionalLeafModuleFields;
@@ -42,7 +42,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
         $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
             'isUserNotification',
             [
-                [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
+                [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
             ]
         );
         return $conditionalLeafModuleFields;

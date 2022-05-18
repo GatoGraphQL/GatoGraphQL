@@ -15,24 +15,24 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -40,12 +40,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP],
-            self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP],
-            self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP],
-            self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -54,17 +54,17 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_LOCATIONPOSTS];
+            case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
+                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_LOCATIONPOSTS];
 
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORLOCATIONPOSTS];
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORLOCATIONPOSTS];
 
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_TAGLOCATIONPOSTS];
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGLOCATIONPOSTS];
         }
 
         return parent::getFilterSubmodule($component);
@@ -73,14 +73,14 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP],
         );
         $horizontalmaps = array(
-            [self::class, self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
 
         if (in_array($component, $maps)) {
@@ -94,12 +94,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
     //             return UserRequestNature::USER;
 
-    //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
-    //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
+    //         case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
     //             return TagRequestNature::TAG;
     //     }
 
@@ -112,13 +112,13 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
 
         switch ($component[1]) {
          // Filter by the Profile/Community
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorcontent($ret);
                 break;
 
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsTagcontent($ret);
                 break;
         }
@@ -129,12 +129,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return $this->instanceManager->getInstance(LocationPostObjectTypeResolver::class);
         }
 
@@ -144,13 +144,13 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
-            case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', PoP_LocationPosts_PostNameUtils::getNamesLc());
+            case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
+            case self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', PoP_LocationPosts_PostNameUtils::getNamesLc());
                 break;
         }
 

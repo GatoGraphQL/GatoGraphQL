@@ -71,123 +71,123 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_NAVIGATOR],
-            [self::class, self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR],
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_ADDONS],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_ADDONS],
-            [self::class, self::MODULE_BLOCK_USERS_SCROLL_ADDONS],
-            [self::class, self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_SEARCHUSERS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_USERS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_TAGS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_POSTS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_SEARCHUSERS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_USERS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_TAGS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST],
-            [self::class, self::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST],
-            [self::class, self::MODULE_BLOCK_USERS_CAROUSEL],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_NAVIGATOR],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_NAVIGATOR],
+            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_NAVIGATOR],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_ADDONS],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_ADDONS],
+            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_ADDONS],
+            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_TAGS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_TAGS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST],
+            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_USERS_CAROUSEL],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_CONTENT_SCROLL_ADDONS => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_CONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_CONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_POSTS_SCROLL_ADDONS => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_NAVIGATOR => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_SEARCHCONTENT,
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_SEARCHCONTENT,
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_SEARCHCONTENT,
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_SEARCHCONTENT,
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_SEARCHCONTENT,
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_DETAILS => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_LIST => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => PostTagsModuleConfiguration::getPostTagsRoute() ,
-            self::MODULE_BLOCK_TAGS_SCROLL_LIST => PostTagsModuleConfiguration::getPostTagsRoute() ,
-            self::MODULE_BLOCK_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_ADDONS => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_DETAILS => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_LIST => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => UsersModuleConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_ADDONS => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_NAVIGATOR => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_ADDONS => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_POSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_POSTS_SCROLL_NAVIGATOR => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_DETAILS => POP_BLOG_ROUTE_SEARCHUSERS,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW => POP_BLOG_ROUTE_SEARCHUSERS,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_LIST => POP_BLOG_ROUTE_SEARCHUSERS,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_SEARCHUSERS,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
+            self::COMPONENT_BLOCK_TAGS_SCROLL_DETAILS => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::COMPONENT_BLOCK_TAGS_SCROLL_LIST => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::COMPONENT_BLOCK_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_SCROLL_ADDONS => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_SCROLL_DETAILS => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_SCROLL_FULLVIEW => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_SCROLL_LIST => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_SCROLL_NAVIGATOR => UsersModuleConfiguration::getUsersRoute(),
+            self::COMPONENT_BLOCK_USERS_SCROLL_THUMBNAIL => UsersModuleConfiguration::getUsersRoute(),
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -195,64 +195,64 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     protected function getInnerSubmodule(array $component)
     {
         $inner_components = array(
-            self::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_NAVIGATOR],
-            self::MODULE_BLOCK_POSTS_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_NAVIGATOR],
-            self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_SCROLL_NAVIGATOR],
-            self::MODULE_BLOCK_CONTENT_SCROLL_ADDONS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_ADDONS],
-            self::MODULE_BLOCK_POSTS_SCROLL_ADDONS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_ADDONS],
-            self::MODULE_BLOCK_USERS_SCROLL_ADDONS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_SCROLL_ADDONS],
-            self::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS],
-            self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_DETAILS],
-            self::MODULE_BLOCK_POSTS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_USERS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_CONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HOMECONTENT_SCROLL_LIST],
-            self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_LIST],
-            self::MODULE_BLOCK_CONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_LIST],
-            self::MODULE_BLOCK_POSTS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_POSTS_SCROLL_LIST],
-            self::MODULE_BLOCK_TAGS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGS_SCROLL_LIST],
-            self::MODULE_BLOCK_SEARCHUSERS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST],
-            self::MODULE_BLOCK_USERS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_SCROLL_LIST],
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS],
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_LIST],
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_LIST],
-            self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST],
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGCONTENT_SCROLL_DETAILS],
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST],
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST],
-            self::MODULE_BLOCK_USERS_CAROUSEL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_CAROUSEL],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_NAVIGATOR],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR],
+            self::COMPONENT_BLOCK_USERS_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLL_NAVIGATOR],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_ADDONS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_ADDONS],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_ADDONS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS],
+            self::COMPONENT_BLOCK_USERS_SCROLL_ADDONS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLL_ADDONS],
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_TAGS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_USERS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_USERS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_USERS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_POSTS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_POSTS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_TAGS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_USERS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST],
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_USERS_CAROUSEL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_CAROUSEL],
         );
 
         return $inner_components[$component[1]] ?? null;
@@ -261,52 +261,52 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     protected function getSectionfilterModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST:
                 if (defined('POP_TAXONOMYQUERY_INITIALIZED') && PoP_Application_TaxonomyQuery_ConfigurationUtils::enableFilterAllcontentByTaxonomy() && PoP_ApplicationProcessors_Utils::addSections()) {
-                    return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS];
+                    return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::COMPONENT_INSTANTANEOUSFILTER_CONTENTSECTIONS];
                 }
                 break;
 
-            case self::MODULE_BLOCK_POSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_POSTS_SCROLL_LIST:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST:
-                return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS];
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST:
+                return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS];
         }
 
         return parent::getSectionfilterModule($component);
@@ -316,7 +316,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
                     '<br/><p class="text-center"><a href="%s">%s</a></p>',
@@ -331,62 +331,62 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST];
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKAUTHORPOSTLIST];
 
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_POSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_POSTS_SCROLL_LIST:
-            case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST];
 
-            case self::MODULE_BLOCK_TAGS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGS_SCROLL_LIST:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_TAGLIST];
+            case self::COMPONENT_BLOCK_TAGS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGS_SCROLL_LIST:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_TAGLIST];
 
-            case self::MODULE_BLOCK_SEARCHUSERS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_USERS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_SEARCHUSERS_SCROLL_LIST:
-            case self::MODULE_BLOCK_USERS_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_USERS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_USERS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_USERS_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_USERS_SCROLL_LIST:
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -395,45 +395,45 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     public function getLatestcountSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_CONTENT_SCROLL_LIST:
-                return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::MODULE_LATESTCOUNT_CONTENT];
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST:
+                return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::COMPONENT_LATESTCOUNT_CONTENT];
 
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST:
-                return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::MODULE_LATESTCOUNT_TAG_CONTENT];
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST:
+                return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::COMPONENT_LATESTCOUNT_TAG_CONTENT];
 
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST:
-                return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::MODULE_LATESTCOUNT_AUTHOR_CONTENT];
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST:
+                return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::COMPONENT_LATESTCOUNT_AUTHOR_CONTENT];
 
-            case self::MODULE_BLOCK_POSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_POSTS_SCROLL_LIST:
-                return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_POSTS];
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_POSTS_SCROLL_LIST:
+                return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_POSTS];
 
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST:
-                return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_AUTHOR_POSTS];
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST:
+                return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_AUTHOR_POSTS];
 
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST:
-                return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_POSTS];
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST:
+                return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_TAG_POSTS];
         }
 
         return parent::getLatestcountSubmodule($component);
@@ -442,7 +442,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
+            case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest Content', 'poptheme-wassup');
         }
 
@@ -454,7 +454,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_BLOCK_USERS_CAROUSEL:
+            case self::COMPONENT_BLOCK_USERS_CAROUSEL:
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;
         }

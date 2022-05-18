@@ -7,7 +7,7 @@ class PoP_Module_Processor_FetchMore extends PoP_Module_Processor_FetchMoreBase
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FETCHMORE],
+            [self::class, self::COMPONENT_FETCHMORE],
         );
     }
 }

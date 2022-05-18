@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
 
         // bring the tags ordering by tag count
         $ret[] = [
-            'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERTAG],
+            'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERTAG],
             'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:tags:count').'|DESC',
         ];
 
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
 
         // Add the query from typeahead.js to filter (http://twitter.github.io/typeahead.js/examples/)
         return GeneralUtils::addQueryArgs([
-            PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH => GD_JSPLACEHOLDER_QUERY,
+            PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH => GD_JSPLACEHOLDER_QUERY,
         ], $url);
     }
 

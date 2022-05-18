@@ -34,11 +34,11 @@ class FilterInputHookSet extends AbstractHookSet
         return [
             [
                 FilterInputComponentProcessor::class,
-                FilterInputComponentProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_AUTHOR_IDS
             ],
             [
                 FilterInputComponentProcessor::class,
-                FilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS
             ],
         ];
     }
@@ -48,11 +48,11 @@ class FilterInputHookSet extends AbstractHookSet
         return [
             [
                 UserFilterInputComponentProcessor::class,
-                UserFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
+                UserFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
             ],
             [
                 UserFilterInputComponentProcessor::class,
-                UserFilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
+                UserFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
             ],
         ];
     }

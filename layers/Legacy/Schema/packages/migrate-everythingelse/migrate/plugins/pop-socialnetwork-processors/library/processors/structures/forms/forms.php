@@ -7,14 +7,14 @@ class PoP_SocialNetwork_Module_Processor_GFForms extends PoP_Module_Processor_Fo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_CONTACTUSER],
+            [self::class, self::COMPONENT_FORM_CONTACTUSER],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_GFFormInners::class, PoP_SocialNetwork_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUSER],
+            self::COMPONENT_FORM_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_GFFormInners::class, PoP_SocialNetwork_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUSER],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

@@ -8,16 +8,16 @@ class PoP_Volunteering_Module_Processor_FormGroups extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_PHONE],
-            [self::class, self::MODULE_FORMINPUTGROUP_WHYVOLUNTEER],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_PHONE],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_WHYVOLUNTEER],
         );
     }
 
     public function getComponentSubmodule(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_PHONE => [PoP_Volunteering_Module_Processor_TextFormInputs::class, PoP_Volunteering_Module_Processor_TextFormInputs::MODULE_FORMINPUT_PHONE],
-            self::MODULE_FORMINPUTGROUP_WHYVOLUNTEER => [PoP_Volunteering_Module_Processor_TextareaFormInputs::class, PoP_Volunteering_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYVOLUNTEER],
+            self::COMPONENT_FORMINPUTGROUP_PHONE => [PoP_Volunteering_Module_Processor_TextFormInputs::class, PoP_Volunteering_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_PHONE],
+            self::COMPONENT_FORMINPUTGROUP_WHYVOLUNTEER => [PoP_Volunteering_Module_Processor_TextareaFormInputs::class, PoP_Volunteering_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_WHYVOLUNTEER],
         );
 
         if ($component = $components[$component[1]] ?? null) {

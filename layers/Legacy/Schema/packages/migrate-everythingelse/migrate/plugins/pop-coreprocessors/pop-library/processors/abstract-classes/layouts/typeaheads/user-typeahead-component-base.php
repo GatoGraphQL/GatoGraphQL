@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             // Important: the TYPEAHEAD_COMPONENT should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
             // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetmoduletreeSectionFlattenedDataFields
-            // To fix this, in self::MODULE_FORMINPUT_TYPEAHEAD data_properties we stop spreading down, so it never reaches below there to get further data-fields
+            // To fix this, in self::COMPONENT_FORMINPUT_TYPEAHEAD data_properties we stop spreading down, so it never reaches below there to get further data-fields
 
             // Important: for Component the size is fixed! It can't be changed from 'avatar-40', because it is hardcoded
             // in layoutuser-typeahead-component.tmpl

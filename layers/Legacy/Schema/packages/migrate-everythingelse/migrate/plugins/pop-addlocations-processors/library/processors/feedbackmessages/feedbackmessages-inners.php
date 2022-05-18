@@ -7,7 +7,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessageInners extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_CREATELOCATION],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_CREATELOCATION],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessageInners extends PoP_Modul
         $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
-            self::MODULE_FEEDBACKMESSAGEINNER_CREATELOCATION => [PoP_Module_Processor_CreateLocationFeedbackMessageAlertLayouts::class, PoP_Module_Processor_CreateLocationFeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_CREATELOCATION => [PoP_Module_Processor_CreateLocationFeedbackMessageAlertLayouts::class, PoP_Module_Processor_CreateLocationFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

@@ -18,15 +18,15 @@ class Wassup_ServerSide_CustomFunctions
         // $psId = $pageSection->attr('id');
 
         // if ($psId == POP_MODULEID_PAGESECTIONCONTAINERID_HOVER) {
-        if ($pssId == PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER) {
+        if ($pssId == PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_HOVER) {
             $psId = POP_MODULEID_PAGESECTIONCONTAINERID_HOVER;
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'closehover');
         }
         // else if ($psId == POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR) {
-        elseif ($pssId == PoP_Module_Processor_PageSections::MODULE_PAGESECTION_NAVIGATOR) {
+        elseif ($pssId == PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_NAVIGATOR) {
             $psId = POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'closenavigator');
-        } elseif ($pssId == PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS) {
+        } elseif ($pssId == PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS) {
             $psId = POP_MODULEID_PAGESECTIONCONTAINERID_ADDONS;
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'window-fullsize');
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'window-maximize');

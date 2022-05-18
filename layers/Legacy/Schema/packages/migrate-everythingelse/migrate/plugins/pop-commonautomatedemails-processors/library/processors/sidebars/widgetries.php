@@ -9,8 +9,8 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS],
-            [self::class, self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO],
         );
     }
 
@@ -19,19 +19,19 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS:
-                $ret[] = [PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts::class, PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTAUTHORS];
+            case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS:
+                $ret[] = [PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts::class, PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTAUTHORS];
                 break;
 
-            case self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
                 break;
         }
 
@@ -41,8 +41,8 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS => TranslationAPIFacade::getInstance()->__('Author(s)', 'pop-coreprocessors'),
-            self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS => TranslationAPIFacade::getInstance()->__('Author(s)', 'pop-coreprocessors'),
+            self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
 
         return $titles[$component[1]] ?? null;
@@ -50,8 +50,8 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS => 'fa-user',
-            self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO => 'fa-circle',
+            self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS => 'fa-user',
+            self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO => 'fa-circle',
         );
 
         return $fontawesomes[$component[1]] ?? null;
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 return 'list-group list-group-sm';
         }
 
@@ -68,7 +68,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
@@ -77,8 +77,8 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS:
-            case self::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
+            case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS:
+            case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 return 'panel panel-default panel-sm';
         }
 

@@ -17,7 +17,7 @@ class PoP_CommonAutomatedEmails_EM_Hooks
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         if ($eventTypeAPI->isEvent($post_id)) {
-            return [PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT];
+            return [PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT];
         }
         return $layout;
     }

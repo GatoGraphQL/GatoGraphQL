@@ -9,18 +9,18 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP],
-            [self::class, self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_SIDE],
+            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP],
+            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE],
         );
     }
 
     public function getBtnClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
+            case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'btn btn-warning';
 
-            case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_SIDE:
+            case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE:
                 return 'btn btn-warning btn-block btn-addnew-side';
         }
     
@@ -30,10 +30,10 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public function getBtnTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
+            case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return '<i class="fa fa-fw fa-plus"></i>';
             
-            case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_SIDE:
+            case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE:
                 return '<i class="fa fa-fw fa-plus"></i>'.TranslationAPIFacade::getInstance()->__('Add new', 'pop-coreprocessors').' <span class="caret"></span>';
         }
     
@@ -43,7 +43,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public function getDropdownbtnClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
+            case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'dropdown';
         }
     
@@ -53,7 +53,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public function innerList(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
+            case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return true;
         }
     

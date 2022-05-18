@@ -9,18 +9,18 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELINNER_EVENTS],
-            [self::class, self::MODULE_CAROUSELINNER_AUTHOREVENTS],
-            [self::class, self::MODULE_CAROUSELINNER_TAGEVENTS],
+            [self::class, self::COMPONENT_CAROUSELINNER_EVENTS],
+            [self::class, self::COMPONENT_CAROUSELINNER_AUTHOREVENTS],
+            [self::class, self::COMPONENT_CAROUSELINNER_TAGEVENTS],
         );
     }
 
     public function getLayoutGrid(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_EVENTS:
-            case self::MODULE_CAROUSELINNER_AUTHOREVENTS:
-            case self::MODULE_CAROUSELINNER_TAGEVENTS:
+            case self::COMPONENT_CAROUSELINNER_EVENTS:
+            case self::COMPONENT_CAROUSELINNER_AUTHOREVENTS:
+            case self::COMPONENT_CAROUSELINNER_TAGEVENTS:
                 return \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomCarouselInners:grid',
                     array(
@@ -39,13 +39,13 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_CAROUSELINNER_EVENTS:
-            case self::MODULE_CAROUSELINNER_AUTHOREVENTS:
-            case self::MODULE_CAROUSELINNER_TAGEVENTS:
+            case self::COMPONENT_CAROUSELINNER_EVENTS:
+            case self::COMPONENT_CAROUSELINNER_AUTHOREVENTS:
+            case self::COMPONENT_CAROUSELINNER_TAGEVENTS:
                 // Allow to override. Eg: TPP Debate needs a different format
                 $layout = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomCarouselInners:layout', 
-                    [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST], 
+                    [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST], 
                     $component
                 );
                 $ret[] = $layout;

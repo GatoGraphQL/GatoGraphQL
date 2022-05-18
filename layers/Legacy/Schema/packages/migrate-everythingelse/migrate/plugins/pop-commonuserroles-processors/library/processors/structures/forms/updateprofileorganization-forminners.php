@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_UpdateProfileOrganizationFormInners extends GD_URE
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_PROFILEORGANIZATION_UPDATE],
+            [self::class, self::COMPONENT_FORMINNER_PROFILEORGANIZATION_UPDATE],
         );
     }
 }

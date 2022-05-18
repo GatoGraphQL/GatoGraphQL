@@ -7,7 +7,7 @@ class PoP_Module_Processor_SocialLoginElements extends PoP_Module_Processor_Soci
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SOCIALLOGIN_NETWORKLINKS],
+            [self::class, self::COMPONENT_SOCIALLOGIN_NETWORKLINKS],
         );
     }
 }

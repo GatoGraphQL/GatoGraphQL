@@ -12,24 +12,24 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_40],
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE],
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_120],
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE],
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_150],
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_40],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_40_RESPONSIVE],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_120],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_150],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE],
         );
     }
 
     public function getAvatarSize(array $component)
     {
         $avatars = array(
-            self::MODULE_LAYOUT_USERAVATAR_40 => GD_AVATAR_SIZE_40,
-            self::MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE => GD_AVATAR_SIZE_40,
-            self::MODULE_LAYOUT_USERAVATAR_120 => GD_AVATAR_SIZE_120,
-            self::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE => GD_AVATAR_SIZE_120,
-            self::MODULE_LAYOUT_USERAVATAR_150 => GD_AVATAR_SIZE_150,
-            self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE => GD_AVATAR_SIZE_150,
+            self::COMPONENT_LAYOUT_USERAVATAR_40 => GD_AVATAR_SIZE_40,
+            self::COMPONENT_LAYOUT_USERAVATAR_40_RESPONSIVE => GD_AVATAR_SIZE_40,
+            self::COMPONENT_LAYOUT_USERAVATAR_120 => GD_AVATAR_SIZE_120,
+            self::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE => GD_AVATAR_SIZE_120,
+            self::COMPONENT_LAYOUT_USERAVATAR_150 => GD_AVATAR_SIZE_150,
+            self::COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE => GD_AVATAR_SIZE_150,
         );
 
         if ($avatar = $avatars[$component[1]] ?? null) {
@@ -42,9 +42,9 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE:
-            case self::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE:
-            case self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE:
+            case self::COMPONENT_LAYOUT_USERAVATAR_40_RESPONSIVE:
+            case self::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE:
+            case self::COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE:
                 $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;
         }

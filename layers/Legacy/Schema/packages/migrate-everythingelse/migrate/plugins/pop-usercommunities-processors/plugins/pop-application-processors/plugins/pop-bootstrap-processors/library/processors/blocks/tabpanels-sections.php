@@ -8,8 +8,8 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_COMMUNITIES],
-            [self::class, self::MODULE_BLOCK_TABPANEL_MYMEMBERS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS],
         );
     }
 
@@ -18,8 +18,8 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::MODULE_TABPANEL_COMMUNITIES],
-            self::MODULE_BLOCK_TABPANEL_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::MODULE_TABPANEL_MYMEMBERS],
+            self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::COMPONENT_TABPANEL_COMMUNITIES],
+            self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYMEMBERS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -31,11 +31,11 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_COMMUNITIES:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_USERLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_USERLIST];
 
-            case self::MODULE_BLOCK_TABPANEL_MYMEMBERS:
-                return [GD_URE_Module_Processor_CustomControlGroups::class, GD_URE_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYMEMBERS];
+            case self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS:
+                return [GD_URE_Module_Processor_CustomControlGroups::class, GD_URE_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYMEMBERS];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -44,11 +44,11 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_COMMUNITIES:
-                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::MODULE_FILTER_COMMUNITIES];
+            case self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES:
+                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_COMMUNITIES];
 
-            case self::MODULE_BLOCK_TABPANEL_MYMEMBERS:
-                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::MODULE_FILTER_MYMEMBERS];
+            case self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS:
+                return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_MYMEMBERS];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

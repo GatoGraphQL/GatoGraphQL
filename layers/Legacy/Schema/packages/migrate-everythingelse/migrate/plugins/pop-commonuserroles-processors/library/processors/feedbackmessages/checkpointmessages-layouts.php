@@ -9,8 +9,8 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION],
-            [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION],
+            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL],
         );
     }
 
@@ -20,8 +20,8 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
 
         $action = $this->getProp($component, $props, 'action');
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
                 $ret['usernotloggedin'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You are not logged in yet, please %1$s first to %2$s.', 'poptheme-wassup'),
                     gdGetLoginHtml(),
@@ -35,14 +35,14 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
                 $ret['profilenotorganization'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Your user account is not an organization, as such you cannot %1$s under this URL.', 'poptheme-wassup'),
                     $action
                 );
                 break;
 
-            case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
+            case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
                 $ret['profilenotindividual'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Your user account is not an individual, as such you cannot %1$s under this URL.', 'poptheme-wassup'),
                     $action

@@ -9,9 +9,9 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS],
-            [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL],
-            [self::class, self::MODULE_MULTICOMPONENT_EMAILDIGESTS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL],
+            [self::class, self::COMPONENT_MULTICOMPONENT_EMAILDIGESTS],
         );
     }
 
@@ -20,9 +20,9 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS:
-                $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_LABEL];
-                $ret[] = [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];
+            case self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS:
+                $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL];
+                $ret[] = [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];
                 // Allow PoP Social Network to hook in its modules
                 if ($forminputs = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_UserMultipleComponents:emailnotifications:modules',
@@ -35,16 +35,16 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
                 }
                 break;
 
-            case self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL:
-                $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL];
-                $ret[] = [PoP_Module_Processor_EmailFormGroups::class, PoP_Module_Processor_EmailFormGroups::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST];
+            case self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL:
+                $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL];
+                $ret[] = [PoP_Module_Processor_EmailFormGroups::class, PoP_Module_Processor_EmailFormGroups::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST];
                 break;
 
-            case self::MODULE_MULTICOMPONENT_EMAILDIGESTS:
+            case self::COMPONENT_MULTICOMPONENT_EMAILDIGESTS:
                 $forminputs = array(
-                    [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILDIGESTS_LABEL],
-                    [PoP_Module_Processor_EmailFormGroups::class, PoP_Module_Processor_EmailFormGroups::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS],
-                    [PoP_Module_Processor_EmailFormGroups::class, PoP_Module_Processor_EmailFormGroups::MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS],
+                    [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::COMPONENT_CODE_EMAILDIGESTS_LABEL],
+                    [PoP_Module_Processor_EmailFormGroups::class, PoP_Module_Processor_EmailFormGroups::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS],
+                    [PoP_Module_Processor_EmailFormGroups::class, PoP_Module_Processor_EmailFormGroups::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS],
                 );
 
                 // Allow PoP Social Network to hook in its modules

@@ -9,8 +9,8 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_NEWSLETTER],
-            [self::class, self::MODULE_FORMINNER_NEWSLETTERUNSUBSCRIPTION],
+            [self::class, self::COMPONENT_FORMINNER_NEWSLETTER],
+            [self::class, self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION],
         );
     }
 
@@ -19,24 +19,24 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_NEWSLETTER:
+            case self::COMPONENT_FORMINNER_NEWSLETTER:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_Newsletter_Module_Processor_FormGroups::class, PoP_Newsletter_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_NEWSLETTEREMAIL],
-                        [PoP_Newsletter_Module_Processor_FormGroups::class, PoP_Newsletter_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_NEWSLETTERNAME],
-                        [PoP_Newsletter_Module_Processor_SubmitButtons::class, PoP_Newsletter_Module_Processor_SubmitButtons::MODULE_GF_SUBMITBUTTON_SUBSCRIBE],
+                        [PoP_Newsletter_Module_Processor_FormGroups::class, PoP_Newsletter_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_NEWSLETTEREMAIL],
+                        [PoP_Newsletter_Module_Processor_FormGroups::class, PoP_Newsletter_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_NEWSLETTERNAME],
+                        [PoP_Newsletter_Module_Processor_SubmitButtons::class, PoP_Newsletter_Module_Processor_SubmitButtons::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE],
                     )
                 );
                 break;
 
-            case self::MODULE_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
+            case self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_Newsletter_Module_Processor_FormGroups::class, PoP_Newsletter_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_NEWSLETTEREMAILVERIFICATIONEMAIL],
-                        [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
-                        [PoP_Newsletter_Module_Processor_SubmitButtons::class, PoP_Newsletter_Module_Processor_SubmitButtons::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION],
+                        [PoP_Newsletter_Module_Processor_FormGroups::class, PoP_Newsletter_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_NEWSLETTEREMAILVERIFICATIONEMAIL],
+                        [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
+                        [PoP_Newsletter_Module_Processor_SubmitButtons::class, PoP_Newsletter_Module_Processor_SubmitButtons::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION],
                     )
                 );
                 break;
@@ -55,11 +55,11 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
     public function initWebPlatformModelProps(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
+            case self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $inputs = array(
-                    [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
-                    [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
+                    [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
+                    [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
                 );
                 foreach ($inputs as $input) {
                     $this->mergeJsmethodsProp($input, $props, array('fillURLParamInput'));

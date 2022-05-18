@@ -7,7 +7,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_POST],
+            [self::class, self::COMPONENT_FORMINNER_POST],
         );
     }
 
@@ -21,12 +21,12 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_POST:
+            case self::COMPONENT_FORMINNER_POST:
                 return array_merge(
                     $ret,
                     array(
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_POST_LEFTSIDE],
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_POST_RIGHTSIDE],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE],
                     )
                 );
         }
@@ -37,9 +37,9 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_POST:
-                $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_POST_RIGHTSIDE];
-                $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_POST_LEFTSIDE];
+            case self::COMPONENT_FORMINNER_POST:
+                $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE];
+                $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE];
 
                 if (!($form_left_class = $this->getProp($component, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';

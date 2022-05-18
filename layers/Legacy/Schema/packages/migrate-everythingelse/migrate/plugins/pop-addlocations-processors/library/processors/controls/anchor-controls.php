@@ -9,13 +9,13 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_CREATELOCATION],
+            [self::class, self::COMPONENT_ANCHORCONTROL_CREATELOCATION],
         );
     }
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 return 'fa-plus';
         }
 
@@ -26,7 +26,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 return POP_TARGET_MODALS;
         }
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
 
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 return RouteUtils::getRouteURL(POP_ADDLOCATIONS_ROUTE_ADDLOCATION);
         }
 
@@ -49,7 +49,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 $this->appendProp($component, $props, 'class', 'btn btn-primary pop-createlocation-btn');
                 break;
         }

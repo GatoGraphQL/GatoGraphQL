@@ -19,10 +19,10 @@ class PoP_CommonUserRolesProcessors_CreateUpdateProfileHooks
         return array_merge(
             $inputs,
             array(
-                'organizationtypes' => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES],
-                'organizationcategories' => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
-                'contact_number' => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER],
-                'contact_person' => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON],
+                'organizationtypes' => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES],
+                'organizationcategories' => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
+                'contact_number' => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_CONTACTNUMBER],
+                'contact_person' => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON],
             )
         );
     }
@@ -32,8 +32,8 @@ class PoP_CommonUserRolesProcessors_CreateUpdateProfileHooks
         return array_merge(
             $inputs,
             array(
-                'last_name' => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_LASTNAME],
-                'individualinterests' => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS],
+                'last_name' => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_LASTNAME],
+                'individualinterests' => [GD_URE_Module_Processor_MultiSelectFormInputs::class, GD_URE_Module_Processor_MultiSelectFormInputs::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS],
             )
         );
     }

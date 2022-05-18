@@ -7,7 +7,7 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
         $ret = parent::getSubComponents($component);
     
         switch ($component[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST:
-                $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
+            case self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST:
+                $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
                 break;
         }
         

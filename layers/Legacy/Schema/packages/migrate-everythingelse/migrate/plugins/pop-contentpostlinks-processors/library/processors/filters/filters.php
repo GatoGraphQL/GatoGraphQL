@@ -8,16 +8,16 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTER_LINKS],
-            [self::class, self::MODULE_FILTER_AUTHORLINKS],
+            [self::class, self::COMPONENT_FILTER_LINKS],
+            [self::class, self::COMPONENT_FILTER_AUTHORLINKS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FILTER_LINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_LINKS],
-            self::MODULE_FILTER_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORLINKS],
+            self::COMPONENT_FILTER_LINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_LINKS],
+            self::COMPONENT_FILTER_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

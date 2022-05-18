@@ -9,14 +9,14 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK],
+            [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 return TranslationAPIFacade::getInstance()->__('as Link', 'poptheme-wassup');
         }
 
@@ -25,7 +25,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 return 'fa-link';
         }
 
@@ -35,7 +35,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 return RouteUtils::getRouteURL(POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK);
         }
 
@@ -45,7 +45,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -58,7 +58,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 $this->appendProp($component, $props, 'class', 'btn btn-info aslink');
                 break;
         }

@@ -18,8 +18,8 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
     public function getMapdivSubmodule(array $component)
     {
     
-        // return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAP_DIV];
-        return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
+        // return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
+        return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAPSTATICIMAGE_USERORPOST_DIV];
     }
     
     public function initWebPlatformModelProps(array $component, array &$props)

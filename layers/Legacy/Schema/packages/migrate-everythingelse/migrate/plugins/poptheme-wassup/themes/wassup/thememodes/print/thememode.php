@@ -42,15 +42,15 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
 
         // Remove all the scrollbars
         switch ($component[1]) {
-            case self::MODULE_OFFCANVAS_BODY:
-            case self::MODULE_OFFCANVAS_BODYSIDEINFO:
+            case self::COMPONENT_OFFCANVAS_BODY:
+            case self::COMPONENT_OFFCANVAS_BODYSIDEINFO:
                 $this->removeJsmethod($jsmethod, 'scrollbarVertical');
                 break;
         }
 
         // Add the automatic print
         switch ($component[1]) {
-            case self::MODULE_OFFCANVAS_BODY:
+            case self::COMPONENT_OFFCANVAS_BODY:
                 $this->addJsmethod($jsmethod, 'printWindow');
                 break;
         }

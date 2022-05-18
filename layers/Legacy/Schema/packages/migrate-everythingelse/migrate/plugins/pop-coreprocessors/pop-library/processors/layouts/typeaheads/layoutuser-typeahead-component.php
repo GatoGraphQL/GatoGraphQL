@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserTypeaheadComponentLayouts extends PoP_Module_Proc
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT],
+            [self::class, self::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT],
         );
     }
 }

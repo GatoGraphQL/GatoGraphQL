@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_PostHiddenInputAlertFormComponentsBase exten
 {
     public function getSelectedModule(array $component)
     {
-        return [PoP_Module_Processor_PostCardLayouts::class, PoP_Module_Processor_PostCardLayouts::MODULE_LAYOUTPOST_CARD];
+        return [PoP_Module_Processor_PostCardLayouts::class, PoP_Module_Processor_PostCardLayouts::COMPONENT_LAYOUTPOST_CARD];
     }
 }

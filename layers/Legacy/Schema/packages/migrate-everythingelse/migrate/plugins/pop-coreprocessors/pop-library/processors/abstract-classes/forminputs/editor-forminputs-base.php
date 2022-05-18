@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
     public function getModulesToPropagateDataProperties(array $component): array
     {
 
-        // Important: the MENTION_COMPONENT (eg: PoP_Module_Processor_UserMentionComponentLayouts::MODULE_LAYOUTUSER_MENTION_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
+        // Important: the MENTION_COMPONENT (eg: PoP_Module_Processor_UserMentionComponentLayouts::COMPONENT_LAYOUTUSER_MENTION_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
         // but it applies to @Mentions, which doesn't need these parameters, however these, here, upset the whole getDatasetmoduletreeSectionFlattenedDataFields
         // To fix this, in the editor data_properties we stop spreading down, so it never reaches below there to get further data-fields
         if ($this->getEditorLayoutSubmodules($component)) {

@@ -7,7 +7,7 @@ class PoP_Module_Processor_LocationContentInners extends PoP_Module_Processor_Co
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TRIGGERTYPEAHEADSELECTINNER_LOCATION],
+            [self::class, self::COMPONENT_TRIGGERTYPEAHEADSELECTINNER_LOCATION],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_LocationContentInners extends PoP_Module_Processor_Co
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_TRIGGERTYPEAHEADSELECTINNER_LOCATION:
-                $ret[] = [PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts::class, PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts::MODULE_EM_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION];
+            case self::COMPONENT_TRIGGERTYPEAHEADSELECTINNER_LOCATION:
+                $ret[] = [PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts::class, PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts::COMPONENT_EM_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION];
                 break;
         }
 

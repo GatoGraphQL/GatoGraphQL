@@ -27,14 +27,14 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_CUSTOMPOSTDATES],
+            [self::class, self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -42,7 +42,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:
+    //         case self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES:
     //             return true;
     //     }
 
@@ -52,7 +52,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:
+            case self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
         }
 
@@ -62,10 +62,10 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:
+            case self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES:
                 // Add a nice name, so that the URL params when filtering make sense
                 $names = array(
-                    self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => 'date',
+                    self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => 'date',
                 );
                 return $names[$component[1]];
         }
@@ -76,7 +76,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -85,7 +85,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => $translationAPI->__('', ''),
             default => null,
         };
     }

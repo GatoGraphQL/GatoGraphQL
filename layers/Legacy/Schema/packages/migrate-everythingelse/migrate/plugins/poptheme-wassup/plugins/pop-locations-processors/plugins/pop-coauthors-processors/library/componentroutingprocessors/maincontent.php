@@ -14,7 +14,7 @@ class Wassup_EM_CAP_Module_MainContentComponentRoutingProcessor extends \PoP\App
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
 
         $routemodules_map = array(
-            POP_ROUTE_AUTHORS => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP],
+            POP_ROUTE_AUTHORS => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [

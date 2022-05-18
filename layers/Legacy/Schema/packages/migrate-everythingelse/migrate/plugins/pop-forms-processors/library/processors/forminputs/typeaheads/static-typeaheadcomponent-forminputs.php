@@ -9,14 +9,14 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TYPEAHEAD_COMPONENT_STATICSEARCH],
+            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_STATICSEARCH:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 return getRouteIcon(POP_BLOG_ROUTE_SEARCHCONTENT, true).TranslationAPIFacade::getInstance()->__('Search:', 'pop-coreprocessors');
         }
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
         $ret = parent::getStaticSuggestions($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_STATICSEARCH:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 $query_wildcard = GD_JSPLACEHOLDER_QUERY;
                 $ret[] = array(
                     'title' => getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Content with ', 'pop-coreprocessors').'"'.GD_JSPLACEHOLDER_QUERY.'"',

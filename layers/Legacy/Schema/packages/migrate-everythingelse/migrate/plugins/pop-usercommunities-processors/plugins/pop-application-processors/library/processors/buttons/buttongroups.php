@@ -7,14 +7,14 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONGROUP_MYUSERS],
+            [self::class, self::COMPONENT_BUTTONGROUP_MYUSERS],
         );
     }
 
     protected function getHeadersdataScreen(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONGROUP_MYUSERS:
+            case self::COMPONENT_BUTTONGROUP_MYUSERS:
                 return POP_URE_SCREEN_MYUSERS;
         }
 

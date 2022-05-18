@@ -10,18 +10,18 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ],
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
                 return TranslationAPIFacade::getInstance()->__('FAQ: Adding Content', 'poptheme-wassup');
 
-            case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return TranslationAPIFacade::getInstance()->__('FAQ: Registration', 'poptheme-wassup');
         }
 
@@ -30,8 +30,8 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
-            case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return 'fa-question';
         }
 
@@ -41,11 +41,11 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
-            case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 $pages = array(
-                    self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
-                    self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
+                    self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
+                    self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
                 );
                 $page_id = $pages[$component[1]];
                 return $pageTypeAPI->getPermalink($page_id);
@@ -56,8 +56,8 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public function getTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
-            case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return POP_TARGET_MODALS;
         }
 
@@ -66,8 +66,8 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public function getText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
-            case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return null;
         }
 
@@ -76,8 +76,8 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
-            case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 // pop-btn-faq: to hide it for the addons
                 $this->appendProp($component, $props, 'class', 'pop-btn-faq btn btn-link btn-compact');
                 break;

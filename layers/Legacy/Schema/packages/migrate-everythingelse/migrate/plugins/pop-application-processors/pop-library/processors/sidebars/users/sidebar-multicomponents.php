@@ -8,8 +8,8 @@ class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_GENERICUSER],
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_AVATAR],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_AVATAR],
         );
     }
 
@@ -18,15 +18,15 @@ class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Modul
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_SIDEBARMULTICOMPONENT_GENERICUSER:
-                $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, GD_Custom_Module_Processor_UserWidgets::MODULE_WIDGETCOMPACT_GENERICUSERINFO];
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER:
+                $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, GD_Custom_Module_Processor_UserWidgets::COMPONENT_WIDGETCOMPACT_GENERICUSERINFO];
                 break;
 
-            case self::MODULE_SIDEBARMULTICOMPONENT_AVATAR:
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_AVATAR:
                 if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-                    $ret[] = [PoP_Module_Processor_UserPhotoLayouts::class, PoP_Module_Processor_UserPhotoLayouts::MODULE_LAYOUT_AUTHOR_USERPHOTO];
+                    $ret[] = [PoP_Module_Processor_UserPhotoLayouts::class, PoP_Module_Processor_UserPhotoLayouts::COMPONENT_LAYOUT_AUTHOR_USERPHOTO];
                 }
-                $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_USERSOCIALMEDIA];
+                $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_USERSOCIALMEDIA];
                 break;
         }
 

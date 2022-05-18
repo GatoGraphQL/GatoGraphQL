@@ -13,8 +13,8 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION],
-            [self::class, self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL],
         );
     }
 
@@ -26,12 +26,12 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
-            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION => $vertical ?
-                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION] :
-                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
-            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL => $vertical ?
-                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL] :
-                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
+            self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION => $vertical ?
+                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION] :
+                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
+            self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL => $vertical ?
+                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL] :
+                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
         );
 
         if ($block_inner = $block_inners[$component[1]] ?? null) {
@@ -44,8 +44,8 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     // public function getNature(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
-    //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
+    //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
+    //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
     //             return UserRequestNature::USER;
     //     }
 
@@ -55,8 +55,8 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -67,8 +67,8 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 

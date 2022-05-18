@@ -11,8 +11,8 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION],
+            [self::class, self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
+            [self::class, self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION],
         );
     }
 
@@ -21,12 +21,12 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
-                $ret[] = [Wassup_Module_Processor_MultipleComponentLayouts::class, Wassup_Module_Processor_MultipleComponentLayouts::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION];
+            case self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
+                $ret[] = [Wassup_Module_Processor_MultipleComponentLayouts::class, Wassup_Module_Processor_MultipleComponentLayouts::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION];
                 break;
 
-            case self::MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
-                $ret[] = [Wassup_Module_Processor_MultipleComponentLayouts::class, Wassup_Module_Processor_MultipleComponentLayouts::MODULE_MULTICOMPONENT_USERPOSTINTERACTION];
+            case self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
+                $ret[] = [Wassup_Module_Processor_MultipleComponentLayouts::class, Wassup_Module_Processor_MultipleComponentLayouts::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION];
                 break;
         }
 
@@ -36,8 +36,8 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
-            case self::MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
+            case self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
+            case self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 

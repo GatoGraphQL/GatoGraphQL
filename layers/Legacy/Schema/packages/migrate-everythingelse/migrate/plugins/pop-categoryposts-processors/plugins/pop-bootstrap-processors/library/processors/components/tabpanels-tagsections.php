@@ -26,26 +26,26 @@ class CPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS00],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS01],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS02],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS03],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS04],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS05],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS06],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS07],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS08],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS09],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS10],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS11],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS12],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS13],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS14],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS15],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS16],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS17],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS18],
-            [self::class, self::MODULE_TABPANEL_TAGCATEGORYPOSTS19],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS00],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS01],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS02],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS03],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS04],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS05],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS06],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS07],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS08],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS09],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS10],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS11],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS12],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS13],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS14],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS15],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS16],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS17],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS18],
+            [self::class, self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS19],
         );
     }
 
@@ -54,262 +54,262 @@ class CPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
         $ret = parent::getPanelSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS00:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS01:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS01:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS02:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS02:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS03:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS03:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS04:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS04:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS05:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS05:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS06:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS06:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS07:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS07:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS08:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS08:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS09:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS09:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS10:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS10:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS11:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS11:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS12:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS12:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS13:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS13:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS14:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS14:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS15:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS15:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS16:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS16:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS17:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS17:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS18:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS18:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS19:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS19:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_DETAILS],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_DETAILS],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL],
+                        [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
                     )
                 );
                 break;
@@ -321,401 +321,401 @@ class CPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
     public function getPanelHeaders(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS00:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS00:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS01:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS01:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS02:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS02:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS03:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS03:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS03_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS04:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS04:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS04_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS05:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS05:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS05_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS06:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS06:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS06_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS07:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS07:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS07_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS08:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS08:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS08_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS09:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS09:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS09_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS10:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS10:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS10_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS11:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS11:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS11_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS12:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS12:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS12_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS13:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS13:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS13_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS14:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS14:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS14_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS15:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS15:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS15_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS16:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS16:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS16_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS17:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS17:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS18:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS18:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
                         ),
                     ],
                 );
                 break;
 
-            case self::MODULE_TABPANEL_TAGCATEGORYPOSTS19:
+            case self::COMPONENT_TABPANEL_TAGCATEGORYPOSTS19:
                 $ret = array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
+                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
                         'subheader-submodules' =>  array(
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_DETAILS],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_DETAILS],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL],
+                            [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
                         ),
                     ],
                 );

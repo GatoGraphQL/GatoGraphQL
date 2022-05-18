@@ -26,26 +26,26 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
         );
     }
 
@@ -54,26 +54,26 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         $ret = parent::getSubComponents($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
-            self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
+            self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -85,27 +85,27 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18:
-            case self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCONTENT];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGCONTENT];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

@@ -9,7 +9,7 @@ class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condition
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONWRAPPER_POSTPERMALINK],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTPERMALINK],
         );
     }
 
@@ -18,8 +18,8 @@ class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condition
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_BUTTONWRAPPER_POSTPERMALINK:
-                $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_POSTPERMALINK];
+            case self::COMPONENT_BUTTONWRAPPER_POSTPERMALINK:
+                $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_POSTPERMALINK];
                 break;
         }
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condition
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_BUTTONWRAPPER_POSTPERMALINK:
+            case self::COMPONENT_BUTTONWRAPPER_POSTPERMALINK:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 

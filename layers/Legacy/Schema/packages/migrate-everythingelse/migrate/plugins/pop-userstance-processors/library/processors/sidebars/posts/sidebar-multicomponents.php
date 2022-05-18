@@ -8,8 +8,8 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_STANCELEFT],
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_STANCERIGHT],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_STANCERIGHT],
         );
     }
 
@@ -18,14 +18,14 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_SIDEBARMULTICOMPONENT_STANCELEFT:
-                $ret[] = [UserStance_Module_Processor_CustomPostWidgets::class, UserStance_Module_Processor_CustomPostWidgets::MODULE_WIDGETCOMPACT_STANCEINFO];
-                $ret[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_WIDGETWRAPPER_STANCETARGET];
-                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER];
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT:
+                $ret[] = [UserStance_Module_Processor_CustomPostWidgets::class, UserStance_Module_Processor_CustomPostWidgets::COMPONENT_WIDGETCOMPACT_STANCEINFO];
+                $ret[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_WIDGETWRAPPER_STANCETARGET];
+                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER];
                 break;
                 
-            case self::MODULE_SIDEBARMULTICOMPONENT_STANCERIGHT:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGETCOMPACT_POST_AUTHORS];
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_STANCERIGHT:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGETCOMPACT_POST_AUTHORS];
                 break;
         }
 

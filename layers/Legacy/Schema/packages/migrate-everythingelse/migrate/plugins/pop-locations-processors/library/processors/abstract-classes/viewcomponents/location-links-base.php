@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_LocationViewComponentLinksBase extends PoP_M
 
     public function getButtoninnerSubmodule(array $component)
     {
-        return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::MODULE_EM_LAYOUT_LOCATIONICONNAME];
+        return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONICONNAME];
     }
 
     public function getUrlField(array $component)

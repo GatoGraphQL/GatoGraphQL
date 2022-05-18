@@ -7,7 +7,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentLayouts extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTSTATIC_TYPEAHEAD_COMPONENT],
+            [self::class, self::COMPONENT_LAYOUTSTATIC_TYPEAHEAD_COMPONENT],
         );
     }
 }

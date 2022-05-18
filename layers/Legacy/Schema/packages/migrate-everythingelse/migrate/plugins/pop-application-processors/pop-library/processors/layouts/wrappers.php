@@ -12,9 +12,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION],
-            [self::class, self::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
+            [self::class, self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER],
         );
     }
 
@@ -23,16 +23,16 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:
-                $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::MODULE_LAYOUT_USERPOSTINTERACTION];
+            case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
+                $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERPOSTINTERACTION];
                 break;
 
-            case self::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
-                $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::MODULE_LAYOUT_USERHIGHLIGHTPOSTINTERACTION];
+            case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
+                $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERHIGHLIGHTPOSTINTERACTION];
                 break;
 
-            case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
-                $ret[] = [PoP_Module_Processor_LazyLoadingSpinnerLayouts::class, PoP_Module_Processor_LazyLoadingSpinnerLayouts::MODULE_LAYOUT_LAZYLOADINGSPINNER];
+            case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
+                $ret[] = [PoP_Module_Processor_LazyLoadingSpinnerLayouts::class, PoP_Module_Processor_LazyLoadingSpinnerLayouts::COMPONENT_LAYOUT_LAZYLOADINGSPINNER];
                 break;
         }
 
@@ -45,11 +45,11 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
+    //         case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
 
     //             // This is needed because we need to print the id no matter what, since this module
-    //             // will be referenced using previousmodules-ids in [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS_FULLVIEW], etc
-    //             $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTY];
+    //             // will be referenced using previousmodules-ids in [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS_FULLVIEW], etc
+    //             $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTY];
     //             break;
     //     }
 
@@ -59,9 +59,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:
-            case self::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
-            case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
+            case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
+            case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
+            case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
@@ -71,12 +71,12 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:
-            case self::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
+            case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
+            case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction clearfix');
                 break;
 
-            case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
+            case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
                 $this->appendProp($component, $props, 'class', 'loadingmsg clearfix');
                 break;
         }

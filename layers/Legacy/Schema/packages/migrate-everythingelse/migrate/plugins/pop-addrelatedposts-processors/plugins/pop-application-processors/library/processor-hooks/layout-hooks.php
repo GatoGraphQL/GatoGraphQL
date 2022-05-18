@@ -12,7 +12,7 @@ class PoP_AddRelatedPosts_LayoutHooks
 
     public function addUserpostinteractionLayouts($layouts)
     {
-        $layouts[] = [PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::class, PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST];
+        $layouts[] = [PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::class, PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST];
         return $layouts;
     }
 }

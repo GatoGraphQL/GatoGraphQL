@@ -8,8 +8,8 @@ class Wassup_Module_Processor_ContentMultipleInners extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS],
-            [self::class, self::MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE],
+            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS],
+            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE],
         );
     }
 
@@ -18,11 +18,11 @@ class Wassup_Module_Processor_ContentMultipleInners extends PoP_Module_Processor
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS:
-                $ret[] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];
+            case self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS:
+                $ret[] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];
                 break;
 
-            case self::MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE:
+            case self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE:
                 // No need for anything, since this is the layout container, to be filled when the lazyload request comes back
                 break;
         }

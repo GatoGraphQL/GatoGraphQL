@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
             );
 
             // // Add the hidden input with the name of the filter
-            // $ret[] = [self::class, self::MODULE_FORMINPUT_FILTERNAME];
+            // $ret[] = [self::class, self::COMPONENT_FORMINPUT_FILTERNAME];
         }
 
         if ($submitbtn = $this->getSubmitbtnModule($component)) {
@@ -74,12 +74,12 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
 
     public function getSubmitbtnModule(array $component)
     {
-        return [PoP_Module_Processor_FormGroups::class, PoP_Module_Processor_FormGroups::MODULE_SUBMITBUTTONFORMGROUP_SEARCH];
+        return [PoP_Module_Processor_FormGroups::class, PoP_Module_Processor_FormGroups::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH];
     }
 
     // public function initModelProps(array $component, array &$props): void
     // {
-    //     $this->setProp([[self::class, self::MODULE_FORMINPUT_FILTERNAME]], $props, 'filter', $this->getFilter($component));
+    //     $this->setProp([[self::class, self::COMPONENT_FORMINPUT_FILTERNAME]], $props, 'filter', $this->getFilter($component));
     //     parent::initModelProps($component, $props);
     // }
 

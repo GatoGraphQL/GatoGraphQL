@@ -10,9 +10,9 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageLayouts extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
         );
     }
 
@@ -21,16 +21,16 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageLayouts extends PoP_Module_P
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Update successful!', 'ure-popprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Your changes have been saved.', 'ure-popprocessors');
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Invite successful!', 'ure-popprocessors');
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Status update successful!', 'ure-popprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Your changes have been saved.', 'ure-popprocessors');
                 break;

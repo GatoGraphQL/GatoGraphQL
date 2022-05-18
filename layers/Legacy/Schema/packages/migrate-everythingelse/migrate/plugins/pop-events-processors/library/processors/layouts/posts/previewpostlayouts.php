@@ -23,30 +23,30 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
         );
     }
 
     public function getUrlField(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return 'editURL';
         }
 
@@ -56,8 +56,8 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getLinktarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
@@ -70,8 +70,8 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getAuthorModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
-                return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+                return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
         return parent::getAuthorModule($component);
@@ -80,15 +80,15 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -97,19 +97,19 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getQuicklinkgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
         return parent::getQuicklinkgroupTopSubmodule($component);
@@ -120,19 +120,19 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         $ret = parent::getBelowthumbLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIME];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIME];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 break;
         }
 
@@ -144,26 +144,26 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         $ret = parent::getBottomSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIME];
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIME];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
-                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIME];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
+                $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIME];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 $ret = array_merge(
                     $ret,
                     $this->getDetailsfeedBottomSubmodules($component)
@@ -177,33 +177,33 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getPostThumbSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_XSMALL];
         }
 
         return parent::getPostThumbSubmodule($component);
@@ -212,8 +212,8 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function showExcerpt(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 return true;
         }
 
@@ -223,8 +223,8 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getTitleHtmlmarkup(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 return 'h3';
         }
 
@@ -234,31 +234,31 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function authorPositions(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE,
                     GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT,
                 );
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE
                 );
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return array();
         }
 
@@ -268,19 +268,19 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function getTitleBeforeauthors(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 return array(
                     'belowcontent' => TranslationAPIFacade::getInstance()->__('posted by', 'poptheme-wassup')
                 );
@@ -292,9 +292,9 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function horizontalLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
                 return true;
         }
 
@@ -304,14 +304,14 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
                 return true;
         }
 
@@ -324,43 +324,43 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 // Hide for small screens since otherwise it doesn't fit in the viewport and the whole popover is then not visible
                 $ret[GD_JS_CLASSES]['thumb'] = 'hidden-xs';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST:
                 $ret[GD_JS_CLASSES]['authors-belowcontent'] = 'pull-right';
                 break;
         }
@@ -371,7 +371,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
                 $this->appendProp($component, $props, 'class', 'events-carousel');
                 break;
         }

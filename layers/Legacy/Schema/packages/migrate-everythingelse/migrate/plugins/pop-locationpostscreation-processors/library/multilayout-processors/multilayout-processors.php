@@ -13,7 +13,7 @@ class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Mu
                 $location_components = array();
                 if ($handle == POP_MULTILAYOUT_HANDLE_POSTCONTENT) {
                     $location_components = array(
-                        POP_FORMAT_TABLE => [PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::class, PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],
+                        POP_FORMAT_TABLE => [PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::class, PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],
                     );
                 }
 

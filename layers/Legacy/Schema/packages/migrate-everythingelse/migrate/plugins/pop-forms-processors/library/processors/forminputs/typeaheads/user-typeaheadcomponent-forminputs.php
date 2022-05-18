@@ -12,14 +12,14 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TYPEAHEAD_COMPONENT_USERS],
+            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_USERS],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
         }
 
@@ -36,7 +36,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 
         if (defined('POP_POSTS_INITIALIZED')) {
             $ret[] = [
-                'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
+                'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERUSER],
                 'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:post-count').'|DESC',
             ];
         }
@@ -52,7 +52,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
             $url,
             [
                 [
-                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
+                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_NAME],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]
@@ -63,7 +63,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
+            case self::COMPONENT_TYPEAHEAD_COMPONENT_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 

@@ -16,7 +16,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
 
         $routemodules_typeahead = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD],
         );
         foreach ($routemodules_typeahead as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -31,7 +31,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         }
 
         $routemodules_navigator = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR],
         );
         foreach ($routemodules_navigator as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -54,7 +54,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         }
 
         $routemodules_addons = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS],
         );
         foreach ($routemodules_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -69,7 +69,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         }
 
         $routemodules_details = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -84,7 +84,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         }
 
         $routemodules_simpleview = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -98,7 +98,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_fullview = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -112,7 +112,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_thumbnail = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -126,7 +126,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_list = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_LIST],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -140,7 +140,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_map = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -154,7 +154,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_horizontalmap = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
         foreach ($routemodules_horizontalmap as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -172,7 +172,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
 
         $routemodules_details = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -186,7 +186,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_simpleview = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -200,7 +200,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_fullview = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -214,7 +214,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_thumbnail = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -228,7 +228,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_list = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -242,7 +242,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_map = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -256,7 +256,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_horizontalmap = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
         foreach ($routemodules_horizontalmap as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -274,7 +274,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
 
         $routemodules_details = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -288,7 +288,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_simpleview = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -302,7 +302,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_fullview = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_FULLVIEW],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -316,7 +316,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_thumbnail = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -330,7 +330,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_list = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -344,7 +344,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_map = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
@@ -358,7 +358,7 @@ class PoP_CommonPages_EM_Module_MainContentComponentRoutingProcessor extends \Po
             }
         }
         $routemodules_horizontalmap = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
         foreach ($routemodules_horizontalmap as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

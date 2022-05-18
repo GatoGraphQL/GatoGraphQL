@@ -26,7 +26,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
             'component' => [
                 FieldDataloadComponentProcessor::class,
-                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
+                FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -56,8 +56,8 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
             $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadComponentProcessor::class,
                 $componentModelModuleConfiguration->enableAdminSchema() ?
-                    FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
-                    : FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+                    FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
+                    : FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

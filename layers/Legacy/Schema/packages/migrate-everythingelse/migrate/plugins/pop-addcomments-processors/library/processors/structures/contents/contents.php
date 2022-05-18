@@ -7,14 +7,14 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENT_COMMENTSINGLE],
+            [self::class, self::COMPONENT_CONTENT_COMMENTSINGLE],
         );
     }
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_CONTENT_COMMENTSINGLE:
-                return [PoP_Module_Processor_CommentContentInners::class, PoP_Module_Processor_CommentContentInners::MODULE_CONTENTINNER_COMMENTSINGLE];
+            case self::COMPONENT_CONTENT_COMMENTSINGLE:
+                return [PoP_Module_Processor_CommentContentInners::class, PoP_Module_Processor_CommentContentInners::COMPONENT_CONTENTINNER_COMMENTSINGLE];
         }
 
         return parent::getInnerSubmodule($component);
@@ -23,7 +23,7 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CONTENT_COMMENTSINGLE:
+            case self::COMPONENT_CONTENT_COMMENTSINGLE:
                 $this->appendProp($component, $props, 'class', 'well well-sm');
                 break;
         }

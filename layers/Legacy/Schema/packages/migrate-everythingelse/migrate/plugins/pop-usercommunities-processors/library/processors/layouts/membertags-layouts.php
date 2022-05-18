@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_LAYOUTUSER_MEMBERTAGS],
+            [self::class, self::COMPONENT_URE_LAYOUTUSER_MEMBERTAGS],
         );
     }
 }

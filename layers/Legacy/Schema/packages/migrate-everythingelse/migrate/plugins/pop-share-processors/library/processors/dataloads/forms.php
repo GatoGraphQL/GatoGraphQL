@@ -9,14 +9,14 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_SHAREBYEMAIL],
+            [self::class, self::COMPONENT_DATALOAD_SHAREBYEMAIL],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_SHAREBYEMAIL => POP_SHARE_ROUTE_SHAREBYEMAIL,
+            self::COMPONENT_DATALOAD_SHAREBYEMAIL => POP_SHARE_ROUTE_SHAREBYEMAIL,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -24,7 +24,7 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SHAREBYEMAIL:
+            case self::COMPONENT_DATALOAD_SHAREBYEMAIL:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
@@ -34,7 +34,7 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     protected function validateCaptcha(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SHAREBYEMAIL:
+            case self::COMPONENT_DATALOAD_SHAREBYEMAIL:
                 return true;
         }
 
@@ -44,7 +44,7 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_SHAREBYEMAIL => ShareByEmailMutationResolverBridge::class,
+            self::COMPONENT_DATALOAD_SHAREBYEMAIL => ShareByEmailMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$component[1]] ?? null) {
             return $actionexecuter;
@@ -56,8 +56,8 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     protected function getFeedbackmessageModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SHAREBYEMAIL:
-                return [PoP_Share_Module_Processor_FeedbackMessages::class, PoP_Share_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL];
+            case self::COMPONENT_DATALOAD_SHAREBYEMAIL:
+                return [PoP_Share_Module_Processor_FeedbackMessages::class, PoP_Share_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL];
         }
 
         return parent::getFeedbackmessageModule($component);
@@ -68,8 +68,8 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SHAREBYEMAIL:
-                $ret[] = [PoP_Share_Module_Processor_GFForms::class, PoP_Share_Module_Processor_GFForms::MODULE_FORM_SHAREBYEMAIL];
+            case self::COMPONENT_DATALOAD_SHAREBYEMAIL:
+                $ret[] = [PoP_Share_Module_Processor_GFForms::class, PoP_Share_Module_Processor_GFForms::COMPONENT_FORM_SHAREBYEMAIL];
                 break;
         }
 
@@ -79,9 +79,9 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_SHAREBYEMAIL:
+            case self::COMPONENT_DATALOAD_SHAREBYEMAIL:
                 // Change the 'Loading' message in the Status
-                $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
+                $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
 

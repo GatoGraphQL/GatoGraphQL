@@ -21,8 +21,8 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
     public function getLayoutSubmodules($layouts, array $component)
     {
         switch ($component[1]) {
-            case PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS:
-                $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID];
+            case PoP_ContactUs_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUS:
+                $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID];
                 break;
         }
 
@@ -33,10 +33,10 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS:
+            case PoP_ContactUs_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUS:
                 // Form ID
                 $form_id = PoP_ContactUs_GFHelpers::getContactusFormId();
-                $processor->setProp([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID], $props, 'default-value'/*'selected-value'*/, $form_id);
+                $processor->setProp([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID], $props, 'default-value'/*'selected-value'*/, $form_id);
                 break;
         }
     }

@@ -15,22 +15,22 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED],
         );
     }
 
     public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER];
         }
 
         return parent::getQuicklinkgroupBottomSubmodule($component);
@@ -39,16 +39,16 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function getQuicklinkgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-                // case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-                // return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTVOLUNTEER];
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+                // case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+                // return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTVOLUNTEER];
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
         return parent::getQuicklinkgroupTopSubmodule($component);
@@ -59,30 +59,30 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         $ret = parent::getBottomSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
                 $ret = array_merge(
                     $ret,
                     $this->getDetailsfeedBottomSubmodules($component)
                 );
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
                 break;
         }
 
@@ -94,26 +94,26 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         $ret = parent::getBelowthumbLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
                 break;
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
-                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
+                $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
                 break;
         }
 
@@ -123,19 +123,19 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function getPostThumbSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_XSMALL];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER];
         }
 
         return parent::getPostThumbSubmodule($component);
@@ -144,7 +144,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function showExcerpt(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
                 return true;
         }
 
@@ -154,7 +154,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function getTitleHtmlmarkup(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
                 return 'h3';
         }
 
@@ -164,14 +164,14 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function authorPositions(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE,
                     GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT,
@@ -184,7 +184,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function horizontalLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
                 return true;
         }
 
@@ -194,10 +194,10 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function horizontalMediaLayout(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
                 return true;
         }
 
@@ -207,14 +207,14 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public function getTitleBeforeauthors(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
                 return array(
                     'belowcontent' => TranslationAPIFacade::getInstance()->__('posted by', 'pop-locationposts-processors')
                 );
@@ -228,31 +228,31 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         $ret = parent::getImmutableConfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
-                // case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+                // case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
 
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowavatar';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST:
                 $ret[GD_JS_CLASSES]['authors-belowcontent'] = 'pull-right';
                 break;
         }

@@ -7,14 +7,14 @@ class GD_EM_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_LOCATIONID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_LOCATIONID],
         );
     }
 
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_LOCATIONID:
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_LOCATIONID:
                 return POP_INPUTNAME_LOCATIONID;
         }
 

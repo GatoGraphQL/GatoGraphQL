@@ -7,14 +7,14 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
     public function getComponentsToProcess(): array
     {
         return array(
-            [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_LOCATIONPOSTLINK],
+            [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_LOCATIONPOSTLINK],
         );
     }
 
     protected function isLink(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOSTLINK:
+            case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return true;
         }
 
@@ -24,7 +24,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
     protected function volunteering(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOSTLINK:
+            case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return true;
         }
 
@@ -33,8 +33,8 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
     protected function getLocationsInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOSTLINK:
-                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP];
+            case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
+                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
 
         return parent::getLocationsInput($component);
@@ -51,12 +51,12 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOSTLINK:
+            case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return array_merge(
                     $ret,
                     array(
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE],
-                        [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE],
+                        [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE],
                     )
                 );
         }
@@ -67,10 +67,10 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_LOCATIONPOSTLINK:
+            case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 // Make it into left/right columns
-                $rightside_component = [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE];
-                $leftside_component = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE];
+                $rightside_component = [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE];
+                $leftside_component = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE];
 
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
                 if (!($form_left_class = $this->getProp($component, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {

@@ -17,7 +17,7 @@ class APIUtils
     public static function getEndpoint(string $url, ?array $dataoutputitems = null): string
     {
         $dataoutputitems = $dataoutputitems ?? [
-            DataOutputItems::MODULE_DATA,
+            DataOutputItems::COMPONENT_DATA,
             DataOutputItems::DATABASES,
             DataOutputItems::DATASET_MODULE_SETTINGS,
         ];

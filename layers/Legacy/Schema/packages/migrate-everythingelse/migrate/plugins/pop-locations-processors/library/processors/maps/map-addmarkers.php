@@ -7,7 +7,7 @@ class PoP_Module_Processor_MapAddMarkers extends PoP_Module_Processor_MapAddMark
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_ADDMARKER],
+            [self::class, self::COMPONENT_MAP_ADDMARKER],
         );
     }
 }

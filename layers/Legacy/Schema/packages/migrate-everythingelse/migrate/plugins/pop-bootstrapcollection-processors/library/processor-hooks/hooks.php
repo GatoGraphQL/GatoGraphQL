@@ -27,22 +27,22 @@ class PoP_CoreProcessors_Bootstrap_Hooks
     public function getSocialmediaSubmodules($subComponents, array $component)
     {
         switch ($component[1]) {
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA], $subComponents);
-                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA]));
-                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA]));
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
+                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA], $subComponents);
+                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA]));
+                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA]));
                 break;
 
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
-                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA], $subComponents);
-                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA]));
-                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA]));
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS:
+                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA], $subComponents);
+                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA]));
+                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA]));
                 break;
 
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
-                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA], $subComponents);
-                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA]));
-                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA]));
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS:
+                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA], $subComponents);
+                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA]));
+                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA]));
                 break;
         }
         
@@ -52,22 +52,22 @@ class PoP_CoreProcessors_Bootstrap_Hooks
     public function getDropdownSubmodules($subComponents, array $component)
     {
         switch ($component[1]) {
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents);
-                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN]));
-                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN]));
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents);
+                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN]));
+                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN]));
                 break;
 
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents);
-                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN]));
-                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN]));
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents);
+                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN]));
+                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_UserViewComponentButtons::class, PoP_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN]));
                 break;
 
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
-                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents);
-                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN]));
-                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN]));
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+                $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents);
+                array_splice($subComponents, $pos, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN]));
+                array_splice($subComponents, $pos+1, 0, array([PoP_Module_Processor_TagViewComponentButtons::class, PoP_Module_Processor_TagViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN]));
                 break;
         }
         
@@ -78,12 +78,12 @@ class PoP_CoreProcessors_Bootstrap_Hooks
     {
 
         // Insert before/after the Print button
-        array_search([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_PRINT], $subComponents);
-        array_splice($subComponents, $pos, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_EMBED]));
-        array_splice($subComponents, $pos+1, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_API]));
+        array_search([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_PRINT], $subComponents);
+        array_splice($subComponents, $pos, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_EMBED]));
+        array_splice($subComponents, $pos+1, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_API]));
 
-        if ($component == [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE]) {
-            array_splice($subComponents, $pos, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_COPYSEARCHURL]));
+        if ($component == [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE]) {
+            array_splice($subComponents, $pos, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_COPYSEARCHURL]));
         }
         return $subComponents;
     }

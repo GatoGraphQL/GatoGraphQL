@@ -8,8 +8,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW],
         );
     }
 
@@ -17,8 +17,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW],
-            self::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {
@@ -33,10 +33,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
 
         // Extra classes
         $simpleviews = array(
-            [self::class, self::MODULE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW],
         );
 
         $extra_class = '';

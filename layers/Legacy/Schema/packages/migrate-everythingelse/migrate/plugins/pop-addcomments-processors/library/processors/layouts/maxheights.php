@@ -7,7 +7,7 @@ class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Proces
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS],
+            [self::class, self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS],
         );
     }
 
@@ -16,8 +16,8 @@ class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Proces
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
-                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
+            case self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
+                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
                 break;
         }
 
@@ -27,7 +27,7 @@ class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Proces
     public function getMaxheight(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
+            case self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
                 return '300';
         }
 

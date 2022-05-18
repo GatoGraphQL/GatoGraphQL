@@ -8,14 +8,14 @@ class Wassup_URE_AAL_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS],
+            [self::class, self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS],
         );
     }
 
     public function getDescription(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS:
+            case self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS:
                 return sprintf(
                     '<em>%s</em>',
                     TranslationAPIFacade::getInstance()->__('Tags:', 'poptheme-wassup')

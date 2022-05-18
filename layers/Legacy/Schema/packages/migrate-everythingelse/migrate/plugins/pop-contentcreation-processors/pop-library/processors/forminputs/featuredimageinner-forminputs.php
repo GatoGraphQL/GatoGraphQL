@@ -7,7 +7,7 @@ class PoP_Module_Processor_FeaturedImageInnerComponentInputs extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_FEATUREDIMAGEINNER],
+            [self::class, self::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER],
         );
     }
 }

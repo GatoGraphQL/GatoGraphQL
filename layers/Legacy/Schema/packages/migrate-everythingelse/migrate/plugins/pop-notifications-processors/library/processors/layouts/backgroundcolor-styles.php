@@ -8,16 +8,16 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES],
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES],
         );
     }
 
     public function getElemTarget(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return '.preview.notification-layout';
         }
 
@@ -27,8 +27,8 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
     public function getElemStyles(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return array(
                     'background-color' => \PoP\Root\App::applyFilters(
                         'PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor',

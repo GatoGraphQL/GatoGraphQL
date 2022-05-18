@@ -7,14 +7,14 @@ class PoP_Module_Processor_SettingsFeedbackMessageAlertLayouts extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS],
         );
     }
 
     public function getLayoutSubmodule(array $component)
     {
         $layouts = array(
-            self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
         );
 
         if ($layout = $layouts[$component[1]] ?? null) {

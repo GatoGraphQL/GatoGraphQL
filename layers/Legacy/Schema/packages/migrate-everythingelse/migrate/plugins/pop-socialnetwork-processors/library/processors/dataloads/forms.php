@@ -13,14 +13,14 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_CONTACTUSER],
+            [self::class, self::COMPONENT_DATALOAD_CONTACTUSER],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_CONTACTUSER => POP_SOCIALNETWORK_ROUTE_CONTACTUSER,
+            self::COMPONENT_DATALOAD_CONTACTUSER => POP_SOCIALNETWORK_ROUTE_CONTACTUSER,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -28,7 +28,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
@@ -38,7 +38,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     protected function validateCaptcha(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
                 return true;
         }
 
@@ -48,7 +48,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_CONTACTUSER => ContactUserMutationResolverBridge::class,
+            self::COMPONENT_DATALOAD_CONTACTUSER => ContactUserMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$component[1]] ?? null) {
             return $actionexecuter;
@@ -60,8 +60,8 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     protected function getFeedbackmessageModule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
-                return [PoP_SocialNetwork_Module_Processor_FeedbackMessages::class, PoP_SocialNetwork_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_CONTACTUSER];
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
+                return [PoP_SocialNetwork_Module_Processor_FeedbackMessages::class, PoP_SocialNetwork_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CONTACTUSER];
         }
 
         return parent::getFeedbackmessageModule($component);
@@ -72,8 +72,8 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
         $ret = parent::getInnerSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
-                $ret[] = [PoP_SocialNetwork_Module_Processor_GFForms::class, PoP_SocialNetwork_Module_Processor_GFForms::MODULE_FORM_CONTACTUSER];
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
+                $ret[] = [PoP_SocialNetwork_Module_Processor_GFForms::class, PoP_SocialNetwork_Module_Processor_GFForms::COMPONENT_FORM_CONTACTUSER];
                 break;
         }
 
@@ -83,9 +83,9 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
                 // Change the 'Loading' message in the Status
-                $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
+                $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
 
@@ -95,7 +95,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
                 return $this->getObjectIDFromURLParam($component, $props, $data_properties);
         }
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
@@ -104,7 +104,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
                 return \PoPCMSSchema\Users\Constants\InputNames::USER_ID;
         }
         return null;
@@ -113,7 +113,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_CONTACTUSER:
+            case self::COMPONENT_DATALOAD_CONTACTUSER:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 

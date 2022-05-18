@@ -12,7 +12,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentComponentRoutingProcesso
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $routemodules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_LOCATIONPOSTS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -24,7 +24,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentComponentRoutingProcesso
         }
 
         $routemodules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -36,7 +36,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentComponentRoutingProcesso
         }
 
         $routemodules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
         );
         foreach ($routemodules as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

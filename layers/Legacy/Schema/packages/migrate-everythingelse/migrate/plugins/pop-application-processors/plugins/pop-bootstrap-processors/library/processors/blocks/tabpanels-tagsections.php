@@ -10,9 +10,9 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGCONTENT],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGPOSTS],
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGPOSTS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS],
         );
     }
 
@@ -21,9 +21,9 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_TAGCONTENT => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGCONTENT],
-            self::MODULE_BLOCK_TABPANEL_TAGPOSTS => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGPOSTS],
-            self::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSUBSCRIBERS],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCONTENT],
+            self::COMPONENT_BLOCK_TABPANEL_TAGPOSTS => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGSUBSCRIBERS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
@@ -35,8 +35,8 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     protected function getControlgroupBottomSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUUSERLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST];
         }
 
         return parent::getControlgroupBottomSubmodule($component);
@@ -45,7 +45,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public function getTitle(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGCONTENT:
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
         }
 
@@ -55,8 +55,8 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     protected function getControlgroupTopSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGCONTENT:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
         }
 
         return parent::getControlgroupTopSubmodule($component);
@@ -65,14 +65,14 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public function getDelegatorfilterSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGCONTENT:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCONTENT];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGCONTENT];
 
-            case self::MODULE_BLOCK_TABPANEL_TAGPOSTS:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGPOSTS];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGPOSTS:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGPOSTS];
 
-            case self::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+            case self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
         return parent::getDelegatorfilterSubmodule($component);

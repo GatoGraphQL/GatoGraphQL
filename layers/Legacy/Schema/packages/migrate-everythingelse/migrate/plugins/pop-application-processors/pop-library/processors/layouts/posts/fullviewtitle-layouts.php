@@ -9,19 +9,19 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLVIEWTITLE],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOSTTITLE],
-            [self::class, self::MODULE_LAYOUT_POSTTITLE],
+            [self::class, self::COMPONENT_LAYOUT_FULLVIEWTITLE],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE],
+            [self::class, self::COMPONENT_LAYOUT_POSTTITLE],
         );
     }
 
     public function getHtmlmarkup(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOSTTITLE:
+            case self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE:
                 return 'h4';
 
-            case self::MODULE_LAYOUT_POSTTITLE:
+            case self::COMPONENT_LAYOUT_POSTTITLE:
                 return 'span';
         }
         

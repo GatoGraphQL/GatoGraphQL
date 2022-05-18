@@ -7,7 +7,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFormInners extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_USERAVATAR_UPDATE],
+            [self::class, self::COMPONENT_FORMINNER_USERAVATAR_UPDATE],
         );
     }
 
@@ -16,11 +16,11 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFormInners extends PoP_Modul
         $ret = parent::getLayoutSubmodules($component);
     
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_USERAVATAR_UPDATE:
+            case self::COMPONENT_FORMINNER_USERAVATAR_UPDATE:
                 $ret = array_merge(
                     array(
-                        [PoP_Module_Processor_FileUploadPictures::class, PoP_Module_Processor_FileUploadPictures::MODULE_FILEUPLOAD_PICTURE],
-                        [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SAVE],
+                        [PoP_Module_Processor_FileUploadPictures::class, PoP_Module_Processor_FileUploadPictures::COMPONENT_FILEUPLOAD_PICTURE],
+                        [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SAVE],
                     )
                 );
                 break;

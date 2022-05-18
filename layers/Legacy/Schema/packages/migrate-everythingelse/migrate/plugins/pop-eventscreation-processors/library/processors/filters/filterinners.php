@@ -7,7 +7,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYEVENTS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS],
         );
     }
 
@@ -16,16 +16,16 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
         $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
-            self::MODULE_FILTERINPUTCONTAINER_MYEVENTS => [
+            self::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS => [
                 // Events: cannot filter by categories, since em_get_events() has no support for meta_query
                 // Events: cannot filter by tags, since using arg "tag" searchs for its own post type for event tag, and not the standard post tag
                 GD_CreateUpdate_Utils::moderate() ?
-                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
-                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
-                [PoP_Events_Module_Processor_SubcomponentFormInputGroups::class, PoP_Events_Module_Processor_SubcomponentFormInputGroups::MODULE_FILTERINPUTGROUP_EVENTSCOPE],
-                // [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_CATEGORIES],
-                // [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
+                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
+                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
+                [PoP_Events_Module_Processor_SubcomponentFormInputGroups::class, PoP_Events_Module_Processor_SubcomponentFormInputGroups::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE],
+                // [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_CATEGORIES],
+                // [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_HASHTAGS],
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
@@ -44,7 +44,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
     // public function getFilter(array $component)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,
+    //         self::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,
     //     );
     //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;

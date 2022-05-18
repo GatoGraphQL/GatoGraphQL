@@ -16,32 +16,32 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENT_FOLLOWSUSERS],
-            [self::class, self::MODULE_CONTENT_UNFOLLOWSUSERS],
-            [self::class, self::MODULE_CONTENT_RECOMMENDSPOSTS],
-            [self::class, self::MODULE_CONTENT_UNRECOMMENDSPOSTS],
-            [self::class, self::MODULE_CONTENT_SUBSCRIBESTOTAGS],
-            [self::class, self::MODULE_CONTENT_UNSUBSCRIBESFROMTAGS],
-            [self::class, self::MODULE_CONTENT_UPVOTESPOSTS],
-            [self::class, self::MODULE_CONTENT_UNDOUPVOTESPOSTS],
-            [self::class, self::MODULE_CONTENT_DOWNVOTESPOSTS],
-            [self::class, self::MODULE_CONTENT_UNDODOWNVOTESPOSTS],
+            [self::class, self::COMPONENT_CONTENT_FOLLOWSUSERS],
+            [self::class, self::COMPONENT_CONTENT_UNFOLLOWSUSERS],
+            [self::class, self::COMPONENT_CONTENT_RECOMMENDSPOSTS],
+            [self::class, self::COMPONENT_CONTENT_UNRECOMMENDSPOSTS],
+            [self::class, self::COMPONENT_CONTENT_SUBSCRIBESTOTAGS],
+            [self::class, self::COMPONENT_CONTENT_UNSUBSCRIBESFROMTAGS],
+            [self::class, self::COMPONENT_CONTENT_UPVOTESPOSTS],
+            [self::class, self::COMPONENT_CONTENT_UNDOUPVOTESPOSTS],
+            [self::class, self::COMPONENT_CONTENT_DOWNVOTESPOSTS],
+            [self::class, self::COMPONENT_CONTENT_UNDODOWNVOTESPOSTS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_CONTENT_FOLLOWSUSERS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_FOLLOWSUSERS],
-            self::MODULE_CONTENT_UNFOLLOWSUSERS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UNFOLLOWSUSERS],
-            self::MODULE_CONTENT_RECOMMENDSPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_RECOMMENDSPOSTS],
-            self::MODULE_CONTENT_UNRECOMMENDSPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UNRECOMMENDSPOSTS],
-            self::MODULE_CONTENT_SUBSCRIBESTOTAGS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_SUBSCRIBESTOTAGS],
-            self::MODULE_CONTENT_UNSUBSCRIBESFROMTAGS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UNSUBSCRIBESFROMTAGS],
-            self::MODULE_CONTENT_UPVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UPVOTESPOSTS],
-            self::MODULE_CONTENT_UNDOUPVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UNDOUPVOTESPOSTS],
-            self::MODULE_CONTENT_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_DOWNVOTESPOSTS],
-            self::MODULE_CONTENT_UNDODOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UNDODOWNVOTESPOSTS],
+            self::COMPONENT_CONTENT_FOLLOWSUSERS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_FOLLOWSUSERS],
+            self::COMPONENT_CONTENT_UNFOLLOWSUSERS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UNFOLLOWSUSERS],
+            self::COMPONENT_CONTENT_RECOMMENDSPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_RECOMMENDSPOSTS],
+            self::COMPONENT_CONTENT_UNRECOMMENDSPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UNRECOMMENDSPOSTS],
+            self::COMPONENT_CONTENT_SUBSCRIBESTOTAGS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_SUBSCRIBESTOTAGS],
+            self::COMPONENT_CONTENT_UNSUBSCRIBESFROMTAGS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UNSUBSCRIBESFROMTAGS],
+            self::COMPONENT_CONTENT_UPVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UPVOTESPOSTS],
+            self::COMPONENT_CONTENT_UNDOUPVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UNDOUPVOTESPOSTS],
+            self::COMPONENT_CONTENT_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS],
+            self::COMPONENT_CONTENT_UNDODOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             return $inner;

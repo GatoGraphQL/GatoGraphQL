@@ -16,16 +16,16 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAG_STANCES_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR],
         );
     }
 
@@ -34,24 +34,24 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
-            self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR],
-            self::MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYSTANCES_SIDEBAR],
-            self::MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_STANCES_AUTHORROLE_SIDEBAR],
-            self::MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_STANCES_STANCE_SIDEBAR],
-            self::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_STANCES_GENERALSTANCE_SIDEBAR],
-            self::MODULE_MULTIPLE_TAG_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR],
-            self::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR],
-            self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORSTANCES_SIDEBAR],
-            self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR],
-            self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYSTANCES_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_AUTHORROLE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_GENERALSTANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR],
+            self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_SIDEBAR],
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR],
         );
         if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
-            case self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
                 $ret = \PoP\Root\App::applyFilters(
                     'PoPVP_Module_Processor_SidebarMultiples:inner-modules:authorstances',
                     $ret
@@ -65,16 +65,16 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public function getScreen(array $component)
     {
         $screens = array(
-            self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR => POP_SCREEN_SECTION,
-            self::MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR => POP_SCREEN_SECTION,
-            self::MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR => POP_SCREEN_SECTION,
-            self::MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR => POP_SCREEN_SECTION,
-            self::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR => POP_SCREEN_SECTION,
-            self::MODULE_MULTIPLE_TAG_STANCES_SIDEBAR => POP_SCREEN_TAGSECTION,
-            self::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR => POP_SCREEN_TAGSECTION,
-            self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR => POP_SCREEN_AUTHORSECTION,
-            self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => POP_SCREEN_AUTHORSECTION,
-            self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => POP_SCREEN_SINGLE,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR => POP_SCREEN_SECTION,
+            self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR => POP_SCREEN_SECTION,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR => POP_SCREEN_SECTION,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR => POP_SCREEN_SECTION,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR => POP_SCREEN_SECTION,
+            self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR => POP_SCREEN_TAGSECTION,
+            self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR => POP_SCREEN_TAGSECTION,
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR => POP_SCREEN_AUTHORSECTION,
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => POP_SCREEN_AUTHORSECTION,
+            self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR => POP_SCREEN_SINGLE,
         );
         if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
@@ -86,18 +86,18 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public function getScreengroup(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR:
-            case self::MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR:
-            case self::MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR:
-            case self::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR:
-            case self::MODULE_MULTIPLE_TAG_STANCES_SIDEBAR:
-            case self::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR:
-            case self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
-            case self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
-            case self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
 
-            case self::MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
@@ -107,9 +107,9 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public function initWebPlatformModelProps(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR:
+            case self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR:
                 $inners = array(
-                    self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR],
                 );
                 $subComponent = $inners[$component[1]];
 

@@ -8,16 +8,16 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pro
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_EVENT],
-            [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_SINGLE_EVENT],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_SINGLE_PASTEVENT],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_VERTICALSIDEBAR_SINGLE_EVENT => [GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::MODULE_VERTICALSIDEBARINNER_SINGLE_EVENT],
-            self::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT => [GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::MODULE_VERTICALSIDEBARINNER_SINGLE_PASTEVENT],
+            self::COMPONENT_VERTICALSIDEBAR_SINGLE_EVENT => [GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT],
+            self::COMPONENT_VERTICALSIDEBAR_SINGLE_PASTEVENT => [GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {
@@ -30,8 +30,8 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pro
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBAR_SINGLE_EVENT:
-            case self::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT:
+            case self::COMPONENT_VERTICALSIDEBAR_SINGLE_EVENT:
+            case self::COMPONENT_VERTICALSIDEBAR_SINGLE_PASTEVENT:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;
         }

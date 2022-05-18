@@ -44,17 +44,17 @@ class PoPThemeWassup_Utils
                 // Because the pageSection names may be mangled (so that "body" will be "x3" or something like that),
                 // repeat the name of the pageSection/class below
                 $possiblyOpenPageSections = array(
-                    PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODY => 'body',
-                    PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO => 'sideinfo',
-                    PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER => 'hover',
+                    PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY => 'body',
+                    PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO => 'sideinfo',
+                    PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_HOVER => 'hover',
                 );
                 foreach ($possiblyOpenPageSections as $possiblyOpenPageSection => $class) {
                     $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBMODULEOUTPUTNAMES] ?? []));
                     if ($pageSectionBlocks) {
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
-                        if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO) {
+                        if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO) {
                             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                            $emptysideinfoModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]);
+                            $emptysideinfoModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTYSIDEINFO]);
                             if (in_array($emptysideinfoModuleOutputName, $pageSectionBlocks)) {
                                 continue;
                             }

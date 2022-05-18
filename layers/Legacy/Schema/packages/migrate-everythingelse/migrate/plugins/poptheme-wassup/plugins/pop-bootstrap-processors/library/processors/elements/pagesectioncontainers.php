@@ -10,8 +10,8 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_PAGESECTIONCONTAINER_HOLE],
-            [self::class, self::MODULE_PAGESECTIONCONTAINER_MODALS],
+            [self::class, self::COMPONENT_PAGESECTIONCONTAINER_HOLE],
+            [self::class, self::COMPONENT_PAGESECTIONCONTAINER_MODALS],
         );
     }
 
@@ -22,16 +22,16 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($component[1]) {
-            case self::MODULE_PAGESECTIONCONTAINER_HOLE:
-            case self::MODULE_PAGESECTIONCONTAINER_MODALS:
+            case self::COMPONENT_PAGESECTIONCONTAINER_HOLE:
+            case self::COMPONENT_PAGESECTIONCONTAINER_MODALS:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $subComponents = array(
-                    self::MODULE_PAGESECTIONCONTAINER_HOLE => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_HOLE],
-                    self::MODULE_PAGESECTIONCONTAINER_MODALS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS],
+                    self::COMPONENT_PAGESECTIONCONTAINER_HOLE => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_HOLE],
+                    self::COMPONENT_PAGESECTIONCONTAINER_MODALS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS],
                 );
                 $subComponent = $subComponents[$component[1]];
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_PAGESECTIONCONTAINER_HOLE:
+            case self::COMPONENT_PAGESECTIONCONTAINER_HOLE:
                 $this->appendProp($component, $props, 'class', 'pagesection-group-after');
                 break;
         }

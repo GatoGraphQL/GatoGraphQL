@@ -9,14 +9,14 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_SHAREBYEMAIL],
+            [self::class, self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL],
         );
     }
 
     public function getLabel(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_SHAREBYEMAIL:
+            case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                 return TranslationAPIFacade::getInstance()->__('Share by email', 'pop-coreprocessors');
         }
 
@@ -25,7 +25,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
     public function getFontawesome(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_SHAREBYEMAIL:
+            case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                 return 'fa-envelope';
         }
 
@@ -38,9 +38,9 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             switch ($component[1]) {
-                case self::MODULE_ANCHORCONTROL_SHAREBYEMAIL:
+                case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                     $modals = array(
-                        self::MODULE_ANCHORCONTROL_SHAREBYEMAIL => [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::MODULE_MODAL_SHAREBYEMAIL],
+                        self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL => [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::COMPONENT_MODAL_SHAREBYEMAIL],
                     );
                     $modal = $modals[$component[1]];
                     return '#'.$componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
@@ -53,7 +53,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_ANCHORCONTROL_SHAREBYEMAIL:
+            case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                 $this->mergeProp(
                     $component,
                     $props,

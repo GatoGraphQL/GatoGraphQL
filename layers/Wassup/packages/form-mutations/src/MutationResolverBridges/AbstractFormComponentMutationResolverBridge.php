@@ -47,8 +47,8 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
         // Check if Captcha validation is needed
         if ($data_properties[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA]) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-            $processor = $this->getComponentProcessorManager()->getProcessor([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
-            $captcha = $processor->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+            $processor = $this->getComponentProcessorManager()->getProcessor([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::COMPONENT_FORMINPUT_CAPTCHA]);
+            $captcha = $processor->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::COMPONENT_FORMINPUT_CAPTCHA]);
             GD_Captcha::assertIsValid($captcha);
         }
     }

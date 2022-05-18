@@ -179,7 +179,7 @@ class PoPWebPlatform_Initialization
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => array(
                 \PoP\ComponentModel\Constants\DataOutputItems::META,
-                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                \PoP\ComponentModel\Constants\DataOutputItems::COMPONENT_DATA,
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ),
             DefinitionsParams::MANGLED => DefinitionsParamValues::MANGLED_NONE,

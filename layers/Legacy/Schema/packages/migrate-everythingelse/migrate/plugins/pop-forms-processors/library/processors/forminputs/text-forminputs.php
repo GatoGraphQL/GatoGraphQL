@@ -13,19 +13,19 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TARGETURL],
-            [self::class, self::MODULE_FORMINPUT_TARGETTITLE],
-            [self::class, self::MODULE_FORMINPUT_POSTTITLE],
-            [self::class, self::MODULE_FORMINPUT_USERNICENAME],
-            [self::class, self::MODULE_FORMINPUT_BROWSERURL],
-            [self::class, self::MODULE_FORMINPUT_SENDERNAME],
+            [self::class, self::COMPONENT_FORMINPUT_TARGETURL],
+            [self::class, self::COMPONENT_FORMINPUT_TARGETTITLE],
+            [self::class, self::COMPONENT_FORMINPUT_POSTTITLE],
+            [self::class, self::COMPONENT_FORMINPUT_USERNICENAME],
+            [self::class, self::COMPONENT_FORMINPUT_BROWSERURL],
+            [self::class, self::COMPONENT_FORMINPUT_SENDERNAME],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_SENDERNAME:
+            case self::COMPONENT_FORMINPUT_SENDERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your name', 'pop-coreprocessors');
         }
 
@@ -37,12 +37,12 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         $ret = parent::getPagesectionJsmethod($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TARGETTITLE:
+            case self::COMPONENT_FORMINPUT_TARGETTITLE:
                 // fill the input when showing the modal
                 $this->addJsmethod($ret, 'fillModalInput');
                 break;
 
-            case self::MODULE_FORMINPUT_TARGETURL:
+            case self::COMPONENT_FORMINPUT_TARGETURL:
                 // fill the input when showing the modal
                 $this->addJsmethod($ret, 'fillModalURLInput');
                 break;
@@ -54,13 +54,13 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_POSTTITLE:
+            case self::COMPONENT_FORMINPUT_POSTTITLE:
                 return 'title';
 
-            case self::MODULE_FORMINPUT_USERNICENAME:
+            case self::COMPONENT_FORMINPUT_USERNICENAME:
                 return 'displayName';
 
-            case self::MODULE_FORMINPUT_TARGETURL:
+            case self::COMPONENT_FORMINPUT_TARGETURL:
                 return 'url';
         }
 
@@ -72,27 +72,27 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TARGETTITLE:
-            case self::MODULE_FORMINPUT_POSTTITLE:
-            case self::MODULE_FORMINPUT_USERNICENAME:
+            case self::COMPONENT_FORMINPUT_TARGETTITLE:
+            case self::COMPONENT_FORMINPUT_POSTTITLE:
+            case self::COMPONENT_FORMINPUT_USERNICENAME:
                 // // fill the input when a new Addon PageSection is created
                 // if ($this->getProp($component, $props, 'replicable')) {
                 $this->addJsmethod($ret, 'fillAddonInput');
                 // }
                 break;
 
-            case self::MODULE_FORMINPUT_TARGETURL:
+            case self::COMPONENT_FORMINPUT_TARGETURL:
                 // // fill the input when a new Addon PageSection is created
                 // if ($this->getProp($component, $props, 'replicable')) {
                 $this->addJsmethod($ret, 'fillAddonURLInput');
                 // }
                 break;
 
-            case self::MODULE_FORMINPUT_BROWSERURL:
+            case self::COMPONENT_FORMINPUT_BROWSERURL:
                 $this->addJsmethod($ret, 'browserUrl');
                 break;
 
-            case self::MODULE_FORMINPUT_SENDERNAME:
+            case self::COMPONENT_FORMINPUT_SENDERNAME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
@@ -104,7 +104,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_SENDERNAME:
+            case self::COMPONENT_FORMINPUT_SENDERNAME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
@@ -116,12 +116,12 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     public function isHidden(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TARGETURL:
-            case self::MODULE_FORMINPUT_TARGETTITLE:
-            case self::MODULE_FORMINPUT_POSTTITLE:
-            case self::MODULE_FORMINPUT_USERNICENAME:
-            case self::MODULE_FORMINPUT_BROWSERURL:
-            // case self::MODULE_FORMINPUT_FILTERNAME:
+            case self::COMPONENT_FORMINPUT_TARGETURL:
+            case self::COMPONENT_FORMINPUT_TARGETTITLE:
+            case self::COMPONENT_FORMINPUT_POSTTITLE:
+            case self::COMPONENT_FORMINPUT_USERNICENAME:
+            case self::COMPONENT_FORMINPUT_BROWSERURL:
+            // case self::COMPONENT_FORMINPUT_FILTERNAME:
                 return true;
         }
 
@@ -131,7 +131,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TARGETURL:
+            case self::COMPONENT_FORMINPUT_TARGETURL:
                 $this->mergeProp(
                     $component,
                     $props,
@@ -142,9 +142,9 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 );
                 break;
 
-            case self::MODULE_FORMINPUT_TARGETTITLE:
-            case self::MODULE_FORMINPUT_POSTTITLE:
-            case self::MODULE_FORMINPUT_USERNICENAME:
+            case self::COMPONENT_FORMINPUT_TARGETTITLE:
+            case self::COMPONENT_FORMINPUT_POSTTITLE:
+            case self::COMPONENT_FORMINPUT_USERNICENAME:
                 $this->mergeProp(
                     $component,
                     $props,
@@ -155,11 +155,11 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 );
                 break;
 
-            case self::MODULE_FORMINPUT_BROWSERURL:
+            case self::COMPONENT_FORMINPUT_BROWSERURL:
                 $this->appendProp($component, $props, 'class', 'pop-browserurl');
                 break;
 
-            case self::MODULE_FORMINPUT_SENDERNAME:
+            case self::COMPONENT_FORMINPUT_SENDERNAME:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always

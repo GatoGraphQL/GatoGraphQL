@@ -27,14 +27,14 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT],
+            [self::class, self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::class, PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::FILTERINPUT_AUTHORROLE_MULTISELECT],
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::class, PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::FILTERINPUT_AUTHORROLE_MULTISELECT],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -42,7 +42,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     // public function isFiltercomponent(array $component)
     // {
     //     switch ($component[1]) {
-    //         case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+    //         case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
     //             return true;
     //     }
 
@@ -52,7 +52,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+            case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Author Role', 'pop-userstance-processors');
         }
 
@@ -62,7 +62,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+            case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return GD_URE_FormInput_MultiAuthorRole::class;
         }
 
@@ -72,7 +72,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getName(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+            case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return 'role';
         }
 
@@ -82,7 +82,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -90,7 +90,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match($component[1]) {
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
@@ -99,7 +99,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $translationAPI->__('', ''),
             default => null,
         };
     }

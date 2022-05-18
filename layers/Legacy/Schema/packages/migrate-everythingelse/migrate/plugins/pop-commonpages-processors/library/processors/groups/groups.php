@@ -7,7 +7,7 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_WHOWEARE],
+            [self::class, self::COMPONENT_GROUP_WHOWEARE],
         );
     }
 
@@ -16,14 +16,14 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_GROUP_WHOWEARE:
+            case self::COMPONENT_GROUP_WHOWEARE:
                 // Allow to override with custom blocks
                 $ret = array_merge(
                     $ret,
                     \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_CustomGroups:modules:whoweare',
                         array(
-                            [GD_Custom_Module_Processor_CustomSectionBlocks::class, GD_Custom_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_WHOWEARE_SCROLL_DETAILS]
+                            [GD_Custom_Module_Processor_CustomSectionBlocks::class, GD_Custom_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS]
                         )
                     )
                 );

@@ -9,8 +9,8 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP],
-            [self::class, self::MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS],
+            [self::class, self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS],
         );
     }
 
@@ -19,12 +19,12 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         $ret = parent::getConditionSucceededSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
-                $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::class, Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP];
+            case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
+                $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::class, Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP];
                 break;
 
-            case self::MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
-                $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::class, Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS];
+            case self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
+                $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::class, Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS];
                 break;
         }
 
@@ -36,9 +36,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         $ret = parent::getConditionFailedSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
-            case self::MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
-                $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::MODULE_HIDEIFEMPTY];
+            case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
+            case self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
+                $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::COMPONENT_HIDEIFEMPTY];
                 break;
         }
 
@@ -48,8 +48,8 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
     public function getConditionField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
-            case self::MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
+            case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
+            case self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
                 $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                 return $fieldQueryInterpreter->getField(
                     'equals',

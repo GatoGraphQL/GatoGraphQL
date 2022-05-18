@@ -7,14 +7,14 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
     public function getComponentsToProcess(): array
     {
         return array(
-            [GD_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_EVENTLINK],
+            [GD_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_EVENTLINK],
         );
     }
 
     protected function isLink(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENTLINK:
+            case self::COMPONENT_FORMINNER_EVENTLINK:
                 return true;
         }
 
@@ -23,7 +23,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
     protected function volunteering(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENTLINK:
+            case self::COMPONENT_FORMINNER_EVENTLINK:
                 return true;
         }
 
@@ -32,8 +32,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
     protected function getLocationsInput(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENTLINK:
-                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
+            case self::COMPONENT_FORMINNER_EVENTLINK:
+                return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
         }
 
         return parent::getLocationsInput($component);
@@ -50,12 +50,12 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENTLINK:
+            case self::COMPONENT_FORMINNER_EVENTLINK:
                 return array_merge(
                     $ret,
                     array(
-                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE],
-                        [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE],
+                        [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE],
+                        [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE],
                     )
                 );
         }
@@ -66,14 +66,14 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINNER_EVENTLINK:
-                $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
+            case self::COMPONENT_FORMINNER_EVENTLINK:
+                $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 
                 // Make it into left/right columns
-                $rightside_component = [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE];
+                $rightside_component = [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE];
                 $leftside_component = $this->isLink($component) ?
-                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
-                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
+                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
+                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE];
                 if (!($form_left_class = $this->getProp($component, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
                 }

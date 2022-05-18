@@ -7,7 +7,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Module_
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC:
+            case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC:
                 $ret = array_merge(
                     $ret,
                     FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)

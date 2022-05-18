@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_MemberStatusLayouts extends GD_URE_Module_Processo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_LAYOUTUSER_MEMBERSTATUS],
+            [self::class, self::COMPONENT_URE_LAYOUTUSER_MEMBERSTATUS],
         );
     }
 }

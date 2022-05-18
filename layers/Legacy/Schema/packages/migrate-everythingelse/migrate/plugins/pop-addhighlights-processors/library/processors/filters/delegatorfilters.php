@@ -9,18 +9,18 @@ class PoP_AddHighlights_Module_Processor_CustomDelegatorFilters extends PoP_Modu
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DELEGATORFILTER_HIGHLIGHTS],
-            [self::class, self::MODULE_DELEGATORFILTER_AUTHORHIGHLIGHTS],
-            [self::class, self::MODULE_DELEGATORFILTER_MYHIGHLIGHTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_HIGHLIGHTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORHIGHLIGHTS],
+            [self::class, self::COMPONENT_DELEGATORFILTER_MYHIGHLIGHTS],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS],
-            self::MODULE_DELEGATORFILTER_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
-            self::MODULE_DELEGATORFILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS],
+            self::COMPONENT_DELEGATORFILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS],
+            self::COMPONENT_DELEGATORFILTER_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
+            self::COMPONENT_DELEGATORFILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

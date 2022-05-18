@@ -9,8 +9,8 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO],
-            [self::class, self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO],
         );
     }
 
@@ -19,20 +19,20 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO:
-                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::MODULE_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS];
+            case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
+                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS];
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
-                    $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS];
+                    $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS];
                 }
-                $ret[] = [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USERCOMPACT];
+                $ret[] = [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERCOMPACT];
                 break;
 
-            case self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO:
-                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS];
+            case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
+                $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS];
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
-                    $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS];
+                    $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS];
                 }
-                $ret[] = [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USERCOMPACT];
+                $ret[] = [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERCOMPACT];
                 break;
         }
 
@@ -42,8 +42,8 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO => TranslationAPIFacade::getInstance()->__('Organization', 'poptheme-wassup'),
-            self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO => TranslationAPIFacade::getInstance()->__('Individual', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO => TranslationAPIFacade::getInstance()->__('Organization', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO => TranslationAPIFacade::getInstance()->__('Individual', 'poptheme-wassup'),
         );
 
         return $titles[$component[1]] ?? null;
@@ -51,8 +51,8 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO => getRouteIcon(POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS, false),
-            self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO => getRouteIcon(POP_COMMONUSERROLES_ROUTE_INDIVIDUALS, false),
+            self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO => getRouteIcon(POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS, false),
+            self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO => getRouteIcon(POP_COMMONUSERROLES_ROUTE_INDIVIDUALS, false),
         );
 
         return $fontawesomes[$component[1]] ?? null;
@@ -61,8 +61,8 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public function getBodyClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO:
-            case self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO:
+            case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
+            case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
                 return 'list-group list-group-sm';
         }
 
@@ -71,8 +71,8 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public function getItemWrapper(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO:
-            case self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO:
+            case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
+            case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
@@ -81,8 +81,8 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public function getWidgetClass(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO:
-            case self::MODULE_WIDGETCOMPACT_INDIVIDUALINFO:
+            case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
+            case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
                 // return 'panel panel-info panel-sm';
                 return 'panel panel-default panel-sm';
         }

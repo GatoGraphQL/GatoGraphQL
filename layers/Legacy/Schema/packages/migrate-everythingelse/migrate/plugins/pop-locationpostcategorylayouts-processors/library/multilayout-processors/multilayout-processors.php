@@ -21,8 +21,8 @@ class PoP_LocationPostCategoryLayouts_Multilayout_Processor extends PoP_Applicat
                             'type' => $locationPostTypeResolver->getTypeName(),
                         ]
                     );
-                    $layouts[$field] = [PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::class, PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::MODULE_MULTICOMPONENT_LOCATIONMAP];
-                    // $layouts[POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST.'-map'] = [PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::class, PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::MODULE_MULTICOMPONENT_LOCATIONMAP];
+                    $layouts[$field] = [PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::class, PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::COMPONENT_MULTICOMPONENT_LOCATIONMAP];
+                    // $layouts[POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST.'-map'] = [PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::class, PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::COMPONENT_MULTICOMPONENT_LOCATIONMAP];
                 }
                 break;
         }

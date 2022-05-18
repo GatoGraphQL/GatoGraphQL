@@ -8,14 +8,14 @@ class GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs extends PoP_Mo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES:
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES:
                 return TranslationAPIFacade::getInstance()->__('Community', 'ure-popprocessors');
         }
         

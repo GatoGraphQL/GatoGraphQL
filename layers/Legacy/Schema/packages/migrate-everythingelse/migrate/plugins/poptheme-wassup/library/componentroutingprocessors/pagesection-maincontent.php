@@ -16,8 +16,8 @@ class PoP_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_Mai
 
         // Author
         $components = array(
-            POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHORDESCRIPTION],
-            POPTHEME_WASSUP_ROUTE_SUMMARY => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHORSUMMARY],
+            POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_AUTHORDESCRIPTION],
+            POPTHEME_WASSUP_ROUTE_SUMMARY => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_AUTHORSUMMARY],
         );
         foreach ($components as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = ['component' => $component];
@@ -44,27 +44,27 @@ class PoP_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_Mai
 
         // 404
         $ret[RequestNature::NOTFOUND][] = [
-            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_404]
+            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_404]
         ];
 
         // Home
         $ret[RequestNature::HOME][] = [
-            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_HOME]
+            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_HOME]
         ];
 
         // Author
         $ret[UserRequestNature::USER][] = [
-            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHOR]
+            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_AUTHOR]
         ];
 
         // Tag
         $ret[TagRequestNature::TAG][] = [
-            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_TAG]
+            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_TAG]
         ];
 
         // Single
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_SINGLEPOST]
+            'component' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_SINGLEPOST]
         ];
 
         return $ret;

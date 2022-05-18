@@ -5,7 +5,7 @@ abstract class PoP_Module_Processor_CustomFullViewLayoutsBase extends PoP_Module
 {
     public function getTitleSubmodule(array $component)
     {
-        return [PoP_Module_Processor_CustomFullViewTitleLayouts::class, PoP_Module_Processor_CustomFullViewTitleLayouts::MODULE_LAYOUT_FULLVIEWTITLE];
+        return [PoP_Module_Processor_CustomFullViewTitleLayouts::class, PoP_Module_Processor_CustomFullViewTitleLayouts::COMPONENT_LAYOUT_FULLVIEWTITLE];
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array

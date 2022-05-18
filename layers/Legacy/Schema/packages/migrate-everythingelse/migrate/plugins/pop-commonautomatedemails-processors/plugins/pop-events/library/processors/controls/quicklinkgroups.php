@@ -7,7 +7,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_QuicklinkGroups extends PoP_Module_
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKGROUP_EVENTBOTTOM],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_EVENTBOTTOM],
         );
     }
 
@@ -16,9 +16,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_QuicklinkGroups extends PoP_Module_
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_QUICKLINKGROUP_EVENTBOTTOM:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
-                $ret[] = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS];
+            case self::COMPONENT_QUICKLINKGROUP_EVENTBOTTOM:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+                $ret[] = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS];
                 break;
         }
 

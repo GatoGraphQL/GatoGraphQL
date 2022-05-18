@@ -30,8 +30,8 @@ class GetPoPDemo_Processors_GroupHooks
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_WIDGETAREA:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_TAG_WIDGETAREA:
                 // Hide if block is empty
                 foreach ($processor->getSubComponents($component) as $subComponent) {
                     $processor->setProp([$subComponent], $props, 'do-not-render-if-no-results', true);
@@ -40,17 +40,17 @@ class GetPoPDemo_Processors_GroupHooks
         }
 
         switch ($component[1]) {
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_WIDGETAREA:
                 // Format
-                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
-                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'add-titlelink', true);
-                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'collapsible', true);
+                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
+                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'add-titlelink', true);
+                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'collapsible', true);
                 break;
 
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA:
-                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
-                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP]], $props, 'add-titlelink', true);
-                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP]], $props, 'collapsible', true);
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_TAG_WIDGETAREA:
+                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
+                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP]], $props, 'add-titlelink', true);
+                $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP]], $props, 'collapsible', true);
                 break;
         }
     }
@@ -59,7 +59,7 @@ class GetPoPDemo_Processors_GroupHooks
     public function homeTopmodules($components)
     {
         return array(
-            [GetPoPDemo_Module_Processor_CustomGroups::class, GetPoPDemo_Module_Processor_CustomGroups::MODULE_GETPOPDEMO_GROUP_HOMETOP],
+            [GetPoPDemo_Module_Processor_CustomGroups::class, GetPoPDemo_Module_Processor_CustomGroups::COMPONENT_GETPOPDEMO_GROUP_HOMETOP],
         );
     }
 
@@ -68,7 +68,7 @@ class GetPoPDemo_Processors_GroupHooks
 
         // Add the Group which has the Featured widget
         if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-            $components[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP];
+            $components[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP];
         }
         return $components;
     }
@@ -78,7 +78,7 @@ class GetPoPDemo_Processors_GroupHooks
 
         // Add the Group which has the Featured widget
         if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-            $components[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP];
+            $components[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP];
         }
         return $components;
     }

@@ -23,7 +23,7 @@ class PoP_Locations_PageSectionHooks
     // {
 
     //     // Do not add the 'modal-body' for the map
-    //     unset($classes[PoP_Module_Processor_LocationsMapBlocks::MODULE_BLOCK_STATICLOCATIONSMAP]);
+    //     unset($classes[PoP_Module_Processor_LocationsMapBlocks::COMPONENT_BLOCK_STATICLOCATIONSMAP]);
     //     return $classes;
     // }
 
@@ -32,7 +32,7 @@ class PoP_Locations_PageSectionHooks
     //     return array_merge(
     //         $headerTitles,
     //         array(
-    //             PoP_Module_Processor_LocationsMapBlocks::MODULE_BLOCK_STATICLOCATIONSMAP => TranslationAPIFacade::getInstance()->__('Location(s):', 'poptheme-wassup'),
+    //             PoP_Module_Processor_LocationsMapBlocks::COMPONENT_BLOCK_STATICLOCATIONSMAP => TranslationAPIFacade::getInstance()->__('Location(s):', 'poptheme-wassup'),
     //         )
     //     );
     // }
@@ -42,7 +42,7 @@ class PoP_Locations_PageSectionHooks
     //     return array_merge(
     //         $classes,
     //         array(
-    //             PoP_Module_Processor_LocationsMapBlocks::MODULE_BLOCK_STATICLOCATIONSMAP => 'modal-lg',
+    //             PoP_Module_Processor_LocationsMapBlocks::COMPONENT_BLOCK_STATICLOCATIONSMAP => 'modal-lg',
     //         )
     //     );
     // }

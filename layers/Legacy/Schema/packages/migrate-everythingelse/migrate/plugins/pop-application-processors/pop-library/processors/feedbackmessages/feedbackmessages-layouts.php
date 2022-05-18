@@ -9,8 +9,8 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY],
         );
     }
 
@@ -19,7 +19,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
         $ret = parent::getMessages($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
                 $names = $this->getProp($component, $props, 'pluralname');
                 $ret['noresults'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('No %s found.', 'poptheme-wassup'),
@@ -38,7 +38,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
                 $this->setProp($component, $props, 'pluralname', TranslationAPIFacade::getInstance()->__('results', 'poptheme-wassup'));
                 break;
         }

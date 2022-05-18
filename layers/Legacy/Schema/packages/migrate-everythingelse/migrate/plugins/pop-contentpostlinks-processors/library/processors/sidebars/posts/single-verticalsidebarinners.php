@@ -7,7 +7,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners ex
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_LINK],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK],
         );
     }
 
@@ -16,7 +16,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners ex
         $ret = parent::getLayoutSubmodules($component);
 
         switch ($component[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_LINK:
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK:
                 $ret = array_merge(
                     $ret,
                     PoP_ContentPostLinks_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POSTLINK)

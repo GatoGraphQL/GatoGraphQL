@@ -18,18 +18,18 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_FILTER],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_CURRENTURL],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_LOADLATESTBLOCK],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_RESETEDITOR],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_SHARE],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDCOMMENT],
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_FILTER],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_CURRENTURL],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RESETEDITOR],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_SHARE],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK],
         );
     }
 
@@ -38,52 +38,52 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS:
-                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS];
+            case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS:
+                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_FILTER:
-                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_FILTERTOGGLE];
+            case self::COMPONENT_CONTROLBUTTONGROUP_FILTER:
+                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_FILTERTOGGLE];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_CURRENTURL:
-                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CURRENTURL];
+            case self::COMPONENT_CONTROLBUTTONGROUP_CURRENTURL:
+                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_CURRENTURL];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP:
-                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP];
+            case self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP:
+                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK:
-                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::MODULE_BUTTONCONTROL_RELOADBLOCK];
+            case self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK:
+                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::COMPONENT_BUTTONCONTROL_RELOADBLOCK];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_LOADLATESTBLOCK:
-                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::MODULE_BUTTONCONTROL_LOADLATESTBLOCK];
+            case self::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK:
+                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS:
-                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS];
+            case self::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS:
+                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_RESETEDITOR:
-                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::MODULE_BUTTONCONTROL_RESETEDITOR];
+            case self::COMPONENT_CONTROLBUTTONGROUP_RESETEDITOR:
+                $ret[] = [PoP_Module_Processor_ButtonControls::class, PoP_Module_Processor_ButtonControls::COMPONENT_BUTTONCONTROL_RESETEDITOR];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_SHARE:
-                $ret[] = [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_SHARE];
+            case self::COMPONENT_CONTROLBUTTONGROUP_SHARE:
+                $ret[] = [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_RESULTSSHARE:
-                $ret[] = [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE];
+            case self::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE:
+                $ret[] = [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_ADDCOMMENT:
-                $ret[] = [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
+            case self::COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT:
+                $ret[] = [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
                 break;
 
-            case self::MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK:
-                $ret[] = [PoP_Module_Processor_CustomAnchorControls::class, PoP_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TAGSLINK];
+            case self::COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK:
+                $ret[] = [PoP_Module_Processor_CustomAnchorControls::class, PoP_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TAGSLINK];
                 break;
         }
 
@@ -93,7 +93,7 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS:
+            case self::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS:
                 $this->appendProp($component, $props, 'class', 'hidden-sm hidden-md hidden-lg');
                 break;
         }

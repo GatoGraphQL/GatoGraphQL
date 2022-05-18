@@ -8,7 +8,7 @@ class PoP_ConfigurationComponentModel_Module_Processor_Elements extends Abstract
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EMPTY],
+            [self::class, self::COMPONENT_EMPTY],
         );
     }
 }

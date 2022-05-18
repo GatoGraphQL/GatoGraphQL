@@ -18,12 +18,12 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
 
     public function getMarkerscriptSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS];
+        return [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS];
     }
 
     public function getResetmarkerscriptSubmodule(array $component)
     {
-        return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
+        return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
     }
 
     public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array

@@ -12,7 +12,7 @@ class PoPTheme_Wassup_ContentCreation_Bootstrap_Module_MainPageSectionComponentR
         $ret = array();
 
         $routemodules = array(
-            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_MYCONTENT],
+            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_MYCONTENT],
         );
         foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

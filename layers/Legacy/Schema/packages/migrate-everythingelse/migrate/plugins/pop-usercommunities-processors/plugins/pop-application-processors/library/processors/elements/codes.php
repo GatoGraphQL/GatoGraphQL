@@ -9,22 +9,22 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CODE_INVITENEWMEMBERSHELP],
+            [self::class, self::COMPONENT_CODE_INVITENEWMEMBERSHELP],
         );
     }
 
     public function getCode(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_CODE_INVITENEWMEMBERSHELP:
+            case self::COMPONENT_CODE_INVITENEWMEMBERSHELP:
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                $invitenew_processor = $componentprocessor_manager->getProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS]);
+                $invitenew_processor = $componentprocessor_manager->getProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS]);
                 $invitenew = sprintf(
                     '<a class="btn btn-xs btn-success" href="%s" target="%s"><i class="fa fa-fw %s"></i>%s</a>',
-                    $invitenew_processor->getHref([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS], $props),
-                    $invitenew_processor->getTarget([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS], $props),
-                    $invitenew_processor->getFontawesome([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS], $props),
-                    $invitenew_processor->getLabel([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS], $props)
+                    $invitenew_processor->getHref([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS], $props),
+                    $invitenew_processor->getTarget([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS], $props),
+                    $invitenew_processor->getFontawesome([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS], $props),
+                    $invitenew_processor->getLabel([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS], $props)
                 );
                 $placeholder = '<strong>%s</strong>: <br/>%s';
                 $placeholder_item = '<h3>%s</h3>%s';

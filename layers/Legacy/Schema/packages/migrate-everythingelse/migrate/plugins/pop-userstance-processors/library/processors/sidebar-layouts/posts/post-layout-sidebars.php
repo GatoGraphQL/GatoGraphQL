@@ -9,9 +9,9 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE],
 
         );
     }
@@ -19,9 +19,9 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
     public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
-            self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
-            self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
         );
 
         if ($inner = $sidebarinners[$component[1]] ?? null) {
@@ -34,12 +34,12 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE:
                 $this->appendProp($component, $props, 'class', 'vertical stances');
                 break;
 
-            case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE:
-            case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE:
                 $this->appendProp($component, $props, 'class', 'horizontal stances');
                 break;
         }

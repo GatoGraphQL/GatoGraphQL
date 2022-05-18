@@ -14,31 +14,31 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_LOGIN],
-            [self::class, self::MODULE_FORM_LOSTPWD],
-            [self::class, self::MODULE_FORM_LOSTPWDRESET],
-            [self::class, self::MODULE_FORM_LOGOUT],
-            [self::class, self::MODULE_FORM_USER_CHANGEPASSWORD],
+            [self::class, self::COMPONENT_FORM_LOGIN],
+            [self::class, self::COMPONENT_FORM_LOSTPWD],
+            [self::class, self::COMPONENT_FORM_LOSTPWDRESET],
+            [self::class, self::COMPONENT_FORM_LOGOUT],
+            [self::class, self::COMPONENT_FORM_USER_CHANGEPASSWORD],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         switch ($component[1]) {
-            case self::MODULE_FORM_LOGIN:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOGIN];
+            case self::COMPONENT_FORM_LOGIN:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOGIN];
 
-            case self::MODULE_FORM_LOSTPWD:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOSTPWD];
+            case self::COMPONENT_FORM_LOSTPWD:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOSTPWD];
 
-            case self::MODULE_FORM_LOSTPWDRESET:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOSTPWDRESET];
+            case self::COMPONENT_FORM_LOSTPWDRESET:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOSTPWDRESET];
 
-            case self::MODULE_FORM_LOGOUT:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOGOUT];
+            case self::COMPONENT_FORM_LOGOUT:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOGOUT];
 
-            case self::MODULE_FORM_USER_CHANGEPASSWORD:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_USER_CHANGEPASSWORD];
+            case self::COMPONENT_FORM_USER_CHANGEPASSWORD:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_USER_CHANGEPASSWORD];
         }
 
         return parent::getInnerSubmodule($component);
@@ -49,8 +49,8 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         $ret = parent::getJsmethods($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORM_LOGIN:
-            case self::MODULE_FORM_LOGOUT:
+            case self::COMPONENT_FORM_LOGIN:
+            case self::COMPONENT_FORM_LOGOUT:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
@@ -62,12 +62,12 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_FORM_LOGIN:
+            case self::COMPONENT_FORM_LOGIN:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
 
-            case self::MODULE_FORM_LOGOUT:
+            case self::COMPONENT_FORM_LOGOUT:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
                 break;
@@ -80,7 +80,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
-            case self::MODULE_FORM_LOGIN:
+            case self::COMPONENT_FORM_LOGIN:
                 $description = sprintf(
                     '<div class="pull-right"><p><em><a href="%s">%s</a></em></p></div>',
                     RouteUtils::getRouteURL(POP_USERLOGIN_ROUTE_LOSTPWD),
@@ -92,7 +92,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
                 break;
 
-            case self::MODULE_FORM_LOSTPWD:
+            case self::COMPONENT_FORM_LOSTPWD:
                 $description = sprintf(
                     '<p class="bg-info text-info"><em>%s</em></p>',
                     TranslationAPIFacade::getInstance()->__('Please type in your account username or email:', 'pop-coreprocessors')
@@ -106,7 +106,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 $this->setProp($component, $props, 'description-bottom', $description_bottom);
                 break;
 
-            case self::MODULE_FORM_LOSTPWDRESET:
+            case self::COMPONENT_FORM_LOSTPWDRESET:
                 // There are 2 ways of reaching this form:
                 // 1. After the user clicks on reset password, will be redirected
                 // 2. After the user clicks on the link on the sent email
@@ -127,7 +127,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 $this->setProp($component, $props, 'description', $description);
                 break;
 
-            case self::MODULE_FORM_LOGOUT:
+            case self::COMPONENT_FORM_LOGOUT:
                 $this->appendProp($component, $props, 'class', 'visible-loggedin');
 
                 // Add the description

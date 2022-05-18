@@ -34,7 +34,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => [
                 RootRelationalFieldDataloadComponentProcessor::class,
-                RootRelationalFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT
+                RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
@@ -45,7 +45,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => [
                 RootRelationalFieldDataloadComponentProcessor::class,
-                RootRelationalFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
+                RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,

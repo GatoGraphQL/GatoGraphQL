@@ -15,18 +15,18 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD],
-            [self::class, self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD],
-            [self::class, self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD],
+            [self::class, self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD],
+            [self::class, self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD],
+            [self::class, self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD],
         );
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string
     {
         return match($component[1]) {
-            self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASREAD,
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD,
+            self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
+            self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASREAD,
+            self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD,
             default => parent::getRelevantRoute($component, $props),
         };
     }
@@ -36,9 +36,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
+            case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 if ($hist_ids = App::getMutationResolutionStore()->getResult($this->getComponentMutationResolverBridge($component))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = $hist_ids;
                 } else {
@@ -53,9 +53,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         $ret = parent::getInnerSubmodules($component);
 
         $layouts = array(
-            self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD => [GD_AAL_Module_Processor_FunctionsContents::class, GD_AAL_Module_Processor_FunctionsContents::MODULE_CONTENT_MARKNOTIFICATIONASREAD],
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD => [GD_AAL_Module_Processor_FunctionsContents::class, GD_AAL_Module_Processor_FunctionsContents::MODULE_CONTENT_MARKNOTIFICATIONASREAD],
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD => [GD_AAL_Module_Processor_FunctionsContents::class, GD_AAL_Module_Processor_FunctionsContents::MODULE_CONTENT_MARKNOTIFICATIONASUNREAD],
+            self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD => [GD_AAL_Module_Processor_FunctionsContents::class, GD_AAL_Module_Processor_FunctionsContents::COMPONENT_CONTENT_MARKNOTIFICATIONASREAD],
+            self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD => [GD_AAL_Module_Processor_FunctionsContents::class, GD_AAL_Module_Processor_FunctionsContents::COMPONENT_CONTENT_MARKNOTIFICATIONASREAD],
+            self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD => [GD_AAL_Module_Processor_FunctionsContents::class, GD_AAL_Module_Processor_FunctionsContents::COMPONENT_CONTENT_MARKNOTIFICATIONASUNREAD],
         );
         if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
@@ -67,9 +67,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
+            case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
 
@@ -79,9 +79,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
+            case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 $this->appendProp($component, $props, 'class', 'hidden');
                 break;
         }
@@ -93,9 +93,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
 
     //     switch ($component[1]) {
 
-    //         case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
-    //         case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
-    //         case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
+    //         case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
+    //         case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD:
+    //         case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD:
 
     //             // The actionexecuter is invoked directly through GET, no ?actionpath required
     //             return null;
@@ -109,9 +109,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
 
         // The actionexecuter is invoked directly through GET, no ?actionpath required
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
-            case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
+            case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD:
+            case self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 return true;
         }
 
@@ -121,9 +121,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $executers = array(
-            self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD => MarkAllAsReadNotificationMutationResolverBridge::class,
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD => MarkAsReadNotificationMutationResolverBridge::class,
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD => MarkAsUnreadNotificationMutationResolverBridge::class,
+            self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD => MarkAllAsReadNotificationMutationResolverBridge::class,
+            self::COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD => MarkAsReadNotificationMutationResolverBridge::class,
+            self::COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD => MarkAsUnreadNotificationMutationResolverBridge::class,
         );
         if ($executer = $executers[$component[1]] ?? null) {
             return $executer;

@@ -7,7 +7,7 @@ class PoP_Module_Processor_MaxHeightLayouts extends PoP_Module_Processor_MaxHeig
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MAXHEIGHT_POSTCONTENT],
+            [self::class, self::COMPONENT_LAYOUT_MAXHEIGHT_POSTCONTENT],
         );
     }
 
@@ -17,8 +17,8 @@ class PoP_Module_Processor_MaxHeightLayouts extends PoP_Module_Processor_MaxHeig
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MAXHEIGHT_POSTCONTENT:
-                $ret[] = [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POSTFEED];
+            case self::COMPONENT_LAYOUT_MAXHEIGHT_POSTCONTENT:
+                $ret[] = [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTFEED];
                 break;
         }
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_MaxHeightLayouts extends PoP_Module_Processor_MaxHeig
     public function getMaxheight(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_LAYOUT_MAXHEIGHT_POSTCONTENT:
+            case self::COMPONENT_LAYOUT_MAXHEIGHT_POSTCONTENT:
 
                 return '380';
         }

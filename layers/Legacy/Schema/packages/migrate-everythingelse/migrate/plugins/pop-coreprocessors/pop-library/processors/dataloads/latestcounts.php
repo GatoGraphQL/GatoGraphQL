@@ -11,7 +11,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_LATESTCOUNTS],
+            [self::class, self::COMPONENT_DATALOAD_LATESTCOUNTS],
         );
     }
 
@@ -20,7 +20,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         $ret = parent::getInnerSubmodules($component);
 
         $inner_components = array(
-            self::MODULE_DATALOAD_LATESTCOUNTS => [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_LATESTCOUNTS],
+            self::COMPONENT_DATALOAD_LATESTCOUNTS => [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::COMPONENT_CONTENT_LATESTCOUNTS],
         );
 
         if ($inner = $inner_components[$component[1]] ?? null) {
@@ -35,7 +35,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTCOUNTS:
+            case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 PoP_Application_SectionUtils::addDataloadqueryargsLatestcounts($ret);
                 break;
         }
@@ -48,7 +48,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 
         // Set the display configuration
         $latestcounts = array(
-            [self::class, self::MODULE_DATALOAD_LATESTCOUNTS],
+            [self::class, self::COMPONENT_DATALOAD_LATESTCOUNTS],
         );
 
         if (in_array($component, $latestcounts)) {
@@ -61,7 +61,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTCOUNTS:
+            case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
@@ -71,7 +71,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTCOUNTS:
+            case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 
@@ -81,7 +81,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     public function initModelProps(array $component, array &$props): void
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_LATESTCOUNTS:
+            case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 // It can be invisible, nothing to show
                 $this->appendProp($component, $props, 'class', 'hidden');
 

@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
 
     public function getControlgroupSubmodule(array $component)
     {
-        return [PoP_Module_Processor_CalendarControlGroups::class, PoP_Module_Processor_CalendarControlGroups::MODULE_CALENDARCONTROLGROUP_CALENDAR];
+        return [PoP_Module_Processor_CalendarControlGroups::class, PoP_Module_Processor_CalendarControlGroups::COMPONENT_CALENDARCONTROLGROUP_CALENDAR];
     }
 
     public function getOptions(array $component, array &$props)

@@ -7,14 +7,14 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostForms extends PoP_Modul
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_HIGHLIGHT],
+            [self::class, self::COMPONENT_FORM_HIGHLIGHT],
         );
     }
 
     public function getInnerSubmodule(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_HIGHLIGHT => [PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_HIGHLIGHT],
+            self::COMPONENT_FORM_HIGHLIGHT => [PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_HIGHLIGHT],
         );
 
         if ($inner = $inners[$component[1]] ?? null) {

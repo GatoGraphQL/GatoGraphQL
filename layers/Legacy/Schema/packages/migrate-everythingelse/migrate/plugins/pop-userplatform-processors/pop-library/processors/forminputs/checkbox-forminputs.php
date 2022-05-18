@@ -8,14 +8,14 @@ class PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs extends PoP_Mod
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_CUP_DISPLAYEMAIL],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL],
         );
     }
 
     public function getLabelText(array $component, array &$props)
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_CUP_DISPLAYEMAIL:
+            case self::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL:
                 return TranslationAPIFacade::getInstance()->__('Show email in your user profile?', 'pop-coreprocessors');
         }
         
@@ -25,7 +25,7 @@ class PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs extends PoP_Mod
     public function getDbobjectField(array $component): ?string
     {
         switch ($component[1]) {
-            case self::MODULE_FORMINPUT_CUP_DISPLAYEMAIL:
+            case self::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL:
                 return 'displayEmail';
         }
 

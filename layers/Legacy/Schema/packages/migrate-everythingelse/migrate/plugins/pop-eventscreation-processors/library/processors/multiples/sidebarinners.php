@@ -8,8 +8,8 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],
-            [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR],
         );
     }
 
@@ -18,14 +18,14 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
         $ret = parent::getSubComponents($component);
 
         switch ($component[1]) {
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
-                $ret[] = [PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::class, PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYEVENTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
+                $ret[] = [PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::class, PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYEVENTS];
                 break;
 
-            case self::MODULE_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR:
-                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
-                $ret[] = [PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::class, PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYEVENTS];
+            case self::COMPONENT_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR:
+                $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
+                $ret[] = [PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::class, PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYEVENTS];
                 break;
         }
         
