@@ -7,5 +7,5 @@ namespace PoP\ComponentRouting;
 class ComponentRoutingGroups
 {
     // We have at least one Group defined: the Entry Module (not mandatory to use it though)
-    const ENTRYCOMPONENT = 'entrycomponent';
+    public const ENTRYCOMPONENT = 'entrycomponent';
 }
