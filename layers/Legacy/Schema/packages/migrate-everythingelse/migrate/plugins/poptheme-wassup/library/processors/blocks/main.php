@@ -157,7 +157,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_BACKGROUNDMENU:
             case self::COMPONENT_BLOCK_404:
-                $submodule_descriptions = array(
+                $subcomponent_descriptions = array(
                     [
                         'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_SECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup'),
@@ -171,13 +171,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                         'description' => TranslationAPIFacade::getInstance()->__('Add Content', 'poptheme-wassup'),
                     ],
                 );
-                foreach ($submodule_descriptions as $submodule_description) {
-                    $subComponent = $submodule_description['subcomponent'];
+                foreach ($subcomponent_descriptions as $subcomponent_description) {
+                    $subComponent = $subcomponent_description['subcomponent'];
                     $description = sprintf(
                         '<h4>%s</h4>',
                         sprintf(
                             TranslationAPIFacade::getInstance()->__('%s:', 'poptheme-wassup'),
-                            $submodule_description['description']
+                            $subcomponent_description['description']
                         )
                     );
                     $this->setProp([$subComponent], $props, 'title', '');

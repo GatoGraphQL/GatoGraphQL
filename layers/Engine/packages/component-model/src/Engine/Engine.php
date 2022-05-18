@@ -924,7 +924,7 @@ class Engine implements EngineInterface
             }
         }
 
-        $submodule_path = array_merge(
+        $subcomponent_path = array_merge(
             $module_path,
             array(
                 $component,
@@ -938,7 +938,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addInterreferencedComponentFullPaths($paths, $submodule_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+            $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -972,7 +972,7 @@ class Engine implements EngineInterface
             }
         }
 
-        $submodule_path = array_merge(
+        $subcomponent_path = array_merge(
             $module_path,
             array(
                 $component,
@@ -986,7 +986,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+            $this->addDataloadingModuleFullpaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }

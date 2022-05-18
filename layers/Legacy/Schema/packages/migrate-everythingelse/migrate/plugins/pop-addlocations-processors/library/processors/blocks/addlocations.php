@@ -39,9 +39,9 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
             case self::COMPONENT_BLOCK_CREATELOCATION:
                 // Add an extra componentPath to the dataload-source for the create-location block, saying to also load the data block
                 $module_path_manager = ModulePathManagerFacade::getInstance();
-                $submodule_propagation_path = $module_path_manager->getPropagationCurrentPath();
-                $submodule_propagation_path[] = $component;
-                $submodule_propagation_path[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
+                $subcomponent_propagation_path = $module_path_manager->getPropagationCurrentPath();
+                $subcomponent_propagation_path[] = $component;
+                $subcomponent_propagation_path[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
                 $this->mergeProp(
                     [
                         [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_CREATELOCATION]
@@ -49,7 +49,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
                     $props,
                     'dataload-source-add-componentPaths',
                     array(
-                        $submodule_propagation_path,
+                        $subcomponent_propagation_path,
                     )
                 );
                 break;

@@ -150,17 +150,17 @@ trait ModulePathProcessorTrait
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $submodule_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $recursive);
+            $subcomponent_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,
-                    $submodule_ret
+                    $subcomponent_ret
                 ) :
                 array_unique(
                     array_values(
                         array_merge(
                             $ret,
-                            $submodule_ret
+                            $subcomponent_ret
                         )
                     )
                 );

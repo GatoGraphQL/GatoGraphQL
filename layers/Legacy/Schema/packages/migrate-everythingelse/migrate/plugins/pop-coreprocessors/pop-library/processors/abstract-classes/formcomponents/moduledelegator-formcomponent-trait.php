@@ -46,11 +46,11 @@ trait FormComponentModuleDelegatorTrait
 
         // Because getLabel is used on initModelProps, the structure in $props for the subcomponent may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
-        $submodule_props = [];
+        $subcomponent_props = [];
         if ($props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]) {
-            $submodule_props = &$props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS];
+            $subcomponent_props = &$props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS];
         }
-        return $componentprocessor_manager->getProcessor($formcomponent_component)->getLabel($formcomponent_component, $submodule_props);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->getLabel($formcomponent_component, $subcomponent_props);
     }
 
     public function metaFormcomponentInitModuleRequestProps(array $component, array &$props)

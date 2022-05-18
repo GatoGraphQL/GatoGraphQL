@@ -176,15 +176,15 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	}
     // 	foreach ($this->getSubcomponentsByGroup($component) as $subComponent) {
 
-    // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesCbs($subComponent, $props)) {
+    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesCbs($subComponent, $props)) {
 
     // 			$ret['cbs'] = array_merge(
     // 				$ret['cbs'],
-    // 				$submodule_ret['cbs']
+    // 				$subcomponent_ret['cbs']
     // 			);
     // 			$ret['actions'] = array_merge(
     // 				$ret['actions'],
-    // 				$submodule_ret['actions']
+    // 				$subcomponent_ret['actions']
     // 			);
     // 		}
     // 	}
@@ -212,14 +212,14 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	$subComponents = $this->getSubcomponentsByGroup($component);
     // 	foreach ($subComponents as $subComponent) {
 
-    // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesPaths($subComponent, $props)) {
+    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesPaths($subComponent, $props)) {
 
     // 			// Add the extra path to the component
-    // 			foreach ($submodule_ret as $submodule_component => $submodule_component_path) {
+    // 			foreach ($subcomponent_ret as $subcomponent_component => $subcomponent_component_path) {
 
-    // 				$ret[$submodule_component] = array_merge(
+    // 				$ret[$subcomponent_component] = array_merge(
     // 					array(ComponentModelModuleInfo::get('response-prop-submodules'), $moduleOutputName),
-    // 					$submodule_component_path
+    // 					$subcomponent_component_path
     // 				);
     // 			}
     // 		}
