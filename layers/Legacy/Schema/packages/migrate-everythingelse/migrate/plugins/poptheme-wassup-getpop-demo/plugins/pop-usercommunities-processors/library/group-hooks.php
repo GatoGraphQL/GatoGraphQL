@@ -6,7 +6,7 @@ class GetPoPDemo_URE_GroupHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
+            'PoP_Module_Processor_CustomGroups:components:author_widgetarea',
             $this->getAuthortopWidgetSubmodules(...),
             0
         );

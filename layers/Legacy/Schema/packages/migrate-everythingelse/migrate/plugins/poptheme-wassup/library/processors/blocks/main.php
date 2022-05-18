@@ -291,7 +291,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
             case self::COMPONENT_BLOCK_HOME:
                 // Allow TPPDebate to override this
                 if ($top_components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_MainGroups:modules:home_tops',
+                    'PoP_Module_Processor_MainGroups:components:home_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOMETOP]
                     )
@@ -310,7 +310,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
             case self::COMPONENT_BLOCK_AUTHOR:
                 if ($top_components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_MainGroups:modules:author_tops',
+                    'PoP_Module_Processor_MainGroups:components:author_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHORTOP],
                     )
@@ -329,7 +329,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
             case self::COMPONENT_BLOCK_TAG:
                 if ($top_components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_MainGroups:modules:tag_tops',
+                    'PoP_Module_Processor_MainGroups:components:tag_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_TAG_WIDGETAREA],
                     )
@@ -369,7 +369,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT],
                 );
                 $components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_MainGroups:modules:single',
+                    'PoP_Module_Processor_MainGroups:components:single',
                     $components
                 );
                 $ret = array_merge(

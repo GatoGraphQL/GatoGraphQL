@@ -25,7 +25,7 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
 
                 // Allow PoP Generic Forms Processors to add modules
                 $components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_DropdownButtonControls:modules:share',
+                    'PoP_Module_Processor_DropdownButtonControls:components:share',
                     $components,
                     $component
                 );

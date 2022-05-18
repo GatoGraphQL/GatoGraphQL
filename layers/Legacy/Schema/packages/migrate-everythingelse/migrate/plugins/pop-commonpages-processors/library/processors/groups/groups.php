@@ -21,7 +21,7 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
                 $ret = array_merge(
                     $ret,
                     \PoP\Root\App::applyFilters(
-                        'PoP_Module_Processor_CustomGroups:modules:whoweare',
+                        'PoP_Module_Processor_CustomGroups:components:whoweare',
                         array(
                             [GD_Custom_Module_Processor_CustomSectionBlocks::class, GD_Custom_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS]
                         )

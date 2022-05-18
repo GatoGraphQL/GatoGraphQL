@@ -5,21 +5,21 @@ class GetPoPDemo_Processors_GroupHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_MainGroups:modules:home_tops',
+            'PoP_Module_Processor_MainGroups:components:home_tops',
             $this->homeTopmodules(...)
         );
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
+            'PoP_Module_Processor_CustomGroups:components:author_widgetarea',
             $this->getAuthortopWidgetSubmodules(...),
             3
         );
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea',
+            'PoP_Module_Processor_CustomGroups:components:tag_widgetarea',
             $this->getTagtopWidgetSubmodules(...),
             3
         );
         \PoP\Root\App::addAction(
-            'PoP_Module_Processor_CustomGroups:modules:props',
+            'PoP_Module_Processor_CustomGroups:components:props',
             $this->setModelProps(...),
             10,
             3

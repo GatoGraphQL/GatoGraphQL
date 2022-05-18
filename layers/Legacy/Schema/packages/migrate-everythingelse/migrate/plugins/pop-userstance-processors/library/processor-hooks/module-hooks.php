@@ -7,7 +7,7 @@ class PoPTheme_UserStance_ModuleHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_MainGroups:modules:single',
+            'PoP_Module_Processor_MainGroups:components:single',
             $this->getSingleSubmodules(...)
         );
     }

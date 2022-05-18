@@ -5,7 +5,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_DropdownButtonControls:modules:share',
+            'PoP_Module_Processor_DropdownButtonControls:components:share',
             $this->getShareSubmodules(...),
             0,
             2

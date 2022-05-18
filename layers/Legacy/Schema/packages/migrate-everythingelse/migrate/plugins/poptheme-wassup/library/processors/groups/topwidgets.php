@@ -63,7 +63,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_GROUP_HOME_WIDGETAREA:
                 // Add the blocks
                 if ($components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_CustomGroups:modules:home_widgetarea',
+                    'PoP_Module_Processor_CustomGroups:components:home_widgetarea',
                     array(),
                     $component
                 )) {
@@ -77,7 +77,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_GROUP_AUTHOR_WIDGETAREA:
                 // Add the blocks
                 if ($components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
+                    'PoP_Module_Processor_CustomGroups:components:author_widgetarea',
                     array(),
                     $component
                 )) {
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
                 // Allow to add the Featured Carousel
                 if ($components = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea',
+                    'PoP_Module_Processor_CustomGroups:components:tag_widgetarea',
                     $components,
                     $component
                 )) {
@@ -110,7 +110,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
                 // Allow MESYM to override this
                 if ($widgetarea = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_CustomGroups:hometop:modules:widget',
+                    'PoP_Module_Processor_CustomGroups:hometop:components:widget',
                     [self::class, self::COMPONENT_GROUP_HOME_WIDGETAREA]
                 )) {
                     $ret[] = $widgetarea;
@@ -122,7 +122,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
                 // Allow MESYM to override this
                 if ($widgetarea = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_CustomGroups:authortop:modules:widget',
+                    'PoP_Module_Processor_CustomGroups:authortop:components:widget',
                     [self::class, self::COMPONENT_GROUP_AUTHOR_WIDGETAREA]
                 )) {
                     $ret[] = $widgetarea;
@@ -264,7 +264,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_GROUP_TAG_WIDGETAREA:
                 // External Injection
                 \PoP\Root\App::doAction(
-                    'PoP_Module_Processor_CustomGroups:modules:props',
+                    'PoP_Module_Processor_CustomGroups:components:props',
                     $component,
                     array(&$props),
                     $this
