@@ -52,7 +52,7 @@ function getImmutableConfiguration($component, &$props)
   $ret = parent::getImmutableConfiguration($component, $props);
 
   switch ($component[1]) {
-    case self::MODULE_SOMENAME:
+    case self::COMPONENT_SOMENAME:
       $ret['description'] = __('Some description');
       $ret['classes']['description'] = 'jumbotron';
       break;
@@ -71,7 +71,7 @@ function getImmutableConfiguration($component, &$props)
   $ret = parent::getImmutableConfiguration($component, $props);
 
   switch ($component[1]) {
-    case self::MODULE_SOMENAME:
+    case self::COMPONENT_SOMENAME:
       $ret['showmore'] = $this->getProp($component, $props, 'showmore');
       $ret['class'] = $this->getProp($component, $props, 'class');
       break;
@@ -83,7 +83,7 @@ function getImmutableConfiguration($component, &$props)
 function initModelProps($component, &$props) 
 {
   switch ($component[1]) {
-    case self::MODULE_SOMENAME:      
+    case self::COMPONENT_SOMENAME:      
       $this->setProp($component, $props, 'showmore', false);
       $this->appendProp($component, $props, 'class', 'text-center');
       break;

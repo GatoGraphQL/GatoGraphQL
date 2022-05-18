@@ -638,17 +638,17 @@ Having the component-based structure, we can now add the actual information requ
 }
 ```
 
-Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ComponentProcessor](#componentprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ComponentProcessor, and create the nested associative array with all properties for all modules. A ComponentProcessor for a module called `MODULE_SOMENAME` looks like this:
+Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ComponentProcessor](#componentprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ComponentProcessor, and create the nested associative array with all properties for all modules. A ComponentProcessor for a module called `COMPONENT_SOMENAME` looks like this:
 
 ```php
 class SomeComponentProcessor extends AbstractComponentProcessor {
 
-  const MODULE_SOMENAME = 'somename';
+  const COMPONENT_SOMENAME = 'somename';
 
   function getSubmodulesToProcess() {
   
     return array(
-      MODULE_SOMENAME,
+      COMPONENT_SOMENAME,
     );
   }
 
@@ -658,10 +658,10 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
 
     switch ($component[1]) {
       
-      case self::MODULE_SOMENAME:
+      case self::COMPONENT_SOMENAME:
         
-        $ret[] = self::MODULE_SOMELAYOUT1;
-        $ret[] = self::MODULE_SOMELAYOUT2;
+        $ret[] = self::COMPONENT_SOMELAYOUT1;
+        $ret[] = self::COMPONENT_SOMELAYOUT2;
         break;
     }
 
@@ -674,7 +674,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
 
     // Print the modules properties ...
     switch ($component[1]) {
-      case self::MODULE_SOMENAME:        
+      case self::COMPONENT_SOMENAME:        
         $ret['description'] = __('Some description');
         $ret['showmore'] = $this->getProp($component, $props, 'showmore');
         $ret['class'] = $this->getProp($component, $props, 'class');
@@ -688,7 +688,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
   {
     // Implement the modules properties ...
     switch ($component[1]) {
-      case self::MODULE_SOMENAME:
+      case self::COMPONENT_SOMENAME:
         $this->setProp($component, $props, 'showmore', false);
         $this->appendProp($component, $props, 'class', 'text-center');
         break;
@@ -777,7 +777,7 @@ For instance, the API response below contains a component hierarchy with two mod
 Every module has a unique name that identifies it, defined as a constant:
 
 ```php
-const MODULE_SOMENAME = 'somename';
+const COMPONENT_SOMENAME = 'somename';
 ```
 
 All the properties of the modules are implemented through objects called [ComponentProcessor](#componentprocessor).
@@ -823,16 +823,16 @@ Every ComponentProcessor can handle more than 1 module: Because different module
 ```php
 class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  const MODULE_SOMENAME1 = 'somename1';
-  const MODULE_SOMENAME2 = 'somename2';
-  const MODULE_SOMENAME3 = 'somename3';
+  const COMPONENT_SOMENAME1 = 'somename1';
+  const COMPONENT_SOMENAME2 = 'somename2';
+  const COMPONENT_SOMENAME3 = 'somename3';
 
   function getSubmodulesToProcess() {
   
     return array(
-      MODULE_SOMENAME1,
-      MODULE_SOMENAME2,
-      MODULE_SOMENAME3,
+      COMPONENT_SOMENAME1,
+      COMPONENT_SOMENAME2,
+      COMPONENT_SOMENAME3,
     );
   }
 
@@ -849,8 +849,8 @@ To access the properties of a module, we must reference its corresponding Compon
 // Retrive the PoP_ComponentProcessor_Manager object from the factory
 $componentprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
-// Obtain the ComponentProcessor for module MODULE_SOMENAME
-$processor = $componentprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::MODULE_SOMENAME]);
+// Obtain the ComponentProcessor for module COMPONENT_SOMENAME
+$processor = $componentprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME]);
 
 // Do something...
 // $processor->...
@@ -871,15 +871,15 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
     // Add properties to the module
     switch ($component[1]) 
     {
-      case self::MODULE_SOMENAME1:
+      case self::COMPONENT_SOMENAME1:
         
         // Do something with $ret
         // ...
         break;
 
       // These modules share the same properties
-      case self::MODULE_SOMENAME2:
-      case self::MODULE_SOMENAME3:
+      case self::COMPONENT_SOMENAME2:
+      case self::COMPONENT_SOMENAME3:
         
         // Do something with $ret
         // ...
@@ -920,17 +920,17 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
     switch ($component[1]) 
     {
-      case self::MODULE_SOMENAME1:
+      case self::COMPONENT_SOMENAME1:
         
-        $ret[] = [self::class, self::MODULE_SOMENAME2];
+        $ret[] = [self::class, self::COMPONENT_SOMENAME2];
         break;
 
-      case self::MODULE_SOMENAME2:
-      case self::MODULE_SOMENAME3:
+      case self::COMPONENT_SOMENAME2:
+      case self::COMPONENT_SOMENAME3:
         
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::MODULE_LAYOUT1];
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::MODULE_LAYOUT2];
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::MODULE_LAYOUT3];
+        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT1];
+        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT2];
+        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT3];
         break;
     }
 
@@ -977,7 +977,7 @@ abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\Abstract
   protected function getThumbnailModule($component) 
   {
     // Default value
-    return [self::class, self::MODULE_LAYOUT_THUMBNAILSMALL];
+    return [self::class, self::COMPONENT_LAYOUT_THUMBNAILSMALL];
   }
   protected function getAftercontentModules($component) 
   {
@@ -991,14 +991,14 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
   {
     switch ($component[1]) 
     {
-      case self::MODULE_SOMENAME1:
+      case self::COMPONENT_SOMENAME1:
         
-        return [self::class, self::MODULE_LAYOUT_POSTCONTENT];
+        return [self::class, self::COMPONENT_LAYOUT_POSTCONTENT];
 
-      case self::MODULE_SOMENAME2:
-      case self::MODULE_SOMENAME3:
+      case self::COMPONENT_SOMENAME2:
+      case self::COMPONENT_SOMENAME3:
         
-        return [self::class, self::MODULE_LAYOUT_POSTEXCERPT];
+        return [self::class, self::COMPONENT_LAYOUT_POSTEXCERPT];
     }
 
     return parent::getContentModule($component);
@@ -1007,13 +1007,13 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
   {
     switch ($component[1]) 
     {
-      case self::MODULE_SOMENAME1:
+      case self::COMPONENT_SOMENAME1:
         
-        return [self::class, self::MODULE_LAYOUT_THUMBNAILBIG];
+        return [self::class, self::COMPONENT_LAYOUT_THUMBNAILBIG];
 
-      case self::MODULE_SOMENAME3:
+      case self::COMPONENT_SOMENAME3:
         
-        return [self::class, self::MODULE_LAYOUT_THUMBNAILMEDIUM];
+        return [self::class, self::COMPONENT_LAYOUT_THUMBNAILMEDIUM];
     }
 
     return parent::getThumbnailModule($component);
@@ -1024,9 +1024,9 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
 
     switch ($component[1]) 
     {
-      case self::MODULE_SOMENAME2:
+      case self::COMPONENT_SOMENAME2:
         
-        $ret[] = self::MODULE_LAYOUT_POSTLIKES;
+        $ret[] = self::COMPONENT_LAYOUT_POSTLIKES;
         break
     }
 
@@ -1157,7 +1157,7 @@ Let's see an example: a component for rendering maps has 2 orientations: `"horiz
 function initModelProps($component, &$props) 
 {
   switch ($component[1]) {
-    case self::MODULE_MAP:
+    case self::COMPONENT_MAP:
       // Module "map" is setting the default value
       $this->setProp($component, $props, 'orientation', 'vertical');
 
@@ -1165,7 +1165,7 @@ function initModelProps($component, &$props)
       $orientation = $this->getProp($component, $props, 'orientation');
 
       // Set the value on "map-inner"
-      $this->setProp([[SomeModule::class, SomeModule::MODULE_MAPINNER]], $props, 'orientation', $orientation);
+      $this->setProp([[SomeModule::class, SomeModule::COMPONENT_MAPINNER]], $props, 'orientation', $orientation);
       break;
   }
 
@@ -1179,8 +1179,8 @@ By default, module map will have prop `"orientation"` set with value `"vertical"
 function initModelProps($component, &$props) 
 {
   switch ($component[1]) {
-    case self::MODULE_MAPWRAPPER:
-      $this->setProp([[SomeModule::class, SomeModule::MODULE_MAP]], $props, 'orientation', 'horizontal');      
+    case self::COMPONENT_MAPWRAPPER:
+      $this->setProp([[SomeModule::class, SomeModule::COMPONENT_MAP]], $props, 'orientation', 'horizontal');      
       break;
   }
 
@@ -1206,7 +1206,7 @@ Indicate if the results are `immutable` (eg: results which never change and are 
 function getDatasource($component, &$props) 
 {
   switch ($component[1]) {
-    case self::MODULE_WHOWEARE:
+    case self::COMPONENT_WHOWEARE:
       return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
   }
 
@@ -1222,7 +1222,7 @@ Define the IDs of the objects to be retrieved from the database, through functio
 function getDbobjectIds($component, &$props, $data_properties) 
 {
   switch ($component[1]) {
-    case self::MODULE_WHOWEARE:
+    case self::COMPONENT_WHOWEARE:
       return [13, 54, 998];
   }
 
@@ -1240,7 +1240,7 @@ Define what [Dataloader](#dataloader) to use, which is the object in charge of f
 function getDataloader($component) 
 {
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
       return [Dataloader::class, Dataloader::DATALOADER_POSTLIST];
   }
     
@@ -1258,7 +1258,7 @@ protected function getImmutableDataloadQueryArgs($component, $props)
   $ret = parent::getImmutableDataloadQueryArgs($component, $props);
   
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
       // 55: id of "Articles" category
       $ret['cat'] = 55;
       break;
@@ -1272,7 +1272,7 @@ protected function getMutableonrequestDataloadQueryArgs($component, $props)
   $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
   
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
     
       // Set the logged-in user id
       $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
@@ -1293,7 +1293,7 @@ The fetched data can be filtered through [Filter](#filter) objects, defined thro
 function getFilter($component) 
 {
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
           
       return GD_FILTER_AUTHORARTICLES;
   }
@@ -1311,7 +1311,7 @@ After fetching data, we can communicate state (eg: are there more results? what'
 function getQueryhandler($component) 
 {
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
       return GD_DATALOAD_QUERYHANDLER_LIST;
   }
   
@@ -1329,7 +1329,7 @@ function getImmutableHeaddatasetmoduleDataProperties($component, &$props)
   $ret = parent::getImmutableHeaddatasetmoduleDataProperties($component, $props);
 
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
       // Make it not fetch more results
       $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
       break;
@@ -1347,7 +1347,7 @@ We can instruct a dataloading module to not load its data simply by setting its 
 function initModelProps($component, &$props) 
 {
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
 
       // Set the content lazy
       $this->setProp($component, $props, 'skip-data-load', true);
@@ -1380,7 +1380,7 @@ function getDataFields($component, $props)
   $ret = parent::getDataFields($component, $props);
 
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
       $ret[] = 'title';
       $ret[] = 'content';
       break;
@@ -1408,16 +1408,16 @@ function getRelationalSubmodules($component)
   $ret = parent::getRelationalSubmodules($component);
 
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
     
       $ret['author'] = [
         GD_DATALOADER_USERLIST => [
-          MODULE_AUTHORNAME,
+          COMPONENT_AUTHORNAME,
         ]
       ];
       $ret['comments'] = [
         GD_DATALOADER_COMMENTLIST => [
-          MODULE_COMMENTLAYOUT,
+          COMPONENT_COMMENTLAYOUT,
         ]
       ];
       break;
@@ -1437,16 +1437,16 @@ function getRelationalSubmodules($component)
   $ret = parent::getRelationalSubmodules($component);
 
   switch ($component[1]) {
-    case self::MODULE_AUTHORARTICLES:
+    case self::COMPONENT_AUTHORARTICLES:
     
       $ret['author'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeComponentProcessor::class, SomeComponentProcessor::MODULE_AUTHORNAME],
+          [SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_AUTHORNAME],
         ]
       ];
       $ret['comments'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeComponentProcessor::class, SomeComponentProcessor::MODULE_COMMENTLAYOUT],
+          [SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_COMMENTLAYOUT],
         ]
       ];
       break;
@@ -1707,7 +1707,7 @@ class TextFilterInputs extends TextFormInputsBase implements \PoP\ComponentModel
   {
     switch ($component[1]) 
     {
-      case self::MODULE_FILTERINPUT_SEARCH:
+      case self::COMPONENT_FILTERINPUT_SEARCH:
         $query['search'] = $value;
         break;
     }
@@ -1733,7 +1733,7 @@ To achieve this, the ComponentProcessor must define the ActionExecuter object fo
 function getActionExecuterClass($component) {
   
   switch ($component[1]) {
-    case self::MODULE_SOMENAME:
+    case self::COMPONENT_SOMENAME:
   
       return SomeActionExecuter::class;
   }
@@ -1840,7 +1840,7 @@ function prepareDataPropertiesAfterMutationExecution($component, &$props, &$data
   parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
   switch ($component[1]) {
-    case self::MODULE_ADDCOMMENT:
+    case self::COMPONENT_ADDCOMMENT:
 
       $actionexecution_manager = \PoP\Engine\ActionExecution_Manager_Factory::getInstance();
       if ($comment_id = $actionexecution_manager->getResult(GD_DATALOAD_ACTIONEXECUTER_ADDCOMMENT)) 
@@ -1873,7 +1873,7 @@ For instance, a module that needs to validate that the user's IP is whitelisted 
 function getDataAccessCheckpoints($component, &$props) 
 {
   switch ($component[1]) {
-    case self::MODULE_SOMEMODULE:
+    case self::COMPONENT_SOMEMODULE:
     
       return [CHECKPOINT_WHITELISTEDIP];
   }
@@ -1882,15 +1882,15 @@ function getDataAccessCheckpoints($component, &$props)
 }
 ```
 
-Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ComponentProcessor, like this:
+Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `COMPONENT_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ComponentProcessor, like this:
 
 ```php
 function getRelevantPage($component, &$props) {
     
   switch ($component[1]) {
-    case self::MODULE_MYPOSTS_SCROLL:
-    case self::MODULE_MYPOSTS_CAROUSEL:
-    case self::MODULE_MYPOSTS_TABLE:
+    case self::COMPONENT_MYPOSTS_SCROLL:
+    case self::COMPONENT_MYPOSTS_CAROUSEL:
+    case self::COMPONENT_MYPOSTS_TABLE:
 
       return POP_PAGE_MYPOSTS;
   }

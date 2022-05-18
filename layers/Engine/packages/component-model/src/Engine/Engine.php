@@ -541,7 +541,7 @@ class Engine implements EngineInterface
         );
 
         $data = [];
-        if (in_array(DataOutputItems::DATASET_MODULE_SETTINGS, $dataoutputitems)) {
+        if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
                 $this->getModuleDatasetSettings($component, $engineState->model_props, $engineState->props)
