@@ -55,7 +55,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
                 );
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-                return $multilayout_manager->getLayoutModules(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$module[1]]);
+                return $multilayout_manager->getLayoutComponentVariations(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$module[1]]);
         }
 
         return parent::getMultipleLayoutSubmodules($module);

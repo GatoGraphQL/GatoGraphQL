@@ -39,7 +39,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
                 $ret = array_merge(
                     $ret,
-                    PoP_ApplicationProcessors_Utils::getInitializedomainModules()
+                    PoP_ApplicationProcessors_Utils::getInitializedomainComponentVariations()
                 );
 
                 break;

@@ -26,7 +26,7 @@ class RequestUtils
         return App::applyFilters('RequestUtils:isSearchEngine', false);
     }
 
-    public static function getFramecomponentModules()
+    public static function getFramecomponentComponentVariations()
     {
         return App::applyFilters(
             'RequestUtils:getFramecomponentModules',

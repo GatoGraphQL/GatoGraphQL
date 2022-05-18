@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_UserAccountUtils
 {
-    public static function getLoginModules()
+    public static function getLoginComponentVariations()
     {
 
         // Allow WSL to add the FB/Twitter Login

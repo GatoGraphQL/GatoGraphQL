@@ -14,7 +14,7 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  */
 
 \PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
-function getWassupFramecomponentModules($modules)
+function getWassupFramecomponentComponentVariations($modules)
 {
     if (\PoP\Root\App::applyFilters('poptheme_wassup_loadlatest', true)) {
         $modules[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];

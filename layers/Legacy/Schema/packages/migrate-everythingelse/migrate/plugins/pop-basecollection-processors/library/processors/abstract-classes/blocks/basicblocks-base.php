@@ -94,9 +94,9 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
-    public function getRequestPropsForDescendantModules(array $module, array &$props): array
+    public function getRequestPropsForDescendantComponentVariations(array $module, array &$props): array
     {
-        $ret = parent::getRequestPropsForDescendantModules($module, $props);
+        $ret = parent::getRequestPropsForDescendantComponentVariations($module, $props);
 
         if ($title = $this->getBlockTitle($module, $props)) {
             $ret['controltarget-title'] = $title;

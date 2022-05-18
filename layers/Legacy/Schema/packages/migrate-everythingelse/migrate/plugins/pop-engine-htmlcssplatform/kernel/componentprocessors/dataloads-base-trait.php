@@ -79,7 +79,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                         // if ($filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module)) {
                         $filterVisible = $this->getProp($module, $props, 'filter-visible');
                         // if ($filterVisible || \PoP\Engine\FilterUtils::filteringBy($filter)) {
-                        if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringModules($module)) {
+                        if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringComponentVariations($module)) {
 
                             // Filter will be open depending on URL params, so make this class a runtime one
                             $this->appendProp($filter_module, $props, 'runtime-class', 'in');

@@ -6,11 +6,11 @@ class PoP_SocialNetowrkProcessors_LoginProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
-            $this->getLoginModules(...)
+            $this->getLoginComponentVariations(...)
         );
     }
 
-    public function getLoginModules($modules)
+    public function getLoginComponentVariations($modules)
     {
         $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_FOLLOWSUSERS];
         $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_RECOMMENDSPOSTS];

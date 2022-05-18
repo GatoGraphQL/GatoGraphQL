@@ -12,9 +12,9 @@ trait AutomatedEmailsBlocksBaseTrait
         return false;
     }
 
-    public function getModelPropsForDescendantModules(array $module, array &$props): array
+    public function getModelPropsForDescendantComponentVariations(array $module, array &$props): array
     {
-        $ret = parent::getModelPropsForDescendantModules($module, $props);
+        $ret = parent::getModelPropsForDescendantComponentVariations($module, $props);
 
         $ret['convert-classes-to-styles'] = true;
 

@@ -26,16 +26,16 @@ class UserFilterInputContainerComponentProcessor extends AbstractFilterInputCont
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         $userFilterInputModules = [
-            ...$this->getIDFilterInputModules(),
+            ...$this->getIDFilterInputComponentVariations(),
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_NAME],
         ];
         $adminUserFilterInputModules = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_EMAILS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
         return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_USERS => [
                 ...$userFilterInputModules,

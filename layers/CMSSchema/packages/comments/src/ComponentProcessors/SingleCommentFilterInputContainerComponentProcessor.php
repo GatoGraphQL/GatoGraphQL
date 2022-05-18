@@ -25,7 +25,7 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         return match ((string)$componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS => [

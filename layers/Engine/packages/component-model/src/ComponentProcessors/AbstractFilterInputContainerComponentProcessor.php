@@ -13,7 +13,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
     final public function getSubmodules(array $componentVariation): array
     {
-        $filterInputModules = $this->getFilterInputModules($componentVariation);
+        $filterInputModules = $this->getFilterInputComponentVariations($componentVariation);
 
         // Enable extensions to add more FilterInputs
         foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
@@ -43,7 +43,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
     public function getFieldFilterInputNameTypeResolvers(array $componentVariation): array
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponentVariations($componentVariation);
         $schemaFieldArgNameTypeResolvers = [];
         foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
@@ -56,7 +56,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
     public function getFieldFilterInputDescription(array $componentVariation, string $fieldArgName): ?string
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponentVariations($componentVariation);
         foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
             $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
@@ -70,7 +70,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
     public function getFieldFilterInputDefaultValue(array $componentVariation, string $fieldArgName): mixed
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponentVariations($componentVariation);
         foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
             $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
@@ -84,7 +84,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
     public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponentVariations($componentVariation);
         foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
             $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);

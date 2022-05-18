@@ -7,7 +7,7 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
     {
         // Only if this post type is shown in All Content
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

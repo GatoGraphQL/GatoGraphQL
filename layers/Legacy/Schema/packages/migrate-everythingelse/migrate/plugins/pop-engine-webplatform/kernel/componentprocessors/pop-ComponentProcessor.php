@@ -14,12 +14,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getJsmethodsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getProcessedJsmethods', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getProcessedJsmethods', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getPagesectionJsmethods(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getModulePagesectionJsmethods', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getModulePagesectionJsmethods', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getImmutableSettings(array $componentVariation, array &$props): array
@@ -107,7 +107,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getImmutableJssettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getImmutableJssettings', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getImmutableJssettings', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getImmutableJssettings(array $componentVariation, array &$props): array
@@ -145,7 +145,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getMutableonmodelJssettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonmodelJssettings', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonmodelJssettings', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getMutableonmodelJssettings(array $componentVariation, array &$props): array
@@ -174,7 +174,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getMutableonrequestJssettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonrequestJssettings', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonrequestJssettings', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getMutableonrequestJssettings(array $componentVariation, array &$props): array
@@ -313,7 +313,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getIntercepturlsMergedmoduletree(array $componentVariation, array &$props)
     {
-        return $this->executeOnSelfAndMergeWithModules('getInterceptUrls', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndMergeWithComponentVariations('getInterceptUrls', __FUNCTION__, $componentVariation, $props, false);
     }
 
     public function getInterceptUrls(array $componentVariation, array &$props)

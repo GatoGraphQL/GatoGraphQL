@@ -26,7 +26,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
     /**
      * Retrieve the same elements as for Posts, and add the "status" filter
      */
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         $targetModule = match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
@@ -35,7 +35,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
         };
         /** @var FilterInputContainerComponentProcessorInterface */
         $targetComponentProcessor = $this->getComponentProcessorManager()->getProcessor($targetModule);
-        $targetFilterInputModules = $targetComponentProcessor->getFilterInputModules($targetModule);
+        $targetFilterInputModules = $targetComponentProcessor->getFilterInputComponentVariations($targetModule);
         return array_merge(
             $targetFilterInputModules,
             [

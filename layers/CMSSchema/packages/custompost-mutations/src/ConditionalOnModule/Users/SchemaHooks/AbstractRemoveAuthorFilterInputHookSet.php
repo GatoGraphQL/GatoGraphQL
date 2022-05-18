@@ -25,7 +25,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     {
         App::addFilter(
             $this->getHookNameToRemoveFilterInput(),
-            $this->getFilterInputModules(...)
+            $this->getFilterInputComponentVariations(...)
         );
     }
 
@@ -34,9 +34,9 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     /**
      * Remove author fieldArgs from field "myCustomPosts"
      */
-    public function getFilterInputModules(array $filterInputModules): array
+    public function getFilterInputComponentVariations(array $filterInputModules): array
     {
-        $modules = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputModules();
+        $modules = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputComponentVariations();
         foreach ($modules as $module) {
             $pos = array_search($module, $filterInputModules);
             if ($pos !== false) {

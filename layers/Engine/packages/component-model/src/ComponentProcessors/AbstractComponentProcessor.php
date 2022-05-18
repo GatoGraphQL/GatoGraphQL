@@ -218,10 +218,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function initModelPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantModules(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $componentVariation, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantComponentVariations(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $componentVariation, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
-    public function getModelPropsForDescendantModules(array $componentVariation, array &$props): array
+    public function getModelPropsForDescendantComponentVariations(array $componentVariation, array &$props): array
     {
         $ret = array();
 
@@ -263,13 +263,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // @todo Pass the ModuleField directly, do not convert to string first
                 $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
-                    foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
+                    foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                     }
                 }
             }
             foreach ($this->getConditionalOnDataFieldSubmodules($componentVariation) as $conditionalLeafModuleField) {
-                foreach ($conditionalLeafModuleField->getConditionalNestedModules() as $conditionalSubmodule) {
+                foreach ($conditionalLeafModuleField->getConditionalNestedComponentVariations() as $conditionalSubmodule) {
                     $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
                 }
             }
@@ -277,7 +277,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
-                        foreach ($relationalModuleField->getNestedModules() as $conditionalSubmodule) {
+                        foreach ($relationalModuleField->getNestedComponentVariations() as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolver);
                         }
                     }
@@ -298,10 +298,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function initRequestPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantModules(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $componentVariation, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponentVariations(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $componentVariation, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
-    public function getRequestPropsForDescendantModules(array $componentVariation, array &$props): array
+    public function getRequestPropsForDescendantComponentVariations(array $componentVariation, array &$props): array
     {
         return [];
     }
@@ -609,7 +609,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $options = array(
             'only-execute-on-dataloading-modules' => true,
         );
-        return $this->executeOnSelfAndPropagateToModules('getImmutableDatasetsettings', __FUNCTION__, $componentVariation, $props, true, $options);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getImmutableDatasetsettings', __FUNCTION__, $componentVariation, $props, true, $options);
     }
 
     public function getImmutableDatasetsettings(array $componentVariation, array &$props): array
@@ -649,7 +649,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
                 // Only modules which do not load data
                 $subcomponent_modules = array_filter(
-                    $relationalModuleField->getNestedModules(),
+                    $relationalModuleField->getNestedComponentVariations(),
                     function ($submodule) {
                         return !$this->getComponentProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
                     }
@@ -666,7 +666,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
                     // Only modules which do not load data
                     $subcomponent_modules = array_filter(
-                        $relationalModuleField->getNestedModules(),
+                        $relationalModuleField->getNestedComponentVariations(),
                         function ($submodule) {
                             return !$this->getComponentProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
                         }
@@ -776,7 +776,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         // The data-properties start on a dataloading component variation, and finish on the next dataloding component variation down the line
         // This way, we can collect all the data-fields that the component variation will need to load for its dbobjects
-        return $this->executeOnSelfAndPropagateToModules('getImmutableDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getImmutableDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
     }
 
     public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array
@@ -843,11 +843,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetmoduletreeSectionFlattenedModules(array $componentVariation): array
+    public function getDatasetmoduletreeSectionFlattenedComponentVariations(array $componentVariation): array
     {
         $ret = [];
 
-        $this->addDatasetmoduletreeSectionFlattenedModules($ret, $componentVariation);
+        $this->addDatasetmoduletreeSectionFlattenedComponentVariations($ret, $componentVariation);
 
         return array_values(
             array_unique(
@@ -857,12 +857,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function addDatasetmoduletreeSectionFlattenedModules(&$ret, array $componentVariation): void
+    public function addDatasetmoduletreeSectionFlattenedComponentVariations(&$ret, array $componentVariation): void
     {
         $ret[] = $componentVariation;
 
         // Propagate down to the components
-        // $this->flattenDatasetmoduletreeModules(__FUNCTION__, $ret, $componentVariation);
+        // $this->flattenDatasetmoduletreeComponentVariations(__FUNCTION__, $ret, $componentVariation);
         // Exclude the subcomponent modules here
         if ($submodules = $this->getModulesToPropagateDataProperties($componentVariation)) {
             foreach ($submodules as $submodule) {
@@ -870,13 +870,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->startDataloadingSection($submodule)) {
-                    $submodule_processor->addDatasetmoduletreeSectionFlattenedModules($ret, $submodule);
+                    $submodule_processor->addDatasetmoduletreeSectionFlattenedComponentVariations($ret, $submodule);
                 }
             }
         }
     }
 
-    // protected function flattenDatasetmoduletreeModules($propagate_fn, &$ret, array $componentVariation)
+    // protected function flattenDatasetmoduletreeComponentVariations($propagate_fn, &$ret, array $componentVariation)
     // {
     //     // Exclude the subcomponent modules here
     //     if ($submodules = $this->getModulesToPropagateDataProperties($componentVariation)) {
@@ -929,7 +929,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getMutableonmodelDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonmodelDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonmodelDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
     }
 
     public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array
@@ -974,7 +974,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getMutableonrequestDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonrequestDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonrequestDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
     }
 
     public function getMutableonrequestDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array
@@ -1125,14 +1125,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
                     $conditionDataField = $conditionalLeafModuleField->asFieldOutputQueryString();
-                    $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedModules();
+                    $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedComponentVariations();
                     $conditionalModuleFields[$conditionDataField] = $conditionalSubmodules;
                 }
                 foreach ($conditionalRelationalModuleFields as $conditionalRelationalModuleField) {
                     $conditionDataField = $conditionalRelationalModuleField->asFieldOutputQueryString();
                     $conditionalModuleFields[$conditionDataField] = [];
                     foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $subConditionalRelationalModuleField) {
-                        $conditionalSubmodules = $subConditionalRelationalModuleField->getNestedModules();
+                        $conditionalSubmodules = $subConditionalRelationalModuleField->getNestedComponentVariations();
                         $conditionalModuleFields[$conditionDataField] = array_merge(
                             $conditionalModuleFields[$conditionDataField],
                             $conditionalSubmodules
@@ -1225,14 +1225,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first
             $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
-            $relationalSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedModules();
+            $relationalSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedComponentVariations();
         }
         foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
             foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                 $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                 $relationalSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
                     $relationalSubmodules[$conditionalDataField] ?? [],
-                    $relationalModuleField->getNestedModules()
+                    $relationalModuleField->getNestedComponentVariations()
                 )));
             }
         }
@@ -1291,7 +1291,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getModelSupplementaryDBObjectDataModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithModules('getModelSupplementaryDBObjectData', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndMergeWithComponentVariations('getModelSupplementaryDBObjectData', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getModelSupplementaryDBObjectData(array $componentVariation, array &$props): array
@@ -1305,7 +1305,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithModules('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndMergeWithComponentVariations('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getMutableonrequestSupplementaryDbobjectdata(array $componentVariation, array &$props): array
@@ -1338,7 +1338,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
                 $ret = array_values(array_unique(
                     array_merge(
-                        $relationalModuleField->getNestedModules(),
+                        $relationalModuleField->getNestedComponentVariations(),
                         $ret
                     ),
                     SORT_REGULAR
@@ -1352,7 +1352,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $ret = array_unique(
                     array_merge(
                         $ret,
-                        $conditionalLeafModuleField->getConditionalNestedModules()
+                        $conditionalLeafModuleField->getConditionalNestedComponentVariations()
                     ),
                     SORT_REGULAR
                 );
@@ -1365,7 +1365,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $ret = array_values(
                         array_unique(
                             array_merge(
-                                $relationalModuleField->getNestedModules(),
+                                $relationalModuleField->getNestedComponentVariations(),
                                 $ret
                             ),
                             SORT_REGULAR

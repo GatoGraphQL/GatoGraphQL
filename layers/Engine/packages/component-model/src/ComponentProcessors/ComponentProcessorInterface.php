@@ -19,11 +19,11 @@ interface ComponentProcessorInterface
     public function getAllSubmodules(array $componentVariation): array;
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $componentVariation, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
-    public function getModelPropsForDescendantModules(array $componentVariation, array &$props): array;
+    public function getModelPropsForDescendantComponentVariations(array $componentVariation, array &$props): array;
     public function getModelPropsForDescendantDatasetmodules(array $componentVariation, array &$props): array;
     public function initModelProps(array $componentVariation, array &$props): void;
     public function initRequestPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
-    public function getRequestPropsForDescendantModules(array $componentVariation, array &$props): array;
+    public function getRequestPropsForDescendantComponentVariations(array $componentVariation, array &$props): array;
     public function getRequestPropsForDescendantDatasetmodules(array $componentVariation, array &$props): array;
     public function initRequestProps(array $componentVariation, array &$props): void;
     public function setProp(array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
@@ -64,7 +64,7 @@ interface ComponentProcessorInterface
     public function getImmutableDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array;
     public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array;
     public function getDatasetmoduletreeSectionFlattenedDataFields(array $componentVariation, array &$props): array;
-    public function getDatasetmoduletreeSectionFlattenedModules(array $componentVariation): array;
+    public function getDatasetmoduletreeSectionFlattenedComponentVariations(array $componentVariation): array;
     public function getImmutableHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array;
     public function getMutableonmodelDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array;
     public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array;
@@ -90,5 +90,5 @@ interface ComponentProcessorInterface
     public function moduleLoadsData(array $componentVariation): bool;
     public function startDataloadingSection(array $componentVariation): bool;
     public function addToDatasetDatabaseKeys(array $componentVariation, array &$props, array $path, array &$ret): void;
-    public function addDatasetmoduletreeSectionFlattenedModules(&$ret, array $componentVariation): void;
+    public function addDatasetmoduletreeSectionFlattenedComponentVariations(&$ret, array $componentVariation): void;
 }

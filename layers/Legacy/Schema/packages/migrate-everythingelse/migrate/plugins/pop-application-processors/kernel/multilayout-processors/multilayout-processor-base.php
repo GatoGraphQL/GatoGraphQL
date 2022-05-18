@@ -7,7 +7,7 @@ class PoP_Application_Multilayout_ProcessorBase implements PoP_Application_Multi
         PoP_Application_MultilayoutManagerFactory::getInstance()->add($this);
     }
 
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
     {
     }
 }

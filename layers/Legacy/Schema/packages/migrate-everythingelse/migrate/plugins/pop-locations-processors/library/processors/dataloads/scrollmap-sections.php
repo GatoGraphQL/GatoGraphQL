@@ -240,7 +240,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 //     $filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
-                if (!$this->getActiveDataloadQueryArgsFilteringModules($module)) {
+                if (!$this->getActiveDataloadQueryArgsFilteringComponentVariations($module)) {
                     $this->setProp($module, $props, 'skip-data-load', true);
                 }
                 break;

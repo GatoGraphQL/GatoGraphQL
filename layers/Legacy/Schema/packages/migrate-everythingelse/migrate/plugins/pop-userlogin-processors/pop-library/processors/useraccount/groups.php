@@ -27,7 +27,7 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
             case self::MODULE_GROUP_LOGGEDINUSERDATA:
                 $ret = array_merge(
                     $ret,
-                    PoP_Module_Processor_UserAccountUtils::getLoginModules()
+                    PoP_Module_Processor_UserAccountUtils::getLoginComponentVariations()
                 );
                 break;
         }

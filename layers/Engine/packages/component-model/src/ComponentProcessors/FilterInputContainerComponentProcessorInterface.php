@@ -10,5 +10,5 @@ interface FilterInputContainerComponentProcessorInterface extends FilterDataComp
     public function getFieldFilterInputDescription(array $componentVariation, string $fieldArgName): ?string;
     public function getFieldFilterInputDefaultValue(array $componentVariation, string $fieldArgName): mixed;
     public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int;
-    public function getFilterInputModules(array $componentVariation): array;
+    public function getFilterInputComponentVariations(array $componentVariation): array;
 }

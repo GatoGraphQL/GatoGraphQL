@@ -89,7 +89,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                 // Load initial frame components
                 $ret = array_merge(
                     $ret,
-                    RequestUtils::getFramecomponentModules()
+                    RequestUtils::getFramecomponentComponentVariations()
                 );
                 break;
         }
@@ -175,7 +175,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         switch ($module[1]) {
          // Make the frame components have a unique ID
             case self::MODULE_PAGE_FRAMECOMPONENTS:
-                foreach (RequestUtils::getFramecomponentModules() as $submodule) {
+                foreach (RequestUtils::getFramecomponentComponentVariations() as $submodule) {
                     $this->setProp([$submodule], $props, 'unique-frontend-id', true);
                 }
                 break;

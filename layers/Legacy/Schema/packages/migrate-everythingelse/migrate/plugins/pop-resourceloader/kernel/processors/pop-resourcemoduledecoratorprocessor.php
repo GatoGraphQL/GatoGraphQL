@@ -22,7 +22,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     function getResourcesMergedmoduletree(array $module, array &$props) {
 
         return array_unique(
-            $this->executeOnSelfAndMergeWithModules('getResources', __FUNCTION__, $module, $props, false),
+            $this->executeOnSelfAndMergeWithComponentVariations('getResources', __FUNCTION__, $module, $props, false),
             SORT_REGULAR
         );
     }

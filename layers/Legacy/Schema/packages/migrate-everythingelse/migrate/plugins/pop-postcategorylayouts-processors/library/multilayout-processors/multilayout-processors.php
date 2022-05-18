@@ -6,7 +6,7 @@ use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
     {
         switch ($handle) {
             case POP_MULTILAYOUT_HANDLE_POSTCONTENT:

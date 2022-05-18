@@ -15,13 +15,13 @@ class FilterInputHookSet extends AbstractHookSet
     {
         App::addFilter(
             UserFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
-            $this->getFilterInputModules(...),
+            $this->getFilterInputComponentVariations(...),
             10,
             2
         );
     }
 
-    public function getFilterInputModules(array $filterInputModules, array $module): array
+    public function getFilterInputComponentVariations(array $filterInputModules, array $module): array
     {
         $adminModuleNames = [
             UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERS,
@@ -30,13 +30,13 @@ class FilterInputHookSet extends AbstractHookSet
         if (in_array($module[1], $adminModuleNames)) {
             return [
                 ...$filterInputModules,
-                ...$this->getUserFilterInputModules(),
+                ...$this->getUserFilterInputComponentVariations(),
             ];
         }
         return $filterInputModules;
     }
 
-    public function getUserFilterInputModules(): array
+    public function getUserFilterInputComponentVariations(): array
     {
         return [
             [

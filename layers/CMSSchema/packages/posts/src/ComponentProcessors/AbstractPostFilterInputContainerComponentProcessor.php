@@ -27,16 +27,16 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         $postFilterInputModules = [
-            ...$this->getIDFilterInputModules(),
+            ...$this->getIDFilterInputComponentVariations(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
         ];
         $statusFilterInputModules = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
         return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputModules,

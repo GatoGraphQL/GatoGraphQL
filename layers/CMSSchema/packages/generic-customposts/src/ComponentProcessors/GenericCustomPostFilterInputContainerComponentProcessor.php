@@ -28,17 +28,17 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         $genericCustomPostFilterInputModules = [
-            ...$this->getIDFilterInputModules(),
+            ...$this->getIDFilterInputComponentVariations(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES],
         ];
         $adminGenericCustomPostFilterInputModules = [
             [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
         return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
                 ...$genericCustomPostFilterInputModules,

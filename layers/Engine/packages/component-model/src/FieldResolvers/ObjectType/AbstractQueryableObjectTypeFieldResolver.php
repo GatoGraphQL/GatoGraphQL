@@ -80,7 +80,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             /** @var FilterInputContainerComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($filterDataloadingModule);
-            if (count($filterDataComponentProcessor->getFilterInputModules($filterDataloadingModule)) > 1) {
+            if (count($filterDataComponentProcessor->getFilterInputComponentVariations($filterDataloadingModule)) > 1) {
                 return false;
             }
         }

@@ -26,17 +26,17 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         $categoryFilterInputModules = [
-            ...$this->getIDFilterInputModules(),
+            ...$this->getIDFilterInputComponentVariations(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
         $topLevelCategoryFilterInputModules = [
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_ID],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
         return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_CATEGORIES => [
                 ...$categoryFilterInputModules,

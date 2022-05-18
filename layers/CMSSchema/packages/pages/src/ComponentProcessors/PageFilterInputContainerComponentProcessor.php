@@ -26,7 +26,7 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         // Get the original config from above
         $targetModule = match ($componentVariation[1]) {
@@ -36,7 +36,7 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
             self::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT],
             default => null,
         };
-        $filterInputModules = parent::getFilterInputModules($targetModule);
+        $filterInputModules = parent::getFilterInputComponentVariations($targetModule);
         // Add the parentIDs and parentID filterInputs
         $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_IDS];
         $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_ID];

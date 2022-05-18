@@ -70,9 +70,9 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return parent::getID($module, $props);
     }
 
-    public function getModelPropsForDescendantModules(array $module, array &$props): array
+    public function getModelPropsForDescendantComponentVariations(array $module, array &$props): array
     {
-        $ret = parent::getModelPropsForDescendantModules($module, $props);
+        $ret = parent::getModelPropsForDescendantComponentVariations($module, $props);
 
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_ADDONS:

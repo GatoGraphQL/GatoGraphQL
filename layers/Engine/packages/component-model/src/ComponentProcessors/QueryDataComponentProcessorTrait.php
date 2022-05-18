@@ -45,7 +45,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getQueryArgsFilteringModules(array $componentVariation, array &$props): array
+    public function getQueryArgsFilteringComponentVariations(array $componentVariation, array &$props): array
     {
         // Attributes overriding the query args, taken from the request
         return [
@@ -59,7 +59,7 @@ trait QueryDataComponentProcessorTrait
 
         // Attributes overriding the query args, taken from the request
         if (!isset($ret[DataloadingConstants::IGNOREREQUESTPARAMS]) || !$ret[DataloadingConstants::IGNOREREQUESTPARAMS]) {
-            $ret[DataloadingConstants::QUERYARGSFILTERINGMODULES] = $this->getQueryArgsFilteringModules($componentVariation, $props);
+            $ret[DataloadingConstants::QUERYARGSFILTERINGMODULES] = $this->getQueryArgsFilteringComponentVariations($componentVariation, $props);
         }
 
         // // Set the filter if it has one

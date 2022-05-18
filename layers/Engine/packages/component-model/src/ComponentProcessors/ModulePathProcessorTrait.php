@@ -94,7 +94,7 @@ trait ModulePathProcessorTrait
 
     // $use_module_output_name_as_key: For response structures (eg: configuration, feedback, etc) must be true
     // for internal structures (eg: $props, $data_properties) no need
-    protected function executeOnSelfAndPropagateToModules($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $use_module_output_name_as_key = true, $options = array())
+    protected function executeOnSelfAndPropagateToComponentVariations($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $use_module_output_name_as_key = true, $options = array())
     {
         $ret = [];
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
@@ -133,7 +133,7 @@ trait ModulePathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithModules($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $recursive = true)
+    protected function executeOnSelfAndMergeWithComponentVariations($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $recursive = true)
     {
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 

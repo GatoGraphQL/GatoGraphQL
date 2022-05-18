@@ -131,7 +131,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     public function getTemplateResourcesMergedmoduletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithModules('getTemplateResources', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndMergeWithComponentVariations('getTemplateResources', __FUNCTION__, $componentVariation, $props, false);
     }
 
     public function getTemplateResources(array $componentVariation, array &$props): array

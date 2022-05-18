@@ -21,7 +21,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     public function getImmutableSettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getImmutableSettings', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getImmutableSettings', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getImmutableSettings(array $componentVariation, array &$props): array
@@ -50,7 +50,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     public function getMutableonmodelSettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonmodelSettings', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonmodelSettings', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getMutableonmodelSettings(array $componentVariation, array &$props): array
@@ -75,7 +75,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     public function getMutableonrequestSettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonrequestSettings', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonrequestSettings', __FUNCTION__, $componentVariation, $props);
     }
 
     public function getMutableonrequestSettings(array $componentVariation, array &$props): array

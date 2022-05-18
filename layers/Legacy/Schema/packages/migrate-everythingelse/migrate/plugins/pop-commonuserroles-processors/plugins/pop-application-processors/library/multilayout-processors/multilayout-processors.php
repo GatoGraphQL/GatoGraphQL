@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class PoP_CommonUserRoles_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field_organization = $fieldQueryInterpreter->getField(

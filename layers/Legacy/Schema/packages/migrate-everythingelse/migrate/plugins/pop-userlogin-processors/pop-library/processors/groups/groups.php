@@ -20,7 +20,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
                 $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN];
                 $ret = array_merge(
                     $ret,
-                    PoP_Module_Processor_UserAccountUtils::getLoginModules()
+                    PoP_Module_Processor_UserAccountUtils::getLoginComponentVariations()
                 );
                 break;
         }

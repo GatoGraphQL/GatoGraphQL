@@ -815,7 +815,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
                 //     $filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
-                if (!$this->getActiveDataloadQueryArgsFilteringModules($module)) {
+                if (!$this->getActiveDataloadQueryArgsFilteringComponentVariations($module)) {
                     $this->setProp($module, $props, 'skip-data-load', true);
                 }
                 break;

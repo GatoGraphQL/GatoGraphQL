@@ -103,7 +103,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                 $format = $formats[$module[1]] ?? '';
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-                return $multilayout_manager->getLayoutModules($handle, $format);
+                return $multilayout_manager->getLayoutComponentVariations($handle, $format);
         }
 
         return parent::getMultipleLayoutSubmodules($module);

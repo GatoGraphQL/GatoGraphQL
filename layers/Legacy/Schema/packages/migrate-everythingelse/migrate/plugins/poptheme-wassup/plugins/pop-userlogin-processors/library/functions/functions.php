@@ -4,7 +4,7 @@
  * Uniqueblocks
  */
 \PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getUserloginFramecomponentModules');
-function getUserloginFramecomponentModules($modules)
+function getUserloginFramecomponentComponentVariations($modules)
 {
 
     // // If the page is not cacheable, then we can already get the state of the logged in user

@@ -36,7 +36,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // The data-properties start on a dataloading module, and finish on the next dataloding module down the line
         // This way, we can collect all the data-fields that the module will need to load for its dbobjects
-        return $this->executeOnSelfAndPropagateToModules('getDynamicDataFieldsDatasetmoduletreeFullsection', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndPropagateToComponentVariations('getDynamicDataFieldsDatasetmoduletreeFullsection', __FUNCTION__, $module, $props);
     }
 
     public function getDynamicDataFieldsDatasetmoduletreeFullsection(array $module, array &$props)
@@ -84,7 +84,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     //     // The data-properties start on a dataloading module, and finish on the next dataloding module down the line
     //     // This way, we can collect all the data-fields that the module will need to load for its dbobjects
-    //     return $this->executeOnSelfAndPropagateToModules('getMutableonrequestDynamicDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $module, $props);
+    //     return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonrequestDynamicDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $module, $props);
     // }
 
     // function getMutableonrequestDynamicDataPropertiesDatasetmoduletreeFullsection(array $module, array &$props) {
@@ -177,7 +177,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 'data-fields' => array(),
                 'subcomponents' => array()
             );
-            foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
+            foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_module) {
                 if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                     $subcomponent_modules_data_properties = array_merge_recursive(
                         $subcomponent_modules_data_properties,

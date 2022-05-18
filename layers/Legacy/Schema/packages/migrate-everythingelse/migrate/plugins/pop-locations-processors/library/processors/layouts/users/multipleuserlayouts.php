@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
                 $handles = array(
                     self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS => POP_MULTILAYOUT_HANDLE_USERCONTENT,
                 );
-                return $multilayout_manager->getLayoutModules($handles[$module[1]], POP_FORMAT_MAP);
+                return $multilayout_manager->getLayoutComponentVariations($handles[$module[1]], POP_FORMAT_MAP);
         }
 
         return parent::getMultipleLayoutSubmodules($module);

@@ -41,7 +41,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         );
     }
 
-    public function getFilterInputModules(array $componentVariation): array
+    public function getFilterInputComponentVariations(array $componentVariation): array
     {
         return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID => [

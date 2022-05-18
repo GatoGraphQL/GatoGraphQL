@@ -6,7 +6,7 @@ use PoPCMSSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeRe
 
 class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
     {
         switch ($handle) {
             case POP_MULTILAYOUT_HANDLE_POSTCONTENT:

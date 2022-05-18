@@ -4,7 +4,7 @@ class PoP_VolunteeringProcessors_FilterUtils
 {
     private static $volunteer_modules;
 
-    public static function getVolunteerModules()
+    public static function getVolunteerComponentVariations()
     {
         if (is_null(self::$volunteer_modules)) {
             $volunteer_modules = \PoP\Root\App::applyFilters(
@@ -25,7 +25,7 @@ class PoP_VolunteeringProcessors_FilterUtils
     public static function maybeAddVolunteerFilterinput($filterinputs, array $module)
     {
         if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-            $volunteer_modules = self::getVolunteerModules();
+            $volunteer_modules = self::getVolunteerComponentVariations();
             $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
             if ($volunteer_module = $volunteer_modules[$moduleFullName] ?? null) {
                 $filterinputs[] = $volunteer_module;

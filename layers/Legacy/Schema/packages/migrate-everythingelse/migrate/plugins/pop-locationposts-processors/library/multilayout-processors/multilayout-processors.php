@@ -14,7 +14,7 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
         );
     }
 
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var RelationalTypeResolverInterface */

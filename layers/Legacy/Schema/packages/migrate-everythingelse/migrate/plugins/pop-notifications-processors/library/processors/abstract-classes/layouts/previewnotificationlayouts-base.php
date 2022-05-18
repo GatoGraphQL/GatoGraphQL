@@ -223,7 +223,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
                     array_map(
                         [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                        $conditionalLeafModuleField->getConditionalNestedModules()
+                        $conditionalLeafModuleField->getConditionalNestedComponentVariations()
                     )
                 );
             }
