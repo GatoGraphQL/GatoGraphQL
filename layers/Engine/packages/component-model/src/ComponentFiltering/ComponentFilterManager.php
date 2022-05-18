@@ -115,7 +115,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return $this->not_excluded_componentVariation_sets;
     }
 
-    public function neverExclude(bool $neverExclude): void
+    public function setNeverExclude(bool $neverExclude): void
     {
         $this->neverExclude = $neverExclude;
     }

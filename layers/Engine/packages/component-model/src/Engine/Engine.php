@@ -1123,7 +1123,7 @@ class Engine implements EngineInterface
         $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
-        $this->getComponentFilterManager()->neverExclude(true);
+        $this->getComponentFilterManager()->setNeverExclude(true);
         foreach ($module_fullpaths as $module_path) {
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
@@ -1377,7 +1377,7 @@ class Engine implements EngineInterface
         }
 
         // Reset the filtermanager state and the pathmanager current path
-        $this->getComponentFilterManager()->neverExclude(false);
+        $this->getComponentFilterManager()->setNeverExclude(false);
         $this->getModulePathManager()->setPropagationCurrentPath();
 
         $ret = [];
