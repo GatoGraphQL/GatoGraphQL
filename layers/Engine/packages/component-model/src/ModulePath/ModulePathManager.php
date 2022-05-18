@@ -24,14 +24,14 @@ class ModulePathManager implements ModulePathManagerInterface
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $module, array &$props): void
+    public function prepareForPropagation(array $componentVariation, array &$props): void
     {
         // Add the module to the path
         // Prepare for the submodule, going one level down, and adding it to the current path
-        // We add $module instead of the first element from $this->propagation_unsettled_paths, so that calculating $this->propagation_current_path works also when not doing ?modulepaths=...
-        $this->propagation_current_path[] = $module;
+        // We add $componentVariation instead of the first element from $this->propagation_unsettled_paths, so that calculating $this->propagation_current_path works also when not doing ?modulepaths=...
+        $this->propagation_current_path[] = $componentVariation;
     }
-    public function restoreFromPropagation(array $module, array &$props): void
+    public function restoreFromPropagation(array $componentVariation, array &$props): void
     {
         // Remove the module to the path
         array_pop($this->propagation_current_path);
