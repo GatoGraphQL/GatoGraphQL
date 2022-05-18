@@ -45,18 +45,18 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_NAME => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_NAME],
             self::MODULE_FILTERINPUT_EMAILS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_NAME:
             case self::MODULE_FILTERINPUT_EMAILS:
             // Add a nice name, so that the URL params when filtering make sense
@@ -64,32 +64,32 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
                     self::MODULE_FILTERINPUT_NAME => 'nombre',
                     self::MODULE_FILTERINPUT_EMAILS => 'emails',
                 );
-                return $names[$module[1]];
+                return $names[$componentVariation[1]];
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_NAME => $this->getStringScalarTypeResolver(),
             self::MODULE_FILTERINPUT_EMAILS => $this->getEmailScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $componentVariation): int
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_EMAILS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_NAME => $this->__('Search users whose name contains this string', 'pop-users'),
             self::MODULE_FILTERINPUT_EMAILS => $this->__('Search users with any of the provided emails', 'pop-users'),
             default => null,

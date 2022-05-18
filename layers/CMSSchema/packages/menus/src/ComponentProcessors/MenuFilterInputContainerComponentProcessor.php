@@ -22,7 +22,7 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         $menuFilterInputModules = [
             ...$this->getIDFilterInputModules(),
@@ -30,7 +30,7 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_MENUS => [
                 ...$menuFilterInputModules,
                 ...$paginationFilterInputModules,

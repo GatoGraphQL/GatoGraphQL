@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 interface FormattableModuleInterface
 {
-    public function getFormat(array $module): ?string;
+    public function getFormat(array $componentVariation): ?string;
 }

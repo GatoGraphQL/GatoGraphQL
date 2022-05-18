@@ -25,9 +25,9 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
-        return match ((string)$module[1]) {
+        return match ((string)$componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS => [
                 [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
             ],
@@ -39,10 +39,10 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         };
     }
 
-    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
     {
-        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
-        switch ($module[1]) {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($componentVariation, $fieldArgName);
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,

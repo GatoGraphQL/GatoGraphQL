@@ -51,31 +51,31 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
         );
     }
 
-    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return $this->getGenericCustomPostObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($componentVariation);
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
                 return [
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
@@ -98,6 +98,6 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
                 ];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 }

@@ -12,12 +12,12 @@ use PoP\SiteBuilderAPI\Helpers\APIUtils;
 
 trait AddAPIQueryToSourcesComponentProcessorTrait
 {
-    public function addAPIQueryToSources(array $sources, array $module, array &$props): array
+    public function addAPIQueryToSources(array $sources, array $componentVariation, array &$props): array
     {
         if (!$sources) {
             return [];
         }
-        $flattened_datafields = $this->getDatasetmoduletreeSectionFlattenedDataFields($module, $props);
+        $flattened_datafields = $this->getDatasetmoduletreeSectionFlattenedDataFields($componentVariation, $props);
         $apiFields = [];
         $heap = [
             '' => [&$flattened_datafields],

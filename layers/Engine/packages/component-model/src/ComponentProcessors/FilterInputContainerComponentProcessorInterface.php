@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 interface FilterInputContainerComponentProcessorInterface extends FilterDataComponentProcessorInterface
 {
-    public function getFieldFilterInputNameTypeResolvers(array $module): array;
-    public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string;
-    public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed;
-    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int;
-    public function getFilterInputModules(array $module): array;
+    public function getFieldFilterInputNameTypeResolvers(array $componentVariation): array;
+    public function getFieldFilterInputDescription(array $componentVariation, string $fieldArgName): ?string;
+    public function getFieldFilterInputDefaultValue(array $componentVariation, string $fieldArgName): mixed;
+    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int;
+    public function getFilterInputModules(array $componentVariation): array;
 }

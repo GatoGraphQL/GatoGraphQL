@@ -35,36 +35,36 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_USER_ROLES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USER_ROLES],
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_USER_ROLES],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => 'roles',
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => 'excludeRoles',
-            default => parent::getName($module),
+            default => parent::getName($componentVariation),
         };
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $componentVariation): int
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES,
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -73,9 +73,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
             default => null,

@@ -34,7 +34,7 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         $customPostFilterInputModules = [
             ...$this->getIDFilterInputModules(),
@@ -47,7 +47,7 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST => [
                 ...$customPostFilterInputModules,
                 ...$unionCustomPostFilterInputModules,

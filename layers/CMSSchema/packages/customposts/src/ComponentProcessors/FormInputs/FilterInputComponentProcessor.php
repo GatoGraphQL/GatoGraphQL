@@ -47,28 +47,28 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTSTATUS],
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
             case self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES:
                 return FormMultipleInput::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
             case self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES:
                 // Add a nice name, so that the URL params when filtering make sense
@@ -76,24 +76,24 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
                     self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => 'status',
                     self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => 'customPostTypes',
                 );
-                return $names[$module[1]];
+                return $names[$componentVariation[1]];
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getFilterCustomPostStatusEnumTypeResolver(),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $componentVariation): int
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -102,9 +102,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $componentVariation): mixed
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
                 CustomPostStatus::PUBLISH,
             ],
@@ -113,9 +113,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->__('Custom Post Status', 'customposts'),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->__('Return results from Union of the Custom Post Types', 'customposts'),
             default => null,

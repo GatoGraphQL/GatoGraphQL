@@ -19,27 +19,27 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
-    public function getImmutableSettingsModuletree(array $module, array &$props): array
+    public function getImmutableSettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getImmutableSettings', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndPropagateToModules('getImmutableSettings', __FUNCTION__, $componentVariation, $props);
     }
 
-    public function getImmutableSettings(array $module, array &$props): array
+    public function getImmutableSettings(array $componentVariation, array &$props): array
     {
         $ret = array();
 
-        if ($configuration = $this->getImmutableConfiguration($module, $props)) {
+        if ($configuration = $this->getImmutableConfiguration($componentVariation, $props)) {
             $ret['configuration'] = $configuration;
         }
 
-        if ($database_keys = $this->getDatabaseKeys($module, $props)) {
+        if ($database_keys = $this->getDatabaseKeys($componentVariation, $props)) {
             $ret['dbkeys'] = $database_keys;
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         return array();
     }
@@ -48,23 +48,23 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // New PUBLIC Functions: Model Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonmodelSettingsModuletree(array $module, array &$props): array
+    public function getMutableonmodelSettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonmodelSettings', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndPropagateToModules('getMutableonmodelSettings', __FUNCTION__, $componentVariation, $props);
     }
 
-    public function getMutableonmodelSettings(array $module, array &$props): array
+    public function getMutableonmodelSettings(array $componentVariation, array &$props): array
     {
         $ret = array();
 
-        if ($configuration = $this->getMutableonmodelConfiguration($module, $props)) {
+        if ($configuration = $this->getMutableonmodelConfiguration($componentVariation, $props)) {
             $ret['configuration'] = $configuration;
         }
 
         return $ret;
     }
 
-    public function getMutableonmodelConfiguration(array $module, array &$props): array
+    public function getMutableonmodelConfiguration(array $componentVariation, array &$props): array
     {
         return array();
     }
@@ -73,23 +73,23 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // New PUBLIC Functions: Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonrequestSettingsModuletree(array $module, array &$props): array
+    public function getMutableonrequestSettingsModuletree(array $componentVariation, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToModules('getMutableonrequestSettings', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndPropagateToModules('getMutableonrequestSettings', __FUNCTION__, $componentVariation, $props);
     }
 
-    public function getMutableonrequestSettings(array $module, array &$props): array
+    public function getMutableonrequestSettings(array $componentVariation, array &$props): array
     {
         $ret = array();
 
-        if ($configuration = $this->getMutableonrequestConfiguration($module, $props)) {
+        if ($configuration = $this->getMutableonrequestConfiguration($componentVariation, $props)) {
             $ret['configuration'] = $configuration;
         }
 
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
     {
         return array();
     }
@@ -98,12 +98,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // Others
     //-------------------------------------------------
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
         return null;
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $componentVariation, array &$props): string
     {
         return DataLoading::DATA_ACCESS_CHECKPOINTS;
     }
@@ -117,42 +117,42 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         );
     }
 
-    public function getDataAccessCheckpoints(array $module, array &$props): array
+    public function getDataAccessCheckpoints(array $componentVariation, array &$props): array
     {
-        if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
+        if ($route = $this->getRelevantRoute($componentVariation, $props)) {
+            if ($this->getRelevantRouteCheckpointTarget($componentVariation, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
                 return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
             }
         }
 
-        return parent::getDataAccessCheckpoints($module, $props);
+        return parent::getDataAccessCheckpoints($componentVariation, $props);
     }
 
-    public function getActionExecutionCheckpoints(array $module, array &$props): array
+    public function getActionExecutionCheckpoints(array $componentVariation, array &$props): array
     {
-        if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
+        if ($route = $this->getRelevantRoute($componentVariation, $props)) {
+            if ($this->getRelevantRouteCheckpointTarget($componentVariation, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
                 return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
             }
         }
 
-        return parent::getActionExecutionCheckpoints($module, $props);
+        return parent::getActionExecutionCheckpoints($componentVariation, $props);
     }
 
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $module, array &$props): array
+    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($module, $props);
+        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($componentVariation, $props);
 
-        if ($dataload_source = $this->getDataloadSource($module, $props)) {
+        if ($dataload_source = $this->getDataloadSource($componentVariation, $props)) {
             $ret[DataloadingConstants::SOURCE] = $dataload_source;
         }
 
         return $ret;
     }
 
-    public function getDatasetmeta(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
-        $ret = parent::getDatasetmeta($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+        $ret = parent::getDatasetmeta($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
         if ($dataload_source = $data_properties[DataloadingConstants::SOURCE] ?? null) {
             $ret['dataloadsource'] = $dataload_source;
@@ -161,7 +161,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getDataloadSource(array $module, array &$props): ?string
+    public function getDataloadSource(array $componentVariation, array &$props): ?string
     {
         if (!App::isHTTPRequest()) {
             return null;
@@ -169,7 +169,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
-        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
+        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($componentVariation);
         $ret = GeneralUtils::addQueryArgs(
             [
                 Params::MODULEFILTER => $this->getModulePaths()->getName(),
@@ -186,7 +186,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         }
 
         // Allow to add extra modulepaths set from above
-        if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
+        if ($extra_module_paths = $this->getProp($componentVariation, $props, 'dataload-source-add-modulepaths')) {
             foreach ($extra_module_paths as $modulepath) {
                 $ret = GeneralUtils::addQueryArgs([
                     Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
@@ -195,7 +195,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         }
 
         // Add the actionpath too
-        if ($this->getComponentMutationResolverBridge($module) !== null) {
+        if ($this->getComponentMutationResolverBridge($componentVariation) !== null) {
             $ret = GeneralUtils::addQueryArgs([
                 Params::ACTION_PATH => $stringified_module_propagation_current_path,
             ], $ret);
@@ -210,7 +210,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
         // Add the format to the query url
         if ($this instanceof FormattableModuleInterface) {
-            if ($format = $this->getFormat($module)) {
+            if ($format = $this->getFormat($componentVariation)) {
                 $ret = GeneralUtils::addQueryArgs([
                     Params::FORMAT => $format,
                 ], $ret);

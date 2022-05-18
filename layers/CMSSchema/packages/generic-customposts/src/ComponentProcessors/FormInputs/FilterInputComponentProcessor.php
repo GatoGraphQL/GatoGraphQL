@@ -34,63 +34,63 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GENERICCUSTOMPOSTTYPES],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
                 return FormMultipleInput::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
                 $names = array(
                     self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => 'customPostTypes',
                 );
-                return $names[$module[1]];
+                return $names[$componentVariation[1]];
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostEnumTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $componentVariation): int
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $componentVariation): mixed
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => null,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->__('Return results from Custom Post Types', 'customposts'),
             default => null,
         };

@@ -11,22 +11,22 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    final public function getSubmodules(array $module): array
+    final public function getSubmodules(array $componentVariation): array
     {
-        $filterInputModules = $this->getFilterInputModules($module);
+        $filterInputModules = $this->getFilterInputModules($componentVariation);
 
         // Enable extensions to add more FilterInputs
         foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
             $filterInputModules = App::applyFilters(
                 $filterInputHookName,
                 $filterInputModules,
-                $module
+                $componentVariation
             );
         }
 
         // Add the filterInputs to whatever came from the parent (if anything)
         return array_merge(
-            parent::getSubmodules($module),
+            parent::getSubmodules($componentVariation),
             $filterInputModules
         );
     }
@@ -41,56 +41,56 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         ];
     }
 
-    public function getFieldFilterInputNameTypeResolvers(array $module): array
+    public function getFieldFilterInputNameTypeResolvers(array $componentVariation): array
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
         $schemaFieldArgNameTypeResolvers = [];
-        foreach ($filterQueryArgsModules as $module) {
+        foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
-            $schemaFieldArgNameTypeResolvers[$filterInputName] = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeResolver($module);
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($componentVariation);
+            $schemaFieldArgNameTypeResolvers[$filterInputName] = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeResolver($componentVariation);
         }
         return $schemaFieldArgNameTypeResolvers;
     }
 
-    public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string
+    public function getFieldFilterInputDescription(array $componentVariation, string $fieldArgName): ?string
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
-        foreach ($filterQueryArgsModules as $module) {
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($componentVariation);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputDescription($module);
+                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputDescription($componentVariation);
             }
         }
         return null;
     }
 
-    public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(array $componentVariation, string $fieldArgName): mixed
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
-        foreach ($filterQueryArgsModules as $module) {
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($componentVariation);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputDefaultValue($module);
+                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputDefaultValue($componentVariation);
             }
         }
         return null;
     }
 
-    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
     {
-        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
-        foreach ($filterQueryArgsModules as $module) {
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($componentVariation);
+        foreach ($filterQueryArgsModules as $componentVariation) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($componentVariation);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeModifiers($module);
+                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeModifiers($componentVariation);
             }
         }
         return SchemaTypeModifiers::NONE;

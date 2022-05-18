@@ -38,35 +38,35 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         );
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);
+                return $this->getQueriedDBObjectID($componentVariation, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($componentVariation);
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
                 return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 }

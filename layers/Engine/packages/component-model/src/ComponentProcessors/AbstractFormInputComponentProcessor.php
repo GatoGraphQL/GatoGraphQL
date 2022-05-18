@@ -16,35 +16,35 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
 
     // This function CANNOT have $props, since multiple can change the value of the input (eg: from Select to MultiSelect => from '' to array())
     // Yet we do not always go through initModelProps to initialize it, then changing the multiple in the form through $props, and trying to retrieve the value in an actionexecuter will fail
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $componentVariation): bool
     {
         return false;
     }
 
-    public function getInputName(array $module): string
+    public function getInputName(array $componentVariation): string
     {
-        $name = $this->getName($module);
-        return $name . ($this->isMultiple($module) ? '[]' : '');
+        $name = $this->getName($componentVariation);
+        return $name . ($this->isMultiple($componentVariation) ? '[]' : '');
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        if ($this->isMultiple($module)) {
+        if ($this->isMultiple($componentVariation)) {
             return FormMultipleInput::class;
         }
 
         return FormInput::class;
     }
 
-    final public function getInput(array $module): FormInput
+    final public function getInput(array $componentVariation): FormInput
     {
-        $inputName = $this->getName($module);
+        $inputName = $this->getName($componentVariation);
         if (!isset($this->formInputs[$inputName])) {
-            $inputClass = $this->getInputClass($module);
+            $inputClass = $this->getInputClass($componentVariation);
             $this->formInputs[$inputName] = new $inputClass(
                 $inputName,
-                $this->getInputSelectedValue($module),
-                $this->getInputOptions($module)
+                $this->getInputSelectedValue($componentVariation),
+                $this->getInputOptions($componentVariation)
             );
         }
         return $this->formInputs[$inputName];
@@ -53,42 +53,42 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
     // This function CANNOT have $props, since we do not always go through initModelProps to set the name of the input
     // Eg: we change the input name through $props 'name' when displaying the form, however in the actionexecuter, it doesn't
     // load that same module (it just accesses directly its value), then it fails retrieving the value since it tries get it from a different field name
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        return $this->getModuleHelpers()->getModuleOutputName($module);
+        return $this->getModuleHelpers()->getModuleOutputName($componentVariation);
     }
 
-    public function getValue(array $module, ?array $source = null): mixed
+    public function getValue(array $componentVariation, ?array $source = null): mixed
     {
-        return $this->getInput($module)->getValue($source);
+        return $this->getInput($componentVariation)->getValue($source);
     }
 
-    public function isInputSetInSource(array $module, ?array $source = null): mixed
+    public function isInputSetInSource(array $componentVariation, ?array $source = null): mixed
     {
-        return $this->getInput($module)->isInputSetInSource($source);
+        return $this->getInput($componentVariation)->isInputSetInSource($source);
     }
 
-    public function getInputDefaultValue(array $module, array &$props): mixed
+    public function getInputDefaultValue(array $componentVariation, array &$props): mixed
     {
         return null;
     }
 
-    public function getDefaultValue(array $module, array &$props): mixed
+    public function getDefaultValue(array $componentVariation, array &$props): mixed
     {
-        $value = $this->getProp($module, $props, 'default-value');
+        $value = $this->getProp($componentVariation, $props, 'default-value');
         if (!is_null($value)) {
             return $value;
         }
 
-        return $this->getInputDefaultValue($module, $props);
+        return $this->getInputDefaultValue($componentVariation, $props);
     }
 
-    public function getInputSelectedValue(array $module): mixed
+    public function getInputSelectedValue(array $componentVariation): mixed
     {
         return null;
     }
 
-    public function getInputOptions(array $module): array
+    public function getInputOptions(array $componentVariation): array
     {
         return [];
     }

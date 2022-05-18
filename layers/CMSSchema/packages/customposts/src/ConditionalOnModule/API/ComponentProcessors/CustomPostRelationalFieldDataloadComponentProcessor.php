@@ -61,19 +61,19 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
         );
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);
+                return $this->getQueriedDBObjectID($componentVariation, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
@@ -82,12 +82,12 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
                 return $this->getCustomPostUnionTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
@@ -95,12 +95,12 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
                 return $this->getListQueryInputOutputHandler();
         }
 
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($componentVariation);
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
@@ -143,6 +143,6 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
                 ];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 }

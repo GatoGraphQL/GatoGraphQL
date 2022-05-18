@@ -44,7 +44,7 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         $responseFilterInputModules = [
             ...$this->getIDFilterInputModules(),
@@ -68,7 +68,7 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
-        return match ((string)$module[1]) {
+        return match ((string)$componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,

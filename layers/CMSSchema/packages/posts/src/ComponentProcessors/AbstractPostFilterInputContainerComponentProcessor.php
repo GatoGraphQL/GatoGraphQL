@@ -27,7 +27,7 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         $postFilterInputModules = [
             ...$this->getIDFilterInputModules(),
@@ -37,7 +37,7 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputModules,
                 ...$paginationFilterInputModules,

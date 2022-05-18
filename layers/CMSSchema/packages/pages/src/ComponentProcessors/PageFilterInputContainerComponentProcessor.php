@@ -26,10 +26,10 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         // Get the original config from above
-        $targetModule = match ($module[1]) {
+        $targetModule = match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_PAGELISTLIST => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST],
             self::MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT],
             self::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST],

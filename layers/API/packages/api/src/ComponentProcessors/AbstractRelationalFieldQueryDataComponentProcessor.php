@@ -149,13 +149,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
 
-        $moduleAtts = $module[2] ?? null;
+        $moduleAtts = $componentVariation[2] ?? null;
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
 
         if ($this->ignoreConditionalFields($moduleAtts)) {
@@ -204,13 +204,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubmodules(array $componentVariation): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
 
-        $moduleAtts = $module[2] ?? null;
+        $moduleAtts = $componentVariation[2] ?? null;
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
 
         if ($this->ignoreConditionalFields($moduleAtts)) {
@@ -258,8 +258,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $nestedFields
             );
             $nestedModule = [
-                $module[0],
-                $module[1],
+                $componentVariation[0],
+                $componentVariation[1],
                 [
                     self::MODULE_ATTS_FIELD_IDS => $nestedFieldIDs,
                 ]
@@ -306,13 +306,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalOnDataFieldSubmodules(array $module): array
+    public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
 
-        $moduleAtts = $module[2] ?? null;
+        $moduleAtts = $componentVariation[2] ?? null;
         if (!$this->ignoreConditionalFields($moduleAtts)) {
             return [];
         }
@@ -355,8 +355,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $fragmentModelListFields,
             );
             $fragmentModelListNestedModule = [
-                $module[0],
-                $module[1],
+                $componentVariation[0],
+                $componentVariation[1],
                 [
                     self::MODULE_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
                     self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
@@ -417,9 +417,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalLeafModuleField[]
     //  */
-    // public function getConditionalOnDataFieldSubmodules(array $module): array
+    // public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
     // {
-    //     $moduleAtts = $module[2] ?? null;
+    //     $moduleAtts = $componentVariation[2] ?? null;
     //     if (!$this->ignoreConditionalFields($moduleAtts)) {
     //         return [];
     //     }
@@ -439,8 +439,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $field = $fieldFragmentModelsTuple->getField();
     //         $location = $field->getLocation();
     //         $nestedModule = [
-    //             $module[0],
-    //             $module[1],
+    //             $componentVariation[0],
+    //             $componentVariation[1],
     //             [
     //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
     //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
@@ -479,9 +479,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalRelationalModuleField[]
     //  */
-    // public function getConditionalOnDataFieldRelationalSubmodules(array $module): array
+    // public function getConditionalOnDataFieldRelationalSubmodules(array $componentVariation): array
     // {
-    //     $moduleAtts = $module[2] ?? null;
+    //     $moduleAtts = $componentVariation[2] ?? null;
     //     if (!$this->ignoreConditionalFields($moduleAtts)) {
     //         return [];
     //     }
@@ -502,8 +502,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $relationalField = $fieldFragmentModelsTuple->getField();
     //         $location = $relationalField->getLocation();
     //         $nestedModule = [
-    //             $module[0],
-    //             $module[1],
+    //             $componentVariation[0],
+    //             $componentVariation[1],
     //             [
     //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
     //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,

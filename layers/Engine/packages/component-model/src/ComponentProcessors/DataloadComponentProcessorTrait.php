@@ -10,15 +10,15 @@ trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 
-    public function getSubmodules(array $module): array
+    public function getSubmodules(array $componentVariation): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubmodules($componentVariation);
 
-        if ($filter_module = $this->getFilterSubmodule($module)) {
+        if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
             $ret[] = $filter_module;
         }
 
-        if ($inners = $this->getInnerSubmodules($module)) {
+        if ($inners = $this->getInnerSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -28,17 +28,17 @@ trait DataloadComponentProcessorTrait
         return $ret;
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
         return array();
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
         return null;
     }
 
-    public function metaInitProps(array $module, array &$props)
+    public function metaInitProps(array $componentVariation, array &$props)
     {
         /**
          * Allow to add more stuff
@@ -46,18 +46,18 @@ trait DataloadComponentProcessorTrait
         App::doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
-            $module,
+            $componentVariation,
             $this
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->metaInitProps($module, $props);
-        parent::initModelProps($module, $props);
+        $this->metaInitProps($componentVariation, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function startDataloadingSection(array $module): bool
+    public function startDataloadingSection(array $componentVariation): bool
     {
         return true;
     }

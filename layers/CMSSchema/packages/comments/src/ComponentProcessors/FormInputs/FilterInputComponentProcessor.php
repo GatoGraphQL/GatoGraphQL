@@ -64,7 +64,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOST_IDS],
@@ -73,12 +73,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             self::MODULE_FILTERINPUT_COMMENT_TYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_COMMENT_TYPES],
             self::MODULE_FILTERINPUT_COMMENT_STATUS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_COMMENT_STATUS],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOST_IDS:
             case self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS:
             case self::MODULE_FILTERINPUT_COMMENT_TYPES:
@@ -86,25 +86,25 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
                 return FormMultipleInput::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => 'customPostIDs',
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => 'customPostID',
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => 'excludeCustomPostIDs',
             self::MODULE_FILTERINPUT_COMMENT_TYPES => 'types',
             self::MODULE_FILTERINPUT_COMMENT_STATUS => 'status',
-            default => parent::getName($module),
+            default => parent::getName($componentVariation),
         };
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
@@ -114,9 +114,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $componentVariation): int
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_COMMENT_TYPES,
@@ -127,9 +127,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $componentVariation): mixed
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_COMMENT_TYPES => [
                 CommentTypes::COMMENT,
             ],
@@ -140,9 +140,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->__('Limit results to elements with the given custom post IDs', 'comments'),
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->__('Limit results to elements with the given custom post ID', 'comments'),
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->__('Exclude elements with the given custom post IDs', 'comments'),

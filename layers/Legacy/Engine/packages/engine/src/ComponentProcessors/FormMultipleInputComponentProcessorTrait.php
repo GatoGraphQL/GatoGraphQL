@@ -11,19 +11,19 @@ trait FormMultipleInputComponentProcessorTrait
     /**
      * @return string[]
      */
-    public function getInputSubnames(array $module): array
+    public function getInputSubnames(array $componentVariation): array
     {
         return [];
     }
 
-    public function getInputOptions(array $module): array
+    public function getInputOptions(array $componentVariation): array
     {
-        $options = parent::getInputOptions($module);
-        $options['subnames'] = $this->getInputSubnames($module);
+        $options = parent::getInputOptions($componentVariation);
+        $options['subnames'] = $this->getInputSubnames($componentVariation);
         return $options;
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
         return MultipleInputFormInput::class;
     }

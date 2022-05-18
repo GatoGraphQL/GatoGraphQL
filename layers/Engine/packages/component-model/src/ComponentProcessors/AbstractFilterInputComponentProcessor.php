@@ -21,16 +21,16 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    protected function getFilterInputSchemaDefinitionResolver(array $module): FilterInputComponentProcessorInterface
+    protected function getFilterInputSchemaDefinitionResolver(array $componentVariation): FilterInputComponentProcessorInterface
     {
         return $this;
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($componentVariation);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getFilterInputTypeResolver($module);
+            return $filterSchemaDefinitionResolver->getFilterInputTypeResolver($componentVariation);
         }
         return $this->getDefaultSchemaFilterInputTypeResolver();
     }
@@ -40,29 +40,29 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return $this->getSchemaDefinitionService()->getDefaultInputTypeResolver();
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
-        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($componentVariation);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getFilterInputDescription($module);
+            return $filterSchemaDefinitionResolver->getFilterInputDescription($componentVariation);
         }
         return null;
     }
 
-    public function getFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $componentVariation): mixed
     {
-        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($componentVariation);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getFilterInputDefaultValue($module);
+            return $filterSchemaDefinitionResolver->getFilterInputDefaultValue($componentVariation);
         }
         return null;
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $componentVariation): int
     {
-        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($componentVariation);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getFilterInputTypeModifiers($module);
+            return $filterSchemaDefinitionResolver->getFilterInputTypeModifiers($componentVariation);
         }
         return SchemaTypeModifiers::NONE;
     }

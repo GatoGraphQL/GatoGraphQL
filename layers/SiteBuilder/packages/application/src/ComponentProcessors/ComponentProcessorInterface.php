@@ -8,9 +8,9 @@ use PoP\ConfigurationComponentModel\ComponentProcessors\ComponentProcessorInterf
 
 interface ComponentProcessorInterface extends UpstreamComponentProcessorInterface
 {
-    public function getDataloadMultidomainSources(array $module, array &$props): array;
-    public function getDataloadMultidomainQuerySources(array $module, array &$props): array;
-    public function queriesExternalDomain(array $module, array &$props): bool;
-    public function isMultidomain(array $module, array &$props): bool;
-    public function isLazyload(array $module, array &$props): bool;
+    public function getDataloadMultidomainSources(array $componentVariation, array &$props): array;
+    public function getDataloadMultidomainQuerySources(array $componentVariation, array &$props): array;
+    public function queriesExternalDomain(array $componentVariation, array &$props): bool;
+    public function isMultidomain(array $componentVariation, array &$props): bool;
+    public function isLazyload(array $componentVariation, array &$props): bool;
 }

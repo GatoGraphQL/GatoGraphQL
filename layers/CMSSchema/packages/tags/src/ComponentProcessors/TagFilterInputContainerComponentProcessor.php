@@ -22,7 +22,7 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         $tagFilterInputModules = [
             ...$this->getIDFilterInputModules(),
@@ -30,7 +30,7 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_TAGS => [
                 ...$tagFilterInputModules,
                 ...$paginationFilterInputModules,

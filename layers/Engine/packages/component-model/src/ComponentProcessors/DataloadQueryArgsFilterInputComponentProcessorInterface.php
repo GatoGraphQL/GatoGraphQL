@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 interface DataloadQueryArgsFilterInputComponentProcessorInterface extends FilterInputComponentProcessorInterface
 {
-    public function getFilterInput(array $module): ?array;
+    public function getFilterInput(array $componentVariation): ?array;
 }

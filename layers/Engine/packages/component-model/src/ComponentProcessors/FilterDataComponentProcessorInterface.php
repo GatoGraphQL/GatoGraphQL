@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 interface FilterDataComponentProcessorInterface
 {
-    public function getDataloadQueryArgsFilteringModules(array $module): array;
-    public function getActiveDataloadQueryArgsFilteringModules(array $module, array $source = null): array;
-    public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null): void;
+    public function getDataloadQueryArgsFilteringModules(array $componentVariation): array;
+    public function getActiveDataloadQueryArgsFilteringModules(array $componentVariation, array $source = null): array;
+    public function filterHeadmoduleDataloadQueryArgs(array $componentVariation, array &$query, array $source = null): void;
 }

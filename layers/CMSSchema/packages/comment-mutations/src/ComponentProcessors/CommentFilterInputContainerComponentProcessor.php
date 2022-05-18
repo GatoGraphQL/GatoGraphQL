@@ -21,15 +21,15 @@ class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilte
         );
     }
 
-    public function getFilterInputModules(array $module): array
+    public function getFilterInputModules(array $componentVariation): array
     {
         // Get the original config from above
-        $targetModule = match ($module[1]) {
+        $targetModule = match ($componentVariation[1]) {
             self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTS => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
             self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
             default => null,
         };
-        return parent::getFilterInputModules($targetModule ?? $module);
+        return parent::getFilterInputModules($targetModule ?? $componentVariation);
     }
 
     /**
