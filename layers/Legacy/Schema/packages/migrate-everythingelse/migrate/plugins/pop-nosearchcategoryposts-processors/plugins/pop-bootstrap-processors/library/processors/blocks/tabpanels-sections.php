@@ -23,7 +23,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
     public final const MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'block-nosearchcategoryposts18-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'block-nosearchcategoryposts19-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00],

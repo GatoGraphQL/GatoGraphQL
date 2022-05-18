@@ -4,7 +4,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_
 {
     public final const MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE = 'vertical-sidebarinner-single-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE],

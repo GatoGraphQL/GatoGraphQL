@@ -6,7 +6,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
     public final const MODULE_EM_WIDGET_POSTLOCATIONSMAP = 'em-widget-postlocationsmap';
     public final const MODULE_EM_WIDGET_USERLOCATIONSMAP = 'em-widget-userlocationsmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_WIDGET_POSTLOCATIONSMAP],

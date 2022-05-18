@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_ProfileFormInners extends PoP_Module_Processor_For
     public final const MODULE_FORMINNER_EDITMEMBERSHIP = 'forminner-editmembership';
     public final const MODULE_FORMINNER_MYCOMMUNITIES_UPDATE = 'forminner-mycommunities-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_EDITMEMBERSHIP],

@@ -4,7 +4,7 @@ class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCo
 {
     public final const MODULE_CODE_DOMAINSTYLES = 'code-domainstyles';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_DOMAINSTYLES],

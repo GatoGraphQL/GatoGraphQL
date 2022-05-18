@@ -6,7 +6,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilters extends PoP_Module_Proces
     public final const MODULE_FILTER_TAGLOCATIONPOSTS = 'filter-taglocationposts';
     public final const MODULE_FILTER_LOCATIONPOSTS = 'filter-locationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_LOCATIONPOSTS],

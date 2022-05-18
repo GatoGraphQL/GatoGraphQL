@@ -5,7 +5,7 @@ class Wassup_URE_AAL_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Pr
 {
     public final const MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS = 'ure-aal-layoutuser-membertags-desc';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS],

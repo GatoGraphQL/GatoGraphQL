@@ -12,7 +12,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'block-automatedemails-latestcontent-scroll-thumbnail';
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'block-automatedemails-latestcontent-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],

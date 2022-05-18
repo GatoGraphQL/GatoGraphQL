@@ -6,7 +6,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
     public final const MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent-locationsmap';
     public final const MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP = 'formcomponent-singlelocationlocationsmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP],

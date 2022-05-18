@@ -6,7 +6,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 {
     public final const MODULE_MULTIPLE_LATESTNOTIFICATIONS = 'multiple-notifications-latestnotifications';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_LATESTNOTIFICATIONS],

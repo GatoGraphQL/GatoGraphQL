@@ -13,7 +13,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
     public final const MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myevents-scroll-fullviewpreview';
     public final const MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-mypastevents-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT],

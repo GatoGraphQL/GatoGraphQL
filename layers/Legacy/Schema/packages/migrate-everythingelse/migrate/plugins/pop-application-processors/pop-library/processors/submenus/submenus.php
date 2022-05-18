@@ -12,7 +12,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public final const MODULE_SUBMENU_TAG = 'submenu-tag';
     public final const MODULE_SUBMENU_SINGLE = 'submenu-single';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBMENU_AUTHOR],

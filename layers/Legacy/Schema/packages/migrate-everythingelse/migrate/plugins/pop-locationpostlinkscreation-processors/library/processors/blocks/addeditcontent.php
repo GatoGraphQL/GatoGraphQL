@@ -5,7 +5,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
     public final const MODULE_BLOCK_LOCATIONPOSTLINK_UPDATE = 'block-locationpostlink-update';
     public final const MODULE_BLOCK_LOCATIONPOSTLINK_CREATE = 'block-locationpostlink-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_LOCATIONPOSTLINK_UPDATE],

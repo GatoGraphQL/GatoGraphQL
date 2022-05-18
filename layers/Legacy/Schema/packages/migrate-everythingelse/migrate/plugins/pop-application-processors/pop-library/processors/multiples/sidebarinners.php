@@ -23,7 +23,7 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
     public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-authorsectioninner-categoryposts-sidebar';
     public final const MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR = 'multiple-homesectioninner-content-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],

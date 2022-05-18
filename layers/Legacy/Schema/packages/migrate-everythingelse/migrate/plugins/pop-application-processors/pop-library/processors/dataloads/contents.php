@@ -17,7 +17,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     public final const MODULE_DATALOAD_SINGLEINTERACTION_CONTENT = 'dataload-singleinteraction-content';
     public final const MODULE_DATALOAD_PAGE_CONTENT = 'dataload-page-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTHOR_CONTENT],

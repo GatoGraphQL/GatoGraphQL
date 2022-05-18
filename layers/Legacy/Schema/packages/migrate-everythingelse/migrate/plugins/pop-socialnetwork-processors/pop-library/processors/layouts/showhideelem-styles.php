@@ -23,7 +23,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
     public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES = 'layout-undodownvoteposts-show-styles';
     public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES = 'layout-undodownvoteposts-hide-styles';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES],

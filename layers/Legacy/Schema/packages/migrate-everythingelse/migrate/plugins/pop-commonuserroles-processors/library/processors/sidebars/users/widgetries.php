@@ -6,7 +6,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     public final const MODULE_WIDGETCOMPACT_ORGANIZATIONINFO = 'widgetcompact-organization-info';
     public final const MODULE_WIDGETCOMPACT_INDIVIDUALINFO = 'widgetcompact-individual-info';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO],

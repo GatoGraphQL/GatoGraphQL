@@ -4,7 +4,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
 {
     public final const MODULE_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_MYUSERS],

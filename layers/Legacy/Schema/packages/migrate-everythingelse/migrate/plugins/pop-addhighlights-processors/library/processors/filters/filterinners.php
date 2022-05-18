@@ -6,7 +6,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
     public final const MODULE_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS = 'filterinputcontainer-authorhighlights';
     public final const MODULE_FILTERINPUTCONTAINER_MYHIGHLIGHTS = 'filterinputcontainer-myhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_HIGHLIGHTS],

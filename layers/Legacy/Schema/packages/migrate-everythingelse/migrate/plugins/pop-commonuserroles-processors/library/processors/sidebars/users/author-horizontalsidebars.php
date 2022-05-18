@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebars extends PoP_Module_
     public final const MODULE_HORIZONTALSIDEBAR_AUTHOR_ORGANIZATION = 'horizontal-sidebar-author-organization';
     public final const MODULE_HORIZONTALSIDEBAR_AUTHOR_INDIVIDUAL = 'horizontal-sidebar-author-individual';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_HORIZONTALSIDEBAR_AUTHOR_ORGANIZATION],

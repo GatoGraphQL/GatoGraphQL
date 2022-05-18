@@ -24,7 +24,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     public final const MODULE_EXAMPLE_PAGE = 'example-page';
     public final const MODULE_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EXAMPLE_LATESTPOSTS],

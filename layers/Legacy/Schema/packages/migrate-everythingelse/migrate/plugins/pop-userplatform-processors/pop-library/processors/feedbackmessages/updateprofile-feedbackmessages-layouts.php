@@ -5,7 +5,7 @@ class PoP_Module_Processor_UpdateProfileFeedbackMessageLayouts extends PoP_Modul
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEPROFILE = 'layout-feedbackmessage-updateprofile';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEPROFILE],

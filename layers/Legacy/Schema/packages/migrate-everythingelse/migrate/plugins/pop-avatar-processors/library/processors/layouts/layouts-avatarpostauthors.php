@@ -8,7 +8,7 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
     public final const MODULE_LAYOUTPOST_AUTHORAVATAR82 = 'layoutpost-authoravatar82';
     public final const MODULE_LAYOUTPOST_AUTHORAVATAR120 = 'layoutpost-authoravatar120';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR],

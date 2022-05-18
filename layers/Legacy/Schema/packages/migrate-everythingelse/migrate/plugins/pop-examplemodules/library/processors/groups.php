@@ -9,7 +9,7 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
     public final const MODULE_EXAMPLE_AUTHOR = 'example-author';
     public final const MODULE_EXAMPLE_TAG = 'example-tag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EXAMPLE_HOME],

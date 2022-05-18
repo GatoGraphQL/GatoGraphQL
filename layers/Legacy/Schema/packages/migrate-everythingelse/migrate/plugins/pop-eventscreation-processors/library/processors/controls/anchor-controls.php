@@ -8,7 +8,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public final const MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS = 'custombuttoncontrol-mypastevents';
     public final const MODULE_CUSTOMANCHORCONTROL_ADDEVENT = 'custombuttoncontrol-addevent';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS],

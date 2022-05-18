@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
     public final const MODULE_URE_WIDGETWRAPPER_COMMUNITIES = 'ure-widgetwrapper-communities';
     public final const MODULE_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES = 'ure-widgetcompactwrapper-communities';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_WIDGETWRAPPER_COMMUNITIES],

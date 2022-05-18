@@ -10,7 +10,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
     public final const MODULE_DATALOAD_CREATELOCATION = 'dataload-createlocation';
     public final const MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION = 'dataload-triggertypeaheadselect-location';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_CREATELOCATION],

@@ -6,7 +6,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_
     public final const MODULE_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW = 'block-mylinks-scroll-simpleviewpreview';
     public final const MODULE_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW = 'block-mylinks-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYLINKS_TABLE_EDIT],

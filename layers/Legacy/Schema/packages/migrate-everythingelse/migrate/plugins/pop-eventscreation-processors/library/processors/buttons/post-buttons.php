@@ -5,7 +5,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
 {
     public final const MODULE_BUTTON_EVENT_CREATE = 'postbutton-event-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_EVENT_CREATE],

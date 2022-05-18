@@ -5,7 +5,7 @@ class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Proces
 {
     public final const MODULE_AAL_CONTROLGROUP_NOTIFICATIONLIST = 'controlgroup-notificationlist';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_AAL_CONTROLGROUP_NOTIFICATIONLIST],

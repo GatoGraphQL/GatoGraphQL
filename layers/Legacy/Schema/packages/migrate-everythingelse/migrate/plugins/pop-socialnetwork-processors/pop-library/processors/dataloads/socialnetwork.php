@@ -14,7 +14,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     public final const MODULE_DATALOAD_UPVOTESPOSTS = 'dataload-upvotesposts';
     public final const MODULE_DATALOAD_DOWNVOTESPOSTS = 'dataload-downvotesposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_FOLLOWSUSERS],

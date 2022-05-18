@@ -6,7 +6,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     public final const MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER = 'forminputgroup-daterangetimepicker';
     public final const MODULE_FILTERINPUTGROUP_POSTDATES = 'filterinputgroup-date';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER],

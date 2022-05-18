@@ -5,7 +5,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
     public final const MODULE_TABPANEL_COMMUNITIES = 'tabpanel-communities';
     public final const MODULE_TABPANEL_MYMEMBERS = 'tabpanel-mymembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_COMMUNITIES],

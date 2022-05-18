@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_FunctionsContents extends PoP_Module_Processor_Con
     public final const MODULE_CONTENT_MARKNOTIFICATIONASREAD = 'content-marknotificationasread';
     public final const MODULE_CONTENT_MARKNOTIFICATIONASUNREAD = 'content-marknotificationasunread';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENT_MARKNOTIFICATIONASREAD],

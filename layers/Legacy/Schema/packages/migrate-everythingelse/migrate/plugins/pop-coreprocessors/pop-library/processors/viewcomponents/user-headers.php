@@ -5,7 +5,7 @@ class PoP_Module_Processor_UserViewComponentHeaders extends PoP_Module_Processor
     public final const MODULE_VIEWCOMPONENT_HEADER_USER = 'viewcomponent-header-user';
     public final const MODULE_VIEWCOMPONENT_HEADER_USER_URL = 'viewcomponent-header-user-url';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_HEADER_USER],

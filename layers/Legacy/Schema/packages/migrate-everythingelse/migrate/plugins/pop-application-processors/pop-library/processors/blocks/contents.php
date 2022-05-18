@@ -12,7 +12,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     public final const MODULE_BLOCK_SINGLE_CONTENT = 'block-single-content';
     public final const MODULE_BLOCK_PAGE_CONTENT = 'block-pageabout-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTHOR_CONTENT],

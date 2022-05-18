@@ -68,7 +68,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     public final const MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST = 'block-authorcontent-scroll-fixedlist';
     public final const MODULE_BLOCK_USERS_CAROUSEL = 'block-users-carousel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR],

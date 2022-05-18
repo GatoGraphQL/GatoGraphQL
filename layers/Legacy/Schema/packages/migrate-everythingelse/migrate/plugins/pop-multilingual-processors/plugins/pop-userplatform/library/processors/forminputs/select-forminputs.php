@@ -5,7 +5,7 @@ class GD_QT_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Selec
 {
     public final const MODULE_QT_FORMINPUT_LANGUAGE = 'qt-forminput-language';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QT_FORMINPUT_LANGUAGE],

@@ -23,7 +23,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
     public final const MODULE_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW = 'scroll-categoryposts18-simpleview';
     public final const MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW = 'scroll-categoryposts19-simpleview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],

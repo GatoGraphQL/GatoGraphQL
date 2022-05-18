@@ -8,7 +8,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
     public final const MODULE_ENTRY_PRINT = 'entry-print';
     public final const MODULE_ENTRY_EMBED = 'entry-embed';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ENTRY_DEFAULT],

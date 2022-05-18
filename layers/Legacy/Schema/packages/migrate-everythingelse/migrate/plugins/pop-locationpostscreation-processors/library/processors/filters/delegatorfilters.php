@@ -4,7 +4,7 @@ class PoPSPEM_Module_Processor_CustomDelegatorFilters extends PoP_Module_Process
 {
     public final const MODULE_DELEGATORFILTER_MYLOCATIONPOSTS = 'delegatorfilter-mylocationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DELEGATORFILTER_MYLOCATIONPOSTS],

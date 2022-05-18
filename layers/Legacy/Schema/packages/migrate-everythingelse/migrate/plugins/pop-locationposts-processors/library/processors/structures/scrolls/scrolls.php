@@ -11,7 +11,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
     public final const MODULE_SCROLL_LOCATIONPOSTS_THUMBNAIL = 'scroll-locationposts-thumbnail';
     public final const MODULE_SCROLL_LOCATIONPOSTS_LIST = 'scroll-locationposts-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_LOCATIONPOSTS_NAVIGATOR],

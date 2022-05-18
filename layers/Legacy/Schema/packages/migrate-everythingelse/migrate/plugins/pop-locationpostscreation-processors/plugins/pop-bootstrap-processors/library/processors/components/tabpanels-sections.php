@@ -4,7 +4,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
 {
     public final const MODULE_TABPANEL_MYLOCATIONPOSTS = 'tabpanel-mylocationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_MYLOCATIONPOSTS],

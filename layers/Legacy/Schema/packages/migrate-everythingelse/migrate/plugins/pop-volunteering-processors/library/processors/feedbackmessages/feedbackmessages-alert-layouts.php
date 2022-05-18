@@ -4,7 +4,7 @@ class PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts extends PoP_
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER = 'layout-feedbackmessagealert-volunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER],

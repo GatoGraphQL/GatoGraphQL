@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
     public final const MODULE_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP = 'scrollmap-tagpastevents-scrollmap';
     public final const MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP = 'scrollmap-tagevents-horizontalscrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLMAP_EVENTS_SCROLLMAP],

@@ -9,7 +9,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
     public final const MODULE_BUTTON_POSTSTANCES_NEUTRAL = 'button-poststances-neutral';
     public final const MODULE_BUTTON_POSTSTANCES_AGAINST = 'button-poststances-against';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_STANCEEDIT],

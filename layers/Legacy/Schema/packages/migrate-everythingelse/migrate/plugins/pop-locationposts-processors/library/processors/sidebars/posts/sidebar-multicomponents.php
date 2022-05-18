@@ -4,7 +4,7 @@ class GD_SP_Custom_EM_Module_Processor_PostMultipleSidebarComponents extends PoP
 {
     public final const MODULE_SIDEBARMULTICOMPONENT_LOCATIONPOST = 'sidebarmulticomponent-locationpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_LOCATIONPOST],

@@ -4,7 +4,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
 {
     public final const MODULE_BUTTON_LOCATIONPOST_CREATE = 'postbutton-locationpost-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_LOCATIONPOST_CREATE],

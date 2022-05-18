@@ -6,7 +6,7 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelBlocks extends PoP
 {
     public final const MODULE_BLOCK_TABPANEL_AUTHORHIGHLIGHTS = 'block-tabpanel-authorhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORHIGHLIGHTS],

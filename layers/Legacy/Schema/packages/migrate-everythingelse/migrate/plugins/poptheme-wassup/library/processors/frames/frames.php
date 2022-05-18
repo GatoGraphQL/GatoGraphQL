@@ -14,7 +14,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
     public final const MODULE_FRAME_TOPSIMPLE = 'frame-topsimple';
     public final const MODULE_FRAME_TOPEMBED = 'frame-topembed';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FRAME_TOP],

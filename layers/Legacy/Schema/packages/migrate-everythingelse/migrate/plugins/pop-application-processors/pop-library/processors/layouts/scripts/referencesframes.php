@@ -9,7 +9,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
     public final const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedby-appendtoscript-fullview';
     public final const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedbyempty-appendtoscript-fullview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],

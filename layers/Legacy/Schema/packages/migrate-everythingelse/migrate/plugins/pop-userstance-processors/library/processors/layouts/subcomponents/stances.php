@@ -5,7 +5,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     public final const MODULE_SUBCOMPONENT_STANCES = 'subcomponent-stances';
     public final const MODULE_LAZYSUBCOMPONENT_STANCES = 'lazysubcomponent-stances';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBCOMPONENT_STANCES],

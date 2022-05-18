@@ -13,7 +13,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
     public final const MODULE_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
     public final const MODULE_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_FOLLOWUSER],

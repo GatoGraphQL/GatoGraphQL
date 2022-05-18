@@ -10,7 +10,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
     public final const MODULE_FORMINPUTGROUP_CUP_YOUTUBE = 'forminputgroup-cup-youtube';
     public final const MODULE_FORMINPUTGROUP_CUP_INSTAGRAM = 'forminputgroup-cup-instagram';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_CUP_SHORTDESCRIPTION],

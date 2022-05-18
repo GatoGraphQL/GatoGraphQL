@@ -13,7 +13,7 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
     public final const MODULE_CONTENT_DOWNVOTESPOSTS = 'content-downvotesposts';
     public final const MODULE_CONTENT_UNDODOWNVOTESPOSTS = 'content-undodownvotesposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENT_FOLLOWSUSERS],

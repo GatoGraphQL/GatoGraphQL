@@ -5,7 +5,7 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
 {
     public final const MODULE_FORMINPUT_CUU_DESCRIPTION = 'forminput-cuu-description';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_CUU_DESCRIPTION],

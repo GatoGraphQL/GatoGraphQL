@@ -5,7 +5,7 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
 {
     public final const MODULE_FORMINPUT_WHYVOLUNTEER = 'gf-field-whyvolunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_WHYVOLUNTEER],

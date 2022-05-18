@@ -4,7 +4,7 @@ class PoP_Module_Processor_CalendarControlButtonGroups extends PoP_Module_Proces
 {
     public final const MODULE_CALENDARCONTROLBUTTONGROUP_CALENDAR = 'calendarcontrolbuttongroup-calendar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CALENDARCONTROLBUTTONGROUP_CALENDAR],

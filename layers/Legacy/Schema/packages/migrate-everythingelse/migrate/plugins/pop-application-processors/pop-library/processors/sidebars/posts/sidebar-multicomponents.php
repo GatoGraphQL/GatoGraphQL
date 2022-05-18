@@ -9,7 +9,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
     public final const MODULE_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT = 'sidebarmulticomponent-highlightright';
     public final const MODULE_SIDEBARMULTICOMPONENT_POST = 'sidebarmulticomponent-post';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE],

@@ -6,7 +6,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
     public final const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LOCATIONPOST = 'layout-postsidebar-horizontal-locationpost';
     public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST = 'layout-postsidebarcompact-horizontal-locationpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST],

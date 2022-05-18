@@ -4,7 +4,7 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
 {
     public final const MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY = 'filterinputwrapper-communities';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY],

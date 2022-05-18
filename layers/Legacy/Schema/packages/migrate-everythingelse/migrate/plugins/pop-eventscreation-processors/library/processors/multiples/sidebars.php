@@ -5,7 +5,7 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
     public final const MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR = 'multiple-section-myevents-sidebar';
     public final const MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR = 'multiple-section-mypastevents-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR],

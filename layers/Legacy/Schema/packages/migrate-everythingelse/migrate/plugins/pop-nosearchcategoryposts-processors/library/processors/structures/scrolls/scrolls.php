@@ -23,7 +23,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_Scrolls extends PoP_Module_Proc
     public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW = 'scroll-nosearchcategoryposts18-simpleview';
     public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW = 'scroll-nosearchcategoryposts19-simpleview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW],

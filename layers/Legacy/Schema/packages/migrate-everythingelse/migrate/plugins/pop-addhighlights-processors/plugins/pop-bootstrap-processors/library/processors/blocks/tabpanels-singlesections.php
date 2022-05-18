@@ -8,7 +8,7 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
 {
     public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT = 'block-tabpanel-singlerelatedhighlightcontent';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT],

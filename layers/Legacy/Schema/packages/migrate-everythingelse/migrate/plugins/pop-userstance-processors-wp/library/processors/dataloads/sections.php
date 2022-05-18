@@ -2,7 +2,7 @@
 
 class UserStance_WP_Module_Processor_CustomSectionDataloads extends UserStance_Module_Processor_CustomSectionDataloads
 {
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL],

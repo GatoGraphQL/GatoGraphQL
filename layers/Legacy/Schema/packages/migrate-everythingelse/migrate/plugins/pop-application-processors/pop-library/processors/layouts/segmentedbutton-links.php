@@ -5,7 +5,7 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
     public final const MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR = 'layout-segmentedbutton-navigator';
     public final const MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR = 'layout-dropdownsegmentedbutton-navigator';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR],

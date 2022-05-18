@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_FormGroups extends PoP_Module_Processor
     public final const MODULE_FORMINPUTGROUP_MESSAGESUBJECT = 'gf-forminputgroup-field-messagesubject';
     public final const MODULE_FORMINPUTGROUP_MESSAGETOUSER = 'gf-forminputgroup-field-messagetouser';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_MESSAGESUBJECT],

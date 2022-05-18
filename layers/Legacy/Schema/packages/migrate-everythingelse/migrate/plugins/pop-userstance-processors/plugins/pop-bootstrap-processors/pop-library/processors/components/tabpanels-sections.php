@@ -14,7 +14,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
     public final const MODULE_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'tabpanel-stances-neutral-article';
     public final const MODULE_TABPANEL_MYSTANCES = 'tabpanel-mystances';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_STANCES],

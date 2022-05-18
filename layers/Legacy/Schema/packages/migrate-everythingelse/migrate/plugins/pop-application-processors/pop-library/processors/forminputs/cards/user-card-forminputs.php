@@ -4,7 +4,7 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
 {
     public final const MODULE_FORMCOMPONENT_CARD_USER = 'forminput-user-card';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_CARD_USER],

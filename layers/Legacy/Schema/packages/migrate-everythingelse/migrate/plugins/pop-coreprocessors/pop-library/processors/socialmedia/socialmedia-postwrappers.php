@@ -7,7 +7,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
     public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER = 'subjugatedpost-socialmedia-wrapper';
     public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER = 'subjugatedpost-socialmedia-counter-wrapper';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_POSTSOCIALMEDIA_POSTWRAPPER],

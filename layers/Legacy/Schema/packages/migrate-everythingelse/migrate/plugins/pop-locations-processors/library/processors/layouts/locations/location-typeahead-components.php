@@ -4,7 +4,7 @@ class GD_EM_Module_Processor_LocationTypeaheadsComponentLayouts extends GD_EM_Mo
 {
     public final const MODULE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT = 'em-layoutlocation-typeahead-component';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT],

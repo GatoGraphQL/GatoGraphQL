@@ -4,7 +4,7 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
 {
     public final const MODULE_BLOCK_FLAG = 'block-flag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_FLAG],

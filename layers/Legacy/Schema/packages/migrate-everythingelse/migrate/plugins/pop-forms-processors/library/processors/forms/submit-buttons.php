@@ -10,7 +10,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
     public final const MODULE_SUBMITBUTTON_UPDATE = 'submitbutton-update';
     public final const MODULE_SUBMITBUTTON_SEARCH = 'submitbutton-search';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBMITBUTTON_SUBMIT],

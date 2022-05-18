@@ -6,7 +6,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Process
     public final const MODULE_FEEDBACKMESSAGE_INVITENEWMEMBERS = 'feedbackmessage-invitemembers';
     public final const MODULE_FEEDBACKMESSAGE_EDITMEMBERSHIP = 'feedbackmessage-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],

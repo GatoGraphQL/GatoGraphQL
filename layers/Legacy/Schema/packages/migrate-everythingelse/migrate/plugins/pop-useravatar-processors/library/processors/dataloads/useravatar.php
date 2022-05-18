@@ -10,7 +10,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 {
     public final const MODULE_DATALOAD_USERAVATAR_UPDATE = 'dataload-useravatar-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_USERAVATAR_UPDATE],

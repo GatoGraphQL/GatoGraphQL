@@ -4,7 +4,7 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
 {
     public final const MODULE_FORMCOMPONENT_CARD_COMMENT = 'forminput-comment-card';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENT],

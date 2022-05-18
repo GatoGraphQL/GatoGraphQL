@@ -5,7 +5,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
 {
     public final const MODULE_FORM_CONTACTUS = 'form-contactus';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_CONTACTUS],

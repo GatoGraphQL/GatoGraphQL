@@ -4,7 +4,7 @@ class PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents exte
 {
     public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST = 'formcomponent-hiddeninputalert-highlightedpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST],

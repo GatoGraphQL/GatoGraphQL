@@ -4,7 +4,7 @@ class GD_URE_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
 {
     public final const MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP = 'ure-quicklinkbuttongroup-user-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP],

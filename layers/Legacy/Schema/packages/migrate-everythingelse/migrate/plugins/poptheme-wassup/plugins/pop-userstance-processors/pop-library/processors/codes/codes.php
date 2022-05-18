@@ -4,7 +4,7 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
 {
     public final const MODULE_USERSTANCE_HTMLCODE_STANCESLIDESTITLE = 'htmlcode-stanceslidestitle';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_USERSTANCE_HTMLCODE_STANCESLIDESTITLE],

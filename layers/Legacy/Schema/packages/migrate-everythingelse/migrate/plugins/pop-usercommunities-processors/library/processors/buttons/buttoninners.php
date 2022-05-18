@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
 {
     public final const MODULE_URE_BUTTONINNER_EDITMEMBERSHIP = 'ure-buttoninner-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_BUTTONINNER_EDITMEMBERSHIP],

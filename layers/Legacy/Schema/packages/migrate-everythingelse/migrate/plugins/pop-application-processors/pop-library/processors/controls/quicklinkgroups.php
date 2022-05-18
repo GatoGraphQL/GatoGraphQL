@@ -16,7 +16,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
     public final const MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
     public final const MODULE_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKGROUP_POST],

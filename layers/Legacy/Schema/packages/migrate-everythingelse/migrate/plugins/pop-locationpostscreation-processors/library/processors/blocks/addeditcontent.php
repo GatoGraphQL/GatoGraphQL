@@ -5,7 +5,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
     public final const MODULE_BLOCK_LOCATIONPOST_UPDATE = 'block-locationpost-update';
     public final const MODULE_BLOCK_LOCATIONPOST_CREATE = 'block-locationpost-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_LOCATIONPOST_UPDATE],

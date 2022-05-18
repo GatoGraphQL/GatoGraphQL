@@ -9,7 +9,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
     public final const MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filtercomponentgroup-selectabletypeahead-communities-post';
     public final const MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filtercomponentgroup-selectabletypeahead-communities-user';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES],

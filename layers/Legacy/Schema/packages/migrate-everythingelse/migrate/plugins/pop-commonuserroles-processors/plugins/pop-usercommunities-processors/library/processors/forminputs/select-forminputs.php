@@ -5,7 +5,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
 {
     public final const MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY = 'ure-cup-iscommunity';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY],

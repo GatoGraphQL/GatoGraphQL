@@ -4,7 +4,7 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
 {
     public final const MODULE_CONTENT_COMMENTSINGLE = 'content-commentsingle';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENT_COMMENTSINGLE],

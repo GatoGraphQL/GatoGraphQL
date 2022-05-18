@@ -13,7 +13,7 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const MODULE_SCROLLINNER_AUTHORSTANCES_LIST = 'scrollinner-authorstances-list';
     public final const MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scrollinner-singlerelatedstancecontent-fullview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],

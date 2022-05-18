@@ -10,7 +10,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
     public final const MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP = 'htmlcode-author-description-top';
     public final const MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM = 'htmlcode-author-description-bottom';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_HTMLCODE_HOMEWELCOMETOP],

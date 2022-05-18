@@ -5,7 +5,7 @@ class PoP_ContactUs_Module_Processor_FeedbackMessageLayouts extends PoP_Module_P
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUS = 'layout-feedbackmessage-contactus';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUS],

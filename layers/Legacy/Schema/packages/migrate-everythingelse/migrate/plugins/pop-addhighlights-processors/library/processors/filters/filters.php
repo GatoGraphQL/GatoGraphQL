@@ -6,7 +6,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
     public final const MODULE_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
     public final const MODULE_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_HIGHLIGHTS],

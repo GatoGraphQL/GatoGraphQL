@@ -5,7 +5,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners extends P
     public final const MODULE_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION = 'checkpointmessageinner-profileorganization';
     public final const MODULE_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL = 'checkpointmessageinner-profileindividual';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION],

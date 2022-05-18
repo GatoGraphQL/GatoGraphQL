@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
     public final const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL = 'block-singlerelatedhighlightcontent-scroll-thumbnail';
     public final const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST = 'block-singlerelatedhighlightcontent-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR],

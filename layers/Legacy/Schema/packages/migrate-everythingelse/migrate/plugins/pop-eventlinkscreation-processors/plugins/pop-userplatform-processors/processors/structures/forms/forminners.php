@@ -4,7 +4,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 {
     public final const MODULE_FORMINNER_EVENTLINK = 'forminner-eventlink';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [GD_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_EVENTLINK],

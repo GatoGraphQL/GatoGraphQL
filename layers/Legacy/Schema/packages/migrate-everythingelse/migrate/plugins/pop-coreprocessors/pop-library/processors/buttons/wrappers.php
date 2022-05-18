@@ -6,7 +6,7 @@ class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condition
 {
     public final const MODULE_BUTTONWRAPPER_POSTPERMALINK = 'buttonwrapper-postpermalink';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONWRAPPER_POSTPERMALINK],

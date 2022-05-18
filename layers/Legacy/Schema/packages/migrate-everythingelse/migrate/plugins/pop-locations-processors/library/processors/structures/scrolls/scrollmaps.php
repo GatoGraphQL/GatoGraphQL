@@ -10,7 +10,7 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
     public final const MODULE_SCROLL_PASTEVENTS_MAP = 'scroll-pastevents-map';
     public final const MODULE_SCROLL_EVENTS_HORIZONTALMAP = 'scroll-events-horizontalmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_USERS_MAP],

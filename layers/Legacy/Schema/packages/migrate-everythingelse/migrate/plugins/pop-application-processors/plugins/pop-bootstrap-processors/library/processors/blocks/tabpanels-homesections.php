@@ -4,7 +4,7 @@ class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processo
 {
     public final const MODULE_BLOCK_TABPANEL_HOMECONTENT = 'block-homecontent-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_HOMECONTENT],

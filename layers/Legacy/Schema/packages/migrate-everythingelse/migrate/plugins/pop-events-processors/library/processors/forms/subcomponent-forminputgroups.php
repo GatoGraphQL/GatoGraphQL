@@ -4,7 +4,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
 {
     public final const MODULE_FILTERINPUTGROUP_EVENTSCOPE = 'filterinputgroup-eventscope';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTGROUP_EVENTSCOPE],

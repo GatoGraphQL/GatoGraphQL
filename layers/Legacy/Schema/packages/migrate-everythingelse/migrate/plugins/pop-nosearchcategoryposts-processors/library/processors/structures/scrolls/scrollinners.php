@@ -23,7 +23,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
     public final const MODULE_SCROLLINNER_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-nosearchcategoryposts18-simpleview';
     public final const MODULE_SCROLLINNER_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-nosearchcategoryposts19-simpleview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW],

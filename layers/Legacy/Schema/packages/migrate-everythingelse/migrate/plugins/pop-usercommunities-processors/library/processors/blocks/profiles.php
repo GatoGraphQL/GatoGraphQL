@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
     public final const MODULE_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
     public final const MODULE_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE],

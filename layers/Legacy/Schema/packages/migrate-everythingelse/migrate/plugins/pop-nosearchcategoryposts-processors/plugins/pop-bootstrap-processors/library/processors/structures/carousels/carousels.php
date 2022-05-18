@@ -123,7 +123,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
     public final const MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT = 'carousel-tagnosearchcategoryposts18-content';
     public final const MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT = 'carousel-tagnosearchcategoryposts19-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00],

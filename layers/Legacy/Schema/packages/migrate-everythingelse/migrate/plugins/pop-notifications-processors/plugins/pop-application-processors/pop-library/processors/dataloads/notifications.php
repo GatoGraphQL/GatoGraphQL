@@ -11,7 +11,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
     public final const MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS = 'dataload-notifications-scroll-details';
     public final const MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST = 'dataload-notifications-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],

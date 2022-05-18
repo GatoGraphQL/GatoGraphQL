@@ -8,7 +8,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
     public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scroll-automatedemails-latestcontent-thumbnail';
     public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scroll-automatedemails-latestcontent-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],

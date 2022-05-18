@@ -10,7 +10,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     public final const MODULE_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
     public final const MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE = 'dataload-profileindividual-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE],

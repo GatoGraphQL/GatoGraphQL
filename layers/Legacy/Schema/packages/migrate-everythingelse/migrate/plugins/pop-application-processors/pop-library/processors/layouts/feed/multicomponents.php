@@ -6,7 +6,7 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
     public final const MODULE_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW = 'multicomponent-userpostactivity-lazysimpleview';
     public final const MODULE_MULTICOMPONENT_USERPOSTACTIVITY = 'multicomponent-userpostactivity';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW],

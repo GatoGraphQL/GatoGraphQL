@@ -65,7 +65,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
     public final const MODULE_DATALOAD_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'dataload-mycategoryposts18-scroll-fullviewpreview';
     public final const MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'dataload-mycategoryposts19-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT],

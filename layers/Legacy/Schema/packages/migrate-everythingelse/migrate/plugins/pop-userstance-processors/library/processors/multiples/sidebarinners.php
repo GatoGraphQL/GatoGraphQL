@@ -12,7 +12,7 @@ class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public final const MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar';
     public final const MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR],

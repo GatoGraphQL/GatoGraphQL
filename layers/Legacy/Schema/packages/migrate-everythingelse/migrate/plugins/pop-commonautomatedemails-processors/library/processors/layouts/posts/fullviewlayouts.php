@@ -4,7 +4,7 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
 {
     public final const MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST = 'layout-automatedemails-fullview-post';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST],

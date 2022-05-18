@@ -12,7 +12,7 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public final const MODULE_FILTER_TAGSTANCES = 'filter-tagstances';
     public final const MODULE_FILTER_TAGSTANCES_STANCE = 'filter-tagstances-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_STANCES],

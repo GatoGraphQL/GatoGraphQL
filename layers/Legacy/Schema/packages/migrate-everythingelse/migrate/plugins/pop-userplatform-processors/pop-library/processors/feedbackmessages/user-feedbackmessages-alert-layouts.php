@@ -4,7 +4,7 @@ class PoP_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_Module_Pr
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_MYPREFERENCES = 'layout-feedbackmessagealert-mypreferences';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_MYPREFERENCES],

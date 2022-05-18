@@ -41,7 +41,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
     public final const MODULE_SCROLL_USERS_LIST = 'scroll-users-list';
     public final const MODULE_SCROLL_USER_LIST = 'scroll-user-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_CONTENT_NAVIGATOR],

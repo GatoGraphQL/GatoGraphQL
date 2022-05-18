@@ -7,7 +7,7 @@ class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module
 {
     public final const MODULE_FORMINPUT_CUP_KEEPASDRAFT = 'forminput-keepasdraft';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_CUP_KEEPASDRAFT],

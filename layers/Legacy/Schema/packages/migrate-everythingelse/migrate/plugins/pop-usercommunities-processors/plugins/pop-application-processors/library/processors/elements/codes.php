@@ -6,7 +6,7 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
 {
     public final const MODULE_CODE_INVITENEWMEMBERSHELP = 'code-invitenewmembershelp';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_INVITENEWMEMBERSHELP],

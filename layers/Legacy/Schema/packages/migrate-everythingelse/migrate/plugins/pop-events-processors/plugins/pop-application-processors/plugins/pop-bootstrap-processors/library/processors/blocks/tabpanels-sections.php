@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
     public final const MODULE_BLOCK_TABPANEL_PASTEVENTS = 'block-pastevents-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_EVENTSCALENDAR = 'block-eventscalendar-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_EVENTS],

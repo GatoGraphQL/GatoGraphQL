@@ -6,7 +6,7 @@ class UserStance_Module_Processor_UserPostInteractionLayouts extends PoP_Module_
     public final const MODULE_USERSTANCE_LAYOUT_USERPOSTINTERACTION = 'userstance-layout-userpostinteraction';
     public final const MODULE_USERSTANCE_LAYOUT_USERFULLVIEWINTERACTION = 'userstance-layout-userfullviewinteraction';
     
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_USERSTANCEPOSTINTERACTION],

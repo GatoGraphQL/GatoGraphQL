@@ -4,7 +4,7 @@ class PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Modul
 {
     public final const MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE = 'quicklinkbuttongroup-usersendmessage';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE],

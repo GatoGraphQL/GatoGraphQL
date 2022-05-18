@@ -5,7 +5,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
     public final const MODULE_TABPANEL_STANCES_BYORGANIZATIONS = 'tabpanel-stances-byorganizations';
     public final const MODULE_TABPANEL_STANCES_BYINDIVIDUALS = 'tabpanel-stances-byindividuals';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS],

@@ -8,7 +8,7 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
     public final const MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR = 'multiple-tag-locationposts-sidebar';
     public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR = 'multiple-single-locationpost-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR],

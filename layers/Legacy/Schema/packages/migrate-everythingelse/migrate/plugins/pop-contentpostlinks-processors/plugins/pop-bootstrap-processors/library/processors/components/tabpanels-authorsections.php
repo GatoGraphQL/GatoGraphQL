@@ -4,7 +4,7 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents exte
 {
     public final const MODULE_TABPANEL_AUTHORLINKS = 'tabpanel-authorlinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORLINKS],

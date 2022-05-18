@@ -10,7 +10,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
     public final const MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS = 'ure-filterinputgroup-membertags';
     public final const MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS = 'ure-filterinputgroup-memberstatus';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES],

@@ -32,7 +32,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     public final const MODULE_DATALOADACTION_DOWNVOTEPOST = 'dataloadaction-downvotepost';
     public final const MODULE_DATALOADACTION_UNDODOWNVOTEPOST = 'dataloadaction-undodownvotepost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOADACTION_FOLLOWUSER],

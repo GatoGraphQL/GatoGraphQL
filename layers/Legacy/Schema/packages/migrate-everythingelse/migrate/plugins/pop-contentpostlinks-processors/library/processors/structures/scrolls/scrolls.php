@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
     public final const MODULE_SCROLL_LINKS_THUMBNAIL = 'scroll-links-thumbnail';
     public final const MODULE_SCROLL_LINKS_LIST = 'scroll-links-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_LINKS_NAVIGATOR],

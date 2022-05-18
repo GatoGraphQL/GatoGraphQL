@@ -5,7 +5,7 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
 {
     public final const MODULE_FORM_EVERYTHINGQUICKLINKS = 'form-everythingquicklinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_EVERYTHINGQUICKLINKS],

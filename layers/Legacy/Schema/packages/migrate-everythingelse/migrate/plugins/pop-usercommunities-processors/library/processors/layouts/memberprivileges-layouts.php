@@ -4,7 +4,7 @@ class GD_URE_Module_Processor_MemberPrivilegesLayouts extends GD_URE_Module_Proc
 {
     public final const MODULE_URE_LAYOUTUSER_MEMBERPRIVILEGES = 'ure-layoutuser-memberprivileges-nodesc';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUTUSER_MEMBERPRIVILEGES],

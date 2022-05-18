@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proc
     public final const MODULE_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR = 'multiple-sectioninner-organizations-sidebar';
     public final const MODULE_MULTIPLE_SECTIONINNER_INDIVIDUALS_SIDEBAR = 'multiple-sectioninner-individuals-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR],

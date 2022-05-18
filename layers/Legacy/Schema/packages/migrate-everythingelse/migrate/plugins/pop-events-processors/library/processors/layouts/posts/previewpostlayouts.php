@@ -20,7 +20,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED = 'layout-previewost-pastevent-related';
     public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT = 'layout-previewost-pastevent-edit';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR],

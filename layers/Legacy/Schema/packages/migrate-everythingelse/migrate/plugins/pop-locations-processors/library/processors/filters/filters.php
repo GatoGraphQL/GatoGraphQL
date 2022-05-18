@@ -4,7 +4,7 @@ class PoP_Locations_Module_Processor_CustomFilters extends PoP_Module_Processor_
 {
     public final const MODULE_FILTER_LOCATIONS = 'filter-locations';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_LOCATIONS],

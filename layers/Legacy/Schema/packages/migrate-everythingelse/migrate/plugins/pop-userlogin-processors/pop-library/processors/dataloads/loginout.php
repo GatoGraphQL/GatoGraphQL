@@ -12,7 +12,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
     public final const MODULE_DATALOAD_LOSTPWDRESET = 'dataload-lostpwdreset';
     public final const MODULE_DATALOAD_LOGOUT = 'dataload-logout';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_LOGIN],

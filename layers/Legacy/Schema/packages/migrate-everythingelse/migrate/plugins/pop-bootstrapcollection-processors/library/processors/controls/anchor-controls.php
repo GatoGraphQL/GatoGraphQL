@@ -8,7 +8,7 @@ class GD_Core_Bootstrap_Module_Processor_AnchorControls extends PoP_Module_Proce
     public final const MODULE_ANCHORCONTROL_API = 'anchorcontrol-api';
     public final const MODULE_ANCHORCONTROL_COPYSEARCHURL = 'anchorcontrol-copysearchurl';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANCHORCONTROL_EMBED],

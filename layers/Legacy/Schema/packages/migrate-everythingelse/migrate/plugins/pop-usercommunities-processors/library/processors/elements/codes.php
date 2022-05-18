@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 {
     public final const MODULE_URE_CODE_MEMBERSLABEL = 'ure-code-memberslabel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_CODE_MEMBERSLABEL],

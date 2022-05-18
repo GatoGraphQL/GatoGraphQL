@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
     public final const MODULE_FORM_EDITMEMBERSHIP = 'form-editmembership';
     public final const MODULE_FORM_MYCOMMUNITIES_UPDATE = 'form-mycommunities-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_EDITMEMBERSHIP],

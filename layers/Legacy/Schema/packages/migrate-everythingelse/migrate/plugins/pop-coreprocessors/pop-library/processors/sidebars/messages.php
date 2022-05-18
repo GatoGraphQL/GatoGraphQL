@@ -6,7 +6,7 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
     public final const MODULE_MESSAGE_NOREFERENCES = 'message-noreferences';
     public final const MODULE_MESSAGE_NOCONTACT = 'message-nocontact';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MESSAGE_NOREFERENCES],

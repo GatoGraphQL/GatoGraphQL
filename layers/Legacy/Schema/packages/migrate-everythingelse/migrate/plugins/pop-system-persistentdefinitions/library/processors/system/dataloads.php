@@ -7,7 +7,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     public final const MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE = 'dataloadaction-system-savedefinitionfile';
 
     // use PoP_PersistentDefinitionsSystem_Module_Processor_SystemActionsTrait;
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE],

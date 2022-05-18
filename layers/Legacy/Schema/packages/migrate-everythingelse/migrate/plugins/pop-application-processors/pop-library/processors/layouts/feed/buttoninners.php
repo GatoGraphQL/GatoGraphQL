@@ -5,7 +5,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
 {
     public final const MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY = 'buttoninner-toggleuserpostactivity';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],

@@ -13,7 +13,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
     public final const MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CUSTOMANCHORCONTROL_CALENDAR],

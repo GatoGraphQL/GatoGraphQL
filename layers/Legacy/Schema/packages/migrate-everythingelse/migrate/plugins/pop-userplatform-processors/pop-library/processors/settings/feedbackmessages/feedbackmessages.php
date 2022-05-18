@@ -4,7 +4,7 @@ class PoP_Module_Processor_SettingsFeedbackMessages extends PoP_Module_Processor
 {
     public final const MODULE_FEEDBACKMESSAGE_SETTINGS = 'feedbackmessage-settings';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGE_SETTINGS],

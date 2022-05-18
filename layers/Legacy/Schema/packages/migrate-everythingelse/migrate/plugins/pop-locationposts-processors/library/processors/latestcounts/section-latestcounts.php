@@ -6,7 +6,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
     public final const MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS = 'latestcount-author-locationposts';
     public final const MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS = 'latestcount-tag-locationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_LOCATIONPOSTS],

@@ -4,7 +4,7 @@ class GD_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_
 {
     public final const MODULE_FORM_EVENT = 'form-event';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_EVENT],

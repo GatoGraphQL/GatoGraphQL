@@ -39,7 +39,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     public final const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_LIST = 'dataload-singleupvotedby-scroll-list';
     public final const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST = 'dataload-singledownvotedby-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS],

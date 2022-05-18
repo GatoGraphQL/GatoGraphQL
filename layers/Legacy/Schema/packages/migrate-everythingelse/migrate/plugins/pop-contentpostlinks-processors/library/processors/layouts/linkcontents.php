@@ -4,7 +4,7 @@ class PoP_ContentPostLinks_Module_Processor_LinkContentLayouts extends PoP_Modul
 {
     public final const MODULE_LAYOUT_CONTENT_LINK = 'layout-content-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CONTENT_LINK],

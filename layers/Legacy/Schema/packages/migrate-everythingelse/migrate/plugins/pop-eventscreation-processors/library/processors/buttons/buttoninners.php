@@ -5,7 +5,7 @@ class GD_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_Bu
 {
     public final const MODULE_BUTTONINNER_EVENT_CREATE = 'buttoninner-event-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_EVENT_CREATE],

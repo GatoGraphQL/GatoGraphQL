@@ -5,7 +5,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
 {
     public final const MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-postlink';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK],

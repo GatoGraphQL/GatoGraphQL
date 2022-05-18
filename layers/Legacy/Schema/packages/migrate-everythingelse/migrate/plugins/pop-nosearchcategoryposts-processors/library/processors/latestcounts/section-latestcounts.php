@@ -63,7 +63,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
     public final const MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 = 'latestcount-tag-nosearchcategoryposts18';
     public final const MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 = 'latestcount-tag-nosearchcategoryposts19';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS00],

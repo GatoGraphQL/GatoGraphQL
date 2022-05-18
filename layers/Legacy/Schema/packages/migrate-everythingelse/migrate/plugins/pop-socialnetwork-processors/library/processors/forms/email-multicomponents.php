@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
     public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK = 'multicomponent-emailnotifications-network';
     public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC = 'multicomponent-emailnotifications-subscribedtopic';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK],

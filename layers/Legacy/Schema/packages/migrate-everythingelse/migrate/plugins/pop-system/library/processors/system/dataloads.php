@@ -11,7 +11,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
     public final const MODULE_DATALOADACTION_SYSTEM_INSTALL = 'dataloadaction-system-install';
 
     // use PoP_System_Module_Processor_SystemActionsTrait;
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOADACTION_SYSTEM_BUILD],

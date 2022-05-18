@@ -23,7 +23,7 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 = 'block-tabpanel-tagcategoryposts18';
     public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 = 'block-tabpanel-tagcategoryposts19';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00],

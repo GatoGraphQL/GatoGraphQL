@@ -7,7 +7,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends Po
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT = 'layout-checkpointmessagealert-loggedincanedit';
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN = 'layout-checkpointmessagealert-loggedinisadmin';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN],

@@ -23,7 +23,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_LIST = 'dataload-authorlinks-scroll-list';
     public final const MODULE_DATALOAD_TAGLINKS_SCROLL_LIST = 'dataload-taglinks-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_LINKS_TYPEAHEAD],

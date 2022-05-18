@@ -10,7 +10,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
     public final const MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE = 'dataload-profileorganization-update';
     public final const MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE = 'dataload-profileindividual-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE],

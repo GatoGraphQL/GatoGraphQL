@@ -6,7 +6,7 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
     public final const MODULE_FORMINPUT_URLPARAMTEXT_USERID = 'forminput-urlparamtext-uid';
     public final const MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID = 'forminput-urlparamtext-cid';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID],

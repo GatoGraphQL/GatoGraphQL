@@ -4,7 +4,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
 {
     public final const MODULE_FORMINNER_CONTENTPOSTLINK = 'forminner-contentpostlink';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_CONTENTPOSTLINK],

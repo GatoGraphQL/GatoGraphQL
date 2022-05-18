@@ -5,7 +5,7 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public final const MODULE_LAYOUT_CATEGORIES = 'layout-categories';
     public final const MODULE_LAYOUT_APPLIESTO = 'layout-appliesto';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CATEGORIES],

@@ -8,7 +8,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT = 'layout-feedbackmessagealert-logout';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD = 'layout-feedbackmessagealert-user-changepassword';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN],

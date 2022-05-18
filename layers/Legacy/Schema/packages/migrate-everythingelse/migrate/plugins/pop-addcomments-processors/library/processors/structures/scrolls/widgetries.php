@@ -6,7 +6,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public final const MODULE_WIDGET_POSTCOMMENTS = 'widget-postcomments';
     public final const MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT = 'widget-postcomments-appendtoscript';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_POSTCOMMENTS],

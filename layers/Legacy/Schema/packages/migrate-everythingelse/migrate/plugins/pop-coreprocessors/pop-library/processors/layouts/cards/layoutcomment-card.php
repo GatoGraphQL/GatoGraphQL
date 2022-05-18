@@ -4,7 +4,7 @@ class PoP_Module_Processor_CommentCardLayouts extends PoP_Module_Processor_Comme
 {
     public final const MODULE_LAYOUTCOMMENT_CARD = 'layoutcomment-card';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTCOMMENT_CARD],

@@ -6,7 +6,7 @@ class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelF
     public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminputgroup-emaildigests-weeklylatestposts';
     public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS = 'forminputgroup-emaildigests-specialposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST],

@@ -6,7 +6,7 @@ class PoP_Locations_Module_Processor_CustomScrolls extends PoP_Module_Processor_
     public final const MODULE_SCROLL_STATICIMAGE = 'scroll-staticimage';
     public final const MODULE_SCROLL_STATICIMAGE_USERORPOST = 'scroll-staticimage-userorpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_LOCATIONS],

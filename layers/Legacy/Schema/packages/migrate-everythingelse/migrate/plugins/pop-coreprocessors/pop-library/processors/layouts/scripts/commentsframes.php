@@ -5,7 +5,7 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
     public final const MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT = 'layout-comments-appendtoscript';
     public final const MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT = 'layout-commentsempty-appendtoscript';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT],

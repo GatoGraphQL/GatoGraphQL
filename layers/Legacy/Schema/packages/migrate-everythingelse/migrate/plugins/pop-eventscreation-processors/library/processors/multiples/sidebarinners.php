@@ -5,7 +5,7 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
     public final const MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR = 'multiple-sectioninner-myevents-sidebar';
     public final const MODULE_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR = 'multiple-sectioninner-mypastevents-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],

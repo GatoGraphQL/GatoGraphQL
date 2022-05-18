@@ -7,7 +7,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
     public final const MODULE_BLOCK_MYPREFERENCES = 'block-mypreferences';
     public final const MODULE_BLOCK_INVITENEWUSERS = 'block-inviteusers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_USER_CHANGEPASSWORD],

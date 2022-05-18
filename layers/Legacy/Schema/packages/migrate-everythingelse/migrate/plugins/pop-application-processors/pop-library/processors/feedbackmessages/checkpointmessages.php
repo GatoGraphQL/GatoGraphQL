@@ -4,7 +4,7 @@ class PoP_Application_Module_Processor_UserCheckpointMessages extends PoP_Module
 {
     public final const MODULE_CHECKPOINTMESSAGE_DOMAIN = 'checkpointmessage-domain';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CHECKPOINTMESSAGE_DOMAIN],

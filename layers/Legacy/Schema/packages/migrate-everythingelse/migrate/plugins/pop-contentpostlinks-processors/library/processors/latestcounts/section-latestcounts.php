@@ -6,7 +6,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     public final const MODULE_LATESTCOUNT_AUTHOR_POSTLINKS = 'latestcount-author-postlinks';
     public final const MODULE_LATESTCOUNT_TAG_POSTLINKS = 'latestcount-tag-postlinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_POSTLINKS],

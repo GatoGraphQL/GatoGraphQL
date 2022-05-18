@@ -9,7 +9,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
     public final const MODULE_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL = 'block-tabpanel-authorstances-neutral';
     public final const MODULE_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST = 'block-tabpanel-authorstances-against';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES],

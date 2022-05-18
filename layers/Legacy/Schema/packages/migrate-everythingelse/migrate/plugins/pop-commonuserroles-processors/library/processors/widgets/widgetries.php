@@ -6,7 +6,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
     public final const MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS = 'ure-widget-profileorganization-details';
     public final const MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS = 'ure-widget-profileindividual-details';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS],

@@ -4,7 +4,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
 {
     public final const MODULE_CAROUSEL_AUTHORMEMBERS = 'carousel-authormembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSEL_AUTHORMEMBERS],

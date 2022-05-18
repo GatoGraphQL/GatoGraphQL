@@ -6,7 +6,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     public final const MODULE_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW = 'block-mycontent-scroll-simpleviewpreview';
     public final const MODULE_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW = 'block-mycontent-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYCONTENT_TABLE_EDIT],

@@ -4,7 +4,7 @@ class GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Modu
 {
     public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW = 'layout-previewpost-event-simpleview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],

@@ -11,7 +11,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
     public final const MODULE_SCROLLINNER_PASTEVENTS_MAP = 'scrollinner-pastevents-map';
     public final const MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP = 'scrollinner-events-horizontalmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_USERS_MAP],

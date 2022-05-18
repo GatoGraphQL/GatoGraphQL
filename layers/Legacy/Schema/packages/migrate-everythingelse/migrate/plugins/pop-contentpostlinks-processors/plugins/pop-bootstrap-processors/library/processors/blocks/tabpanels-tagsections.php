@@ -4,7 +4,7 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
 {
     public final const MODULE_BLOCK_TABPANEL_TAGLINKS = 'block-tabpanel-taglinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_TAGLINKS],

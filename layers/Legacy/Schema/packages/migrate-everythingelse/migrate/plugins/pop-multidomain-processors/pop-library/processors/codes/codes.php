@@ -4,7 +4,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
 {
     public final const MODULE_CODE_EXTERNAL = 'code-external';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_EXTERNAL],

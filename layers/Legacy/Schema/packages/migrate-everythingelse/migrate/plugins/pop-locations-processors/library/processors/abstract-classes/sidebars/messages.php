@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetM
 {
     public final const MODULE_EM_MESSAGE_NOLOCATION = 'em-message-nolocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_MESSAGE_NOLOCATION],

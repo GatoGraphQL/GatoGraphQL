@@ -9,7 +9,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public final const MODULE_BUTTONINNER_POSTCOMMENTS = 'buttoninner-comments';
     public final const MODULE_BUTTONINNER_POSTCOMMENTS_LABEL = 'buttoninner-comments-label';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN],

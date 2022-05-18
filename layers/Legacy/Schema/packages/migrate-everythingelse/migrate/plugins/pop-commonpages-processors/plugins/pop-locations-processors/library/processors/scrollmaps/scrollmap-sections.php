@@ -4,7 +4,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_M
 {
     public final const MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP = 'scrollmap-whoweare-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP],

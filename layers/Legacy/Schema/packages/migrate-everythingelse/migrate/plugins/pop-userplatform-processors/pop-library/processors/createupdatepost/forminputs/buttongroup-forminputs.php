@@ -6,7 +6,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
     public final const MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION = 'forminput-buttongroup-postsection';
     public final const MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS = 'forminput-buttongroup-postsections';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION],

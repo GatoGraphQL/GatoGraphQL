@@ -6,7 +6,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
 {
     public final const MODULE_FORMCOMPONENTGROUP_CARD_FLAG = 'formcomponentgroup-card-flag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG],

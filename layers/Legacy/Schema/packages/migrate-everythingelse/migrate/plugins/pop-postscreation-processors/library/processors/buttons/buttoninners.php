@@ -5,7 +5,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_ButtonInners extends PoP_Mod
 {
     public final const MODULE_BUTTONINNER_CONTENTPOSTLINK_CREATE = 'buttoninner-postlink-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_CONTENTPOSTLINK_CREATE],

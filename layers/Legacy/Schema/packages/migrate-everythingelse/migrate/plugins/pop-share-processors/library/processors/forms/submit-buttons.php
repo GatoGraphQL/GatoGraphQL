@@ -5,7 +5,7 @@ class PoP_Share_Module_Processor_SubmitButtons extends PoP_Module_Processor_Subm
 {
     public final const MODULE_GF_SUBMITBUTTON_SENDEMAIL = 'gf-submitbutton-sendemail';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GF_SUBMITBUTTON_SENDEMAIL],

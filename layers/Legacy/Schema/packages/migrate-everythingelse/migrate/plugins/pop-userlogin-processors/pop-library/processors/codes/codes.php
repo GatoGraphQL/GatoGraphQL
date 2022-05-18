@@ -5,7 +5,7 @@ class PoP_UserLogin_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTML
 {
     public final const MODULE_HTMLCODE_USERMUSTBELOGGEDIN = 'htmlcode-usermustbeloggedin';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_HTMLCODE_USERMUSTBELOGGEDIN],

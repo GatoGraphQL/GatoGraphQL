@@ -8,7 +8,7 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
     public final const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD = 'notifications-buttoninner-notification-markasread';
     public final const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD = 'notifications-buttoninner-notification-markasunread';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK],

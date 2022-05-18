@@ -8,7 +8,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
     public final const MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE = 'dataload-postlink-update';
     public final const MODULE_DATALOAD_CONTENTPOSTLINK_CREATE = 'dataload-postlink-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE],

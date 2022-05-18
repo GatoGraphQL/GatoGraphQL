@@ -20,7 +20,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
     public final const MODULE_BLOCK_AUTHORLINKS_SCROLL_LIST = 'block-authorlinks-scroll-list';
     public final const MODULE_BLOCK_TAGLINKS_SCROLL_LIST = 'block-taglinks-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_LINKS_SCROLL_NAVIGATOR],

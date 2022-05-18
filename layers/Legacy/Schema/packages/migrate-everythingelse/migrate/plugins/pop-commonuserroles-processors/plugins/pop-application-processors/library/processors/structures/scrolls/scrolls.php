@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const MODULE_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
     public final const MODULE_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_ORGANIZATIONS_DETAILS],

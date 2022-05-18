@@ -5,7 +5,7 @@ class Wassup_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Proc
     public final const MODULE_LAYOUT_USERPOSTINTERACTION = 'layout-userpostinteraction';
     public final const MODULE_LAYOUT_USERHIGHLIGHTPOSTINTERACTION = 'layout-userhighlightpostinteraction';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_USERPOSTINTERACTION],

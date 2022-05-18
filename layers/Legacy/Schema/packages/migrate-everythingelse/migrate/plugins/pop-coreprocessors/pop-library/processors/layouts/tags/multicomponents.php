@@ -4,7 +4,7 @@ class PoP_Module_ProcessorTagMultipleComponents extends PoP_Module_Processor_Mul
 {
     public final const MODULE_LAYOUT_TAG_DETAILS = 'multicomponent-tag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_TAG_DETAILS],

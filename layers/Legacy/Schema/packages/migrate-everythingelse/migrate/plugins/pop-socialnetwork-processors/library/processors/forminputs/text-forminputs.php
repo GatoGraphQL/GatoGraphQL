@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_TextFormInputs extends PoP_Module_Proce
 {
     public final const MODULE_FORMINPUT_MESSAGESUBJECT = 'gf-field-messagesubject';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_MESSAGESUBJECT],

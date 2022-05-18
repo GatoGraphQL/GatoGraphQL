@@ -17,7 +17,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
     public final const MODULE_LAYOUT_MULTIPLEUSER_LIST = 'layout-multipleuser-list';
     public final const MODULE_LAYOUT_MULTIPLEUSER_FULLUSER = 'layout-multipleuser-fulluser';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MULTIPLEUSER_POPOVER],

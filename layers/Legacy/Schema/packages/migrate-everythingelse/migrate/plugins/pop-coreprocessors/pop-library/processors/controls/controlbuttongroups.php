@@ -15,7 +15,7 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public final const MODULE_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
     public final const MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],

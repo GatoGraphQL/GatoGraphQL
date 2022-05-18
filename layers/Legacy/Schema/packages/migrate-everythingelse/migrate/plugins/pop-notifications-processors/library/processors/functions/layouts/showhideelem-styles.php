@@ -7,7 +7,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
     public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES = 'layout-marknotificationasunread-showelemstyles';
     public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES = 'layout-marknotificationasunread-hideelemstyles';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES],

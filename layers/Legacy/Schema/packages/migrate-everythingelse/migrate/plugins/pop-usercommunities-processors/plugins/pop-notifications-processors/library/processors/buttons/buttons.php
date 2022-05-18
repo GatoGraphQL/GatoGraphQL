@@ -6,7 +6,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
     public final const MODULE_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
     public final const MODULE_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP],

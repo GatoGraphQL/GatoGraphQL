@@ -6,7 +6,7 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
     public final const MODULE_DROPDOWNBUTTONMENU_SIDE = 'dropdownbuttonmenu-side';
     public final const MODULE_MULTITARGETINDENTMENU = 'multitargetindentmenu';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DROPDOWNBUTTONMENU_TOP],

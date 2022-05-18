@@ -6,7 +6,7 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
     public final const MODULE_BUTTONGROUP_TAGCALENDARSECTION = 'buttongroup-tagcalendarsection';
     public final const MODULE_BUTTONGROUP_AUTHORCALENDARSECTION = 'buttongroup-authorcalendarsection';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_CALENDARSECTION],

@@ -4,7 +4,7 @@ class PoP_LocationPostsCreation_Module_Processor_ButtonInners extends PoP_Module
 {
     public final const MODULE_BUTTONINNER_LOCATIONPOST_CREATE = 'buttoninner-locationpost-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_LOCATIONPOST_CREATE],

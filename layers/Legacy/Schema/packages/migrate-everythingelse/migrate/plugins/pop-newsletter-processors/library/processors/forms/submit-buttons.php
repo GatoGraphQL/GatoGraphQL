@@ -6,7 +6,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
     public final const MODULE_GF_SUBMITBUTTON_SUBSCRIBE = 'gf-submitbutton-subscribe';
     public final const MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION = 'gf-submitbutton-confirmunsubscription';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE],

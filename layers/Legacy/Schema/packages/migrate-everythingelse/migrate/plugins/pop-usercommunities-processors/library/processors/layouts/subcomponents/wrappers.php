@@ -4,7 +4,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
 {
     public final const MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS = 'ure-layoutwrapper-communitymembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS],

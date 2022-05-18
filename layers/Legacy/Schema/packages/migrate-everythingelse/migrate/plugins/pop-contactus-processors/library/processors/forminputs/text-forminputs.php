@@ -5,7 +5,7 @@ class PoP_ContactUs_Module_Processor_TextFormInputs extends PoP_Module_Processor
 {
     public final const MODULE_FORMINPUT_SUBJECT = 'gf-field-subject';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_SUBJECT],

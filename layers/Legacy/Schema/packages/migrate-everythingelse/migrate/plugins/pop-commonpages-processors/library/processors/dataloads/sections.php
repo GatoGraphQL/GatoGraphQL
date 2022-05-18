@@ -8,7 +8,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
     public final const MODULE_DATALOAD_WHOWEARE_SCROLL_LIST = 'dataload-whoweare-scroll-list';
     public final const MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW = 'dataload-whoweare-scroll-fullview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_WHOWEARE_SCROLL_DETAILS],

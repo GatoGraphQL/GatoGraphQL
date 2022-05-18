@@ -5,7 +5,7 @@ class GD_EM_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Proces
     public final const MODULE_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW = 'scrollinner-mylocationposts-simpleviewpreview';
     public final const MODULE_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW = 'scrollinner-mylocationposts-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW],

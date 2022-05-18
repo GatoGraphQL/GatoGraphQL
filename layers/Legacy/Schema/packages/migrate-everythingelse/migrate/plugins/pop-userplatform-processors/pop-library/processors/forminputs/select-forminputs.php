@@ -5,7 +5,7 @@ class GD_UserPlatform_Module_Processor_SelectFormInputs extends PoP_Module_Proce
 {
     public final const MODULE_FORMINPUT_SETTINGSFORMAT = 'forminput-settingsformat';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_SETTINGSFORMAT],

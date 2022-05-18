@@ -24,7 +24,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
     public final const MODULE_BUTTON_UNDODOWNVOTEPOST_FULL = 'button-undodownvotepost-full';
     public final const MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW = 'button-undodownvotepost-preview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_FOLLOWUSER_PREVIEW],

@@ -5,7 +5,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_Tables extends PoP_Module_Pr
 {
     public final const MODULE_TABLE_MYLINKS = 'table-mylinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLE_MYLINKS],

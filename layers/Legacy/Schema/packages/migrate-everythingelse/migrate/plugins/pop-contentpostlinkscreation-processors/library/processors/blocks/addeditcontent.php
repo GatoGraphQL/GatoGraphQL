@@ -5,7 +5,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
     public final const MODULE_BLOCK_CONTENTPOSTLINK_UPDATE = 'block-postlink-update';
     public final const MODULE_BLOCK_CONTENTPOSTLINK_CREATE = 'block-postlink-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE],

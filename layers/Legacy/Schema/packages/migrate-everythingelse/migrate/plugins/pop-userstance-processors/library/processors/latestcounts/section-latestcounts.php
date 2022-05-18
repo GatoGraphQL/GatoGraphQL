@@ -19,7 +19,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
     public final const MODULE_LATESTCOUNT_TAG_STANCES_NEUTRAL = 'latestcount-tag-stances-neutral';
     public final const MODULE_LATESTCOUNT_SINGLE_STANCES_NEUTRAL = 'latestcount-single-stances-neutral';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_STANCES],

@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
     public final const MODULE_FILTER_MYPOSTS = 'filter-myposts';
     public final const MODULE_FILTER_MYCATEGORYPOSTS = 'filter-mycategoryposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_TAGS],

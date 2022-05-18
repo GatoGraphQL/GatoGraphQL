@@ -5,7 +5,7 @@ class PoP_EventsCreation_Module_Processor_CustomControlGroups extends PoP_Module
     public final const MODULE_CONTROLGROUP_MYEVENTLIST = 'controlgroup-myeventlist';
     public final const MODULE_CONTROLGROUP_MYBLOCKEVENTLIST = 'controlgroup-myblockeventlist';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLGROUP_MYEVENTLIST],

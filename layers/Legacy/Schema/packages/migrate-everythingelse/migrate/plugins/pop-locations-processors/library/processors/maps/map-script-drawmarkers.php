@@ -6,7 +6,7 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
     public final const MODULE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS = 'em-map-staticimage-script-drawmarkers';
     public final const MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS = 'em-map-staticimage-userorpost-script-drawmarkers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MAP_SCRIPT_DRAWMARKERS],

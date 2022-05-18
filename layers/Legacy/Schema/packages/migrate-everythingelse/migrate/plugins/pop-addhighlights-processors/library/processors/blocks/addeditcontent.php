@@ -5,7 +5,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     public final const MODULE_BLOCK_HIGHLIGHT_UPDATE = 'block-highlight-update';
     public final const MODULE_BLOCK_HIGHLIGHT_CREATE = 'block-highlight-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_HIGHLIGHT_UPDATE],

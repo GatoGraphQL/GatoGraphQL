@@ -63,7 +63,7 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
     public final const MODULE_BLOCK_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'block-mycategoryposts18-scroll-fullviewpreview';
     public final const MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'block-mycategoryposts19-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYCATEGORYPOSTS00_TABLE_EDIT],

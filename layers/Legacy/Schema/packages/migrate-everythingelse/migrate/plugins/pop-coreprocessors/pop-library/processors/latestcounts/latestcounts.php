@@ -9,7 +9,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
     public final const MODULE_LATESTCOUNT_AUTHOR_CONTENT = 'latestcount-author-content';
     public final const MODULE_LATESTCOUNT_SINGLE_CONTENT = 'latestcount-single-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_TAG_CONTENT],

@@ -4,7 +4,7 @@ class PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues ex
 {
     public final const MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST = 'card-highlightedpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST],

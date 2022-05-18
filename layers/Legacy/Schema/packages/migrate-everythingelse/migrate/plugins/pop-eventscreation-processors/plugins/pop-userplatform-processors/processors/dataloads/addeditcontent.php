@@ -12,7 +12,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
     public final const MODULE_DATALOAD_EVENT_UPDATE = 'dataload-event-update';
     public final const MODULE_DATALOAD_EVENT_CREATE = 'dataload-event-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_EVENT_UPDATE],

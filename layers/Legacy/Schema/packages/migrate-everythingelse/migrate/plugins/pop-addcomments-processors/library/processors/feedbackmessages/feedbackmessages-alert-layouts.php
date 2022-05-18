@@ -5,7 +5,7 @@ class PoP_Module_Processor_CommentsFeedbackMessageAlertLayouts extends PoP_Modul
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_COMMENTS = 'layout-feedbackmessagealert-comments';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_ADDCOMMENT = 'layout-feedbackmessagealert-addcomment';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_COMMENTS],

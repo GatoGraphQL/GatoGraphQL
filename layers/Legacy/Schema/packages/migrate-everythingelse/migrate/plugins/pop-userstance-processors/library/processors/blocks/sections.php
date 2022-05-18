@@ -75,7 +75,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
     public final const MODULE_BLOCK_AUTHORSTANCES_CAROUSEL = 'block-authorstances-carousel';
     public final const MODULE_BLOCK_TAGSTANCES_CAROUSEL = 'block-tagstances-carousel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_STANCES_SCROLL_NAVIGATOR],

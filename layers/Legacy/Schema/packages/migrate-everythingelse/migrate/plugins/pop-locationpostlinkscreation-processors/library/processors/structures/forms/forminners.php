@@ -4,7 +4,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
 {
     public final const MODULE_FORMINNER_LOCATIONPOSTLINK = 'forminner-locationpostlink';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_LOCATIONPOSTLINK],

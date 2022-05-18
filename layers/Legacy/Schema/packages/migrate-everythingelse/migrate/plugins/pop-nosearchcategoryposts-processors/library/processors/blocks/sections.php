@@ -523,7 +523,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
     public final const MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT = 'block-tagnosearchcategoryposts18-carousel-content';
     public final const MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT = 'block-tagnosearchcategoryposts19-carousel-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR],

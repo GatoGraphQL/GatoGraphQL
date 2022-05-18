@@ -65,7 +65,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
     public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts18-scroll-fullviewpreview';
     public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts19-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],

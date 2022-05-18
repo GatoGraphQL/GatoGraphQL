@@ -5,7 +5,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
 {
     public final const MODULE_WIDGET_FORM_EVENTLINKDETAILS = 'widget-form-eventlink-details';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_FORM_EVENTLINKDETAILS],

@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
 {
     public final const MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION = 'forminput-text-typeaheadaddlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION],

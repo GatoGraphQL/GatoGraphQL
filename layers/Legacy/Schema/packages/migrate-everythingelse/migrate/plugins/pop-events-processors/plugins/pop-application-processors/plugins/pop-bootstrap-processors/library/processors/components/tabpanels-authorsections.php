@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
     public final const MODULE_TABPANEL_AUTHORPASTEVENTS = 'tabpanel-authorpastevents';
     public final const MODULE_TABPANEL_AUTHOREVENTSCALENDAR = 'tabpanel-authoreventscalendar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHOREVENTS],

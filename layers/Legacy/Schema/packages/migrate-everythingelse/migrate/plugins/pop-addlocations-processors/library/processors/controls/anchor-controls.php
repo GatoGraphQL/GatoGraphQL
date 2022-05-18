@@ -6,7 +6,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
 {
     public final const MODULE_ANCHORCONTROL_CREATELOCATION = 'anchorcontrol-createlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANCHORCONTROL_CREATELOCATION],

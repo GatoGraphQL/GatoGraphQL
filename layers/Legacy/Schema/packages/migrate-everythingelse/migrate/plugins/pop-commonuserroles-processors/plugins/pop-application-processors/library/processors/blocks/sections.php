@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
     public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_LIST = 'block-organizations-scroll-list';
     public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_LIST = 'block-individuals-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],

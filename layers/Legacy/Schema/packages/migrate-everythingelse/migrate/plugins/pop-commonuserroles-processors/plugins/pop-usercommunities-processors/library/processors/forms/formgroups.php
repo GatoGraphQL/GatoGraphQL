@@ -5,7 +5,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
 {
     public final const MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY = 'ure-forminputgroup-cup-iscommunity';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],

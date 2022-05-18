@@ -7,7 +7,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrollInners extends PoP_Module_
     public final const MODULE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW = 'scrollinner-myevents-fullviewpreview';
     public final const MODULE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW = 'scrollinner-mypastevents-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW],

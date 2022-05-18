@@ -8,7 +8,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageInners extends PoP_Module
     public final const MODULE_FEEDBACKMESSAGEINNER_LOGOUT = 'feedbackmessageinner-logout';
     public final const MODULE_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD = 'feedbackmessageinner-user-changepassword';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGEINNER_LOGIN],

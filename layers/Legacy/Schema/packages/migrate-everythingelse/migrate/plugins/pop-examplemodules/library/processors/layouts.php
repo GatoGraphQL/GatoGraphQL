@@ -12,7 +12,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     public final const MODULE_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
     public final const MODULE_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EXAMPLE_404],

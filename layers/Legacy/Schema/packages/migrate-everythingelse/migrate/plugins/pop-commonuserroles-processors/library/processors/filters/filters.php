@@ -5,7 +5,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
     public final const MODULE_FILTER_INDIVIDUALS = 'filter-individuals';
     public final const MODULE_FILTER_ORGANIZATIONS = 'filter-organizations';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_INDIVIDUALS],

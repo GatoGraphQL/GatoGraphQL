@@ -9,7 +9,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections exten
     public final const MODULE_SCROLLMAP_SINGLEDOWNVOTEDBY_SCROLLMAP = 'scrollmap-singledownvotedby-scrollmap';
     public final const MODULE_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP = 'scrollmap-tagsubscribers-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP],

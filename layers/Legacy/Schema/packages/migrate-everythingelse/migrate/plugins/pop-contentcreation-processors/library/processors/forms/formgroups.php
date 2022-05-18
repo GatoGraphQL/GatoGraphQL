@@ -4,7 +4,7 @@ class PoP_ContentCreation_Module_Processor_FormGroups extends PoP_Module_Process
 {
     public final const MODULE_FORMINPUTGROUP_WHYFLAG = 'gf-forminputgroup-field-whyflag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_WHYFLAG],

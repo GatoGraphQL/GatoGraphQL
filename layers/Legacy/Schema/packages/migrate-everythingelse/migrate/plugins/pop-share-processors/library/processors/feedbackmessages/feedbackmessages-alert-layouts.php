@@ -4,7 +4,7 @@ class PoP_Share_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SHAREBYEMAIL = 'layout-feedbackmessagealert-sharebyemail';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SHAREBYEMAIL],

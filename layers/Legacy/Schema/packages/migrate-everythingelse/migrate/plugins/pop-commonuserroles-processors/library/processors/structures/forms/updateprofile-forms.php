@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_Fo
     public final const MODULE_FORM_PROFILEORGANIZATION_UPDATE = 'form-profileorganization-update';
     public final const MODULE_FORM_PROFILEINDIVIDUAL_UPDATE = 'form-profileindividual-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_PROFILEORGANIZATION_UPDATE],

@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
     public final const MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD = 'contentinner-marknotificationasread';
     public final const MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD = 'contentinner-marknotificationasunread';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD],

@@ -5,7 +5,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
     public final const MODULE_CAROUSEL_STANCES_BYORGANIZATIONS = 'carousel-stances-byorganizations';
     public final const MODULE_CAROUSEL_STANCES_BYINDIVIDUALS = 'carousel-stances-byindividuals';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::MODULE_CAROUSEL_STANCES_BYORGANIZATIONS],

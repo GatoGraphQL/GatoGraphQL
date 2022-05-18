@@ -10,7 +10,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     public final const MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
     public final const MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION],

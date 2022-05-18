@@ -11,7 +11,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
     public final const MODULE_CODE_STANCECOUNT = 'code-stancecount';
     public final const MODULE_CODE_POSTSTANCE = 'code-poststance';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_REFERENCEDAFTERREADING],

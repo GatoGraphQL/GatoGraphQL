@@ -6,7 +6,7 @@ class PoP_Module_Processor_MapDivs extends PoP_Module_Processor_MapDivsBase
     public final const MODULE_MAPSTATICIMAGE_DIV = 'em-mapstaticimage-div';
     public final const MODULE_MAPSTATICIMAGE_USERORPOST_DIV = 'em-mapstaticimage-userorpost-div';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MAP_DIV],

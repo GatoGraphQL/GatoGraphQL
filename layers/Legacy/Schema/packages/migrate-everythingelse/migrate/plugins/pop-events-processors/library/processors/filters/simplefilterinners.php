@@ -9,7 +9,7 @@ class PoP_Events_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Pr
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'simplefilterinputcontainer-authoreventscalendar';
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'simplefilterinputcontainer-tageventscalendar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_EVENTS],

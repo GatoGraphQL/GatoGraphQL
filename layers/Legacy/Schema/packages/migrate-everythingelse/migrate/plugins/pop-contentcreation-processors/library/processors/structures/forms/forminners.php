@@ -4,7 +4,7 @@ class PoP_ContentCreation_Module_Processor_GFFormInners extends PoP_Module_Proce
 {
     public final const MODULE_FORMINNER_FLAG = 'forminner-flag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_FLAG],

@@ -4,7 +4,7 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
 {
     public final const MODULE_GROUP_WHOWEARE = 'group-whoweare';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GROUP_WHOWEARE],

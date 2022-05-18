@@ -9,7 +9,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     public final const MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT = 'dataload-mymembers-table-edit';
     public final const MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW = 'dataload-mymembers-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT],

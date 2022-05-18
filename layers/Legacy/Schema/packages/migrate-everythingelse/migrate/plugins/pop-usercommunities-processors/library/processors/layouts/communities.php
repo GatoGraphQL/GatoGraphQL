@@ -4,7 +4,7 @@ class GD_URE_Module_Processor_UserCommunityLayouts extends GD_URE_Module_Process
 {
     public final const MODULE_URE_LAYOUT_COMMUNITIES = 'ure-layoutuser-communities';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUT_COMMUNITIES],

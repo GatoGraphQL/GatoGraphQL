@@ -17,7 +17,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public final const MODULE_BLOCK_AUTHORSUMMARY = 'block-authorsummary';
     public final const MODULE_BLOCK_TAG = 'block-tag';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_HOME],

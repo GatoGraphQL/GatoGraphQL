@@ -4,7 +4,7 @@ class GD_Custom_EM_Module_Processor_TableInners extends PoP_Module_Processor_Tab
 {
     public final const MODULE_TABLEINNER_MYLOCATIONPOSTS = 'tableinner-mylocationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLEINNER_MYLOCATIONPOSTS],

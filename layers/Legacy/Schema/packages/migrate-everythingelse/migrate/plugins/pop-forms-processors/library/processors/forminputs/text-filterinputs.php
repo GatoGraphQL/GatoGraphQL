@@ -27,7 +27,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_SEARCH],

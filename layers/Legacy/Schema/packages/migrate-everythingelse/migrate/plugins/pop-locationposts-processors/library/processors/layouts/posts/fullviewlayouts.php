@@ -4,7 +4,7 @@ class GD_Custom_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Pro
 {
     public final const MODULE_LAYOUT_FULLVIEW_LOCATIONPOST = 'layout-fullview-locationpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST],

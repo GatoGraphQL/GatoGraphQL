@@ -6,7 +6,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
     public final const MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS = 'lazysubcomponent-postcomments';
     public final const MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS = 'lazysubcomponent-noheaderpostcomments';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBCOMPONENT_POSTCOMMENTS],

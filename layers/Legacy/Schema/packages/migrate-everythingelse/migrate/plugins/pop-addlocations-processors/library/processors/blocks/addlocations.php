@@ -4,7 +4,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
 {
     public final const MODULE_BLOCK_CREATELOCATION = 'block-createlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_CREATELOCATION],

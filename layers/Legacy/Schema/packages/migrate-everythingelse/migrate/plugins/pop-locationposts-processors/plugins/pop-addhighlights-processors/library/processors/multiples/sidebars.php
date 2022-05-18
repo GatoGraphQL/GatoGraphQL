@@ -4,7 +4,7 @@ class PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples extends 
 {
     public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR = 'multiple-single-locationpost-highlightssidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR],

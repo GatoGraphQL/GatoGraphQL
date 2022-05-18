@@ -4,7 +4,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners ex
 {
     public final const MODULE_VERTICALSIDEBARINNER_SINGLE_LINK = 'vertical-sidebarinner-single-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_LINK],

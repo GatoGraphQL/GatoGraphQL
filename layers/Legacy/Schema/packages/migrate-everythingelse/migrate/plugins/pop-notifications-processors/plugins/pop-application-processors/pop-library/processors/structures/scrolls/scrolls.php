@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const MODULE_SCROLL_NOTIFICATIONS_DETAILS = 'scroll-notifications-details';
     public final const MODULE_SCROLL_NOTIFICATIONS_LIST = 'scroll-notifications-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_NOTIFICATIONS_DETAILS],

@@ -5,7 +5,7 @@ class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor
     public final const MODULE_FEEDBACKMESSAGE_COMMENTS = 'feedbackmessage-comments';
     public final const MODULE_FEEDBACKMESSAGE_ADDCOMMENT = 'feedbackmessage-addcomment';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGE_COMMENTS],

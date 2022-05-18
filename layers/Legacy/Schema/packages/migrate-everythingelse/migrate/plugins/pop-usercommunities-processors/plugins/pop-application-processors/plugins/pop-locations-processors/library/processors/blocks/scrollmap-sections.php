@@ -5,7 +5,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks extend
     public final const MODULE_BLOCK_COMMUNITIES_SCROLLMAP = 'block-communities-scrollmap';
     public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'block-authormembers-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLLMAP],

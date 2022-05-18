@@ -5,7 +5,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
     public final const MODULE_FORMINPUTGROUP_NAME = 'gf-forminputgroup-field-name';
     public final const MODULE_FORMINPUTGROUP_EMAIL = 'gf-forminputgroup-field-email';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_NAME],

@@ -4,7 +4,7 @@ class PoP_Module_Processor_MultipleContentInners extends PoP_Module_Processor_Co
 {
     public final const MODULE_CONTENTINNER_PAGECONTENT = 'contentinner-getpop-pagecontent';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_PAGECONTENT],

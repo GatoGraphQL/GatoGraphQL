@@ -546,7 +546,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     public final const MODULE_DATALOAD_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT = 'dataload-tagcategoryposts18-carousel-content';
     public final const MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT = 'dataload-tagcategoryposts19-carousel-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD],

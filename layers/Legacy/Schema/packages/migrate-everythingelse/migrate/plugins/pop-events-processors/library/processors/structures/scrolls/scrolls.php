@@ -19,7 +19,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public final const MODULE_SCROLL_EVENTS_LIST = 'scroll-events-list';
     public final const MODULE_SCROLL_PASTEVENTS_LIST = 'scroll-pastevents-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_EVENTS_NAVIGATOR],

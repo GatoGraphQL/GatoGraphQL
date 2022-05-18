@@ -4,7 +4,7 @@ class PoP_Module_Processor_Alerts extends PoP_Module_Processor_AlertsBase
 {
     public final const MODULE_ALERT_STICKY = 'alert-sticky';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ALERT_STICKY],

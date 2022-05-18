@@ -4,7 +4,7 @@ class PoP_UserCommunities_EM_Module_Processor_CustomScrollInners extends PoP_Mod
 {
     public final const MODULE_SCROLLINNER_COMMUNITIES_MAP = 'scrollinner-communities-map';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_COMMUNITIES_MAP],

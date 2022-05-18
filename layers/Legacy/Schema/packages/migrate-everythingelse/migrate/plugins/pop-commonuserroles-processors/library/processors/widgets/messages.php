@@ -5,7 +5,7 @@ class GD_URE_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor
 {
     public final const MODULE_URE_MESSAGE_NODETAILS = 'ure-message-nodetails';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_MESSAGE_NODETAILS],

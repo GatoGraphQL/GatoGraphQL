@@ -4,7 +4,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebars extends PoP_Modul
 {
     public final const MODULE_VERTICALSIDEBAR_SINGLE_STANCE = 'vertical-sidebar-single-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE],

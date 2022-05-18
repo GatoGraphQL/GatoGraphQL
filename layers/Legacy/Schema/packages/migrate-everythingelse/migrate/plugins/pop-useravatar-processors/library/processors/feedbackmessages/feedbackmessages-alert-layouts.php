@@ -4,7 +4,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts 
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE = 'layout-feedbackmessagealert-useravatar-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE],

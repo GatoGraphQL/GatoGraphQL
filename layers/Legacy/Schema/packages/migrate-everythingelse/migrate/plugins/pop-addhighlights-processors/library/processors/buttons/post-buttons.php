@@ -6,7 +6,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     public final const MODULE_BUTTON_HIGHLIGHT_CREATE = 'postbutton-highlight-create';
     public final const MODULE_BUTTON_HIGHLIGHT_CREATEBTN = 'postbutton-highlight-createbtn';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_HIGHLIGHT_CREATE],

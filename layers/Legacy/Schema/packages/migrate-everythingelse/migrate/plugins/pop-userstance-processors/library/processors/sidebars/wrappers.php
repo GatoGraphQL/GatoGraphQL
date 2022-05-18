@@ -11,7 +11,7 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
     public final const MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-opvotereferencedby-details';
     public final const MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'buttonwrapper-opvote-createorupdate';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGETWRAPPER_STANCETARGET],

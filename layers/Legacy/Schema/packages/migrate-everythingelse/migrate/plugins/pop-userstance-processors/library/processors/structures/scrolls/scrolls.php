@@ -13,7 +13,7 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public final const MODULE_SCROLL_AUTHORSTANCES_LIST = 'scroll-authorstances-list';
     public final const MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scroll-singlerelatedstancecontent-fullview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW],

@@ -19,7 +19,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
     public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_LIST = 'dataload-organizations-scroll-list';
     public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST = 'dataload-individuals-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD],

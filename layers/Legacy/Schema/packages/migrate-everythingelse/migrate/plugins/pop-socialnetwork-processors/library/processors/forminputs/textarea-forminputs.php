@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_TextareaFormInputs extends PoP_Module_P
 {
     public final const MODULE_FORMINPUT_MESSAGETOUSER = 'gf-field-messagetouser';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_MESSAGETOUSER],

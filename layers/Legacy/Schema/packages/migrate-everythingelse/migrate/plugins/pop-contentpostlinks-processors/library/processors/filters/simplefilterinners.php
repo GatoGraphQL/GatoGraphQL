@@ -6,7 +6,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS = 'simplefilterinputcontainer-authorlinks';
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLINKS = 'simplefilterinputcontainer-taglinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_LINKS],

@@ -23,7 +23,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
     public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'tabpanel-authornosearchcategoryposts18';
     public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'tabpanel-authornosearchcategoryposts19';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00],

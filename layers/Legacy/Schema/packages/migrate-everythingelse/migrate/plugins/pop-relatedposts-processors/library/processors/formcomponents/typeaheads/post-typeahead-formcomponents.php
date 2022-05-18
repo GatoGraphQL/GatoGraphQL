@@ -5,7 +5,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFormComponents extends PoP_Mod
 {
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'formcomponent-selectabletypeahead-references';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],

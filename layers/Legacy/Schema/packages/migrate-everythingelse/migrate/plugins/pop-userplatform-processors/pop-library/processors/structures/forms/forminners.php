@@ -5,7 +5,7 @@ class PoP_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInner
     public final const MODULE_FORMINNER_INVITENEWUSERS = 'forminner-inviteusers';
     public final const MODULE_FORMINNER_MYPREFERENCES = 'forminner-mypreferences';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_INVITENEWUSERS],

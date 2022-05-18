@@ -7,7 +7,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
     public final const MODULE_FORMINPUT_EMAILS = 'forminput-emails';
     public final const MODULE_FORMINPUT_ADDITIONALMESSAGE = 'forminput-additionalmessage';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_TEXTAREAEDITOR],

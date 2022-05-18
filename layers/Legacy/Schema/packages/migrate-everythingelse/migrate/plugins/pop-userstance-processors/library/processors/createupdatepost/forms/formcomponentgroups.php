@@ -6,7 +6,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
 {
     public final const MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET = 'formcomponentgroup-card-stancetarget';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET],

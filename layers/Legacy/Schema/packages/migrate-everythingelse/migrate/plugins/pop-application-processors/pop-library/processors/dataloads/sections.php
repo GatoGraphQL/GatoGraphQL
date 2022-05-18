@@ -10,7 +10,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'dataload-singleauthors-scroll-thumbnail';
     public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST = 'dataload-singleauthors-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS],

@@ -41,7 +41,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
     public final const MODULE_SCROLLINNER_USERS_LIST = 'scrollinner-users-list';
     public final const MODULE_SCROLLINNER_USER_LIST = 'scrollinner-user-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR],

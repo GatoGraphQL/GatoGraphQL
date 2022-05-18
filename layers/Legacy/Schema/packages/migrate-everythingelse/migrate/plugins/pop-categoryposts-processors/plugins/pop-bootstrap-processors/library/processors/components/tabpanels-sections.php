@@ -23,7 +23,7 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
     public final const MODULE_TABPANEL_CATEGORYPOSTS18 = 'categoryposts18-tabpanel';
     public final const MODULE_TABPANEL_CATEGORYPOSTS19 = 'categoryposts19-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_CATEGORYPOSTS00],

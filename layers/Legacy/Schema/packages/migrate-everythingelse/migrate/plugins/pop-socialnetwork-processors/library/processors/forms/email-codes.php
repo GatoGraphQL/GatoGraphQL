@@ -6,7 +6,7 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
     public final const MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL = 'code-emailnotifications-networklabel';
     public final const MODULE_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL = 'code-emailnotifications-subscribedtopicslabel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL],

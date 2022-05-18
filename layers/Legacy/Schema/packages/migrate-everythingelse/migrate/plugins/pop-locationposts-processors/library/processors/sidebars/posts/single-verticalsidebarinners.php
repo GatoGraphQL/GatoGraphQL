@@ -4,7 +4,7 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Mo
 {
     public final const MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST = 'vertical-sidebarinner-single-locationpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST],

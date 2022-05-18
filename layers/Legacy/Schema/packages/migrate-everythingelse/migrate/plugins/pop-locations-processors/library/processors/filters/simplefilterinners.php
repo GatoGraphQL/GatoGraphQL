@@ -4,7 +4,7 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
 {
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS = 'simplefilterinputcontainer-locations';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],

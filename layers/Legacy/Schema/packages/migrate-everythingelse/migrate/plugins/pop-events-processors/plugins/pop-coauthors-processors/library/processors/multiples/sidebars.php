@@ -5,7 +5,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
     public final const MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR = 'multiple-single-pastevent-postauthorssidebar';
     public final const MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR = 'multiple-single-event-postauthorssidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR],

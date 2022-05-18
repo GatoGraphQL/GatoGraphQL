@@ -11,7 +11,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const MODULE_WIDGET_REFERENCES_LINE = 'widget-references-line';
     public final const MODULE_WIDGET_HIGHLIGHTEDPOST_LINE = 'widget-highlightedpost-line';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_POST_AUTHORS],

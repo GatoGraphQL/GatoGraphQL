@@ -35,7 +35,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         return $this->customPostUnmoderatedStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnmoderatedStatusEnumTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS],

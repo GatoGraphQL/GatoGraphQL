@@ -7,7 +7,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
     public final const MODULE_BUTTON_POSTVIEW = 'button-postview';
     public final const MODULE_BUTTON_POSTPREVIEW = 'button-postpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_POSTEDIT],

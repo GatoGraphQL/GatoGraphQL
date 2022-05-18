@@ -5,7 +5,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
 {
     public final const MODULE_FORMINPUT_EMBEDCODE = 'embedcode';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_EMBEDCODE],

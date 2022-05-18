@@ -8,7 +8,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public final const MODULE_BUTTONCONTROL_LOADLATESTBLOCK = 'buttoncontrol-loadlatestblock';
     public final const MODULE_BUTTONCONTROL_RESETEDITOR = 'buttoncontrol-reseteditor';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP],

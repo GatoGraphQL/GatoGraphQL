@@ -7,7 +7,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
     public final const MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION = 'ure-typeahead-component-organization';
     public final const MODULE_URE_TYPEAHEAD_COMPONENT_INDIVIDUAL = 'ure-typeahead-component-individual';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION],

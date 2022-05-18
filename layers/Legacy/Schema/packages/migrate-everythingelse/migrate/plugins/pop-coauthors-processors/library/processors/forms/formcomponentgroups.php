@@ -6,7 +6,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
     public final const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS = 'formcomponentgroup-selectabletypeahead-postauthors';
     public final const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS = 'formcomponentgroup-selectabletypeahead-postcoauthors';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS],

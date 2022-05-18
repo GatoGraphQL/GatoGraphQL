@@ -12,7 +12,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     public final const MODULE_MULTICOMPONENT_USEROPTIONS = 'multicomponent-useroptions';
     public final const MODULE_MULTICOMPONENT_TAGOPTIONS = 'multicomponent-tagoptions';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA],

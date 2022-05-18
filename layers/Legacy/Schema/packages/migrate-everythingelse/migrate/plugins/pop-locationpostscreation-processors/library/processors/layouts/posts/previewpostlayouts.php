@@ -4,7 +4,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 {
     public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT = 'layout-previewpost-locationpost-edit';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],

@@ -5,7 +5,7 @@ class GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs extends PoP_Mo
 {
     public final const MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES = 'forminput-text-typeaheadcommunities';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES],

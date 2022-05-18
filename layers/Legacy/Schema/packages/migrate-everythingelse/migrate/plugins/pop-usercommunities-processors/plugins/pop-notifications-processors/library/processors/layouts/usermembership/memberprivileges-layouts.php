@@ -5,7 +5,7 @@ class Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts extends GD_URE_Mod
 {
     public final const MODULE_UREAAL_LAYOUTUSER_MEMBERPRIVILEGES = 'ure-aal-layoutuser-memberprivileges-desc';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_LAYOUTUSER_MEMBERPRIVILEGES],

@@ -23,7 +23,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'tabpanel-tagnosearchcategoryposts18';
     public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'tabpanel-tagnosearchcategoryposts19';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],

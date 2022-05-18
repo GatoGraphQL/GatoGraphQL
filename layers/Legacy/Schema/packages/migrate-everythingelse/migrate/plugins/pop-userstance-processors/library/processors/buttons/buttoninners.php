@@ -10,7 +10,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
     public final const MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL = 'buttoninner-poststance-neutral';
     public final const MODULE_BUTTONINNER_POSTSTANCE_AGAINST = 'buttoninner-poststance-against';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_STANCE_CREATE],

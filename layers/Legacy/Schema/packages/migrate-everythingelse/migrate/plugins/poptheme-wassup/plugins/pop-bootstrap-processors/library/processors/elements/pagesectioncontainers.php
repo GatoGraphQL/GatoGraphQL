@@ -7,7 +7,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
     public final const MODULE_PAGESECTIONCONTAINER_HOLE = 'pagesectioncontainer-hole';
     public final const MODULE_PAGESECTIONCONTAINER_MODALS = 'pagesectioncontainer-modals';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_PAGESECTIONCONTAINER_HOLE],

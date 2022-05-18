@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
     public final const MODULE_AAL_QUICKLINKBUTTONGROUP_VIEWUSER = 'notifications-quicklinkbuttongroup-viewuser';
     public final const MODULE_AAL_QUICKLINKBUTTONGROUP_NOTIFICATION_MARKASREADUNREAD = 'notifications-quicklinkbuttongroup-notification-markasreadunread';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_AAL_QUICKLINKBUTTONGROUP_VIEWUSER],

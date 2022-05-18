@@ -4,7 +4,7 @@ class GD_EM_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor
 {
     public final const MODULE_FORMINPUT_URLPARAMTEXT_LOCATIONID = 'forminput-urlparam-locationid';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_LOCATIONID],

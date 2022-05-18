@@ -10,7 +10,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
     public final const MODULE_BLOCK_TABPANEL_MYCONTENT = 'block-mycontent-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_MYPOSTS = 'block-myposts-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_SEARCHCONTENT],

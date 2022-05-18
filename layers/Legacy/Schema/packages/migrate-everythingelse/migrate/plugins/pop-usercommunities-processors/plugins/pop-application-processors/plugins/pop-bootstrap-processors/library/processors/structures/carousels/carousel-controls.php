@@ -9,7 +9,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
 {
     public final const MODULE_CAROUSELCONTROLS_AUTHORMEMBERS = 'carouselcontrols-members';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS],

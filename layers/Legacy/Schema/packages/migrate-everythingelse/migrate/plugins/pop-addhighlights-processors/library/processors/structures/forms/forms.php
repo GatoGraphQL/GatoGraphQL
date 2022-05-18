@@ -4,7 +4,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostForms extends PoP_Modul
 {
     public final const MODULE_FORM_HIGHLIGHT = 'form-highlight';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_HIGHLIGHT],

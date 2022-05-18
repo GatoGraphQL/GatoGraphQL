@@ -5,7 +5,7 @@ class PoP_Share_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 {
     public final const MODULE_FORMINPUT_DESTINATIONEMAIL = 'gf-field-destinationemail';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_DESTINATIONEMAIL],

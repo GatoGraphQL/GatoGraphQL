@@ -5,7 +5,7 @@ class PoP_Module_Processor_PostLayoutSidebars extends PoP_Module_Processor_Sideb
     public final const MODULE_LAYOUT_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layout-postconclusionsidebar-horizontal';
     public final const MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layout-subjugatedpostconclusionsidebar-horizontal';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBAR_HORIZONTAL],

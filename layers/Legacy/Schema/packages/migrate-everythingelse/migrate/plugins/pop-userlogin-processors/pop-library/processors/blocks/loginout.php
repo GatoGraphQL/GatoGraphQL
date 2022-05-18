@@ -10,7 +10,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
     public final const MODULE_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
     public final const MODULE_BLOCK_LOGOUT = 'block-logout';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_LOGIN],

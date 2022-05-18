@@ -7,7 +7,7 @@ class PoPCore_GenericForms_Module_Processor_TagViewComponentButtons extends PoP_
     public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-tagbutton-sharebyemail-socialmedia';
     public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-sharebyemail-previewdropdown';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA],

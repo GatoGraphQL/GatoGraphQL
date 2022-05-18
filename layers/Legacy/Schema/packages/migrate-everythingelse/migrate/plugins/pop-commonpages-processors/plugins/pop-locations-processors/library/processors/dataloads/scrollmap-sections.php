@@ -5,7 +5,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
 {
     public final const MODULE_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP],

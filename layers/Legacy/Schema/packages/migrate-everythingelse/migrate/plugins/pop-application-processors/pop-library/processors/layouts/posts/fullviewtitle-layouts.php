@@ -6,7 +6,7 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
     public final const MODULE_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
     public final const MODULE_LAYOUT_POSTTITLE = 'layout-posttitle';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FULLVIEWTITLE],

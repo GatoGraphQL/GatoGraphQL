@@ -11,7 +11,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     public final const MODULE_LAYOUT_PREVIEWUSER_POSTAUTHOR = 'layout-previewuser-postauthor';
     public final const MODULE_LAYOUT_PREVIEWUSER_HEADER = 'layout-previewuser-header';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWUSER_NAVIGATOR],

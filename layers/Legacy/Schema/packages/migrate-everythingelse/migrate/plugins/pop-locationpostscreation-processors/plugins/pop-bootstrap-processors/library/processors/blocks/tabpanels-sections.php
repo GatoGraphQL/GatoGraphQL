@@ -4,7 +4,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
 {
     public final const MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS = 'block-mylocationposts-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS],

@@ -8,7 +8,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public final const MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR = 'multiple-authorsubscribedtotags-sidebar';
     public final const MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR = 'multiple-authorrecommendedposts-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR],

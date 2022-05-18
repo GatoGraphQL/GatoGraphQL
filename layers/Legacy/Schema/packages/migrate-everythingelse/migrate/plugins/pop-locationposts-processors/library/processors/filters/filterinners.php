@@ -6,7 +6,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
     public final const MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinputcontainer-authorlocationposts';
     public final const MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinputcontainer-taglocationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS],

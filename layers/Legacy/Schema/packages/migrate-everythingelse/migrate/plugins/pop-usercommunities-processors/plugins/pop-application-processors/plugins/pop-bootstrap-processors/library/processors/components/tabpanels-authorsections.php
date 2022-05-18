@@ -4,7 +4,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
 {
     public final const MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'tabpanel-authorcommunitymembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS],

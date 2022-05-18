@@ -5,7 +5,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
     public final const MODULE_FILTER_LINKS = 'filter-links';
     public final const MODULE_FILTER_AUTHORLINKS = 'filter-authorlinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_LINKS],

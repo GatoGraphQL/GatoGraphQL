@@ -4,7 +4,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
 {
     public final const MODULE_TABPANEL_LINKS = 'tabpanel-links';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_LINKS],

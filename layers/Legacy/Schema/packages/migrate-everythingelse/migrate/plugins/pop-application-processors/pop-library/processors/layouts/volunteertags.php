@@ -4,7 +4,7 @@ class PoP_Module_Processor_VolunteerTagLayouts extends PoP_Module_Processor_Volu
 {
     public final const MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER = 'layout-postadditional-volunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER],

@@ -4,7 +4,7 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
 {
     public final const MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE = 'layout-previewpost-simpleview-featureimage';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE],

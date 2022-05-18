@@ -4,7 +4,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
 {
     public final const MODULE_FORMINNER_EVENT = 'forminner-event';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_EVENT],

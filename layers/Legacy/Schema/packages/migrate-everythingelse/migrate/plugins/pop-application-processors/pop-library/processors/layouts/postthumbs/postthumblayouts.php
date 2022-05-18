@@ -18,7 +18,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     public final const MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED = 'layout-postthumb-linkselfcroppedfeed';
     public final const MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER = 'layout-postthumb-linkselfcroppedfeed-volunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTTHUMB_FAVICON],

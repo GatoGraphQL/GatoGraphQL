@@ -12,7 +12,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL = 'block-automatedemails-events-scroll-thumbnail';
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST = 'block-automatedemails-events-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS],

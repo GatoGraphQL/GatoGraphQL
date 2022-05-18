@@ -5,7 +5,7 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
     public final const MODULE_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'contentinner-postconclusionsidebar-horizontal';
     public final const MODULE_CONTENTINNER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'contentinner-subjugatedpostconclusionsidebar-horizontal';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL],

@@ -8,7 +8,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public final const MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO = 'dropdownbuttonquicklink-usercontactinfo';
     public final const MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE = 'dropdownbuttonquicklink-tagshare';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE],

@@ -10,7 +10,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     public final const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'filterinputcontainer-authorstances-stance';
     public final const MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'filterinputcontainer-stances-generalstance';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_STANCES],

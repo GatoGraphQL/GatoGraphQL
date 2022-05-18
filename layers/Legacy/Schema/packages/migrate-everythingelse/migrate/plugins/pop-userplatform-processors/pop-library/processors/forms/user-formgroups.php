@@ -14,7 +14,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
     public final const MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL = 'forminputgroup-cuu-userwebsiteurl';
     public final const MODULE_FORMINPUTGROUP_CUU_DESCRIPTION = 'forminputgroup-cuu-description';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_CUU_USERNAME],

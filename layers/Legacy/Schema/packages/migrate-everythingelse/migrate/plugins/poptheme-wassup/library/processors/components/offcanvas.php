@@ -14,7 +14,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_OFFCANVAS_HOVER],

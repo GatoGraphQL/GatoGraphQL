@@ -4,7 +4,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps exte
 {
     public final const MODULE_SCROLL_WHOWEARE_MAP = 'scroll-whoweare-map';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_WHOWEARE_MAP],

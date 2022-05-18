@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     public final const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public final const MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'filterinputcontainer-mycategoryposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_TAGS],

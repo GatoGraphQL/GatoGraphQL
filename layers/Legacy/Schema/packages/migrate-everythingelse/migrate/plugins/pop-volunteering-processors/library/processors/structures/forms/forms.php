@@ -5,7 +5,7 @@ class PoP_Volunteering_Module_Processor_GFForms extends PoP_Module_Processor_For
 {
     public final const MODULE_FORM_VOLUNTEER = 'form-volunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_VOLUNTEER],

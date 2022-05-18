@@ -546,7 +546,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
     public final const MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT = 'dataload-tagnosearchcategoryposts18-carousel-content';
     public final const MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT = 'dataload-tagnosearchcategoryposts19-carousel-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_TYPEAHEAD],

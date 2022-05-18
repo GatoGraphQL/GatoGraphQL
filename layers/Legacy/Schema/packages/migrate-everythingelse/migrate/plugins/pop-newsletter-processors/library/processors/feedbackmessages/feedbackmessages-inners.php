@@ -5,7 +5,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageInners extends PoP_Module_P
     public final const MODULE_FEEDBACKMESSAGEINNER_NEWSLETTER = 'feedbackmessageinner-newsletter';
     public final const MODULE_FEEDBACKMESSAGEINNER_NEWSLETTERUNSUBSCRIPTION = 'feedbackmessageinner-newsletterunsubscription';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGEINNER_NEWSLETTER],

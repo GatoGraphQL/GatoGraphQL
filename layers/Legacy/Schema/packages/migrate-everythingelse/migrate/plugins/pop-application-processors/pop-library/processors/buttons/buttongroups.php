@@ -15,7 +15,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
     public final const MODULE_BUTTONGROUP_TAGS = 'buttongroup-tags';
     public final const MODULE_BUTTONGROUP_AUTHORTAGS = 'buttongroup-authortags';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_SECTION],

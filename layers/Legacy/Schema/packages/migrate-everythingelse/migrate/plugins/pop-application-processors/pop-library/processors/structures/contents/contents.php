@@ -8,7 +8,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
     public final const MODULE_CONTENT_PAGECONTENT = 'content-pagecontent';
     public final const MODULE_CONTENT_PAGECONTENT_PRETTYPRINT = 'content-pagecontent-prettyprint';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENT_AUTHOR],

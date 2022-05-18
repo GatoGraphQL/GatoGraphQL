@@ -8,7 +8,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
     public final const MODULE_DATALOAD_NEWSLETTER = 'dataload-newsletter';
     public final const MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION = 'dataload-newsletterunsubscription';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_NEWSLETTER],

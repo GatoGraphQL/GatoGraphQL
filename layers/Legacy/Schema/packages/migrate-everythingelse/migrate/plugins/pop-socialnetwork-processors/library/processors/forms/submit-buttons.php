@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_SubmitButtons extends PoP_Module_Proces
 {
     public final const MODULE_GF_SUBMITBUTTON_SENDMESSAGETOUSER = 'gf-submitbutton-sendmessagetouser';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GF_SUBMITBUTTON_SENDMESSAGETOUSER],

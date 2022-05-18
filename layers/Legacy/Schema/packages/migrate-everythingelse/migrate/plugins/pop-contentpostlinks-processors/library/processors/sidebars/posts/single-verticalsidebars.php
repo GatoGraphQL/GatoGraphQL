@@ -4,7 +4,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebars extends
 {
     public final const MODULE_VERTICALSIDEBAR_SINGLE_LINK = 'vertical-sidebar-single-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_LINK],

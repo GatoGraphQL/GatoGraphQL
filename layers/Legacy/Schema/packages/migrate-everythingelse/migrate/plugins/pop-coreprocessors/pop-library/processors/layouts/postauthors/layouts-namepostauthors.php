@@ -4,7 +4,7 @@ class PoP_Module_Processor_PostAuthorNameLayouts extends PoP_Module_Processor_Po
 {
     public final const MODULE_LAYOUTPOST_AUTHORNAME = 'layoutpost-authorname';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTPOST_AUTHORNAME],

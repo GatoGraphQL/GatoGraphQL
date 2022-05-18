@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_WidgetMessages extends PoP_Module_Processor_Widget
 {
     public final const MODULE_URE_MESSAGE_NOCOMMUNITIES = 'ure-message-nocommunities';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_MESSAGE_NOCOMMUNITIES],

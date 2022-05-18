@@ -5,7 +5,7 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
     public final const MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT = 'quicklinkgroup-highlightedit';
     public final const MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT = 'quicklinkgroup-highlightcontent';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT],

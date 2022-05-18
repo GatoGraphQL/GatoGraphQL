@@ -6,7 +6,7 @@ class PoP_ContactUs_Module_Processor_FormGroups extends PoP_Module_Processor_For
     public final const MODULE_FORMINPUTGROUP_SUBJECT = 'gf-forminputgroup-field-subject';
     public final const MODULE_FORMINPUTGROUP_MESSAGE = 'gf-forminputgroup-field-message';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_TOPIC],

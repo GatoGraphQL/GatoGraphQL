@@ -7,7 +7,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     public final const MODULE_WIDGET_LINK_CATEGORIES = 'widget-link-categories';
     public final const MODULE_WIDGETCOMPACT_LINKINFO = 'widgetcompact-link-info';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_LINK_ACCESS],

@@ -18,7 +18,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     public final const MODULE_PAGE_TOP = 'page-top';
     public final const MODULE_PAGE_BODYSIDEINFO = 'page-bodysideinfo';
     public final const MODULE_PAGE_BODY = 'page-body';
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_PAGE_QUICKVIEW],

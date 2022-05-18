@@ -4,7 +4,7 @@ class GD_URE_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Processor_
 {
     public final const MODULE_URE_LAYOUTUSER_MEMBERTAGS = 'ure-layoutuser-membertags-nodesc';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUTUSER_MEMBERTAGS],

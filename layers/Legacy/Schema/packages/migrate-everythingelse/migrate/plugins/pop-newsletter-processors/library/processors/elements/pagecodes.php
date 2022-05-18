@@ -4,7 +4,7 @@ class GenericForms_Module_Processor_PageCodes extends PoP_Module_Processor_HTMLP
 {
     public final const MODULE_PAGECODE_NEWSLETTER = 'pagecode-newsletter';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_PAGECODE_NEWSLETTER],

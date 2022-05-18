@@ -8,7 +8,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
     public final const MODULE_EM_WIDGETCOMPACT_EVENTINFO = 'em-widgetcompact-eventinfo';
     public final const MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO = 'em-widgetcompact-pasteventinfo';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS],

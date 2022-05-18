@@ -4,7 +4,7 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
 {
     public final const MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST = 'controlbuttongroup-addrelatedpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST],

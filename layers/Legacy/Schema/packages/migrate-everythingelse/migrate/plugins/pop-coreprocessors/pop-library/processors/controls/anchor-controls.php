@@ -15,7 +15,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
     public final const MODULE_ANCHORCONTROL_CLOSEPAGEBTN = 'anchorcontrol-closepagebtn';
     public final const MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG = 'anchorcontrol-closepagebtnbig';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS],

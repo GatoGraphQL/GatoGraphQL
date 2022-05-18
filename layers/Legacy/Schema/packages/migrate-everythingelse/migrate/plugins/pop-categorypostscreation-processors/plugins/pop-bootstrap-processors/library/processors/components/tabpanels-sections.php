@@ -23,7 +23,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
     public final const MODULE_TABPANEL_MYCATEGORYPOSTS18 = 'tabpanel-mycategoryposts18';
     public final const MODULE_TABPANEL_MYCATEGORYPOSTS19 = 'tabpanel-mycategoryposts19';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_MYCATEGORYPOSTS00],

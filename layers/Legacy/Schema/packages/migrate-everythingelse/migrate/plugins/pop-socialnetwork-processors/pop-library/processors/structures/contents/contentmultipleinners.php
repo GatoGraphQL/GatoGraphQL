@@ -13,7 +13,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
     public final const MODULE_CONTENTINNER_DOWNVOTESPOSTS = 'contentinner-downvotesposts';
     public final const MODULE_CONTENTINNER_UNDODOWNVOTESPOSTS = 'contentinner-undodownvotesposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_FOLLOWSUSERS],

@@ -7,7 +7,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     public final const MODULE_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
     public final const MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_NEWSLETTER],

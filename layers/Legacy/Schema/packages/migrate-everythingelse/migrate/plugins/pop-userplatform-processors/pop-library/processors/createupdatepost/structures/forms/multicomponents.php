@@ -12,7 +12,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
     public final const MODULE_MULTICOMPONENT_FORM_POST_LEFTSIDE = 'multicomponent-form-post-leftside';
     public final const MODULE_MULTICOMPONENT_FORM_POST_RIGHTSIDE = 'multicomponent-form-post-rightside';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH],

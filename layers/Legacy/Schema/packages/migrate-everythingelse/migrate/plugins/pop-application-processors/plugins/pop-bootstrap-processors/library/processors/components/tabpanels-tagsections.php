@@ -6,7 +6,7 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
     public final const MODULE_TABPANEL_TAGPOSTS = 'tabpanel-tagposts';
     public final const MODULE_TABPANEL_TAGSUBSCRIBERS = 'tabpanel-tagsubscribers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_TAGCONTENT],

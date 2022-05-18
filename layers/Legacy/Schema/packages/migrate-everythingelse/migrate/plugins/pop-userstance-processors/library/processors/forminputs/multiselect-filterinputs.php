@@ -24,7 +24,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_STANCE_MULTISELECT],

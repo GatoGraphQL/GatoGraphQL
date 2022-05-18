@@ -5,7 +5,7 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
 {
     public final const MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH = 'submitbutton-instantaneoussearch';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH],

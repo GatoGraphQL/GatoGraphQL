@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_Control
 {
     public final const MODULE_URE_CONTROLGROUP_CONTENTSOURCE = 'ure-controlgroup-contentsource';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_CONTROLGROUP_CONTENTSOURCE],

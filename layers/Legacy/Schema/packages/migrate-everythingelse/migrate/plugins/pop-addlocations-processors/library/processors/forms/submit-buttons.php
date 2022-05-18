@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitBu
 {
     public final const MODULE_EM_SUBMITBUTTON_ADDLOCATION = 'em-submitbutton-addlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_SUBMITBUTTON_ADDLOCATION],

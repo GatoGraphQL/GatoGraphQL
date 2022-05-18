@@ -5,7 +5,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomDelegatorFilters extends PoP_M
     public final const MODULE_DELEGATORFILTER_CONTENTPOSTLINKS = 'delegatorfilter-contentpostlinks';
     public final const MODULE_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS = 'delegatorfilter-authorcontentpostlinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DELEGATORFILTER_CONTENTPOSTLINKS],

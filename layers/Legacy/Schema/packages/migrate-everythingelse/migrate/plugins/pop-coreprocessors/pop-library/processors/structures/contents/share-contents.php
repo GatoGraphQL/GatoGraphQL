@@ -8,7 +8,7 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
     public final const MODULE_CONTENT_API = 'content-api';
     public final const MODULE_CONTENT_COPYSEARCHURL = 'content-copysearchurl';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENT_EMBEDPREVIEW],

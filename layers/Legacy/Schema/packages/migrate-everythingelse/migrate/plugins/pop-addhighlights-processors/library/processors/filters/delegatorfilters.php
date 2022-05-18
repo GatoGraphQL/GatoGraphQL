@@ -6,7 +6,7 @@ class PoP_AddHighlights_Module_Processor_CustomDelegatorFilters extends PoP_Modu
     public final const MODULE_DELEGATORFILTER_HIGHLIGHTS = 'delegatorfilter-highlights';
     public final const MODULE_DELEGATORFILTER_MYHIGHLIGHTS = 'delegatorfilter-myhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DELEGATORFILTER_HIGHLIGHTS],

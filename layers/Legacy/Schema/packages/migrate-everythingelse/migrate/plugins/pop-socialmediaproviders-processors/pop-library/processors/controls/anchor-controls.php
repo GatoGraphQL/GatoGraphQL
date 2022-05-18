@@ -12,7 +12,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     public final const MODULE_ANCHORCONTROL_FIXEDSHARE_TWITTER = 'anchorcontrol-fixedshare-twitter';
     public final const MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN = 'anchorcontrol-fixedshare-linkedin';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK],

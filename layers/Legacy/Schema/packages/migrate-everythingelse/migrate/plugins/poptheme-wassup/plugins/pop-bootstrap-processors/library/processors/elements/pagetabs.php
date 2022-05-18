@@ -6,7 +6,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
 {
     public final const MODULE_PAGE_ADDONTABS = 'page-addontabs';
     public final const MODULE_PAGE_BODYTABS = 'page-bodytabs';
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_PAGE_ADDONTABS],

@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
 {
     public final const MODULE_FORMINPUT_EM_LOCATIONCOUNTRY = 'forminput-locationcountry';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY],

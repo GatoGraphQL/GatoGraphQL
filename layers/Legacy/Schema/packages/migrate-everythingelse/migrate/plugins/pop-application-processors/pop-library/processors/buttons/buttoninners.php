@@ -5,7 +5,7 @@ class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
 {
     public final const MODULE_BUTTONINNER_POST_CREATE = 'buttoninner-post-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_POST_CREATE],

@@ -6,7 +6,7 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
     public final const MODULE_DELEGATORFILTER_LOCATIONPOSTS = 'delegatorfilter-locationposts';
     public final const MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS = 'delegatorfilter-taglocationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DELEGATORFILTER_AUTHORLOCATIONPOSTS],

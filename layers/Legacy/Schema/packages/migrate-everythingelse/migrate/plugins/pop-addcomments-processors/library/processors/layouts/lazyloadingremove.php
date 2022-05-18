@@ -4,7 +4,7 @@ class PoP_Module_Processor_LazyLoadingRemoveLayouts extends PoP_Module_Processor
 {
     public final const MODULE_SCRIPT_LAZYLOADINGREMOVE = 'script-lazyloading-remove';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCRIPT_LAZYLOADINGREMOVE],

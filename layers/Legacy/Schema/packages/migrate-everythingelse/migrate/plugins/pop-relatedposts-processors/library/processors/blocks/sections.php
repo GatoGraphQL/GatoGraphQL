@@ -8,7 +8,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
     public final const MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL = 'block-singlerelatedcontent-scroll-thumbnail';
     public final const MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST = 'block-singlerelatedcontent-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS],

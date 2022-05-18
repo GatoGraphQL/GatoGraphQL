@@ -6,7 +6,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST = 'layout-feedbackmessage-itemlist';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY = 'layout-feedbackmessage-empty';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST],

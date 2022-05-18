@@ -7,7 +7,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
 {
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST = 'block-automatedemails-singlepost';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST],

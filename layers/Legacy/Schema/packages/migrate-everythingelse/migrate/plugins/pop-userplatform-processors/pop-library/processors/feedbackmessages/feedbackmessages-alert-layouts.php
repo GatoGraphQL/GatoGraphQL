@@ -4,7 +4,7 @@ class PoP_Core_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_P
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWUSERS = 'layout-feedbackmessagealert-inviteusers';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWUSERS],

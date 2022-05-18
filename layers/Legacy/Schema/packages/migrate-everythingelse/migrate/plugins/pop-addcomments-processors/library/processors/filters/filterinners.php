@@ -4,7 +4,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
 {
     public final const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],

@@ -24,7 +24,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
     public final const MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW = 'buttoninner-undodownvotepost-preview';
     public final const MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL = 'buttoninner-sidebar-undodownvotepost-full';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW],

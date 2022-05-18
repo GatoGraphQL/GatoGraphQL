@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
     public final const MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP = 'em-layoutwrapper-postlocationsmap';
     public final const MODULE_EM_LAYOUTWRAPPER_USERLOCATIONSMAP = 'em-layoutwrapper-userlocationsmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP],

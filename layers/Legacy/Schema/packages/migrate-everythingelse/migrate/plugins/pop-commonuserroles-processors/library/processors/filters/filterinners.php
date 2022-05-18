@@ -5,7 +5,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
     public final const MODULE_FILTERINPUTCONTAINER_INDIVIDUALS = 'filterinputcontainer-individuals';
     public final const MODULE_FILTERINPUTCONTAINER_ORGANIZATIONS = 'filterinputcontainer-organizations';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS],

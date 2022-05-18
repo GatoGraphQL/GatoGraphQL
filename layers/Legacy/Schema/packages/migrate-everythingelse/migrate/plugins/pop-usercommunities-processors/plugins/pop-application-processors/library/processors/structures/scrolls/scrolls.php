@@ -8,7 +8,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
     public final const MODULE_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
     public final const MODULE_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],

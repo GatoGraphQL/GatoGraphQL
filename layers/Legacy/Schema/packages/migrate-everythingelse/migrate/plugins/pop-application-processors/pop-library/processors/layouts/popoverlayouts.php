@@ -8,7 +8,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
     public final const MODULE_LAYOUT_POPOVER_USER_AVATAR40 = 'layout-popover-user-avatar40';
     public final const MODULE_LAYOUT_POPOVER_USER_AVATAR26 = 'layout-popover-user-avatar26';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POPOVER_USER],

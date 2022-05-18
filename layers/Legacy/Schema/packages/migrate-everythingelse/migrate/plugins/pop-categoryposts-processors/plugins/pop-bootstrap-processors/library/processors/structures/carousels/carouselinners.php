@@ -43,7 +43,7 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
     public final const MODULE_CAROUSELINNER_CATEGORYPOSTS18_CONTENT = 'carouselinner-categoryposts18-content';
     public final const MODULE_CAROUSELINNER_CATEGORYPOSTS19_CONTENT = 'carouselinner-categoryposts19-content';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSELINNER_CATEGORYPOSTS00],

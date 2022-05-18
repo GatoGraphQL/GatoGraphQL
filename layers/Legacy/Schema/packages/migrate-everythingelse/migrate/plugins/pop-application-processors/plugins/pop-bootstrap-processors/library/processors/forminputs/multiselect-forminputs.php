@@ -6,7 +6,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
     public final const MODULE_FORMINPUT_APPLIESTO = 'forminput-appliesto';
     public final const MODULE_FORMINPUT_CATEGORIES = 'forminput-categories';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_APPLIESTO],
