@@ -16,12 +16,12 @@ Configure and obtain what module will be added to the component hierarchy at eac
 Via Composer
 
 ``` bash
-composer require getpop/modulerouting
+composer require getpop/componentrouting
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/modulerouting`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/modulerouting).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/componentrouting`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/componentrouting).
 
 ## Usage
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/modulerouting.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/getpop/componentrouting.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/modulerouting/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/modulerouting.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/modulerouting.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/modulerouting.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/getpop/componentrouting/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/componentrouting.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/componentrouting.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/getpop/componentrouting.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/modulerouting
-[link-travis]: https://travis-ci.org/getpop/modulerouting
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/modulerouting/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/modulerouting
-[link-downloads]: https://packagist.org/packages/getpop/modulerouting
+[link-packagist]: https://packagist.org/packages/getpop/componentrouting
+[link-travis]: https://travis-ci.org/getpop/componentrouting
+[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/componentrouting/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/getpop/componentrouting
+[link-downloads]: https://packagist.org/packages/getpop/componentrouting
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

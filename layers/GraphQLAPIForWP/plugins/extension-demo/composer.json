@@ -1,7 +1,7 @@
 {
     "name": "graphql-api/extension-demo",
     "conflict": {
-        "getpop/modulerouting": "<0.8.9",
+        "getpop/componentrouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
         "getpop/translation": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.8.9",
@@ -207,7 +207,7 @@
         "getpop/guzzle-helpers": "^0.9",
         "getpop/loosecontracts": "^0.9",
         "getpop/mandatory-directives-by-configuration": "^0.9",
-        "getpop/modulerouting": "^0.9",
+        "getpop/componentrouting": "^0.9",
         "getpop/query-parsing": "^0.9",
         "getpop/root": "^0.9",
         "pop-schema/schema-commons": "^0.9",

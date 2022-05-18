@@ -59,7 +59,7 @@ services:
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/mandatory-directives-by-configuration
         - >-
-          ../../layers/Engine/packages/modulerouting:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/modulerouting
+          ../../layers/Engine/packages/componentrouting:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/componentrouting
         - >-
           ../../layers/Engine/packages/query-parsing:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/query-parsing
         - >-

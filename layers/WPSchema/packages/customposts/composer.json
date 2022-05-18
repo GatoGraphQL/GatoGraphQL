@@ -25,7 +25,7 @@
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
     "conflict": {
-        "getpop/modulerouting": "<0.8.9",
+        "getpop/componentrouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
         "getpop/translation": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.8.9",

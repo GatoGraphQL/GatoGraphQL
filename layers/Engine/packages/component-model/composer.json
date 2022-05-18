@@ -1,7 +1,7 @@
 {
     "name": "getpop/component-model",
     "conflict": {
-        "getpop/modulerouting": "<0.8.9",
+        "getpop/componentrouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.8.9",
         "getpop/filestore": "<0.8.9",
@@ -167,7 +167,7 @@
         "getpop/field-query": "^0.9",
         "getpop/graphql-parser": "^0.9",
         "getpop/loosecontracts": "^0.9",
-        "getpop/modulerouting": "^0.9",
+        "getpop/componentrouting": "^0.9",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
         "psr/simple-cache": "^3.0",
