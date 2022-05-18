@@ -29,9 +29,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         if ($fields = $this->getFields()) {
             $databases = $data['dbData'] ?? [];
             $unionDBKeyIDs = $data['unionDBKeyIDs'] ?? [];
-            $datasetModuleData = $data['datasetmoduledata'] ?? [];
-            foreach ($datasetModuleData as $moduleName => $objectIDs) {
-                $dbKeyPaths = $data['datasetmodulesettings'][$moduleName]['dbkeys'] ?? [];
+            $datasetComponentData = $data['datasetcomponentdata'] ?? [];
+            foreach ($datasetComponentData as $componentName => $objectIDs) {
+                $dbKeyPaths = $data['datasetcomponentsettings'][$componentName]['dbkeys'] ?? [];
                 $objectIDorIDs = $objectIDs['dbobjectids'];
                 $this->addData($ret, $fields, $databases, $unionDBKeyIDs, $objectIDorIDs, 'id', $dbKeyPaths, false);
             }
@@ -84,7 +84,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         }
         // Execute for all fields other than the first one, "root", for both UnionTypeResolvers and non-union ones
         // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-        // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetmodulesettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
+        // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
         if ($concatenateField) {
             list(
                 $dbKey,

@@ -9,15 +9,15 @@ use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 
 class ModulePaths extends AbstractComponentFilter
 {
-    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModulePathHelpersInterface $componentPathHelpers = null;
 
-    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
     {
-        $this->modulePathHelpers = $modulePathHelpers;
+        $this->componentPathHelpers = $componentPathHelpers;
     }
     final protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
 
     /**
@@ -33,15 +33,15 @@ class ModulePaths extends AbstractComponentFilter
      */
     protected array $backlog_unsettled_paths = [];
 
-    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ModulePathManagerInterface $componentPathManager = null;
 
-    final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    final public function setModulePathManager(ModulePathManagerInterface $componentPathManager): void
     {
-        $this->modulePathManager = $modulePathManager;
+        $this->componentPathManager = $componentPathManager;
     }
     final protected function getModulePathManager(): ModulePathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->componentPathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
 
     protected function init(): void
@@ -67,13 +67,13 @@ class ModulePaths extends AbstractComponentFilter
             return true;
         }
 
-        // The module is included for rendering, if either there is no path, or if there is, if it's the last module
-        // on the path or any module thereafter
+        // The component is included for rendering, if either there is no path, or if there is, if it's the last component
+        // on the path or any component thereafter
         if (!$this->propagation_unsettled_paths) {
             return false;
         }
 
-        // Check if this module is the last item of any componentPath
+        // Check if this component is the last item of any componentPath
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
             if (count($unsettled_path) == 1 && $unsettled_path[0] == $component) {
                 return false;
@@ -94,16 +94,16 @@ class ModulePaths extends AbstractComponentFilter
             return $subComponents;
         }
 
-        // $component_unsettled_path: Start only from the specified module. It is passed under URL param "componentPaths", and it's the list of module paths
+        // $component_unsettled_path: Start only from the specified component. It is passed under URL param "componentPaths", and it's the list of component paths
         // starting from the entry, and joined by ".", like this: componentPaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
         // This way, the component can interact with itself to fetch or post data, etc
         $matching_subComponents = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-            // Validate that the current module is at the head of the path
-            // This validation will work for the entry module only, since the array_intersect below will guarantee that only the path modules are returned
+            // Validate that the current component is at the head of the path
+            // This validation will work for the entry component only, since the array_intersect below will guarantee that only the path components are returned
             $unsettled_path_component = $unsettled_path[0];
             if (count($unsettled_path) == 1) {
-                // We reached the end of the unsettled path => from now on, all modules must be included
+                // We reached the end of the unsettled path => from now on, all components must be included
                 if ($unsettled_path_component == $component) {
                     return $subComponents;
                 }

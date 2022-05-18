@@ -417,7 +417,7 @@ When executing this query on a [single post](https://nextapi.getpop.org/2013/01/
 
 ```javascript
 {
-  "datasetmodulesettings": {
+  "datasetcomponentsettings": {
     "dataload-relationalfields-singlepost": {
       "dbkeys": {
         "id": "posts",
@@ -426,7 +426,7 @@ When executing this query on a [single post](https://nextapi.getpop.org/2013/01/
       }
     }
   },
-  "datasetmoduledata": {
+  "datasetcomponentdata": {
     "dataload-relationalfields-singlepost": {
       "dbobjectids": [
         23691

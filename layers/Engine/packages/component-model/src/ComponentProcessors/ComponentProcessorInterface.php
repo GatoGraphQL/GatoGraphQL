@@ -17,7 +17,7 @@ interface ComponentProcessorInterface
     public function getComponentsToProcess(): array;
     public function getSubcomponents(array $component): array;
     public function getAllSubmodules(array $component): array;
-    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
+    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getModelPropsForDescendantComponents(array $component, array &$props): array;
     public function getModelPropsForDescendantDatasetmodules(array $component, array &$props): array;

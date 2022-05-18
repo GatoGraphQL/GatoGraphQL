@@ -43,34 +43,34 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected bool $neverExclude = false;
 
-    private ?ModulePathManagerInterface $modulePathManager = null;
-    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModulePathManagerInterface $componentPathManager = null;
+    private ?ModulePathHelpersInterface $componentPathHelpers = null;
 
-    final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    final public function setModulePathManager(ModulePathManagerInterface $componentPathManager): void
     {
-        $this->modulePathManager = $modulePathManager;
+        $this->componentPathManager = $componentPathManager;
     }
     final protected function getModulePathManager(): ModulePathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->componentPathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
     {
-        $this->modulePathHelpers = $modulePathHelpers;
+        $this->componentPathHelpers = $componentPathHelpers;
     }
     final protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
 
-    public function addComponentFilter(ComponentFilterInterface $moduleFilter): void
+    public function addComponentFilter(ComponentFilterInterface $componentFilter): void
     {
-        $this->componentfilters[$moduleFilter->getName()] = $moduleFilter;
+        $this->componentfilters[$componentFilter->getName()] = $componentFilter;
     }
 
     protected function init(): void
     {
-        // Lazy initialize so that we can inject all the moduleFilters before checking the selected one
+        // Lazy initialize so that we can inject all the componentFilters before checking the selected one
         $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedComponentFilterName();
         if ($this->selected_filter_name) {
             $this->selected_filter = $this->componentfilters[$this->selected_filter_name];
@@ -111,7 +111,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
 
     public function getNotExcludedComponentSets(): ?array
     {
-        // It shall be used for requestmeta.rendermodules, to know from which modules the client must start rendering
+        // It shall be used for requestmeta.rendercomponents, to know from which components the client must start rendering
         return $this->not_excluded_component_sets;
     }
 
@@ -156,7 +156,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     }
 
     /**
-     * The `prepare` function advances the componentPath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
     public function prepareForPropagation(array $component, array &$props): void
     {
@@ -165,23 +165,23 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         }
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && is_null($this->not_excluded_ancestor_component) && $this->excludeModule($component, $props) === false) {
-                // Set the current module as the one which is not excluded.
-                $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $component;
+                // Set the current component as the one which is not excluded.
+                $component_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
+                $component_propagation_current_path[] = $component;
 
-                $this->not_excluded_ancestor_component = $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path);
+                $this->not_excluded_ancestor_component = $this->getModulePathHelpers()->stringifyModulePath($component_propagation_current_path);
 
-                // Add it to the list of not-excluded modules
+                // Add it to the list of not-excluded components
                 if (!in_array($this->not_excluded_ancestor_component, $this->not_excluded_component_sets_as_string)) {
                     $this->not_excluded_component_sets_as_string[] = $this->not_excluded_ancestor_component;
-                    $this->not_excluded_component_sets[] = $module_propagation_current_path;
+                    $this->not_excluded_component_sets[] = $component_propagation_current_path;
                 }
             }
 
             $this->selected_filter->prepareForPropagation($component, $props);
         }
 
-        // Add the module to the path
+        // Add the component to the path
         $this->getModulePathManager()->prepareForPropagation($component, $props);
     }
     public function restoreFromPropagation(array $component, array &$props): void
@@ -190,16 +190,16 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             $this->init();
         }
 
-        // Remove the module from the path
+        // Remove the component from the path
         $this->getModulePathManager()->restoreFromPropagation($component, $props);
 
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_component) && $this->excludeModule($component, $props) === false) {
-                $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $component;
+                $component_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
+                $component_propagation_current_path[] = $component;
 
-                // If the current module was set as the one not excluded, then reset it
-                if ($this->not_excluded_ancestor_component == $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path)) {
+                // If the current component was set as the one not excluded, then reset it
+                if ($this->not_excluded_ancestor_component == $this->getModulePathHelpers()->stringifyModulePath($component_propagation_current_path)) {
                     $this->not_excluded_ancestor_component = null;
                 }
             }
