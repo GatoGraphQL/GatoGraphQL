@@ -24,7 +24,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
     {
         $ret = array();
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'module' => [
+            'component' => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
@@ -67,7 +67,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),

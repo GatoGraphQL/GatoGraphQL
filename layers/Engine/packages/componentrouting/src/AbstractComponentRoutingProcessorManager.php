@@ -64,7 +64,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
                             // Check that it is >= instead of >. This is done so that later processors can override the behavior from previous processors,
                             // which makes sense since plugins are loaded in a specific order
                             if (($matching_properties_count = count($conditions, COUNT_RECURSIVE)) >= $most_matching_properties_count) {
-                                $most_matching_module = $vars_properties_set['module'];
+                                $most_matching_module = $vars_properties_set['component'];
                                 $most_matching_properties_count = $matching_properties_count;
                             }
                         }
@@ -90,7 +90,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
                     if (Methods::arrayIsSubset($conditions, $appState)) {
                         // Check how many matches there are, and if it's the most, this is the most matching module
                         if (($matching_properties_count = count($conditions, COUNT_RECURSIVE)) >= $most_matching_properties_count) {
-                            $most_matching_module = $vars_properties_set['module'];
+                            $most_matching_module = $vars_properties_set['component'];
                             $most_matching_properties_count = $matching_properties_count;
                         }
                     }
@@ -111,7 +111,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
                     if (Methods::arrayIsSubset($conditions, $appState)) {
                         // Check how many matches there are, and if it's the most, this is the most matching module
                         if (($matching_properties_count = count($conditions, COUNT_RECURSIVE)) >= $most_matching_properties_count) {
-                            $most_matching_module = $vars_properties_set['module'];
+                            $most_matching_module = $vars_properties_set['component'];
                             $most_matching_properties_count = $matching_properties_count;
                         }
                     }
