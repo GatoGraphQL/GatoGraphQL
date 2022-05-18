@@ -128,13 +128,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_404:
             case self::COMPONENT_BLOCK_BACKGROUNDMENU:
-                foreach ($this->getSubComponents($component) as $subComponent) {
+                foreach ($this->getSubcomponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'col-xs-12 col-sm-4');
                 }
                 break;
 
             case self::COMPONENT_BLOCK_SINGLEPOST:
-                foreach ($this->getSubComponents($component) as $subComponent) {
+                foreach ($this->getSubcomponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'col-xs-12');
                 }
 
@@ -193,7 +193,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
                 $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $subComponents = array_diff(
-                    $this->getSubComponents($component),
+                    $this->getSubcomponents($component),
                     [
                         $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
                     ]
@@ -281,9 +281,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getTitle($component, $props);
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 

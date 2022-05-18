@@ -33,9 +33,9 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         return 'x';
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret = array_merge(

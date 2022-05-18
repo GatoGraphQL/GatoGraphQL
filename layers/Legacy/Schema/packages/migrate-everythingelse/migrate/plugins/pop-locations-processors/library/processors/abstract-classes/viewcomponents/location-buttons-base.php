@@ -34,9 +34,9 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         return true;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($this->initMarkers($component)) {
             $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];

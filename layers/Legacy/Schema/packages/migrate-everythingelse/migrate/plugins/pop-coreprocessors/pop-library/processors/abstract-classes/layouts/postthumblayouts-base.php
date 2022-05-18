@@ -8,9 +8,9 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POSTTHUMB];
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($component)) {
             $ret = array_merge(

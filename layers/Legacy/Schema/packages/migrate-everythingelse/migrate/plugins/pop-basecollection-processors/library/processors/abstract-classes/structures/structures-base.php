@@ -8,9 +8,9 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         return null;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         // Sometimes there's no inner. Eg: self::COMPONENT_CONTENT_ADDCONTENTFAQ
         if ($inner = $this->getInnerSubmodule($component)) {

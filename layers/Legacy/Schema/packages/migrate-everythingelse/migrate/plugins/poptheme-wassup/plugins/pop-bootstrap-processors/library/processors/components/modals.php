@@ -27,9 +27,9 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 

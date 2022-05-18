@@ -18,10 +18,10 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
         return null;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         return array_merge(
-            parent::getSubComponents($component),
+            parent::getSubcomponents($component),
             array(
                 $this->getLayoutSubmodule($component),
                 $this->getScriptSubmodule($component),

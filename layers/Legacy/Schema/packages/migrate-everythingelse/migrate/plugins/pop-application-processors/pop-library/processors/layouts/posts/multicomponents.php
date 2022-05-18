@@ -57,9 +57,9 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:

@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_DropdownButtonControlsBase extends PoP_Modul
             $ret[GD_JS_CLASSES]['btn'] = $class;
         }
 
-        if ($subComponents = $this->getSubComponents($component)) {
+        if ($subComponents = $this->getSubcomponents($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $subComponents

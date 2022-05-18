@@ -13,9 +13,9 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
@@ -35,7 +35,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
-                foreach ($this->getSubComponents($component) as $subComponent) {
+                foreach ($this->getSubcomponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'btn btn-link btn-compact');
                 }
                 break;

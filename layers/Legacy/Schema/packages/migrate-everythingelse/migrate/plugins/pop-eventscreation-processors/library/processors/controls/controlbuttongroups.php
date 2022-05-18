@@ -19,9 +19,9 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
     
         switch ($component[1]) {
             case self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT:

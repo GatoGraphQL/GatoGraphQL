@@ -15,9 +15,9 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:

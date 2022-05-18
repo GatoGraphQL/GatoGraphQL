@@ -20,9 +20,9 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return null;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
             $ret[] = $controlgroup_top;

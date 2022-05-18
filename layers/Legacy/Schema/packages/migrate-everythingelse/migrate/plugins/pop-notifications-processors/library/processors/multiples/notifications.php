@@ -13,9 +13,9 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS => [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS],

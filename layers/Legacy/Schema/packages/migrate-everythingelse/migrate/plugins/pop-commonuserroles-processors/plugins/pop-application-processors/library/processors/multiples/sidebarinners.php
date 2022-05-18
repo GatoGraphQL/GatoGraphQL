@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR:

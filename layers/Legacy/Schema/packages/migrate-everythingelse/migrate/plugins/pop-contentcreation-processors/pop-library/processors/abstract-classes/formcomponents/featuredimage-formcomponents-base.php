@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     abstract public function getFeaturedimageinnerSubmodule(array $component): ?array;
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         return array(
             $this->getFeaturedimageinnerSubmodule($component),

@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComp
     public function initModelProps(array $component, array &$props): void
     {
         if ($blocktarget = $this->getProp($component, $props, 'control-target')) {
-            foreach ($this->getSubComponents($component) as $subComponent) {
+            foreach ($this->getSubcomponents($component) as $subComponent) {
                 $this->setProp([$subComponent], $props, 'control-target', $blocktarget);
             }
         }

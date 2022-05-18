@@ -18,9 +18,9 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         return [PoP_Module_Processor_FetchMore::class, PoP_Module_Processor_FetchMore::COMPONENT_FETCHMORE];
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($fetchmore = $this->getFetchmoreButtonSubmodule($component)) {
             $ret[] = $fetchmore;

@@ -12,9 +12,9 @@ class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $status = GD_CreateUpdate_Utils::moderate() ?
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :

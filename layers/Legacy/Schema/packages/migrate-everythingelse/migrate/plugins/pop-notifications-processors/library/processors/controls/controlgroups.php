@@ -12,9 +12,9 @@ class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Proces
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

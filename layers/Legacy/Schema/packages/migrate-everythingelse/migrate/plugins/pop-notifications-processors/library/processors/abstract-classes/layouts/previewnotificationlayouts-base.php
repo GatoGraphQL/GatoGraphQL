@@ -29,9 +29,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     //     return true;
     // }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($link = $this->getLinkSubmodule($component)) {
             $ret[] = $link;
@@ -244,7 +244,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     {
         if (in_array(
             [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION],
-            $this->getSubComponents($component)
+            $this->getSubcomponents($component)
         )) {
             //-----------------------------------
             // Whenever clicking on the link on the notification, also "click" on the `Mark as read` button

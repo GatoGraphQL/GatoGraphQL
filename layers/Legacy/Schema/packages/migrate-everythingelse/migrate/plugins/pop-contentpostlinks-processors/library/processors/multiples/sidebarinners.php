@@ -11,9 +11,9 @@ class PoP_ContentPostLinks_Module_Processor_SidebarInners extends PoP_Module_Pro
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_POSTLINKS_SIDEBAR:

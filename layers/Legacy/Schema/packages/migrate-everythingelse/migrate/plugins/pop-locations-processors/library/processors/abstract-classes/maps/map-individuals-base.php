@@ -29,9 +29,9 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
         // return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::COMPONENT_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS];
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $ret[] = $this->getMapscriptSubmodule($component);
         $ret[] = $this->getMapdivSubmodule($component);

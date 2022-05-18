@@ -4,9 +4,9 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
         $ret[] = $this->getBtnreplyModule($component);
 
         if ($abovelayout_components = $this->getAbovelayoutLayoutSubmodules($component)) {

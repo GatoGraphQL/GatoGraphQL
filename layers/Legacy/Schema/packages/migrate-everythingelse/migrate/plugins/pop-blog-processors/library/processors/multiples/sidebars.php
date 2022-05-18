@@ -91,7 +91,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
                 $subComponents = array_diff(
-                    $this->getSubComponents($component),
+                    $this->getSubcomponents($component),
                     $this->getPermanentSubmodules($component)
                 );
                 foreach ($subComponents as $subComponent) {

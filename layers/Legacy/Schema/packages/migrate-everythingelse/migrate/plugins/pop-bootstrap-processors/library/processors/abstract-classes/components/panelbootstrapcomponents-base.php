@@ -3,10 +3,10 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Module_Processor_BootstrapComponentsBase
 {
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         return array_merge(
-            parent::getSubComponents($component),
+            parent::getSubcomponents($component),
             $this->getPanelSubmodules($component)
         );
     }
@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         $ret = array();
 
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // foreach ($this->getSubComponents($component) as $subComponent) {
+        // foreach ($this->getSubcomponents($component) as $subComponent) {
 
         //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
         //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
     //     $ret = array();
 
-    //     foreach ($this->getSubComponents($component) as $subComponent) {
+    //     foreach ($this->getSubcomponents($component) as $subComponent) {
 
     //         $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
     //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
@@ -106,7 +106,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     }
     public function getActivepanelSubmodule(array $component)
     {
-        $subComponents = $this->getSubComponents($component);
+        $subComponents = $this->getSubcomponents($component);
         foreach ($subComponents as $subComponent) {
             if ($this->isSubmoduleActivePanel($component, $subComponent)) {
                 return $subComponent;
@@ -128,7 +128,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
 
         // Simply return the first one
-        $subComponents = $this->getSubComponents($component);
+        $subComponents = $this->getSubcomponents($component);
         return $subComponents[0];
     }
 
@@ -149,7 +149,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         $ret = array();
 
-        foreach ($this->getSubComponents($component) as $subComponent) {
+        foreach ($this->getSubcomponents($component) as $subComponent) {
             $ret[] = [
                 'header-submodule' => $subComponent,
             ];
@@ -327,7 +327,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         if ($this->lazyLoadInactivePanels($component, $props)) {
             $active_submodule = $this->getActivepanelSubmodule($component);
             $inactive_submodules = array_diff(
-                $this->getSubComponents($component),
+                $this->getSubcomponents($component),
                 array(
                     $active_submodule
                 )

@@ -29,7 +29,7 @@ trait FormatActiveTrait
     public function getDefaultActivepanelSubmodule(array $component)
     {
         if ($default_format = $this->getDefaultActivepanelFormat($component)) {
-            foreach ($this->getSubComponents($component) as $subComponent) {
+            foreach ($this->getSubcomponents($component) as $subComponent) {
                 if ($default_format == $this->getSubmoduleFormat($component, $subComponent)) {
                     return $subComponent;
                 }

@@ -11,9 +11,9 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS:
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS:
-                $components = $this->getSubComponents($component);
+                $components = $this->getSubcomponents($component);
                 foreach ($components as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'inline');
                 }

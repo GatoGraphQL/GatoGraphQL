@@ -15,9 +15,9 @@ class PoP_Locations_Module_Processor_CustomControlButtonGroups extends PoP_Modul
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
     
         switch ($component[1]) {
             case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP:

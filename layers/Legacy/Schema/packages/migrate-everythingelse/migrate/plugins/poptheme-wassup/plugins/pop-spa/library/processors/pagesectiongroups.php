@@ -7,7 +7,7 @@ use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 {
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         // If fetching a page, then load only the required pageSection modules and nothing else
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -54,7 +54,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
         }
 
         // If loading the site, then print all pageSection modules
-        return parent::getSubComponents($component);
+        return parent::getSubcomponents($component);
     }
 }
 

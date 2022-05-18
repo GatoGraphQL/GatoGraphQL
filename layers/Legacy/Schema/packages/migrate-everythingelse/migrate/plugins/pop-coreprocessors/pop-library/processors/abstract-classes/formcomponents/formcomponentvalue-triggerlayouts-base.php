@@ -39,9 +39,9 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return null;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $ret[] = $this->getTriggerSubmodule($component);
 

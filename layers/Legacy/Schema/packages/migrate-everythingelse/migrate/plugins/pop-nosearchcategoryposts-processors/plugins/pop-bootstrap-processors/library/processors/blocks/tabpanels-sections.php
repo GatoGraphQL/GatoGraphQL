@@ -49,9 +49,9 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00],

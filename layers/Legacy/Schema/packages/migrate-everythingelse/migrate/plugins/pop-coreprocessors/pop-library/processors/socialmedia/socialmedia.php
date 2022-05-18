@@ -37,7 +37,7 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
         return parent::useCounter($component);
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         switch ($component[1]) {
             case self::COMPONENT_POSTSOCIALMEDIA:
@@ -73,7 +73,7 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
                 );
         }
         
-        return parent::getSubComponents($component);
+        return parent::getSubcomponents($component);
     }
 }
 

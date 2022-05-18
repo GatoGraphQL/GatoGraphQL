@@ -29,9 +29,9 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
         return GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
             $ret = array_merge(

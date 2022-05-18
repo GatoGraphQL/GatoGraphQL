@@ -8,9 +8,9 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         return null;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         // if it's a map, add the Map block. Do it before adding the Scroll, because otherwise there's an error:
         // The map is not created yet, however the links in the elements are already trying to add the markers

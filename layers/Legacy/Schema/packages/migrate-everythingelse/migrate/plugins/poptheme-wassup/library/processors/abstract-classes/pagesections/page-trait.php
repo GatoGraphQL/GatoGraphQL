@@ -20,10 +20,10 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
         return array();
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         return array_merge(
-            parent::getSubComponents($component),
+            parent::getSubcomponents($component),
             $this->getFrameoptionsSubmodules($component)
         );
     }
@@ -36,7 +36,7 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
-        foreach ($this->getSubComponents($component) as $subComponent) {
+        foreach ($this->getSubcomponents($component) as $subComponent) {
             $this->appendProp([$subComponent], $props, 'class', 'pop-outerblock');
         }
 

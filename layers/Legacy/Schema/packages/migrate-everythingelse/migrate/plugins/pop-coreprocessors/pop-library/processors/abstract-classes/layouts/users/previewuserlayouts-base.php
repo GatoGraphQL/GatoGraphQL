@@ -35,9 +35,9 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
         return true;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($belowavatar_components = $this->getBelowavatarLayoutSubmodules($component)) {
             $ret = array_merge(

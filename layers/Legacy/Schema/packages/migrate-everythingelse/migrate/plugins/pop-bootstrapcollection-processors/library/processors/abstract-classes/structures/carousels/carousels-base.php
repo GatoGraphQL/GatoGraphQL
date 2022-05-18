@@ -10,9 +10,9 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_CAROUSEL];
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($controls_bottom = $this->getControlsBottomSubmodule($component)) {
             $ret[] = $controls_bottom;

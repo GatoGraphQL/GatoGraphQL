@@ -24,9 +24,9 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return null;
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($layout_extra = $this->getLayoutExtraSubmodule($component)) {
             $ret[] = $layout_extra;

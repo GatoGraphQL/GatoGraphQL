@@ -13,9 +13,9 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT:

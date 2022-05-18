@@ -27,9 +27,9 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $components = array();
         switch ($component[1]) {
@@ -99,7 +99,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
             case self::COMPONENT_MULTICOMPONENT_USEROPTIONS:
             case self::COMPONENT_MULTICOMPONENT_TAGOPTIONS:
                 $this->appendProp($component, $props, 'class', 'options-group');
-                foreach ($this->getSubComponents($component) as $subComponent) {
+                foreach ($this->getSubcomponents($component) as $subComponent) {
                     $this->appendProp([$subComponent], $props, 'class', 'inline');
                 }
                 break;

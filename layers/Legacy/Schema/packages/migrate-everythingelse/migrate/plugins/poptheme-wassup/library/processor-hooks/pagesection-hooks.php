@@ -17,7 +17,7 @@ class PoPTheme_Wassup_PageSectionHooks
         $props = &$props_in_array[0];
 
         $subComponent = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST];
-        // if (in_array($subComponent, $processor->getSubComponents($component))) {
+        // if (in_array($subComponent, $processor->getSubcomponents($component))) {
 
         // We need to lazy-load it, so that it doesn't change the ETag value
         // for when visiting any one page on the site (eg: viewing a post should not say "click here to update" since the post itself was not updated,

@@ -11,9 +11,9 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         $inner_components = array(
             self::COMPONENT_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTCOUNTS],

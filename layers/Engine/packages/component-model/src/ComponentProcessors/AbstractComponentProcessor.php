@@ -125,14 +125,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
         return [];
     }
 
     final public function getAllSubmodules(array $component): array
     {
-        return $this->getSubComponentsByGroup($component);
+        return $this->getSubcomponentsByGroup($component);
     }
 
     // public function getNature(array $component)
@@ -256,7 +256,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         if ($relationalTypeResolver !== null) {
             // Set the property "succeeding-typeResolver" on all descendants: the same typeResolver for all submodules, and the explicit one (or get the default one for "*") for relational objects
-            foreach ($this->getSubComponents($component) as $subComponent) {
+            foreach ($this->getSubcomponents($component) as $subComponent) {
                 $this->setProp($subComponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
@@ -678,7 +678,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Only modules which do not load data
-            $subComponents = array_filter($this->getSubComponents($component), function ($subComponent) {
+            $subComponents = array_filter($this->getSubcomponents($component), function ($subComponent) {
                 return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
             });
             foreach ($subComponents as $subComponent) {
@@ -1099,7 +1099,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getModulesToPropagateDataProperties(array $component): array
     {
-        return $this->getSubComponentsByGroup(
+        return $this->getSubcomponentsByGroup(
             $component,
             array(
                 self::MODULECOMPONENT_SUBCOMPONENTS,
@@ -1120,7 +1120,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($component);
             $conditionalRelationalModuleFields = $this->getConditionalOnDataFieldRelationalSubmodules($component);
             if ($conditionalLeafModuleFields !== [] || $conditionalRelationalModuleFields !== []) {
-                $directSubmodules = $this->getSubComponents($component);
+                $directSubmodules = $this->getSubcomponents($component);
                 $conditionalModuleFields = [];
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
@@ -1313,7 +1313,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
-    private function getSubComponentsByGroup(array $component, array $elements = array()): array
+    private function getSubcomponentsByGroup(array $component, array $elements = array()): array
     {
         if (empty($elements)) {
             $elements = array(
@@ -1329,7 +1329,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if (in_array(self::MODULECOMPONENT_SUBCOMPONENTS, $elements)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             $ret = array_unique(
-                $this->getSubComponents($component),
+                $this->getSubcomponents($component),
                 SORT_REGULAR
             );
         }

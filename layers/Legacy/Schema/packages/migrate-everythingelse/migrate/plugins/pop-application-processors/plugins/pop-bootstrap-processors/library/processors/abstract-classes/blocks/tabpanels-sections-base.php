@@ -2,9 +2,9 @@
 
 abstract class PoP_Module_Processor_TabPanelSectionBlocksBase extends PoP_Module_Processor_SectionBlocksBase
 {
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
             $ret[] = $filter_component;

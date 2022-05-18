@@ -70,9 +70,9 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         );
     }
 
-    public function getSubComponents(array $component): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubComponents($component);
+        $ret = parent::getSubcomponents($component);
 
         if ($this->enableSuggestions($component)) {
             if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($component)) {
