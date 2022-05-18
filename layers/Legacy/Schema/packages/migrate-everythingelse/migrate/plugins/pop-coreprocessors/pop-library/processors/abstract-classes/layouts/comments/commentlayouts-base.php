@@ -9,14 +9,14 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         $ret = parent::getSubComponentVariations($componentVariation);
         $ret[] = $this->getBtnreplyModule($componentVariation);
 
-        if ($abovelayout_modules = $this->getAbovelayoutLayoutSubmodules($componentVariation)) {
+        if ($abovelayout_componentVariations = $this->getAbovelayoutLayoutSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $abovelayout_modules
+                $abovelayout_componentVariations
             );
         }
-        if ($content_module = $this->getContentSubmodule($componentVariation)) {
-            $ret[] = $content_module;
+        if ($content_componentVariation = $this->getContentSubmodule($componentVariation)) {
+            $ret[] = $content_componentVariation;
         }
         return $ret;
     }
@@ -120,14 +120,14 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
             }
         }
 
-        if ($content_module = $this->getContentSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_module);
+        if ($content_componentVariation = $this->getContentSubmodule($componentVariation)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_componentVariation);
         }
 
-        if ($abovelayout_modules = $this->getAbovelayoutLayoutSubmodules($componentVariation)) {
+        if ($abovelayout_componentVariations = $this->getAbovelayoutLayoutSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovelayout'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $abovelayout_modules
+                $abovelayout_componentVariations
             );
         }
 

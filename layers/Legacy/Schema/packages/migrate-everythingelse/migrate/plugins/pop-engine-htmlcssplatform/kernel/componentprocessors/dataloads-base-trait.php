@@ -15,11 +15,11 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             return $ret;
         }
 
-        if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+        if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
             if ($this->getProp($componentVariation, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($filter_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($filter_componentVariation);
         }
 
         return $ret;
@@ -34,7 +34,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 
             $this->setProp($componentVariation, $props, 'show-filter', true);
 
-            if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+            if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
 
                 // Class needed for the proxyForm's selector when proxying this one block
                 $this->appendProp($componentVariation, $props, 'class', 'withfilter');
@@ -49,7 +49,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                         $class .= ' hidden';
                     }
 
-                    $this->appendProp($filter_module, $props, 'class', $class);
+                    $this->appendProp($filter_componentVariation, $props, 'class', $class);
                 }
             }
 
@@ -65,7 +65,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-            if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+            if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
 
                 // Filter visible: if explicitly defined, or if currently filtering with it
                 if ($show_filter = $this->getProp($componentVariation, $props, 'show-filter')) {
@@ -76,13 +76,13 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                     // it doesn't even show any param being filtered (month or year not chosen in filter)
                     // Comment Leo 15/04/2015: do not show the filter even if filtering for EMBED and PRINT
                     if (\PoP\Root\App::applyFilters(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, true)) {
-                        // if ($filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module)) {
+                        // if ($filter = $componentprocessor_manager->getProcessor($filter_componentVariation)->getFilter($filter_componentVariation)) {
                         $filterVisible = $this->getProp($componentVariation, $props, 'filter-visible');
                         // if ($filterVisible || \PoP\Engine\FilterUtils::filteringBy($filter)) {
                         if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation)) {
 
                             // Filter will be open depending on URL params, so make this class a runtime one
-                            $this->appendProp($filter_module, $props, 'runtime-class', 'in');
+                            $this->appendProp($filter_componentVariation, $props, 'runtime-class', 'in');
                         }
                         // }
                     }

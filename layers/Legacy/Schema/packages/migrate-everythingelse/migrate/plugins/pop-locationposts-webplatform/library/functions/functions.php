@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 
-\PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'gdSpEmMultilayoutLabels');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:multilayout_labels', 'gdSpEmMultilayoutLabels');
 function gdSpEmMultilayoutLabels($labels)
 {
     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

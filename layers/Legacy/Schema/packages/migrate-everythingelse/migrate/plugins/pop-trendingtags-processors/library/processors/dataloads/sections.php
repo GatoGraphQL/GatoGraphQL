@@ -25,12 +25,12 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_TAGS_DETAILS],
             self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_TAGS_LIST],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFormat(array $componentVariation): ?string

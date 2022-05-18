@@ -30,14 +30,14 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS],
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

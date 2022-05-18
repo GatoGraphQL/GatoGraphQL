@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         }
 
         // Hook for User Avatar
-        $components = \PoP\Root\App::applyFilters('pop_module:createuser:components', $components, $componentVariation, $this);
+        $components = \PoP\Root\App::applyFilters('pop_componentVariation:createuser:components', $components, $componentVariation, $this);
 
         return $components;
     }
@@ -63,7 +63,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         }
 
         return \PoP\Root\App::applyFilters(
-            'pop_module:createuser:mandatory-components',
+            'pop_componentVariation:createuser:mandatory-components',
             $mandatory,
             $componentVariation
         );

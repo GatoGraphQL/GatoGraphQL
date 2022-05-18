@@ -200,7 +200,7 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             self::MODULE_BLOCK_MYCATEGORYPOSTS00_TABLE_EDIT => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT],
             self::MODULE_BLOCK_MYCATEGORYPOSTS01_TABLE_EDIT => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYCATEGORYPOSTS01_TABLE_EDIT],
@@ -266,7 +266,7 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
             self::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

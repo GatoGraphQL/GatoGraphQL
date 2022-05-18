@@ -177,9 +177,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
         // if it's a map, add the Map block. Do it before adding the Scroll, because otherwise there's an error:
         // The map is not created yet, however the links in the elements are already trying to add the markers
-        if ($map_inner_module = $this->getPostmapInnerModule($componentVariation)) {
+        if ($map_inner_componentVariation = $this->getPostmapInnerModule($componentVariation)) {
             $ret[] = [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::MODULE_EM_MAP_POST];
-            $ret[] = $map_inner_module;
+            $ret[] = $map_inner_componentVariation;
         }
 
         return $ret;
@@ -187,18 +187,18 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     protected function getPostmapInnerModule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::MODULE_CALENDAR_EVENTSMAP],
             self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::MODULE_CALENDAR_EVENTSMAP],
             self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::MODULE_CALENDAR_EVENTSMAP],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
         /*********************************************
          * Typeaheads
@@ -297,7 +297,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL => [GD_EM_Module_Processor_CustomCarousels::class, GD_EM_Module_Processor_CustomCarousels::MODULE_CAROUSEL_TAGEVENTS],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getFeedbackmessagesPosition(array $componentVariation)

@@ -40,7 +40,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             /*********************************************
              * My Content Tables
@@ -58,7 +58,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrolls::class, PoP_EventsCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array

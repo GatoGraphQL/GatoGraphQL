@@ -27,13 +27,13 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_MYLINKS_TABLE_EDIT => [PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYLINKS_TABLE_EDIT],
             self::MODULE_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
             self::MODULE_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

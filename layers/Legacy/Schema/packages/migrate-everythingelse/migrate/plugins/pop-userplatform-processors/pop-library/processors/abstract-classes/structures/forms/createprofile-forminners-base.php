@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
         PoP_Module_Processor_CreateUpdateProfileFormsUtils::getFormSubmodules($componentVariation, $components, $this);
 
         // Hook for Newsletter
-        $components = \PoP\Root\App::applyFilters('pop_module:createprofile:components', $components, $componentVariation, $this);
+        $components = \PoP\Root\App::applyFilters('pop_componentVariation:createprofile:components', $components, $componentVariation, $this);
 
         return $components;
     }

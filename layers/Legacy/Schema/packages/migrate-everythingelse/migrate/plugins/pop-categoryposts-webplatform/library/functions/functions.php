@@ -1,7 +1,7 @@
 <?php
 use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-\PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'categorypostsMultilayoutLabels');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:multilayout_labels', 'categorypostsMultilayoutLabels');
 function categorypostsMultilayoutLabels($labels)
 {
     $label = '<span class="label label-%s">%s</span>';

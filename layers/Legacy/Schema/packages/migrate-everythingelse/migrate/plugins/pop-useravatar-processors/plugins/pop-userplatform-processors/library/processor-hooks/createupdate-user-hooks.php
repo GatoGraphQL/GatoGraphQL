@@ -5,7 +5,7 @@ class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'pop_module:createuser:components', 
+            'pop_componentVariation:createuser:components', 
             $this->getComponentSubmodules(...), 
             10, 
             3

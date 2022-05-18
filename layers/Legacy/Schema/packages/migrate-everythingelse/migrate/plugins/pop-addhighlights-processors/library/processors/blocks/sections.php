@@ -52,7 +52,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_HIGHLIGHTS_SCROLL_ADDONS => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS],
             self::MODULE_BLOCK_HIGHLIGHTS_SCROLL_FULLVIEW => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW],
@@ -66,7 +66,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

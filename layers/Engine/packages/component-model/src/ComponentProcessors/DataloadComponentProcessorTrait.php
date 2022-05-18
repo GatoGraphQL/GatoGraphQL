@@ -14,8 +14,8 @@ trait DataloadComponentProcessorTrait
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
-            $ret[] = $filter_module;
+        if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
+            $ret[] = $filter_componentVariation;
         }
 
         if ($inners = $this->getInnerSubmodules($componentVariation)) {

@@ -34,7 +34,7 @@ class PoP_Avatar_AWSFunctions
 
         // Register the AWS S3 domain in the Allowed Domains list
         \PoP\Root\App::addFilter(
-            'pop_modulemanager:allowed_domains',
+            'pop_componentVariationmanager:allowed_domains',
             $this->getAllowedDomains(...)
         );
     }

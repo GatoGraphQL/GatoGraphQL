@@ -133,7 +133,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT],
@@ -199,7 +199,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

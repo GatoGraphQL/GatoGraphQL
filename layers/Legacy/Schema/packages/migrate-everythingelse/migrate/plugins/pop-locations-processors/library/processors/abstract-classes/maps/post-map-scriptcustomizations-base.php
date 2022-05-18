@@ -40,12 +40,12 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
      */
     public function getRelationalSubmodules(array $componentVariation): array
     {
-        if ($authors_module = $this->getAuthorsModule($componentVariation)) {
+        if ($authors_componentVariation = $this->getAuthorsModule($componentVariation)) {
             return [
                 new RelationalModuleField(
                     'author',
                     [
-                        $authors_module,
+                        $authors_componentVariation,
                     ]
                 ),
             ];
@@ -101,8 +101,8 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
                 $this->getThumbField($componentVariation, $props)),
         );
 
-        if ($authors_module = $this->getAuthorsModule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authors_module);
+        if ($authors_componentVariation = $this->getAuthorsModule($componentVariation)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authors_componentVariation);
             $ret['authors-sep'] = $this->getAuthorsSeparator($componentVariation, $props);
         }
         if ($layout_extra = $this->getLayoutExtraSubmodule($componentVariation)) {

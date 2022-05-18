@@ -31,12 +31,12 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
 
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS => [AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST => [AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 

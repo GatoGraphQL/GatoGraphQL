@@ -99,13 +99,13 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_DATALOAD_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::MODULE_FORM_USER_CHANGEPASSWORD],
             self::MODULE_DATALOAD_MYPREFERENCES => [PoP_Module_Processor_UserForms::class, PoP_Module_Processor_UserForms::MODULE_FORM_MYPREFERENCES],
             self::MODULE_DATALOAD_INVITENEWUSERS => [PoP_Module_Processor_UserForms::class, PoP_Module_Processor_UserForms::MODULE_FORM_INVITENEWUSERS],
         );
 
-        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 

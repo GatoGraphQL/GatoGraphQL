@@ -39,10 +39,10 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($belowavatar_modules = $this->getBelowavatarLayoutSubmodules($componentVariation)) {
+        if ($belowavatar_componentVariations = $this->getBelowavatarLayoutSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $belowavatar_modules
+                $belowavatar_componentVariations
             );
         }
         if ($belowexcerpt_templates = $this->getBelowexcerptLayoutSubmodules($componentVariation)) {
@@ -89,16 +89,16 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($belowavatar_modules = $this->getBelowavatarLayoutSubmodules($componentVariation)) {
+        if ($belowavatar_componentVariations = $this->getBelowavatarLayoutSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowavatar'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $belowavatar_modules
+                $belowavatar_componentVariations
             );
         }
-        if ($belowexcerpt_modules = $this->getBelowexcerptLayoutSubmodules($componentVariation)) {
+        if ($belowexcerpt_componentVariations = $this->getBelowexcerptLayoutSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowexcerpt'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $belowexcerpt_modules
+                $belowexcerpt_componentVariations
             );
         }
         if ($this->showShortDescription($componentVariation)) {

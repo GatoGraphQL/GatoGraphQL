@@ -69,8 +69,8 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOSTLINK:
                 // Make it into left/right columns
-                $rightside_module = [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE];
-                $leftside_module = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE];
+                $rightside_componentVariation = [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE];
+                $leftside_componentVariation = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE];
 
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
                 if (!($form_left_class = $this->getProp($componentVariation, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
@@ -79,8 +79,8 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
                 if (!($form_right_class = $this->getProp($componentVariation, $props, 'form-right-class')/*$this->get_general_prop($props, 'form-right-class')*/)) {
                     $form_right_class = 'col-sm-4';
                 }
-                $this->appendProp($leftside_module, $props, 'class', $form_left_class);
-                $this->appendProp($rightside_module, $props, 'class', $form_right_class);
+                $this->appendProp($leftside_componentVariation, $props, 'class', $form_left_class);
+                $this->appendProp($rightside_componentVariation, $props, 'class', $form_right_class);
                 break;
         }
 

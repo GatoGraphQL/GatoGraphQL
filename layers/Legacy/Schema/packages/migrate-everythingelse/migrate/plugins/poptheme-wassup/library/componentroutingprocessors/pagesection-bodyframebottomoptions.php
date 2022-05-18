@@ -12,15 +12,15 @@ class PoP_Module_BodyFrameBottomOptionsPageSectionComponentRoutingProcessor exte
     {
         $ret = array();
 
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         // Get the value of the SideInfo Content. If it is not the "Close Sideinfo" module, then we need to add support to toggle the SideInfo
-        $load_module = true;
+        $load_componentVariation = true;
         if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-            $load_module = [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODY] == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+            $load_componentVariation = [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODY] == $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
         }
 
-        if ($load_module) {
+        if ($load_componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][] = [
                 'component-variation' => [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG]
             ];

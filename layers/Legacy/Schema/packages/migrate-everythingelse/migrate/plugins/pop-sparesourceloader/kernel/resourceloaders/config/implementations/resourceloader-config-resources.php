@@ -13,18 +13,18 @@ class PoP_SPAResourceLoader_FileReproduction_ResourcesConfig extends PoP_SPAReso
         // So that the generated resources.js file, containing all resources, does not override these values in popSPAResourceLoader.config
         // as already set in `initScripts` in pop-sparesourceloader/kernel/functions/engine-initialization-hooks.php
         if (PoP_ResourceLoader_ServerUtils::includeResourcesInBody()) {
-            if ($dynamic_module_resources_data = PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils::getDynamicModuleResourcesData()) {
-                $dynamic_module_resourcesources = $dynamic_module_resources_data['sources'];
-                $dynamic_module_resourcetypes = $dynamic_module_resources_data['types'];
+            if ($dynamic_componentVariation_resources_data = PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils::getDynamicModuleResourcesData()) {
+                $dynamic_componentVariation_resourcesources = $dynamic_componentVariation_resources_data['sources'];
+                $dynamic_componentVariation_resourcetypes = $dynamic_componentVariation_resources_data['types'];
 
                 $configuration['$sources'] = array_unique(
                     array_merge(
                         $configuration['$sources'],
-                        $dynamic_module_resourcesources
+                        $dynamic_componentVariation_resourcesources
                     )
                 );
 
-                foreach ($dynamic_module_resourcetypes as $resourcetype => $resourcetype_resources) {
+                foreach ($dynamic_componentVariation_resourcetypes as $resourcetype => $resourcetype_resources) {
                     $configuration['$types'][$resourcetype] = array_unique(
                         array_merge(
                             $configuration['$types'][$resourcetype],

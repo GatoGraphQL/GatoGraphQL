@@ -202,7 +202,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             /*********************************************
          * My Content Tables
@@ -274,7 +274,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array

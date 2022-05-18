@@ -33,17 +33,17 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $abovecontent_modules
+                $abovecontent_componentVariations
             );
         }
 
-        if ($content_modules = $this->getContentSubmodules($componentVariation)) {
+        if ($content_componentVariations = $this->getContentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $content_modules
+                $content_componentVariations
             );
         }
 
@@ -74,17 +74,17 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
             $ret['title-position'] = $this->titlePosition($componentVariation, $props);
         }
 
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $abovecontent_modules
+                $abovecontent_componentVariations
             );
         }
 
-        if ($content_modules = $this->getContentSubmodules($componentVariation)) {
+        if ($content_componentVariations = $this->getContentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $content_modules
+                $content_componentVariations
             );
         }
 

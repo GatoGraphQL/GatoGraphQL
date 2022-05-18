@@ -203,10 +203,10 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($panel_modules = $this->getPanelSubmodules($componentVariation)) {
+        if ($panel_componentVariations = $this->getPanelSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['panels'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $panel_modules
+                $panel_componentVariations
             );
         }
 

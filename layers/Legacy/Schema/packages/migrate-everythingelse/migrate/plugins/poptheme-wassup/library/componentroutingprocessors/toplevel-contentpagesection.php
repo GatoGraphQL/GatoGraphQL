@@ -10,7 +10,7 @@ class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP
         $ret = array();
 
         // The modules below are chosen when the correspoding target is set
-        $target_modules = array(
+        $target_componentVariations = array(
             POP_TARGET_SIDE => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_SIDE],
             POP_TARGET_TOP => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_TOP],
             POP_TARGET_BACKGROUND => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BACKGROUND],
@@ -22,7 +22,7 @@ class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP
             POP_TARGET_HOVER => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
             POP_TARGET_HOLE => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
         );
-        foreach ($target_modules as $target => $componentVariation) {
+        foreach ($target_componentVariations as $target => $componentVariation) {
             $ret[] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

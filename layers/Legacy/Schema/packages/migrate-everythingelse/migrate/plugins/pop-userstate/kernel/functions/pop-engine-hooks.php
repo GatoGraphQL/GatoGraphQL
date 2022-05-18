@@ -29,7 +29,7 @@ class PoP_UserState_EngineHooks
         );
     }
 
-    public function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
+    public function start($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-userstatedata-load'] = false;
@@ -45,7 +45,7 @@ class PoP_UserState_EngineHooks
         }
     }
 
-    public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
+    public function end($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 

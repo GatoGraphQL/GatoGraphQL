@@ -12,10 +12,10 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $abovecontent_modules
+                $abovecontent_componentVariations
             );
         }
 
@@ -64,10 +64,10 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
 
         $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $abovecontent_modules
+                $abovecontent_componentVariations
             );
         }
 

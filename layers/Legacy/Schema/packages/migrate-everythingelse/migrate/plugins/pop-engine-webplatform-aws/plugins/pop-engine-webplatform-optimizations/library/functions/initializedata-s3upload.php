@@ -29,8 +29,8 @@ class PoP_WebPlatformEngine_AWS_InitializeData_S3Upload extends PoP_WebPlatformE
 
     public function maybeUploadToS3(array $componentVariation, $property_path, $type/*, $value_js*/)
     {
-        global $pop_module_runtimecontentmanager;
-        if ($file = $pop_module_runtimecontentmanager->getFileWithModelInstanceFilename($type)) {
+        global $pop_componentVariation_runtimecontentmanager;
+        if ($file = $pop_componentVariation_runtimecontentmanager->getFileWithModelInstanceFilename($type)) {
             $this->uploadToS3($file);
         }
     }

@@ -6,11 +6,11 @@ class PoPTheme_UserStance_LayoutHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_modules',
+            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_componentVariations',
             $this->getFeedBottomSubmodules(...)
         );
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_modules',
+            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_componentVariations',
             $this->getFeedBottomSubmodules(...)
         );
         \PoP\Root\App::addFilter(

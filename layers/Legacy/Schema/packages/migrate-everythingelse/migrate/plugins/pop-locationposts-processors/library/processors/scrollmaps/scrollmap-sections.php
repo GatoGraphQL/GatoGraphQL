@@ -38,7 +38,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_MAP],
             self::MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
             self::MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_MAP],
@@ -47,7 +47,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
             self::MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getMapDirection(array $componentVariation, array &$props)

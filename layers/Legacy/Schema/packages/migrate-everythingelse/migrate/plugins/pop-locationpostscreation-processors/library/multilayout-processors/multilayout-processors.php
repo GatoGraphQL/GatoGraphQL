@@ -10,14 +10,14 @@ class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Mu
     {
         switch ($handle) {
             case POP_MULTILAYOUT_HANDLE_POSTCONTENT:
-                $location_modules = array();
+                $location_componentVariations = array();
                 if ($handle == POP_MULTILAYOUT_HANDLE_POSTCONTENT) {
-                    $location_modules = array(
+                    $location_componentVariations = array(
                         POP_FORMAT_TABLE => [PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::class, PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],
                     );
                 }
 
-                if ($layout = $location_modules[$format] ?? null) {
+                if ($layout = $location_componentVariations[$format] ?? null) {
                     $instanceManager = InstanceManagerFacade::getInstance();
                     /** @var RelationalTypeResolverInterface */
                     $locationPostTypeResolver = $instanceManager->getInstance(LocationPostObjectTypeResolver::class);

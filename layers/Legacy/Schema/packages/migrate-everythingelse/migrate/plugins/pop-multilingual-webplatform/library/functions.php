@@ -5,7 +5,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
  * Litte bit of everything
  */
 // Change the position of where the path in a URL starts (accounting for "en/")
-\PoP\Root\App::addFilter('pop_modulemanager:pathstartpos', 'gdQtransPathstartpos');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:pathstartpos', 'gdQtransPathstartpos');
 function gdQtransPathstartpos($pos)
 {
     $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();
@@ -36,7 +36,7 @@ function gdBodyClassLocale($body_classes)
  */
 
 // Add the locale to the webplatform
-\PoP\Root\App::addFilter('pop_modulemanager:locale', 'popQtransLocale');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:locale', 'popQtransLocale');
 function popQtransLocale($locale)
 {
 
@@ -46,7 +46,7 @@ function popQtransLocale($locale)
 }
 
 // Add the locale to the home url
-\PoP\Root\App::addFilter('pop_modulemanager:homelocale_url', 'popQtransHomelocaleUrl');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:homelocale_url', 'popQtransHomelocaleUrl');
 function popQtransHomelocaleUrl($url)
 {
     $cmsService = CMSServiceFacade::getInstance();

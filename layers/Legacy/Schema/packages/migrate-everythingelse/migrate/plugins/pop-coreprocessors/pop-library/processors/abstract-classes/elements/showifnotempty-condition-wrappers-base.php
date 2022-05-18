@@ -24,10 +24,10 @@ abstract class PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase extends P
     public function initModelProps(array $componentVariation, array &$props): void
     {
         $this->appendProp($componentVariation, $props, 'class', 'pop-show-notempty');
-        if ($textfield_module = $this->getTextfieldModule($componentVariation, $props)) {
+        if ($textfield_componentVariation = $this->getTextfieldModule($componentVariation, $props)) {
             // Watch out! Class attribute here is called 'textfield-class', so any module implementing the textfield functionality
             // will need to add this class in the span surrounding the data to be refreshed (eg: buttoninner.tmpl)
-            $this->appendProp($textfield_module, $props, 'textfield-class', 'pop-show-notempty');
+            $this->appendProp($textfield_componentVariation, $props, 'textfield-class', 'pop-show-notempty');
         }
         parent::initModelProps($componentVariation, $props);
     }

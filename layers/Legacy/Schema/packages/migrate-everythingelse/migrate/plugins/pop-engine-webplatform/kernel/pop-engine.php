@@ -16,9 +16,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     public $enqueue;
     public $scripttag_attributes;
     public $intercept_urls;
-    public $immutable_modulejsdata;
-    public $mutableonmodel_modulejsdata;
-    public $mutableonrequest_modulejsdata;
+    public $immutable_componentVariationjsdata;
+    public $mutableonmodel_componentVariationjsdata;
+    public $mutableonrequest_componentVariationjsdata;
 
     public function __construct()
     {
@@ -118,19 +118,19 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     protected function processAndGenerateData(): void
     {
         // Initialize/Reset the JS module data
-        $this->immutable_modulejsdata = $this->mutableonmodel_modulejsdata = $this->mutableonrequest_modulejsdata = array();
+        $this->immutable_componentVariationjsdata = $this->mutableonmodel_componentVariationjsdata = $this->mutableonrequest_componentVariationjsdata = array();
 
         parent::processAndGenerateData();
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
+    public function getModuleData(array $root_componentVariation, array $root_model_props, array $root_props): array
     {
-        $ret = parent::getModuleData($root_module, $root_model_props, $root_props);
+        $ret = parent::getModuleData($root_componentVariation, $root_model_props, $root_props);
 
         // Only add the extra information if the entry-module is of the right object class
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $root_processor = $componentprocessor_manager->getProcessor($root_module);
+        $root_processor = $componentprocessor_manager->getProcessor($root_componentVariation);
 
         // Only add the extra information if the entry-module is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataComponentProcessorBase) {
@@ -141,29 +141,29 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
             if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
-                if ($this->immutable_modulejsdata) {
-                    $ret['modulejsdata']['immutable'] = $this->immutable_modulejsdata;
+                if ($this->immutable_componentVariationjsdata) {
+                    $ret['modulejsdata']['immutable'] = $this->immutable_componentVariationjsdata;
                 }
-                if ($this->mutableonmodel_modulejsdata) {
-                    $ret['modulejsdata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $this->mutableonmodel_modulejsdata) : $this->mutableonmodel_modulejsdata;
+                if ($this->mutableonmodel_componentVariationjsdata) {
+                    $ret['modulejsdata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $this->mutableonmodel_componentVariationjsdata) : $this->mutableonmodel_componentVariationjsdata;
                 }
-                if ($this->mutableonrequest_modulejsdata) {
-                    $ret['modulejsdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $this->mutableonrequest_modulejsdata) : $this->mutableonrequest_modulejsdata;
+                if ($this->mutableonrequest_componentVariationjsdata) {
+                    $ret['modulejsdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $this->mutableonrequest_componentVariationjsdata) : $this->mutableonrequest_componentVariationjsdata;
                 }
             } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
 
                 // If everything is combined, then it belongs under "mutableonrequest"
-                if ($combined_modulejsdata = array_merge_recursive(
-                    $this->immutable_modulejsdata,
-                    $this->mutableonmodel_modulejsdata,
-                    $this->mutableonrequest_modulejsdata
+                if ($combined_componentVariationjsdata = array_merge_recursive(
+                    $this->immutable_componentVariationjsdata,
+                    $this->mutableonmodel_componentVariationjsdata,
+                    $this->mutableonrequest_componentVariationjsdata
                 )) {
-                    $ret['modulejsdata'] = $has_extra_routes ? array($current_uri => $combined_modulejsdata) : $combined_modulejsdata;
+                    $ret['modulejsdata'] = $has_extra_routes ? array($current_uri => $combined_componentVariationjsdata) : $combined_componentVariationjsdata;
                 }
             }
 
             // Specify all the URLs to be intercepted by the current page. This is needed to obtain their configuration in the webplatform, under this page's URL
-            $this->intercept_urls = $root_processor->getIntercepturlsMergedmoduletree($root_module, $root_props);
+            $this->intercept_urls = $root_processor->getIntercepturlsMergedmoduletree($root_componentVariation, $root_props);
         }
 
         return $ret;
@@ -193,11 +193,11 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
         // Save the results on either the static or mutableonrequest branches
         if ($datasource == \PoP\ComponentModel\Constants\DataSources::IMMUTABLE) {
-            $modulejsdata = &$this->immutable_modulejsdata;
+            $modulejsdata = &$this->immutable_componentVariationjsdata;
         } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL) {
-            $modulejsdata = &$this->mutableonmodel_modulejsdata;
+            $modulejsdata = &$this->mutableonmodel_componentVariationjsdata;
         } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
-            $modulejsdata = &$this->mutableonrequest_modulejsdata;
+            $modulejsdata = &$this->mutableonrequest_componentVariationjsdata;
         }
 
         // Integrate the JS feedback into $modulejsdata

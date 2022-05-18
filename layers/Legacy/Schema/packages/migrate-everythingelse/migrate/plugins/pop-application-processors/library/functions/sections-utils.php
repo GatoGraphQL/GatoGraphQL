@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         // Only filter if the 'author' attribute has not been set yet. If it has been set, it must've been done by the filter,
         // which will allow only members belonging to the community. So use that one instead
         // if (!$ret['author']) {
-        $authors = \PoP\Root\App::applyFilters('pop_module:dataload_query_args:authors', array($author));
+        $authors = \PoP\Root\App::applyFilters('pop_componentVariation:dataload_query_args:authors', array($author));
         $ret['authors'] = $authors;
         // }
     }

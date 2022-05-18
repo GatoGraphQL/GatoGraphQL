@@ -59,14 +59,14 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
     {
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_LOGIN => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOGIN],
             self::MODULE_BLOCK_LOSTPWD => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOSTPWD],
             self::MODULE_BLOCK_LOSTPWDRESET => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOSTPWDRESET],
             self::MODULE_BLOCK_LOGOUT => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOGOUT],
         );
 
-        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 

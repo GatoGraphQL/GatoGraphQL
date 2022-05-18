@@ -12,11 +12,11 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($post_module = $this->getPostSubmodule($componentVariation)) {
-            $ret[] = $post_module;
+        if ($post_componentVariation = $this->getPostSubmodule($componentVariation)) {
+            $ret[] = $post_componentVariation;
         }
-        if ($comment_module = $this->getCommentSubmodule($componentVariation)) {
-            $ret[] = $comment_module;
+        if ($comment_componentVariation = $this->getCommentSubmodule($componentVariation)) {
+            $ret[] = $comment_componentVariation;
         }
 
         return $ret;
@@ -46,12 +46,12 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
 
         $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($componentVariation, $props);
 
-        if ($post_module = $this->getPostSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_module);
+        if ($post_componentVariation = $this->getPostSubmodule($componentVariation)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_componentVariation);
         }
 
-        if ($comment_module = $this->getCommentSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_module);
+        if ($comment_componentVariation = $this->getCommentSubmodule($componentVariation)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_componentVariation);
         }
 
         return $ret;

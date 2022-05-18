@@ -92,13 +92,13 @@ trait ModulePathProcessorTrait
         return $ret;
     }
 
-    // $use_module_output_name_as_key: For response structures (eg: configuration, feedback, etc) must be true
+    // $use_componentVariation_output_name_as_key: For response structures (eg: configuration, feedback, etc) must be true
     // for internal structures (eg: $props, $data_properties) no need
-    protected function executeOnSelfAndPropagateToComponentVariations($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $use_module_output_name_as_key = true, $options = array())
+    protected function executeOnSelfAndPropagateToComponentVariations($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $use_componentVariation_output_name_as_key = true, $options = array())
     {
         $ret = [];
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
-        $key = $use_module_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($componentVariation) : $moduleFullName;
+        $key = $use_componentVariation_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($componentVariation) : $moduleFullName;
 
         // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {

@@ -12,8 +12,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     protected function getModuledecoratorprocessorManager()
     {
-        global $pop_module_processordynamicdatadecorator_manager;
-        return $pop_module_processordynamicdatadecorator_manager;
+        global $pop_componentVariation_processordynamicdatadecorator_manager;
+        return $pop_componentVariation_processordynamicdatadecorator_manager;
     }
 
     //-------------------------------------------------
@@ -128,7 +128,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $componentVariation, array &$props)
     {
-        global $pop_module_processordynamicdatadecorator_manager;
+        global $pop_componentVariation_processordynamicdatadecorator_manager;
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
 
@@ -142,7 +142,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
                 // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
                 if (!$submodule_processor->startDataloadingSection($subComponentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
-                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subComponentVariation))->$propagate_fn($subComponentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                    if ($submodule_ret = $pop_componentVariation_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subComponentVariation))->$propagate_fn($subComponentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -162,7 +162,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     protected function flattenRelationaldbobjectDataProperties($propagate_fn, &$ret, array $componentVariation, array &$props)
     {
-        global $pop_module_processordynamicdatadecorator_manager;
+        global $pop_componentVariation_processordynamicdatadecorator_manager;
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
 
@@ -178,7 +178,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 'subcomponents' => array()
             );
             foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_componentVariation) {
-                if ($subcomponent_componentVariation_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_componentVariation))->$propagate_fn($subcomponent_componentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                if ($subcomponent_componentVariation_data_properties = $pop_componentVariation_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_componentVariation))->$propagate_fn($subcomponent_componentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                     $subcomponent_componentVariations_data_properties = array_merge_recursive(
                         $subcomponent_componentVariations_data_properties,
                         $subcomponent_componentVariation_data_properties
@@ -245,6 +245,6 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 /**
  * Settings Initialization
  */
-global $pop_module_processordynamicdatadecorator_manager;
-$pop_module_processordynamicdatadecorator_manager->add(PoP_WebPlatformQueryDataComponentProcessorBase::class, PoP_DynamicDataModuleDecoratorProcessor::class);
-// $pop_module_processordynamicdatadecorator_manager->add(PoP_Module_ProcessorBaseWrapper::class, PoP_DynamicDataModuleDecoratorProcessor::class);
+global $pop_componentVariation_processordynamicdatadecorator_manager;
+$pop_componentVariation_processordynamicdatadecorator_manager->add(PoP_WebPlatformQueryDataComponentProcessorBase::class, PoP_DynamicDataModuleDecoratorProcessor::class);
+// $pop_componentVariation_processordynamicdatadecorator_manager->add(PoP_Module_ProcessorBaseWrapper::class, PoP_DynamicDataModuleDecoratorProcessor::class);

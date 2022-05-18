@@ -53,8 +53,8 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     {
         if ($this->showEachLocation($componentVariation)) {
             $componentVariations = [];
-            if ($location_module = $this->getLocationModule($componentVariation)) {
-                $componentVariations[] = $location_module;
+            if ($location_componentVariation = $this->getLocationModule($componentVariation)) {
+                $componentVariations[] = $location_componentVariation;
             }
             if ($location_complement = $this->getLocationComplementModule($componentVariation)) {
                 $componentVariations[] = $location_complement;
@@ -145,8 +145,8 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             $ret['each-separator'] = $this->getEachSeparator($componentVariation);
             $ret['complement-separator'] = $this->getComplementSeparator($componentVariation);
 
-            if ($location_module = $this->getLocationModule($componentVariation)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_module);
+            if ($location_componentVariation = $this->getLocationModule($componentVariation)) {
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_componentVariation);
             }
             if ($location_complement = $this->getLocationComplementModule($componentVariation)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-complement'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_complement);

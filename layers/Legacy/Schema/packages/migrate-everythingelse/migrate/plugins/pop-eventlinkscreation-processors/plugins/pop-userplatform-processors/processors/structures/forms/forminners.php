@@ -70,8 +70,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
                 $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 
                 // Make it into left/right columns
-                $rightside_module = [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE];
-                $leftside_module = $this->isLink($componentVariation) ?
+                $rightside_componentVariation = [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE];
+                $leftside_componentVariation = $this->isLink($componentVariation) ?
                     [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
                     [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
                 if (!($form_left_class = $this->getProp($componentVariation, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
@@ -80,8 +80,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
                 if (!($form_right_class = $this->getProp($componentVariation, $props, 'form-right-class')/*$this->get_general_prop($props, 'form-right-class')*/)) {
                     $form_right_class = 'col-sm-4';
                 }
-                $this->appendProp($leftside_module, $props, 'class', $form_left_class);
-                $this->appendProp($rightside_module, $props, 'class', $form_right_class);
+                $this->appendProp($leftside_componentVariation, $props, 'class', $form_left_class);
+                $this->appendProp($rightside_componentVariation, $props, 'class', $form_right_class);
                 break;
         }
 

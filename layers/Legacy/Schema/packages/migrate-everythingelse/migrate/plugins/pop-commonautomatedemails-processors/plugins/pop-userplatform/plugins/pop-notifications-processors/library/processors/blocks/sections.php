@@ -33,12 +33,12 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
 
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 

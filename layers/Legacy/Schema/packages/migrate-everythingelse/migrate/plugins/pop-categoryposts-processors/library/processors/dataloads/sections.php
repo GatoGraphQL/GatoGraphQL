@@ -1627,7 +1627,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             /*********************************************
          * Typeaheads
@@ -2220,7 +2220,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_Carousels::class, CPP_Module_Processor_Carousels::MODULE_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array

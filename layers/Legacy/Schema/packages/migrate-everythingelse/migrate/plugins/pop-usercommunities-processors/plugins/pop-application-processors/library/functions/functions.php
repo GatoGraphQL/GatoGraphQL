@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 /**
  * Allow communities to include its members' content in the community Profile
  */
-\PoP\Root\App::addFilter('pop_module:dataload_query_args:authors', 'gdUreProfileCommunityDataloadqueryAddmembers');
+\PoP\Root\App::addFilter('pop_componentVariation:dataload_query_args:authors', 'gdUreProfileCommunityDataloadqueryAddmembers');
 function gdUreProfileCommunityDataloadqueryAddmembers($authors)
 {
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);

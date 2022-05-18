@@ -135,10 +135,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     protected function getCategories()
     {
         if ($this->showCategories()) {
-            if ($categories_module = $this->getCategoriesModule()) {
+            if ($categories_componentVariation = $this->getCategoriesModule()) {
                 // We might decide to allow the user to input many sections, or only one section, so this value might be an array or just the value
                 // So treat it always as an array
-                $categories = $this->getComponentProcessorManager()->getProcessor($categories_module)->getValue($categories_module);
+                $categories = $this->getComponentProcessorManager()->getProcessor($categories_componentVariation)->getValue($categories_componentVariation);
                 if ($categories && !is_array($categories)) {
                     $categories = array($categories);
                 }

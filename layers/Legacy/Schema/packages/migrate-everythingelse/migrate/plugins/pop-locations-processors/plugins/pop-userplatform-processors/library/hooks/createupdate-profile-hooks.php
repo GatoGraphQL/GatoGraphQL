@@ -10,8 +10,8 @@ class GD_EM_CreateUpdate_Profile_Hooks
         \PoP\Root\App::addFilter('PoP_Location_UserPlatform_ProfileHooks:form-input', $this->getLocationsForminputInput(...));
 
         // Processor Hooks
-        \PoP\Root\App::addFilter('pop_module:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
-        \PoP\Root\App::addFilter('pop_module:updateprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_componentVariation:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_componentVariation:updateprofile:components', $this->getComponentSubmodules(...), 10, 3);
     }
 
     public function getLocationsForminputInput()

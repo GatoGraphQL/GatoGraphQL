@@ -113,7 +113,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_DETAILS => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS],
@@ -147,7 +147,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getSectionfilterModule(array $componentVariation)

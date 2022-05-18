@@ -113,7 +113,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //         $ret[$componentVariation[1]] = $resources;
     //     }
 
-    //     foreach ($this->getDecoratedcomponentProcessor($componentVariation)->get_descendant_modules_to_propagate($componentVariation) as $subComponentVariation) {
+    //     foreach ($this->getDecoratedcomponentProcessor($componentVariation)->get_descendant_componentVariations_to_propagate($componentVariation) as $subComponentVariation) {
 
     //         if ($submodule_ret = $this->getComponentProcessordecorator($subComponentVariation)->getModulesResources($subComponentVariation, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 

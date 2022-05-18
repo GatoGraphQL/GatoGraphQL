@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('pop_module:sidebar_author:components', 'gdUreAuthorsidebarsComponents', 10, 2);
+\PoP\Root\App::addFilter('pop_componentVariation:sidebar_author:components', 'gdUreAuthorsidebarsComponents', 10, 2);
 function gdUreAuthorsidebarsComponents($components, $section)
 {
     if (PoP_ApplicationProcessors_Utils::addAuthorWidgetDetails()) {

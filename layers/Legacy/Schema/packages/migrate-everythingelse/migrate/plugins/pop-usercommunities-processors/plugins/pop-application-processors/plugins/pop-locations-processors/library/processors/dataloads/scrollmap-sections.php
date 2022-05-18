@@ -28,12 +28,12 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP],
             self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array

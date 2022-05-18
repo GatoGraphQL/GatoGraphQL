@@ -1563,7 +1563,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS02_SCROLL_NAVIGATOR],
@@ -2111,7 +2111,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

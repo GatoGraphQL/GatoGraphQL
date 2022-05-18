@@ -27,9 +27,9 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     {
         $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($location_module = $this->getLocationModule($componentVariation)) {
+        if ($location_componentVariation = $this->getLocationModule($componentVariation)) {
             $ret['separator'] = $this->separator($componentVariation, $props);
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_componentVariation);
         } else {
             $ret[GD_JS_TITLES] = array(
                 'locations' => TranslationAPIFacade::getInstance()->__('Locations', 'em-popprocessors')
@@ -44,12 +44,12 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
      */
     public function getRelationalSubmodules(array $componentVariation): array
     {
-        if ($location_module = $this->getLocationModule($componentVariation)) {
+        if ($location_componentVariation = $this->getLocationModule($componentVariation)) {
             return [
                 new RelationalModuleField(
                     'locations',
                     [
-                        $location_module,
+                        $location_componentVariation,
                     ]
                 ),
             ];

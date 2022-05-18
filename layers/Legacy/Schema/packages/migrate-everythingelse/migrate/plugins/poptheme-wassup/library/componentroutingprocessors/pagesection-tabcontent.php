@@ -15,7 +15,7 @@ class PoP_Module_TabContentPageSectionComponentRoutingProcessor extends PoP_Modu
     {
         $ret = array();
 
-        $nature_modules = array(
+        $nature_componentVariations = array(
             RequestNature::HOME => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_HOME],
             UserRequestNature::USER => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_AUTHOR],
             CustomPostRequestNature::CUSTOMPOST => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_SINGLE],
@@ -24,7 +24,7 @@ class PoP_Module_TabContentPageSectionComponentRoutingProcessor extends PoP_Modu
             PageRequestNature::PAGE => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_PAGE],
             RequestNature::GENERIC => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_ROUTE],
         );
-        foreach ($nature_modules as $nature => $componentVariation) {
+        foreach ($nature_componentVariations as $nature => $componentVariation) {
             $ret[$nature][] = [
                 'component-variation' => $componentVariation,
             ];

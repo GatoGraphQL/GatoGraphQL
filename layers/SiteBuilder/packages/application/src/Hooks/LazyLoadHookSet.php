@@ -60,7 +60,7 @@ class LazyLoadHookSet extends AbstractHookSet
         );
     }
 
-    public function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
+    public function start($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-lazy-load'] = false;
@@ -76,7 +76,7 @@ class LazyLoadHookSet extends AbstractHookSet
         }
     }
 
-    public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
+    public function end($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 

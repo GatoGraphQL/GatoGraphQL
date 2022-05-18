@@ -68,8 +68,8 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         $this->appendProp($componentVariation, $props, 'class', $direction);
 
         // Set the direction on the ScrollMap
-        $inner_module = $this->getInnerSubmodule($componentVariation);
-        $this->setProp($inner_module, $props, 'direction', $direction);
+        $inner_componentVariation = $this->getInnerSubmodule($componentVariation);
+        $this->setProp($inner_componentVariation, $props, 'direction', $direction);
 
         parent::initModelProps($componentVariation, $props);
     }

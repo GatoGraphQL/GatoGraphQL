@@ -74,8 +74,8 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     {
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        if ($inner_module = $this->getInnerSubmodule($componentVariation)) {
-            $ret[] = $inner_module;
+        if ($inner_componentVariation = $this->getInnerSubmodule($componentVariation)) {
+            $ret[] = $inner_componentVariation;
         }
 
         return $ret;
@@ -90,10 +90,10 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     // {
     //     $ret = parent::getModelPropsForDescendantComponentVariations($componentVariation, $props);
 
-    //     if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+    //     if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //         $ret['filter-module'] = $filter_module;
-    //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+    //         $ret['filter-module'] = $filter_componentVariation;
+    //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_componentVariation)->getFilter($filter_componentVariation);
     //     }
 
     //     return $ret;

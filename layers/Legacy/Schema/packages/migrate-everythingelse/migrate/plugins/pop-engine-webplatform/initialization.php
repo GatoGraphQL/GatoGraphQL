@@ -167,15 +167,15 @@ class PoPWebPlatform_Initialization
         $allowed_domains = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
 
         // Locale is needed to store the Open Tabs under the right language
-        $locale = \PoP\Root\App::applyFilters('pop_modulemanager:locale', get_locale());
+        $locale = \PoP\Root\App::applyFilters('pop_componentVariationmanager:locale', get_locale());
 
         // Default one: do not send, so that it doesn't show up in the Embed URL
         $keepopentabs = \PoP\Root\App::applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
         // $multilayout_keyfields = PoP_WebPlatform_ConfigurationUtils::get_multilayout_keyfields();
-        $domcontainer_id = \PoP\Root\App::applyFilters('pop_modulemanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
-        $addanchorspinner = \PoP\Root\App::applyFilters('pop_modulemanager:add_anchor_spinner', true);
-        $api_urlparams = \PoP\Root\App::applyFilters('pop_modulemanager:api_urlparams', array(
+        $domcontainer_id = \PoP\Root\App::applyFilters('pop_componentVariationmanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
+        $addanchorspinner = \PoP\Root\App::applyFilters('pop_componentVariationmanager:add_anchor_spinner', true);
+        $api_urlparams = \PoP\Root\App::applyFilters('pop_componentVariationmanager:api_urlparams', array(
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => array(
                 \PoP\ComponentModel\Constants\DataOutputItems::META,
@@ -199,7 +199,7 @@ class PoPWebPlatform_Initialization
             // This URL is needed to retrieve the user data, if the user is logged in
             // 'BACKGROUND_LOAD' => $backgroundLoad,
             'KEEP_OPEN_TABS' => $keepopentabs ? true : '',
-            'USERLOGGEDIN_LOADINGMSG_TARGET' => \PoP\Root\App::applyFilters('pop_modulemanager:userloggedin_loadingmsg_target', null),
+            'USERLOGGEDIN_LOADINGMSG_TARGET' => \PoP\Root\App::applyFilters('pop_componentVariationmanager:userloggedin_loadingmsg_target', null),
             // Define variable below to be overriden by WP Super Cache (if plugin disabled, it won't break anything)
             'AJAXURL' => admin_url('admin-ajax.php', 'relative'),
             'UPLOADURL' => admin_url('async-upload.php', 'relative'),
@@ -218,20 +218,20 @@ class PoPWebPlatform_Initialization
                 'MEDIA_FEATUREDIMAGE_TITLE' => TranslationAPIFacade::getInstance()->__('Set Featured Image', 'pop-engine-webplatform'),
                 'MEDIA_FEATUREDIMAGE_BTN' => TranslationAPIFacade::getInstance()->__('Set', 'pop-engine-webplatform'),
             ),
-            'FETCHTARGET_SETTINGS' => \PoP\Root\App::applyFilters('pop_modulemanager:fetchtarget_settings', array()),
-            'FETCHPAGESECTION_SETTINGS' => \PoP\Root\App::applyFilters('pop_modulemanager:fetchpagesection_settings', array()),
+            'FETCHTARGET_SETTINGS' => \PoP\Root\App::applyFilters('pop_componentVariationmanager:fetchtarget_settings', array()),
+            'FETCHPAGESECTION_SETTINGS' => \PoP\Root\App::applyFilters('pop_componentVariationmanager:fetchpagesection_settings', array()),
             'MULTILAYOUT_LABELS' => $multilayout_labels,
             // 'MULTILAYOUT_KEYFIELDS' => $multilayout_keyfields,
             'ADDANCHORSPINNER' => $addanchorspinner,
             'STRING_MORE' => GD_STRING_MORE,
             'STRING_LESS' => GD_STRING_LESS,
             'ONDATE' => $ondate,
-            'PATHSTARTPOS' => \PoP\Root\App::applyFilters('pop_modulemanager:pathstartpos', 1),
+            'PATHSTARTPOS' => \PoP\Root\App::applyFilters('pop_componentVariationmanager:pathstartpos', 1),
             'THROW_EXCEPTION_ON_TEMPLATE_ERROR' => (PoP_HTMLCSSPlatform_ServerUtils::throwExceptionOnTemplateError() ? true : ''),
         );
 
         // Allow qTrans to add the language information
-        if ($homelocaleurl = \PoP\Root\App::applyFilters('pop_modulemanager:homelocale_url', $homeurl)) {
+        if ($homelocaleurl = \PoP\Root\App::applyFilters('pop_componentVariationmanager:homelocale_url', $homeurl)) {
             $jqueryConstants['HOMELOCALE_URL'] = $homelocaleurl;
         }
 

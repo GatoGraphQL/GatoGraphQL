@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
 
     public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($filter_module = $this->getDelegatorfilterSubmodule($componentVariation)) {
+        if ($filter_componentVariation = $this->getDelegatorfilterSubmodule($componentVariation)) {
             // Events: choose to only select past/future
             switch ($componentVariation[1]) {
                 case self::MODULE_BLOCK_TABPANEL_TAGPASTEVENTS:
@@ -59,7 +59,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
                     break;
             }
             if ($daterange_class) {
-                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_module]);
+                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_componentVariation]);
             }
         }
 

@@ -3,7 +3,7 @@
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-\PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'wassupMultilayoutLabels');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:multilayout_labels', 'wassupMultilayoutLabels');
 function wassupMultilayoutLabels($labels)
 {
     $label = '<span class="label label-%s">%s</span>';

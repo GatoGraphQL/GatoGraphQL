@@ -24,8 +24,8 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
 
         // When clicking on any button, already submit the form
         if ($submit_btn = $this->getSubmitbtnModule($componentVariation)) {
-            // $trigger_module can only be the Filter and not the FilterInner, because FilterInner has no id, which is needed for previousmodules-ids
-            if ($trigger_module = $this->getProp($componentVariation, $props, 'trigger-module')) {
+            // $trigger_componentVariation can only be the Filter and not the FilterInner, because FilterInner has no id, which is needed for previousmodules-ids
+            if ($trigger_componentVariation = $this->getProp($componentVariation, $props, 'trigger-module')) {
                 // Execute JS and set all needed params
                 $this->mergeJsmethodsProp($submit_btn, $props, array('onActionThenClick'));
                 $this->mergeProp(
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
                     $props,
                     'previousmodules-ids',
                     array(
-                        'data-triggertarget' => $trigger_module,
+                        'data-triggertarget' => $trigger_componentVariation,
                     )
                 );
                 $this->mergeProp(

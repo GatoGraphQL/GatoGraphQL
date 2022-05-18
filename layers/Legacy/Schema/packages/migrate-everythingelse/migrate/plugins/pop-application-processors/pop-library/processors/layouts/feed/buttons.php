@@ -64,13 +64,13 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $this->appendProp($componentVariation, $props, 'class', 'pop-collapse-btn');
 
-                if ($collapse_module = $this->getProp($componentVariation, $props, 'target-module')) {
+                if ($collapse_componentVariation = $this->getProp($componentVariation, $props, 'target-module')) {
                     $this->mergeProp(
                         $componentVariation,
                         $props,
                         'previousmodules-ids',
                         array(
-                            'href' => $collapse_module,
+                            'href' => $collapse_componentVariation,
                         )
                     );
                     $this->mergeProp(

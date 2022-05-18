@@ -6,7 +6,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 //-------------------------------------------------------------------------------------
 
 // Register the AWS S3 domain in the Allowed Domains list
-\PoP\Root\App::addFilter('pop_modulemanager:allowed_domains', 'popAwss3Allowedurl');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:allowed_domains', 'popAwss3Allowedurl');
 function popAwss3Allowedurl($allowed_domains)
 {
 

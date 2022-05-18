@@ -23,6 +23,6 @@ interface EngineInterface
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution;
-    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array;
+    public function getModuleData(array $root_componentVariation, array $root_model_props, array $root_props): array;
     public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

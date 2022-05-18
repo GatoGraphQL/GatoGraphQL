@@ -144,7 +144,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $componentVariation, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_componentVariations_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $componentVariation, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the component variation to its string representation to access it in the array
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
@@ -187,7 +187,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Allow the $componentVariation to add general props for all its descendant modules
         $wildcard_props_to_propagate = array_merge(
             $wildcard_props_to_propagate,
-            $get_props_for_descendant_modules_fn($componentVariation, $module_props)
+            $get_props_for_descendant_componentVariations_fn($componentVariation, $module_props)
         );
 
         // Propagate
@@ -404,7 +404,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Descend into the path to find the component variation for which to add the att
             $module_props = &$props;
             foreach ($startingFromModulepathFullNames as $pathlevelModuleFullName) {
-                $last_module_props = &$module_props;
+                $last_componentVariation_props = &$module_props;
                 $lastModuleFullName = $pathlevelModuleFullName;
 
                 $module_props[$pathlevelModuleFullName][Props::SUBMODULES] = $module_props[$pathlevelModuleFullName][Props::SUBMODULES] ?? array();
@@ -415,7 +415,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Save the current $props, and restore later, to make sure this array has only one key, otherwise it will not work
             $current_props = $props;
             $props = array(
-                $lastModuleFullName => &$last_module_props[$lastModuleFullName]
+                $lastModuleFullName => &$last_componentVariation_props[$lastModuleFullName]
             );
         }
 
@@ -424,8 +424,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsModuletree`
         if ($this->isDescendantModule($componentVariation_or_componentVariationPath, $props)) {
             // It is a child component variation
-            $att_module = $componentVariation_or_componentVariationPath;
-            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_module);
+            $att_componentVariation = $componentVariation_or_componentVariationPath;
+            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_componentVariation);
 
             // From the root of the $props we obtain the current component variation
             $moduleFullName = $this->getPathHeadModule($props);

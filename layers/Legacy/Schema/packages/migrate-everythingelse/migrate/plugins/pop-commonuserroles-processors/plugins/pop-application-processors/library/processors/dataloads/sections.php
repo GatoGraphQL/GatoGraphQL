@@ -62,7 +62,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             /*********************************************
          * Typeaheads
@@ -96,7 +96,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_LIST],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array

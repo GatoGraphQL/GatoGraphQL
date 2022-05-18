@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
 function gdCustomUserloggedinLoadingmsgTarget($target)
 {
 
@@ -24,7 +24,7 @@ function getWassupFramecomponentComponentVariations($componentVariations)
 }
 
 
-\PoP\Root\App::addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
 function gdCustomFetchtargetSettings($fetchtarget_settings)
 {
     return array_merge(
@@ -65,7 +65,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 //     return $add_active;
 // }
 
-\PoP\Root\App::addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
+\PoP\Root\App::addFilter('pop_componentVariationmanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
 function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 {
     $settings_main = array(

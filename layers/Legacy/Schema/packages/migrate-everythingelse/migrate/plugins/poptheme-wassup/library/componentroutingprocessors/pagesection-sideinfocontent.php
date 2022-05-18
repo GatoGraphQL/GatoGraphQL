@@ -64,12 +64,12 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
 
         // Default for Home
         // Allow GetPoP website to change the sidebar, since it is changing the homeroute
-        $home_module = \PoP\Root\App::applyFilters(
+        $home_componentVariation = \PoP\Root\App::applyFilters(
             'PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup',
             [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]
         );
         $ret[RequestNature::HOME][] = [
-            'component-variation' => $home_module,
+            'component-variation' => $home_componentVariation,
         ];
 
         return $ret;

@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase exten
         }
 
         // Allow to override. Eg: TPP Debate website adds the Stance Counter
-        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_modules', $layouts, $componentVariation);
+        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_componentVariations', $layouts, $componentVariation);
 
         return $layouts;
     }

@@ -18,13 +18,13 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
     {
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($componentVariation[1]) {
             case self::MODULE_PAGE_ADDONTABS:
             case self::MODULE_PAGE_BODYTABS:
-                if ($tab_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
-                    $ret[] = $tab_module;
+                if ($tab_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
+                    $ret[] = $tab_componentVariation;
                 }
                 break;
         }

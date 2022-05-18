@@ -230,7 +230,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_STANCES_SCROLL_ADDONS => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_SCROLL_ADDONS],
             self::MODULE_BLOCK_STANCES_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW],
@@ -303,7 +303,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGSTANCES_CAROUSEL],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

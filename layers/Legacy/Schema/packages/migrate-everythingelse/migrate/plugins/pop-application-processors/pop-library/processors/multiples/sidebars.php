@@ -180,17 +180,17 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
             case self::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR:
                 if ($componentVariation == [self::class, self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
-                    $target_modules = array(
+                    $target_componentVariations = array(
                         '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                     );
                 } elseif ($componentVariation == [self::class, self::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR]) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
-                    $target_modules = array(
+                    $target_componentVariations = array(
                         '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],
                         '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR],
                     );
                 }
-                foreach ($target_modules as $target => $subComponentVariation) {
+                foreach ($target_componentVariations as $target => $subComponentVariation) {
                      // Make the block be collapsible, open it when the main feed is reached, with waypoints
                     $this->appendProp(array($subComponentVariation), $props, 'class', 'collapse');
                     $this->mergeProp(

@@ -59,7 +59,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // // component variation
         // // methods: map of group => methods
         // // next: repeats this sequence down the line for all the component variation's modules
-        // if ($priority_jsmethod = $this->get_module_filtered_jsmethods($componentVariation, $props)) {
+        // if ($priority_jsmethod = $this->get_componentVariation_filtered_jsmethods($componentVariation, $props)) {
 
         // 	foreach ($priority_jsmethod as $priority => $jsmethod) {
 

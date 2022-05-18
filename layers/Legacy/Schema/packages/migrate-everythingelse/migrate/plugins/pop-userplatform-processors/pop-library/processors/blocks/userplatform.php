@@ -62,13 +62,13 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
     {
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_BLOCK_USER_CHANGEPASSWORD => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_USER_CHANGEPASSWORD],
             self::MODULE_BLOCK_MYPREFERENCES => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_MYPREFERENCES],
             self::MODULE_BLOCK_INVITENEWUSERS => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_INVITENEWUSERS],
         );
 
-        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 

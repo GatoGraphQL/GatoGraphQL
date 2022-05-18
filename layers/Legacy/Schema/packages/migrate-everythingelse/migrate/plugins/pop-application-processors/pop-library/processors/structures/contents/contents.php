@@ -41,7 +41,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             );
             $inner = $inners[$componentVariation[1]];
 
-            return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_module', $inner, $componentVariation);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_componentVariation', $inner, $componentVariation);
         }
 
         return parent::getInnerSubmodule($componentVariation);

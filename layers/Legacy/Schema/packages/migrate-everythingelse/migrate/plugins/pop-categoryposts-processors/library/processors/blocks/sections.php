@@ -1563,7 +1563,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_NAVIGATOR => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_CATEGORYPOSTS01_SCROLL_NAVIGATOR => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_NAVIGATOR],
@@ -2112,7 +2112,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

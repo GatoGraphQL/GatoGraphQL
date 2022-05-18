@@ -215,11 +215,11 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($subComponentVariation)->getModulesPaths($subComponentVariation, $props)) {
 
     // 			// Add the extra path to the component variation
-    // 			foreach ($submodule_ret as $submodule_module => $submodule_module_path) {
+    // 			foreach ($submodule_ret as $submodule_componentVariation => $submodule_componentVariation_path) {
 
-    // 				$ret[$submodule_module] = array_merge(
+    // 				$ret[$submodule_componentVariation] = array_merge(
     // 					array(ComponentModelModuleInfo::get('response-prop-submodules'), $moduleOutputName),
-    // 					$submodule_module_path
+    // 					$submodule_componentVariation_path
     // 				);
     // 			}
     // 		}

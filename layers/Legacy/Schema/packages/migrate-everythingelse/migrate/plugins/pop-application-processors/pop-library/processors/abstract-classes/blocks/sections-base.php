@@ -114,17 +114,17 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     public function initModelProps(array $componentVariation, array &$props): void
     {
         // If the inner module is a DataloadingModule, then transfer dataloading properties to its contained module
-        if ($inner_module = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner_componentVariation = $this->getInnerSubmodule($componentVariation)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            if ($componentprocessor_manager->getProcessor($inner_module) instanceof DataloadingModuleInterface) {
+            if ($componentprocessor_manager->getProcessor($inner_componentVariation) instanceof DataloadingModuleInterface) {
 
                 $skip_data_load = $this->getProp($componentVariation, $props, 'skip-data-load');
                 if (!is_null($skip_data_load)) {
-                    $this->setProp([$inner_module], $props, 'skip-data-load', $skip_data_load);
+                    $this->setProp([$inner_componentVariation], $props, 'skip-data-load', $skip_data_load);
                 }
                 $lazy_load = $this->getProp($componentVariation, $props, 'lazy-load');
                 if (!is_null($lazy_load)) {
-                    $this->setProp([$inner_module], $props, 'lazy-load', $lazy_load);
+                    $this->setProp([$inner_componentVariation], $props, 'lazy-load', $lazy_load);
                 }
             }
         }
@@ -179,12 +179,12 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
         $ret = parent::getInnerSubmodules($componentVariation);
 
-        if ($sectionfilter_module = $this->getSectionfilterModule($componentVariation)) {
-            $ret[] = $sectionfilter_module;
+        if ($sectionfilter_componentVariation = $this->getSectionfilterModule($componentVariation)) {
+            $ret[] = $sectionfilter_componentVariation;
         }
 
-        if ($inner_module = $this->getInnerSubmodule($componentVariation)) {
-            $ret[] = $inner_module;
+        if ($inner_componentVariation = $this->getInnerSubmodule($componentVariation)) {
+            $ret[] = $inner_componentVariation;
         }
 
         return $ret;

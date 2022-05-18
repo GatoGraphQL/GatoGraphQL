@@ -50,10 +50,10 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
     public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        $trigger_module = $this->getTriggerSubmodule($componentVariation);
+        $trigger_componentVariation = $this->getTriggerSubmodule($componentVariation);
 
         // Add the class to be able to merge
-        $this->appendProp($componentVariation, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($trigger_module));
+        $this->appendProp($componentVariation, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($trigger_componentVariation));
 
         parent::initWebPlatformModelProps($componentVariation, $props);
     }
@@ -73,8 +73,8 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         // Because the URL param and the field name are disassociated, instead of getting ->getValue (which gets the value for the fieldname),
         // we do $_GET instead
         if ($value = \PoP\Root\App::query($this->getUrlParam($componentVariation))) {
-            $trigger_module = $this->getTriggerSubmodule($componentVariation);
-            $this->setProp($trigger_module, $props, 'default-value', $value);
+            $trigger_componentVariation = $this->getTriggerSubmodule($componentVariation);
+            $this->setProp($trigger_componentVariation, $props, 'default-value', $value);
         }
 
         parent::initRequestProps($componentVariation, $props);
@@ -82,11 +82,11 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
     public function initModelProps(array $componentVariation, array &$props): void
     {
-        $trigger_module = $this->getTriggerSubmodule($componentVariation);
+        $trigger_componentVariation = $this->getTriggerSubmodule($componentVariation);
 
         // // Because the triggered layout will need to be rendered, it needs to have its template_path printed in the webplatform
-        // $this->setProp($trigger_module, $props, 'module-path', true);
-        $this->setProp($trigger_module, $props, 'dynamic-module', true);
+        // $this->setProp($trigger_componentVariation, $props, 'module-path', true);
+        $this->setProp($trigger_componentVariation, $props, 'dynamic-module', true);
 
         // // Initialize typeahead value for replicable/webplatform
         // if ($this->getProp($componentVariation, $props, 'replicable')) {
@@ -141,8 +141,8 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             $ret['dbkey'] = $triggerTypeResolver->getTypeOutputDBKey();
         }
 
-        $trigger_module = $this->getTriggerSubmodule($componentVariation);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_module);
+        $trigger_componentVariation = $this->getTriggerSubmodule($componentVariation);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_componentVariation);
 
         $this->addMetaFormcomponentModuleConfiguration($ret, $componentVariation, $props);
 
@@ -216,8 +216,8 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
             $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
-            $trigger_module = $this->getTriggerSubmodule($componentVariation);
-            $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_module)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
+            $trigger_componentVariation = $this->getTriggerSubmodule($componentVariation);
+            $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_componentVariation)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_componentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
 
             // Extend the dataload ids
             return array(

@@ -17,7 +17,7 @@ class PoPTheme_Wassup_EM_SidebarHooks
 
         // Add the Events Calendar to all Groups in the Sideinfo
         $includeScreengroups = \PoP\Root\App::applyFilters(
-            'PoPTheme_Wassup_EM_SidebarHooks:sidebar_modules:includeScreengroups',
+            'PoPTheme_Wassup_EM_SidebarHooks:sidebar_componentVariations:includeScreengroups',
             array(
                 POP_SCREENGROUP_CONTENTREAD,
             )

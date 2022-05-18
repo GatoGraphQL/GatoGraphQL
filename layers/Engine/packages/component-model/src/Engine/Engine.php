@@ -1039,12 +1039,12 @@ class Engine implements EngineInterface
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
+    public function getModuleData(array $root_componentVariation, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_module);
+        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_componentVariation);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1053,7 +1053,7 @@ class Engine implements EngineInterface
         $dataoutputitems = App::getState('dataoutputitems');
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
 
-        $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = [];
+        $immutable_componentVariationdata = $mutableonmodel_componentVariationdata = $mutableonrequest_componentVariationdata = [];
         $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = [];
         if ($add_meta) {
             $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = [];
@@ -1069,7 +1069,7 @@ class Engine implements EngineInterface
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
-            $root_module,
+            $root_componentVariation,
             array(&$root_model_props),
             array(&$root_props),
             array(&$engineState->helperCalculations),
@@ -1085,13 +1085,13 @@ class Engine implements EngineInterface
 
         // If there is no cached one, generate the props and cache it
         if ($immutable_data_properties === null) {
-            $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_module, $root_model_props);
+            $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_componentVariation, $root_model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
             }
         }
         if ($mutableonmodel_data_properties === null) {
-            $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_module, $root_model_props);
+            $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_componentVariation, $root_model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
             }
@@ -1105,7 +1105,7 @@ class Engine implements EngineInterface
         if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
-            $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_module, $root_props);
+            $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_componentVariation, $root_props);
             $root_data_properties = array_merge_recursive(
                 $model_data_properties,
                 $mutableonrequest_data_properties
@@ -1113,10 +1113,10 @@ class Engine implements EngineInterface
         }
 
         // Get the list of all modules which calculate their data feedback using another module's results
-        $interreferenced_modulefullpaths = $this->getInterreferencedComponentVariationFullPaths($root_module, $root_props);
+        $interreferenced_componentVariationfullpaths = $this->getInterreferencedComponentVariationFullPaths($root_componentVariation, $root_props);
 
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
-        $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
+        $module_fullpaths = $this->getDataloadingModuleFullpaths($root_componentVariation, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
@@ -1292,19 +1292,19 @@ class Engine implements EngineInterface
                 if ($add_meta) {
                     $datasetmodulemeta = &$immutable_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$immutable_moduledata;
+                $engineState->moduledata = &$immutable_componentVariationdata;
             } elseif ($datasource == DataSources::MUTABLEONMODEL) {
                 $datasetmoduledata = &$mutableonmodel_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$mutableonmodel_moduledata;
+                $engineState->moduledata = &$mutableonmodel_componentVariationdata;
             } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                 $datasetmoduledata = &$mutableonrequest_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$mutableonrequest_moduledata;
+                $engineState->moduledata = &$mutableonrequest_componentVariationdata;
             }
 
             // Integrate the dbobjectids into $datasetmoduledata
@@ -1326,9 +1326,9 @@ class Engine implements EngineInterface
             $this->processAndAddModuleData($module_path, $componentVariation, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
-            if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($componentVariation)))] ?? null) {
-                foreach ($referencer_modulefullpaths as $referencer_componentVariationPath) {
-                    $referencer_module = array_pop($referencer_componentVariationPath);
+            if ($referencer_componentVariationfullpaths = $interreferenced_componentVariationfullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($componentVariation)))] ?? null) {
+                foreach ($referencer_componentVariationfullpaths as $referencer_componentVariationPath) {
+                    $referencer_componentVariation = array_pop($referencer_componentVariationPath);
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
@@ -1347,11 +1347,11 @@ class Engine implements EngineInterface
                             )
                         )
                     ) {
-                        $referencer_module_props = &$referencer_model_props;
+                        $referencer_componentVariation_props = &$referencer_model_props;
                     } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
-                        $referencer_module_props = &$referencer_props;
+                        $referencer_componentVariation_props = &$referencer_props;
                     }
-                    $this->processAndAddModuleData($referencer_componentVariationPath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+                    $this->processAndAddModuleData($referencer_componentVariationPath, $referencer_componentVariation, $referencer_componentVariation_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
             }
 
@@ -1388,16 +1388,16 @@ class Engine implements EngineInterface
 
             if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
                 /** @phpstan-ignore-next-line */
-                if ($immutable_moduledata) {
-                    $ret['moduledata']['immutable'] = $immutable_moduledata;
+                if ($immutable_componentVariationdata) {
+                    $ret['moduledata']['immutable'] = $immutable_componentVariationdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($mutableonmodel_moduledata) {
-                    $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_moduledata) : $mutableonmodel_moduledata;
+                if ($mutableonmodel_componentVariationdata) {
+                    $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_componentVariationdata) : $mutableonmodel_componentVariationdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($mutableonrequest_moduledata) {
-                    $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_moduledata) : $mutableonrequest_moduledata;
+                if ($mutableonrequest_componentVariationdata) {
+                    $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_componentVariationdata) : $mutableonrequest_componentVariationdata;
                 }
                 /** @phpstan-ignore-next-line */
                 if ($immutable_datasetmoduledata) {
@@ -1429,13 +1429,13 @@ class Engine implements EngineInterface
             } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
-                    $combined_moduledata = array_merge_recursive(
-                        $immutable_moduledata,
-                        $mutableonmodel_moduledata,
-                        $mutableonrequest_moduledata
+                    $combined_componentVariationdata = array_merge_recursive(
+                        $immutable_componentVariationdata,
+                        $mutableonmodel_componentVariationdata,
+                        $mutableonrequest_componentVariationdata
                     )
                 ) {
-                    $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_moduledata) : $combined_moduledata;
+                    $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_componentVariationdata) : $combined_componentVariationdata;
                 }
                 if (
                     $combined_datasetmoduledata = array_merge_recursive(
@@ -1463,7 +1463,7 @@ class Engine implements EngineInterface
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
-            $root_module,
+            $root_componentVariation,
             array(&$root_model_props),
             array(&$root_props),
             array(&$engineState->helperCalculations),

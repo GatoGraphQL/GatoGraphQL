@@ -6,7 +6,7 @@ class PoP_Share_GFHelpers
     public static function getSharebyemailFormFieldNames()
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $gfinputname_modules = array(
+        $gfinputname_componentVariations = array(
             POP_GENERICFORMS_GF_FORM_SHAREBYEMAIL_FIELDNAME_NAME_ID => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME],
             POP_GENERICFORMS_GF_FORM_SHAREBYEMAIL_FIELDNAME_DESTINATIONEMAILS_ID => [PoP_Share_Module_Processor_TextFormInputs::class, PoP_Share_Module_Processor_TextFormInputs::MODULE_FORMINPUT_DESTINATIONEMAIL],
             POP_GENERICFORMS_GF_FORM_SHAREBYEMAIL_FIELDNAME_ADDITIONALMESSAGE_ID => [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_ADDITIONALMESSAGE],
@@ -14,7 +14,7 @@ class PoP_Share_GFHelpers
             POP_GENERICFORMS_GF_FORM_SHAREBYEMAIL_FIELDNAME_PAGETITLE_ID => [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETTITLE],
         );
         $fieldnames = array();
-        foreach ($gfinputname_modules as $gf_field_name => $componentVariation) {
+        foreach ($gfinputname_componentVariations as $gf_field_name => $componentVariation) {
             $fieldnames[$componentprocessor_manager->getProcessor($componentVariation)->getName($componentVariation)] = $gf_field_name;
         }
         

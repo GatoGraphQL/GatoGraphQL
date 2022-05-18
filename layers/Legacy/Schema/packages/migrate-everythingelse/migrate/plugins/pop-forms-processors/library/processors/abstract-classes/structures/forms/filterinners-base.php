@@ -38,11 +38,11 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     {
         $ret = parent::getLayoutSubmodules($componentVariation);
 
-        if ($input_modules = $this->getFilteredInputSubmodules($componentVariation)) {
+        if ($input_componentVariations = $this->getFilteredInputSubmodules($componentVariation)) {
 
             $ret = array_merge(
                 $ret,
-                $input_modules
+                $input_componentVariations
             );
 
             // // Add the hidden input with the name of the filter

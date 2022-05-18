@@ -105,8 +105,8 @@ class PoP_ResourceLoaderProcessorUtils {
         $route_formats = array();
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        $componentroutingprocessors = $pop_module_componentroutingprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $componentroutingprocessors = $pop_componentVariation_componentroutingprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         foreach ($componentroutingprocessors as $componentroutingprocessor) {
             foreach ($componentroutingprocessor->getStatePropertiesToSelectComponentByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
@@ -413,7 +413,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $resources[$path][$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_componentVariation_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == RequestNature::GENERIC) {
 
@@ -446,7 +446,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $vars['route'] = $current_route;
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_componentVariation_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == CustomPostRequestNature::CUSTOMPOST) {
 
@@ -477,7 +477,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromAppState() doesn't have all the information needed
                 // // Eg: because the categories are not in $vars, it can't tell the difference between past and future events,
                 // // or from 2 posts with different category
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_componentVariation_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == UserRequestNature::USER) {
 
@@ -501,7 +501,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::addResourcesFromCurrentLoop($modulefilter, $resources, $key, $merge, $options);
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_componentVariation_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == TagRequestNature::TAG) {
 
@@ -527,7 +527,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::addResourcesFromCurrentLoop($modulefilter, $resources, $key, $merge, $options);
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_componentVariation_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == RequestNature::HOME) {
 
@@ -545,7 +545,7 @@ class PoP_ResourceLoaderProcessorUtils {
             $resources[$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
             // // Reset the cache
-            // $pop_module_processor_runtimecache->deleteCache();
+            // $pop_componentVariation_processor_runtimecache->deleteCache();
         } elseif ($nature == RequestNature::NOTFOUND) {
 
             $vars['routing'] = [];
@@ -562,7 +562,7 @@ class PoP_ResourceLoaderProcessorUtils {
             $resources[$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
             // // Reset the cache
-            // $pop_module_processor_runtimecache->deleteCache();
+            // $pop_componentVariation_processor_runtimecache->deleteCache();
         }
 
         // If doing JSON, then we may need to duplicate entries.
@@ -661,7 +661,7 @@ class PoP_ResourceLoaderProcessorUtils {
         ApplicationState::augmentVarsProperties();
 
         // // Set the runtimecache once again to operate with $request
-        // $pop_module_processor_runtimecache->setUseVarsIdentifier(false);
+        // $pop_componentVariation_processor_runtimecache->setUseVarsIdentifier(false);
     }
 
     protected static function addResourcesFromCurrentLoop($modulefilter, &$resources, $key, $merge = false, $options = array()) {

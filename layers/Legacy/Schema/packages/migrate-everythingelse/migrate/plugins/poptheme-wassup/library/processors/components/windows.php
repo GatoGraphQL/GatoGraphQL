@@ -23,21 +23,21 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
 
     protected function getInnerSubmodules(array $componentVariation): array
     {
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($componentVariation[1]) {
             case self::MODULE_WINDOW_ADDONS:
-                $load_module = true;
+                $load_componentVariation = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $componentVariation == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_componentVariation = $componentVariation == $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $addons_module = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS];
-                $addontabs_module = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_ADDONTABS];
-                if ($load_module) {
+                $addons_componentVariation = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS];
+                $addontabs_componentVariation = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_ADDONTABS];
+                if ($load_componentVariation) {
                     return array(
-                        $addons_module,
-                        $addontabs_module,
+                        $addons_componentVariation,
+                        $addontabs_componentVariation,
                     );
                 }
 
@@ -45,13 +45,13 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
                 $moduleAtts = array('empty' => true);
                 return array(
                     [
-                        $addons_module[0],
-                        $addons_module[1],
+                        $addons_componentVariation[0],
+                        $addons_componentVariation[1],
                         $moduleAtts
                     ],
                     [
-                        $addontabs_module[0],
-                        $addontabs_module[1],
+                        $addontabs_componentVariation[0],
+                        $addontabs_componentVariation[1],
                         $moduleAtts
                     ],
                 );

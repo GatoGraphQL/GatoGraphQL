@@ -24,13 +24,13 @@ class UserStance_Module_Processor_MySectionBlocks extends PoP_Module_Processor_M
 
     protected function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             self::MODULE_BLOCK_MYSTANCES_TABLE_EDIT => [UserStance_Module_Processor_MySectionDataloads::class, UserStance_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT],
             self::MODULE_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW => [UserStance_Module_Processor_MySectionDataloads::class, UserStance_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $componentVariation)

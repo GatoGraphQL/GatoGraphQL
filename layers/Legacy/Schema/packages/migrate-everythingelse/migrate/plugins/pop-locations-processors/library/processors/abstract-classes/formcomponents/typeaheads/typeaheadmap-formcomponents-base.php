@@ -68,8 +68,8 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         $ret['addmarker-module'] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::MODULE_MAP_ADDMARKER];
 
         $locations_typeahead = $this->getLocationsTypeaheadSubmodule($componentVariation);
-        $map_module = $this->getMapSubmodule($componentVariation);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_module);
+        $map_componentVariation = $this->getMapSubmodule($componentVariation);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_componentVariation);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['locations'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($locations_typeahead);
 
         $ret[GD_JS_CLASSES]['wrapper'] = $this->getProp($componentVariation, $props, 'wrapper-class');

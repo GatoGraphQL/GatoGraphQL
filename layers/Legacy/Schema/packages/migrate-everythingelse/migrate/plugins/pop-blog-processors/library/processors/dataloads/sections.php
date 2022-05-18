@@ -225,7 +225,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             /*********************************************
          * Typeaheads
@@ -328,7 +328,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_USERS_CAROUSEL => [PoP_Module_Processor_CustomCarousels::class, PoP_Module_Processor_CustomCarousels::MODULE_CAROUSEL_USERS],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array
@@ -810,9 +810,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST:
                 // Search: don't bring anything unless we're filtering (no results initially)
-                // if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+                // if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                //     $filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+                //     $filter = $componentprocessor_manager->getProcessor($filter_componentVariation)->getFilter($filter_componentVariation);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
                 if (!$this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation)) {

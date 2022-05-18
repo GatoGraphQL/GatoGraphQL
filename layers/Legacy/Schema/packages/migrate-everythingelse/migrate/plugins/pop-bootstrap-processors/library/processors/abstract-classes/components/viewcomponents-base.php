@@ -67,10 +67,10 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
     {
         $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($inner_modules = $this->getInnerSubmodules($componentVariation)) {
+        if ($inner_componentVariations = $this->getInnerSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $inner_modules
+                $inner_componentVariations
             );
         }
 

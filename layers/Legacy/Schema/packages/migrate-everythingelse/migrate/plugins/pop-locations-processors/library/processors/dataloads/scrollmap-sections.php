@@ -55,7 +55,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SEARCHUSERS_SCROLLMAP],
             self::MODULE_DATALOAD_USERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_USERS_SCROLLMAP],
             self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP],
@@ -70,7 +70,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array
@@ -235,9 +235,9 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
-                // if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+                // if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                //     $filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+                //     $filter = $componentprocessor_manager->getProcessor($filter_componentVariation)->getFilter($filter_componentVariation);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
                 if (!$this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation)) {

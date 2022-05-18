@@ -169,11 +169,11 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
         // Because a component can interact with itself by adding ?componentVariationPaths=...,
         // then, by default, we simply set the dataload source to point to itself!
-        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($componentVariation);
+        $stringified_componentVariation_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($componentVariation);
         $ret = GeneralUtils::addQueryArgs(
             [
                 Params::MODULEFILTER => $this->getModulePaths()->getName(),
-                Params::MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
+                Params::MODULEPATHS . '[]' => $stringified_componentVariation_propagation_current_path,
             ],
             $this->getRequestHelperService()->getCurrentURL()
         );
@@ -186,8 +186,8 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         }
 
         // Allow to add extra componentVariationPaths set from above
-        if ($extra_module_paths = $this->getProp($componentVariation, $props, 'dataload-source-add-componentVariationPaths')) {
-            foreach ($extra_module_paths as $componentVariationPath) {
+        if ($extra_componentVariation_paths = $this->getProp($componentVariation, $props, 'dataload-source-add-componentVariationPaths')) {
+            foreach ($extra_componentVariation_paths as $componentVariationPath) {
                 $ret = GeneralUtils::addQueryArgs([
                     Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($componentVariationPath),
                 ], $ret);
@@ -197,7 +197,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         // Add the actionpath too
         if ($this->getComponentMutationResolverBridge($componentVariation) !== null) {
             $ret = GeneralUtils::addQueryArgs([
-                Params::ACTION_PATH => $stringified_module_propagation_current_path,
+                Params::ACTION_PATH => $stringified_componentVariation_propagation_current_path,
             ], $ret);
         }
 

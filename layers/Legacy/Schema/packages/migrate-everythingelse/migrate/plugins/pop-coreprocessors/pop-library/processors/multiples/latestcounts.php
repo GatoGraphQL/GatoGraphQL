@@ -15,10 +15,10 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        $inner_modules = array(
+        $inner_componentVariations = array(
             self::MODULE_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTCOUNTS],
         );
-        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 

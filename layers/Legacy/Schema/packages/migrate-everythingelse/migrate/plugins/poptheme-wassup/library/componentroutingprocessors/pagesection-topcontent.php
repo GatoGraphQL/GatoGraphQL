@@ -9,11 +9,11 @@ class PoP_Module_TopContentPageSectionComponentRoutingProcessor extends PoP_Modu
     {
         $ret = array();
 
-        $thememode_modules = array(
+        $thememode_componentVariations = array(
             GD_THEMEMODE_WASSUP_SIMPLE => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOPSIMPLE],
             GD_THEMEMODE_WASSUP_EMBED => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOPEMBED],
         );
-        foreach ($thememode_modules as $thememode => $componentVariation) {
+        foreach ($thememode_componentVariations as $thememode => $componentVariation) {
             $ret[] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

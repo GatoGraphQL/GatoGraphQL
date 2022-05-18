@@ -18,53 +18,53 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($belowthumb_modules = $this->getBelowthumbLayoutSubmodules($componentVariation)) {
+        if ($belowthumb_componentVariations = $this->getBelowthumbLayoutSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $belowthumb_modules
+                $belowthumb_componentVariations
             );
         }
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $abovecontent_modules
+                $abovecontent_componentVariations
             );
         }
-        if ($belowcontent_modules = $this->getBelowcontentSubmodules($componentVariation)) {
+        if ($belowcontent_componentVariations = $this->getBelowcontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $belowcontent_modules
+                $belowcontent_componentVariations
             );
         }
-        if ($top_modules = $this->getTopSubmodules($componentVariation)) {
+        if ($top_componentVariations = $this->getTopSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $top_modules
+                $top_componentVariations
             );
         }
-        if ($bottom_modules = $this->getPreviewpostBottomSubmodules($componentVariation)) {
+        if ($bottom_componentVariations = $this->getPreviewpostBottomSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $bottom_modules
+                $bottom_componentVariations
             );
         }
-        if ($beforecontent_modules = $this->getBeforecontentSubmodules($componentVariation)) {
+        if ($beforecontent_componentVariations = $this->getBeforecontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $beforecontent_modules
+                $beforecontent_componentVariations
             );
         }
-        if ($aftercontent_modules = $this->getAftercontentSubmodules($componentVariation)) {
+        if ($aftercontent_componentVariations = $this->getAftercontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $aftercontent_modules
+                $aftercontent_componentVariations
             );
         }
         if ($post_thumb = $this->getPostThumbSubmodule($componentVariation)) {
             $ret[] = $post_thumb;
         }
-        if ($content_module = $this->getContentSubmodule($componentVariation)) {
-            $ret[] = $content_module;
+        if ($content_componentVariation = $this->getContentSubmodule($componentVariation)) {
+            $ret[] = $content_componentVariation;
         }
 
         return $ret;
@@ -80,8 +80,8 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         $componentVariations = [];
 
         // Show author or not: if position defined
-        if ($author_module = $this->getAuthorModule($componentVariation)) {
-            $componentVariations[] = $author_module;
+        if ($author_componentVariation = $this->getAuthorModule($componentVariation)) {
+            $componentVariations[] = $author_componentVariation;
         }
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
@@ -204,7 +204,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
-        return \PoP\Root\App::applyFilters('PoP_Module_Processor_PreviewPostLayoutsBase:bottom_modules', $this->getBottomSubmodules($componentVariation), $componentVariation);
+        return \PoP\Root\App::applyFilters('PoP_Module_Processor_PreviewPostLayoutsBase:bottom_componentVariations', $this->getBottomSubmodules($componentVariation), $componentVariation);
     }
 
     public function getImmutableConfiguration(array $componentVariation, array &$props): array
@@ -213,50 +213,50 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($belowthumb_modules = $this->getBelowthumbLayoutSubmodules($componentVariation)) {
+        if ($belowthumb_componentVariations = $this->getBelowthumbLayoutSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowthumb'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $belowthumb_modules
+                $belowthumb_componentVariations
             );
         }
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $abovecontent_modules
+                $abovecontent_componentVariations
             );
         }
-        if ($belowcontent_modules = $this->getBelowcontentSubmodules($componentVariation)) {
+        if ($belowcontent_componentVariations = $this->getBelowcontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowcontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $belowcontent_modules
+                $belowcontent_componentVariations
             );
         }
-        if ($top_modules = $this->getTopSubmodules($componentVariation)) {
+        if ($top_componentVariations = $this->getTopSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['top'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $top_modules
+                $top_componentVariations
             );
         }
-        if ($bottom_modules = $this->getPreviewpostBottomSubmodules($componentVariation)) {
+        if ($bottom_componentVariations = $this->getPreviewpostBottomSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $bottom_modules
+                $bottom_componentVariations
             );
         }
-        if ($beforecontent_modules = $this->getBeforecontentSubmodules($componentVariation)) {
+        if ($beforecontent_componentVariations = $this->getBeforecontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['beforecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $beforecontent_modules
+                $beforecontent_componentVariations
             );
         }
-        if ($aftercontent_modules = $this->getAftercontentSubmodules($componentVariation)) {
+        if ($aftercontent_componentVariations = $this->getAftercontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['aftercontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $aftercontent_modules
+                $aftercontent_componentVariations
             );
         }
-        if ($author_module = $this->getAuthorModule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($author_module);
+        if ($author_componentVariation = $this->getAuthorModule($componentVariation)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($author_componentVariation);
             $ret['authors-position'] = $this->authorPositions($componentVariation);
             $ret['authors-sep'] = $this->getAuthorsSeparator($componentVariation, $props);
             if ($title_beforeauthors = $this->getTitleBeforeauthors($componentVariation, $props)) {
@@ -276,8 +276,8 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
             $ret[GD_JS_CLASSES]['date'] = 'close close-sm';
         }
 
-        if ($content_module = $this->getContentSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_module);
+        if ($content_componentVariation = $this->getContentSubmodule($componentVariation)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_componentVariation);
         }
 
         if ($post_thumb = $this->getPostThumbSubmodule($componentVariation)) {
@@ -293,8 +293,8 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
     public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($author_module = $this->getAuthorModule($componentVariation)) {
-            $this->appendProp($author_module, $props, 'class', 'preview-author');
+        if ($author_componentVariation = $this->getAuthorModule($componentVariation)) {
+            $this->appendProp($author_componentVariation, $props, 'class', 'preview-author');
         }
 
         parent::initModelProps($componentVariation, $props);

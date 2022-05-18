@@ -18,7 +18,7 @@ class RequestUtils
         $domain_id = str_replace('.', '-', removeScheme($domain));
 
         // Allow to override the domainId, to unify DEV and PROD domains
-        return App::applyFilters('pop_modulemanager:domain_id', $domain_id, $domain);
+        return App::applyFilters('pop_componentVariationmanager:domain_id', $domain_id, $domain);
     }
 
     public static function isSearchEngine()

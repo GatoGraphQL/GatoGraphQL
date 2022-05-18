@@ -231,7 +231,7 @@ class PoP_ServerSideRendering
         // Expand the JS Keys first, since the template key may be the compacted one
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $popManager->expandJSKeys($pagesection_configuration);
-        if (!$pagesection_module = $pagesection_configuration[GD_JS_MODULE]) {
+        if (!$pagesection_componentVariation = $pagesection_configuration[GD_JS_MODULE]) {
             throw new GenericSystemException(
                 sprintf(
                     'No template defined in context (%s)',
@@ -242,7 +242,7 @@ class PoP_ServerSideRendering
 
         // We can render a block instead of the pageSection
         // Needed for producing the html for the automated emails
-        $renderModule = $pagesection_module;
+        $renderModule = $pagesection_componentVariation;
         $render_context = $pagesection_configuration;
         if ($block) {
             $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-submodules')][$block];

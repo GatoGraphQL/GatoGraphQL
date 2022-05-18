@@ -16,19 +16,19 @@ class PoP_ResourceLoader_Utils {
 
 		// Comment Leo 11/12/2017: get the dynamic module resources, and print already their source and type, since
 		// this information will be needed if including those resources in the body when initializing a lazy-load block
-		if ($dynamic_module_resources_data = PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils::getDynamicModuleResourcesData()) {
+		if ($dynamic_componentVariation_resources_data = PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils::getDynamicModuleResourcesData()) {
 			$cmsService = CMSServiceFacade::getInstance();
-			$dynamic_module_resourcesources = $dynamic_module_resources_data['sources'];
-			$dynamic_module_resourcetypes = $dynamic_module_resources_data['types'];
+			$dynamic_componentVariation_resourcesources = $dynamic_componentVariation_resources_data['sources'];
+			$dynamic_componentVariation_resourcetypes = $dynamic_componentVariation_resources_data['types'];
 			$domain = $cmsService->getSiteURL();
 
 			$scripts[] = sprintf(
 				'pop.%s.config["%s"].sources = %s',
 				$jsObject,
 				$domain,
-				json_encode($dynamic_module_resourcesources)
+				json_encode($dynamic_componentVariation_resourcesources)
 			);
-			foreach ($dynamic_module_resourcetypes as $resourcetype => $resourcetype_resources) {
+			foreach ($dynamic_componentVariation_resourcetypes as $resourcetype => $resourcetype_resources) {
 				
 				$scripts[] = sprintf(
 					'pop.%s.config["%s"].types["%s"] = %s',

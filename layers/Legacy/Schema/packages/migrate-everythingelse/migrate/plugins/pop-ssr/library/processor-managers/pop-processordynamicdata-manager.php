@@ -9,5 +9,5 @@ class PoP_DynamicDataModuleDecoratorProcessorManager
 /**
  * Initialization
  */
-global $pop_module_processordynamicdatadecorator_manager;
-$pop_module_processordynamicdatadecorator_manager = new PoP_DynamicDataModuleDecoratorProcessorManager();
+global $pop_componentVariation_processordynamicdatadecorator_manager;
+$pop_componentVariation_processordynamicdatadecorator_manager = new PoP_DynamicDataModuleDecoratorProcessorManager();

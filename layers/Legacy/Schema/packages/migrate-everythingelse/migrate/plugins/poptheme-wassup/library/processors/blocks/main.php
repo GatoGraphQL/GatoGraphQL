@@ -191,11 +191,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
                 // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
-                $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+                $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $subComponentVariations = array_diff(
                     $this->getSubComponentVariations($componentVariation),
                     [
-                        $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
+                        $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
                     ]
                 );
                 foreach ($subComponentVariations as $subComponentVariation) {
@@ -285,12 +285,12 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_HOME:
                 // Allow TPPDebate to override this
-                if ($top_modules = \PoP\Root\App::applyFilters(
+                if ($top_componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:home_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOMETOP]
@@ -298,18 +298,18 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $top_modules
+                        $top_componentVariations
                     );
                 }
 
                 // Content module
-                if ($content_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
-                    $ret[] = $content_module;
+                if ($content_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                    $ret[] = $content_componentVariation;
                 }
                 break;
 
             case self::MODULE_BLOCK_AUTHOR:
-                if ($top_modules = \PoP\Root\App::applyFilters(
+                if ($top_componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:author_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHORTOP],
@@ -317,18 +317,18 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $top_modules
+                        $top_componentVariations
                     );
                 }
 
                 // Content module
-                if ($content_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
-                    $ret[] = $content_module;
+                if ($content_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                    $ret[] = $content_componentVariation;
                 }
                 break;
 
             case self::MODULE_BLOCK_TAG:
-                if ($top_modules = \PoP\Root\App::applyFilters(
+                if ($top_componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:tag_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA],
@@ -336,13 +336,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $top_modules
+                        $top_componentVariations
                     );
                 }
 
                 // Content module
-                if ($content_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
-                    $ret[] = $content_module;
+                if ($content_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                    $ret[] = $content_componentVariation;
                 }
                 break;
 

@@ -35,7 +35,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
 
     public function getInnerSubmodule(array $componentVariation)
     {
-        $inner_modules = array(
+        $inner_componentVariations = array(
 
             self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::class, PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS],
             self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::class, PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
@@ -44,7 +44,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
             self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::class, PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST],
         );
 
-        return $inner_modules[$componentVariation[1]] ?? null;
+        return $inner_componentVariations[$componentVariation[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $componentVariation): ?array

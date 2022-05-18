@@ -7,7 +7,7 @@ class PoPTheme_UserStance_ContentHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_Contents:inner_module',
+            'PoP_Module_Processor_Contents:inner_componentVariation',
             $this->contentInner(...),
             10,
             2
