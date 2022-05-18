@@ -1049,7 +1049,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
-    public function getDataFeedbackInterreferencedModulepath(array $componentVariation, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentVariationPath(array $componentVariation, array &$props): ?array
     {
         return null;
     }

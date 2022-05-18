@@ -893,14 +893,14 @@ class Engine implements EngineInterface
         $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
     }
 
-    protected function getInterreferencedModuleFullpaths(array $componentVariation, array &$props): array
+    protected function getInterreferencedComponentVariationFullPaths(array $componentVariation, array &$props): array
     {
         $paths = [];
-        $this->addInterreferencedModuleFullpaths($paths, [], $componentVariation, $props);
+        $this->addInterreferencedComponentVariationFullPaths($paths, [], $componentVariation, $props);
         return $paths;
     }
 
-    private function addInterreferencedModuleFullpaths(
+    private function addInterreferencedComponentVariationFullPaths(
         array &$paths,
         array $module_path,
         array $componentVariation,
@@ -912,7 +912,7 @@ class Engine implements EngineInterface
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             // If the current module loads data, then add its path to the list
-            if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedModulepath($componentVariation, $props)) {
+            if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedComponentVariationPath($componentVariation, $props)) {
                 $referenced_modulepath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_modulepath);
                 $paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? [];
                 $paths[$referenced_modulepath][] = array_merge(
@@ -938,7 +938,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         foreach ($submodules as $submodule) {
-            $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
+            $this->addInterreferencedComponentVariationFullPaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
     }
@@ -1113,7 +1113,7 @@ class Engine implements EngineInterface
         }
 
         // Get the list of all modules which calculate their data feedback using another module's results
-        $interreferenced_modulefullpaths = $this->getInterreferencedModuleFullpaths($root_module, $root_props);
+        $interreferenced_modulefullpaths = $this->getInterreferencedComponentVariationFullPaths($root_module, $root_props);
 
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
