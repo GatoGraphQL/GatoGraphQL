@@ -105,10 +105,10 @@ class PoP_ResourceLoaderProcessorUtils {
         $route_formats = array();
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
-        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        $componentroutingprocessors = $pop_module_routemoduleprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
-        foreach ($componentroutingprocessors as $routemoduleprocessor) {
-            foreach ($routemoduleprocessor->getModulesVarsPropertiesByNatureAndRoute() as $nature => $route_vars_properties) {
+        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $componentroutingprocessors = $pop_module_componentroutingprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        foreach ($componentroutingprocessors as $componentroutingprocessor) {
+            foreach ($componentroutingprocessor->getModulesVarsPropertiesByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
 
                     // "false" routes may be added to the configuration when that route must not be installed. Check for this case and skip it

@@ -41,7 +41,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_ADDONS:
@@ -70,7 +70,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                     self::MODULE_PAGE_BODYSIDEINFO => POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT,
                     self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
                 );
-                if ($page_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($module_groups[$module[1]] ?? null)) {
+                if ($page_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($module_groups[$module[1]] ?? null)) {
                     $ret[] = $page_module;
                 }
                 break;
@@ -81,7 +81,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                 $moduleAtts = count($module) >= 3 ? $module[2] : null;
                 if (!$moduleAtts || !$moduleAtts['onlyinitial']) {
                      // Load targeted module
-                    if ($page_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
+                    if ($page_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
                         $ret[] = $page_module;
                     }
                 }
@@ -101,18 +101,18 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     {
         $ret = parent::getFrametopoptionsSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_BODY:
             case self::MODULE_PAGE_QUICKVIEW:
-                if ($pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
+                if ($pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
                      // Add only if the corresponding content module exists
                     $groups = array(
                         self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMETOPOPTIONS,
                         self::MODULE_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS,
                     );
-                    if ($frameoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]] ?? null)) {
+                    if ($frameoptions_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]] ?? null)) {
                         $ret[] = $frameoptions_module;
                     }
                 }
@@ -121,10 +121,10 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
             case self::MODULE_PAGE_BODYSIDEINFO:
             case self::MODULE_PAGE_QUICKVIEWSIDEINFO:
                 // If there is a sideinfo module then add the options module
-                if ($sideinfocontent_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT)) {
+                if ($sideinfocontent_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT)) {
                     // If the added sideinfo module is the empty one, then no need for the frame
                     if ($sideinfocontent_module != [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]) {
-                        if ($sideinfoframeoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOFRAMEOPTIONS)) {
+                        if ($sideinfoframeoptions_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOFRAMEOPTIONS)) {
                             $ret[] = $sideinfoframeoptions_module;
                         }
                     }
@@ -138,18 +138,18 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     {
         $ret = parent::getFramebottomoptionsSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_BODY:
             case self::MODULE_PAGE_QUICKVIEW:
-                if ($pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
+                if ($pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
                      // Add only if the corresponding content module exists
                     $groups = array(
                         self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMEBOTTOMOPTIONS,
                         self::MODULE_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMEBOTTOMOPTIONS,
                     );
-                    if ($frameoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]] ?? null)) {
+                    if ($frameoptions_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]] ?? null)) {
                         $ret[] = $frameoptions_module;
                     }
                 }
