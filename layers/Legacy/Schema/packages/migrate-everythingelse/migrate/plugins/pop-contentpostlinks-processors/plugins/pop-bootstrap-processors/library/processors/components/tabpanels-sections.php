@@ -40,14 +40,14 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
                 $ret = array(
                     [
                         'header-subcomponent' => [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW],
                             [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_DETAILS],
                             [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_THUMBNAIL],
                             [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_LIST],

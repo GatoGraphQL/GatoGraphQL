@@ -127,14 +127,14 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                 $ret = array(
                     [
                         'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW],
                         ],
                     ],
                     [
                         'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST],
@@ -147,14 +147,14 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                 $ret = array(
                     [
                         'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW],
                         ],
                     ],
                     [
                         'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_LIST],
@@ -170,7 +170,7 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                     ],
                     [
                         'header-subcomponent' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_THUMBNAIL],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_LIST],
@@ -186,7 +186,7 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                     ],
                     [
                         'header-subcomponent' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_THUMBNAIL],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_LIST],
@@ -210,14 +210,14 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                 $ret = array(
                     [
                         'header-subcomponent' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW],
                         ],
                     ],
                     [
                         'header-subcomponent' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST],
-                        'subheader-submodules' => [
+                        'subheader-subcomponents' => [
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST],

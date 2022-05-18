@@ -69,7 +69,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
                     ],
                     [
                         'header-subcomponent' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL],
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST],
@@ -87,7 +87,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
                     ],
                     [
                         'header-subcomponent' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL],
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST],

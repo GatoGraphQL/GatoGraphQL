@@ -192,7 +192,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_SCROLL_THUMBNAIL],
                         ),
@@ -207,7 +207,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_SCROLL_THUMBNAIL],
                         ),
@@ -222,7 +222,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_SCROLL_THUMBNAIL],
                         ),
@@ -237,7 +237,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_SCROLL_THUMBNAIL],
                         ),
@@ -252,7 +252,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_GENERAL_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_GENERAL_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_GENERAL_SCROLL_THUMBNAIL],
                         ),
@@ -267,7 +267,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_GENERAL_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_GENERAL_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_GENERAL_SCROLL_THUMBNAIL],
                         ),
@@ -282,7 +282,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL],
                         ),
@@ -297,7 +297,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_ARTICLE_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_ARTICLE_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_PRO_ARTICLE_SCROLL_THUMBNAIL],
                         ),
@@ -312,7 +312,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_ARTICLE_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_ARTICLE_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_AGAINST_ARTICLE_SCROLL_THUMBNAIL],
                         ),
@@ -327,7 +327,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
                     ],
                     [
                         'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL],
                         ),

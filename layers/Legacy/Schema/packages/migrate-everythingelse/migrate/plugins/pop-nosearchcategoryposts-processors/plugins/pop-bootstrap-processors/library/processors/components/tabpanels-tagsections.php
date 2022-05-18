@@ -325,14 +325,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_LIST],
@@ -345,14 +345,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_LIST],
@@ -365,14 +365,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_LIST],
@@ -385,14 +385,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS03_SCROLL_LIST],
@@ -405,14 +405,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS04_SCROLL_LIST],
@@ -425,14 +425,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS05_SCROLL_LIST],
@@ -445,14 +445,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS06_SCROLL_LIST],
@@ -465,14 +465,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS07_SCROLL_LIST],
@@ -485,14 +485,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS08_SCROLL_LIST],
@@ -505,14 +505,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS09_SCROLL_LIST],
@@ -525,14 +525,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS10_SCROLL_LIST],
@@ -545,14 +545,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS11_SCROLL_LIST],
@@ -565,14 +565,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS12_SCROLL_LIST],
@@ -585,14 +585,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS13_SCROLL_LIST],
@@ -605,14 +605,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS14_SCROLL_LIST],
@@ -625,14 +625,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS15_SCROLL_LIST],
@@ -645,14 +645,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS16_SCROLL_LIST],
@@ -665,14 +665,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_LIST],
@@ -685,14 +685,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_LIST],
@@ -705,14 +705,14 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 $ret = array(
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
                         'header-subcomponent' => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
+                        'subheader-subcomponents' =>  array(
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL],
                             [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST],
