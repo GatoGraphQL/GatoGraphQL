@@ -14,9 +14,11 @@ class Lazy extends AbstractComponentFilter
         return 'lazy';
     }
 
+    /**
+     * Exclude if it is not lazy
+     */
     public function excludeModule(array $componentVariation, array &$props): bool
     {
-        // Exclude if it is not lazy
         /** @var ComponentProcessorInterface */
         $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
         return !$processor->isLazyload($componentVariation, $props);
