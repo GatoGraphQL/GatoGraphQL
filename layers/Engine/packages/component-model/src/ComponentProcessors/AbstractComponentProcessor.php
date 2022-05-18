@@ -132,7 +132,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     final public function getAllSubmodules(array $component): array
     {
-        return $this->getSubmodulesByGroup($component);
+        return $this->getSubComponentsByGroup($component);
     }
 
     // public function getNature(array $component)
@@ -1099,7 +1099,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getModulesToPropagateDataProperties(array $component): array
     {
-        return $this->getSubmodulesByGroup(
+        return $this->getSubComponentsByGroup(
             $component,
             array(
                 self::MODULECOMPONENT_SUBCOMPONENTS,
@@ -1313,7 +1313,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
-    private function getSubmodulesByGroup(array $component, array $elements = array()): array
+    private function getSubComponentsByGroup(array $component, array $elements = array()): array
     {
         if (empty($elements)) {
             $elements = array(
