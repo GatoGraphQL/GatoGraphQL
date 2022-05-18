@@ -1,6 +1,6 @@
 {{#with dbObject}}
 	<div class="{{../class}}" style="{{../style}}">
-		{{#withConditionalOnDataFieldModule ../dbKey id ../condition-on-data-field-modules ../default-component ../.}}
+		{{#withConditionalOnDataFieldModule ../dbKey id ../condition-on-data-field-components ../default-component ../.}}
 			{{enterModule ../../. dbKey=dbKey objectID=objectID}}
 		{{/withConditionalOnDataFieldModule}}	
 	</div>

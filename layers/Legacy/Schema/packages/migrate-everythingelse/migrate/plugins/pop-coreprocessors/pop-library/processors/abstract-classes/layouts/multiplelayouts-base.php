@@ -64,7 +64,7 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         if ($defaultLayout = $this->getDefaultLayoutSubmodule($component)) {
             $ret['default-component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
         }
-        $ret['condition-on-data-field-modules'] = array_map(
+        $ret['condition-on-data-field-components'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
             $this->getMultipleLayoutSubmodules($component)
         );
