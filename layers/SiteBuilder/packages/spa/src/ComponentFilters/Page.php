@@ -14,11 +14,11 @@ class Page extends AbstractComponentFilter
         return 'page';
     }
 
-    public function excludeModule(array $module, array &$props): bool
+    public function excludeModule(array $componentVariation, array &$props): bool
     {
 
         // Exclude until reaching the pageSection
-        $processor = $this->getComponentProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
         return !($processor instanceof PageInterface);
     }
 }

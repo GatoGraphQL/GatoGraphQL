@@ -56,7 +56,7 @@ class ModulePaths extends AbstractComponentFilter
         return 'modulepaths';
     }
 
-    public function excludeModule(array $module, array &$props): bool
+    public function excludeModule(array $componentVariation, array &$props): bool
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -75,7 +75,7 @@ class ModulePaths extends AbstractComponentFilter
 
         // Check if this module is the last item of any modulepath
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-            if (count($unsettled_path) == 1 && $unsettled_path[0] == $module) {
+            if (count($unsettled_path) == 1 && $unsettled_path[0] == $componentVariation) {
                 return false;
             }
         }
@@ -83,7 +83,7 @@ class ModulePaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubmodules(array $module, array $submodules): array
+    public function removeExcludedSubmodules(array $componentVariation, array $submodules): array
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -104,13 +104,13 @@ class ModulePaths extends AbstractComponentFilter
             $unsettled_path_module = $unsettled_path[0];
             if (count($unsettled_path) == 1) {
                 // We reached the end of the unsettled path => from now on, all modules must be included
-                if ($unsettled_path_module == $module) {
+                if ($unsettled_path_module == $componentVariation) {
                     return $submodules;
                 }
             } else {
                 // Then, check that the following element in the unsettled_path, which is the submodule, is on the submodules
                 $unsettled_path_submodule = $unsettled_path[1];
-                if ($unsettled_path_module == $module && in_array($unsettled_path_submodule, $submodules) && !in_array($unsettled_path_submodule, $matching_submodules)) {
+                if ($unsettled_path_module == $componentVariation && in_array($unsettled_path_submodule, $submodules) && !in_array($unsettled_path_submodule, $matching_submodules)) {
                     $matching_submodules[] = $unsettled_path_submodule;
                 }
             }
@@ -122,7 +122,7 @@ class ModulePaths extends AbstractComponentFilter
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $module, array &$props): void
+    public function prepareForPropagation(array $componentVariation, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -134,7 +134,7 @@ class ModulePaths extends AbstractComponentFilter
             $matching_unsettled_paths = array();
             foreach ($this->propagation_unsettled_paths as $unsettled_path) {
                 $module_unsettled_path = $unsettled_path[0];
-                if ($module_unsettled_path == $module) {
+                if ($module_unsettled_path == $componentVariation) {
                     array_shift($unsettled_path);
                     // If there are still elements, then add it to the list
                     if ($unsettled_path) {
@@ -145,7 +145,7 @@ class ModulePaths extends AbstractComponentFilter
             $this->propagation_unsettled_paths = $matching_unsettled_paths;
         }
     }
-    public function restoreFromPropagation(array $module, array &$props): void
+    public function restoreFromPropagation(array $componentVariation, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();

@@ -14,8 +14,8 @@ class HeadModule extends AbstractComponentFilter
         return 'headmodule';
     }
 
-    public function excludeModule(array $module, array &$props): bool
+    public function excludeModule(array $componentVariation, array &$props): bool
     {
-        return App::getState('headmodule') != $module;
+        return App::getState('headmodule') !== $componentVariation;
     }
 }
