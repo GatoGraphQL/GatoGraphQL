@@ -1,6 +1,6 @@
 {{#with dbObject}}
 	{{#ifget . ../condition-field method=../condition-method context=../.}}
-		{{#each ../submoduleoutputnames.layouts}}
+		{{#each ../subcomponentoutputnames.layouts}}
 			{{#withModule ../../. this}}
 				{{#if ../../../show-div}}
 					<div class="wrapper {{../../../class}} {{../../../classes.succeeded}} {{#each ../../../templates.class-extensions}}{{enterTemplate . context=../../../../.}}{{/each}}" style="{{../../../style}}{{../../../styles.succeeded}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
@@ -12,7 +12,7 @@
 			{{/withModule}}
 		{{/each}}
 	{{else}}
-		{{#each ../submoduleoutputnames.conditionfailed-layouts}}
+		{{#each ../subcomponentoutputnames.conditionfailed-layouts}}
 			{{#withModule ../../. this}}
 				{{#if ../../../show-div}}
 					<div class="wrapper {{../../../class}} {{../../../classes.failed}} {{#each ../../../templates.class-extensions}}{{enterTemplate . context=../../../../.}}{{/each}}" style="{{../../../style}}{{../../../styles.failed}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>

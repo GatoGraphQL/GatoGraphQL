@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        // Add the submoduleoutputnames of all blocks
+        // Add the subcomponentoutputnames of all blocks
         if (!$ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES] = array();
         }

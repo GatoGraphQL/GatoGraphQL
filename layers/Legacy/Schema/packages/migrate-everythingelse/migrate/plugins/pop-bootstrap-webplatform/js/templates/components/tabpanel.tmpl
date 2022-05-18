@@ -84,9 +84,9 @@
 			</div>
 		</div>
 	{{/compare}}
-	{{#if submoduleoutputnames.panels}}
+	{{#if subcomponentoutputnames.panels}}
 		<div class="tab-content {{classes.content}}" style="{{styles.content}}">
-			{{#each submoduleoutputnames.panels}}
+			{{#each subcomponentoutputnames.panels}}
 				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" role="tabpanel" class="tab-pane {{../classes.bootstrap-component}} {{#compare ../active this}}active{{/compare}} {{../classes.panel}} {{get ../custom-panel-class this}}" style="{{../styles.bootstrap-component}}{{../styles.panel}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
 					<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}" style="{{../styles.container}}">
 						{{#withModule ../. this}}

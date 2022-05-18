@@ -7,7 +7,7 @@
 				<div class="pop-box"></div>
 			</div>
 			<div id="{{lastGeneratedId group=bootstrap-type}}-container" class="{{type}}-body {{classes.container}}" style="{{styles.container}}">
-				{{#each submoduleoutputnames.inners}}
+				{{#each subcomponentoutputnames.inners}}
 					{{#withModule ../. this}}
 						{{enterModule .}}
 					{{/withModule}}

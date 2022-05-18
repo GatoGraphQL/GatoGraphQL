@@ -13,9 +13,9 @@
 					</div>
 				{{/withModule}}
 				<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
-					{{#if ../submoduleoutputnames.headers}}
+					{{#if ../subcomponentoutputnames.headers}}
 						<div class="headers {{../classes.headers}}" style="{{../styles.headers}}">
-							{{#each ../submoduleoutputnames.headers}}
+							{{#each ../subcomponentoutputnames.headers}}
 								{{#withModule ../../. this}}
 									<div class="header {{../../../classes.header}}" style="{{../../../styles.header}}">
 										{{enterModule ../../../.}}
@@ -37,9 +37,9 @@
 							{{{description-formatted}}}
 						</div>	
 					{{/if}}
-					{{#if ../submoduleoutputnames.footers}}
+					{{#if ../subcomponentoutputnames.footers}}
 						<div class="footers {{../classes.footers}}" style="{{../styles.footers}}">
-							{{#each ../submoduleoutputnames.footers}}
+							{{#each ../subcomponentoutputnames.footers}}
 								{{#withModule ../../. this}}
 									<div class="footer {{../../../classes.footer}}" style="{{../../../styles.footer}}">
 										{{enterModule ../../../.}}

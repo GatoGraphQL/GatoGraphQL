@@ -1,5 +1,5 @@
 <div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="panel-group {{class}}" style="{{style}}">
-	{{#each submoduleoutputnames.panels}}
+	{{#each subcomponentoutputnames.panels}}
 		<div class="{{../classes.collapsepanel}}" style="{{../styles.collapsepanel}}">
 			{{#compare ../panel-header-type "heading"}}
 				<div class="panel-heading">

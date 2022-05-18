@@ -1,6 +1,6 @@
 {{#with dbObject}}
 	{{#withget . ../subcomponent-field}}
-		{{#each ../../submoduleoutputnames.layouts}}
+		{{#each ../../subcomponentoutputnames.layouts}}
 			{{#withModule ../../../. this}}
 				{{#if ../../../../individual}}
 					{{#each (maybe_make_array ../../.)}}

@@ -1,6 +1,6 @@
 {{#each dbObjectIDs}}
 	<tr class="pop-structureinner">
-		{{#each ../submoduleoutputnames.layouts}}
+		{{#each ../subcomponentoutputnames.layouts}}
 			{{#withModule ../../. this}}
 				<td>
 					{{enterModule ../../../. dbKey=../../../dbKey objectID=../../.}}

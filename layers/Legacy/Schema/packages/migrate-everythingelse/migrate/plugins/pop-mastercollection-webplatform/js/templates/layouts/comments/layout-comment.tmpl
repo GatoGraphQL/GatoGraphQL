@@ -26,9 +26,9 @@
 								</div>
 							</div>
 						{{/withModule}}
-						{{#if ../submoduleoutputnames.abovelayout}}
+						{{#if ../subcomponentoutputnames.abovelayout}}
 							<div class="abovelayout {{../classes.abovelayout}}" style="{{../styles.abovelayout}}">
-								{{#each ../submoduleoutputnames.abovelayout}}
+								{{#each ../subcomponentoutputnames.abovelayout}}
 									{{#withModule ../../. this}}
 										{{enterModule ../../../.}}
 									{{/withModule}}

@@ -5,9 +5,9 @@
 				{{enterModule ../../.}}
 			</div>
 		{{/withModule}}
-		{{#if ../submoduleoutputnames.top}}			
+		{{#if ../subcomponentoutputnames.top}}			
 			<div class="top {{../classes.top}}" style="{{../styles.top}}">
-				{{#each ../submoduleoutputnames.top}}
+				{{#each ../subcomponentoutputnames.top}}
 					<div class="inner {{../../classes.top-inner}}" style="{{../../styles.top-inner}}">
 						{{#withModule ../../. this}}
 							{{enterModule ../../../.}}
@@ -40,9 +40,9 @@
 						{{enterModule ../../. dbKey=../../bs.dbkeys.authors objectID=../authors}}
 					</div>
 				{{/withModule}}
-				{{#if ../submoduleoutputnames.belowthumb}}
+				{{#if ../subcomponentoutputnames.belowthumb}}
 					<div class="extra {{../classes.belowthumb}}" style="{{../styles.belowthumb}}">
-						{{#each ../submoduleoutputnames.belowthumb}}
+						{{#each ../subcomponentoutputnames.belowthumb}}
 							{{#withModule ../../. this}}
 								<div class="extra-inner">
 									{{enterModule ../../../.}}
@@ -52,9 +52,9 @@
 					</div>
 				{{/if}}
 			</div>
-			{{#if ../submoduleoutputnames.beforecontent}}			
+			{{#if ../subcomponentoutputnames.beforecontent}}			
 				<div class="beforecontent {{../classes.beforecontent}}" style="{{../styles.beforecontent}}">
-					{{#each ../submoduleoutputnames.beforecontent}}
+					{{#each ../subcomponentoutputnames.beforecontent}}
 						<div class="inner {{../../classes.beforecontent-inner}}" style="{{../../styles.beforecontent-inner}}">
 							{{#withModule ../../. this}}
 								{{enterModule ../../../.}}
@@ -88,9 +88,9 @@
 						{{/if}}
 					</{{../title-htmlmarkup}}>
 				{{/if}}
-				{{#if ../submoduleoutputnames.abovecontent}}
+				{{#if ../subcomponentoutputnames.abovecontent}}
 					<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
-						{{#each ../submoduleoutputnames.abovecontent}}
+						{{#each ../subcomponentoutputnames.abovecontent}}
 							{{#withModule ../../. this}}
 								{{enterModule ../../../.}}
 							{{/withModule}}
@@ -119,9 +119,9 @@
 						{{{../titles.afterauthors.belowcontent}}}
 					</div>
 				{{/compare}}
-				{{#if ../submoduleoutputnames.belowcontent}}
+				{{#if ../subcomponentoutputnames.belowcontent}}
 					<div class="extra {{../classes.belowcontent}}" style="{{../styles.belowcontent}}">
-						{{#each ../submoduleoutputnames.belowcontent}}
+						{{#each ../subcomponentoutputnames.belowcontent}}
 							<div class="extra-inner {{../../classes.belowcontent-inner}}" style="{{../../styles.belowcontent-inner}}">
 								{{#withModule ../../. this}}
 									{{enterModule ../../../.}}
@@ -135,9 +135,9 @@
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}
-				{{#if ../submoduleoutputnames.bottom}}
+				{{#if ../subcomponentoutputnames.bottom}}
 					<div class="extra {{../classes.bottom}}" style="{{../styles.bottom}}">
-						{{#each ../submoduleoutputnames.bottom}}
+						{{#each ../subcomponentoutputnames.bottom}}
 							<div class="extra-inner {{../../classes.bottom-inner}}" style="{{../../styles.bottom-inner}}">
 								{{#withModule ../../. this}}
 									{{enterModule ../../../.}}
@@ -147,9 +147,9 @@
 					</div>
 				{{/if}}
 			</div>
-			{{#if ../submoduleoutputnames.aftercontent}}			
+			{{#if ../subcomponentoutputnames.aftercontent}}			
 				<div class="aftercontent {{../classes.aftercontent}}" style="{{../styles.aftercontent}}">
-					{{#each ../submoduleoutputnames.aftercontent}}
+					{{#each ../subcomponentoutputnames.aftercontent}}
 						<div class="inner {{../../classes.aftercontent-inner}}" style="{{../../styles.aftercontent-inner}}">
 							{{#withModule ../../. this}}
 								{{enterModule ../../../.}}

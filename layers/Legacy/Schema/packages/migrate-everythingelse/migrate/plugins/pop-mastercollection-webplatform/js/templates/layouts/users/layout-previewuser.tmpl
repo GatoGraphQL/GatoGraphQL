@@ -11,9 +11,9 @@
 					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">
 						{{enterModule ../../.}}
 
-						{{#if ../../submoduleoutputnames.avatar-extras}}
+						{{#if ../../subcomponentoutputnames.avatar-extras}}
 							<div class="avatar-extras">
-								{{#each ../../submoduleoutputnames.avatar-extras}}
+								{{#each ../../subcomponentoutputnames.avatar-extras}}
 									{{#withModule ../../../. this}}
 										{{enterModule ../../../../.}}
 									{{/withModule}}
@@ -22,9 +22,9 @@
 						{{/if}}
 					</div>
 				{{/withModule}}
-				{{#if ../submoduleoutputnames.belowavatar}}
+				{{#if ../subcomponentoutputnames.belowavatar}}
 					<div class="extra {{../classes.belowavatar}}" style="{{../styles.belowavatar}}">
-						{{#each ../submoduleoutputnames.belowavatar}}
+						{{#each ../subcomponentoutputnames.belowavatar}}
 							{{#withModule ../../. this}}
 								<div class="extra-inner">
 									{{enterModule ../../../.}}
@@ -53,9 +53,9 @@
 						<p class="excerpt {{../../classes.excerpt}}" style="{{../../styles.excerpt}}">{{{excerpt}}}</p>
 					{{/if}}
 				{{/if}}
-				{{#if ../submoduleoutputnames.belowexcerpt}}
+				{{#if ../subcomponentoutputnames.belowexcerpt}}
 					<div class="extra {{../classes.belowexcerpt}}" style="{{../styles.belowexcerpt}}">
-						{{#each ../submoduleoutputnames.belowexcerpt}}
+						{{#each ../subcomponentoutputnames.belowexcerpt}}
 							{{#withModule ../../. this}}
 								<div class="extra-inner">
 									{{enterModule ../../../.}}

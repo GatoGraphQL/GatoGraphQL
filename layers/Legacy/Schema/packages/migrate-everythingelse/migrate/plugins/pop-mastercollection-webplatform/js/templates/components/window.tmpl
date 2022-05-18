@@ -4,7 +4,7 @@
 		<a {{#generateId group='maximize'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId}}" data-toggle="window-maximize" href="#" class="maximize close" title="{{titles.maximize}}"><span class="glyphicon glyphicon-resize-small"></span></a>
 		<a {{#generateId group='minimize'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId}}" data-toggle="window-minimize" href="#" class="minimize close" title="{{titles.minimize}}"><span class="glyphicon glyphicon-minus"></span></a>
 	</div>
-	{{#each submoduleoutputnames.elements}}
+	{{#each subcomponentoutputnames.elements}}
 		<div class="{{../classes.wrapper}} {{{get ../moduleclasses .}}}" style="{{styles.wrapper}}" {{#withget ../moduleparams .}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
 			{{#withModule ../. this}}
 				{{enterModule ../../.}}

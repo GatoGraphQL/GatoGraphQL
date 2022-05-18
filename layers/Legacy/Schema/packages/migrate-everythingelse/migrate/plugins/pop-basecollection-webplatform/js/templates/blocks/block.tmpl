@@ -46,14 +46,14 @@
 		{{{description}}}
 
 		{{!This will be empty for BlockGroup}}
-		{{#if submoduleoutputnames.block-inners}}
+		{{#if subcomponentoutputnames.block-inners}}
 			<div class="blocksection-inners clearfix {{classes.blocksection-inners}}" style="{{styles.blocksection-inners}}">
 				{{#if show-disabled-layer}}
 					<div class="pop-disabledlayer {{#unless feedback.checkpoint-failed}}hidden{{/unless}}">
 						<div class="layer"></div>
 					</div>
 				{{/if}}
-				{{#each submoduleoutputnames.block-inners}}
+				{{#each subcomponentoutputnames.block-inners}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}

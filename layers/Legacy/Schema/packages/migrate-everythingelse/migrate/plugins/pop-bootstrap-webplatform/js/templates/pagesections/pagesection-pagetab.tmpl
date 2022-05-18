@@ -1,4 +1,4 @@
-{{#each submoduleoutputnames.inners}}
+{{#each subcomponentoutputnames.inners}}
 	{{#withModule ../. this}}
 		<div class="{{../../class}}" style="{{../../style}}" {{#generateId context=../../. targetId=../../pss.pssId group='unit'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}}  {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="btn-group">

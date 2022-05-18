@@ -17,7 +17,7 @@
 
 		{{#if feedbackmessages-top}}
 			<div class="dataload-feedbackmessage">
-				{{#each submoduleoutputnames.feedbackmessages}}
+				{{#each subcomponentoutputnames.feedbackmessages}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}
@@ -26,9 +26,9 @@
 		{{/if}}
 
 		{{!This will be empty for BlockGroup}}
-		{{#if submoduleoutputnames.inners}}
+		{{#if subcomponentoutputnames.inners}}
 			<div class="dataload-inners clearfix">
-				{{#each submoduleoutputnames.inners}}
+				{{#each subcomponentoutputnames.inners}}
 					{{#withModule ../. this}}
 						{{enterModule ../../. dbKey=../../bs.dbkeys.id dbObjectIDs=../../bs.dbobjectids}}
 					{{/withModule}}
@@ -38,7 +38,7 @@
 
 		{{#if feedbackmessages-bottom}}
 			<div class="dataload-feedbackmessage">
-				{{#each submoduleoutputnames.feedbackmessages}}
+				{{#each subcomponentoutputnames.feedbackmessages}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}

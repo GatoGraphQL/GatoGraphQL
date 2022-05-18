@@ -3,7 +3,7 @@
 		{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{#if text}}<span class="pop-btn-title">{{{text}}}</span>{{/if}}
 	</button>
 	<ul class="dropdown-menu" role="menu" aria-labelledby="{{lastGeneratedId}}">
-		{{#each submoduleoutputnames.elements}}
+		{{#each subcomponentoutputnames.elements}}
 			<li role="presentation" class="pop-hide-empty">
 				{{! Please notice: the dbKey/dbObject below might be null (eg: controlgroup) or have a value (eg: quicklinkgroup)}}
 				{{#withModule ../. this}}

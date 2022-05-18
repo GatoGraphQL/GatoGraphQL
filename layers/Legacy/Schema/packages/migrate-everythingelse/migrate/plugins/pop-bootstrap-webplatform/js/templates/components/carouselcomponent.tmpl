@@ -22,7 +22,7 @@
 		</div>
 	{{/if}}
 	<div class="carousel-inner" role="listbox">
-		{{#each submoduleoutputnames.panels}}
+		{{#each subcomponentoutputnames.panels}}
 			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="item {{#compare ../active this}}active{{/compare}} {{../classes.panel}} {{get ../custom-panel-class this}}" style="{{../styles.panel}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
 				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}" style="{{../styles.container}}">
 					{{#compare ../panel-header-type "indicators-internal"}}

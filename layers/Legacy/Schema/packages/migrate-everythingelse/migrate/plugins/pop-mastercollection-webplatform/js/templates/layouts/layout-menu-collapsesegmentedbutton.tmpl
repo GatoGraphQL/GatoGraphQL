@@ -17,14 +17,14 @@
 			{{#compare title "divider"}}
 				item = '<hr />';
 			{{else}}
-				item = '<div class="{{#if ../submoduleoutputnames.dropdownsegmentedbuttons}}input-group{{else}}input-unique{{/if}} child">';
+				item = '<div class="{{#if ../subcomponentoutputnames.dropdownsegmentedbuttons}}input-group{{else}}input-unique{{/if}} child">';
 				item += '<a id="menu-item-{{id}}" href="{{url}}" title="{{alt}}" class="form-control {{../classes.btn}} {{classes}}" style="{{../styles.btn}}">';
 				item += unescapeHtml('{{title}}');
 				item += '</a>';
 
-				{{#if ../submoduleoutputnames.dropdownsegmentedbuttons}}
+				{{#if ../subcomponentoutputnames.dropdownsegmentedbuttons}}
 					item += '<div class="input-group-btn">';
-					{{#each ../submoduleoutputnames.dropdownsegmentedbuttons}}
+					{{#each ../subcomponentoutputnames.dropdownsegmentedbuttons}}
 						{{#withModule ../../. this}}
 							item += '{{enterModule ../../../.}}';
 						{{/withModule}}
@@ -44,7 +44,7 @@
 				item += unescapeHtml('{{title}}');
 				item += '</a>';
 				item += 	'<div class="input-group-btn">';
-				{{#each ../submoduleoutputnames.segmentedbuttons}}
+				{{#each ../subcomponentoutputnames.segmentedbuttons}}
 					{{#withModule ../../. this}}
 						item += '{{enterModule ../../../.}}';
 					{{/withModule}}

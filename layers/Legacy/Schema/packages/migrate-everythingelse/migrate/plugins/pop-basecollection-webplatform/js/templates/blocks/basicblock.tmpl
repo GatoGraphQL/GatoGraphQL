@@ -12,9 +12,9 @@
 			</div>
 		{{/if}}
 		{{{description}}}
-		{{#if submoduleoutputnames.block-inners}}
+		{{#if subcomponentoutputnames.block-inners}}
 			<div class="blocksection-inners clearfix {{classes.blocksection-inners}}" style="{{styles.blocksection-inners}}">
-				{{#each submoduleoutputnames.block-inners}}
+				{{#each subcomponentoutputnames.block-inners}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}
