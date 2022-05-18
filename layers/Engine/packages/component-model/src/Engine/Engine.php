@@ -1170,7 +1170,7 @@ class Engine implements EngineInterface
                 $model_props = &$model_props[$submoduleFullName][Props::SUBCOMPONENTS];
             }
 
-            $module_props = null;
+            $component_props = null;
             if (
                 in_array(
                     $datasource,
@@ -1180,9 +1180,9 @@ class Engine implements EngineInterface
                     )
                 )
             ) {
-                $module_props = &$model_props;
+                $component_props = &$model_props;
             } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
-                $module_props = &$props;
+                $component_props = &$props;
             }
 
             $processor = $this->getComponentProcessorManager()->getProcessor($component);
@@ -1217,7 +1217,7 @@ class Engine implements EngineInterface
                 }
 
                 // Allow modules to change their data_properties based on the actionexecution of previous modules.
-                $processor->prepareDataPropertiesAfterMutationExecution($component, $module_props, $data_properties);
+                $processor->prepareDataPropertiesAfterMutationExecution($component, $component_props, $data_properties);
 
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
@@ -1229,7 +1229,7 @@ class Engine implements EngineInterface
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $module_props, $data_properties);
+                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
                     // To simplify the logic, deal with arrays only
                     if ($dbObjectIDOrIDs === null) {
                         $dbObjectIDOrIDs = [];
@@ -1316,14 +1316,14 @@ class Engine implements EngineInterface
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
                 if (!is_null($datasetcomponentmeta)) {
-                    if ($dataset_meta = $processor->getDatasetmeta($component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
                         $this->assignValueForModule($datasetcomponentmeta, $module_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
             }
 
             // Integrate the feedback into $componentdata
-            $this->processAndAddModuleData($module_path, $component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+            $this->processAndAddModuleData($module_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this component's data results
             if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($component)))] ?? null) {
@@ -1358,14 +1358,14 @@ class Engine implements EngineInterface
             // Incorporate the background URLs
             $engineState->backgroundload_urls = array_merge(
                 $engineState->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetmoduletree($component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
+                $processor->getBackgroundurlsMergeddatasetmoduletree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
                 '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
                 $component,
-                array(&$module_props),
+                array(&$component_props),
                 array(&$data_properties),
                 $dataaccess_checkpoint_validation,
                 $mutation_checkpoint_validation,

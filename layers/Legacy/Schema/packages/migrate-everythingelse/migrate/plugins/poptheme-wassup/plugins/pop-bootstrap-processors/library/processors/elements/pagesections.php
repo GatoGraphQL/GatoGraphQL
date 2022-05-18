@@ -226,7 +226,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
-        $module_props = array(
+        $component_props = array(
             $componentFullName => &$props[$componentFullName],
         );
         switch ($component[1]) {
@@ -235,7 +235,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
                     $component,
-                    array(&$module_props),
+                    array(&$component_props),
                     $this
                 );
                 break;
@@ -245,7 +245,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:main',
                     $component,
-                    array(&$module_props),
+                    array(&$component_props),
                     $this
                 );
                 break;
@@ -254,7 +254,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:hover',
                     $component,
-                    array(&$module_props),
+                    array(&$component_props),
                     $this
                 );
                 break;
