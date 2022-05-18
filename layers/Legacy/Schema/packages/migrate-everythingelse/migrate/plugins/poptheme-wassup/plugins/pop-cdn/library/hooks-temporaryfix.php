@@ -3,7 +3,7 @@ use PoP\Root\Routing\Routes as RoutingRoutes;
 
 /**
 Temporary fix to address the following issue:
-ComponentRoutingProcessors winner module from function `getRouteModuleByMostAllmatchingVarsProperties`:
+ComponentRoutingProcessors winner module from function `getRoutingComponentByMostAllMatchingStateProperties`:
     How to incorporate the CDN hooks about it?
 It cannot be done manually, since we don't know which module will be the winner
     And adding hooks here and there depending on the winner is a mess

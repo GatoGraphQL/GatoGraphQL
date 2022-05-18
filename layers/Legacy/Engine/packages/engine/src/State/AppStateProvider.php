@@ -96,11 +96,11 @@ class AppStateProvider extends AbstractAppStateProvider
                 $state['modulepaths'] = $this->getModulePathHelpers()->getModulePaths();
             }
         }
-        // Function `getRouteModuleByMostAllmatchingVarsProperties` actually needs to access all values in $state
+        // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
         if ($state['modulefilter'] === $this->mainContentModule->getName()) {
-            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         }
     }
 }

@@ -39,7 +39,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
     /**
      * @return string[]|null
      */
-    public function getRouteModuleByMostAllmatchingVarsProperties(string $group = null): ?array
+    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?array
     {
         $group ??= $this->getDefaultGroup();
         $nature = App::getState('nature');

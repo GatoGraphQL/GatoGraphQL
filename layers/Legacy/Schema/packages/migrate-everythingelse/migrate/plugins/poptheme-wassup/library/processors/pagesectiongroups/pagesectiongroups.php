@@ -81,7 +81,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                 $submodules = array_diff(
                     $this->getSubmodules($module),
                     [
-                        $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)
+                        $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)
                     ]
                 );
                 foreach ($submodules as $submodule) {

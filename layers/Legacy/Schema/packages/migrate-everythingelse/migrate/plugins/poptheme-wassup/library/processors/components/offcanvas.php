@@ -40,7 +40,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
             case self::MODULE_OFFCANVAS_BODY:
                 $load_module = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $submodules = array(
@@ -71,7 +71,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                         self::MODULE_OFFCANVAS_BODYTABS => [self::class, self::MODULE_OFFCANVAS_BODY],
                         self::MODULE_OFFCANVAS_BODYSIDEINFO => [self::class, self::MODULE_OFFCANVAS_BODY],
                     );
-                    $load_module = $dependencies[$module[1]] == $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_module = $dependencies[$module[1]] == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $submodules = array(

@@ -26,6 +26,6 @@ class EntryComponentManager implements EntryComponentManagerInterface
 
     public function getEntryComponent(): ?array
     {
-        return $this->getComponentRoutingProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ComponentRoutingGroups::ENTRYCOMPONENT);
+        return $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(ComponentRoutingGroups::ENTRYCOMPONENT);
     }
 }

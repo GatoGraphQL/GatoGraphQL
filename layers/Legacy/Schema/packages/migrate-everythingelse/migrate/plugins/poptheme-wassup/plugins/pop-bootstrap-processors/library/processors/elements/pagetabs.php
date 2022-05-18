@@ -23,7 +23,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
         switch ($module[1]) {
             case self::MODULE_PAGE_ADDONTABS:
             case self::MODULE_PAGE_BODYTABS:
-                if ($tab_module = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
+                if ($tab_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
                     $ret[] = $tab_module;
                 }
                 break;

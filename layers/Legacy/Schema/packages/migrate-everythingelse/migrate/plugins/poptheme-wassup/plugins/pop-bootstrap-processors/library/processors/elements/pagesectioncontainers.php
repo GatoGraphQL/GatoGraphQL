@@ -26,7 +26,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
             case self::MODULE_PAGESECTIONCONTAINER_MODALS:
                 $load_module = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $submodules = array(

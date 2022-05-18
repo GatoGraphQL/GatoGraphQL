@@ -14,7 +14,7 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
     protected function getBlockModule()
     {
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        return $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        return $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
     }
     
     protected function getContent()

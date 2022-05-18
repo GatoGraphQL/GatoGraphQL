@@ -29,7 +29,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserBlocks extends PoP_Module_Pr
             case self::MODULE_BLOCK_USERAVATAR_UPDATE:
                 // Either with or without moduleAtts
                 $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-                $ret[] = $pop_module_componentroutingprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+                $ret[] = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
                 break;
         }
     
