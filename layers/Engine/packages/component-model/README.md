@@ -652,11 +652,11 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
     );
   }
 
-  function getSubmodules($module) 
+  function getSubmodules($componentVariation) 
   {
-    $ret = parent::getSubmodules($module);
+    $ret = parent::getSubmodules($componentVariation);
 
-    switch ($module[1]) {
+    switch ($componentVariation[1]) {
       
       case self::MODULE_SOMENAME:
         
@@ -668,33 +668,33 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
     return $ret;
   }
 
-  function getImmutableConfiguration($module, &$props) 
+  function getImmutableConfiguration($componentVariation, &$props) 
   {
-    $ret = parent::getImmutableConfiguration($module, $props);
+    $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
     // Print the modules properties ...
-    switch ($module[1]) {
+    switch ($componentVariation[1]) {
       case self::MODULE_SOMENAME:        
         $ret['description'] = __('Some description');
-        $ret['showmore'] = $this->getProp($module, $props, 'showmore');
-        $ret['class'] = $this->getProp($module, $props, 'class');
+        $ret['showmore'] = $this->getProp($componentVariation, $props, 'showmore');
+        $ret['class'] = $this->getProp($componentVariation, $props, 'class');
         break;
     }
 
     return $ret;
   }
   
-  function initModelProps($module, &$props) 
+  function initModelProps($componentVariation, &$props) 
   {
     // Implement the modules properties ...
-    switch ($module[1]) {
+    switch ($componentVariation[1]) {
       case self::MODULE_SOMENAME:
-        $this->setProp($module, $props, 'showmore', false);
-        $this->appendProp($module, $props, 'class', 'text-center');
+        $this->setProp($componentVariation, $props, 'showmore', false);
+        $this->appendProp($componentVariation, $props, 'class', 'text-center');
         break;
     }
 
-    parent::initModelProps($module, $props);
+    parent::initModelProps($componentVariation, $props);
   }
   // ...
 }
@@ -795,13 +795,13 @@ Virtual modules cannot depend on props for defining their behaviour, because at 
 Extracting the pair of module name and virtual module atts from the module is done through function `extract_virtualmodule`, like this:
 
 ```php
-list($module, $virtualmoduleatts) = \PoP\Engine\VirtualModuleUtils::extractVirtualmodule($module);
+list($componentVariation, $virtualmoduleatts) = \PoP\Engine\VirtualModuleUtils::extractVirtualmodule($componentVariation);
 ```
 
 To generate a virtual module is done through function `create_virtualmodule`, like this:
 
 ```php
-$virtualmodule = \PoP\Engine\VirtualModuleUtils::createVirtualmodule($module, $virtualmoduleatts),
+$virtualmodule = \PoP\Engine\VirtualModuleUtils::createVirtualmodule($componentVariation, $virtualmoduleatts),
 ```
 -->
 ### ComponentProcessor
@@ -858,18 +858,18 @@ $processor = $componentprocessor_manager->getProcessor([SomeComponentProcessor::
 
 ### Anatomy of a Module
 
-Because a ComponentProcessor can handle several modules, then each of its functions will receive a parameter `$module` indicating which is the module being processed. Please notice how, inside the function, we can conveniently use `switch` statements to operate accordingly (modules with shared properties can easily share the logic) and, according to [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design), we first obtain the results of the parent class and then the ComponentProcessor adds its own properties:
+Because a ComponentProcessor can handle several modules, then each of its functions will receive a parameter `$componentVariation` indicating which is the module being processed. Please notice how, inside the function, we can conveniently use `switch` statements to operate accordingly (modules with shared properties can easily share the logic) and, according to [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design), we first obtain the results of the parent class and then the ComponentProcessor adds its own properties:
 
 ```php
 class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  function foo($module) 
+  function foo($componentVariation) 
   {
     // First obtain the value from the parent class
-    $ret = parent::foo($module);
+    $ret = parent::foo($componentVariation);
 
     // Add properties to the module
-    switch ($module[1]) 
+    switch ($componentVariation[1]) 
     {
       case self::MODULE_SOMENAME1:
         
@@ -891,14 +891,14 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 }
 ```
 
-In addition to parameter `$module`, most functions will also receive a `$props` parameter, with the value of the "props" set on the module (more on section [Props](#props)):
+In addition to parameter `$componentVariation`, most functions will also receive a `$props` parameter, with the value of the "props" set on the module (more on section [Props](#props)):
 
 ```php
 class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  function foo($module, &$atts) 
+  function foo($componentVariation, &$atts) 
   {
-    $ret = parent::foo($module, &$atts);
+    $ret = parent::foo($componentVariation, &$atts);
 
     // ...
 
@@ -914,11 +914,11 @@ Modules are composed of other modules through function `getSubmodules`:
 ```php
 class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  function getSubmodules($module) 
+  function getSubmodules($componentVariation) 
   {
-    $ret = parent::getSubmodules($module);
+    $ret = parent::getSubmodules($componentVariation);
 
-    switch ($module[1]) 
+    switch ($componentVariation[1]) 
     {
       case self::MODULE_SOMENAME1:
         
@@ -946,19 +946,19 @@ Abstract ComponentProcessors can define what descendant modules will be required
 ```php
 abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  function getSubmodules($module) {
+  function getSubmodules($componentVariation) {
   
-    $ret = parent::getSubmodules($module);
+    $ret = parent::getSubmodules($componentVariation);
 
-    if ($thumbnail_module = $this->getThumbnailModule($module)) 
+    if ($thumbnail_module = $this->getThumbnailModule($componentVariation)) 
     {
       $ret[] = $thumbnail_module;
     }
-    if ($content_module = $this->getContentModule($module)) 
+    if ($content_module = $this->getContentModule($componentVariation)) 
     {
       $ret[] = $content_module;
     }
-    if ($aftercontent_modules = $this->getAftercontentModules($module)) 
+    if ($aftercontent_modules = $this->getAftercontentModules($componentVariation)) 
     {
       $ret = array_merge(
         $ret,
@@ -969,17 +969,17 @@ abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\Abstract
     return $ret;
   }
 
-  protected function getContentModule($module) 
+  protected function getContentModule($componentVariation) 
   {
     // Must implement
     return null;
   }
-  protected function getThumbnailModule($module) 
+  protected function getThumbnailModule($componentVariation) 
   {
     // Default value
     return [self::class, self::MODULE_LAYOUT_THUMBNAILSMALL];
   }
-  protected function getAftercontentModules($module) 
+  protected function getAftercontentModules($componentVariation) 
   {
     return array();
   }
@@ -987,9 +987,9 @@ abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\Abstract
 
 class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor {
 
-  protected function getContentModule($module) 
+  protected function getContentModule($componentVariation) 
   {
-    switch ($module[1]) 
+    switch ($componentVariation[1]) 
     {
       case self::MODULE_SOMENAME1:
         
@@ -1001,11 +1001,11 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
         return [self::class, self::MODULE_LAYOUT_POSTEXCERPT];
     }
 
-    return parent::getContentModule($module);
+    return parent::getContentModule($componentVariation);
   }
-  protected function getThumbnailModule($module) 
+  protected function getThumbnailModule($componentVariation) 
   {
-    switch ($module[1]) 
+    switch ($componentVariation[1]) 
     {
       case self::MODULE_SOMENAME1:
         
@@ -1016,13 +1016,13 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
         return [self::class, self::MODULE_LAYOUT_THUMBNAILMEDIUM];
     }
 
-    return parent::getThumbnailModule($module);
+    return parent::getThumbnailModule($componentVariation);
   }
-  protected function getAftercontentModules($module) 
+  protected function getAftercontentModules($componentVariation) 
   {
-    $ret = parent::getAftercontentModules($module);
+    $ret = parent::getAftercontentModules($componentVariation);
 
-    switch ($module[1]) 
+    switch ($componentVariation[1]) 
     {
       case self::MODULE_SOMENAME2:
         
@@ -1108,7 +1108,7 @@ Setting props works in one direction only: modules can set props on any descenda
 
 Modules can set props on descendant modules whichever number of levels below in the component hierarchy, and it is done directly, i.e. without involving the modules in between or affecting their props. In the structure above, "module1" can set a prop directly on "module3" without going through "module2".
 
-Setting props is done through functions `initModelProps($module, &$props)` and `initRequestProps($module, &$props)`. A prop must be implemented in either function, but not on both of them. `initRequestProps` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `initModelProps` is used for everything else. 
+Setting props is done through functions `initModelProps($componentVariation, &$props)` and `initRequestProps($componentVariation, &$props)`. A prop must be implemented in either function, but not on both of them. `initRequestProps` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `initModelProps` is used for everything else. 
 
 Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getSubmodules` and those inner functions invoked by `getSubmodules`), every function in the `ComponentProcessor` can receive `$props`. 
 
@@ -1139,52 +1139,52 @@ All 3 methods receive the same parameters:
 Every module first initializes its own props, and only then continues the flow to the parent class, so that inheriting classes have priority over their ancestors in the object inheritance scheme:
 
 ```php
-function initModelProps($module, &$props) 
+function initModelProps($componentVariation, &$props) 
 {
   // Set prop...
   // Set prop...
   // Set prop...
 
-  parent::initModelProps($module, $props);
+  parent::initModelProps($componentVariation, $props);
 }
 ```
 
-Accessing the value of the prop is done through `function getProp($module, &$props, $field, $starting_from_modulepath = array())`. The signature of the function is similar to the ones above, however without parameter `$value`.
+Accessing the value of the prop is done through `function getProp($componentVariation, &$props, $field, $starting_from_modulepath = array())`. The signature of the function is similar to the ones above, however without parameter `$value`.
 
 Let's see an example: a component for rendering maps has 2 orientations: `"horizontal"` and `"vertical"`. It is composed by modules `"map" => "map-inner"`, and both these modules need this property. Module `"map"` will set the value by default to `"vertical"`, obtain the value for this prop just in case an ancestor module had already set the prop, and then set this value on module `"map-inner"`. Function below is implemented for module `"map"`:
 
 ```php
-function initModelProps($module, &$props) 
+function initModelProps($componentVariation, &$props) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_MAP:
       // Module "map" is setting the default value
-      $this->setProp($module, $props, 'orientation', 'vertical');
+      $this->setProp($componentVariation, $props, 'orientation', 'vertical');
 
       // Obtain the value from the prop
-      $orientation = $this->getProp($module, $props, 'orientation');
+      $orientation = $this->getProp($componentVariation, $props, 'orientation');
 
       // Set the value on "map-inner"
       $this->setProp([[SomeModule::class, SomeModule::MODULE_MAPINNER]], $props, 'orientation', $orientation);
       break;
   }
 
-  parent::initModelProps($module, $props);
+  parent::initModelProps($componentVariation, $props);
 }
 ```
 
 By default, module map will have prop `"orientation"` set with value `"vertical"`. However, parent module `"map-wrapper"` can set this prop beforehand to `"horizontal"`:
 
 ```php
-function initModelProps($module, &$props) 
+function initModelProps($componentVariation, &$props) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_MAPWRAPPER:
       $this->setProp([[SomeModule::class, SomeModule::MODULE_MAP]], $props, 'orientation', 'horizontal');      
       break;
   }
 
-  parent::initModelProps($module, $props);
+  parent::initModelProps($componentVariation, $props);
 }
 ```
 
@@ -1203,14 +1203,14 @@ Those modules indicating what DB objects must be loaded are called "dataloading"
 Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `\PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
 
 ```php
-function getDatasource($module, &$props) 
+function getDatasource($componentVariation, &$props) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_WHOWEARE:
       return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
   }
 
-  return parent::getDatasource($module, $props);
+  return parent::getDatasource($componentVariation, $props);
 }
 ```
 
@@ -1219,14 +1219,14 @@ function getDatasource($module, &$props)
 Define the IDs of the objects to be retrieved from the database, through function `getDbobjectIds`. If the module already knows what database objects are required, it can simply return them:
 
 ```php
-function getDbobjectIds($module, &$props, $data_properties) 
+function getDbobjectIds($componentVariation, &$props, $data_properties) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_WHOWEARE:
       return [13, 54, 998];
   }
 
-  return parent::getDbobjectIds($module, $props, $data_properties);
+  return parent::getDbobjectIds($componentVariation, $props, $data_properties);
 }
 ```
 
@@ -1237,14 +1237,14 @@ However, most likely, the objects are not known in advance, and must be found th
 Define what [Dataloader](#dataloader) to use, which is the object in charge of fetching data from the database, through function `getDataloader`:
 
 ```php
-function getDataloader($module) 
+function getDataloader($componentVariation) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
       return [Dataloader::class, Dataloader::DATALOADER_POSTLIST];
   }
     
-  return parent::getDataloader($module);
+  return parent::getDataloader($componentVariation);
 }
 ```
 
@@ -1253,11 +1253,11 @@ function getDataloader($module)
 Customize a query to filter data, which is passed to the Dataloader, through functions `getImmutableDataloadQueryArgs` and `getMutableonrequestDataloadQueryArgs`:
 
 ```php
-protected function getImmutableDataloadQueryArgs($module, $props) 
+protected function getImmutableDataloadQueryArgs($componentVariation, $props) 
 {
-  $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+  $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
   
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
       // 55: id of "Articles" category
       $ret['cat'] = 55;
@@ -1267,11 +1267,11 @@ protected function getImmutableDataloadQueryArgs($module, $props)
   return $ret;
 }
 
-protected function getMutableonrequestDataloadQueryArgs($module, $props) 
+protected function getMutableonrequestDataloadQueryArgs($componentVariation, $props) 
 {
-  $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
+  $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
   
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
     
       // Set the logged-in user id
@@ -1290,15 +1290,15 @@ protected function getMutableonrequestDataloadQueryArgs($module, $props)
 The fetched data can be filtered through [Filter](#filter) objects, defined through function `getFilter`:
 
 ```php
-function getFilter($module) 
+function getFilter($componentVariation) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
           
       return GD_FILTER_AUTHORARTICLES;
   }
   
-  return parent::getFilter($module);
+  return parent::getFilter($componentVariation);
 }
 ```
 -->
@@ -1308,14 +1308,14 @@ function getFilter($module)
 After fetching data, we can communicate state (eg: are there more results? what's the next paging number? etc) through [QueryInputOutputHandler](#queryhandler) objects, defined through function `getQueryhandler`. By default, it returns object with name `GD_DATALOAD_QUERYHANDLER_ACTIONEXECUTION`, needed when executing an operation (see section [Data-Posting and Operations](#data-posting-and-operations)):
 
 ```php
-function getQueryhandler($module) 
+function getQueryhandler($componentVariation) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
       return GD_DATALOAD_QUERYHANDLER_LIST;
   }
   
-  return parent::getQueryhandler($module);
+  return parent::getQueryhandler($componentVariation);
 }
 ```
 
@@ -1324,11 +1324,11 @@ function getQueryhandler($module)
 If the module needs to pass a variable to any other object involved in fetching/processing data ([Dataloader](#dataloader), [QueryInputOutputHandler](#queryhandler), [ActionExecuter](#actionexecuter), etc), it can do so through "data properties", set through functions `getImmutableHeaddatasetmoduleDataProperties` and `getMutableonrequestHeaddatasetmoduleDataProperties`:
 
 ```php
-function getImmutableHeaddatasetmoduleDataProperties($module, &$props) 
+function getImmutableHeaddatasetmoduleDataProperties($componentVariation, &$props) 
 {
-  $ret = parent::getImmutableHeaddatasetmoduleDataProperties($module, $props);
+  $ret = parent::getImmutableHeaddatasetmoduleDataProperties($componentVariation, $props);
 
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
       // Make it not fetch more results
       $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
@@ -1344,17 +1344,17 @@ function getImmutableHeaddatasetmoduleDataProperties($module, &$props)
 We can instruct a dataloading module to not load its data simply by setting its prop `"skip-data-load"` to `true`:
 
 ```php
-function initModelProps($module, &$props) 
+function initModelProps($componentVariation, &$props) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
 
       // Set the content lazy
-      $this->setProp($module, $props, 'skip-data-load', true);
+      $this->setProp($componentVariation, $props, 'skip-data-load', true);
       break;
   }
 
-  parent::initModelProps($module, $props);
+  parent::initModelProps($componentVariation, $props);
 }
 ```
 
@@ -1375,11 +1375,11 @@ Starting from a dataloading module, and including itself, any descendant module 
 "Data fields", which are the properties to be required from the loaded database object, are defined through function `getDataFields`:
 
 ```php
-function getDataFields($module, $props) 
+function getDataFields($componentVariation, $props) 
 {
-  $ret = parent::getDataFields($module, $props);
+  $ret = parent::getDataFields($componentVariation, $props);
 
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
       $ret[] = 'title';
       $ret[] = 'content';
@@ -1403,11 +1403,11 @@ Consider the image below: Starting from the object type "post", and moving down 
 Switching domins is accomplished through function `getRelationalSubmodules`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the modules to use:
 
 ```php
-function getRelationalSubmodules($module) 
+function getRelationalSubmodules($componentVariation) 
 {
-  $ret = parent::getRelationalSubmodules($module);
+  $ret = parent::getRelationalSubmodules($componentVariation);
 
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
     
       $ret['author'] = [
@@ -1432,11 +1432,11 @@ function getRelationalSubmodules($module)
 Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [ObjectTypeFieldResolver](#ObjectTypeFieldResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
 
 ```php
-function getRelationalSubmodules($module) 
+function getRelationalSubmodules($componentVariation) 
 {
-  $ret = parent::getRelationalSubmodules($module);
+  $ret = parent::getRelationalSubmodules($componentVariation);
 
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_AUTHORARTICLES:
     
       $ret['author'] = [
@@ -1703,9 +1703,9 @@ By implementing the interface `DataloadQueryArgsFilter` modules can also filter 
 ```php
 class TextFilterInputs extends TextFormInputsBase implements \PoP\ComponentModel\DataloadQueryArgsFilter
 {
-  public function filterDataloadQueryArgs(array &$query, $module, $value)
+  public function filterDataloadQueryArgs(array &$query, $componentVariation, $value)
   {
-    switch ($module[1]) 
+    switch ($componentVariation[1]) 
     {
       case self::MODULE_FILTERINPUT_SEARCH:
         $query['search'] = $value;
@@ -1730,15 +1730,15 @@ In addition to loading data, "dataloading" modules can also post data, or execut
 To achieve this, the ComponentProcessor must define the ActionExecuter object for the module through function `getActionExecuterClass`:
 
 ```php
-function getActionExecuterClass($module) {
+function getActionExecuterClass($componentVariation) {
   
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_SOMENAME:
   
       return SomeActionExecuter::class;
   }
 
-  return parent::getActionExecuterClass($module);
+  return parent::getActionExecuterClass($componentVariation);
 }
 ```
 
@@ -1835,11 +1835,11 @@ function execute(&$data_properties)
 A ComponentProcessor can modify what data it will fetch from the database through function `prepareDataPropertiesAfterMutationExecution`, which is invoked after executing the module's corresponding ActionExecuter. For instance, after creating a comment, we can load it immediately or, if the creation was not successful, state to skip loading any database object:
 
 ```php
-function prepareDataPropertiesAfterMutationExecution($module, &$props, &$data_properties) {
+function prepareDataPropertiesAfterMutationExecution($componentVariation, &$props, &$data_properties) {
     
-  parent::prepareDataPropertiesAfterMutationExecution($module, $props, $data_properties);
+  parent::prepareDataPropertiesAfterMutationExecution($componentVariation, $props, $data_properties);
 
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_ADDCOMMENT:
 
       $actionexecution_manager = \PoP\Engine\ActionExecution_Manager_Factory::getInstance();
@@ -1870,24 +1870,24 @@ The reason why these 2 functions are split like is, is to allow a page perform t
 For instance, a module that needs to validate that the user's IP is whitelisted can do it like this:
 
 ```php
-function getDataAccessCheckpoints($module, &$props) 
+function getDataAccessCheckpoints($componentVariation, &$props) 
 {
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_SOMEMODULE:
     
       return [CHECKPOINT_WHITELISTEDIP];
   }
   
-  return parent::getDataAccessCheckpoints($module, $props);
+  return parent::getDataAccessCheckpoints($componentVariation, $props);
 }
 ```
 
 Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ComponentProcessor, like this:
 
 ```php
-function getRelevantPage($module, &$props) {
+function getRelevantPage($componentVariation, &$props) {
     
-  switch ($module[1]) {
+  switch ($componentVariation[1]) {
     case self::MODULE_MYPOSTS_SCROLL:
     case self::MODULE_MYPOSTS_CAROUSEL:
     case self::MODULE_MYPOSTS_TABLE:
@@ -1895,7 +1895,7 @@ function getRelevantPage($module, &$props) {
       return POP_PAGE_MYPOSTS;
   }
 
-  return parent::getRelevantPage($module, $props);
+  return parent::getRelevantPage($componentVariation, $props);
 }
 ```
 
@@ -1941,7 +1941,7 @@ class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
         break;
     }
   
-    return parent::process($checkpoint, $module);
+    return parent::process($checkpoint, $componentVariation);
   }
 }
 ```
