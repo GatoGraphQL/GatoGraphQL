@@ -540,8 +540,8 @@ window.pop.Manager = {
 		if (context && pop.c.COMPACT_RESPONSE_JSON_KEYS) {
 
 			// Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
-			if (context[pop.c.JS_SUBMODULES]) {
-				context.modules = context[pop.c.JS_SUBMODULES];
+			if (context[pop.c.JS_SUBCOMPONENTS]) {
+				context.modules = context[pop.c.JS_SUBCOMPONENTS];
 			}
 			if (context[pop.c.JS_MODULE]) {
 				context['module'] = context[pop.c.JS_MODULE];
@@ -3105,7 +3105,7 @@ window.pop.Manager = {
 	// 				memory.statelessdata.settings['db-keys'][rpssId] = {};
 	// 				memory.statefuldata.settings.configuration[rpssId] = {};
 	// 				memory.statelessdata.settings.configuration[rpssId] = {};
-	// 				memory.statelessdata.statelessdata.settings.configuration[rpssId][pop.c.JS_SUBMODULES] = {};
+	// 				memory.statelessdata.statelessdata.settings.configuration[rpssId][pop.c.JS_SUBCOMPONENTS] = {};
 
 	// 				// Configuration: first copy the modules, and then the 1st level configuration => pageSection configuration
 	// 				// This is a special case because the blocks are located under 'modules', so doing $.extend will override the existing modules in 'memory', however we want to keep them
@@ -3114,7 +3114,7 @@ window.pop.Manager = {
 	// 				$.each(lpsConfiguration, function(key, value) {
 
 	// 					// Do not process the key modules, that will be done later
-	// 					if (key == pop.c.JS_SUBMODULES || key == 'modules') return;
+	// 					if (key == pop.c.JS_SUBCOMPONENTS || key == 'modules') return;
 
 	// 					// Do not process the root-context and parent-context keys, which contain inner references,
 	// 					// to avoid JS error "Maximum call stack size called" when doing the deep extend below
@@ -3155,10 +3155,10 @@ window.pop.Manager = {
 	// 					// Doing deep copy, so that the domain memory does not override the local domain
 	// 					// We gotta delete keys 'root-context' and 'parent-context' first, otherwise the deep copy does not work, we will get
 	// 					// JS error "Maximum call stack size called" when doing the deep extend below
-	// 					var bConfiguration = localMemory.settings.configuration[rpssId][pop.c.JS_SUBMODULES][rbsId];
+	// 					var bConfiguration = localMemory.settings.configuration[rpssId][pop.c.JS_SUBCOMPONENTS][rbsId];
 	// 					delete bConfiguration['root-context'];
 	// 					delete bConfiguration['parent-context'];
-	// 					memory.statelessdata.settings.configuration[rpssId][pop.c.JS_SUBMODULES][rbsId] = $.extend(true, {}, bConfiguration);
+	// 					memory.statelessdata.settings.configuration[rpssId][pop.c.JS_SUBCOMPONENTS][rbsId] = $.extend(true, {}, bConfiguration);
 	// 				}
 	// 			});
 	// 		});
@@ -3747,9 +3747,9 @@ window.pop.Manager = {
 	// 	var bsId = that.getSettingsId(block);
 
 	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES] || {};
-	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES][bsId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES][bsId] || {};
-	// 	var runtimeConfiguration = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES][bsId];
+	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] || {};
+	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] || {};
+	// 	var runtimeConfiguration = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId];
 
 	// 	runtimeMempage.id = block.attr('id');
 	// 	runtimeMempage['query-url'] = runtimeConfiguration['query-url'];
@@ -3910,12 +3910,12 @@ window.pop.Manager = {
 	// 	var url = "temporary-hack";
 
 	// 	// Fill each block configuration with its pssId/bsId/settings
-	// 	if (psConfiguration[pop.c.JS_SUBMODULES]) {
-	// 		$.each(psConfiguration[pop.c.JS_SUBMODULES], function(bsId, bConfiguration) {
-	// 	// if (storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES]) {
-	// 	// 	$.each(storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES], function(bsId, rbConfiguration) {
+	// 	if (psConfiguration[pop.c.JS_SUBCOMPONENTS]) {
+	// 		$.each(psConfiguration[pop.c.JS_SUBCOMPONENTS], function(bsId, bConfiguration) {
+	// 	// if (storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS]) {
+	// 	// 	$.each(storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS], function(bsId, rbConfiguration) {
 				
-	// 			var bConfiguration = psConfiguration[pop.c.JS_SUBMODULES][bsId];
+	// 			var bConfiguration = psConfiguration[pop.c.JS_SUBCOMPONENTS][bsId];
 	// 			var bId = bConfiguration[pop.c.JS_FRONTENDID];
 	// 			// The blockTopLevelDomain is the same as the domain when initializing the pageSection
 	// 			var bs = that.getBlockSettings(domain, domain, pssId, bsId, psId, bId);
@@ -4098,9 +4098,9 @@ window.pop.Manager = {
 		var statefulData = that.getStatefulData(blockTLDomain, url);
 
 		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES] || {};
-		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES][bsId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES][bsId] || {};
-		var runtimeConfiguration = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBMODULES][bsId];
+		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] || {};
+		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] || {};
+		var runtimeConfiguration = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId];
 
 		// Comments Leo 27/07/2017: the query-multidomain-urls are stored under the domain from which the block was initially rendered,
 		// and not that from where the data is being rendered

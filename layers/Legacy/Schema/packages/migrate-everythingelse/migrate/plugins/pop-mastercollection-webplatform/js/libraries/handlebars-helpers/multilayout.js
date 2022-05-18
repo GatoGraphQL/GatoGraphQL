@@ -27,7 +27,7 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, ob
 	}
 
 	// Render the content from this layout
-	var layoutContext = context[pop.c.JS_SUBMODULES][layout];
+	var layoutContext = context[pop.c.JS_SUBCOMPONENTS][layout];
 
 	// Add dbKey and objectID back into the context
 	jQuery.extend(layoutContext, {dbKey: dbKey, objectID: objectID});

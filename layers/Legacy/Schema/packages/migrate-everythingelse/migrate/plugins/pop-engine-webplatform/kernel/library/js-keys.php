@@ -21,7 +21,7 @@ function gdJqueryConstantsJsparams($jqueryConstants)
 
     // From PoP Engine
     $jqueryConstants['JS_MODULE'] = GD_JS_MODULE;
-    $jqueryConstants['JS_SUBMODULES'] = ComponentModelModuleInfo::get('response-prop-submodules');
+    $jqueryConstants['JS_SUBCOMPONENTS'] = ComponentModelModuleInfo::get('response-prop-submodules');
     $jqueryConstants['JS_MODULEOUTPUTNAME'] = GD_JS_MODULEOUTPUTNAME;
 
     // From Web Platform PoP Engine

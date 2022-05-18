@@ -35,12 +35,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
-    public final const HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
+    public final const HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetcomponentDataProperties';
 
-    protected const MODULECOMPONENT_SUBMODULES = 'submodules';
-    protected const MODULECOMPONENT_RELATIONALSUBMODULES = 'relational-submodules';
-    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
-    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES = 'conditional-on-data-field-relational-submodules';
+    protected const MODULECOMPONENT_SUBCOMPONENTS = 'subcomponents';
+    protected const MODULECOMPONENT_RELATIONALSUBCOMPONENTS = 'relational-subcomponents';
+    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS = 'conditional-on-data-field-subcomponents';
+    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS = 'conditional-on-data-field-relational-subcomponents';
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
@@ -197,7 +197,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         if ($subComponents) {
-            $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
+            $props[$moduleFullName][Props::SUBCOMPONENTS] = $props[$moduleFullName][Props::SUBCOMPONENTS] ?? array();
             foreach ($subComponents as $subComponent) {
                 $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
                 $submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
@@ -210,7 +210,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     );
                 }
 
-                $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
+                $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -407,8 +407,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $last_component_props = &$module_props;
                 $lastModuleFullName = $pathlevelModuleFullName;
 
-                $module_props[$pathlevelModuleFullName][Props::SUBMODULES] = $module_props[$pathlevelModuleFullName][Props::SUBMODULES] ?? array();
-                $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBMODULES];
+                $module_props[$pathlevelModuleFullName][Props::SUBCOMPONENTS] = $module_props[$pathlevelModuleFullName][Props::SUBCOMPONENTS] ?? array();
+                $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBCOMPONENTS];
             }
 
             // This is the new $props, so it starts from here
@@ -443,8 +443,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Descend into the path to find the component for which to add the att
             $module_props = &$props;
             foreach ($componentPath as $pathlevelFullName) {
-                $module_props[$pathlevelFullName][Props::SUBMODULES] = $module_props[$pathlevelFullName][Props::SUBMODULES] ?? array();
-                $module_props = &$module_props[$pathlevelFullName][Props::SUBMODULES];
+                $module_props[$pathlevelFullName][Props::SUBCOMPONENTS] = $module_props[$pathlevelFullName][Props::SUBCOMPONENTS] ?? array();
+                $module_props = &$module_props[$pathlevelFullName][Props::SUBCOMPONENTS];
             }
         }
 
@@ -503,7 +503,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $module_props = &$props;
         foreach ($starting_from_componentPath as $pathlevelModule) {
             $pathlevelModuleFullName = $this->getModuleHelpers()->getModuleFullName($pathlevelModule);
-            $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBMODULES];
+            $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBCOMPONENTS];
         }
 
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
@@ -655,7 +655,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     }
                 );
                 foreach ($subcomponent_components as $subcomponent_component) {
-                    $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$moduleFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
             foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
@@ -672,7 +672,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         }
                     );
                     foreach ($subcomponent_components as $subcomponent_component) {
-                        $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                        $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$moduleFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                     }
                 }
             }
@@ -682,7 +682,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
             });
             foreach ($subComponents as $subComponent) {
-                $this->getComponentProcessorManager()->getProcessor($subComponent)->addToDatasetDatabaseKeys($subComponent, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
+                $this->getComponentProcessorManager()->getProcessor($subComponent)->addToDatasetDatabaseKeys($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $path, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
@@ -1102,8 +1102,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->getSubmodulesByGroup(
             $component,
             array(
-                self::MODULECOMPONENT_SUBMODULES,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES,
+                self::MODULECOMPONENT_SUBCOMPONENTS,
+                self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
             )
         );
     }
@@ -1153,7 +1153,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
                         // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                         if (!$submodule_processor->startDataloadingSection($subComponent)) {
-                            if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES])) {
+                            if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS])) {
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
                                 if ($submodule_ret['data-fields'] ?? null) {
@@ -1198,7 +1198,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->startDataloadingSection($subComponent)) {
-                    if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES])) {
+                    if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -1247,7 +1247,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
             foreach ($subcomponent_components as $subcomponent_component) {
                 $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent_component);
-                if ($subcomponent_component_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_component, $props[$moduleFullName][Props::SUBMODULES])) {
+                if ($subcomponent_component_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_component, $props[$moduleFullName][Props::SUBCOMPONENTS])) {
                     $subcomponent_components_data_properties = array_merge_recursive(
                         $subcomponent_components_data_properties,
                         $subcomponent_component_data_properties
@@ -1317,16 +1317,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         if (empty($components)) {
             $components = array(
-                self::MODULECOMPONENT_SUBMODULES,
-                self::MODULECOMPONENT_RELATIONALSUBMODULES,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES,
+                self::MODULECOMPONENT_SUBCOMPONENTS,
+                self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS,
+                self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
+                self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS,
             );
         }
 
         $ret = array();
 
-        if (in_array(self::MODULECOMPONENT_SUBMODULES, $components)) {
+        if (in_array(self::MODULECOMPONENT_SUBCOMPONENTS, $components)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             $ret = array_unique(
                 $this->getSubComponents($component),
@@ -1334,7 +1334,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
         }
 
-        if (in_array(self::MODULECOMPONENT_RELATIONALSUBMODULES, $components)) {
+        if (in_array(self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS, $components)) {
             foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 $ret = array_values(array_unique(
                     array_merge(
@@ -1346,7 +1346,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES, $components)) {
+        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $components)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             foreach ($this->getConditionalOnDataFieldSubmodules($component) as $conditionalLeafModuleField) {
                 $ret = array_unique(
@@ -1359,7 +1359,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES, $components)) {
+        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $components)) {
             foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $ret = array_values(

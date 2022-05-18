@@ -226,7 +226,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 
 Handlebars.registerHelper('withModule', function(context, moduleSetingsIdOrPointer, options) {
 
-	if (typeof context == 'undefined' || typeof context[pop.c.JS_SUBMODULES] == 'undefined') {
+	if (typeof context == 'undefined' || typeof context[pop.c.JS_SUBCOMPONENTS] == 'undefined') {
 
 		return;
 	}
@@ -240,13 +240,13 @@ Handlebars.registerHelper('withModule', function(context, moduleSetingsIdOrPoint
 		moduleSettingsId = moduleSetingsIdOrPointer;
 	}
 
-	if (typeof context[pop.c.JS_SUBMODULES][moduleSettingsId] == 'undefined') {
+	if (typeof context[pop.c.JS_SUBCOMPONENTS][moduleSettingsId] == 'undefined') {
 
 		return;
 	}
 
 	// Go down to the module
-	context = context[pop.c.JS_SUBMODULES][moduleSettingsId];
+	context = context[pop.c.JS_SUBCOMPONENTS][moduleSettingsId];
 
 	// Expand the JS Keys
 	pop.Manager.expandJSKeys(context);

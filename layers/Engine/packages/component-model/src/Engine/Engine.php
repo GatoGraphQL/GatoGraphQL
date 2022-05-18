@@ -938,7 +938,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addInterreferencedComponentFullPaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBMODULES]);
+            $this->addInterreferencedComponentFullPaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -986,7 +986,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBMODULES]);
+            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -1166,8 +1166,8 @@ class Engine implements EngineInterface
             $model_props = &$root_model_props;
             foreach ($module_path as $subComponent) {
                 $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
-                $props = &$props[$submoduleFullName][Props::SUBMODULES];
-                $model_props = &$model_props[$submoduleFullName][Props::SUBMODULES];
+                $props = &$props[$submoduleFullName][Props::SUBCOMPONENTS];
+                $model_props = &$model_props[$submoduleFullName][Props::SUBCOMPONENTS];
             }
 
             $module_props = null;
@@ -1334,8 +1334,8 @@ class Engine implements EngineInterface
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_componentPath as $subComponent) {
                         $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
-                        $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBMODULES];
-                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBMODULES];
+                        $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBCOMPONENTS];
+                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBCOMPONENTS];
                     }
 
                     if (

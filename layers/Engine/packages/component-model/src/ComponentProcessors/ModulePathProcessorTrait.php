@@ -48,7 +48,7 @@ trait ModulePathProcessorTrait
         foreach ($subComponents as $subComponent) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         if ($submodules_ret) {
@@ -84,7 +84,7 @@ trait ModulePathProcessorTrait
         foreach ($subComponents as $subComponent) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -119,7 +119,7 @@ trait ModulePathProcessorTrait
         foreach ($subComponents as $subComponent) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES])
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS])
             );
         }
         if ($submodules_ret) {
@@ -150,7 +150,7 @@ trait ModulePathProcessorTrait
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $submodule_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $recursive);
+            $submodule_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,
