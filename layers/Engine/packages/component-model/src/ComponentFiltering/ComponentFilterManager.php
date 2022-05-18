@@ -25,9 +25,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     protected array $componentfilters = [];
     protected bool $initialized = false;
     /**
-     * From the moment in which a module is not excluded, every module from then on must also be included
+     * From the moment in which a component variation is not excluded, every component variation from then on must also be included
      */
-    protected ?string $not_excluded_ancestor_module = null;
+    protected ?string $not_excluded_ancestor_componentVariation = null;
     /**
      * @var array<array>|null
      */
@@ -37,8 +37,8 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected ?array $not_excluded_componentVariation_sets_as_string;
     /**
-     * When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids())
-     * those modules are already and always included, so no need to check
+     * When targeting component variations in pop-engine.php (eg: when doing ->get_dbobjectids())
+     * those component variations are already and always included, so no need to check
      * for their ancestors or anything
      */
     protected bool $neverExclude = false;
@@ -75,7 +75,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         if ($this->selected_filter_name) {
             $this->selected_filter = $this->componentfilters[$this->selected_filter_name];
 
-            // Initialize only if we are intending to filter modules. This way, passing modulefilter=somewrongpath will return an empty array, meaning to not render anything
+            // Initialize only if we are intending to filter components. This way, passing componentfilter=somewrongpath will return an empty array, meaning to not render anything
             $this->not_excluded_componentVariation_sets = $this->not_excluded_componentVariation_sets_as_string = array();
         }
         $this->initialized = true;
@@ -100,7 +100,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             return null;
         }
 
-        // Only valid if there's a corresponding moduleFilter
+        // Only valid if there's a corresponding componentFilter
         $selectedComponentFilterName = Request::getComponentFilter();
         if ($selectedComponentFilterName !== null && in_array($selectedComponentFilterName, array_keys($this->componentfilters))) {
             return $selectedComponentFilterName;
@@ -120,7 +120,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->neverExclude = $neverExclude;
     }
 
-    public function excludeModule(array $module, array &$props): bool
+    public function excludeModule(array $componentVariation, array &$props): bool
     {
         if (!$this->initialized) {
             $this->init();
@@ -129,17 +129,17 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             if ($this->neverExclude) {
                 return false;
             }
-            if (!is_null($this->not_excluded_ancestor_module)) {
+            if (!is_null($this->not_excluded_ancestor_componentVariation)) {
                 return false;
             }
 
-            return $this->selected_filter->excludeModule($module, $props);
+            return $this->selected_filter->excludeModule($componentVariation, $props);
         }
 
         return false;
     }
 
-    public function removeExcludedSubmodules(array $module, array $submodules): array
+    public function removeExcludedSubmodules(array $componentVariation, array $submodules): array
     {
         if (!$this->initialized) {
             $this->init();
@@ -149,7 +149,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
                 return $submodules;
             }
 
-            return $this->selected_filter->removeExcludedSubmodules($module, $submodules);
+            return $this->selected_filter->removeExcludedSubmodules($componentVariation, $submodules);
         }
 
         return $submodules;
@@ -158,53 +158,53 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $module, array &$props): void
+    public function prepareForPropagation(array $componentVariation, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();
         }
         if ($this->selected_filter_name) {
-            if (!$this->neverExclude && is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
+            if (!$this->neverExclude && is_null($this->not_excluded_ancestor_componentVariation) && $this->excludeModule($componentVariation, $props) === false) {
                 // Set the current module as the one which is not excluded.
                 $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $module;
+                $module_propagation_current_path[] = $componentVariation;
 
-                $this->not_excluded_ancestor_module = $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path);
+                $this->not_excluded_ancestor_componentVariation = $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path);
 
                 // Add it to the list of not-excluded modules
-                if (!in_array($this->not_excluded_ancestor_module, $this->not_excluded_componentVariation_sets_as_string)) {
-                    $this->not_excluded_componentVariation_sets_as_string[] = $this->not_excluded_ancestor_module;
+                if (!in_array($this->not_excluded_ancestor_componentVariation, $this->not_excluded_componentVariation_sets_as_string)) {
+                    $this->not_excluded_componentVariation_sets_as_string[] = $this->not_excluded_ancestor_componentVariation;
                     $this->not_excluded_componentVariation_sets[] = $module_propagation_current_path;
                 }
             }
 
-            $this->selected_filter->prepareForPropagation($module, $props);
+            $this->selected_filter->prepareForPropagation($componentVariation, $props);
         }
 
         // Add the module to the path
-        $this->getModulePathManager()->prepareForPropagation($module, $props);
+        $this->getModulePathManager()->prepareForPropagation($componentVariation, $props);
     }
-    public function restoreFromPropagation(array $module, array &$props): void
+    public function restoreFromPropagation(array $componentVariation, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();
         }
 
         // Remove the module from the path
-        $this->getModulePathManager()->restoreFromPropagation($module, $props);
+        $this->getModulePathManager()->restoreFromPropagation($componentVariation, $props);
 
         if ($this->selected_filter_name) {
-            if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
+            if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_componentVariation) && $this->excludeModule($componentVariation, $props) === false) {
                 $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $module;
+                $module_propagation_current_path[] = $componentVariation;
 
                 // If the current module was set as the one not excluded, then reset it
-                if ($this->not_excluded_ancestor_module == $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path)) {
-                    $this->not_excluded_ancestor_module = null;
+                if ($this->not_excluded_ancestor_componentVariation == $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path)) {
+                    $this->not_excluded_ancestor_componentVariation = null;
                 }
             }
 
-            $this->selected_filter->restoreFromPropagation($module, $props);
+            $this->selected_filter->restoreFromPropagation($componentVariation, $props);
         }
     }
 }
