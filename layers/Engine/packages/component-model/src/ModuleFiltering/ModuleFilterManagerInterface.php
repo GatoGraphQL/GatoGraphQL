@@ -11,7 +11,7 @@ interface ModuleFilterManagerInterface
     public function addModuleFilter(ModuleFilterInterface $moduleFilter): void;
     public function getSelectedModuleFilterName(): ?string;
     public function setSelectedModuleFilterName(string $selectedModuleFilterName): void;
-    public function getNotExcludedModuleSets(): ?array;
+    public function getNotExcludedComponentVariationSets(): ?array;
     public function neverExclude($neverExclude): void;
     public function excludeModule(array $module, array &$props): bool;
     public function removeExcludedSubmodules(array $module, array $submodules): array;

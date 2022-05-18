@@ -31,11 +31,11 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     /**
      * @var array<array>|null
      */
-    protected ?array $not_excluded_module_sets = null;
+    protected ?array $not_excluded_componentVariation_sets = null;
     /**
      * @var string[]|null
      */
-    protected ?array $not_excluded_module_sets_as_string;
+    protected ?array $not_excluded_componentVariation_sets_as_string;
     /**
      * When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids())
      * those modules are already and always included, so no need to check
@@ -76,7 +76,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
             $this->selected_filter = $this->modulefilters[$this->selected_filter_name];
 
             // Initialize only if we are intending to filter modules. This way, passing modulefilter=somewrongpath will return an empty array, meaning to not render anything
-            $this->not_excluded_module_sets = $this->not_excluded_module_sets_as_string = array();
+            $this->not_excluded_componentVariation_sets = $this->not_excluded_componentVariation_sets_as_string = array();
         }
         $this->initialized = true;
     }
@@ -109,10 +109,10 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         return null;
     }
 
-    public function getNotExcludedModuleSets(): ?array
+    public function getNotExcludedComponentVariationSets(): ?array
     {
         // It shall be used for requestmeta.rendermodules, to know from which modules the client must start rendering
-        return $this->not_excluded_module_sets;
+        return $this->not_excluded_componentVariation_sets;
     }
 
     public function neverExclude($neverExclude): void
@@ -172,9 +172,9 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
                 $this->not_excluded_ancestor_module = $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path);
 
                 // Add it to the list of not-excluded modules
-                if (!in_array($this->not_excluded_ancestor_module, $this->not_excluded_module_sets_as_string)) {
-                    $this->not_excluded_module_sets_as_string[] = $this->not_excluded_ancestor_module;
-                    $this->not_excluded_module_sets[] = $module_propagation_current_path;
+                if (!in_array($this->not_excluded_ancestor_module, $this->not_excluded_componentVariation_sets_as_string)) {
+                    $this->not_excluded_componentVariation_sets_as_string[] = $this->not_excluded_ancestor_module;
+                    $this->not_excluded_componentVariation_sets[] = $module_propagation_current_path;
                 }
             }
 

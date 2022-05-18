@@ -710,18 +710,18 @@ class Engine implements EngineInterface
             $meta[Response::BACKGROUND_LOAD_URLS] = $engineState->backgroundload_urls;
         };
 
-        // Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
-        $not_excluded_module_sets = $this->getModuleFilterManager()->getNotExcludedModuleSets();
-        if (!is_null($not_excluded_module_sets)) {
+        // Starting from what component variations must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
+        $not_excluded_componentVariation_sets = $this->getModuleFilterManager()->getNotExcludedComponentVariationSets();
+        if (!is_null($not_excluded_componentVariation_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
-            foreach ($not_excluded_module_sets as $modules) {
+            foreach ($not_excluded_componentVariation_sets as $modules) {
                 $filteredsettings[] = array_map(
                     [$this->getModuleHelpers(), 'getModuleOutputName'],
                     $modules
                 );
             }
-            $meta['filteredmodules'] = $filteredsettings;
+            $meta['filteredcomponents'] = $filteredsettings;
         }
 
         return App::applyFilters(
