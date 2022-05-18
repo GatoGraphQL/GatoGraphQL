@@ -6,7 +6,7 @@ namespace PoP\ComponentRouting;
 
 use PoP\Root\Services\BasicServiceTrait;
 
-abstract class AbstractComponentRoutingProcessor
+abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProcessorInterface
 {
     use BasicServiceTrait;
 
