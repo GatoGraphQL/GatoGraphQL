@@ -10,7 +10,7 @@ use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -21,7 +21,7 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?HeadModule $headModule = null;
     private ?ModulePaths $modulePaths = null;
     private ?MainContentModule $mainContentModule = null;
-    private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
+    private ?ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
 
@@ -49,13 +49,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
-    final public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager): void
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }
-    final protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
+    final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
+        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
     final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {
@@ -96,11 +96,11 @@ class AppStateProvider extends AbstractAppStateProvider
                 $state['modulepaths'] = $this->getModulePathHelpers()->getModulePaths();
             }
         }
-        // Function `getRouteModuleByMostAllmatchingVarsProperties` actually needs to access all values in $state
+        // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
         if ($state['modulefilter'] === $this->mainContentModule->getName()) {
-            $state['maincontentmodule'] = $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         }
     }
 }

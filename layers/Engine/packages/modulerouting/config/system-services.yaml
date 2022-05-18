@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoP\ModuleRouting\Container\CompilerPasses\:
-        resource: '../src/Container/CompilerPasses/*'

@@ -7,5 +7,5 @@ services:
     PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\Hooks\:
         resource: '../../../src/ConditionalOnModule/RESTAPI/Hooks/*'
 
-    PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\RouteModuleProcessors\:
-        resource: '../../../src/ConditionalOnModule/RESTAPI/RouteModuleProcessors/*'
+    PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\:
+        resource: '../../../src/ConditionalOnModule/RESTAPI/ComponentRoutingProcessors/*'

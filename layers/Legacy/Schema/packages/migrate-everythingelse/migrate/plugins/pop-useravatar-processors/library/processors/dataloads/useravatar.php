@@ -98,7 +98,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         // point to the "execute" block instead
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                // We also must add ?action=execute to tell the routemoduleprocessor to fetch the module with the "execute" moduleAtts
+                // We also must add ?action=execute to tell the componentroutingprocessor to fetch the module with the "execute" moduleAtts
                 return GeneralUtils::addQueryArgs([
                     \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
                 ], parent::getDataloadSource($module, $props));

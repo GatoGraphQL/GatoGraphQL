@@ -81,8 +81,8 @@ services:
     PoP\ComponentModel\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoP\ComponentModel\RouteModuleProcessors\:
-        resource: '../src/RouteModuleProcessors/*'
+    PoP\ComponentModel\ComponentRoutingProcessors\:
+        resource: '../src/ComponentRoutingProcessors/*'
 
     PoP\ComponentModel\QueryInputOutputHandlers\:
         resource: '../src/QueryInputOutputHandlers/*'
@@ -144,8 +144,8 @@ services:
     PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface:
         class: \PoP\ComponentModel\AttachableExtensions\AttachExtensionService
 
-    PoP\ModuleRouting\RouteModuleProcessorManagerInterface:
-        class: \PoP\ComponentModel\ModuleRouting\RouteModuleProcessorManager
+    PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface:
+        class: \PoP\ComponentModel\ComponentRouting\ComponentRoutingProcessorManager
 
     PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface:
         class: \PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser

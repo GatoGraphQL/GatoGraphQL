@@ -70,7 +70,7 @@ includes:
     - layers/CMSSchema/packages/meta/phpstan.neon.dist
     - layers/WPSchema/packages/meta/phpstan.neon.dist
     - layers/CMSSchema/packages/metaquery-wp/phpstan.neon.dist
-    - layers/Engine/packages/modulerouting/phpstan.neon.dist
+    - layers/Engine/packages/componentrouting/phpstan.neon.dist
     - layers/CMSSchema/packages/pages/phpstan.neon.dist
     - layers/WPSchema/packages/pages/phpstan.neon.dist
     - layers/CMSSchema/packages/pages-wp/phpstan.neon.dist

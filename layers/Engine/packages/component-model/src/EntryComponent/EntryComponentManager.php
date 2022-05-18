@@ -6,26 +6,26 @@ namespace PoP\ComponentModel\EntryComponent;
 
 use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\ModuleRouting\ModuleRoutingGroups;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\ComponentRoutingGroups;
+use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 
 class EntryComponentManager implements EntryComponentManagerInterface
 {
     use BasicServiceTrait;
 
-    private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
+    private ?ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager = null;
 
-    final public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager): void
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }
-    final protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
+    final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
+        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
 
     public function getEntryComponent(): ?array
     {
-        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYCOMPONENT);
+        return $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(ComponentRoutingGroups::ENTRYCOMPONENT);
     }
 }

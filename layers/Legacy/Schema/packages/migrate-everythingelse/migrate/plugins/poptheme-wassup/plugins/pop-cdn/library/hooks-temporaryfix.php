@@ -3,7 +3,7 @@ use PoP\Root\Routing\Routes as RoutingRoutes;
 
 /**
 Temporary fix to address the following issue:
-RouteModuleProcessors winner module from function `getRouteModuleByMostAllmatchingVarsProperties`:
+ComponentRoutingProcessors winner module from function `getRoutingComponentByMostAllMatchingStateProperties`:
     How to incorporate the CDN hooks about it?
 It cannot be done manually, since we don't know which module will be the winner
     And adding hooks here and there depending on the winner is a mess
@@ -21,7 +21,7 @@ class PoP_Wassup_CDN_TemporaryFixHooks
     public function __construct()
     {
 
-        // Temporary fix until coding the cdnthumbprints.js file automatically, to also include the winner module from the RouteModuleProcessor (in this case, RoutingRoutes::$MAIN for the homepage)
+        // Temporary fix until coding the cdnthumbprints.js file automatically, to also include the winner module from the ComponentRoutingProcessor (in this case, RoutingRoutes::$MAIN for the homepage)
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
             $this->getThumbprintPartialpaths(...),
@@ -33,7 +33,7 @@ class PoP_Wassup_CDN_TemporaryFixHooks
     public function getThumbprintPartialpaths($paths, $thumbprint)
     {
 
-        // Temporary fix until coding the cdnthumbprints.js file automatically, to also include the winner module from the RouteModuleProcessor
+        // Temporary fix until coding the cdnthumbprints.js file automatically, to also include the winner module from the ComponentRoutingProcessor
         // In this case, RoutingRoutes::$MAIN is the page for the homepage, for which there are pop-blog/ modules to be inserted (HOMECONTENT etc)
         $routes = array();
         if ($thumbprint == POP_CDN_THUMBPRINT_USER) {

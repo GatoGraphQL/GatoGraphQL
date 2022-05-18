@@ -46,7 +46,7 @@ services:
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
         - >-
-          ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
+          ../../layers/Engine/packages/componentrouting:/app/vendor/getpop/componentrouting
         - >-
           ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'

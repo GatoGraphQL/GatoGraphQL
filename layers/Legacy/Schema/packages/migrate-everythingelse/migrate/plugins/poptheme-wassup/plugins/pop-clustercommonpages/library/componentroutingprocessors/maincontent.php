@@ -1,0 +1,32 @@
+<?php
+
+use PoP\Root\Routing\RequestNature;
+
+class PoP_Application_ClusterCommonPages_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
+{
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
+    {
+        $ret = array();
+
+        $modules = array(
+            POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS => [GD_ClusterCommonPages_Module_Processor_CustomGroups::class, GD_ClusterCommonPages_Module_Processor_CustomGroups::MODULE_GROUP_OURSPONSORS],
+        );
+        foreach ($modules as $route => $module) {
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        }
+
+        return $ret;
+    }
+}
+
+/**
+ * Initialization
+ */
+add_action('init', function() {
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_Application_ClusterCommonPages_Module_MainContentComponentRoutingProcessor()
+	);
+}, 200);

@@ -25,7 +25,7 @@ class PoP_Events_Engine_Hooks
         $vars = &$vars_in_array[0];
         $nature = $vars['nature'];
 
-        // Attributes needed to match the RouteModuleProcessor vars conditions
+        // Attributes needed to match the ComponentRoutingProcessor vars conditions
         if ($nature == CustomPostRequestNature::CUSTOMPOST) {
             $eventTypeAPI = EventTypeAPIFacade::getInstance();
             $customPostType = $vars['routing']['queried-object-post-type'];

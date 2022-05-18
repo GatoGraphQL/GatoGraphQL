@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
@@ -105,10 +105,10 @@ class PoP_ResourceLoaderProcessorUtils {
         $route_formats = array();
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
-        $routemoduleprocessors = $pop_module_routemoduleprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
-        foreach ($routemoduleprocessors as $routemoduleprocessor) {
-            foreach ($routemoduleprocessor->getModulesVarsPropertiesByNatureAndRoute() as $nature => $route_vars_properties) {
+        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $componentroutingprocessors = $pop_module_componentroutingprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        foreach ($componentroutingprocessors as $componentroutingprocessor) {
+            foreach ($componentroutingprocessor->getStatePropertiesToSelectComponentByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
 
                     // "false" routes may be added to the configuration when that route must not be installed. Check for this case and skip it
