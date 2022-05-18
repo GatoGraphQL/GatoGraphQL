@@ -537,7 +537,7 @@ class PoP_ServerSideManager
                 return $executableTemplate($context);
             } catch (Exception $e) {
                 // Do nothing
-                $error = 'Error in '.$componentName.': '+$e->getMessage();
+                $error = 'Error in '.$componentOrTemplateName.': '+$e->getMessage();
             }
         }
 
