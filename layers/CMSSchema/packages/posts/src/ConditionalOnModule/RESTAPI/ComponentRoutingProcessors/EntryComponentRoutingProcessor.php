@@ -65,9 +65,9 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                     ]
                 ],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'module' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),

@@ -30,9 +30,9 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
             ],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $component) {
             $ret[RequestNature::USER][$route][] = [
-                'module' => $module,
+                'module' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                 ],

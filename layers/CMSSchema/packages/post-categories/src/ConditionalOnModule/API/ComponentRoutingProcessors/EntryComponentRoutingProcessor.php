@@ -59,9 +59,9 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $routemodules = array(
             $moduleConfiguration->getPostCategoriesRoute() => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'module' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                 ],
@@ -72,9 +72,9 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $routemodules = array(
             $moduleConfiguration->getPostsRoute() => [CategoryPostFieldDataloadModuleProcessor::class, CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $component) {
             $ret[CategoryRequestNature::CATEGORY][$route][] = [
-                'module' => $module,
+                'module' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing' => [

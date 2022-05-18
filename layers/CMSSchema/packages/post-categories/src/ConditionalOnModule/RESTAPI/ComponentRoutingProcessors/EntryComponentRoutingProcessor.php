@@ -82,9 +82,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 ]
             ],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'module' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),
@@ -104,9 +104,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                     ]
                 ],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $component) {
             $ret[CategoryRequestNature::CATEGORY][$route][] = [
-                'module' => $module,
+                'module' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),
