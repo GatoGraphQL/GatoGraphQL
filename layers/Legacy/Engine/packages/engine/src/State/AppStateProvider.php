@@ -18,20 +18,20 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?HeadModule $headModule = null;
+    private ?HeadModule $headComponent = null;
     private ?ModulePaths $componentPaths = null;
-    private ?MainContentModule $mainContentModule = null;
+    private ?MainContentModule $mainContentComponent = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
 
-    final public function setHeadModule(HeadModule $headModule): void
+    final public function setHeadModule(HeadModule $headComponent): void
     {
-        $this->headModule = $headModule;
+        $this->headComponent = $headComponent;
     }
     final protected function getHeadModule(): HeadModule
     {
-        return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
+        return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
     }    
     final public function setModulePaths(ModulePaths $componentPaths): void
     {
@@ -41,13 +41,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->componentPaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
-    final public function setMainContentModule(MainContentModule $mainContentModule): void
+    final public function setMainContentModule(MainContentModule $mainContentComponent): void
     {
-        $this->mainContentModule = $mainContentModule;
+        $this->mainContentComponent = $mainContentComponent;
     }
     final protected function getMainContentModule(): MainContentModule
     {
-        return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
+        return $this->mainContentComponent ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
     final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
     {
@@ -84,10 +84,10 @@ class AppStateProvider extends AbstractAppStateProvider
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         $enablePassingStateViaRequest = $rootModuleConfiguration->enablePassingStateViaRequest();
 
-        if ($state['componentFilter'] === $this->headModule->getName()) {
+        if ($state['componentFilter'] === $this->headComponent->getName()) {
             if ($enablePassingStateViaRequest) {
-                if ($headmodule = Request::getHeadModule()) {
-                    $state['headmodule'] = $this->getModuleHelpers()->getModuleFromOutputName($headmodule);
+                if ($headComponent = Request::getHeadModule()) {
+                    $state['headComponent'] = $this->getModuleHelpers()->getModuleFromOutputName($headComponent);
                 }
             }
         }
@@ -99,7 +99,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
-        if ($state['componentFilter'] === $this->mainContentModule->getName()) {
+        if ($state['componentFilter'] === $this->mainContentComponent->getName()) {
             $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         }
     }

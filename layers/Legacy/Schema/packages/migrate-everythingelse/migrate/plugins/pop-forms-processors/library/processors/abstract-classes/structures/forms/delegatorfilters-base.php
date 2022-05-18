@@ -20,13 +20,13 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MainContentModule */
-        $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
+        $mainContentComponent = $instanceManager->getInstance(MainContentModule::class);
         $this->mergeImmutableJsconfigurationProp(
             $component,
             $props,
             array(
                 'fetchparams' => array(
-                    Params::COMPONENTFILTER => $mainContentModule->getName(),
+                    Params::COMPONENTFILTER => $mainContentComponent->getName(),
                 ),
             )
         );

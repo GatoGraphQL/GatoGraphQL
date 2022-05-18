@@ -12,16 +12,16 @@ use PoP\Root\Hooks\AbstractHookSet;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
-    private ?HeadModule $headModule = null;
+    private ?HeadModule $headComponent = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
     
-    final public function setHeadModule(HeadModule $headModule): void
+    final public function setHeadModule(HeadModule $headComponent): void
     {
-        $this->headModule = $headModule;
+        $this->headComponent = $headComponent;
     }
     final protected function getHeadModule(): HeadModule
     {
-        return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
+        return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
     }
     final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
     {
@@ -42,9 +42,9 @@ class HeadModuleHookSet extends AbstractHookSet
     
     public function maybeAddComponent($components)
     {
-        if (App::getState('componentFilter') === $this->headModule->getName()) {
-            if ($headmodule = App::getState('headmodule')) {
-                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headmodule);
+        if (App::getState('componentFilter') === $this->headComponent->getName()) {
+            if ($headComponent = App::getState('headComponent')) {
+                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headComponent);
             }
         }
 

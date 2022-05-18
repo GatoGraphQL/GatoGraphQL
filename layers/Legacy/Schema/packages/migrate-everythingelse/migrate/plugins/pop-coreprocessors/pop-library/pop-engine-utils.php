@@ -20,11 +20,11 @@ class PoPCore_ModuleManager_Utils
         /** @var DBItemListDataStructureFormatter */
         $dbItemListDataStructureFormatter = $instanceManager->getInstance(DBItemListDataStructureFormatter::class);
         /** @var MainContentModule */
-        $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
+        $mainContentComponent = $instanceManager->getInstance(MainContentModule::class);
         $args = [
             Params::VERSION => ApplicationInfoFacade::getInstance()->getVersion(),
             Params::OUTPUT => Outputs::JSON,
-            Params::COMPONENTFILTER => $mainContentModule->getName(),
+            Params::COMPONENTFILTER => $mainContentComponent->getName(),
             Params::DATA_OUTPUT_ITEMS => [
                 DataOutputItems::DATABASES,
             ],

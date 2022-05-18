@@ -11,11 +11,11 @@ class HeadModule extends AbstractComponentFilter
 {
     public function getName(): string
     {
-        return 'headmodule';
+        return 'headComponent';
     }
 
     public function excludeModule(array $component, array &$props): bool
     {
-        return App::getState('headmodule') !== $component;
+        return App::getState('headComponent') !== $component;
     }
 }
