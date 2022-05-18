@@ -37,10 +37,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
     public final const HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetcomponentDataProperties';
 
-    protected const MODULECOMPONENT_SUBCOMPONENTS = 'subcomponents';
-    protected const MODULECOMPONENT_RELATIONALSUBCOMPONENTS = 'relational-subcomponents';
-    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS = 'conditional-on-data-field-subcomponents';
-    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS = 'conditional-on-data-field-relational-subcomponents';
+    protected const COMPONENTELEMENT_SUBCOMPONENTS = 'subcomponents';
+    protected const COMPONENTELEMENT_RELATIONALSUBCOMPONENTS = 'relational-subcomponents';
+    protected const COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS = 'conditional-on-data-field-subcomponents';
+    protected const COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS = 'conditional-on-data-field-relational-subcomponents';
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
@@ -1102,8 +1102,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->getSubcomponentsByGroup(
             $component,
             array(
-                self::MODULECOMPONENT_SUBCOMPONENTS,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
+                self::COMPONENTELEMENT_SUBCOMPONENTS,
+                self::COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
             )
         );
     }
@@ -1317,16 +1317,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         if (empty($elements)) {
             $elements = array(
-                self::MODULECOMPONENT_SUBCOMPONENTS,
-                self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS,
+                self::COMPONENTELEMENT_SUBCOMPONENTS,
+                self::COMPONENTELEMENT_RELATIONALSUBCOMPONENTS,
+                self::COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
+                self::COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS,
             );
         }
 
         $ret = array();
 
-        if (in_array(self::MODULECOMPONENT_SUBCOMPONENTS, $elements)) {
+        if (in_array(self::COMPONENTELEMENT_SUBCOMPONENTS, $elements)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             $ret = array_unique(
                 $this->getSubcomponents($component),
@@ -1334,7 +1334,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
         }
 
-        if (in_array(self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS, $elements)) {
+        if (in_array(self::COMPONENTELEMENT_RELATIONALSUBCOMPONENTS, $elements)) {
             foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 $ret = array_values(array_unique(
                     array_merge(
@@ -1346,7 +1346,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $elements)) {
+        if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $elements)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             foreach ($this->getConditionalOnDataFieldSubmodules($component) as $conditionalLeafModuleField) {
                 $ret = array_unique(
@@ -1359,7 +1359,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $elements)) {
+        if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $elements)) {
             foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $ret = array_values(
