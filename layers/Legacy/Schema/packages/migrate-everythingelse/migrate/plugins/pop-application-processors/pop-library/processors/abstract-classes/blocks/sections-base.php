@@ -113,7 +113,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
     public function initModelProps(array $component, array &$props): void
     {
-        // If the inner module is a DataloadingModule, then transfer dataloading properties to its contained module
+        // If the inner component is a DataloadingModule, then transfer dataloading properties to its contained component
         if ($inner_component = $this->getInnerSubmodule($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             if ($componentprocessor_manager->getProcessor($inner_component) instanceof DataloadingModuleInterface) {
@@ -203,8 +203,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
     {
 
-        // If the inner module is a DataloadingModule, then calculate the datafeedback of this module
-        // based on the results from the inner dataloading module. Then, can calculate "do-not-render-if-no-results"
+        // If the inner component is a DataloadingModule, then calculate the datafeedback of this component
+        // based on the results from the inner dataloading component. Then, can calculate "do-not-render-if-no-results"
         if ($inner = $this->getInnerSubmodule($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);

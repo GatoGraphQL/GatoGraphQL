@@ -127,7 +127,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 
         $this->modifyDataProperties($data_properties, $resultID);
 
-        // Save the result for some module to incorporate it into the query args
+        // Save the result for some component to incorporate it into the query args
         App::getMutationResolutionStore()->setResult($this, $resultID);
 
         $return[ResponseConstants::SUCCESS] = true;

@@ -98,7 +98,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
         // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
-        // If filtering module by "maincontent", then calculate which is the main content module
+        // If filtering component by "maincontent", then calculate which is the main content component
         if ($state['componentFilter'] === $this->mainContentComponent->getName()) {
             $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         }

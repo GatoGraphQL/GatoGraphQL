@@ -75,7 +75,7 @@ class DefinitionManager implements DefinitionManagerInterface
     }
 
     /**
-     * Function used to create a definition for a module.
+     * Function used to create a definition for a component.
      * Needed for reducing the filesize of the html generated for PROD
      * Instead of using the name of the $component, we use a unique number in base 36,
      * so the name will occupy much lower size
