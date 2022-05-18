@@ -112,6 +112,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             // self::E_5_2_3_1 => 'subscriptions_not_yet_supported',
             self::E_5_3_1 => 'TODO: satisfy',
             self::E_5_3_2 => 'TODO: satisfy',
+            // @todo: Watch out: This one has been satisfied as: 'Field \'%s\' is not a connection'
             self::E_5_3_3 => 'TODO: satisfy',
             self::E_5_4_1 => 'TODO: satisfy',
             self::E_5_4_2 => $this->__('Argument \'%s\' is duplicated', 'graphql-server'),

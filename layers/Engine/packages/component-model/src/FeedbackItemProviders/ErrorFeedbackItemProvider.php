@@ -80,6 +80,11 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
+            /**
+             * @todo: This one is error "5.3.3 Leaf Field Selections"!
+             * @see https://spec.graphql.org/October2021/#sec-Leaf-Field-Selections
+             * in GraphQLSpecErrorFeedbackItemProvider.php
+             */
             self::E1 => $this->__('Field \'%s\' is not a connection', 'component-model'),
             self::E2 => $this->__('Field \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
             self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
