@@ -253,7 +253,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 $this->mergeProp(
                     [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                     $props,
-                    'previousmodules-ids',
+                    'previouscomponents-ids',
                     array(
                         'data-triggertarget' => $link
                     )
@@ -276,7 +276,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             $this->mergeProp(
                 [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                 $props,
-                'previousmodules-ids',
+                'previouscomponents-ids',
                 array(
                     'data-target' => $component,
                 )
@@ -298,7 +298,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             $this->mergeProp(
                 [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
                 $props,
-                'previousmodules-ids',
+                'previouscomponents-ids',
                 array(
                     'data-target' => $component,
                 )

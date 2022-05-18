@@ -17,6 +17,6 @@
 		{{#if readonly}}readonly{{/if}} 
 		{{#if disabled}}disabled="disabled"{{/if}} 
 		{{#each params}} {{@key}}="{{this}}"{{/each}} 
-		{{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}
+		{{#each previouscomponents-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}
 	> {{{label}}}
 </label>

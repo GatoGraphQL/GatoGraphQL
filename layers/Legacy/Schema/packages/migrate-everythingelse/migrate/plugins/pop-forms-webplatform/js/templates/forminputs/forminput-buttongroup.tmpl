@@ -1,4 +1,4 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="btn-group {{class}}" style="{{style}}" data-toggle="buttons" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}>
+<div {{#generateId}}{{id}}{{/generateId}} class="btn-group {{class}}" style="{{style}}" data-toggle="buttons" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previouscomponents-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}>
 	{{#each options}}
 		<label class="{{../classes.btn-input}} {{get ../classes.btn-inputs @key}} {{#compare @key (formatValue (formcomponentValue ../value ../dbObject ../dbobject-field ../default-value) ../value-format) operator=../compare-by}}active{{/compare}}" style="{{../styles.input}}">
 			<input name="{{../name}}" value="{{@key}}" class="{{../classes.input}}" style="{{../styles.input}}" type="{{../type}}" autocomplete="off" {{#compare @key (formatValue (formcomponentValue ../value ../dbObject ../dbobject-field ../default-value) ../value-format) operator=../compare-by}}checked{{/compare}}> {{{this}}}

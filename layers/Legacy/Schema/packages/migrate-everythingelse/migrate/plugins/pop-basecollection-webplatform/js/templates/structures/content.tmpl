@@ -1,5 +1,5 @@
 {{{description}}}
-<div {{#generateId}}{{id}}{{/generateId}} class="content {{#each templates.class-extensions}}{{enterTemplate . context=../.}}{{/each}} {{class}} {{class-merge}}" style="{{style}}" {{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}>
+<div {{#generateId}}{{id}}{{/generateId}} class="content {{#each templates.class-extensions}}{{enterTemplate . context=../.}}{{/each}} {{class}} {{class-merge}}" style="{{style}}" {{#each previouscomponents-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}>
 	{{#withModule . "inner"}}
 		{{enterModule ../. dbKey=../dbKey dbObjectIDs=../dbObjectIDs}}
 	{{/withModule}}	

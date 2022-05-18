@@ -51,7 +51,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
-                // We use the "previousmodules-ids" to obtain the url to point to
+                // We use the "previouscomponents-ids" to obtain the url to point to
                 return null;
         }
 
@@ -68,7 +68,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
                     $this->mergeProp(
                         $component,
                         $props,
-                        'previousmodules-ids',
+                        'previouscomponents-ids',
                         array(
                             'href' => $collapse_component,
                         )

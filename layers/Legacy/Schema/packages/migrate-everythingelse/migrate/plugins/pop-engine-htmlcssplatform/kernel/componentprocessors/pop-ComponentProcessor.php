@@ -309,7 +309,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         if ($dbobject_params = $this->getProp($component, $props, 'dbobject-params')) {
             $ret[GD_JS_DBOBJECTPARAMS] = $dbobject_params;
         }
-        if ($previousmodules_ids = $this->getProp($component, $props, 'previousmodules-ids')) {
+        if ($previousmodules_ids = $this->getProp($component, $props, 'previouscomponents-ids')) {
             // We receive entries of key => component, convert them to key => moduleOutputName
             $ret[GD_JS_PREVIOUSCOMPONENTSIDS] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],

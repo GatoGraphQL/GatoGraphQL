@@ -48,7 +48,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     //         case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
 
     //             // This is needed because we need to print the id no matter what, since this module
-    //             // will be referenced using previousmodules-ids in [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS_FULLVIEW], etc
+    //             // will be referenced using previouscomponents-ids in [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS_FULLVIEW], etc
     //             $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTY];
     //             break;
     //     }

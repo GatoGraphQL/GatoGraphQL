@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
         $this->mergeProp(
             $component,
             $props,
-            'previousmodules-ids',
+            'previouscomponents-ids',
             array(
                 'data-iframe-target' => $iframe,
                 'data-input-target' => $input,

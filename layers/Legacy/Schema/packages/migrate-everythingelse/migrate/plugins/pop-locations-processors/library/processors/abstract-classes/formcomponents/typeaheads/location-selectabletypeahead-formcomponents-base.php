@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
             $this->mergeProp(
                 $control,
                 $props,
-                'previousmodules-ids',
+                'previouscomponents-ids',
                 array(
                     'data-typeahead-target' => $component,
                 )

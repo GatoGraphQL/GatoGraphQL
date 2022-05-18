@@ -18,5 +18,5 @@ define('GD_JS_STYLES', $compact ? 'ys' : 'styles');
 define('GD_JS_TITLES', $compact ? 'tt' : 'titles');
 define('GD_JS_PARAMS', $compact ? 'p' : 'params');
 define('GD_JS_DBOBJECTPARAMS', $compact ? 'dop' : 'dbobject-params');
-define('GD_JS_PREVIOUSCOMPONENTSIDS', $compact ? 'pt' : 'previousmodules-ids');
+define('GD_JS_PREVIOUSCOMPONENTSIDS', $compact ? 'pt' : 'previouscomponents-ids');
 define('GD_JS_DESCRIPTION', $compact ? 'd' : 'description');
