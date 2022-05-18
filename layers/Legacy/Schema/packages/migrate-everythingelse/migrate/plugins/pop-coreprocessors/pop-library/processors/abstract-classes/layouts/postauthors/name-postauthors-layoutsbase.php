@@ -2,17 +2,17 @@
 
 abstract class PoP_Module_Processor_PostAuthorNameLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTPOST_AUTHORNAME];
     }
 
-    public function getUrlField(array $module, array &$props)
+    public function getUrlField(array $componentVariation, array &$props)
     {
         return 'url';
     }
 
-    public function getLinkTarget(array $module, array &$props)
+    public function getLinkTarget(array $componentVariation, array &$props)
     {
         return '';
     }
@@ -22,25 +22,25 @@ abstract class PoP_Module_Processor_PostAuthorNameLayoutsBase extends PoPEngine_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($componentVariation, $props);
     
-        $ret[] = $this->getUrlField($module, $props);
+        $ret[] = $this->getUrlField($componentVariation, $props);
         $ret[] = 'displayName';
 
         return $ret;
     }
 
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($target = $this->getLinkTarget($module, $props)) {
+        if ($target = $this->getLinkTarget($componentVariation, $props)) {
             $ret['targets']['link'] = $target;
         }
-        $ret['url-field'] = $this->getUrlField($module, $props);
+        $ret['url-field'] = $this->getUrlField($componentVariation, $props);
 
         return $ret;
     }

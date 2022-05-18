@@ -6,75 +6,75 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        $ret[] = $this->getLocationsTypeaheadSubmodule($module);
-        $ret[] = $this->getMapSubmodule($module);
+        $ret[] = $this->getLocationsTypeaheadSubmodule($componentVariation);
+        $ret[] = $this->getMapSubmodule($componentVariation);
         $ret[] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::MODULE_MAP_ADDMARKER];
 
         return $ret;
     }
 
-    public function getFormcomponentModule(array $module)
+    public function getFormcomponentModule(array $componentVariation)
     {
-        return $this->getLocationsTypeaheadSubmodule($module);
+        return $this->getLocationsTypeaheadSubmodule($componentVariation);
     }
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENT_TYPEAHEADMAP];
     }
 
-    public function getMapSubmodule(array $module)
+    public function getMapSubmodule(array $componentVariation)
     {
         return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::MODULE_MAP_INDIVIDUAL];
     }
 
-    public function getLocationsTypeaheadSubmodule(array $module)
+    public function getLocationsTypeaheadSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($module, $props);
-        parent::initRequestProps($module, $props);
+        $this->metaFormcomponentInitModuleRequestProps($componentVariation, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $this->appendProp($module, $props, 'class', 'pop-typeaheadmap');
+        $this->appendProp($componentVariation, $props, 'class', 'pop-typeaheadmap');
 
-        $locations_typeahead = $this->getLocationsTypeaheadSubmodule($module);
+        $locations_typeahead = $this->getLocationsTypeaheadSubmodule($componentVariation);
 
         // Classes to define its frame
-        $this->setProp($module, $props, 'wrapper-class', 'row');
-        $this->setProp($module, $props, 'map-class', 'col-sm-9 col-sm-push-3');
-        $this->setProp($module, $props, 'typeahead-class', 'col-sm-3 col-sm-pull-9');
+        $this->setProp($componentVariation, $props, 'wrapper-class', 'row');
+        $this->setProp($componentVariation, $props, 'map-class', 'col-sm-9 col-sm-push-3');
+        $this->setProp($componentVariation, $props, 'typeahead-class', 'col-sm-3 col-sm-pull-9');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret['addmarker-module'] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::MODULE_MAP_ADDMARKER];
 
-        $locations_typeahead = $this->getLocationsTypeaheadSubmodule($module);
-        $map_module = $this->getMapSubmodule($module);
+        $locations_typeahead = $this->getLocationsTypeaheadSubmodule($componentVariation);
+        $map_module = $this->getMapSubmodule($componentVariation);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['locations'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($locations_typeahead);
 
-        $ret[GD_JS_CLASSES]['wrapper'] = $this->getProp($module, $props, 'wrapper-class');
-        $ret[GD_JS_CLASSES]['map'] = $this->getProp($module, $props, 'map-class');
-        $ret[GD_JS_CLASSES]['typeahead'] = $this->getProp($module, $props, 'typeahead-class');
+        $ret[GD_JS_CLASSES]['wrapper'] = $this->getProp($componentVariation, $props, 'wrapper-class');
+        $ret[GD_JS_CLASSES]['map'] = $this->getProp($componentVariation, $props, 'map-class');
+        $ret[GD_JS_CLASSES]['typeahead'] = $this->getProp($componentVariation, $props, 'typeahead-class');
 
         return $ret;
     }

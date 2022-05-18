@@ -11,28 +11,28 @@ class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Proce
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $sidebarinners = array(
             self::MODULE_VERTICALSIDEBAR_TAG => [Wassup_Module_Processor_CustomVerticalTagSidebarInners::class, Wassup_Module_Processor_CustomVerticalTagSidebarInners::MODULE_VERTICALSIDEBARINNER_TAG],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VERTICALSIDEBAR_TAG:
-                $this->appendProp($module, $props, 'class', 'vertical');
+                $this->appendProp($componentVariation, $props, 'class', 'vertical');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

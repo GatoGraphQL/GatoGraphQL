@@ -13,11 +13,11 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
             case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 $modules = array();
@@ -27,7 +27,7 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
                 $modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_DropdownButtonControls:modules:share',
                     $modules,
-                    $module
+                    $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
@@ -39,26 +39,26 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         return $ret;
     }
 
-    public function getBtnClass(array $module)
+    public function getBtnClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
             case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'btn btn-compact btn-link';
         }
         
-        return parent::getBtnClass($module);
+        return parent::getBtnClass($componentVariation);
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
             case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'fa-share';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 }
 

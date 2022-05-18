@@ -22,11 +22,11 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         );
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $componentVariation)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
             case self::MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS:
             case self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS:
@@ -36,11 +36,11 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $componentVariation)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
             case self::MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS:
             case self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS:
@@ -51,7 +51,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES],
@@ -62,16 +62,16 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
             self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::MODULE_URE_FILTERINPUT_MEMBERSTATUS],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status "Active" if the user is truly your member, or "Rejected" otherwise. Rejected users will not appear as your community\'s members, or contribute content.');
 
@@ -82,7 +82,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
                 return TranslationAPIFacade::getInstance()->__('What is the type of relationship from this member to your community.', 'ure-popprocessors');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($componentVariation, $props);
     }
 }
 

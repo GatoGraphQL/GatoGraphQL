@@ -40,9 +40,9 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FAVICON],
@@ -62,16 +62,16 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
             self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE:
@@ -93,9 +93,9 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
         return null;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM:
@@ -107,11 +107,11 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
-                $this->appendProp($module, $props, 'class', 'wrapper-featuredimage');
+                $this->appendProp($componentVariation, $props, 'class', 'wrapper-featuredimage');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

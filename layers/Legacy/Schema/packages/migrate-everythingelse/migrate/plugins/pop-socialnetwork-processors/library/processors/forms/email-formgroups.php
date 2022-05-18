@@ -25,7 +25,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT => [PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],
@@ -38,16 +38,16 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
             self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT => [PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function useModuleConfiguration(array $module)
+    public function useModuleConfiguration(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
             case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
             case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -59,7 +59,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
                 return false;
         }
 
-        return parent::useModuleConfiguration($module);
+        return parent::useModuleConfiguration($componentVariation);
     }
 }
 

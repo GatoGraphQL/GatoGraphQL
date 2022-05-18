@@ -17,18 +17,18 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS => POP_ROUTE_AUTHORS,
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => POP_ROUTE_AUTHORS,
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST => POP_ROUTE_AUTHORS,
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL => POP_ROUTE_AUTHORS,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW],
@@ -37,12 +37,12 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Single Authors has no filter, so show only the Share control
             case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 }
 

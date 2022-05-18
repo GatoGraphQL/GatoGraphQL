@@ -14,11 +14,11 @@ class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP:
                 $ret[] = [Wassup_URE_AAL_Module_Processor_MultiMembership::class, Wassup_URE_AAL_Module_Processor_MultiMembership::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP];
                 break;
@@ -31,9 +31,9 @@ class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isAction', ['action' => URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP]);
 

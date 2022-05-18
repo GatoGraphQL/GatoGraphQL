@@ -14,31 +14,31 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         $routes = array(
             self::MODULE_BUTTONINNER_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
             self::MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
         );
-        if ($route = $routes[$module[1]] ?? null) {
+        if ($route = $routes[$componentVariation[1]] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(
             self::MODULE_BUTTONINNER_HIGHLIGHT_CREATE => $extract,
             self::MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN => $extract,
         );
-        if ($title = $titles[$module[1]] ?? null) {
+        if ($title = $titles[$componentVariation[1]] ?? null) {
             return $title;
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 }
 

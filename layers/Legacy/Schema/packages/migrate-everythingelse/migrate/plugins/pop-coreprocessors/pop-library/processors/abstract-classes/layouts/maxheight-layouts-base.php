@@ -4,16 +4,16 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MAXHEIGHT];
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($inners = $this->getInnerSubmodules($module)) {
+        if ($inners = $this->getInnerSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -23,30 +23,30 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getMaxheight(array $module, array &$props)
+    public function getMaxheight(array $componentVariation, array &$props)
     {
         return null;
     }
 
-    // function getShowmoreBtnHtml(array $module, array &$props) {
+    // function getShowmoreBtnHtml(array $componentVariation, array &$props) {
 
-    //     $titles = $this->getShowmoreBtnTitles($module, $props);
+    //     $titles = $this->getShowmoreBtnTitles($componentVariation, $props);
     //     return sprintf(
     //         '<div class="dynamicbtn-wrapper"><button class="js-dynamic-show-hide button %1$s" title="%2$s" data-replace-text="%3$s">%2$s</button></div>',
-    //         $this->get_showmore_btn_class($module, $props),
+    //         $this->get_showmore_btn_class($componentVariation, $props),
     //         $titles['more'],
     //         $titles['less']
     //     );
     // }
 
-    // function getShowmoreBtnTitles(array $module, array &$props) {
+    // function getShowmoreBtnTitles(array $componentVariation, array &$props) {
 
     //     return array(
     //         'more' => TranslationAPIFacade::getInstance()->__('Show more', 'pop-coreprocessors'),
     //         'less' => TranslationAPIFacade::getInstance()->__('Show less', 'pop-coreprocessors'),
     //     );
     // }
-    public function getBtnTitles(array $module, array &$props)
+    public function getBtnTitles(array $componentVariation, array &$props)
     {
         return array(
             'more' => TranslationAPIFacade::getInstance()->__('Show more', 'pop-coreprocessors'),
@@ -54,22 +54,22 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         );
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
         return 'btn btn-link';
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
         return array();
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // Integrate with plug-in "Dynamic max height plugin for jQuery"
-        if (!is_null($this->getProp($module, $props, 'maxheight'))) {
+        if (!is_null($this->getProp($componentVariation, $props, 'maxheight'))) {
             // This function is critical! Execute immediately, so users can already press on "See more" when scrolling down
             $this->addJsmethod($ret, 'dynamicMaxHeight', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
         }
@@ -77,54 +77,54 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($inners = $this->getInnerSubmodules($module)) {
+        if ($inners = $this->getInnerSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $inners
             );
         }
 
-        if ($btn_titles = $this->getBtnTitles($module, $props)) {
+        if ($btn_titles = $this->getBtnTitles($componentVariation, $props)) {
             $ret[GD_JS_TITLES] = $btn_titles;
         }
-        if ($btn_class = $this->getBtnClass($module, $props)) {
+        if ($btn_class = $this->getBtnClass($componentVariation, $props)) {
             $ret[GD_JS_CLASSES]['btn'] = $btn_class;
         }
 
-        $maxheight = $this->getProp($module, $props, 'maxheight');
+        $maxheight = $this->getProp($componentVariation, $props, 'maxheight');
         if (!is_null($maxheight)) {
             $ret['maxheight'] = $maxheight;
         }
 
         // // Integrate with plug-in "Dynamic max height plugin for jQuery"
-        // if ($this->getProp($module, $props, 'maxheight')) {
+        // if ($this->getProp($componentVariation, $props, 'maxheight')) {
 
         //     $ret[GD_JS_CLASSES]['inner'] = 'dynamic-height-wrap';
-        //     $ret['description-bottom'] = $this->getShowmoreBtnHtml($module, $props);
+        //     $ret['description-bottom'] = $this->getShowmoreBtnHtml($componentVariation, $props);
         // }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'maxheight', $this->getMaxheight($module, $props));
-        // $maxheight = $this->getProp($module, $props, 'maxheight');
+        $this->setProp($componentVariation, $props, 'maxheight', $this->getMaxheight($componentVariation, $props));
+        // $maxheight = $this->getProp($componentVariation, $props, 'maxheight');
         // if (!is_null($maxheight)) {
 
         //     // Integrate with plug-in "Dynamic max height plugin for jQuery"
-        //     // $this->appendProp($module, $props, 'class', 'js-dynamic-height');
-        //     $this->mergeProp($module, $props, 'params', array(
+        //     // $this->appendProp($componentVariation, $props, 'class', 'js-dynamic-height');
+        //     $this->mergeProp($componentVariation, $props, 'params', array(
         //         'data-maxheight' => $maxheight,
         //     ));
         // }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

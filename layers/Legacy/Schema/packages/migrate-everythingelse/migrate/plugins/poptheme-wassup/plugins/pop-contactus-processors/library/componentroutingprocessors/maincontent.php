@@ -14,8 +14,8 @@ class PoPTheme_Wassup_ContactUs_Module_MainContentComponentRoutingProcessor exte
         $routemodules = array(
             POP_CONTACTUS_ROUTE_CONTACTUS => [PoP_ContactUs_Module_Processor_Blocks::class, PoP_ContactUs_Module_Processor_Blocks::MODULE_BLOCK_CONTACTUS],
         );
-        foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+        foreach ($routemodules as $route => $componentVariation) {
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 
         return $ret;

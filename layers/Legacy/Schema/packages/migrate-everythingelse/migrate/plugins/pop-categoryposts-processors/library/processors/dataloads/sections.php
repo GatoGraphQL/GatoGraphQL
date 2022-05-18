@@ -1118,9 +1118,9 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_CAROUSEL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -1621,11 +1621,11 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
 
@@ -2220,12 +2220,12 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_Carousels::class, CPP_Module_Processor_Carousels::MODULE_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD:
             case self::MODULE_DATALOAD_CATEGORYPOSTS01_TYPEAHEAD:
             case self::MODULE_DATALOAD_CATEGORYPOSTS02_TYPEAHEAD:
@@ -2613,10 +2613,10 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCATEGORYPOSTS];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $componentVariation): ?string
     {
 
         // Add the format attr
@@ -3148,32 +3148,32 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             [self::class, self::MODULE_DATALOAD_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT],
             [self::class, self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
-        if (in_array($module, $details)) {
+        if (in_array($componentVariation, $details)) {
             $format = POP_FORMAT_DETAILS;
-        } elseif (in_array($module, $simpleviews)) {
+        } elseif (in_array($componentVariation, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($componentVariation, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($componentVariation, $lists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($module, $lines)) {
+        } elseif (in_array($componentVariation, $lines)) {
             $format = POP_FORMAT_LINE;
-        } elseif (in_array($module, $carousels)) {
+        } elseif (in_array($componentVariation, $carousels)) {
             $format = POP_FORMAT_CAROUSEL;
-        } elseif (in_array($module, $content_carousels)) {
+        } elseif (in_array($componentVariation, $content_carousels)) {
             $format = POP_FORMAT_CAROUSELCONTENT;
-        } elseif (in_array($module, $typeaheads)) {
+        } elseif (in_array($componentVariation, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($componentVariation);
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_DETAILS:
@@ -3499,15 +3499,15 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     //             return TagRequestNature::TAG;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($componentVariation);
     // }
 
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD:
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_ADDONS:
@@ -4112,11 +4112,11 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS:
@@ -4448,14 +4448,14 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_DETAILS:
@@ -5042,7 +5042,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', $names);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

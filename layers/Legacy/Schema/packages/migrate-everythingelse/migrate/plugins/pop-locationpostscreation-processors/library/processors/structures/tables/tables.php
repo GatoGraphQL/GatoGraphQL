@@ -12,25 +12,25 @@ class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBa
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYLOCATIONPOSTS:
                 $inners = array(
                     self::MODULE_TABLE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_TableInners::class, GD_Custom_EM_Module_Processor_TableInners::MODULE_TABLEINNER_MYLOCATIONPOSTS],
                 );
 
-                return $inners[$module[1]];
+                return $inners[$componentVariation[1]];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getHeaderTitles(array $module)
+    public function getHeaderTitles(array $componentVariation)
     {
-        $ret = parent::getHeaderTitles($module);
+        $ret = parent::getHeaderTitles($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYLOCATIONPOSTS:
                 $ret[] = PoP_LocationPosts_PostNameUtils::getNameUc();
                 $ret[] = TranslationAPIFacade::getInstance()->__('Date', 'pop-locationpostscreation-processors');

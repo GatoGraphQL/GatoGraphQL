@@ -12,24 +12,24 @@ class GD_UserPlatform_Module_Processor_SelectFormInputs extends PoP_Module_Proce
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_SETTINGSFORMAT:
                 return TranslationAPIFacade::getInstance()->__('Default view', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_SETTINGSFORMAT:
                 return GD_FormInput_SettingsFormat::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 }
 

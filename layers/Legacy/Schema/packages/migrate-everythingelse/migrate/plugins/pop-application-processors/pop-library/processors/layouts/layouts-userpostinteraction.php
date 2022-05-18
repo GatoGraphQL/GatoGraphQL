@@ -13,11 +13,11 @@ class Wassup_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Proc
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_USERPOSTINTERACTION:
                 // Allow TPPDebate to add the "What do you think about TPP?" before these layouts
                 if ($layouts = \PoP\Root\App::applyFilters(
@@ -25,7 +25,7 @@ class Wassup_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Proc
                     array(
                         [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_USERPOSTINTERACTION],
                     ),
-                    $module
+                    $componentVariation
                 )) {
                     $ret = array_merge(
                         $ret,

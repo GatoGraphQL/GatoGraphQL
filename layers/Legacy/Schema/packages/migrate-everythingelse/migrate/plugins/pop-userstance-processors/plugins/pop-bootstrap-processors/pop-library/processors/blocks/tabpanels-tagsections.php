@@ -17,9 +17,9 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES],
@@ -27,16 +27,16 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES_NEUTRAL],
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES_AGAINST => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES_AGAINST],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_TABPANEL_TAGSTANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_TAGSTANCES];
 
@@ -46,7 +46,7 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_TAGSTANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubmodule($componentVariation);
     }
 }
 

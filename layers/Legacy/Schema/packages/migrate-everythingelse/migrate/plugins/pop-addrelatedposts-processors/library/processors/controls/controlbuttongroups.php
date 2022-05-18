@@ -11,11 +11,11 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST:
                 $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
                 break;

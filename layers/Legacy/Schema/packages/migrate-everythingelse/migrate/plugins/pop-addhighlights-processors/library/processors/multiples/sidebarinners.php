@@ -13,11 +13,11 @@ class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR:
                 $ret[] = [PoP_AddHighlights_Module_Processor_ButtonGroups::class, PoP_AddHighlights_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_HIGHLIGHTS];
                 $ret[] = [PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::class, PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_HIGHLIGHTS];

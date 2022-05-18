@@ -2,25 +2,25 @@
 
 abstract class PoP_Module_Processor_StylesLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_STYLES];
     }
 
-    public function getElemTarget(array $module, array &$props)
+    public function getElemTarget(array $componentVariation, array &$props)
     {
         return '';
     }
-    public function getElemStyles(array $module, array &$props)
+    public function getElemStyles(array $componentVariation, array &$props)
     {
         return array();
     }
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $ret['elem-target'] = $this->getElemTarget($module, $props);
-        $ret['elem-styles'] = $this->getElemStyles($module, $props);
+        $ret['elem-target'] = $this->getElemTarget($componentVariation, $props);
+        $ret['elem-styles'] = $this->getElemStyles($componentVariation, $props);
 
         return $ret;
     }

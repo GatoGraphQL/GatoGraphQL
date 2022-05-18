@@ -13,28 +13,28 @@ class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Ap
         );
     }
     
-    public function doAppend(array $module)
+    public function doAppend(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCRIPT_STANCESEMPTY:
                 return false;
         }
         
-        return parent::doAppend($module);
+        return parent::doAppend($componentVariation);
     }
     
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCRIPT_STANCES:
             case self::MODULE_SCRIPT_STANCESEMPTY:
                 $classes = array(
                     self::MODULE_SCRIPT_STANCES => GD_CLASS_STANCES,
                     self::MODULE_SCRIPT_STANCESEMPTY => GD_CLASS_STANCES,
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$module[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$componentVariation[1]];
                 break;
         }
         

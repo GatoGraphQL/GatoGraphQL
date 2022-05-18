@@ -24,11 +24,11 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_POST_AUTHORS:
             case self::MODULE_WIDGETCOMPACT_POST_AUTHORS:
                 $ret[] = [PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::MODULE_LAYOUT_POSTAUTHORS];
@@ -58,7 +58,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $componentVariation, array &$props)
     {
 
         // $asresponse = TranslationAPIFacade::getInstance()->__('Posted in response / as an addition to', 'pop-coreprocessors');
@@ -75,9 +75,9 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE => TranslationAPIFacade::getInstance()->__('Highlighted from', 'pop-coreprocessors'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$componentVariation[1]] ?? null;
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGET_AUTHOR_CONTACT => 'fa-link',
@@ -89,11 +89,11 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE => 'fa-circle',
         );
 
-        return $fontawesomes[$module[1]] ?? null;
+        return $fontawesomes[$componentVariation[1]] ?? null;
     }
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_POST_AUTHORS:
                 return 'list-group';
 
@@ -102,11 +102,11 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return '';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($componentVariation, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_AUTHOR_CONTACT:
                 return 'list-group-item';
 
@@ -115,11 +115,11 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return '';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($componentVariation, $props);
     }
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_POST_AUTHORS:
             case self::MODULE_WIDGETCOMPACT_AUTHORDESCRIPTION:
                 return 'panel panel-default panel-sm';
@@ -130,27 +130,27 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return '';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($componentVariation, $props);
     }
-    public function getTitleWrapperClass(array $module, array &$props)
+    public function getTitleWrapperClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_REFERENCES_LINE:
             case self::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE:
                 return '';
         }
 
-        return parent::getTitleWrapperClass($module, $props);
+        return parent::getTitleWrapperClass($componentVariation, $props);
     }
-    public function getTitleClass(array $module, array &$props)
+    public function getTitleClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_REFERENCES_LINE:
             case self::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE:
                 return '';
         }
 
-        return parent::getTitleClass($module, $props);
+        return parent::getTitleClass($componentVariation, $props);
     }
 }
 

@@ -17,9 +17,9 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
         );
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTPOST:
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
@@ -31,7 +31,7 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
                 return \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID;
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 }
 

@@ -13,24 +13,24 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_MYEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYEVENTS],
             self::MODULE_BLOCK_TABPANEL_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYPASTEVENTS],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_TABPANEL_MYEVENTS:
                 return [PoP_EventsCreation_Module_Processor_CustomControlGroups::class, PoP_EventsCreation_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYEVENTLIST];
 
@@ -38,25 +38,25 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_TABPANEL_MYEVENTS:
             case self::MODULE_BLOCK_TABPANEL_MYPASTEVENTS:
                 return [PoP_EventsCreation_Module_Processor_CustomFilters::class, PoP_EventsCreation_Module_Processor_CustomFilters::MODULE_FILTER_MYEVENTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($filter_module = $this->getDelegatorfilterSubmodule($module)) {
+        if ($filter_module = $this->getDelegatorfilterSubmodule($componentVariation)) {
             // Events: choose to only select past/future
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_BLOCK_TABPANEL_MYPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
@@ -70,7 +70,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

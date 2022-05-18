@@ -11,9 +11,9 @@ class PoP_UserCommunities_EM_Module_Processor_CustomScrollInners extends PoP_Mod
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_COMMUNITIES_MAP:
                 return array(
                     'row-items' => 1,
@@ -21,18 +21,18 @@ class PoP_UserCommunities_EM_Module_Processor_CustomScrollInners extends PoP_Mod
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_COMMUNITIES_MAP => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 

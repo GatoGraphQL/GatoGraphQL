@@ -53,7 +53,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Get the entry module based on the application configuration and the nature
-        $module = $this->getEntryComponent();
+        $componentVariation = $this->getEntryComponent();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
         $dataoutputitems = App::getState('dataoutputitems');
@@ -62,7 +62,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleSettings($module, $engineState->model_props, $engineState->props)
+                $this->getModuleSettings($componentVariation, $engineState->model_props, $engineState->props)
             );
         }
 
@@ -73,11 +73,11 @@ class Engine extends UpstreamEngine implements EngineInterface
         );
     }
 
-    public function getModuleSettings(array $module, $model_props, array &$props)
+    public function getModuleSettings(array $componentVariation, $model_props, array &$props)
     {
         $ret = array();
 
-        $processor = $this->getComponentProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
@@ -95,19 +95,19 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // If there is no cached one, generate the configuration and cache it
         if ($immutable_settings === null) {
-            $immutable_settings = $processor->getImmutableSettingsModuletree($module, $model_props);
+            $immutable_settings = $processor->getImmutableSettingsModuletree($componentVariation, $model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS, $immutable_settings);
             }
         }
         if ($mutableonmodel_settings === null) {
-            $mutableonmodel_settings = $processor->getMutableonmodelSettingsModuletree($module, $model_props);
+            $mutableonmodel_settings = $processor->getMutableonmodelSettingsModuletree($componentVariation, $model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
         if ($datasourceselector == DataSourceSelectors::MODELANDREQUEST) {
-            $mutableonrequest_settings = $processor->getMutableonrequestSettingsModuletree($module, $props);
+            $mutableonrequest_settings = $processor->getMutableonrequestSettingsModuletree($componentVariation, $props);
         }
 
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"

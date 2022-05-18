@@ -14,9 +14,9 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION:
                 return TranslationAPIFacade::getInstance()->__('Section', 'poptheme-wassup');
 
@@ -24,12 +24,12 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
                 return TranslationAPIFacade::getInstance()->__('Sections', 'poptheme-wassup');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION:
                 return GD_FormInput_PostSection::class;
 
@@ -37,22 +37,22 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
                 return GD_FormInput_PostSections::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $componentVariation): bool
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
                 return true;
         }
 
-        return parent::isMultiple($module);
+        return parent::isMultiple($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION:
                 return 'mainCategory';
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
                 return 'catsByName';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

@@ -12,11 +12,11 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_EVENTLINKDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
                     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_CATEGORIES];
@@ -33,7 +33,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
                 }
 
                 // Comment Leo 16/01/2016: There's no need to ask for the LinkAccess since we don't show it anyway
-                // if ($module == [self::class, self::MODULE_WIDGET_FORM_EVENTLINKDETAILS]) {
+                // if ($componentVariation == [self::class, self::MODULE_WIDGET_FORM_EVENTLINKDETAILS]) {
                 //     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
                 // }
                 break;
@@ -42,51 +42,51 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $componentVariation, array &$props)
     {
         $titles = array(
             self::MODULE_WIDGET_FORM_EVENTLINKDETAILS => TranslationAPIFacade::getInstance()->__('Event link details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$componentVariation[1]] ?? null;
     }
 
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_EVENTLINKDETAILS:
-                if ($class = $this->getProp($module, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
+                if ($class = $this->getProp($componentVariation, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
                 }
 
                 return 'panel panel-info';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($componentVariation, $props);
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_EVENTLINKDETAILS:
                 return 'panel-body';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($componentVariation, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_EVENTLINKDETAILS:
                 return '';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_EVENTLINKDETAILS:
                 // Typeahead map: make it small
                 $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'wrapper-class', '');
@@ -95,7 +95,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

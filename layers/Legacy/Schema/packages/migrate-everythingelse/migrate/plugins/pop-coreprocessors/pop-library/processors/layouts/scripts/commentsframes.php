@@ -13,25 +13,25 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
         );
     }
 
-    public function doAppend(array $module)
+    public function doAppend(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return false;
         }
         
-        return parent::doAppend($module);
+        return parent::doAppend($componentVariation);
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT:
             case self::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
         }
         
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
 }
 

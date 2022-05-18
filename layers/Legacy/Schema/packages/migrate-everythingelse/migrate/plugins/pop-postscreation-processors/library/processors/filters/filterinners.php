@@ -11,9 +11,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_MYLINKS => [
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
             ],
         ];
         // Add the link access filter
-        if (($inputmodules[$module[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputmodules[$componentVariation[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
                 $ret,
@@ -43,8 +43,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
         }
         if ($modules = \PoP\Root\App::applyFilters(
             'Links:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -54,16 +54,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

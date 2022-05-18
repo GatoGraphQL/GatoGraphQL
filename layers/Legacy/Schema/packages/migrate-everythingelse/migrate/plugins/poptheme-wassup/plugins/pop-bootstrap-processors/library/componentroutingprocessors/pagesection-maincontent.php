@@ -18,9 +18,9 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
         $routemodules = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

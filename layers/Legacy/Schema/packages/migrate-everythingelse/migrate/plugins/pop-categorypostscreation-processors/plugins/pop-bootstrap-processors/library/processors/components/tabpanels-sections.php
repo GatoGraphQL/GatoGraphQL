@@ -49,9 +49,9 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS00:
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS01:
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS02:
@@ -75,14 +75,14 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -307,9 +307,9 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS00:
                 return array(
                     [
@@ -591,7 +591,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
                 );
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

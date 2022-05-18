@@ -115,9 +115,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -165,19 +165,19 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_LIST => POP_EVENTS_ROUTE_PASTEVENTS,
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => POP_EVENTS_ROUTE_PASTEVENTS,
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL => POP_EVENTS_ROUTE_PASTEVENTS,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         // if it's a map, add the Map block. Do it before adding the Scroll, because otherwise there's an error:
         // The map is not created yet, however the links in the elements are already trying to add the markers
-        if ($map_inner_module = $this->getPostmapInnerModule($module)) {
+        if ($map_inner_module = $this->getPostmapInnerModule($componentVariation)) {
             $ret[] = [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::MODULE_EM_MAP_POST];
             $ret[] = $map_inner_module;
         }
@@ -185,7 +185,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getPostmapInnerModule(array $module)
+    protected function getPostmapInnerModule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::MODULE_CALENDAR_EVENTSMAP],
@@ -193,10 +193,10 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::MODULE_CALENDAR_EVENTSMAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
 
@@ -297,12 +297,12 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL => [GD_EM_Module_Processor_CustomCarousels::class, GD_EM_Module_Processor_CustomCarousels::MODULE_CAROUSEL_TAGEVENTS],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function getFeedbackmessagesPosition(array $module)
+    protected function getFeedbackmessagesPosition(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDARMAP:
             case self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP:
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
@@ -317,12 +317,12 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return 'top';
         }
 
-        return parent::getFeedbackmessagesPosition($module);
+        return parent::getFeedbackmessagesPosition($componentVariation);
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_EVENTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_EVENTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW:
@@ -373,10 +373,10 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTSCALENDAR];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $componentVariation): ?string
     {
 
         // Add the format attr
@@ -449,33 +449,33 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_CAROUSEL],
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL],
         );
-        if (in_array($module, $details)) {
+        if (in_array($componentVariation, $details)) {
             $format = POP_FORMAT_DETAILS;
-        } elseif (in_array($module, $simpleviews)) {
+        } elseif (in_array($componentVariation, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($componentVariation, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($componentVariation, $lists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($module, $calendarmaps)) {
+        } elseif (in_array($componentVariation, $calendarmaps)) {
             $format = POP_FORMAT_CALENDARMAP;
             // $format = POP_FORMAT_MAP;
-        } elseif (in_array($module, $calendars)) {
+        } elseif (in_array($componentVariation, $calendars)) {
             $format = POP_FORMAT_CALENDAR;
-        } elseif (in_array($module, $typeaheads)) {
+        } elseif (in_array($componentVariation, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
-        } elseif (in_array($module, $carousels)) {
+        } elseif (in_array($componentVariation, $carousels)) {
             $format = POP_FORMAT_CAROUSEL;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($componentVariation);
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -507,14 +507,14 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //             return TagRequestNature::TAG;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($componentVariation);
     // }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -552,9 +552,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR:
             case self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS:
             case self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR:
@@ -566,14 +566,14 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_Calendar::class);
         }
 
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($componentVariation);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_PASTEVENTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLL_ADDONS:
@@ -599,9 +599,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_EVENTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_EVENTS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_EVENTS_SCROLL_ADDONS:
@@ -652,12 +652,12 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_EVENTS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_EVENTS_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_EVENTS_SCROLL_DETAILS:
@@ -745,16 +745,16 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL],
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLL_LIST],
         );
-        if (in_array($module, $past)) {
+        if (in_array($componentVariation, $past)) {
             $daterange_class = 'daterange-past opens-right';
-        } elseif (in_array($module, $future)) {
+        } elseif (in_array($componentVariation, $future)) {
             $daterange_class = 'daterange-future opens-right';
         }
         if ($daterange_class) {
             $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

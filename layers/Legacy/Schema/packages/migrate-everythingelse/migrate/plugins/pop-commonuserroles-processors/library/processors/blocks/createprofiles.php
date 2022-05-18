@@ -14,20 +14,20 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
                 $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE];
                 $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT];
@@ -42,33 +42,33 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEACCOUNT];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 
-    public function getSubmenuSubmodule(array $module)
+    public function getSubmenuSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::MODULE_SUBMENU_ACCOUNT];
         }
 
-        return parent::getSubmenuSubmodule($module);
+        return parent::getSubmenuSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 $this->setProp(
@@ -79,13 +79,13 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
                     ),
                     $props,
                     'target',
-                    '#'.$this->getFrontendId($module, $props).' .collapse'
+                    '#'.$this->getFrontendId($componentVariation, $props).' .collapse'
                 );
                 $this->appendProp([PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT], $props, 'class', 'well');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -29,7 +29,7 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_CONTENT_FOLLOWSUSERS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_FOLLOWSUSERS],
@@ -43,11 +43,11 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
             self::MODULE_CONTENT_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_DOWNVOTESPOSTS],
             self::MODULE_CONTENT_UNDODOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_UNDODOWNVOTESPOSTS],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

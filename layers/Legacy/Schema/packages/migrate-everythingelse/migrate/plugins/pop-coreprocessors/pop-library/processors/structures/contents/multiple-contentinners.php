@@ -11,11 +11,11 @@ class PoPCore_Module_Processor_MultipleContentInners extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_LATESTCOUNTS:
                 $ret[] = [PoP_Module_Processor_LatestCountScriptsLayouts::class, PoP_Module_Processor_LatestCountScriptsLayouts::MODULE_LAYOUT_LATESTCOUNTSCRIPT];
                 break;

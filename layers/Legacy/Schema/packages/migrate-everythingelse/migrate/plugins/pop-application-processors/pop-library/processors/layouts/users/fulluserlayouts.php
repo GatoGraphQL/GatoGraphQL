@@ -11,14 +11,14 @@ class PoP_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor_Cu
         );
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLUSER:
                 return [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 }
 

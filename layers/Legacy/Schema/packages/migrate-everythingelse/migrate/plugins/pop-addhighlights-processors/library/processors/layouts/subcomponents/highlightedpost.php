@@ -13,15 +13,15 @@ class PoP_Module_Processor_HighlightedPostSubcomponentLayouts extends PoP_Module
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_LAYOUT_HIGHLIGHTEDPOST_LINE => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_LINE],
             self::MODULE_LAYOUT_HIGHLIGHTEDPOST_ADDONS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_ADDONS],
         );
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 

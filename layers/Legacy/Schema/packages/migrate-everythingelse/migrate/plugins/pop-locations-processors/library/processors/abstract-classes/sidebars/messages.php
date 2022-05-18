@@ -12,14 +12,14 @@ class GD_EM_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetM
         );
     }
 
-    public function getMessage(array $module)
+    public function getMessage(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_MESSAGE_NOLOCATION:
                 return TranslationAPIFacade::getInstance()->__('No location', 'em-popprocessors');
         }
 
-        return parent::getMessage($module);
+        return parent::getMessage($componentVariation);
     }
 }
 

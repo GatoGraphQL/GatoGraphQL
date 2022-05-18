@@ -22,9 +22,9 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Short description', 'pop-coreprocessors');
 
@@ -44,12 +44,12 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
                 return TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return 'shortDescription';
 
@@ -69,11 +69,11 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
                 return 'instagram';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         // Remove the html code from the placeholder
         $placeholders = array(
@@ -83,11 +83,11 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             self::MODULE_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
             self::MODULE_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
         );
-        if ($placeholder = $placeholders[$module[1]] ?? null) {
-            $this->setProp($module, $props, 'placeholder', $placeholder);
+        if ($placeholder = $placeholders[$componentVariation[1]] ?? null) {
+            $this->setProp($componentVariation, $props, 'placeholder', $placeholder);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

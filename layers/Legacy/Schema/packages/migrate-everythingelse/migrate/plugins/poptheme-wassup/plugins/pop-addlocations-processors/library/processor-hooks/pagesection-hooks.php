@@ -44,10 +44,10 @@ class PoP_AddLocations_PageSectionHooks
     //     );
     // }
 
-    public function initModelProps(array $module, $props_in_array, $processor)
+    public function initModelProps(array $componentVariation, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS:
                 $processor->setProp([GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::MODULE_BLOCK_CREATELOCATION], $props, 'title', '');
                 break;

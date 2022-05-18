@@ -15,11 +15,11 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
                 $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG];
                 break;
@@ -36,9 +36,9 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
@@ -48,11 +48,11 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return null;
     }
 
-    public function getConditionFailedSubmodules(array $module)
+    public function getConditionFailedSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionFailedSubmodules($module);
+        $ret = parent::getConditionFailedSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
                 $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::MODULE_HIDEIFEMPTY];
@@ -62,17 +62,17 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
-                $this->appendProp($module, $props, 'class', 'volunteer-wrapper');
+                $this->appendProp($componentVariation, $props, 'class', 'volunteer-wrapper');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

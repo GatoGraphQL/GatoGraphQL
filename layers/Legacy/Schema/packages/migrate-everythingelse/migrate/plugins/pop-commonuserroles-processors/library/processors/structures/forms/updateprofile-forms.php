@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_PROFILEORGANIZATION_UPDATE:
                 return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubmodule:profileorganization', 
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_Fo
                 );
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

@@ -18,11 +18,11 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
@@ -35,7 +35,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     self::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
                     self::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($filter = $filters[$module[1]] ?? null) {
+                if ($filter = $filters[$componentVariation[1]] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -44,7 +44,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     'PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts',
                     $ret,
                     $author,
-                    $module
+                    $componentVariation
                 );
                 break;
         }
@@ -52,7 +52,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR => POP_SCREEN_AUTHORUSERS,
@@ -60,16 +60,16 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             self::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => POP_SCREEN_AUTHORTAGS,
             self::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR:
@@ -77,7 +77,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 }
 

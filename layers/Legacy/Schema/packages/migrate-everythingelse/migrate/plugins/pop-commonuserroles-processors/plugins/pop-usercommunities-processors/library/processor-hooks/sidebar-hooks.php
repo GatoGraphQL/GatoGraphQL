@@ -1,7 +1,7 @@
 <?php
 
 \PoP\Root\App::addFilter('PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts', 'gdUreAddSidebarLayouts', 10, 3);
-function gdUreAddSidebarLayouts($layouts, $author, array $module)
+function gdUreAddSidebarLayouts($layouts, $author, array $componentVariation)
 {
     if (gdUreIsOrganization($author)) {
         $layouts[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];

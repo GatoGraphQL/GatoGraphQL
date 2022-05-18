@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_MENTION_COMPONENT];
     }
@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         // Can't use "user-nicename", because @Mentions plugin does not store the "-" in the html attribute, so it would
         // save the entry as data-usernicename. To avoid conflicts, just remove the "-"
@@ -30,9 +30,9 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
         return $data_fields;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             $avatar_size = GD_AVATAR_SIZE_40;
@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
 
             $ret['avatar'] = array(
                 'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                    $this->getProp($module, $props, 'succeeding-typeResolver'),
+                    $this->getProp($componentVariation, $props, 'succeeding-typeResolver'),
                     $avatar_field
                 ),
                 'size' => $avatar_size

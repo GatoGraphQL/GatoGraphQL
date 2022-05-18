@@ -17,7 +17,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
         );
     }
 
-    public function getSocialmediaModule(array $module)
+    public function getSocialmediaModule(array $componentVariation)
     {
         $socialmedias = array(
             self::MODULE_POSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA],
@@ -26,11 +26,11 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
             self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
         );
 
-        if ($socialmedia = $socialmedias[$module[1]] ?? null) {
+        if ($socialmedia = $socialmedias[$componentVariation[1]] ?? null) {
             return $socialmedia;
         }
 
-        return parent::getSocialmediaModule($module);
+        return parent::getSocialmediaModule($componentVariation);
     }
 }
 

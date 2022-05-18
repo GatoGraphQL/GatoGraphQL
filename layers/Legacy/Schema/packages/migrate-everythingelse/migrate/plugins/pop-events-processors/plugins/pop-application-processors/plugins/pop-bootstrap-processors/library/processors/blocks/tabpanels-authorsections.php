@@ -17,14 +17,14 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($module[1]) {
+                switch ($componentVariation[1]) {
                     case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTS:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR:
@@ -39,16 +39,16 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORPASTEVENTS],
             self::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHOREVENTSCALENDAR],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTS:
             case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_AUTHOREVENTS];
@@ -57,14 +57,14 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_AUTHOREVENTSCALENDAR];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($filter_module = $this->getDelegatorfilterSubmodule($module)) {
+        if ($filter_module = $this->getDelegatorfilterSubmodule($componentVariation)) {
             // Events: choose to only select past/future
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
@@ -78,7 +78,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

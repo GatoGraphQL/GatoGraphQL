@@ -45,9 +45,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
@@ -65,11 +65,11 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR],
@@ -91,12 +91,12 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW:
@@ -118,12 +118,12 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 
-    public function getLatestcountSubmodule(array $module)
+    public function getLatestcountSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW:
@@ -143,7 +143,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
                 return [PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS];
         }
 
-        return parent::getLatestcountSubmodule($module);
+        return parent::getLatestcountSubmodule($componentVariation);
     }
 }
 

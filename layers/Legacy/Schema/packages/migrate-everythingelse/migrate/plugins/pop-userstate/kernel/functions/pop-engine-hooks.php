@@ -35,7 +35,7 @@ class PoP_UserState_EngineHooks
         $helperCalculations['has-userstatedata-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
+    public function calculateDataloadingModuleData(array $componentVariation, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
     {
         $data_properties = &$data_properties_in_array[0];
 

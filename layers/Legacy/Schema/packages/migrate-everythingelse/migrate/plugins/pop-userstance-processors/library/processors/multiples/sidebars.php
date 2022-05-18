@@ -29,9 +29,9 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inners = array(
             self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR],
@@ -45,11 +45,11 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR],
             self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
                 $ret = \PoP\Root\App::applyFilters(
@@ -62,7 +62,7 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR => POP_SCREEN_SECTION,
@@ -76,16 +76,16 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => POP_SCREEN_SINGLE,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR:
@@ -101,17 +101,17 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR:
                 $inners = array(
                     self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR],
                 );
-                $submodule = $inners[$module[1]];
+                $submodule = $inners[$componentVariation[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
@@ -130,7 +130,7 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

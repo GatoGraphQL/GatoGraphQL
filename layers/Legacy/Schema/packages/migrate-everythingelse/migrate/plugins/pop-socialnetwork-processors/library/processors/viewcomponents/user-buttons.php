@@ -15,9 +15,9 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
         );
     }
 
-    // function headerShowUrl(array $module) {
+    // function headerShowUrl(array $componentVariation) {
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
@@ -25,38 +25,38 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     //             return true;
     //     }
 
-    //     return parent::headerShowUrl($module);
+    //     return parent::headerShowUrl($componentVariation);
     // }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
         $buttoninners = array(
             self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
             self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL],
         );
-        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Send message', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 // $ret .= 'btn btn-sm btn-success btn-block btn-important';
                 $ret .= 'btn btn-info btn-block btn-important';
@@ -70,37 +70,37 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
-                $this->appendProp($module, $props, 'class', 'pop-hidden-print');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-hidden-print');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
                 return 'contactURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 }
 

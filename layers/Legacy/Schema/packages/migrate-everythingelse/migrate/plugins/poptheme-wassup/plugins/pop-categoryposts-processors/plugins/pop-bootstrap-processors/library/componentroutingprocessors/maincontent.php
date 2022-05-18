@@ -35,9 +35,9 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_CATEGORYPOSTS18],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_CATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -66,9 +66,9 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -97,9 +97,9 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

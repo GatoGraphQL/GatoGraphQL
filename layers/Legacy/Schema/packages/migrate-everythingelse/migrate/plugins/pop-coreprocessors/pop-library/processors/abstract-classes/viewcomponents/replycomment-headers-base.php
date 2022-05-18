@@ -3,36 +3,36 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_REPLYCOMMENT];
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($post_module = $this->getPostSubmodule($module)) {
+        if ($post_module = $this->getPostSubmodule($componentVariation)) {
             $ret[] = $post_module;
         }
-        if ($comment_module = $this->getCommentSubmodule($module)) {
+        if ($comment_module = $this->getCommentSubmodule($componentVariation)) {
             $ret[] = $comment_module;
         }
 
         return $ret;
     }
 
-    public function getPostSubmodule(array $module)
+    public function getPostSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getCommentSubmodule(array $module)
+    public function getCommentSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getInresponsetoTitle(array $module, array &$props)
+    public function getInresponsetoTitle(array $componentVariation, array &$props)
     {
         return sprintf(
             '<p><em>%s</em></p>',
@@ -40,17 +40,17 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         );
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($module, $props);
+        $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($componentVariation, $props);
 
-        if ($post_module = $this->getPostSubmodule($module)) {
+        if ($post_module = $this->getPostSubmodule($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_module);
         }
 
-        if ($comment_module = $this->getCommentSubmodule($module)) {
+        if ($comment_module = $this->getCommentSubmodule($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_module);
         }
 

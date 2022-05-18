@@ -13,9 +13,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW:
             case self::MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW:
                 return array(
@@ -24,19 +24,19 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
             self::MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_LINK],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 

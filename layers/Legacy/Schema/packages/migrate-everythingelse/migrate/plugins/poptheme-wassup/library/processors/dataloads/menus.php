@@ -37,18 +37,18 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
         );
     }
 
-    // function getRelevantRoute(array $module, array &$props) {
+    // function getRelevantRoute(array $componentVariation, array &$props) {
 
     //     $routes = array(
     //         self::MODULE_DATALOAD_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::MODULE_DATALOAD_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
     //     );
-    //     return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+    //     return $routes[$componentVariation[1]] ?? parent::getRelevantRoute($componentVariation, $props);
     // }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inners = array(
             self::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT => [PoP_Module_Processor_CustomMenuSidebars::class, PoP_Module_Processor_CustomMenuSidebars::MODULE_SIDEBAR_MENU_ABOUT],
@@ -67,16 +67,16 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::MODULE_DATALOAD_MENU_BODY_ABOUT => [PoP_Module_Processor_IndentMenus::class, PoP_Module_Processor_IndentMenus::MODULE_INDENTMENU],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getMenu(array $module)
+    public function getMenu(array $componentVariation)
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT => GD_MENU_SIDEBAR_ABOUT,
             self::MODULE_DATALOAD_MENU_TOPNAV_USERLOGGEDIN => GD_MENU_TOPNAV_USERLOGGEDIN,
             self::MODULE_DATALOAD_MENU_TOPNAV_USERNOTLOGGEDIN => GD_MENU_TOPNAV_USERNOTLOGGEDIN,
@@ -91,7 +91,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::MODULE_DATALOAD_MENU_BODY_SECTIONS => GD_MENU_SIDENAV_SECTIONS,
             self::MODULE_DATALOAD_MENU_BODY_MYSECTIONS => GD_MENU_SIDENAV_MYSECTIONS,
             self::MODULE_DATALOAD_MENU_BODY_ABOUT => GD_MENU_TOPNAV_ABOUT,
-            default => parent::getMenu($module),
+            default => parent::getMenu($componentVariation),
         };
     }
 }

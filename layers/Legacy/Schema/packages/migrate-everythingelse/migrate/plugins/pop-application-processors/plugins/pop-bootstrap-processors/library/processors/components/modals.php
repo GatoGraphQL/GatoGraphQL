@@ -12,11 +12,11 @@ class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormMo
         );
     }
     
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MODAL_SHAREBYEMAIL:
                 $ret[] = [PoP_Share_Module_Processor_Dataloads::class, PoP_Share_Module_Processor_Dataloads::MODULE_DATALOAD_SHAREBYEMAIL];
                 break;
@@ -25,10 +25,10 @@ class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormMo
         return $ret;
     }
 
-    public function getHeaderTitle(array $module)
+    public function getHeaderTitle(array $componentVariation)
     {
         $header_placeholder = '<i class="fa %s fa-fw"></i><em>%s</em>';
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MODAL_SHAREBYEMAIL:
                 return sprintf(
                     $header_placeholder,
@@ -37,7 +37,7 @@ class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormMo
                 );
         }
 
-        return parent::getHeaderTitle($module);
+        return parent::getHeaderTitle($componentVariation);
     }
 }
 

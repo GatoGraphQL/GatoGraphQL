@@ -17,17 +17,17 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
                 $filters = array(
                     self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
                 );
-                $ret[] = $filters[$module[1]];
+                $ret[] = $filters[$componentVariation[1]];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR];
                 break;
 
@@ -37,7 +37,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     self::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR],
                     self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
                 );
-                if ($inner = $inners[$module[1]] ?? null) {
+                if ($inner = $inners[$componentVariation[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -46,7 +46,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR => POP_SCREEN_HIGHLIGHTS,
@@ -54,16 +54,16 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => POP_SCREEN_SINGLE,
             self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
@@ -73,17 +73,17 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
                 $inners = array(
                     self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
                 );
-                $submodule = $inners[$module[1]];
+                $submodule = $inners[$componentVariation[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
@@ -102,7 +102,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

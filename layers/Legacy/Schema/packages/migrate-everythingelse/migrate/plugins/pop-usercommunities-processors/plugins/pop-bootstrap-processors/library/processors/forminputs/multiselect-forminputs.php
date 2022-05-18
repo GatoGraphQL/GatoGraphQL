@@ -14,9 +14,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('Privileges', 'ure-popprocessors');
 
@@ -24,12 +24,12 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
                 return TranslationAPIFacade::getInstance()->__('Tags', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return GD_URE_FormInput_MemberPrivileges::class;
             
@@ -37,12 +37,12 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
                 return GD_URE_FormInput_MemberTags::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return 'memberprivileges';
 
@@ -50,7 +50,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
                 return 'membertags';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

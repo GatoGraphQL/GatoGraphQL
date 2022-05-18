@@ -17,61 +17,61 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $componentVariation, array &$props): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($module, $props);
+        return parent::getRelevantRouteCheckpointTarget($componentVariation, $props);
     }
 
-    protected function validateCaptcha(array $module, array &$props)
+    protected function validateCaptcha(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 return true;
         }
 
-        return parent::validateCaptcha($module, $props);
+        return parent::validateCaptcha($componentVariation, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_FLAG => FlagCustomPostMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$module[1]] ?? null) {
+        if ($actionexecuter = $actionexecuters[$componentVariation[1]] ?? null) {
             return $actionexecuter;
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($componentVariation);
     }
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackmessageModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 return [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_FLAG];
         }
 
-        return parent::getFeedbackmessageModule($module);
+        return parent::getFeedbackmessageModule($componentVariation);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 $ret[] = [PoP_ContentCreation_Module_Processor_GFForms::class, PoP_ContentCreation_Module_Processor_GFForms::MODULE_FORM_FLAG];
                 break;
@@ -80,44 +80,44 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 // Change the 'Loading' message in the Status
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
-                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($componentVariation, $props, $data_properties);
         }
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(array $componentVariation, array &$props, array &$data_properties): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();;
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 }
 

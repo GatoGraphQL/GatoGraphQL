@@ -18,11 +18,11 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::MODULE_LAYOUT_USERPOSTINTERACTION];
                 break;
@@ -39,11 +39,11 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return $ret;
     }
 
-    // function getConditionFailedSubmodules(array $module) {
+    // function getConditionFailedSubmodules(array $componentVariation) {
 
-    //     $ret = parent::getConditionFailedSubmodules($module);
+    //     $ret = parent::getConditionFailedSubmodules($componentVariation);
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
 
@@ -56,9 +56,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     //     return $ret;
     // }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
@@ -68,20 +68,20 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return null;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
-                $this->appendProp($module, $props, 'class', 'userpostinteraction clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'userpostinteraction clearfix');
                 break;
 
             case self::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER:
-                $this->appendProp($module, $props, 'class', 'loadingmsg clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'loadingmsg clearfix');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

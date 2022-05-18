@@ -11,14 +11,14 @@ class PoP_UserStance_Module_Processor_PostHiddenInputAlertFormComponents extends
         );
     }
     
-    public function getHiddeninputModule(array $module)
+    public function getHiddeninputModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_STANCETARGET:
                 return [PoP_UserStance_Processor_HiddenInputFormInputs::class, PoP_UserStance_Processor_HiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_STANCETARGET];
         }
 
-        return parent::getHiddeninputModule($module);
+        return parent::getHiddeninputModule($componentVariation);
     }
 }
 

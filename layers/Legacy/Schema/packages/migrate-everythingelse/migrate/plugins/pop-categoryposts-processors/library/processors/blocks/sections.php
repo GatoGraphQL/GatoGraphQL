@@ -1074,9 +1074,9 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_CAROUSEL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -1557,11 +1557,11 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_LIST => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
 
@@ -2112,12 +2112,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_DETAILS:
@@ -2445,12 +2445,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 
-    public function getLatestcountSubmodule(array $module)
+    public function getLatestcountSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_FULLVIEW:
@@ -2932,12 +2932,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19];
         }
 
-        return parent::getLatestcountSubmodule($module);
+        return parent::getLatestcountSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_CATEGORYPOSTS00_CAROUSEL:
             case self::MODULE_BLOCK_CATEGORYPOSTS01_CAROUSEL:
             case self::MODULE_BLOCK_CATEGORYPOSTS02_CAROUSEL:
@@ -3059,12 +3059,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             case self::MODULE_BLOCK_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT:
             case self::MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT:
                 // Artificial property added to identify the template when adding module-resources
-                // $this->setProp($module, $props, 'resourceloader', 'block-carousel');
-                $this->appendProp($module, $props, 'class', 'pop-block-carousel block-posts-carousel');
+                // $this->setProp($componentVariation, $props, 'resourceloader', 'block-carousel');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

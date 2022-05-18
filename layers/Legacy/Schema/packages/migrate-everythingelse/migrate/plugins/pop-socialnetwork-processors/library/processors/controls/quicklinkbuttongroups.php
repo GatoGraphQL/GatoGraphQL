@@ -11,11 +11,11 @@ class PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE:
                 $ret[] = [PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::class, PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW];
                 break;

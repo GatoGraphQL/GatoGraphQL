@@ -11,19 +11,19 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_GROUP_LOGGEDINUSERDATA => POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_LOGGEDINUSERDATA:
                 $ret = array_merge(
                     $ret,
@@ -35,15 +35,15 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_LOGGEDINUSERDATA:
-                $this->appendProp($module, $props, 'class', 'hidden');
+                $this->appendProp($componentVariation, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

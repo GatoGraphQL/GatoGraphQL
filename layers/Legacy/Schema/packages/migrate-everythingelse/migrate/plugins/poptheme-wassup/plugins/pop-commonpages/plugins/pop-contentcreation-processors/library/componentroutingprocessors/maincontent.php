@@ -16,9 +16,9 @@ class PoP_CommonPages_ContentCreation_Module_MainContentComponentRoutingProcesso
             // POP_COMMONPAGES_PAGE_ABOUT_CONTENTGUIDELINES => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_PAGE_CONTENT],
             POP_COMMONPAGES_PAGE_ADDCONTENTFAQ => [GD_CommonPages_Module_Processor_CustomBlocks::class, GD_CommonPages_Module_Processor_CustomBlocks::MODULE_BLOCK_ADDCONTENTFAQ],
         );
-        foreach ($modules as $page => $module) {
+        foreach ($modules as $page => $componentVariation) {
             $ret[PageRequestNature::PAGE][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'routing' => [
                         'queried-object-id' => $page,

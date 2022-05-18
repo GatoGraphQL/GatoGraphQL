@@ -15,11 +15,11 @@ class UserStance_Module_Processor_CustomControlButtonGroups extends PoP_Module_P
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_STANCESTATS_GENERAL:
                 $ret[] = [UserStance_Custom_Module_Processor_Codes::class, UserStance_Custom_Module_Processor_Codes::MODULE_CODE_STANCECOUNT_GENERAL];
                 $ret[] = [UserStance_Module_Processor_CustomAnchorControls::class, UserStance_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT];

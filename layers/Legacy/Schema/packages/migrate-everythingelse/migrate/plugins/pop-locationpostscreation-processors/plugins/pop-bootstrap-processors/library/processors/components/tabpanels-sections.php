@@ -11,21 +11,21 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_MYLOCATIONPOSTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_MYLOCATIONPOSTS:
                 $ret = array_merge(
                     $ret,

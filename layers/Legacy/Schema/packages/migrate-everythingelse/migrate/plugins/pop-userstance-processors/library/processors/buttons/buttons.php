@@ -20,7 +20,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
         $buttoninners = array(
             self::MODULE_BUTTON_STANCEEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
@@ -29,14 +29,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL],
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTSTANCE_AGAINST],
         );
-        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
         $fields = array(
             self::MODULE_BUTTON_STANCEEDIT => 'editURL',
@@ -44,14 +44,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => 'postStancesNeutralURL',
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => 'postStancesAgainstURL',
         );
-        if ($field = $fields[$module[1]] ?? null) {
+        if ($field = $fields[$componentVariation[1]] ?? null) {
             return $field;
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
         $titles = array(
             self::MODULE_BUTTON_STANCEEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'pop-userstance-processors'),
@@ -60,16 +60,16 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$module[1]] ?? null) {
+        if ($title = $titles[$componentVariation[1]] ?? null) {
             return $title;
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_STANCEEDIT:
                 return POP_TARGET_ADDONS;
 
@@ -79,14 +79,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
                 return POP_TARGET_QUICKVIEW;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_STANCEVIEW:
             case self::MODULE_BUTTON_STANCEEDIT:
                 $ret .= ' btn btn-xs btn-default';

@@ -33,7 +33,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
         );
     }
 
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $componentVariation, array &$props)
     {
         $screens = array(
             self::MODULE_BUTTONGROUP_SECTION => POP_SCREEN_SECTION,
@@ -49,16 +49,16 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
             self::MODULE_BUTTONGROUP_TAGS => POP_SCREEN_TAGS,
             self::MODULE_BUTTONGROUP_AUTHORTAGS => POP_SCREEN_AUTHORTAGS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($module, $props);
+        return parent::getHeadersdataScreen($componentVariation, $props);
     }
 
-    protected function getHeadersdataformatsHasmap(array $module, array &$props)
+    protected function getHeadersdataformatsHasmap(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONGROUP_USERS:
             case self::MODULE_BUTTONGROUP_SECTIONWITHMAP:
             case self::MODULE_BUTTONGROUP_TAGSECTIONWITHMAP:
@@ -67,7 +67,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
                 return true;
         }
 
-        return parent::getHeadersdataformatsHasmap($module, $props);
+        return parent::getHeadersdataformatsHasmap($componentVariation, $props);
     }
 }
 

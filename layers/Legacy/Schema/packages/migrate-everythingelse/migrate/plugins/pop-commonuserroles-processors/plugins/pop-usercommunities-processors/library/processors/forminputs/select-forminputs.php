@@ -12,34 +12,34 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Does your organization accept members?', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return GD_FormInput_YesNo::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return 'isCommunity';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

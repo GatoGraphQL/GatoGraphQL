@@ -11,21 +11,21 @@ class GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Modu
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubmodules(array $componentVariation)
     {
-        $ret = parent::getAbovecontentSubmodules($module);
+        $ret = parent::getAbovecontentSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
                 $ret[] = [GD_EM_Module_Processor_EventMultipleComponents::class, GD_EM_Module_Processor_EventMultipleComponents::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS];
                 break;

@@ -249,10 +249,10 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
-        // switch ($module[1]) {
+        // switch ($componentVariation[1]) {
 
         //     case self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00:
         //     case self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS01:
@@ -375,17 +375,17 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
         //     case self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT:
         //     case self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT:
 
-        //         $this->appendProp($module, $props, 'class', 'slide');
-        //         $this->appendProp($module, $props, 'class', 'widget widget-info');
+        //         $this->appendProp($componentVariation, $props, 'class', 'slide');
+        //         $this->appendProp($componentVariation, $props, 'class', 'widget widget-info');
         //         break;
         // }
-        $this->appendProp($module, $props, 'class', 'slide');
-        $this->appendProp($module, $props, 'class', 'widget widget-info');
+        $this->appendProp($componentVariation, $props, 'class', 'slide');
+        $this->appendProp($componentVariation, $props, 'class', 'widget widget-info');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00],
@@ -509,17 +509,17 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT],
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getMode(array $module, array &$props)
+    public function getMode(array $componentVariation, array &$props)
     {
 
-        // switch ($module[1]) {
+        // switch ($componentVariation[1]) {
 
         //     case self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00:
         //     case self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS01:
@@ -645,12 +645,12 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
         //         return 'static';
         // }
 
-        // return parent::getMode($module, $props);
+        // return parent::getMode($componentVariation, $props);
         return 'static';
     }
 
 
-    public function getControlsTopSubmodule(array $module)
+    public function getControlsTopSubmodule(array $componentVariation)
     {
         $controls = array(
             self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_NOSEARCHCATEGORYPOSTS00],
@@ -754,11 +754,11 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS18],
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS19],
         );
-        if ($control = $controls[$module[1]] ?? null) {
+        if ($control = $controls[$componentVariation[1]] ?? null) {
             return $control;
         }
 
-        return parent::getControlsTopSubmodule($module);
+        return parent::getControlsTopSubmodule($componentVariation);
     }
 }
 

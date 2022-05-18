@@ -20,11 +20,11 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_AUTHOR_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
@@ -39,7 +39,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     self::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
                     self::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
                 );
-                if ($filter = $filters[$module[1]] ?? null) {
+                if ($filter = $filters[$componentVariation[1]] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -48,7 +48,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     'PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts',
                     $ret,
                     $author,
-                    $module
+                    $componentVariation
                 );
                 break;
         }
@@ -56,7 +56,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_AUTHOR_SIDEBAR => POP_SCREEN_AUTHOR,
@@ -65,16 +65,16 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             self::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_AUTHOR_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORCONTENT_SIDEBAR:
@@ -83,16 +83,16 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
                 $submodules = array_diff(
-                    $this->getSubComponentVariations($module),
-                    $this->getPermanentSubmodules($module)
+                    $this->getSubComponentVariations($componentVariation),
+                    $this->getPermanentSubmodules($componentVariation)
                 );
                 foreach ($submodules as $submodule) {
                       // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
@@ -113,7 +113,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

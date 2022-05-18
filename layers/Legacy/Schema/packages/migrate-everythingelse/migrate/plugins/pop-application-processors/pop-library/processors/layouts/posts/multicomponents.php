@@ -15,10 +15,10 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
-    protected function getUserpostinteractionLayoutSubmodules(array $module)
+    protected function getUserpostinteractionLayoutSubmodules(array $componentVariation)
     {
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Highlights: it has a different set-up
             case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
                 $layouts = array(
@@ -53,20 +53,20 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return \PoP\Root\App::applyFilters(
             'Wassup_Module_Processor_MultipleComponentLayouts:userpostinteraction_layouts',
             $layouts,
-            $module
+            $componentVariation
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
             case self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
-                    $this->getUserpostinteractionLayoutSubmodules($module)
+                    $this->getUserpostinteractionLayoutSubmodules($componentVariation)
                 );
                 break;
         }
@@ -74,16 +74,16 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
             case self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION:
-                $this->appendProp($module, $props, 'class', 'userpostinteraction-single');
+                $this->appendProp($componentVariation, $props, 'class', 'userpostinteraction-single');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

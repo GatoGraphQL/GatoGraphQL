@@ -13,11 +13,11 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
                 $ret = array_merge(
                     $ret,
@@ -36,26 +36,26 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
             case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($componentVariation);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
             case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL:
                 return 'col-xsm-4';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($componentVariation);
     }
 }
 

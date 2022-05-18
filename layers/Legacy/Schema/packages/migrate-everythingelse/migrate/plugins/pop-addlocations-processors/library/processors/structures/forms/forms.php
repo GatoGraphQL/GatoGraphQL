@@ -11,14 +11,14 @@ class GD_EM_Module_Processor_CreateLocationForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_CREATELOCATION:
                 return [GD_EM_Module_Processor_CreateLocationFormInners::class, GD_EM_Module_Processor_CreateLocationFormInners::MODULE_FORMINNER_CREATELOCATION];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

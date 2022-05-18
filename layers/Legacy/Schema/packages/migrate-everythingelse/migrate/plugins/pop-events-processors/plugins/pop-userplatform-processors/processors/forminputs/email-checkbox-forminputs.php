@@ -12,27 +12,27 @@ class PoP_Events_Module_Processor_UserProfileCheckboxFormInputs extends PoP_User
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
                 return TranslationAPIFacade::getInstance()->__('Upcoming events (weekly)', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getCheckboxValue(array $module, array &$props)
+    public function getCheckboxValue(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
                 $values = array(
                     self::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS => POP_USERPREFERENCES_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS,
                 );
-                return $values[$module[1]];
+                return $values[$componentVariation[1]];
         }
 
-        return parent::getCheckboxValue($module, $props);
+        return parent::getCheckboxValue($componentVariation, $props);
     }
 }
 

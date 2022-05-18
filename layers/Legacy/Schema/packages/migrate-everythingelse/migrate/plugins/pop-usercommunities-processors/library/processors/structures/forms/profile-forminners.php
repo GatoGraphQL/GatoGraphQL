@@ -13,11 +13,11 @@ class GD_URE_Module_Processor_ProfileFormInners extends PoP_Module_Processor_For
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EDITMEMBERSHIP:
                 $ret[] = [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS];
                 $ret[] = [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES];

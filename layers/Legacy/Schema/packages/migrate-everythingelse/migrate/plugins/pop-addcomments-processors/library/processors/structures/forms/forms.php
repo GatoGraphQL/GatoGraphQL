@@ -11,14 +11,14 @@ class PoP_Module_Processor_CommentsForms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_ADDCOMMENT:
                 return [PoP_Module_Processor_CommentsFormInners::class, PoP_Module_Processor_CommentsFormInners::MODULE_FORMINNER_ADDCOMMENT];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

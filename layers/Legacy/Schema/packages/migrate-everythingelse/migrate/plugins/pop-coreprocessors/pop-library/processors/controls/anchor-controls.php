@@ -30,9 +30,9 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
                 return TranslationAPIFacade::getInstance()->__('Toggle optional fields', 'pop-coreprocessors');
 
@@ -54,21 +54,21 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                 return TranslationAPIFacade::getInstance()->__('Close', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_FILTERTOGGLE:
             case self::MODULE_ANCHORCONTROL_CLOSEPAGEBTN:
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($componentVariation, $props);
     }
-    public function getIcon(array $module)
+    public function getIcon(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS:
                 return 'glyphicon-menu-hamburger';
 
@@ -81,11 +81,11 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                 return 'glyphicon-remove';
         }
 
-        return parent::getIcon($module);
+        return parent::getIcon($componentVariation);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
                 return 'fa-star-half-o';
 
@@ -99,18 +99,18 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                 return 'fa-link';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
             case self::MODULE_ANCHORCONTROL_EXPANDCOLLAPSIBLE:
                 // $block_id = $props['block-id'];
                 // return '#'.$block_id.' .collapse';
-                return $this->getProp($module, $props, 'target');
+                return $this->getProp($componentVariation, $props, 'target');
 
             case self::MODULE_ANCHORCONTROL_FILTERTOGGLE:
                 // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
@@ -121,7 +121,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
                     // Comment Leo 26/03/2019: This must be re-implemented through Handlebars function `upcomingModuleId`
                     // // The Filter is set in the props
-                    // if ($filter = $this->getProp($module, $props, 'filter-module')) {
+                    // if ($filter = $this->getProp($componentVariation, $props, 'filter-module')) {
                     //     $filter_id = $componentprocessor_manager->getProcessor($filter)->getFrontendId($filter, $props);
                     //     return '#'.$filter_id;
                     // }
@@ -137,33 +137,33 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                 // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
                 if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
                      // The Submenu target is set in the props by the block
-                    return $this->getProp($module, $props, 'submenu-target');
+                    return $this->getProp($componentVariation, $props, 'submenu-target');
                 }
                 return null;
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
 
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_CURRENTURL:
                 return \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
-                $this->appendProp($module, $props, 'class', 'btn btn-primary');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-primary');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -175,9 +175,9 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
             case self::MODULE_ANCHORCONTROL_EXPANDCOLLAPSIBLE:
             case self::MODULE_ANCHORCONTROL_FILTERTOGGLE:
             case self::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS:
-                $this->appendProp($module, $props, 'class', 'btn btn-compact btn-link');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-compact btn-link');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -188,38 +188,38 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
             case self::MODULE_ANCHORCONTROL_PRINT:
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
-                        'data-blocktarget' => $this->getProp($module, $props, 'control-target')
+                        'data-blocktarget' => $this->getProp($componentVariation, $props, 'control-target')
                     )
                 );
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_CURRENTURL:
-                $this->appendProp($module, $props, 'class', 'btn btn-compact btn-link');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-compact btn-link');
                 break;
 
             case self::MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG:
-                $this->appendProp($module, $props, 'class', 'close');
+                $this->appendProp($componentVariation, $props, 'class', 'close');
                 break;
 
             case self::MODULE_ANCHORCONTROL_CLOSEPAGEBTN:
-                $this->appendProp($module, $props, 'class', 'btn btn-link');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_PRINT:
                 $this->addJsmethod($ret, 'controlPrint');
                 break;

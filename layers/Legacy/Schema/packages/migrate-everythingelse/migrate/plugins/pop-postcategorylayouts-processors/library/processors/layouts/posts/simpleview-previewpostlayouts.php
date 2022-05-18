@@ -11,20 +11,20 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
     }
 
-    public function getTopSubmodules(array $module)
+    public function getTopSubmodules(array $componentVariation)
     {
-        $ret = parent::getTopSubmodules($module);
-        switch ($module[1]) {
+        $ret = parent::getTopSubmodules($componentVariation);
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE:
                 $ret[] = [GD_Custom_Module_Processor_PostThumbLayoutWrappers::class, GD_Custom_Module_Processor_PostThumbLayoutWrappers::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE];
                 break;
@@ -33,13 +33,13 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubmodules(array $componentVariation)
     {
 
-        // $ret = parent::getAbovecontentSubmodules($module);
+        // $ret = parent::getAbovecontentSubmodules($componentVariation);
         $ret = array();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT];
                 break;

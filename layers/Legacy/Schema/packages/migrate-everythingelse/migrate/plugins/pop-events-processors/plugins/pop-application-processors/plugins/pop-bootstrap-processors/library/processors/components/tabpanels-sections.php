@@ -15,21 +15,21 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_EVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTIONCALENDAR);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_EVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_EVENTS:
                 return array(
                     [
@@ -120,7 +120,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
                 );
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

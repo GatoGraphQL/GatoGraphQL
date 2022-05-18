@@ -18,7 +18,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW],
@@ -26,14 +26,14 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
             self::MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW],
             self::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Extra classes
@@ -47,14 +47,14 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
         );
 
         $extra_class = '';
-        if (in_array($module, $simpleviews)) {
+        if (in_array($componentVariation, $simpleviews)) {
             $extra_class = 'simpleview';
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $extra_class = 'fullview';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($componentVariation, $props, 'class', $extra_class);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

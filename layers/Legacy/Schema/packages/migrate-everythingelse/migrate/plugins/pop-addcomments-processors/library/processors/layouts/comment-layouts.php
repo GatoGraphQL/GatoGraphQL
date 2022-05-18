@@ -13,14 +13,14 @@ class PoP_Module_Processor_CommentsLayouts extends PoP_Module_Processor_CommentL
         );
     }
 
-    public function isRuntimeAdded(array $module, array &$props)
+    public function isRuntimeAdded(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_COMMENT_ADD:
                 return true;
         }
 
-        return parent::isRuntimeAdded($module, $props);
+        return parent::isRuntimeAdded($componentVariation, $props);
     }
 }
 

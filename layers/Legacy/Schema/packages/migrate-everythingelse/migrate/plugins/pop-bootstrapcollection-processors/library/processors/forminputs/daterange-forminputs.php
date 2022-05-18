@@ -14,19 +14,19 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         );
     }
 
-    public function useTime(array $module)
+    public function useTime(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
 
-        return parent::useTime($module);
+        return parent::useTime($componentVariation);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_DATERANGEPICKER:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
 
@@ -34,17 +34,17 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
                 return TranslationAPIFacade::getInstance()->__('Date/Time', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 }
 

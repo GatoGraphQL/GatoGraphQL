@@ -15,11 +15,11 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         );
     }
 
-    public function getSectionClasses(array $module, array &$props)
+    public function getSectionClasses(array $componentVariation, array &$props)
     {
-        $ret = parent::getSectionClasses($module, $props);
+        $ret = parent::getSectionClasses($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_POSTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTS:
             case self::MODULE_LATESTCOUNT_TAG_POSTS:
@@ -32,24 +32,24 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         return $ret;
     }
 
-    public function isAuthor(array $module, array &$props)
+    public function isAuthor(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTS:
                 return true;
         }
     
-        return parent::isAuthor($module, $props);
+        return parent::isAuthor($componentVariation, $props);
     }
 
-    public function isTag(array $module, array &$props)
+    public function isTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_TAG_POSTS:
                 return true;
         }
     
-        return parent::isTag($module, $props);
+        return parent::isTag($componentVariation, $props);
     }
 }
 

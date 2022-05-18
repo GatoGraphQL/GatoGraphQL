@@ -12,14 +12,14 @@ class GD_URE_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor
         );
     }
 
-    public function getMessage(array $module)
+    public function getMessage(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_MESSAGE_NODETAILS:
                 return TranslationAPIFacade::getInstance()->__('No details', 'poptheme-wassup');
         }
 
-        return parent::getMessage($module);
+        return parent::getMessage($componentVariation);
     }
 }
 

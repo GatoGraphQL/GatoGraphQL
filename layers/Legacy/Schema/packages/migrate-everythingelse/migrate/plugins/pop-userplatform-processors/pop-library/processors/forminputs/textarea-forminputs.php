@@ -12,34 +12,34 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
         );
     }
 
-    public function getRows(array $module, array &$props)
+    public function getRows(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:
                 return 10;
         }
 
-        return parent::getRows($module, $props);
+        return parent::getRows($componentVariation, $props);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Description', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:
                 return 'description';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

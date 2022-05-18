@@ -16,18 +16,18 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR],
                 );
-                if ($filter = $filters[$module[1]] ?? null) {
+                if ($filter = $filters[$componentVariation[1]] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -36,7 +36,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                     'PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts',
                     $ret,
                     $author,
-                    $module
+                    $componentVariation
                 );
                 break;
 
@@ -45,7 +45,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                     self::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR],
                     self::MODULE_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR],
                 );
-                if ($inner = $inners[$module[1]] ?? null) {
+                if ($inner = $inners[$componentVariation[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -54,23 +54,23 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR => POP_URE_SCREEN_MYUSERS,
             self::MODULE_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR => POP_SCREEN_USERS,
             self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => POP_SCREEN_AUTHORUSERS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
@@ -79,7 +79,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 }
 

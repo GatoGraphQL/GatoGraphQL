@@ -15,8 +15,8 @@ class PoP_Volunteering_GFHelpers
             POP_GENERICFORMS_GF_FORM_VOLUNTEER_FIELDNAME_PAGETITLE_ID => [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_POSTTITLE],
         );
         $fieldnames = array();
-        foreach ($gfinputname_modules as $gf_field_name => $module) {
-            $fieldnames[$componentprocessor_manager->getProcessor($module)->getName($module)] = $gf_field_name;
+        foreach ($gfinputname_modules as $gf_field_name => $componentVariation) {
+            $fieldnames[$componentprocessor_manager->getProcessor($componentVariation)->getName($componentVariation)] = $gf_field_name;
         }
         
         return $fieldnames;

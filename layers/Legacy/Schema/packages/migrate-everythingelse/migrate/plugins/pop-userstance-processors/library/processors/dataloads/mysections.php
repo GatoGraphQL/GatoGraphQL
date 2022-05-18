@@ -15,37 +15,37 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW => POP_USERSTANCE_ROUTE_MYSTANCES,
             self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT => POP_USERSTANCE_ROUTE_MYSTANCES,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT => [UserStance_Module_Processor_Tables::class, UserStance_Module_Processor_Tables::MODULE_TABLE_MYSTANCES],
             self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_MYSTANCES];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $componentVariation): ?string
     {
         $tables = array(
             [self::class, self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT],
@@ -53,29 +53,29 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         $fullviews = array(
             [self::class, self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($module, $tables)) {
+        if (in_array($componentVariation, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($componentVariation);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 $stances = PoP_UserStance_PostNameUtils::getNamesLc();
@@ -91,7 +91,7 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
                 );
                 break;
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

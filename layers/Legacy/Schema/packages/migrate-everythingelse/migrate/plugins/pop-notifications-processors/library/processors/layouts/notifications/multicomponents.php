@@ -16,18 +16,18 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $module): array
+    public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($module);
+        $ret = parent::getConditionalOnDataFieldSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge(
                     $ret,
                     \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_MultipleComponentLayouts:modules',
                         [],
-                        $module
+                        $componentVariation
                     )
                 );
                 break;

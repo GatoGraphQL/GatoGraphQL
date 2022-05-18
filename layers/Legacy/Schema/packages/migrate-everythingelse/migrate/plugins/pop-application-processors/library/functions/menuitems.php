@@ -1,12 +1,12 @@
 <?php
 
 // \PoP\Root\App::addFilter('PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids', 'addActiveMenuitemParentitem', 10, 3);
-// function addActiveMenuitemParentitem($active_link_menu_item_ids, array $module, array &$props)
+// function addActiveMenuitemParentitem($active_link_menu_item_ids, array $componentVariation, array &$props)
 // {
 //     $add_parentpageid = \PoP\Root\App::applyFilters(
 //         'PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item',
 //         false,
-//         $module,
+//         $componentVariation,
 //         $props
 //     );
 //     if ($add_parentpageid) {

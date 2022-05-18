@@ -21,9 +21,9 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_EVENTS => [
@@ -61,8 +61,8 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -72,7 +72,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_EVENTS => POP_FILTER_EVENTS,
@@ -82,11 +82,11 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::MODULE_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR => POP_FILTER_AUTHOREVENTSCALENDAR,
     //         self::MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR => POP_FILTER_TAGEVENTSCALENDAR,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

@@ -5,12 +5,12 @@ use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait
 {
-    public function isSubmoduleActivePanel(array $module, $submodule)
+    public function isSubmoduleActivePanel(array $componentVariation, $submodule)
     {
-        return \PoP\Root\App::getState('format') == $this->getSubmoduleFormat($module, $submodule);
+        return \PoP\Root\App::getState('format') == $this->getSubmoduleFormat($componentVariation, $submodule);
     }
 
-    protected function getSubmoduleFormat(array $module, $submodule)
+    protected function getSubmoduleFormat(array $componentVariation, $submodule)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $componentprocessor_manager->getProcessor($submodule);
@@ -21,21 +21,21 @@ trait FormatActiveTrait
         return null;
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
         return null;
     }
 
-    public function getDefaultActivepanelSubmodule(array $module)
+    public function getDefaultActivepanelSubmodule(array $componentVariation)
     {
-        if ($default_format = $this->getDefaultActivepanelFormat($module)) {
-            foreach ($this->getSubComponentVariations($module) as $submodule) {
-                if ($default_format == $this->getSubmoduleFormat($module, $submodule)) {
+        if ($default_format = $this->getDefaultActivepanelFormat($componentVariation)) {
+            foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
+                if ($default_format == $this->getSubmoduleFormat($componentVariation, $submodule)) {
                     return $submodule;
                 }
             }
         }
 
-        return parent::getDefaultActivepanelSubmodule($module);
+        return parent::getDefaultActivepanelSubmodule($componentVariation);
     }
 }

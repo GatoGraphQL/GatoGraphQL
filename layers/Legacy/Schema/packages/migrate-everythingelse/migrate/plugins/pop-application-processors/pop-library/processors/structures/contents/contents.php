@@ -18,7 +18,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             [self::class, self::MODULE_CONTENT_PAGECONTENT_PRETTYPRINT],
         );
     }
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_CONTENT_AUTHOR => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_AUTHOR],
@@ -26,7 +26,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             self::MODULE_CONTENT_PAGECONTENT_PRETTYPRINT => [PoP_Module_Processor_MultipleContentInners::class, PoP_Module_Processor_MultipleContentInners::MODULE_CONTENTINNER_PAGECONTENT],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
@@ -34,24 +34,24 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             [self::class, self::MODULE_CONTENT_SINGLE],
             [self::class, self::MODULE_CONTENT_USERPOSTINTERACTION],
         );
-        if (in_array($module, $hookable)) {
+        if (in_array($componentVariation, $hookable)) {
             $inners = array(
                 self::MODULE_CONTENT_SINGLE => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_SINGLE],
                 self::MODULE_CONTENT_USERPOSTINTERACTION => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_USERPOSTINTERACTION],
             );
-            $inner = $inners[$module[1]];
+            $inner = $inners[$componentVariation[1]];
 
-            return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_module', $inner, $module);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_module', $inner, $componentVariation);
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENT_PAGECONTENT_PRETTYPRINT:
                 $this->addJsmethod($ret, 'prettyPrint');
                 break;
@@ -60,15 +60,15 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENT_SINGLE:
-                $this->appendProp($module, $props, 'class', 'content-single');
+                $this->appendProp($componentVariation, $props, 'class', 'content-single');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

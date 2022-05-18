@@ -62,7 +62,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
             
             // Check if this file has already been generated. If not, then save it
             global $pop_module_runtimecontentmanager;
-            $module = $processor->getEntryComponent();
+            $componentVariation = $processor->getEntryComponent();
             if (!$pop_module_runtimecontentmanager->fileWithModelInstanceFilenameExists($type)) {
                    // Generate and save the JS code
                 $placeholder = '%1$s = %2$s;';
@@ -86,7 +86,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
                 // can also work when hosting the website at multiple servers
                 \PoP\Root\App::doAction(
                     '\PoP\ComponentModel\Engine:optimizeEncodedData:file_stored',
-                    $module,
+                    $componentVariation,
                     $property_path,
                     $type
                 );

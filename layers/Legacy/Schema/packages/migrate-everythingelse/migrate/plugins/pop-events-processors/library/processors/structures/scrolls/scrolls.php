@@ -42,7 +42,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_SCROLL_EVENTS_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_NAVIGATOR],
@@ -63,14 +63,14 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
             self::MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Extra classes
@@ -106,31 +106,31 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
         );
 
         $extra_class = '';
-        if (in_array($module, $navigators)) {
+        if (in_array($componentVariation, $navigators)) {
             $extra_class = 'navigator text-inverse';
-        } elseif (in_array($module, $addons)) {
+        } elseif (in_array($componentVariation, $addons)) {
             $extra_class = 'addons';
-        } elseif (in_array($module, $simpleviews)) {
+        } elseif (in_array($componentVariation, $simpleviews)) {
             $extra_class = 'simpleview';
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($module, $details)) {
+        } elseif (in_array($componentVariation, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($componentVariation, $thumbnails)) {
             $extra_class = 'thumb';
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($componentVariation, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($componentVariation, $props, 'class', $extra_class);
 
 
-        $inner = $this->getInnerSubmodule($module);
-        if (in_array($module, $navigators)) {
+        $inner = $this->getInnerSubmodule($componentVariation);
+        if (in_array($componentVariation, $navigators)) {
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

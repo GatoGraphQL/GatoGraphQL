@@ -11,12 +11,12 @@ class UserStance_Module_Processor_TableInners extends PoP_Module_Processor_Table
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         // Main layout
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLEINNER_MYSTANCES:
                 $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT];
                 $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::MODULE_LAYOUTPOST_DATE];

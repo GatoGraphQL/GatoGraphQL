@@ -8,29 +8,29 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
 
-    // protected function getComponentTemplateResource(array $module) {
+    // protected function getComponentTemplateResource(array $componentVariation) {
 
     //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }
-    protected function getValueKey(array $module, array &$props)
+    protected function getValueKey(array $componentVariation, array &$props)
     {
         return 'displayName';
     }
-    protected function getComponentTemplateResource(array $module)
+    protected function getComponentTemplateResource(array $componentVariation)
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     }
-    // protected function getLayoutSubmodule(array $module) {
+    // protected function getLayoutSubmodule(array $componentVariation) {
 
     //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }
-    protected function getTokenizerKeys(array $module, array &$props)
+    protected function getTokenizerKeys(array $componentVariation, array &$props)
     {
         return array('displayName');
     }
 
 
-    protected function getThumbprintQuery(array $module, array &$props)
+    protected function getThumbprintQuery(array $componentVariation, array &$props)
     {
 
         // Allow PoP User Platform to add the role "profile"
@@ -50,11 +50,11 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
         return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
-    protected function getPendingMsg(array $module)
+    protected function getPendingMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Users', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $module)
+    protected function getNotfoundMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('No Users found', 'pop-coreprocessors');
     }

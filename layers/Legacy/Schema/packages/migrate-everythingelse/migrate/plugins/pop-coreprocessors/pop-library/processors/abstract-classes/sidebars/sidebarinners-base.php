@@ -2,22 +2,22 @@
 
 abstract class PoP_Module_Processor_SidebarInnersBase extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $componentVariation)
     {
         return '';
     }
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $componentVariation)
     {
         return '';
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($wrapper_class = $this->getWrapperClass($module)) {
-            $this->appendProp($module, $props, 'class', $wrapper_class);
+        if ($wrapper_class = $this->getWrapperClass($componentVariation)) {
+            $this->appendProp($componentVariation, $props, 'class', $wrapper_class);
         }
-        if ($widgetwrapper_class = $this->getWidgetwrapperClass($module)) {
-            foreach ($this->getLayoutSubmodules($module) as $layout) {
+        if ($widgetwrapper_class = $this->getWidgetwrapperClass($componentVariation)) {
+            foreach ($this->getLayoutSubmodules($componentVariation) as $layout) {
                 $this->mergeProp(
                     $layout,
                     $props,
@@ -29,6 +29,6 @@ abstract class PoP_Module_Processor_SidebarInnersBase extends PoP_Module_Process
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

@@ -25,10 +25,10 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         );
     }
 
-    // function getDataaccessCheckpointConfiguration(array $module, array &$props) {
-    public function getDataAccessCheckpoints(array $module, array &$props): array
+    // function getDataaccessCheckpointConfiguration(array $componentVariation, array &$props) {
+    public function getDataAccessCheckpoints(array $componentVariation, array &$props): array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
@@ -37,15 +37,15 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
                 return $this->maybeOverrideCheckpoints(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER);//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER);
         }
 
-        // return parent::getDataaccessCheckpointConfiguration($module, $props);
-        return parent::getDataAccessCheckpoints($module, $props);
+        // return parent::getDataaccessCheckpointConfiguration($componentVariation, $props);
+        return parent::getDataAccessCheckpoints($componentVariation, $props);
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props)
+    protected function addHeaddatasetmoduleDataProperties(&$ret, array $componentVariation, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $module, $props);
+        parent::addHeaddatasetmoduleDataProperties($ret, $componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
@@ -59,11 +59,11 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         }
     }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $module, array &$props): array
+    public function getImmutableHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($module, $props);
+        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
@@ -78,9 +78,9 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_DATALOAD_FOLLOWSUSERS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_FOLLOWSUSERS],
@@ -89,14 +89,14 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::MODULE_DATALOAD_UPVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_UPVOTESPOSTS],
             self::MODULE_DATALOAD_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_DOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
         if (!\PoP\Root\App::getState('is-user-logged-in')) {
@@ -111,17 +111,17 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::MODULE_DATALOAD_DOWNVOTESPOSTS => GD_METAKEY_PROFILE_DOWNVOTESPOSTS,
         ];
 
-        if ($metaKey = $metaKeys[$module[1]] ?? null) {
+        if ($metaKey = $metaKeys[$componentVariation[1]] ?? null) {
             $userID = \PoP\Root\App::getState('current-user-id');
             return \PoPCMSSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
@@ -134,22 +134,22 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
-                $this->appendProp($module, $props, 'class', 'hidden');
+                $this->appendProp($componentVariation, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

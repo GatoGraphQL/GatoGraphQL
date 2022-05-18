@@ -11,14 +11,14 @@ class PoP_Module_Processor_LocationContents extends PoP_Module_Processor_Content
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TRIGGERTYPEAHEADSELECT_LOCATION:
                 return [PoP_Module_Processor_LocationContentInners::class, PoP_Module_Processor_LocationContentInners::MODULE_TRIGGERTYPEAHEADSELECTINNER_LOCATION];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

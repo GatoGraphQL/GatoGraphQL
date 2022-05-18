@@ -2,12 +2,12 @@
 
 abstract class GD_EM_Module_Processor_ScrollMapDataloadsBase extends PoP_Module_Processor_SectionDataloadsBase
 {
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
         
         // Allow to override the limit by $props
-        if ($limit = $this->getProp($module, $props, 'limit')) {
+        if ($limit = $this->getProp($componentVariation, $props, 'limit')) {
             $ret['limit'] = $limit;
         }
 

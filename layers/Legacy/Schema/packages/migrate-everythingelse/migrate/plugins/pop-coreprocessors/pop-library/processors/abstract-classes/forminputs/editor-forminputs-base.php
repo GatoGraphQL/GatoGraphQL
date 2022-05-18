@@ -4,17 +4,17 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_EDITOR];
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         // Allow Mentions to add its required templates (User/Tag Mention Layout)
-        if ($layouts = $this->getEditorLayoutSubmodules($module)) {
+        if ($layouts = $this->getEditorLayoutSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
                 $layouts
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getEditorLayoutSubmodules(array $module)
+    protected function getEditorLayoutSubmodules(array $componentVariation)
     {
 
         // Allow Mentions to add its required templates (User/Tag Mention Layout)
@@ -34,26 +34,26 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         );
     }
 
-    public function getModulesToPropagateDataProperties(array $module): array
+    public function getModulesToPropagateDataProperties(array $componentVariation): array
     {
 
         // Important: the MENTION_COMPONENT (eg: PoP_Module_Processor_UserMentionComponentLayouts::MODULE_LAYOUTUSER_MENTION_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
         // but it applies to @Mentions, which doesn't need these parameters, however these, here, upset the whole getDatasetmoduletreeSectionFlattenedDataFields
         // To fix this, in the editor data_properties we stop spreading down, so it never reaches below there to get further data-fields
-        if ($this->getEditorLayoutSubmodules($module)) {
+        if ($this->getEditorLayoutSubmodules($componentVariation)) {
             // Do nothing
             return array();
         }
 
-        return parent::getModulesToPropagateDataProperties($module);
+        return parent::getModulesToPropagateDataProperties($componentVariation);
     }
 
-    public function addQuicktags(array $module, array &$props)
+    public function addQuicktags(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    public function getRows(array $module, array &$props)
+    public function getRows(array $componentVariation, array &$props)
     {
 
         // Allow pageSection Addons to define how many rows it will have
@@ -61,15 +61,15 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
 
         return $rows;
         }
-        else*/if ($rows = $this->getProp($module, $props, 'editor-rows')) {
+        else*/if ($rows = $this->getProp($componentVariation, $props, 'editor-rows')) {
             return $rows;
 }
         return 0;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
         $this->addJsmethod($ret, 'editor');
 
         // To hide the .wp-media-buttons under the specific (user is not logged in) domain
@@ -77,9 +77,9 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
         // For function addDomainClass
         $ret['addDomainClass']['prefix'] = 'editor-';
@@ -87,20 +87,20 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function autofocus(array $module, array &$props)
+    public function autofocus(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $name = $this->getName($module);
+        $name = $this->getName($componentVariation);
 
         // Allow to add extra classes (eg: "pop-form-clear")
-        $class = $this->getProp($module, $props, 'class');
-        $quicktags = $this->addQuicktags($module, $props);
+        $class = $this->getProp($componentVariation, $props, 'class');
+        $quicktags = $this->addQuicktags($componentVariation, $props);
 
         // Generate a random id, needed to be able to load more than 1 wpEditor using Template Manager
         $editor_id = $name.'_'.ComponentModelModuleInfo::get('unique-id');
@@ -109,7 +109,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
             'textarea_name' => $name,
             'quicktags' => $quicktags,
         );
-        if ($rows = $this->getRows($module, $props)) {
+        if ($rows = $this->getRows($componentVariation, $props)) {
             $options['textarea_rows'] = $rows;
         }
 
@@ -119,30 +119,30 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         // This replacement below must be done always
         $ret['unique-id'] = ComponentModelModuleInfo::get('unique-id');
 
-        $initialtext = $this->getInitialtext($module, $props);
+        $initialtext = $this->getInitialtext($componentVariation, $props);
         $ret['initial-text'] = $initialtext;
         $ret['editor-code'] = PoP_EditorUtils::getEditorCode($editor_id, $initialtext, $options);
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($this->autofocus($module, $props)) {
-            $this->appendProp($module, $props, 'class', 'pop-editor-autofocus');
+        if ($this->autofocus($componentVariation, $props)) {
+            $this->appendProp($componentVariation, $props, 'class', 'pop-editor-autofocus');
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getInitialtext(array $module, array &$props)
+    public function getInitialtext(array $componentVariation, array &$props)
     {
 
         // This is needed since this string will be replaced by the actual content (either empty, or the post content, or etc)
         return TranslationAPIFacade::getInstance()->__('Please write the content here...', 'pop-coreprocessors');
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
         return 'contentEditor';
     }

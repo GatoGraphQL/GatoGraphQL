@@ -27,9 +27,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER:
@@ -40,22 +40,22 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
     }
 
-    public function getTitleHtmlmarkup(array $module, array &$props)
+    public function getTitleHtmlmarkup(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 return 'h3';
         }
 
-        return parent::getTitleHtmlmarkup($module, $props);
+        return parent::getTitleHtmlmarkup($componentVariation, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:
@@ -67,14 +67,14 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USERBOTTOM];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
     }
 
-    public function getBelowexcerptLayoutSubmodules(array $module)
+    public function getBelowexcerptLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getBelowexcerptLayoutSubmodules($module);
+        $ret = parent::getBelowexcerptLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
                 break;
@@ -91,11 +91,11 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return $ret;
     }
 
-    public function getBelowavatarLayoutSubmodules(array $module)
+    public function getBelowavatarLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getBelowavatarLayoutSubmodules($module);
+        $ret = parent::getBelowavatarLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
                 break;
@@ -104,10 +104,10 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return $ret;
     }
 
-    public function getUseravatarSubmodule(array $module)
+    public function getUseravatarSubmodule(array $componentVariation)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES:
                 case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR:
                 case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
@@ -127,33 +127,33 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
             }
         }
 
-        return parent::getUseravatarSubmodule($module);
+        return parent::getUseravatarSubmodule($componentVariation);
     }
 
 
-    public function showExcerpt(array $module)
+    public function showExcerpt(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 return true;
         }
 
-        return parent::showExcerpt($module);
+        return parent::showExcerpt($componentVariation);
     }
 
-    public function horizontalLayout(array $module)
+    public function horizontalLayout(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 return true;
         }
 
-        return parent::horizontalLayout($module);
+        return parent::horizontalLayout($componentVariation);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR:
@@ -163,14 +163,14 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($componentVariation);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:
@@ -180,7 +180,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';
                 break;
         }
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::MODULE_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:

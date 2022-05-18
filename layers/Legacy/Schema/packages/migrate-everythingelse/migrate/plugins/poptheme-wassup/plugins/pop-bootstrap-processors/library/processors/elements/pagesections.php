@@ -50,13 +50,13 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGESECTION_QUICKVIEW:
             case self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO:
             case self::MODULE_PAGESECTION_ADDONTABS:
@@ -70,7 +70,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_PAGESECTION_BODYTABS:
             case self::MODULE_PAGESECTION_BODY:
                 // If not told to be empty, then add the page submodule
-                $moduleAtts = count($module) >= 3 ? $module[2] : null;
+                $moduleAtts = count($componentVariation) >= 3 ? $componentVariation[2] : null;
                 if (!($moduleAtts && $moduleAtts['empty'])) {
                     $submodules = array(
                         self::MODULE_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEW],
@@ -86,14 +86,14 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                         self::MODULE_PAGESECTION_BODYTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::MODULE_PAGE_BODYTABS],
                         self::MODULE_PAGESECTION_BODY => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_BODY],
                     );
-                    $ret[] = $submodules[$module[1]];
+                    $ret[] = $submodules[$componentVariation[1]];
                 }
                 break;
 
             case self::MODULE_PAGESECTION_FRAMECOMPONENTS:
                 $load_module = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_module = $componentVariation == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $submodule = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_FRAMECOMPONENTS];
@@ -122,9 +122,9 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return $ret;
     }
 
-    public function getID(array $module, array &$props): string
+    public function getID(array $componentVariation, array &$props): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGESECTION_HOVER:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_HOVER;
 
@@ -168,16 +168,16 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 return POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
         }
 
-        return parent::getID($module, $props);
+        return parent::getID($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGESECTION_QUICKVIEW:
-                $this->appendProp($module, $props, 'class', 'offcanvas body tab-content');
+                $this->appendProp($componentVariation, $props, 'class', 'offcanvas body tab-content');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -188,9 +188,9 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 break;
 
             case self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO:
-                $this->appendProp($module, $props, 'class', 'offcanvas sideinfo tab-content');
+                $this->appendProp($componentVariation, $props, 'class', 'offcanvas sideinfo tab-content');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -202,19 +202,19 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGESECTION_FRAMECOMPONENTS:
-                $this->appendProp($module, $props, 'class', 'framecomponents');
+                $this->appendProp($componentVariation, $props, 'class', 'framecomponents');
                 break;
 
             case self::MODULE_PAGESECTION_HOLE:
-                $this->appendProp($module, $props, 'class', 'hole');
+                $this->appendProp($componentVariation, $props, 'class', 'hole');
                 break;
 
             case self::MODULE_PAGESECTION_MODALS:
-                $this->appendProp($module, $props, 'class', 'modals');
+                $this->appendProp($componentVariation, $props, 'class', 'modals');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -225,16 +225,16 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         }
 
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
         $module_props = array(
             $moduleFullName => &$props[$moduleFullName],
         );
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGESECTION_BODYSIDEINFO:
                 // Allow the Sideinfo's permanent Events Calendar to be lazy-load
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
-                    $module,
+                    $componentVariation,
                     array(&$module_props),
                     $this
                 );
@@ -244,7 +244,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 // Allow for compatibility for the Users Carousel in the Homepage to not be lazy-load
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:main',
-                    $module,
+                    $componentVariation,
                     array(&$module_props),
                     $this
                 );
@@ -253,7 +253,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_PAGESECTION_HOVER:
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:hover',
-                    $module,
+                    $componentVariation,
                     array(&$module_props),
                     $this
                 );
@@ -262,21 +262,21 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_PAGESECTION_MODALS:
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomModalPageSections:get_props_block_initial:modals',
-                    $module,
+                    $componentVariation,
                     array(&$props),
                     $this
                 );
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGESECTION_ADDONTABS:
                 $this->addJsmethod($ret, 'scrollbarHorizontal');
                 break;

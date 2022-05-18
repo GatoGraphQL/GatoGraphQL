@@ -32,21 +32,21 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
         );
     }
 
-    protected function getFontawesome(array $module, array &$props)
+    protected function getFontawesome(array $componentVariation, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_LAYOUT_PAGETABS_HOME => 'fa-home',
             self::MODULE_LAYOUT_PAGETABS_TAG => 'fa-hashtag',
             self::MODULE_LAYOUT_PAGETABS_404 => 'fa-exclamation-circle',
         );
-        if ($fontawesome = $fontawesomes[$module[1]] ?? null) {
+        if ($fontawesome = $fontawesomes[$componentVariation[1]] ?? null) {
             return $fontawesome;
         }
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    protected function getThumb(array $module, array &$props)
+    protected function getThumb(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $avatar = gdGetAvatar($author, GD_AVATAR_SIZE_16);
@@ -71,12 +71,12 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
                 break;
         }
 
-        return parent::getThumb($module, $props);
+        return parent::getThumb($componentVariation, $props);
     }
-    // protected function getPretitle(array $module, array &$props)
+    // protected function getPretitle(array $componentVariation, array &$props)
     // {
     //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
     //         case self::MODULE_LAYOUT_PAGETABS_SINGLE:
     //             $natures = array(
@@ -86,20 +86,20 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
     //             // For the default page add the thumbnail. For the others, add the pretitle
     //             $page_id = RequestUtils::getRoute();
-    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$module[1]] ?? null)) {
+    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$componentVariation[1]] ?? null)) {
     //                 return $cmsengineapi->getTitle($page_id);
     //             }
     //             break;
     //     }
 
-    //     return parent::getPretitle($module, $props);
+    //     return parent::getPretitle($componentVariation, $props);
     // }
-    protected function getTitle(array $module, array &$props)
+    protected function getTitle(array $componentVariation, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
@@ -122,10 +122,10 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             self::MODULE_LAYOUT_PAGETABS_HOME => TranslationAPIFacade::getInstance()->__('Home', 'poptheme-wassup'),
             self::MODULE_LAYOUT_PAGETABS_404 => TranslationAPIFacade::getInstance()->__('Page not found!', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]] ?? null) {
+        if ($title = $titles[$componentVariation[1]] ?? null) {
             return $title;
         }
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 }
 

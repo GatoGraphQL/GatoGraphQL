@@ -23,9 +23,9 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionComponentRoutingProce
             UsersModuleConfiguration::getUsersRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_USERS],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SEARCHUSERS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -37,9 +37,9 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionComponentRoutingProce
             POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCONTENT],
             PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORPOSTS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -51,9 +51,9 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionComponentRoutingProce
             POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
             PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGPOSTS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

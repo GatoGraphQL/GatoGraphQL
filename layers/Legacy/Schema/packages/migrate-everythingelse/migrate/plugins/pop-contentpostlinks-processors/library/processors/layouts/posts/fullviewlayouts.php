@@ -15,11 +15,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
         );
     }
 
-    public function getFooterSubmodules(array $module)
+    public function getFooterSubmodules(array $componentVariation)
     {
-        $ret = parent::getFooterSubmodules($module);
+        $ret = parent::getFooterSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_LINK:
             case self::MODULE_AUTHORLAYOUT_FULLVIEW_LINK:
             case self::MODULE_SINGLELAYOUT_FULLVIEW_LINK:
@@ -35,9 +35,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_LINK:
             case self::MODULE_AUTHORLAYOUT_FULLVIEW_LINK:
             case self::MODULE_SINGLELAYOUT_FULLVIEW_LINK:
@@ -47,10 +47,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
                     self::MODULE_SINGLELAYOUT_FULLVIEW_LINK => [PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars::class, PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$componentVariation[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 }
 

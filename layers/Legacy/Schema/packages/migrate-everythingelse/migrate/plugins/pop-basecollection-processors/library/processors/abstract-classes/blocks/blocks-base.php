@@ -5,96 +5,96 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_BasicBlocksBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BLOCK];
     }
 
-    public function getSubmenuSubmodule(array $module)
+    public function getSubmenuSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getLatestcountSubmodule(array $module)
+    public function getLatestcountSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($controlgroup_top = $this->getControlgroupTopSubmodule($module)) {
+        if ($controlgroup_top = $this->getControlgroupTopSubmodule($componentVariation)) {
             $ret[] = $controlgroup_top;
         }
-        if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($module)) {
+        if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($componentVariation)) {
             $ret[] = $controlgroup_bottom;
         }
 
-        if ($submenu = $this->getSubmenuSubmodule($module)) {
+        if ($submenu = $this->getSubmenuSubmodule($componentVariation)) {
             $ret[] = $submenu;
         }
 
-        if ($latestcount = $this->getLatestcountSubmodule($module)) {
+        if ($latestcount = $this->getLatestcountSubmodule($componentVariation)) {
             $ret[] = $latestcount;
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($this->showDisabledLayer($module, $props)) {
+        if ($this->showDisabledLayer($componentVariation, $props)) {
             $ret['show-disabled-layer'] = true;
         }
 
-        if ($this->getProp($module, $props, 'show-controls-top')) {
-            if ($controlgroup_top = $this->getControlgroupTopSubmodule($module)) {
+        if ($this->getProp($componentVariation, $props, 'show-controls-top')) {
+            if ($controlgroup_top = $this->getControlgroupTopSubmodule($componentVariation)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup_top);
             }
         }
 
-        if ($latestcount = $this->getLatestcountSubmodule($module)) {
+        if ($latestcount = $this->getLatestcountSubmodule($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['latestcount'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($latestcount);
         }
 
-        if ($this->addClearfixdiv($module)) {
+        if ($this->addClearfixdiv($componentVariation)) {
             $ret['add-clearfixdiv'] = true;
         }
 
-        if ($description_bottom = $this->getProp($module, $props, 'description-bottom')) {
+        if ($description_bottom = $this->getProp($componentVariation, $props, 'description-bottom')) {
             $ret['description-bottom'] = $description_bottom;
         }
-        if ($description_top = $this->getProp($module, $props, 'description-top')) {
+        if ($description_top = $this->getProp($componentVariation, $props, 'description-top')) {
             $ret['description-top'] = $description_top;
         }
-        if ($description_abovetitle = $this->getProp($module, $props, 'description-abovetitle')) {
+        if ($description_abovetitle = $this->getProp($componentVariation, $props, 'description-abovetitle')) {
             $ret['description-abovetitle'] = $description_abovetitle;
         }
 
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Only add the submenu if this is the main block! That way, both blockgroups and blocks can define the submenu, but only the main of them will show it
         // Also, only add submenu if single post is published, hence this goes under mutableonrequest
-        if ($this->getProp($module, $props, 'show-submenu')) {
-            if ($submenu = $this->getSubmenuSubmodule($module)) {
+        if ($this->getProp($componentVariation, $props, 'show-submenu')) {
+            if ($submenu = $this->getSubmenuSubmodule($componentVariation)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['submenu'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submenu);
             }
         }
 
-        if ($this->getProp($module, $props, 'show-controls-bottom')) {
-            if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($module)) {
+        if ($this->getProp($componentVariation, $props, 'show-controls-bottom')) {
+            if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($componentVariation)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup_bottom);
             }
         }
@@ -102,107 +102,107 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return $ret;
     }
 
-    protected function showDisabledLayer(array $module, array &$props)
+    protected function showDisabledLayer(array $componentVariation, array &$props)
     {
         return true;
     }
-    protected function showDisabledLayerIfCheckpointFailed(array $module, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    public function getJsdataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        $ret = parent::getJsdataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getJsdataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        if ($this->showDisabledLayer($module, $props) && $this->showDisabledLayerIfCheckpointFailed($module, $props)) {
+        if ($this->showDisabledLayer($componentVariation, $props) && $this->showDisabledLayerIfCheckpointFailed($componentVariation, $props)) {
             $ret['blockHandleDisabledLayer']['checkpoint-failed'] = $dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null;
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // Add the Disabled Layer on top of the block after the checkpoint fails
-        if ($this->showDisabledLayer($module, $props) && $this->showDisabledLayerIfCheckpointFailed($module, $props)) {
+        if ($this->showDisabledLayer($componentVariation, $props) && $this->showDisabledLayerIfCheckpointFailed($componentVariation, $props)) {
             $this->addJsmethod($ret, 'blockHandleDisabledLayer');
         }
 
         return $ret;
     }
 
-    public function initWebPlatformRequestProps(array $module, array &$props)
+    public function initWebPlatformRequestProps(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($submenu = $this->getSubmenuSubmodule($module)) {
-            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
+        if ($submenu = $this->getSubmenuSubmodule($componentVariation)) {
+            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
             $submenu_id = $componentprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
             $submenu_target = '#'.$submenu_id.'-xs';
             $this->setProp([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS], $props, 'submenu-target', $submenu_target);
         }
 
-        parent::initWebPlatformRequestProps($module, $props);
+        parent::initWebPlatformRequestProps($componentVariation, $props);
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // // Only add the submenu if this is the main block! That way, both blockgroups and blocks can define the submenu, but only the main of them will show it
-        // $this->setProp($module, $props, 'is-mainblock', false);
-        // if ($this->getProp($module, $props, 'is-mainblock')) {
+        // $this->setProp($componentVariation, $props, 'is-mainblock', false);
+        // if ($this->getProp($componentVariation, $props, 'is-mainblock')) {
 
-        //     $this->setProp($module, $props, 'show-submenu', true);
+        //     $this->setProp($componentVariation, $props, 'show-submenu', true);
         // }
-        $this->setProp($module, $props, 'show-submenu', true);
-        if ($this->getProp($module, $props, 'show-submenu')) {
+        $this->setProp($componentVariation, $props, 'show-submenu', true);
+        if ($this->getProp($componentVariation, $props, 'show-submenu')) {
             // Needed to hide a nested submenu (eg: blockgroup and block both have submenu) through CSS
-            $this->appendProp($module, $props, 'runtime-class', 'withsubmenu');
+            $this->appendProp($componentVariation, $props, 'runtime-class', 'withsubmenu');
         }
 
-        if ($showControls = $this->getProp($module, $props, 'show-controls')) {
-            $this->setProp($module, $props, 'show-controls-bottom', true);
+        if ($showControls = $this->getProp($componentVariation, $props, 'show-controls')) {
+            $this->setProp($componentVariation, $props, 'show-controls-bottom', true);
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
 
         // Block target for the controls. This is set in advance by the blockgroup (panelbootstrapjavascript-base) or,
         // whenever the page access the block directly (eg: opening Stance in the quickview) then here
         // $blocktarget = '#'.$props['block-id'];
-        $blocktarget = '#'.$this->getFrontendId($module, $props);
-        if ($controlgroup_top = $this->getControlgroupTopSubmodule($module)) {
+        $blocktarget = '#'.$this->getFrontendId($componentVariation, $props);
+        if ($controlgroup_top = $this->getControlgroupTopSubmodule($componentVariation)) {
             $this->setProp($controlgroup_top, $props, 'control-target', $blocktarget);
         }
-        if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($module)) {
+        if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($componentVariation)) {
             $this->setProp($controlgroup_bottom, $props, 'control-target', $blocktarget);
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'show-controls', true);
-        if ($showControls = $this->getProp($module, $props, 'show-controls')) {
-            $this->setProp($module, $props, 'show-controls-top', true);
+        $this->setProp($componentVariation, $props, 'show-controls', true);
+        if ($showControls = $this->getProp($componentVariation, $props, 'show-controls')) {
+            $this->setProp($componentVariation, $props, 'show-controls-top', true);
         }
 
-        if ($description_bottom = $this->getDescriptionBottom($module, $props)) {
-            $this->setProp($module, $props, 'description-bottom', $description_bottom);
+        if ($description_bottom = $this->getDescriptionBottom($componentVariation, $props)) {
+            $this->setProp($componentVariation, $props, 'description-bottom', $description_bottom);
         }
-        if ($description_top = $this->getDescriptionTop($module, $props)) {
-            $this->setProp($module, $props, 'description-top', $description_top);
+        if ($description_top = $this->getDescriptionTop($componentVariation, $props)) {
+            $this->setProp($componentVariation, $props, 'description-top', $description_top);
         }
-        if ($description_abovetitle = $this->getDescriptionAbovetitle($module, $props)) {
-            $this->setProp($module, $props, 'description-abovetitle', $description_abovetitle);
+        if ($description_abovetitle = $this->getDescriptionAbovetitle($componentVariation, $props)) {
+            $this->setProp($componentVariation, $props, 'description-abovetitle', $description_abovetitle);
         }
 
         /**
@@ -211,41 +211,41 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         \PoP\Root\App::doAction(
             'PoP_Module_Processor_BlocksBase:initModelProps',
             array(&$props),
-            $module,
+            $componentVariation,
             $this
         );
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
         return null;
     }
-    protected function getControlgroupBottomSubmodule(array $module)
+    protected function getControlgroupBottomSubmodule(array $componentVariation)
     {
         return null;
     }
-    protected function addClearfixdiv(array $module)
+    protected function addClearfixdiv(array $componentVariation)
     {
         return true;
     }
-    protected function getDescriptionBottom(array $module, array &$props)
+    protected function getDescriptionBottom(array $componentVariation, array &$props)
     {
         return null;
     }
-    protected function getDescriptionTop(array $module, array &$props)
+    protected function getDescriptionTop(array $componentVariation, array &$props)
     {
         return null;
     }
-    protected function getDescriptionAbovetitle(array $module, array &$props)
+    protected function getDescriptionAbovetitle(array $componentVariation, array &$props)
     {
         return null;
     }
 
-    protected function getBlocksectionsClasses(array $module)
+    protected function getBlocksectionsClasses(array $componentVariation)
     {
-        $ret = parent::getBlocksectionsClasses($module);
+        $ret = parent::getBlocksectionsClasses($componentVariation);
 
         $ret['controlgroup-top'] = 'right pull-right';
         $ret['controlgroup-bottom'] = 'bottom pull-right';
@@ -257,9 +257,9 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         if ($dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null) {
             $ret['checkpoint-failed'] = true;
         }

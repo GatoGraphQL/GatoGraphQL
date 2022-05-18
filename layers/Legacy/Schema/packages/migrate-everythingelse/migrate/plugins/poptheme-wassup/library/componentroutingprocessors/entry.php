@@ -14,9 +14,9 @@ class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\Ab
             GD_THEMEMODE_WASSUP_EMBED => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_EMBED],
             GD_THEMEMODE_WASSUP_PRINT => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_PRINT],
         );
-        foreach ($thememode_modules as $thememode => $module) {
+        foreach ($thememode_modules as $thememode => $componentVariation) {
             $ret[] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'thememode' => $thememode,
                 ],

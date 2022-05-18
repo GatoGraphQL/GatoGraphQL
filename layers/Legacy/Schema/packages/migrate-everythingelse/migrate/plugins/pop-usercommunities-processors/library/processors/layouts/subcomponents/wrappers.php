@@ -11,11 +11,11 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_Codes::class, GD_URE_Module_Processor_Codes::MODULE_URE_CODE_MEMBERSLABEL];
                 $ret[] = [GD_URE_Module_Processor_MembersLayoutMultipleComponents::class, GD_URE_Module_Processor_MembersLayoutMultipleComponents::MODULE_URE_MULTICOMPONENT_COMMUNITYMEMBERS];
@@ -25,9 +25,9 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
                 return 'hasMembers';
         }

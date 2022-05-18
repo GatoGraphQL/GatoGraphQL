@@ -11,11 +11,11 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
         );
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_LINKS:
                 $ret = array_merge(
                     $ret,
@@ -33,9 +33,9 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_LINKS:
                 $ret = array(
                     [
@@ -57,7 +57,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
                 break;
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

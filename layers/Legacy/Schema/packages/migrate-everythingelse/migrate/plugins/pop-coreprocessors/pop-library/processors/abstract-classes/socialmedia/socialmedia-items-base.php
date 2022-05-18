@@ -5,29 +5,29 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA_ITEM];
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
         return null;
     }
-    public function getShortname(array $module)
+    public function getShortname(array $componentVariation)
     {
         return null;
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         return null;
     }
-    public function getProvider(array $module)
+    public function getProvider(array $componentVariation)
     {
         return null;
     }
 
-    public function getShareurlField(array $module, array &$props)
+    public function getShareurlField(array $componentVariation, array &$props)
     {
         return null;
     }
@@ -37,35 +37,35 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         $ret = array(
-            $this->getShareurlField($module, $props),
+            $this->getShareurlField($componentVariation, $props),
             'url',
         );
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $title = sprintf(TranslationAPIFacade::getInstance()->__('Share on %s', 'pop-coreprocessors'), $this->getName($module));
+        $title = sprintf(TranslationAPIFacade::getInstance()->__('Share on %s', 'pop-coreprocessors'), $this->getName($componentVariation));
         $ret['name'] = $title;
-        $ret['short-name'] = $this->getShortname($module);
+        $ret['short-name'] = $this->getShortname($componentVariation);
         $ret['targets']['socialmedia'] = GD_URLPARAM_TARGET_SOCIALMEDIA;
         $ret[GD_JS_TITLES]['share'] = $title;
-        $ret[GD_JS_FONTAWESOME] = $this->getFontawesome($module, $props);
+        $ret[GD_JS_FONTAWESOME] = $this->getFontawesome($componentVariation, $props);
         
         $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-            $this->getProp($module, $props, 'succeeding-typeResolver'),
-            $this->getShareurlField($module, $props)
+            $this->getProp($componentVariation, $props, 'succeeding-typeResolver'),
+            $this->getShareurlField($componentVariation, $props)
         );
 
-        if ($provider = $this->getProvider($module)) {
+        if ($provider = $this->getProvider($componentVariation)) {
             $ret['provider'] = $provider;
         }
 

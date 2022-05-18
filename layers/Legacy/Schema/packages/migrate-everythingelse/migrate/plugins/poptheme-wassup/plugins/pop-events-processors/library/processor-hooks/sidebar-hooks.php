@@ -12,7 +12,7 @@ class PoPTheme_Wassup_EM_SidebarHooks
         );
     }
 
-    public function getSidebarSubmodules($modules, $screengroup, $screen, array $module)
+    public function getSidebarSubmodules($modules, $screengroup, $screen, array $componentVariation)
     {
 
         // Add the Events Calendar to all Groups in the Sideinfo

@@ -11,14 +11,14 @@ class GenericForms_Module_Processor_PageCodes extends PoP_Module_Processor_HTMLP
         );
     }
 
-    public function getPageId(array $module)
+    public function getPageId(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGECODE_NEWSLETTER:
                 return POP_NEWSLETTER_CODEPAGE_NEWSLETTER;
         }
     
-        return parent::getPageId($module);
+        return parent::getPageId($componentVariation);
     }
 }
 

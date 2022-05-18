@@ -25,9 +25,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_LINKS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -51,12 +51,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_LINKS_NAVIGATOR => [PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR],
@@ -69,7 +69,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
             self::MODULE_SCROLLINNER_AUTHORLINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::MODULE_AUTHORLAYOUT_FULLVIEW_LINK],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 

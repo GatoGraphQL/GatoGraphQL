@@ -16,9 +16,9 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYCONTENT:
             case self::MODULE_TABLE_MYHIGHLIGHTS:
             case self::MODULE_TABLE_MYPOSTS:
@@ -28,17 +28,17 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                     self::MODULE_TABLE_MYPOSTS => [PoP_Module_Processor_TableInners::class, PoP_Module_Processor_TableInners::MODULE_TABLEINNER_MYPOSTS],
                 );
 
-                return $inners[$module[1]];
+                return $inners[$componentVariation[1]];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getHeaderTitles(array $module)
+    public function getHeaderTitles(array $componentVariation)
     {
-        $ret = parent::getHeaderTitles($module);
+        $ret = parent::getHeaderTitles($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYCONTENT:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');
@@ -60,15 +60,15 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYHIGHLIGHTS:
-                $this->appendProp($module, $props, 'class', 'table-myhighlights');
+                $this->appendProp($componentVariation, $props, 'class', 'table-myhighlights');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

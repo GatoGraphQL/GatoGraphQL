@@ -24,9 +24,9 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getDropdownSubmodules($submodules, array $module)
+    public function getDropdownSubmodules($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
                     $submodules, 
@@ -70,9 +70,9 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         return $submodules;
     }
 
-    public function getSocialmediaSubmodules($submodules, array $module)
+    public function getSocialmediaSubmodules($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
                 $submodules[] = [PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::class, PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
@@ -89,7 +89,7 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         return $submodules;
     }
 
-    public function getShareSubmodules($submodules, array $module)
+    public function getShareSubmodules($submodules, array $componentVariation)
     {
 
         // Insert before the Embed button

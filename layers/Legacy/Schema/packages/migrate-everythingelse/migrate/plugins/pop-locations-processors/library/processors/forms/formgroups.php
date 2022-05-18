@@ -15,53 +15,53 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP],
             self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
             case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('If you can\'t find the location in the input below, click on the "+" button to add a new one.', 'em-popprocessors');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
             case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 // Make it mandatory?
                 if (\PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_FormGroups:locations:mandatory',
                     false,
-                    $module,
+                    $componentVariation,
                     $props
                 )
                 ) {
-                    $component = $this->getComponentSubmodule($module);
+                    $component = $this->getComponentSubmodule($componentVariation);
                     $this->setProp($component, $props, 'mandatory', true);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

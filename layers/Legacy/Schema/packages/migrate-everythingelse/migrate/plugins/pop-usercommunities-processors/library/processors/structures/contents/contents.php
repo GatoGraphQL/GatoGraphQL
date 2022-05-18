@@ -11,14 +11,14 @@ class GD_URE_Module_Processor_CustomContents extends PoP_Module_Processor_Conten
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_CONTENT_MEMBER:
                 return [GD_URE_Module_Processor_CustomContentInners::class, GD_URE_Module_Processor_CustomContentInners::MODULE_URE_CONTENTINNER_MEMBER];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

@@ -11,11 +11,11 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV];
                 $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT];
@@ -25,27 +25,27 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 // Pass the needed props down the line
-                if ($target = $this->getProp($module, $props, 'carousel-target')) {
-                    foreach ($this->getSubComponentVariations($module) as $submodule) {
+                if ($target = $this->getProp($componentVariation, $props, 'carousel-target')) {
+                    foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                         $this->setProp([$submodule], $props, 'carousel-target', $target);
                     }
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 $this->addJsmethod($ret, 'carouselControls');
                 break;

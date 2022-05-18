@@ -12,9 +12,9 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         );
     }
 
-    public function getFeaturedimageinnerSubmodule(array $module): ?array
+    public function getFeaturedimageinnerSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return [PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER];
         }
@@ -22,24 +22,24 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         return null;
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return TranslationAPIFacade::getInstance()->__('Featured Image', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 }
 

@@ -20,8 +20,8 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
+        foreach ($modules as $route => $componentVariation) {
+            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
         }
 
         $modules = array(
@@ -29,8 +29,8 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_PASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
+        foreach ($modules as $route => $componentVariation) {
+            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
         }
 
         $modules = array(
@@ -38,8 +38,8 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+        foreach ($modules as $route => $componentVariation) {
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 
         return $ret;

@@ -37,11 +37,11 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_CATEGORIES:
                 $ret[] = [Wassup_Module_Processor_CategoriesLayouts::class, Wassup_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_CATEGORIES];
                 break;
@@ -102,11 +102,11 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $module)
+    public function getConditionFailedSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionFailedSubmodules($module);
+        $ret = parent::getConditionFailedSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
@@ -129,9 +129,9 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
@@ -144,16 +144,16 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
-                $this->appendProp($module, $props, 'class', 'referencedby clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'referencedby clearfix');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_CATEGORIES:
                 return 'hasTopics';
 

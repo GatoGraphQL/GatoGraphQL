@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_PROFILEORGANIZATION_CREATE:
                 // Allow the Custom implementation to override
                 return \PoP\Root\App::applyFilters(
@@ -30,14 +30,14 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
                 );
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_PROFILEORGANIZATION_CREATE:
             case self::MODULE_FORM_PROFILEINDIVIDUAL_CREATE:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -46,11 +46,11 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_PROFILEORGANIZATION_CREATE:
             case self::MODULE_FORM_PROFILEINDIVIDUAL_CREATE:
                 // For function addDomainClass
@@ -61,17 +61,17 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_PROFILEORGANIZATION_CREATE:
             case self::MODULE_FORM_PROFILEINDIVIDUAL_CREATE:
                 // Do not show if user already logged in
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

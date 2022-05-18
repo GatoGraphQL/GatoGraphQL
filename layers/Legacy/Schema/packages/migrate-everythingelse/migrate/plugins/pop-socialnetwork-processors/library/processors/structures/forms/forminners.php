@@ -11,11 +11,11 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_CONTACTUSER:
                 $ret = array_merge(
                     $ret,
@@ -52,24 +52,24 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
         $ret = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_GFFormInners:layouts',
             $ret,
-            $module
+            $componentVariation
         );
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields
         \PoP\Root\App::doAction(
             'PoP_Module_Processor_GFFormInners:init-props',
-            $module,
+            $componentVariation,
             array(&$props),
             $this
         );
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

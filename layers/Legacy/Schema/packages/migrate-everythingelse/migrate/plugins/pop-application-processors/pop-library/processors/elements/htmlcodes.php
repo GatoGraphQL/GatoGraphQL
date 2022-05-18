@@ -20,11 +20,11 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_EMPTYSIDEINFO:
                 // Comment Leo 07/12/2017: this function closes the sideinfo for [self::class, self::MODULE_CODE_EMPTYSIDEINFO], and it must take place immediately,
                 // or otherwise the sideinfo will show and then disappear a few seconds later and it looks ugly (eg: in Verticals homepage, where there is no sideinfo)
@@ -35,17 +35,17 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return $ret;
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_404:
                 return 'p';
         }
 
-        return parent::getHtmlTag($module, $props);
+        return parent::getHtmlTag($componentVariation, $props);
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $question = '<h4>%s</h4>';
@@ -53,7 +53,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         $response_last = '<p>%s</p>';
         $li = '<li>%s</li>';
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_HOMEWELCOME:
                 $code = sprintf(
                     '<h3 class="media-heading">%s</h3>',
@@ -80,7 +80,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                             TranslationAPIFacade::getInstance()->__('<strong>#Trending tags are:</strong><br/>Those tags which appear in the highest number of posts, during the last %s days.', 'poptheme-wassup'),
                             POP_TRENDINGTAGS_DAYS_TRENDINGTAGS
                         ),
-                        $module
+                        $componentVariation
                     )
                 );
 
@@ -88,18 +88,18 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                 return TranslationAPIFacade::getInstance()->__('Oops, page not found.', 'pop-application-processors');
         }
 
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_HOMEWELCOME:
-                $this->appendProp($module, $props, 'class', 'block-homewelcome');
+                $this->appendProp($componentVariation, $props, 'class', 'block-homewelcome');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

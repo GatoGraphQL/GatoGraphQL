@@ -15,11 +15,11 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
             case self::MODULE_LAYOUT_TAGSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
@@ -39,20 +39,20 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
             case self::MODULE_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($componentVariation);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
                 return 'col-xsm-4';
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($componentVariation);
     }
 }
 

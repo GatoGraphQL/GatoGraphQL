@@ -14,9 +14,9 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
         );
     }
 
-    public function getMessage(array $module)
+    public function getMessage(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MESSAGE_NOREFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Nothing here', 'pop-coreprocessors');
 
@@ -24,7 +24,7 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
                 return TranslationAPIFacade::getInstance()->__('No contact details', 'pop-coreprocessors');
         }
 
-        return parent::getMessage($module);
+        return parent::getMessage($componentVariation);
     }
 }
 

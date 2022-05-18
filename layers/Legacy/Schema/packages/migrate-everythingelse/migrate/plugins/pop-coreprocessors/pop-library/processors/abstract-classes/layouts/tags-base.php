@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_TagLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_TAG];
     }
@@ -12,21 +12,21 @@ abstract class PoP_Module_Processor_TagLayoutsBase extends PoPEngine_QueryDataCo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         return array('url', 'symbolnamedescription');
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
         return 'span';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
     
-        $ret['html-tag'] = $this->getHtmlTag($module, $props);
+        $ret['html-tag'] = $this->getHtmlTag($componentVariation, $props);
         
         return $ret;
     }

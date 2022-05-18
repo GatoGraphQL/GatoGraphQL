@@ -18,11 +18,11 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLGROUP_STANCESTATS:
                 $ret[] = [UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_STANCESTATS_GENERAL];
                 $ret[] = [UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE];
@@ -49,11 +49,11 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLGROUP_STANCESTATS:
                 // Make them collapsible, with a control expanding them by looking for class "collapse"
                 $this->appendProp([UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE], $props, 'class', 'collapse');
@@ -61,7 +61,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

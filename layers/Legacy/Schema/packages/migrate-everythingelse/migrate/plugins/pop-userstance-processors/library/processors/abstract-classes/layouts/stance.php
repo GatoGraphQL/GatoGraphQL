@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_Application_UserStance_TemplateResourceLoaderProcessor::class, PoP_Application_UserStance_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTSTANCE];
     }
@@ -13,21 +13,21 @@ abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_Q
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         return array('catName');
     }
 
-    public function getStanceTitle(array $module, array &$props)
+    public function getStanceTitle(array $componentVariation, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('Stance:', 'pop-userstance-processors');
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
     
-        $ret[GD_JS_TITLES]['stance'] = $this->getStanceTitle($module, $props);
+        $ret[GD_JS_TITLES]['stance'] = $this->getStanceTitle($componentVariation, $props);
         
         return $ret;
     }

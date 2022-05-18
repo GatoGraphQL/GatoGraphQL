@@ -13,25 +13,25 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_
         );
     }
 
-    protected function isUserMap(array $module)
+    protected function isUserMap(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP:
             case self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 return true;
         }
 
-        return parent::isUserMap($module);
+        return parent::isUserMap($componentVariation);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::class, PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::MODULE_SCROLL_COMMUNITIES_MAP],
             self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 }
 

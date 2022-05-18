@@ -11,21 +11,21 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
         );
     }
 
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONGROUP_MYUSERS:
                 return POP_URE_SCREEN_MYUSERS;
         }
 
-        return parent::getHeadersdataScreen($module, $props);
+        return parent::getHeadersdataScreen($componentVariation, $props);
     }
 
-    protected function getHeadersdataFormats(array $module, array &$props)
+    protected function getHeadersdataFormats(array $componentVariation, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen
-        $screen = $this->getHeadersdataScreen($module, $props);
+        $screen = $this->getHeadersdataScreen($componentVariation, $props);
         switch ($screen) {
             case POP_URE_SCREEN_MYUSERS:
                 return array(
@@ -34,7 +34,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
                 );
         }
 
-        return parent::getHeadersdataFormats($module, $props);
+        return parent::getHeadersdataFormats($componentVariation, $props);
     }
 }
 

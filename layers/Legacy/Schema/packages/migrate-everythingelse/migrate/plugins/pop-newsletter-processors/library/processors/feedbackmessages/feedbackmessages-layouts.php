@@ -15,12 +15,12 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $componentVariation, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($componentVariation, $props);
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Subscription Successful!', 'pop-genericforms');
                 $ret['success'] = sprintf(

@@ -11,11 +11,11 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
                 $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
                 break;
@@ -24,19 +24,19 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
-                if ($target = $this->getProp($module, $props, 'carousel-target')) {
-                    foreach ($this->getSubComponentVariations($module) as $submodule) {
+                if ($target = $this->getProp($componentVariation, $props, 'carousel-target')) {
+                    foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                         $this->setProp([$submodule], $props, 'carousel-target', $target);
                     }
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

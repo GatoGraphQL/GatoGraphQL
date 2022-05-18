@@ -11,21 +11,21 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 $ret = array_merge(
                     $ret,
@@ -43,9 +43,9 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 $ret = array(
                     [
@@ -67,10 +67,10 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
         }
 
         if ($ret) {
-            return \PoP\Root\App::applyFilters('GD_URE_Module_Processor_AuthorSectionTabPanels:panel_headers', $ret, $module);
+            return \PoP\Root\App::applyFilters('GD_URE_Module_Processor_AuthorSectionTabPanels:panel_headers', $ret, $componentVariation);
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

@@ -14,11 +14,11 @@ class PoP_Events_PageSectionHooks
         );
     }
 
-    public function initModelPropsSideinfo(array $module, $props_in_array, $processor)
+    public function initModelPropsSideinfo(array $componentVariation, $props_in_array, $processor)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $submodule = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
-        // if (in_array($submodule, $processor->getSubComponentVariations($module))) {
+        // if (in_array($submodule, $processor->getSubComponentVariations($componentVariation))) {
 
         $props = &$props_in_array[0];
         

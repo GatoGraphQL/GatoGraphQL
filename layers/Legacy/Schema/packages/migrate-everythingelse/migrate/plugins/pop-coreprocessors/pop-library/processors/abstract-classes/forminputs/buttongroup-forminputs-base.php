@@ -5,48 +5,48 @@ abstract class PoP_Module_Processor_ButtonGroupFormInputsBase extends PoP_Module
 
     // use PoP_Module_Processor_MultipleFormInputsTrait;
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_BUTTONGROUP];
     }
 
-    public function getInputbtnClass(array $module, array &$props)
+    public function getInputbtnClass(array $componentVariation, array &$props)
     {
         return 'btn btn-default';
     }
 
-    public function getInputbtnClasses(array $module, array &$props)
+    public function getInputbtnClasses(array $componentVariation, array &$props)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $input = $this->getInput($module);
+        $input = $this->getInput($componentVariation);
         $ret['options'] = $input->getAllValues();
 
-        if ($btnclass = $this->getProp($module, $props, 'btn-class')) {
+        if ($btnclass = $this->getProp($componentVariation, $props, 'btn-class')) {
             $ret[GD_JS_CLASSES]['btn-input'] = $btnclass;
         }
-        if ($btnclasses = $this->getProp($module, $props, 'btn-classes')) {
+        if ($btnclasses = $this->getProp($componentVariation, $props, 'btn-classes')) {
             $ret[GD_JS_CLASSES]['btn-inputs'] = $btnclasses;
         }
 
         // multiple == true => checkbox type
         // multiple == false => radio type
-        $multiple = $this->isMultiple($module);
+        $multiple = $this->isMultiple($componentVariation);
         $ret['compare-by'] = $multiple ? 'in' : 'eq';
         $ret['type'] = $multiple ? 'checkbox' : 'radio';
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'btn-class', $this->getInputbtnClass($module, $props));
-        $this->setProp($module, $props, 'btn-classes', $this->getInputbtnClasses($module, $props));
-        parent::initModelProps($module, $props);
+        $this->setProp($componentVariation, $props, 'btn-class', $this->getInputbtnClass($componentVariation, $props));
+        $this->setProp($componentVariation, $props, 'btn-classes', $this->getInputbtnClasses($componentVariation, $props));
+        parent::initModelProps($componentVariation, $props);
     }
 }

@@ -11,11 +11,11 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         );
     }
 
-    // function getFailedLayouts(array $module) {
+    // function getFailedLayouts(array $componentVariation) {
 
-    //     $ret = parent::getFailedLayouts($module);
+    //     $ret = parent::getFailedLayouts($componentVariation);
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
 
@@ -26,11 +26,11 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     //     return $ret;
     // }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
                 $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD];
                 // $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD];
@@ -40,9 +40,9 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
                 return 'isStatusNotRead';
         }

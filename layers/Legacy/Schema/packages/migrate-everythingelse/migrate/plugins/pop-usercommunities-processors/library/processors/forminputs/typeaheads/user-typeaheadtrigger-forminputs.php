@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
         );
     }
     
-    public function getHiddeninputModule(array $module)
+    public function getHiddeninputModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
                 return [GD_URE_Processor_SelectableHiddenInputFormInputs::class, GD_URE_Processor_SelectableHiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERCOMMUNITIES];
 
@@ -23,25 +23,25 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
                 return [GD_URE_Processor_SelectableHiddenInputFormInputs::class, GD_URE_Processor_SelectableHiddenInputFormInputs::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES];
         }
 
-        return parent::getHiddeninputModule($module);
+        return parent::getHiddeninputModule($componentVariation);
     }
 
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $componentVariation): bool
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITIES:
                 return true;
         }
 
-        return parent::isMultiple($module);
+        return parent::isMultiple($componentVariation);
     }
 
-    public function getAlertClass(array $module, array &$props)
+    public function getAlertClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getAlertClass($module, $props);
+        $ret = parent::getAlertClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
                 $ret .= ' alert-narrow';
                 break;

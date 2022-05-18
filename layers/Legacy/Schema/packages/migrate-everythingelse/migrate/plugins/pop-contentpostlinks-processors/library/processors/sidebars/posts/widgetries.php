@@ -16,11 +16,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_LINK_ACCESS:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_Layouts::class, PoP_ContentPostLinks_Module_Processor_Layouts::MODULE_LAYOUT_LINK_ACCESS];
                 break;
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $componentVariation, array &$props)
     {
         $titles = array(
             self::MODULE_WIDGET_LINK_ACCESS => TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup'),
@@ -49,9 +49,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::MODULE_WIDGETCOMPACT_LINKINFO => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$componentVariation[1]] ?? null;
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGET_LINK_ACCESS => 'fa-link',
@@ -59,35 +59,35 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::MODULE_WIDGETCOMPACT_LINKINFO => 'fa-link',
         );
 
-        return $fontawesomes[$module[1]] ?? null;
+        return $fontawesomes[$componentVariation[1]] ?? null;
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_LINKINFO:
                 return 'list-group list-group-sm';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($componentVariation, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_LINKINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($componentVariation, $props);
     }
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_LINKINFO:
                 return 'panel panel-default panel-sm';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($componentVariation, $props);
     }
 }
 

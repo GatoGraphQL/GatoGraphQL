@@ -25,9 +25,9 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         );
     }
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
                 return [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_FRAME_TOP];
 
@@ -45,11 +45,11 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return null;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
             case self::MODULE_FRAME_SIDE:
             case self::MODULE_FRAME_TOPSIMPLE:
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglepagetabs');
                 break;
         }
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
             case self::MODULE_FRAME_SIDE:
             case self::MODULE_FRAME_TOPSIMPLE:
@@ -68,7 +68,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglenav');
                 break;
         }
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
             case self::MODULE_FRAME_TOPSIMPLE:
             case self::MODULE_FRAME_TOPEMBED:
@@ -85,14 +85,14 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 if (\PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPageSections:jsmethods:toggleside',
                     true,
-                    $module
+                    $componentVariation
                 )
                 ) {
                     $this->addJsmethod($ret, 'cookieToggleClass', 'togglenav');
                 }
                 break;
         }
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
                 $this->addJsmethod($ret, 'switchTargetClass', 'togglesearch-xs');
                 $this->addJsmethod($ret, 'scrollbarVertical', 'notifications');
@@ -110,7 +110,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 $this->addJsmethod($ret, 'tooltip', 'new-window');
                 break;
         }
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_SIDE:
             case self::MODULE_FRAME_BACKGROUND:
                 $this->addJsmethod($ret, 'scrollbarVertical');
@@ -120,23 +120,23 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
                 $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST], $props, 'set-datasetcount', true);
                 $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST], $props, 'lazy-load', true);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
                 $ret = array_merge(
                     $ret,
@@ -170,18 +170,18 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $togglenav = TranslationAPIFacade::getInstance()->__('Toggle Navigation', 'poptheme-wassup');
         $togglehistory = TranslationAPIFacade::getInstance()->__('Toggle Browsing Tabs', 'poptheme-wassup');
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Comment Leo 24/10/2016: This is the only difference between self::MODULE_FRAME_TOPSIMPLE and self::MODULE_FRAME_TOPEMBED:
          // the Embed does not use the Side, as such do not execute this JS below which will add class "active-side" and so create a bug
             case self::MODULE_FRAME_TOP:
@@ -205,7 +205,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOP:
                 $title = $cmsapplicationapi->getSiteName();
 
@@ -429,12 +429,12 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FRAME_TOPSIMPLE:
             case self::MODULE_FRAME_TOPEMBED:
                 $ret[GD_JS_TITLES]['document'] = \PoP\Root\App::applyFilters(

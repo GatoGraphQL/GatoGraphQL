@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $sidebarinners = array(
             self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT],
@@ -33,30 +33,30 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT:
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT:
-                $this->appendProp($module, $props, 'class', 'vertical');
+                $this->appendProp($componentVariation, $props, 'class', 'vertical');
                 break;
 
             case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT:
             case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT:
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT:
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT:
-                $this->appendProp($module, $props, 'class', 'horizontal');
+                $this->appendProp($componentVariation, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

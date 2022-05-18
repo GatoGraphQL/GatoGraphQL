@@ -26,9 +26,9 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
                 return TranslationAPIFacade::getInstance()->__('Created content', 'pop-coreprocessors');
             
@@ -54,12 +54,12 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
                 return TranslationAPIFacade::getInstance()->__('Has a comment added', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getCheckboxValue(array $module, array &$props)
+    public function getCheckboxValue(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -78,10 +78,10 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
                     self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT,
                     self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
                 );
-                return $values[$module[1]];
+                return $values[$componentVariation[1]];
         }
 
-        return parent::getCheckboxValue($module, $props);
+        return parent::getCheckboxValue($componentVariation, $props);
     }
 }
 

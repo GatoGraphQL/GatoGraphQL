@@ -18,9 +18,9 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
         );
     }
 
-    protected function getDescription(array $module, array &$props)
+    protected function getDescription(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENT_EMBEDPREVIEW:
                 return sprintf(
                     '<h4><i class="fa fa-fw fa-eye"></i>%s</h4>',
@@ -41,12 +41,12 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
                 );
         }
 
-        return parent::getDescription($module, $props);
+        return parent::getDescription($componentVariation, $props);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENT_EMBEDPREVIEW:
                 return [PoP_Module_Processor_ShareContentInners::class, PoP_Module_Processor_ShareContentInners::MODULE_CONTENTINNER_EMBEDPREVIEW];
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
                 return [PoP_Module_Processor_ShareContentInners::class, PoP_Module_Processor_ShareContentInners::MODULE_CONTENTINNER_COPYSEARCHURL];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

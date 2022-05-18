@@ -49,9 +49,9 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW:
             case self::MODULE_SCROLLINNER_CATEGORYPOSTS01_SIMPLEVIEW:
             case self::MODULE_SCROLLINNER_CATEGORYPOSTS02_SIMPLEVIEW:
@@ -78,12 +78,12 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $categories = array(
             self::MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -112,7 +112,7 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
         if ($layout = \PoP\Root\App::applyFilters(
             'PoP_CategoryPosts_Module_Processor_ScrollInners:layout',
             [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
-            $categories[$module[1]]
+            $categories[$componentVariation[1]]
         )) {
             $ret[] = $layout;
         }

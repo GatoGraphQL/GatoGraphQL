@@ -5,14 +5,14 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Processor_ButtonGroupsBase
 {
-    public function getHeadersData(array $module, array &$props)
+    public function getHeadersData(array $componentVariation, array &$props)
     {
-        $formats = $this->getHeadersdataFormats($module, $props);
+        $formats = $this->getHeadersdataFormats($componentVariation, $props);
         
         // All possible titles and icos for PoPTheme Wassup are already set here, however we only need to provide for the correspnding formats, filter out the rest
         $allformats = array_unique(array_merge(array_keys($formats), arrayFlatten(array_values($formats))));
-        $alltitles = $this->getHeadersdataTitles($module, $props);
-        $allicons = $this->getHeadersdataIcons($module, $props);
+        $alltitles = $this->getHeadersdataTitles($componentVariation, $props);
+        $allicons = $this->getHeadersdataIcons($componentVariation, $props);
         $titles = $icons = array();
         foreach ($allformats as $format) {
             $titles[$format] = $alltitles[$format];
@@ -23,11 +23,11 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
             'formats' => $formats,
             'titles' => $titles,
             'icons' => $icons,
-            'screen' => $this->getHeadersdataScreen($module, $props),
-            'url' => $this->getHeadersdataUrl($module, $props),
+            'screen' => $this->getHeadersdataScreen($componentVariation, $props),
+            'url' => $this->getHeadersdataUrl($componentVariation, $props),
         );
     }
-    protected function getHeadersdataTitles(array $module, array &$props)
+    protected function getHeadersdataTitles(array $componentVariation, array &$props)
     {
         return array(
             POP_FORMAT_SIMPLEVIEW => TranslationAPIFacade::getInstance()->__('Feed', 'poptheme-wassup'),
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
             POP_FORMAT_TABLE => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
         );
     }
-    protected function getHeadersdataIcons(array $module, array &$props)
+    protected function getHeadersdataIcons(array $componentVariation, array &$props)
     {
         return array(
             POP_FORMAT_SIMPLEVIEW => 'fa-angle-right',
@@ -56,16 +56,16 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
         );
     }
 
-    protected function getHeadersdataformatsHasmap(array $module, array &$props)
+    protected function getHeadersdataformatsHasmap(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    protected function getHeadersdataFormats(array $module, array &$props)
+    protected function getHeadersdataFormats(array $componentVariation, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen
-        $screen = $this->getHeadersdataScreen($module, $props);
+        $screen = $this->getHeadersdataScreen($componentVariation, $props);
         switch ($screen) {
             case POP_SCREEN_TAGS:
             case POP_SCREEN_AUTHORTAGS:
@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
                 );
                 // Allow to add the Map (eg: events, projects)
                 if (defined('POP_LOCATIONS_INITIALIZED')) {
-                    if ($this->getHeadersdataformatsHasmap($module, $props)) {
+                    if ($this->getHeadersdataformatsHasmap($componentVariation, $props)) {
                         $formats[POP_FORMAT_MAP] = array();
                     }
                 }
@@ -107,7 +107,7 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
                     POP_FORMAT_FULLVIEW => array()
                 );
                 if (defined('POP_LOCATIONS_INITIALIZED')) {
-                    if ($this->getHeadersdataformatsHasmap($module, $props)) {
+                    if ($this->getHeadersdataformatsHasmap($componentVariation, $props)) {
                         $formats[POP_FORMAT_MAP] = array();
                     }
                 }
@@ -158,11 +158,11 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
 
         return array();
     }
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $componentVariation, array &$props)
     {
         return null;
     }
-    protected function getHeadersdataUrl(array $module, array &$props)
+    protected function getHeadersdataUrl(array $componentVariation, array &$props)
     {
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         return $requestHelperService->getCurrentURL();

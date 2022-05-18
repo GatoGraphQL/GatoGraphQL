@@ -11,19 +11,19 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_CODE_EXTERNAL => POP_MULTIDOMAIN_ROUTE_EXTERNAL,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_EXTERNAL:
                 // This is all this block does: load the external url defined in parameter "url"
                 $this->addJsmethod($ret, 'clickURLParam');
@@ -33,16 +33,16 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_EXTERNAL:
                 // Make it invisible, nothing to show
-                $this->appendProp($module, $props, 'class', 'hidden');
+                $this->appendProp($componentVariation, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

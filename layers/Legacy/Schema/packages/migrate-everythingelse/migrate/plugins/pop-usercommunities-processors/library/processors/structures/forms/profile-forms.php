@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_EDITMEMBERSHIP:
                 return [GD_URE_Module_Processor_ProfileFormInners::class, GD_URE_Module_Processor_ProfileFormInners::MODULE_FORMINNER_EDITMEMBERSHIP];
 
@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
                 return [GD_URE_Module_Processor_ProfileFormInners::class, GD_URE_Module_Processor_ProfileFormInners::MODULE_FORMINNER_MYCOMMUNITIES_UPDATE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

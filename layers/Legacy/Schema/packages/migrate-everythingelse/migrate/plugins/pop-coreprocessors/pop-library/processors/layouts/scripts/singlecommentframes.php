@@ -13,9 +13,9 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_COMMENTFRAME_LIST:
                 return [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST];
 
@@ -23,7 +23,7 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_ADD];
         }
         
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
 }
 

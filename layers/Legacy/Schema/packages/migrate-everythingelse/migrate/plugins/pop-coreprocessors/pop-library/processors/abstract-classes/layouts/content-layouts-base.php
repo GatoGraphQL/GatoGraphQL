@@ -3,16 +3,16 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_CONTENT];
     }
     
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($module)) {
+        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
                 $abovecontent_modules
@@ -27,51 +27,51 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         return array_merge(
-            parent::getDataFields($module, $props),
+            parent::getDataFields($componentVariation, $props),
             array(
                 'content',
             )
         );
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubmodules(array $componentVariation)
     {
         return array();
     }
 
-    public function getContentMaxlength(array $module, array &$props)
+    public function getContentMaxlength(array $componentVariation, array &$props)
     {
         return null;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        if ($this->getContentMaxlength($module, $props)) {
+        if ($this->getContentMaxlength($componentVariation, $props)) {
             $this->addJsmethod($ret, 'showmore', 'inner');
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($abovecontent_modules = $this->getAbovecontentSubmodules($module)) {
+        if ($abovecontent_modules = $this->getAbovecontentSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $abovecontent_modules
             );
         }
 
-        if ($length = $this->getContentMaxlength($module, $props)) {
+        if ($length = $this->getContentMaxlength($componentVariation, $props)) {
             $ret['content-maxlength'] = $length;
         }
 

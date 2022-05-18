@@ -12,27 +12,27 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Become a Community: all the content posted by your members will also appear under your Organization\'s profile.');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($componentVariation, $props);
     }
 }
 

@@ -39,9 +39,9 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_POSTS => [
@@ -143,8 +143,8 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'Blog:SimpleFilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS => POP_FILTER_TAGS,
@@ -173,11 +173,11 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT => POP_FILTER_TAGCONTENT,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

@@ -16,9 +16,9 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOST:
                 return TranslationAPIFacade::getInstance()->__('Add Post', 'poptheme-wassup');
 
@@ -26,11 +26,11 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
                 return TranslationAPIFacade::getInstance()->__('View all tags', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOST:
                 return 'fa-plus';
 
@@ -38,28 +38,28 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
                 return 'fa-hashtag';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOST:
             case self::MODULE_ANCHORCONTROL_TAGSLINK:
                 $routes = array(
                     self::MODULE_ANCHORCONTROL_ADDPOST => POP_POSTSCREATION_ROUTE_ADDPOST,
                     self::MODULE_ANCHORCONTROL_TAGSLINK => PostTagsModuleConfiguration::getPostTagsRoute(),
                 );
-                $route = $routes[$module[1]];
+                $route = $routes[$componentVariation[1]];
 
                 return RouteUtils::getRouteURL($route);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOST:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -67,30 +67,30 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
                 break;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TAGSLINK:
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOST:
-                $this->appendProp($module, $props, 'class', 'btn btn-primary');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-primary');
                 break;
 
             case self::MODULE_ANCHORCONTROL_TAGSLINK:
-                $this->appendProp($module, $props, 'class', 'btn btn-link btn-compact');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

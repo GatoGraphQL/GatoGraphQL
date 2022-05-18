@@ -4,7 +4,7 @@ class PoP_TypeaheadComponentFormInputsResourceModuleDecoratorProcessor extends P
 {
 
     // Comment Leo 31/10/2017: the components will be rendered dynamically, yet they don't have a path, so in this case simply return true always for them
-    public function isDynamicModule(array $module, array &$props)
+    public function isDynamicModule(array $componentVariation, array &$props)
     {
         return true;
     }

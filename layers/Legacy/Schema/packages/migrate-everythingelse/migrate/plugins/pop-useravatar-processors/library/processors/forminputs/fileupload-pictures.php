@@ -12,14 +12,14 @@ class PoP_Module_Processor_FileUploadPictures extends PoP_Module_Processor_FileU
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILEUPLOAD_PICTURE:
                 return TranslationAPIFacade::getInstance()->__('Picture', 'pop-useravatar-processors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 }
 

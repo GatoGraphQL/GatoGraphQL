@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $sidebarinners = array(
             self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
@@ -23,27 +23,27 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LINK:
-                $this->appendProp($module, $props, 'class', 'vertical');
+                $this->appendProp($componentVariation, $props, 'class', 'vertical');
                 break;
 
             case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK:
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK:
-                $this->appendProp($module, $props, 'class', 'horizontal');
+                $this->appendProp($componentVariation, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

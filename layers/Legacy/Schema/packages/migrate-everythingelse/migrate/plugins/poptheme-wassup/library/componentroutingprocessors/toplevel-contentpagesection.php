@@ -22,9 +22,9 @@ class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP
             POP_TARGET_HOVER => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
             POP_TARGET_HOLE => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
         );
-        foreach ($target_modules as $target => $module) {
+        foreach ($target_modules as $target => $componentVariation) {
             $ret[] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'target' => $target,
                 ],

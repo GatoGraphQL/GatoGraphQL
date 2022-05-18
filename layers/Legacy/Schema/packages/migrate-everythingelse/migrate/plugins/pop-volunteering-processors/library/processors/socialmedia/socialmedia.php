@@ -13,9 +13,9 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
                 return array(
                     [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND],
@@ -31,20 +31,20 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
                 );
         }
 
-        return parent::getSubComponentVariations($module);
+        return parent::getSubComponentVariations($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
-                foreach ($this->getSubComponentVariations($module) as $submodule) {
+                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -2,42 +2,42 @@
 
 abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA];
     }
 
-    public function useCounter(array $module)
+    public function useCounter(array $componentVariation)
     {
         return false;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        if ($this->useCounter($module)) {
+        if ($this->useCounter($componentVariation)) {
             $this->addJsmethod($ret, 'socialmediaCounter');
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $title = $this->getProp($module, $props, 'title');
-        foreach ($this->getSubComponentVariations($module) as $submodule) {
+        $title = $this->getProp($componentVariation, $props, 'title');
+        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
             $this->setProp([$submodule], $props, 'title', $title);
         }
 
-        if ($this->useCounter($module)) {
-            foreach ($this->getSubComponentVariations($module) as $submodule) {
+        if ($this->useCounter($componentVariation)) {
+            foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                 $this->setProp([$submodule], $props, 'load-socialmedia-counter', true);
             }
         }
 
-        $this->appendProp($module, $props, 'class', 'pop-hidden-print');
+        $this->appendProp($componentVariation, $props, 'class', 'pop-hidden-print');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

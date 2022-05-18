@@ -17,9 +17,9 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ENTRY_DEFAULT:
                 return array(
                     [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_TOP],
@@ -56,30 +56,30 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                 );
         }
 
-        return parent::getSubComponentVariations($module);
+        return parent::getSubComponentVariations($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ENTRY_DEFAULT:
             case self::MODULE_ENTRY_PRINT:
             case self::MODULE_ENTRY_EMBED:
-                $this->appendProp($module, $props, 'class', 'pop-pagesection-group pagesection-group');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-pagesection-group pagesection-group');
 
                 $active_pagesections = array(
                     self::MODULE_ENTRY_DEFAULT => array('active-top', 'active-side'),
                     self::MODULE_ENTRY_EMBED => array('active-top'),
                 );
-                if ($active_pagesections[$module[1]] ?? null) {
-                    $this->appendProp($module, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$module[1]] ?? null)));
+                if ($active_pagesections[$componentVariation[1]] ?? null) {
+                    $this->appendProp($componentVariation, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$componentVariation[1]] ?? null)));
                 }
 
                 // When loading the whole site, only the main pageSection can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the widgets
                 $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $submodules = array_diff(
-                    $this->getSubComponentVariations($module),
+                    $this->getSubComponentVariations($componentVariation),
                     [
                         $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)
                     ]
@@ -90,7 +90,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

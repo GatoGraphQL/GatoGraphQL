@@ -12,49 +12,49 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
             [self::class, self::MODULE_ANCHORCONTROL_CREATELOCATION],
         );
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_CREATELOCATION:
                 return 'fa-plus';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_CREATELOCATION:
                 return POP_TARGET_MODALS;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_CREATELOCATION:
                 return RouteUtils::getRouteURL(POP_ADDLOCATIONS_ROUTE_ADDLOCATION);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_CREATELOCATION:
-                $this->appendProp($module, $props, 'class', 'btn btn-primary pop-createlocation-btn');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-primary pop-createlocation-btn');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

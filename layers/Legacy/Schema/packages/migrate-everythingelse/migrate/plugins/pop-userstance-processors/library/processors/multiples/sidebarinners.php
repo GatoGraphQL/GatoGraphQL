@@ -27,11 +27,11 @@ class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR:
                 $ret[] = [PoPVP_Module_Processor_ButtonGroups::class, PoPVP_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_STANCES];
                 $ret[] = [PoPVP_Module_Processor_CustomDelegatorFilters::class, PoPVP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_STANCES];

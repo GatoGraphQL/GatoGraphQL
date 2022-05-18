@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_CALENDAR_EVENTS_NAVIGATOR => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTS_NAVIGATOR],
@@ -24,18 +24,18 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
             self::MODULE_CALENDAR_EVENTS_MAIN => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTS_MAIN],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getOptions(array $module, array &$props)
+    public function getOptions(array $componentVariation, array &$props)
     {
-        $ret = parent::getOptions($module, $props);
+        $ret = parent::getOptions($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CALENDAR_EVENTS_NAVIGATOR:
             case self::MODULE_CALENDAR_EVENTS_ADDONS:
                 // Comment Leo 12/08/2016: if adding directly the first letter, then it can't be translated, so use the full name and get the first letter for each day
@@ -58,9 +58,9 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CALENDAR_EVENTS_NAVIGATOR:
             case self::MODULE_CALENDAR_EVENTS_ADDONS:
                 // Do not show the Title in the Calendar Navigator, no space
@@ -68,14 +68,14 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CALENDAR_EVENTS_MAIN:
                 // Make it activeItem: highlight on viewing the corresponding fullview
                 $this->appendProp([GD_EM_Module_Processor_CustomPopoverLayouts::class, GD_EM_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_EVENT], $props, 'class', 'pop-openmapmarkers');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

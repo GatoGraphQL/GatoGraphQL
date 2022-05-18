@@ -21,11 +21,11 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE:
                 // Allow TPP Debate to override, adding UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT
                 $layouts = array();
@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
                 $layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimage:modules', 
                     $layouts, 
-                    $module
+                    $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
                 $layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules', 
                     $layouts, 
-                    $module
+                    $componentVariation
                 );
                 $ret = array_merge(
                     $ret,

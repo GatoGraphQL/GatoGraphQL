@@ -38,11 +38,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
                 $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES];
                 break;
@@ -55,25 +55,25 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EXAMPLE_SINGLE:
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);
+                return $this->getQueriedDBObjectID($componentVariation, $props, $data_properties);
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 return $pageTypeAPI->getHomeStaticPageID();
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
@@ -91,14 +91,14 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
                 return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
                 $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
@@ -114,11 +114,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubmodules(array $componentVariation): array
     {
-        $ret = parent::getRelationalSubmodules($module);
+        $ret = parent::getRelationalSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EXAMPLE_SINGLE:
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
@@ -146,7 +146,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         $data_fields = array(
             self::MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
@@ -157,8 +157,8 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             self::MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );
         return array_merge(
-            parent::getDataFields($module, $props),
-            $data_fields[$module[1]] ?? array()
+            parent::getDataFields($componentVariation, $props),
+            $data_fields[$componentVariation[1]] ?? array()
         );
     }
 }

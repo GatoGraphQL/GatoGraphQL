@@ -11,9 +11,9 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS => [
@@ -28,8 +28,8 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -39,16 +39,16 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

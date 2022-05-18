@@ -13,11 +13,11 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_ProfileIndividualLayouts::class, GD_URE_Custom_Module_Processor_ProfileIndividualLayouts::MODULE_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS];
                 break;
@@ -30,11 +30,11 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $module)
+    public function getConditionFailedSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionFailedSubmodules($module);
+        $ret = parent::getConditionFailedSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_WidgetMessages::class, GD_URE_Custom_Module_Processor_WidgetMessages::MODULE_URE_MESSAGE_NODETAILS];
@@ -44,9 +44,9 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
                 return 'hasIndividualDetails';
 

@@ -14,9 +14,9 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_TITLE:
                 return TranslationAPIFacade::getInstance()->__('Title', 'poptheme-wassup');
 
@@ -24,23 +24,23 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
                 return TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_TITLE:
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_TITLE:
                 return 'titleEdit';
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
                 return 'linkaccess';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

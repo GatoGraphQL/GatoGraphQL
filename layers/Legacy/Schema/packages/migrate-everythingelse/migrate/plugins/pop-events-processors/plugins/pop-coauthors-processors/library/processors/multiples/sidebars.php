@@ -13,11 +13,11 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR:
                 // Comment Leo 27/07/2016: can't have the filter for "POSTAUTHORSSIDEBAR", because to get the authors we do:
@@ -27,7 +27,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
                 $filters = array(
                     self::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],//[PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$module[1]];
+                $ret[] = $filters[$componentVariation[1]];
                 $ret[] = [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR];
                 break;
 
@@ -35,7 +35,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
                 $filters = array(
                     self::MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],//[PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$module[1]];
+                $ret[] = $filters[$componentVariation[1]];
                 $ret[] = [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR];
                 break;
         }
@@ -43,28 +43,28 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR => POP_SCREEN_SINGLEUSERS,
             self::MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR => POP_SCREEN_SINGLEUSERS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 }
 

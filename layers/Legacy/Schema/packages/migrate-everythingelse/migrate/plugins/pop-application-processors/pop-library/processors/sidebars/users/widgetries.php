@@ -13,11 +13,11 @@ class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Widget
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_GENERICUSERINFO:
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS];
@@ -29,50 +29,50 @@ class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Widget
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $componentVariation, array &$props)
     {
         $titles = array(
             self::MODULE_WIDGETCOMPACT_GENERICUSERINFO => TranslationAPIFacade::getInstance()->__('User', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$componentVariation[1]] ?? null;
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGETCOMPACT_GENERICUSERINFO => getRouteIcon(UsersModuleConfiguration::getUsersRoute(), false),
         );
 
-        return $fontawesomes[$module[1]] ?? null;
+        return $fontawesomes[$componentVariation[1]] ?? null;
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_GENERICUSERINFO:
                 return 'list-group list-group-sm';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($componentVariation, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_GENERICUSERINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($componentVariation, $props);
     }
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETCOMPACT_GENERICUSERINFO:
                 // return 'panel panel-info panel-sm';
                 return 'panel panel-default panel-sm';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($componentVariation, $props);
     }
 }
 

@@ -2,57 +2,57 @@
 
 abstract class PoP_Module_Processor_BootstrapComponentsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getBootstrapcomponentClass(array $module)
+    public function getBootstrapcomponentClass(array $componentVariation)
     {
 
         // Needed for all the hooks using Bootstrap (show.bs.modal, etc)
         return 'pop-bscomponent';
     }
 
-    public function getContainerClass(array $module)
+    public function getContainerClass(array $componentVariation)
     {
         return '';
     }
 
-    public function getBootstrapcomponentType(array $module)
+    public function getBootstrapcomponentType(array $componentVariation)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($component_class = $this->getBootstrapcomponentClass($module)) {
+        if ($component_class = $this->getBootstrapcomponentClass($componentVariation)) {
             $ret[GD_JS_CLASSES]['bootstrap-component'] = $component_class;
         }
-        if ($container_class = $this->getContainerClass($module)) {
+        if ($container_class = $this->getContainerClass($componentVariation)) {
             $ret[GD_JS_CLASSES]['container'] = $container_class;
         }
-        if ($component_type = $this->getBootstrapcomponentType($module)) {
+        if ($component_type = $this->getBootstrapcomponentType($componentVariation)) {
             $ret['bootstrap-type'] = $component_type;
         }
                 
         return $ret;
     }
 
-    protected function getInitjsBlockbranches(array $module, array &$props)
+    protected function getInitjsBlockbranches(array $componentVariation, array &$props)
     {
         return array();
     }
     
-    public function getMutableonrequestJsconfiguration(array $module, array &$props): array
+    public function getMutableonrequestJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestJsconfiguration($module, $props);
+        $ret = parent::getMutableonrequestJsconfiguration($componentVariation, $props);
 
-        if ($branches = $this->getInitjsBlockbranches($module, $props)) {
+        if ($branches = $this->getInitjsBlockbranches($componentVariation, $props)) {
             $ret['initActiveBranchesJSMethods']['initjs-blockbranches'] = $branches;
         }
 
         return $ret;
     }
 
-    public function getInitializationjsmethod(array $module, array &$props)
+    public function getInitializationjsmethod(array $componentVariation, array &$props)
     {
         return 'initActiveBranchesJSMethods';
     }

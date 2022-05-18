@@ -15,9 +15,9 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
         );
     }
 
-    public function getCategoriesField(array $module, array &$props)
+    public function getCategoriesField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_ORGANIZATIONCATEGORIES:
                 return 'organizationCategoriesByName';
 
@@ -28,16 +28,16 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
                 return 'individualInterestsByName';
         }
         
-        return parent::getCategoriesField($module, $props);
+        return parent::getCategoriesField($componentVariation, $props);
     }
-    public function getLabelClass(array $module, array &$props)
+    public function getLabelClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_ORGANIZATIONTYPES:
                 return 'label-primary';
         }
         
-        return parent::getLabelClass($module, $props);
+        return parent::getLabelClass($componentVariation, $props);
     }
 }
 

@@ -26,7 +26,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_SCROLL_LOCATIONPOSTS_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR],
@@ -39,14 +39,14 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
             self::MODULE_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Extra classes
@@ -61,15 +61,15 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
         );
 
         $extra_class = '';
-        if (in_array($module, $simpleviews)) {
+        if (in_array($componentVariation, $simpleviews)) {
             $extra_class = 'simpleview';
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $extra_class = 'fullview';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($componentVariation, $props, 'class', $extra_class);
 
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

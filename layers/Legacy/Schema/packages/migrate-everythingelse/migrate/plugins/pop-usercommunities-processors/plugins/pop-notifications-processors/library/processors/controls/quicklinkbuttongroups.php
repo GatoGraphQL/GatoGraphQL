@@ -13,11 +13,11 @@ class GD_URE_AAL_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_UREAAL_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP:
                 $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP];
                 break;

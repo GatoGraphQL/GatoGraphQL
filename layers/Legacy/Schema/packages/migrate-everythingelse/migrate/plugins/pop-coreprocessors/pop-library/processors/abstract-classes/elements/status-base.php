@@ -2,14 +2,14 @@
 
 abstract class PoP_Module_Processor_StatusBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_STATUS];
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         // Error: allow for status-specific message, or a general one
         $ret[GD_JS_TITLES]['error'] = sprintf(
@@ -23,8 +23,8 @@ abstract class PoP_Module_Processor_StatusBase extends PoPEngine_QueryDataCompon
         );
         $loading = sprintf(
             '%s %s',
-            $this->getProp($module, $props, 'loading-spinner'),
-            $this->getProp($module, $props, 'loading-msg')
+            $this->getProp($componentVariation, $props, 'loading-spinner'),
+            $this->getProp($componentVariation, $props, 'loading-msg')
         );
         $ret[GD_JS_TITLES]['loading'] = $loading;
         $ret[GD_JS_TITLES]['retry'] = GD_CONSTANT_RETRY_MSG;
@@ -32,9 +32,9 @@ abstract class PoP_Module_Processor_StatusBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         $this->addJsmethod($ret, 'switchTargetClass', 'error-dismiss');
         $this->addJsmethod($ret, 'retrySendRequest', 'retry');
@@ -42,12 +42,12 @@ abstract class PoP_Module_Processor_StatusBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'class', 'top');
-        $this->setProp($module, $props, 'loading-msg', GD_CONSTANT_LOADING_MSG);
-        $this->setProp($module, $props, 'loading-spinner', GD_CONSTANT_LOADING_SPINNER);
+        $this->setProp($componentVariation, $props, 'class', 'top');
+        $this->setProp($componentVariation, $props, 'loading-msg', GD_CONSTANT_LOADING_MSG);
+        $this->setProp($componentVariation, $props, 'loading-spinner', GD_CONSTANT_LOADING_SPINNER);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

@@ -13,9 +13,9 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS => [
@@ -31,8 +31,8 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'CommonUserRoles:SimpleFilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -42,17 +42,17 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS => POP_FILTER_INDIVIDUALS,
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS => POP_FILTER_ORGANIZATIONS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

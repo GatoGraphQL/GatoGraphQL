@@ -13,11 +13,11 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD:
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
 
@@ -25,7 +25,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasread:layouts',
                     array(),
-                    $module
+                    $componentVariation
                 )
                 ) {
                     $ret = array_merge(
@@ -42,7 +42,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasunread:layouts',
                     array(),
-                    $module
+                    $componentVariation
                 )
                 ) {
                     $ret = array_merge(
@@ -61,11 +61,11 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD:
             case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
                 // In addition, bring the new status (read/unread) of the notification to update the database/userstatedatabase in the webplatform, for consistency

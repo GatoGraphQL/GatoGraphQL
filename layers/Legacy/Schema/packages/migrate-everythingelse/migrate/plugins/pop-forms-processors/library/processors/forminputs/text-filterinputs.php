@@ -36,31 +36,31 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
             self::MODULE_FILTERINPUT_NAME => [UserFilterInputProcessor::class, UserFilterInputProcessor::FILTERINPUT_NAME],
             self::MODULE_FILTERINPUT_HASHTAGS => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERINPUT_HASHTAGS],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_FILTERINPUT_SEARCH:
     //         case self::MODULE_FILTERINPUT_HASHTAGS:
     //         case self::MODULE_FILTERINPUT_NAME:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($componentVariation);
     // }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_SEARCH:
                 return TranslationAPIFacade::getInstance()->__('Search', 'pop-coreprocessors');
 
@@ -71,12 +71,12 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
                 return TranslationAPIFacade::getInstance()->__('Name', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_SEARCH:
             case self::MODULE_FILTERINPUT_HASHTAGS:
             case self::MODULE_FILTERINPUT_NAME:
@@ -86,15 +86,15 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
                     self::MODULE_FILTERINPUT_HASHTAGS => 'tags',
                     self::MODULE_FILTERINPUT_NAME => 'nombre',
                 );
-                return $names[$module[1]];
+                return $names[$componentVariation[1]];
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_HASHTAGS => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
@@ -102,10 +102,10 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_HASHTAGS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_NAME => $translationAPI->__('', ''),

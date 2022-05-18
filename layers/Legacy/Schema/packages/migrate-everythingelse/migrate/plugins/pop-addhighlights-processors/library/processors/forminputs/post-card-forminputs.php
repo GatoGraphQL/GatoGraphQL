@@ -11,24 +11,24 @@ class PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues ex
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST:
                 return [PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubmodule($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST:
                 return 'highlightedpost';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

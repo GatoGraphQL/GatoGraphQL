@@ -13,9 +13,9 @@ class PoP_Module_Processor_PostHiddenInputAlertFormComponents extends PoP_Module
         );
     }
     
-    public function getHiddeninputModule(array $module)
+    public function getHiddeninputModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST:
                 return [PoP_Module_Processor_HiddenInputFormInputs::class, PoP_Module_Processor_HiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTPOST];
 
@@ -23,7 +23,7 @@ class PoP_Module_Processor_PostHiddenInputAlertFormComponents extends PoP_Module
                 return [PoP_Module_Processor_HiddenInputFormInputs::class, PoP_Module_Processor_HiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST];
         }
 
-        return parent::getHiddeninputModule($module);
+        return parent::getHiddeninputModule($componentVariation);
     }
 }
 

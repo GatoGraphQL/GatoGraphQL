@@ -11,9 +11,9 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELINNER_AUTHORMEMBERS:
                 return array(
                     'row-items' => 12,
@@ -23,14 +23,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELINNER_AUTHORMEMBERS:
                 $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_USER_AVATAR];
                 break;

@@ -15,11 +15,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 $ret = array_merge(
@@ -39,20 +39,20 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($componentVariation);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 return 'col-xsm-4';
             
@@ -60,7 +60,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($componentVariation);
     }
 }
 

@@ -37,18 +37,18 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
         );
     }
 
-    // function getRelevantRoute(array $module, array &$props) {
+    // function getRelevantRoute(array $componentVariation, array &$props) {
 
     //     $routes = array(
     //         self::MODULE_MULTIPLE_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
     //     );
-    //     return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+    //     return $routes[$componentVariation[1]] ?? parent::getRelevantRoute($componentVariation, $props);
     // }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         $inners = array(
             self::MODULE_MULTIPLE_MENU_SIDEBAR_ABOUT => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT],
@@ -66,12 +66,12 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             self::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::MODULE_DATALOAD_MENU_BODY_MYSECTIONS],
             self::MODULE_MULTIPLE_MENU_BODY_ABOUT => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::MODULE_DATALOAD_MENU_BODY_ABOUT],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         // Extra blocks
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN:
                 $ret[] = [GD_UserPlatform_Module_Processor_AnchorControls::class, GD_UserPlatform_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_INVITENEWUSERS];
                 break;
@@ -80,11 +80,11 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
         return $ret;
     }
 
-    protected function getBlocksectionsClasses(array $module)
+    protected function getBlocksectionsClasses(array $componentVariation)
     {
-        $ret = parent::getBlocksectionsClasses($module);
+        $ret = parent::getBlocksectionsClasses($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_MENU_SIDEBAR_ABOUT:
                 $ret['controlgroup-top'] = 'top';
                 break;
@@ -93,11 +93,11 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -105,11 +105,11 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'menu-';
@@ -119,20 +119,20 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_MENU_TOP_ADDNEW:
             case self::MODULE_MULTIPLE_MENU_SIDE_ADDNEW:
-                $this->appendProp($module, $props, 'class', 'addnew-menu');
+                $this->appendProp($componentVariation, $props, 'class', 'addnew-menu');
                 break;
 
             case self::MODULE_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN:
-                $this->appendProp($module, $props, 'class', 'multiple-menu-home-usernotloggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'multiple-menu-home-usernotloggedin');
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
             case self::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN:
             case self::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT:
@@ -146,8 +146,8 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             case self::MODULE_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET:
             case self::MODULE_MULTIPLE_MENU_SIDE_MYSECTIONS:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'side-sections-menu');
-                $this->appendProp($module, $props, 'class', 'side-sections-menu');
+                $this->setProp($componentVariation, $props, 'resourceloader', 'side-sections-menu');
+                $this->appendProp($componentVariation, $props, 'class', 'side-sections-menu');
                 break;
 
             case self::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT:
@@ -155,12 +155,12 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             case self::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS:
             case self::MODULE_MULTIPLE_MENU_BODY_ABOUT:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'side-sections-menu');
-                $this->appendProp($module, $props, 'class', 'side-sections-menu');
+                $this->setProp($componentVariation, $props, 'resourceloader', 'side-sections-menu');
+                $this->appendProp($componentVariation, $props, 'class', 'side-sections-menu');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -13,19 +13,19 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
 
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return 'editURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -33,47 +33,47 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
                 break;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
     }
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
         }
 
-        return parent::getPostThumbSubmodule($module);
+        return parent::getPostThumbSubmodule($componentVariation);
     }
 
-    public function authorPositions(array $module)
+    public function authorPositions(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return array();
         }
 
-        return parent::authorPositions($module);
+        return parent::authorPositions($componentVariation);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($componentVariation);
     }
 }
 

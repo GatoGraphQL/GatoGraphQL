@@ -18,9 +18,9 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK];
 
@@ -34,21 +34,21 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
-    public function getLinktargetField(array $module)
+    public function getLinktargetField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return 'target';
         }
 
-        return parent::getLinktargetField($module);
+        return parent::getLinktargetField($componentVariation);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return 'url';
 
@@ -62,23 +62,23 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 return 'markAsUnreadURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function showTooltip(array $module, array &$props)
+    public function showTooltip(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 return true;
         }
 
-        return parent::showTooltip($module, $props);
+        return parent::showTooltip($componentVariation, $props);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_USERVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-notifications-processors');
 
@@ -89,14 +89,14 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 return TranslationAPIFacade::getInstance()->__('Mark as unread', 'pop-notifications-processors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 $ret .= ' url';
                 break;
@@ -111,7 +111,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
                 $ret .= ' pop-functional '.AAL_CLASS_NOTIFICATION_MARKASREAD;
                 break;
@@ -124,14 +124,14 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 // Tell the Search engines to not follow the link
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -141,7 +141,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -13,12 +13,12 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         // Main layout
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLEINNER_MYEVENTS:
                 $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT];
                 $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::MODULE_EM_LAYOUTEVENT_TABLECOL];

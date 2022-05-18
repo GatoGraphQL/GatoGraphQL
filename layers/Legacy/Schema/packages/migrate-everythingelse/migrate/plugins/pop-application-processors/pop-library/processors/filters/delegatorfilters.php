@@ -45,7 +45,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_DELEGATORFILTER_TAGS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS],
@@ -68,20 +68,20 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
             self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getBlockTarget(array $module, array &$props)
+    public function getBlockTarget(array $componentVariation, array &$props)
     {
 
         // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
         // Comment Leo 12/01/2017: Actually, for the forms we must use .active instead of :last-child, because the selector is executed
         // on runtime, and not when initializing the JS
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::MODULE_DELEGATORFILTER_HOMECONTENT:
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter';
         }
 
-        return parent::getBlockTarget($module, $props);
+        return parent::getBlockTarget($componentVariation, $props);
     }
 }
 

@@ -21,11 +21,11 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
                 $ret = array_merge(
@@ -60,9 +60,9 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
@@ -70,12 +70,12 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($componentVariation);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
                 return 'col-xsm-4';
@@ -85,7 +85,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($componentVariation);
     }
 }
 

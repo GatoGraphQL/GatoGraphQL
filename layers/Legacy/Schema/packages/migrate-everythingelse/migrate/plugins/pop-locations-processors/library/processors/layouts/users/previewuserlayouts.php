@@ -13,33 +13,33 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         );
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USERBOTTOM];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
     }
 
-    public function getBelowexcerptLayoutSubmodules(array $module)
+    public function getBelowexcerptLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getBelowexcerptLayoutSubmodules($module);
+        $ret = parent::getBelowexcerptLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS];
@@ -49,9 +49,9 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getUseravatarSubmodule(array $module)
+    public function getUseravatarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
                 return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE];
             
@@ -59,24 +59,24 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_40];
         }
 
-        return parent::getUseravatarSubmodule($module);
+        return parent::getUseravatarSubmodule($componentVariation);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($componentVariation);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';

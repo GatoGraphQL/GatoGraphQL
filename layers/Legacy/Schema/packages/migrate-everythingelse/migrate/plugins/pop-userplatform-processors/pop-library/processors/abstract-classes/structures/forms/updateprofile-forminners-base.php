@@ -2,15 +2,15 @@
 
 abstract class PoP_Module_Processor_UpdateProfileFormInnersBase extends PoP_Module_Processor_UpdateUserFormInnersBase
 {
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $components = parent::getLayoutSubmodules($module);
+        $components = parent::getLayoutSubmodules($componentVariation);
     
         // Add common Create/Update components
-        PoP_Module_Processor_CreateUpdateProfileFormsUtils::getFormSubmodules($module, $components, $this);
+        PoP_Module_Processor_CreateUpdateProfileFormsUtils::getFormSubmodules($componentVariation, $components, $this);
 
         // Hook for Newsletter
-        $components = \PoP\Root\App::applyFilters('pop_module:updateprofile:components', $components, $module, $this);
+        $components = \PoP\Root\App::applyFilters('pop_module:updateprofile:components', $components, $componentVariation, $this);
         
         return $components;
     }

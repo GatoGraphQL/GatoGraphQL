@@ -24,9 +24,9 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return TranslationAPIFacade::getInstance()->__('Facebook', 'pop-coreprocessors');
@@ -40,11 +40,11 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                 return TranslationAPIFacade::getInstance()->__('LinkedIn', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return 'fa-facebook';
@@ -58,14 +58,14 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                 return 'fa-linkedin';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_SHARE_TWITTER:
@@ -81,12 +81,12 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     self::MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN => GD_SOCIALMEDIA_PROVIDER_LINKEDIN,
                 );
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
-                        'data-provider' => $providers[$module[1]],
-                        'data-blocktarget' => $this->getProp($module, $props, 'control-target')
+                        'data-provider' => $providers[$componentVariation[1]],
+                        'data-blocktarget' => $this->getProp($componentVariation, $props, 'control-target')
                     )
                 );
 
@@ -95,7 +95,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     [self::class, self::MODULE_ANCHORCONTROL_FIXEDSHARE_TWITTER],
                     [self::class, self::MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN],
                 );
-                if (in_array($module, $fixed)) {
+                if (in_array($componentVariation, $fixed)) {
                       // Share the website URL
                     $title = sprintf(
                         '%s | %s',
@@ -103,29 +103,29 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                         $cmsapplicationapi->getSiteDescription()
                     );
                     // Allow parent modules to override the share url and the title (eg: GetPoP Campaign)
-                    $this->setProp($module, $props, 'title', $title);
-                    $this->setProp($module, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()));
+                    $this->setProp($componentVariation, $props, 'title', $title);
+                    $this->setProp($componentVariation, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()));
                     $this->mergeProp(
-                        $module,
+                        $componentVariation,
                         $props,
                         'params',
                         array(
-                            'data-shareurl' => $this->getProp($module, $props, 'shareURL'),
-                            'data-sharetitle' => str_replace(array('"', "'"), '', $this->getProp($module, $props, 'title')),
+                            'data-shareurl' => $this->getProp($componentVariation, $props, 'shareURL'),
+                            'data-sharetitle' => str_replace(array('"', "'"), '', $this->getProp($componentVariation, $props, 'title')),
                         )
                     );
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_SHARE_TWITTER:

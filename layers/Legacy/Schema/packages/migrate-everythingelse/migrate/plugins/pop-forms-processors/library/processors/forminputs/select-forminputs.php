@@ -37,7 +37,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $componentVariation): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_ORDERUSER => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
@@ -45,24 +45,24 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             self::MODULE_FILTERINPUT_ORDERTAG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
             self::MODULE_FILTERINPUT_ORDERCOMMENT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$componentVariation[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_FILTERINPUT_ORDERUSER:
     //         case self::MODULE_FILTERINPUT_ORDERPOST:
     //         case self::MODULE_FILTERINPUT_ORDERTAG:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($componentVariation);
     // }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_ORDERUSER:
             case self::MODULE_FILTERINPUT_ORDERPOST:
             case self::MODULE_FILTERINPUT_ORDERTAG:
@@ -70,12 +70,12 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
                 return TranslationAPIFacade::getInstance()->__('Order by', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_ORDERUSER:
                 return GD_FormInput_OrderUser::class;
 
@@ -89,12 +89,12 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
                 return GD_FormInput_OrderComment::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_ORDERUSER:
             case self::MODULE_FILTERINPUT_ORDERPOST:
             case self::MODULE_FILTERINPUT_ORDERTAG:
@@ -103,12 +103,12 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
                 return 'order';
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_FILTERINPUT_ORDERUSER => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_ORDERPOST => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_ORDERTAG => $this->stringScalarTypeResolver,
@@ -117,10 +117,10 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $componentVariation): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
+        return match ($componentVariation[1]) {
             self::MODULE_FILTERINPUT_ORDERUSER => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERPOST => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERTAG => $translationAPI->__('', ''),

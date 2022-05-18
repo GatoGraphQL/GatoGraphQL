@@ -18,8 +18,8 @@ class PoPTheme_Wassup_UserLogin_Module_MainContentComponentRoutingProcessor exte
             POP_USERLOGIN_ROUTE_LOGOUT => [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGOUT],
             POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA => [PoP_Module_Processor_UserAccountGroups::class, PoP_Module_Processor_UserAccountGroups::MODULE_GROUP_LOGGEDINUSERDATA],
         );
-        foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+        foreach ($modules as $route => $componentVariation) {
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 
         return $ret;

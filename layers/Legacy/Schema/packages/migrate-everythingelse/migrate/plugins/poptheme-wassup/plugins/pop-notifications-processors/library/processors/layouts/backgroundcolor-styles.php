@@ -13,32 +13,32 @@ class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends Po
         );
     }
 
-    public function getElemTarget(array $module, array &$props)
+    public function getElemTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
                 return '#ps-top .preview.notification-layout';
         }
 
-        return parent::getElemTarget($module, $props);
+        return parent::getElemTarget($componentVariation, $props);
     }
     
-    public function getElemStyles(array $module, array &$props)
+    public function getElemStyles(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
                 return array(
                     'background-color' => \PoP\Root\App::applyFilters(
                         'PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor',
                         'transparent',
-                        $module
+                        $componentVariation
                     )
                 );
         }
 
-        return parent::getElemStyles($module, $props);
+        return parent::getElemStyles($componentVariation, $props);
     }
 }
 

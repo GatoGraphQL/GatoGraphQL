@@ -14,9 +14,9 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         );
     }
 
-    public function getTitleTop(array $module, array &$props)
+    public function getTitleTop(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 return TranslationAPIFacade::getInstance()->__('Welcome', 'pop-coreprocessors');
 
@@ -24,13 +24,13 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
                 return TranslationAPIFacade::getInstance()->__('You are already logged in as', 'pop-coreprocessors');
         }
 
-        return parent::getTitleTop($module, $props);
+        return parent::getTitleTop($componentVariation, $props);
     }
 
-    public function getTitleBottom(array $module, array &$props)
+    public function getTitleBottom(array $componentVariation, array &$props)
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINPROMPT:
                 return sprintf(
                     '<p><a href="%s">%s</a></p>',
@@ -39,14 +39,14 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
                 );
         }
 
-        return parent::getTitleBottom($module, $props);
+        return parent::getTitleBottom($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -54,11 +54,11 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
@@ -68,15 +68,15 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
-                $this->appendProp($module, $props, 'class', 'visible-loggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-loggedin');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

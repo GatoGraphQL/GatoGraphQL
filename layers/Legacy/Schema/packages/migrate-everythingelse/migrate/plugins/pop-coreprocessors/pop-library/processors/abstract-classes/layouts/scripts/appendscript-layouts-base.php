@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_APPENDSCRIPT];
     }
 
-    public function doAppend(array $module)
+    public function doAppend(array $componentVariation)
     {
 
         // Through doAppend, we can have both success and conditionfailed layouts execute.
@@ -16,23 +16,23 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
         return true;
     }
 
-    // function stopAppending(array $module) {
+    // function stopAppending(array $componentVariation) {
 
     //     // Comments will not stop appending, everything else will
     //     return true;
     // }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        if ($this->doAppend($module)) {
-            if ($layout = $this->getLayoutSubmodule($module)) {
+        if ($this->doAppend($componentVariation)) {
+            if ($layout = $this->getLayoutSubmodule($componentVariation)) {
                 $ret[] = $layout;
             }
         }
@@ -40,28 +40,28 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
         return $ret;
     }
 
-    public function getOperation(array $module, array &$props)
+    public function getOperation(array $componentVariation, array &$props)
     {
         return 'append';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        // if ($this->stopAppending($module)) {
+        // if ($this->stopAppending($componentVariation)) {
         
         //     $ret['stop-appending'] = true;
         // }
 
-        if ($this->doAppend($module)) {
+        if ($this->doAppend($componentVariation)) {
             $ret['do-append'] = true;
-            $ret['frame-module'] = $this->getProp($module, $props, 'frame-module');
-            $ret['operation'] = $this->getOperation($module, $props);
+            $ret['frame-module'] = $this->getProp($componentVariation, $props, 'frame-module');
+            $ret['operation'] = $this->getOperation($componentVariation, $props);
 
-            if ($layout = $this->getLayoutSubmodule($module)) {
+            if ($layout = $this->getLayoutSubmodule($componentVariation)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
             }
         }

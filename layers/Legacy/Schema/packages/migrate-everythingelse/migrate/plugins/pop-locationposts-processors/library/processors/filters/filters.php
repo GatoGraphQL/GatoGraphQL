@@ -15,7 +15,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilters extends PoP_Module_Proces
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_FILTER_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomFilterInners::class, PoP_LocationPosts_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS],
@@ -23,11 +23,11 @@ class PoP_LocationPosts_Module_Processor_CustomFilters extends PoP_Module_Proces
             self::MODULE_FILTER_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomFilterInners::class, PoP_LocationPosts_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

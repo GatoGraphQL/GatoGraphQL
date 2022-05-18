@@ -16,9 +16,9 @@ interface EngineInterface
     public function listExtraRouteVars(): array;
     public function generateDataAndPrepareResponse(): void;
     public function calculateOutputData(): void;
-    public function getModelPropsModuletree(array $module): array;
-    public function addRequestPropsModuletree(array $module, array $props): array;
-    public function getModuleDatasetSettings(array $module, $model_props, array &$props): array;
+    public function getModelPropsModuletree(array $componentVariation): array;
+    public function addRequestPropsModuletree(array $componentVariation, array $props): array;
+    public function getModuleDatasetSettings(array $componentVariation, $model_props, array &$props): array;
     public function getRequestMeta(): array;
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;

@@ -15,11 +15,11 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_POSTEDIT:
                 $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTEDIT];
                 break;

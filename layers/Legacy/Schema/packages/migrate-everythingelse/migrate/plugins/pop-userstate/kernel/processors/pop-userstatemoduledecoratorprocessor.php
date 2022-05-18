@@ -19,20 +19,20 @@ class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProce
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function requiresUserState(array $module, array &$props)
+    public function requiresUserState(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($module);
+        $processor = $componentprocessor_manager->getProcessor($componentVariation);
 
         // Dataloading modules need to check for user state
-        if ($processor->moduleLoadsData($module)) {
+        if ($processor->moduleLoadsData($componentVariation)) {
             // Check if the corresponding page requires state or not
-            /*if ($checkpoint_configuration = $processor->getDataaccessCheckpointConfiguration($module, $props)) {
+            /*if ($checkpoint_configuration = $processor->getDataaccessCheckpointConfiguration($componentVariation, $props)) {
 
             return PoP_UserState_Utils::checkpointConfigurationRequiresUserState($checkpoint_configuration);
             }
             // Check if the corresponding page requires state or not
-            else*/if ($route = $processor->getRelevantRoute($module, $props)) {
+            else*/if ($route = $processor->getRelevantRoute($componentVariation, $props)) {
                 return PoP_UserState_Utils::routeRequiresUserState($route);
 }
         }

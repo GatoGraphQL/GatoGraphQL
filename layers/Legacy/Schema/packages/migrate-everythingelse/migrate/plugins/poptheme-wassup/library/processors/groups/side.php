@@ -11,11 +11,11 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_SIDE:
                 // Allow GetPoP to only keep the Sections menu
                 if ($modules = \PoP\Root\App::applyFilters(
@@ -25,7 +25,7 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
                         [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET],
                         [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_SIDE_MYSECTIONS],
                     ),
-                    $module
+                    $componentVariation
                 )
                 ) {
                     $ret = array_merge(

@@ -50,9 +50,9 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         );
     }
 
-    public function getTag(array $module)
+    public function getTag(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
             case self::MODULE_BUTTONINNER_UNFOLLOWUSER_FULL:
             case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
@@ -66,12 +66,12 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
                 return 'h4';
         }
 
-        return parent::getTag($module);
+        return parent::getTag($componentVariation);
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
             case self::MODULE_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
@@ -101,12 +101,12 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
                 return 'fa-fw fa-thumbs-down';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Follow', 'pop-coreprocessors');
@@ -128,12 +128,12 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-coreprocessors');
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 
-    public function getBtntitleClass(array $module, array &$props)
+    public function getBtntitleClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTONINNER_FOLLOWUSER_FULL:
             case self::MODULE_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
@@ -141,12 +141,12 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
                 return 'visible';
         }
         
-        return parent::getBtntitleClass($module, $props);
+        return parent::getBtntitleClass($componentVariation, $props);
     }
 
-    public function getTextField(array $module, array &$props)
+    public function getTextField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_RECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
                 return 'recommendPostCount';
@@ -172,7 +172,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
                 return 'downvotePostCountPlus1';
         }
         
-        return parent::getTextField($module, $props);
+        return parent::getTextField($componentVariation, $props);
     }
 }
 

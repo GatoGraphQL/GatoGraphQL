@@ -23,16 +23,16 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
             POP_FORMAT_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL],
             POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST],
         );
-        foreach ($format_modules as $format => $module) {
+        foreach ($format_modules as $format => $componentVariation) {
             $ret[RequestNature::HOME][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[RequestNature::HOME][] = [
-                    'component-variation' => $module,
+                    'component-variation' => $componentVariation,
                 ];
             }
         }
@@ -45,16 +45,16 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
             POP_FORMAT_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL],
             POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST],
         );
-        foreach ($format_modules as $format => $module) {
+        foreach ($format_modules as $format => $componentVariation) {
             $ret[UserRequestNature::USER][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[UserRequestNature::USER][] = [
-                    'component-variation' => $module,
+                    'component-variation' => $componentVariation,
                 ];
             }
         }
@@ -67,16 +67,16 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
             POP_FORMAT_THUMBNAIL => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
             POP_FORMAT_LIST => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_LIST],
         );
-        foreach ($format_modules as $format => $module) {
+        foreach ($format_modules as $format => $componentVariation) {
             $ret[TagRequestNature::TAG][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[TagRequestNature::TAG][] = [
-                    'component-variation' => $module,
+                    'component-variation' => $componentVariation,
                 ];
             }
         }

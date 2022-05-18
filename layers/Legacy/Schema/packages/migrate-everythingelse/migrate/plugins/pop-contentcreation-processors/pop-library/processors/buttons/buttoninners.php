@@ -16,9 +16,9 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTPREVIEW:
                 return 'fa-fw fa-eye';
             
@@ -29,12 +29,12 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
                 return 'fa-fw fa-link';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
             
@@ -45,7 +45,7 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
                 return TranslationAPIFacade::getInstance()->__('Preview', 'pop-coreprocessors');
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 }
 

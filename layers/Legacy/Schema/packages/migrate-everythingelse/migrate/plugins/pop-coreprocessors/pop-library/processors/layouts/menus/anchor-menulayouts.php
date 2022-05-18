@@ -11,14 +11,14 @@ class PoP_Module_Processor_AnchorMenuLayouts extends PoP_Module_Processor_Anchor
         );
     }
 
-    public function getItemClass(array $module, array &$props)
+    public function getItemClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MENU_BUTTON:
                 return 'btn btn-default btn-block';
         }
     
-        return parent::getItemClass($module, $props);
+        return parent::getItemClass($componentVariation, $props);
     }
 }
 

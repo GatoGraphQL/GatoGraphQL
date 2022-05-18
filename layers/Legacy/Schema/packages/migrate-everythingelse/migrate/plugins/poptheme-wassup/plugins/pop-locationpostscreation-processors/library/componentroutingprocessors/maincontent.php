@@ -15,8 +15,8 @@ class PoP_LocationPostsCreation_Module_MainContentComponentRoutingProcessor exte
             POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST => [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOST_CREATE],
             POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST => [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOST_UPDATE],
         );
-        foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+        foreach ($routemodules as $route => $componentVariation) {
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
@@ -24,43 +24,43 @@ class PoP_LocationPostsCreation_Module_MainContentComponentRoutingProcessor exte
         $routemodules_mycontent = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLOCATIONPOSTS_TABLE_EDIT],
         );
-        foreach ($routemodules_mycontent as $route => $module) {
+        foreach ($routemodules_mycontent as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
             }
         }
         $routemodules_mycontent_simpleviewpreviews = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLOCATIONPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
+        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
             }
         }
         $routemodules_mycontent_fullviewpreviews = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
+        foreach ($routemodules_mycontent_fullviewpreviews as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
             }
         }
 

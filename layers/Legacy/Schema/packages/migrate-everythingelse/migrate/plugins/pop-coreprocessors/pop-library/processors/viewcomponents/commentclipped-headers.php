@@ -11,15 +11,15 @@ class PoP_Module_Processor_CommentClippedViewComponentHeaders extends PoP_Module
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED:
-                $this->appendProp($module, $props, 'class', 'bg-warning');
+                $this->appendProp($componentVariation, $props, 'class', 'bg-warning');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

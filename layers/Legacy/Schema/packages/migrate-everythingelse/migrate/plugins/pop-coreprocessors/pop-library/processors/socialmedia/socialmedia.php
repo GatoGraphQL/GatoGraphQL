@@ -25,21 +25,21 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
         );
     }
 
-    public function useCounter(array $module)
+    public function useCounter(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_COUNTER:
             case self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER:
             case self::MODULE_USERSOCIALMEDIA_COUNTER:
             case self::MODULE_TAGSOCIALMEDIA_COUNTER:
                 return true;
         }
-        return parent::useCounter($module);
+        return parent::useCounter($componentVariation);
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA:
             case self::MODULE_POSTSOCIALMEDIA_COUNTER:
                 return array(
@@ -73,7 +73,7 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
                 );
         }
         
-        return parent::getSubComponentVariations($module);
+        return parent::getSubComponentVariations($componentVariation);
     }
 }
 

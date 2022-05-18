@@ -17,9 +17,9 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
             [self::class, self::MODULE_BUTTONCONTROL_RESETEDITOR],
         );
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -27,12 +27,12 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($componentVariation, $props);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -42,12 +42,12 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 return TranslationAPIFacade::getInstance()->__('Reset', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -57,47 +57,47 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 return 'fa-repeat';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONCONTROL_RESETEDITOR:
                 return 'btn btn-compact btn-link';
         }
 
-        return parent::getBtnClass($module, $props);
+        return parent::getBtnClass($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
-                $this->appendProp($module, $props, 'class', 'btn btn-compact btn-link');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-compact btn-link');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
-                        'data-blocktarget' => $this->getProp($module, $props, 'control-target')
+                        'data-blocktarget' => $this->getProp($componentVariation, $props, 'control-target')
                     )
                 );
                 break;
 
             case self::MODULE_BUTTONCONTROL_RESETEDITOR:
-                $this->appendProp($module, $props, 'class', 'pop-reset');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-reset');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
                 $this->addJsmethod($ret, 'reloadBlockGroup');
                 break;

@@ -20,9 +20,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
                 return 'fa-fw fa-print';
 
@@ -37,12 +37,12 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
                 return 'fa-fw fa-comments';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
 
@@ -53,38 +53,38 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
                 return TranslationAPIFacade::getInstance()->__('Permalink', 'pop-coreprocessors');
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 
-    public function getTextField(array $module, array &$props)
+    public function getTextField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTCOMMENTS:
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return 'commentCount';
         }
 
-        return parent::getTextField($module, $props);
+        return parent::getTextField($componentVariation, $props);
     }
 
-    public function getTextfieldOpen(array $module, array &$props)
+    public function getTextfieldOpen(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('(', 'pop-coreprocessors');
         }
 
-        return parent::getTextfieldOpen($module, $props);
+        return parent::getTextfieldOpen($componentVariation, $props);
     }
 
-    public function getTextfieldClose(array $module, array &$props)
+    public function getTextfieldClose(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__(')', 'pop-coreprocessors');
         }
 
-        return parent::getTextfieldClose($module, $props);
+        return parent::getTextfieldClose($componentVariation, $props);
     }
 }
 

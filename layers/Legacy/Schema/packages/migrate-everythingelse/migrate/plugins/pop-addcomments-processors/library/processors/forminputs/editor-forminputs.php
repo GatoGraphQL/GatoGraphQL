@@ -12,54 +12,54 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
         );
     }
 
-    // function getRows(array $module, array &$props) {
+    // function getRows(array $componentVariation, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
 
     //             return 3;
     //     }
 
-    //     return parent::getRows($module, $props);
+    //     return parent::getRows($componentVariation, $props);
     // }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
-                $this->appendProp($module, $props, 'class', 'pop-editor-form-clear');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-editor-form-clear');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Comment', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
 
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 
-    // function getJsmethods(array $module, array &$props) {
+    // function getJsmethods(array $componentVariation, array &$props) {
 
-    //     $ret = parent::getJsmethods($module, $props);
+    //     $ret = parent::getJsmethods($componentVariation, $props);
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
 
@@ -69,26 +69,26 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     //     return $ret;
     // }
 
-    public function autofocus(array $module, array &$props)
+    public function autofocus(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
 
-        return parent::autofocus($module, $props);
+        return parent::autofocus($componentVariation, $props);
     }
 
-    // function getPlaceholder(array $module, array &$props) {
+    // function getPlaceholder(array $componentVariation, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
 
     //             return TranslationAPIFacade::getInstance()->__('Type comment here...', 'pop-coreprocessors');
     //     }
 
-    //     return parent::getPlaceholder($module, $props);
+    //     return parent::getPlaceholder($componentVariation, $props);
     // }
 }
 

@@ -12,9 +12,9 @@ class GD_URE_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_CODE_MEMBERSLABEL:
                 return sprintf(
                     '<em>%s</em>',
@@ -22,7 +22,7 @@ class GD_URE_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                 );
         }
     
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 }
 

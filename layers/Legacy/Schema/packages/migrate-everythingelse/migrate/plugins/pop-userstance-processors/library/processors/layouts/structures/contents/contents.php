@@ -12,9 +12,9 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
             [self::class, self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE],
         );
     }
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTLAYOUT_STANCES:
                 return [UserStance_Module_Processor_ContentMultipleInners::class, UserStance_Module_Processor_ContentMultipleInners::MODULE_LAYOUTCONTENTINNER_STANCES];
 
@@ -22,40 +22,40 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
                 return [UserStance_Module_Processor_ContentMultipleInners::class, UserStance_Module_Processor_ContentMultipleInners::MODULE_LAYOUTCONTENTINNER_STANCES_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function addFetchedData(array $module, array &$props)
+    public function addFetchedData(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTLAYOUT_STANCES:
             case self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE:
                 return false;
         }
 
-        return parent::addFetchedData($module, $props);
+        return parent::addFetchedData($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE:
                 $classes = array(
                     self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE => GD_CLASS_STANCES,
                 );
 
-                $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
+                $this->setProp($componentVariation, $props, 'appendable', true);
+                $this->setProp($componentVariation, $props, 'appendable-class', $classes[$componentVariation[1]] ?? null);
 
                 // Show the lazy loading spinner?
-                // if ($this->getProp($module, $props, 'show-lazyloading-spinner')) {
+                // if ($this->getProp($componentVariation, $props, 'show-lazyloading-spinner')) {
 
-                //     $this->setProp($module, $props, 'description', GD_CONSTANT_LAZYLOAD_LOADINGDIV);
+                //     $this->setProp($componentVariation, $props, 'description', GD_CONSTANT_LAZYLOAD_LOADINGDIV);
                 // }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

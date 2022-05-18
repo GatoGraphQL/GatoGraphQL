@@ -156,9 +156,9 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
@@ -230,11 +230,11 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGSTANCES_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES,
             self::MODULE_DATALOAD_TAGSTANCES_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES,
             self::MODULE_DATALOAD_TAGSTANCES_SCROLL_THUMBNAIL => POP_USERSTANCE_ROUTE_STANCES,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
 
@@ -351,12 +351,12 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::MODULE_CAROUSEL_TAGSTANCES],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_STANCES_TYPEAHEAD:
             case self::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_STANCES_SCROLL_THUMBNAIL:
@@ -439,10 +439,10 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_STANCE];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $componentVariation): ?string
     {
         $fullviews = array(
             [self::class, self::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW],
@@ -523,24 +523,24 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             [self::class, self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL],
             [self::class, self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL],
         );
-        if (in_array($module, $fullviews)) {
+        if (in_array($componentVariation, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($componentVariation, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($componentVariation, $lists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($module, $typeaheads)) {
+        } elseif (in_array($componentVariation, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
-        } elseif (in_array($module, $carousels)) {
+        } elseif (in_array($componentVariation, $carousels)) {
             $format = POP_FORMAT_CAROUSEL;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($componentVariation);
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW:
@@ -586,14 +586,14 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($componentVariation);
     // }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_STANCES_PRO_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_STANCES_PRO_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_STANCES_PRO_SCROLL_LIST:
@@ -658,7 +658,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_STANCES_PRO_GENERAL_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_STANCES_PRO_GENERAL_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_STANCES_PRO_GENERAL_SCROLL_LIST:
@@ -714,7 +714,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                     self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
                     self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
                 );
-                if ($cat = $cats[$module[1]] ?? null) {
+                if ($cat = $cats[$componentVariation[1]] ?? null) {
                     $ret['tax-query'][] = [
                         'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
                         'terms'    => $cat,
@@ -723,7 +723,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
             case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
                 // General thought: menu_order = 0. Article-related thought: menu_order = 1. So order ASC.
@@ -738,11 +738,11 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL:
@@ -796,9 +796,9 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_STANCES_TYPEAHEAD:
             case self::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR:
@@ -873,12 +873,12 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_STANCES_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW:
@@ -953,7 +953,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

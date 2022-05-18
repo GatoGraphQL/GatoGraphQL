@@ -13,24 +13,24 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
             case self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
                 return 'fa-folder-open-o';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
             case self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -41,13 +41,13 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
-                $this->appendProp($module, $props, 'class', 'btn btn-default btn-background');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-default btn-background');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

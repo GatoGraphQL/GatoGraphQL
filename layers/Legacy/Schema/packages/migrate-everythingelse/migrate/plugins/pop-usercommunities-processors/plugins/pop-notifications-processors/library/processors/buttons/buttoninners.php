@@ -14,9 +14,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP:
                 return 'fa-fw fa-asterisk';
 
@@ -24,12 +24,12 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
                 return 'fa-fw fa-users';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'poptheme-wassup');
 
@@ -37,7 +37,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
                 return TranslationAPIFacade::getInstance()->__('View all members', 'poptheme-wassup');
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 }
 

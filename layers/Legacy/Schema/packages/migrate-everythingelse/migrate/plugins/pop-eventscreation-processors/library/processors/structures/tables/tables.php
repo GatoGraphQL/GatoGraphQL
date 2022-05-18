@@ -14,9 +14,9 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYEVENTS:
             case self::MODULE_TABLE_MYPASTEVENTS:
                 $inners = array(
@@ -24,17 +24,17 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                     self::MODULE_TABLE_MYPASTEVENTS => [GD_EM_Module_Processor_TableInners::class, GD_EM_Module_Processor_TableInners::MODULE_TABLEINNER_MYPASTEVENTS],
                 );
 
-                return $inners[$module[1]];
+                return $inners[$componentVariation[1]];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getHeaderTitles(array $module)
+    public function getHeaderTitles(array $componentVariation)
     {
-        $ret = parent::getHeaderTitles($module);
+        $ret = parent::getHeaderTitles($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYEVENTS:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('When', 'poptheme-wassup');

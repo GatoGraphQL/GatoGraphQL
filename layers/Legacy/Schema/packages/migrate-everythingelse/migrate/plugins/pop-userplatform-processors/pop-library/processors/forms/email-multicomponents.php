@@ -15,11 +15,11 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS:
                 $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_LABEL];
                 $ret[] = [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];

@@ -14,9 +14,9 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
         );
     }
 
-    public function getLocationsTypeaheadSubmodule(array $module)
+    public function getLocationsTypeaheadSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::class, PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS];
 
@@ -24,12 +24,12 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
                 return [PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::class, PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION];
         }
     
-        return parent::getLocationsTypeaheadSubmodule($module);
+        return parent::getLocationsTypeaheadSubmodule($componentVariation);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
 
@@ -37,7 +37,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
                 return TranslationAPIFacade::getInstance()->__('Location', 'em-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 }
 

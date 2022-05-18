@@ -3,48 +3,48 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 {
-    public function getExtraTemplateResources(array $module, array &$props): array
+    public function getExtraTemplateResources(array $componentVariation, array &$props): array
     {
         // Add the extension templates
-        $ret = parent::getExtraTemplateResources($module, $props);
+        $ret = parent::getExtraTemplateResources($componentVariation, $props);
         $ret['extensions'] = $ret['extensions'] ?? array();
         $ret['extensions'][] = [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_EXTENSIONPAGESECTIONFRAMEOPTIONS];
         return $ret;
     }
 
-    protected function getFrameoptionsSubmodules(array $module): array
+    protected function getFrameoptionsSubmodules(array $componentVariation): array
     {
         return array_merge(
-            $this->getFrametopoptionsSubmodules($module),
-            $this->getFramebottomoptionsSubmodules($module)
+            $this->getFrametopoptionsSubmodules($componentVariation),
+            $this->getFramebottomoptionsSubmodules($componentVariation)
         );
     }
 
-    public function getFrametopoptionsSubmodules(array $module): array
+    public function getFrametopoptionsSubmodules(array $componentVariation): array
     {
         return array();
     }
 
-    public function getFramebottomoptionsSubmodules(array $module): array
+    public function getFramebottomoptionsSubmodules(array $componentVariation): array
     {
         return array();
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
         return array_merge(
-            parent::getSubComponentVariations($module),
-            $this->getFrameoptionsSubmodules($module)
+            parent::getSubComponentVariations($componentVariation),
+            $this->getFrameoptionsSubmodules($componentVariation)
         );
     }
 
-    public function getMutableonmodelConfiguration(array $module, array &$props): array
+    public function getMutableonmodelConfiguration(array $componentVariation, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getMutableonmodelConfiguration($module, $props);
+        $ret = parent::getMutableonmodelConfiguration($componentVariation, $props);
 
-        if ($submodules = $this->getFrameoptionsSubmodules($module)) {
+        if ($submodules = $this->getFrameoptionsSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['frameoptions'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
@@ -58,17 +58,17 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
-        foreach ($this->getSubComponentVariations($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
             $this->appendProp([$submodule], $props, 'class', 'pop-outerblock');
         }
 
-        $topframeoptions = $this->getFrametopoptionsSubmodules($module);
-        $bottomframeoptions = $this->getFramebottomoptionsSubmodules($module);
-        foreach ($this->getFrameoptionsSubmodules($module) as $submodule) {
+        $topframeoptions = $this->getFrametopoptionsSubmodules($componentVariation);
+        $bottomframeoptions = $this->getFramebottomoptionsSubmodules($componentVariation);
+        foreach ($this->getFrameoptionsSubmodules($componentVariation) as $submodule) {
             $this->appendProp([$submodule], $props, 'class', 'blocksection-controls pull-right');
 
             if (in_array($submodule, $topframeoptions)) {
@@ -78,6 +78,6 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

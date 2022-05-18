@@ -142,7 +142,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         );
         return App::applyFilters($filtername, $routeConfigurations);
     }
-    public function getPagesectionJsmethod($jsmethod, array $module)
+    public function getPagesectionJsmethod($jsmethod, array $componentVariation)
     {
 
         // Forward the filter to be processed by the ThemeMode
@@ -152,7 +152,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return App::applyFilters($filtername, $jsmethod, $module);
+        return App::applyFilters($filtername, $jsmethod, $componentVariation);
     }
     public function filteringbyShowfilter($showfilter)
     {

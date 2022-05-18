@@ -13,43 +13,43 @@ class GD_URE_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Side
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $blocks = array(
             self::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR => [GD_URE_Module_Processor_CustomSectionSidebarInners::class, GD_URE_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_INDIVIDUALS_SIDEBAR],
             self::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR => [GD_URE_Module_Processor_CustomSectionSidebarInners::class, GD_URE_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]] ?? null) {
+        if ($block = $blocks[$componentVariation[1]] ?? null) {
             $ret[] = $block;
         }
 
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR => POP_SCREEN_USERS,
             self::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR => POP_SCREEN_USERS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 }
 

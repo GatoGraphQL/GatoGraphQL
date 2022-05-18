@@ -49,7 +49,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
         );
     }
 
-    public function getElemTarget(array $module, array &$props)
+    public function getElemTarget(array $componentVariation, array &$props)
     {
         $targets = array(
             self::MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES => GD_CLASS_FOLLOWUSER,
@@ -73,16 +73,16 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
             self::MODULE_LAYOUT_DOWNVOTEPOST_HIDE_STYLES => GD_CLASS_DOWNVOTEPOST,
             self::MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES => GD_CLASS_UNDODOWNVOTEPOST,
         );
-        if ($target = $targets[$module[1]] ?? null) {
+        if ($target = $targets[$componentVariation[1]] ?? null) {
             return '.'.$target;
         }
 
-        return parent::getElemTarget($module, $props);
+        return parent::getElemTarget($componentVariation, $props);
     }
 
-    public function getElemStyles(array $module, array &$props)
+    public function getElemStyles(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES:
             case self::MODULE_LAYOUT_UNFOLLOWUSER_SHOW_STYLES:
             case self::MODULE_LAYOUT_RECOMMENDPOST_SHOW_STYLES:
@@ -112,7 +112,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
                 );
         }
 
-        return parent::getElemStyles($module, $props);
+        return parent::getElemStyles($componentVariation, $props);
     }
 }
 

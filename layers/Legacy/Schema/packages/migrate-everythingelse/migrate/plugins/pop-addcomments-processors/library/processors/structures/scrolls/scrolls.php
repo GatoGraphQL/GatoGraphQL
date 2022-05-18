@@ -19,9 +19,9 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
                 return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_SCROLLINNER_COMMENTS_LIST];
 
@@ -35,27 +35,27 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                 return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function addFetchedData(array $module, array &$props)
+    public function addFetchedData(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT:
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 return false;
         }
 
-        return parent::addFetchedData($module, $props);
+        return parent::addFetchedData($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
-                $this->appendProp($module, $props, 'class', 'pop-commentpost-'.$post_id);
-                $this->appendProp($module, $props, 'class', 'pop-postcomment');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-commentpost-'.$post_id);
+                $this->appendProp($componentVariation, $props, 'class', 'pop-postcomment');
                 break;
 
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
@@ -63,24 +63,24 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                     self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE => 'comments',
                 );
 
-                $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
+                $this->setProp($componentVariation, $props, 'appendable', true);
+                $this->setProp($componentVariation, $props, 'appendable-class', $classes[$componentVariation[1]] ?? null);
 
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getFetchmoreButtonSubmodule(array $module)
+    public function getFetchmoreButtonSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
             case self::MODULE_SCROLL_COMMENTS_ADD:
                 return null;
         }
 
-        return parent::getFetchmoreButtonSubmodule($module);
+        return parent::getFetchmoreButtonSubmodule($componentVariation);
     }
 }
 

@@ -6,16 +6,16 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_FormsBase
 {
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // Comment Leo 10/12/2017: this function MUST be critical, because it needs to set the filter query args on the block
         // before initializing a lazy block, eg: http://sukipop.localhost/en/search-content/?filter=content&searchfor=change
         $this->addJsmethod($ret, 'initFilter', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
 
         // Depending on the form type, execute a js method or another
-        $form_type = $this->getFormType($module, $props);
+        $form_type = $this->getFormType($componentVariation, $props);
         if ($form_type == GD_SUBMITFORMTYPE_FILTERBLOCK) {
             $this->addJsmethod($ret, 'initBlockFilter');
         } elseif ($form_type == GD_SUBMITFORMTYPE_FILTERBLOCKGROUP) {
@@ -24,11 +24,11 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getFormType(array $module, array &$props)
+    public function getFormType(array $componentVariation, array &$props)
     {
 
         // Allow the Block to set the form type (eg: to override FILTERBLOCK with FILTERBLOCKGROUP)
-        if ($form_type = $this->getProp($module, $props, 'form-type')) {
+        if ($form_type = $this->getProp($componentVariation, $props, 'form-type')) {
             return $form_type;
         }
 
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
         return GD_SUBMITFORMTYPE_FILTERBLOCK;
     }
 
-    public function getMethod(array $module, array &$props)
+    public function getMethod(array $componentVariation, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no PoP_WebPlatform_ServerUtils
@@ -52,23 +52,23 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
         return 'GET';
     }
     
-    public function fixedId(array $module, array &$props): bool
+    public function fixedId(array $componentVariation, array &$props): bool
     {
 
         // So that it can be collapsed from the ControlGroup
         return true;
     }
 
-    // public function getFilterObject(array $module)
+    // public function getFilterObject(array $componentVariation)
     // {
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //     $filterinner = $this->getInnerSubmodule($module);
+    //     $filterinner = $this->getInnerSubmodule($componentVariation);
     //     return $componentprocessor_manager->getProcessor($filterinner)->getFilterObject($filterinner);
     // }
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //     $filterinner = $this->getInnerSubmodule($module);
+    //     $filterinner = $this->getInnerSubmodule($componentVariation);
     //     return $componentprocessor_manager->getProcessor($filterinner)->getFilter($filterinner);
     // }
 }

@@ -15,12 +15,12 @@ class PoP_Module_Processor_TableInners extends PoP_Module_Processor_TableInnersB
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         // Main layout
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLEINNER_MYCONTENT:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_EDIT];
                 $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::MODULE_LAYOUTPOST_STATUS];

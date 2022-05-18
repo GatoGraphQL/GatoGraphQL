@@ -23,9 +23,9 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
@@ -39,20 +39,20 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 return TranslationAPIFacade::getInstance()->__('Toggle tabs', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($componentVariation, $props);
     }
-    public function getIcon(array $module)
+    public function getIcon(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
@@ -66,17 +66,17 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 return 'glyphicon-time';
         }
 
-        return parent::getIcon($module);
+        return parent::getIcon($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -98,23 +98,23 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 $tablet = array(
                     [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO],
                 );
-                if (in_array($module, $xs)) {
+                if (in_array($componentVariation, $xs)) {
                     $mode = 'xs';
                     $classs = 'hidden-sm hidden-md hidden-lg';
-                } elseif (in_array($module, $tablet)) {
+                } elseif (in_array($componentVariation, $tablet)) {
                     $classs = 'hidden-xs';
                 }
 
                 $back = array(
                     [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
                 );
-                if (in_array($module, $back)) {
+                if (in_array($componentVariation, $back)) {
                     $classs .= ' btn btn-lg btn-link';
                 }
 
-                $this->appendProp($module, $props, 'class', $classs);
+                $this->appendProp($componentVariation, $props, 'class', $classs);
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -130,16 +130,16 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 $xs = array(
                     [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABSXS],
                 );
-                if (in_array($module, $xs)) {
+                if (in_array($componentVariation, $xs)) {
                     $mode = 'xs';
                     $classs = 'hidden-sm hidden-md hidden-lg';
                 } else {
                     $mode = '';
                     $classs = 'hidden-xs';
                 }
-                $this->appendProp($module, $props, 'class', $classs);
+                $this->appendProp($componentVariation, $props, 'class', $classs);
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -151,14 +151,14 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:

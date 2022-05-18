@@ -49,11 +49,11 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
         );
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -318,9 +318,9 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
                 $ret = array(
                     [
@@ -722,7 +722,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($module, $props);
+        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

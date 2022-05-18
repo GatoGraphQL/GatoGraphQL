@@ -16,40 +16,40 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
         );
     }
 
-    public function getControlClass(array $module)
+    public function getControlClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getControlClass($module);
+        return parent::getControlClass($componentVariation);
     }
 
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return POP_TARGET_QUICKVIEW;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
-    public function getTitleClass(array $module)
+    public function getTitleClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getTitleClass($module);
+        return parent::getTitleClass($componentVariation);
     }
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).TranslationAPIFacade::getInstance()->__('By organizations', 'pop-userstance-processors');
 
@@ -57,12 +57,12 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).TranslationAPIFacade::getInstance()->__('By individuals', 'pop-userstance-processors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
-    protected function getTitleLink(array $module, array &$props)
+    protected function getTitleLink(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS);
 
@@ -70,7 +70,7 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS);
         }
 
-        return parent::getTitleLink($module, $props);
+        return parent::getTitleLink($componentVariation, $props);
     }
 }
 

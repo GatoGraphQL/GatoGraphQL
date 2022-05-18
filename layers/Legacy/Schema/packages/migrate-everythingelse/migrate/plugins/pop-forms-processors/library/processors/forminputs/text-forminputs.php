@@ -22,21 +22,21 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_SENDERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your name', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getPagesectionJsmethod(array $module, array &$props)
+    public function getPagesectionJsmethod(array $componentVariation, array &$props)
     {
-        $ret = parent::getPagesectionJsmethod($module, $props);
+        $ret = parent::getPagesectionJsmethod($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TARGETTITLE:
                 // fill the input when showing the modal
                 $this->addJsmethod($ret, 'fillModalInput');
@@ -51,9 +51,9 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_POSTTITLE:
                 return 'title';
 
@@ -64,26 +64,26 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 return 'url';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TARGETTITLE:
             case self::MODULE_FORMINPUT_POSTTITLE:
             case self::MODULE_FORMINPUT_USERNICENAME:
                 // // fill the input when a new Addon PageSection is created
-                // if ($this->getProp($module, $props, 'replicable')) {
+                // if ($this->getProp($componentVariation, $props, 'replicable')) {
                 $this->addJsmethod($ret, 'fillAddonInput');
                 // }
                 break;
 
             case self::MODULE_FORMINPUT_TARGETURL:
                 // // fill the input when a new Addon PageSection is created
-                // if ($this->getProp($module, $props, 'replicable')) {
+                // if ($this->getProp($componentVariation, $props, 'replicable')) {
                 $this->addJsmethod($ret, 'fillAddonURLInput');
                 // }
                 break;
@@ -99,11 +99,11 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_SENDERNAME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -113,9 +113,9 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function isHidden(array $module, array &$props)
+    public function isHidden(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TARGETURL:
             case self::MODULE_FORMINPUT_TARGETTITLE:
             case self::MODULE_FORMINPUT_POSTTITLE:
@@ -125,15 +125,15 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 return true;
         }
 
-        return parent::isHidden($module, $props);
+        return parent::isHidden($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TARGETURL:
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -146,7 +146,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
             case self::MODULE_FORMINPUT_POSTTITLE:
             case self::MODULE_FORMINPUT_USERNICENAME:
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -156,20 +156,20 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 break;
 
             case self::MODULE_FORMINPUT_BROWSERURL:
-                $this->appendProp($module, $props, 'class', 'pop-browserurl');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-browserurl');
                 break;
 
             case self::MODULE_FORMINPUT_SENDERNAME:
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always
                 if (!PoP_FormUtils::useLoggedinuserData()) {
-                    $this->appendProp($module, $props, 'class', 'visible-always');
+                    $this->appendProp($componentVariation, $props, 'class', 'visible-always');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -16,47 +16,47 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
                 return TranslationAPIFacade::getInstance()->__('Toggle Map', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
                 return 'fa-map-marker';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
                 // Assume there is only one .collapse.map in this block
                 // return '#'.$props['block-id'].' > .blocksection-inners .collapse.map';
-                return $this->getProp($module, $props, 'target');
+                return $this->getProp($componentVariation, $props, 'target');
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
@@ -68,16 +68,16 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
-                $this->appendProp($module, $props, 'class', 'pop-togglemap-btn');
-                $this->appendProp($module, $props, 'class', 'btn btn-default btn-sm');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-togglemap-btn');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-default btn-sm');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -86,12 +86,12 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                 );
                 // Set the params for the cookie
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
-                        'data-cookieid' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module).'-togglemap',
-                        'data-cookietarget' => $this->getProp($module, $props, 'target')/*'#'.$props['block-id'].' > .blocksection-inners .collapse.map'*/,
+                        'data-cookieid' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation).'-togglemap',
+                        'data-cookietarget' => $this->getProp($componentVariation, $props, 'target')/*'#'.$props['block-id'].' > .blocksection-inners .collapse.map'*/,
                         'data-cookiecollapse' => 'show',
                         'data-togglecookiebtn' => 'self',
                     )
@@ -99,12 +99,12 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // The map is initially toggled non-visible
             case self::MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::MODULE_ANCHORCONTROL_TOGGLETAGMAP:
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -114,7 +114,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

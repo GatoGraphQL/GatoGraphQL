@@ -11,11 +11,11 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_LOGIN:
                 $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN];
                 $ret = array_merge(
@@ -28,14 +28,14 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_LOGIN:
-                $this->appendProp($module, $props, 'class', 'blockgroup-login');
+                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-login');
 
                 // Make the Login Block and others show the submenu
-                foreach ($this->getSubComponentVariations($module) as $submodule) {
+                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                     $this->setProp([$submodule], $props, 'show-submenu', true);
 
                     // Allow to set $props for the extra blocks. Eg: WSL setting the loginBlock for setting the disabled layer
@@ -44,13 +44,13 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
                         array()
                     );
                     foreach ($hooks as $hook) {
-                        $hook->setModelProps($module, $props, $this);
+                        $hook->setModelProps($componentVariation, $props, $this);
                     }
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

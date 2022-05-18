@@ -6,46 +6,46 @@ abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends P
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentModule(array $module)
+    public function getFormcomponentModule(array $componentVariation)
     {
-        return $this->getHiddeninputModule($module);
+        return $this->getHiddeninputModule($componentVariation);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
         return array(
-            $this->getSelectedModule($module),
-            $this->getHiddeninputModule($module),
+            $this->getSelectedModule($componentVariation),
+            $this->getHiddeninputModule($componentVariation),
         );
     }
 
-    public function getSelectedModule(array $module)
+    public function getSelectedModule(array $componentVariation)
     {
         return null;
     }
-    public function getHiddeninputModule(array $module)
+    public function getHiddeninputModule(array $componentVariation)
     {
         return null;
     }
 
-    public function getAlertBaseClass(array $module, array &$props)
+    public function getAlertBaseClass(array $componentVariation, array &$props)
     {
-        return parent::getAlertBaseClass($module, $props).' hiddeninputalert';
+        return parent::getAlertBaseClass($componentVariation, $props).' hiddeninputalert';
     }
 
-    public function getAlertClass(array $module, array &$props)
+    public function getAlertClass(array $componentVariation, array &$props)
     {
         return 'alert-warning alert-sm';
     }
 
-    public function showCloseButton(array $module, array &$props)
+    public function showCloseButton(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($module, $props);
-        parent::initRequestProps($module, $props);
+        $this->metaFormcomponentInitModuleRequestProps($componentVariation, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 }

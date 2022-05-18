@@ -13,17 +13,17 @@ class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Process
         );
     }
 
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $componentVariation, array &$props)
     {
         $screens = array(
             self::MODULE_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
             self::MODULE_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($module, $props);
+        return parent::getHeadersdataScreen($componentVariation, $props);
     }
 }
 

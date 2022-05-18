@@ -19,10 +19,10 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 return sprintf(TranslationAPIFacade::getInstance()->__('Search %s', 'pop-coreprocessors'), $cmsapplicationapi->getSiteName());
 
@@ -35,14 +35,14 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
                 return TranslationAPIFacade::getInstance()->__('In response to', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 $this->addJsmethod($ret, 'typeaheadSearchInput');
                 break;
@@ -50,9 +50,9 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 // Comment Leo 08/12/2017: Assign the input the "searchfor" name, so that it works to perform search
                 // even when JS is disabled or fails
@@ -60,7 +60,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
                 return $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH])->getName([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH]);
         }
         
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 }
 

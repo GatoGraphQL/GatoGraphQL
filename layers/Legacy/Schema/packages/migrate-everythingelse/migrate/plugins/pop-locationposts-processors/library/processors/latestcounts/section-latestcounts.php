@@ -15,35 +15,35 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
         );
     }
 
-    public function getObjectName(array $module, array &$props)
+    public function getObjectName(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_LOCATIONPOSTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
             case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return PoP_LocationPosts_PostNameUtils::getNameLc();
         }
     
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($componentVariation, $props);
     }
 
-    public function getObjectNames(array $module, array &$props)
+    public function getObjectNames(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_LOCATIONPOSTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
             case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return PoP_LocationPosts_PostNameUtils::getNamesLc();
         }
     
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($componentVariation, $props);
     }
 
-    public function getSectionClasses(array $module, array &$props)
+    public function getSectionClasses(array $componentVariation, array &$props)
     {
-        $ret = parent::getSectionClasses($module, $props);
+        $ret = parent::getSectionClasses($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_LOCATIONPOSTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
             case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
@@ -55,31 +55,31 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
         $ret = \PoP\Root\App::applyFilters(
             'latestcounts:locationposts:classes',
             $ret,
-            $module,
+            $componentVariation,
             $props
         );
     
         return $ret;
     }
 
-    public function isAuthor(array $module, array &$props)
+    public function isAuthor(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
                 return true;
         }
     
-        return parent::isAuthor($module, $props);
+        return parent::isAuthor($componentVariation, $props);
     }
 
-    public function isTag(array $module, array &$props)
+    public function isTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return true;
         }
     
-        return parent::isTag($module, $props);
+        return parent::isTag($componentVariation, $props);
     }
 }
 

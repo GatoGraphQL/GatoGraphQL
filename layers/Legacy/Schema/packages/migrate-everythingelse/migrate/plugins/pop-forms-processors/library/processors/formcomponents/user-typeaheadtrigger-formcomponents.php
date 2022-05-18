@@ -17,9 +17,9 @@ class PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends 
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS:
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES:
@@ -30,15 +30,15 @@ class PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends 
                     self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES],
                     self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS],
                 );
-                return $layouts[$module[1]];
+                return $layouts[$componentVariation[1]];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubmodule($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS:
                 return 'authors';
 
@@ -46,7 +46,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends 
                 return 'coauthors';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

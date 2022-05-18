@@ -12,33 +12,33 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
         $buttoninners = array(
             self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
-        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('Comments, responses and highlights', 'poptheme-wassup');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $ret .= ' btn btn-default';
                 break;
@@ -47,26 +47,26 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         return $ret;
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 // We use the "previousmodules-ids" to obtain the url to point to
                 return null;
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
-                $this->appendProp($module, $props, 'class', 'pop-collapse-btn');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-collapse-btn');
 
-                if ($collapse_module = $this->getProp($module, $props, 'target-module')) {
+                if ($collapse_module = $this->getProp($componentVariation, $props, 'target-module')) {
                     $this->mergeProp(
-                        $module,
+                        $componentVariation,
                         $props,
                         'previousmodules-ids',
                         array(
@@ -74,7 +74,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
                         )
                     );
                     $this->mergeProp(
-                        $module,
+                        $componentVariation,
                         $props,
                         'params',
                         array(
@@ -85,7 +85,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -12,11 +12,11 @@ class PoP_Module_Processor_CreateLocationFeedbackMessageLayouts extends PoP_Modu
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $componentVariation, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Location added successfully!', 'em-popprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('More locations to add?', 'em-popprocessors');

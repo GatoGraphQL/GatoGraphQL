@@ -14,9 +14,9 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
         );
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL:
             case self::MODULE_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL:
                 $titles = array(
@@ -25,11 +25,11 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
                 );
                 return sprintf(
                     '<h4>%s</h4>',
-                    $titles[$module[1]]
+                    $titles[$componentVariation[1]]
                 );
         }
     
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 }
 

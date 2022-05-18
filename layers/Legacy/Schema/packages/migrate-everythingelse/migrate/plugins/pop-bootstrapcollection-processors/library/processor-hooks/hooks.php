@@ -24,9 +24,9 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getSocialmediaSubmodules($submodules, array $module)
+    public function getSocialmediaSubmodules($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
                 $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA], $submodules);
                 array_splice($submodules, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA]));
@@ -49,9 +49,9 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         return $submodules;
     }
 
-    public function getDropdownSubmodules($submodules, array $module)
+    public function getDropdownSubmodules($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $submodules);
                 array_splice($submodules, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN]));
@@ -74,7 +74,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         return $submodules;
     }
 
-    public function getShareSubmodules($submodules, array $module)
+    public function getShareSubmodules($submodules, array $componentVariation)
     {
 
         // Insert before/after the Print button
@@ -82,7 +82,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         array_splice($submodules, $pos, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_EMBED]));
         array_splice($submodules, $pos+1, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_API]));
 
-        if ($module == [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE]) {
+        if ($componentVariation == [PoP_Module_Processor_DropdownButtonControls::class, PoP_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE]) {
             array_splice($submodules, $pos, 0, array([GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_COPYSEARCHURL]));
         }
         return $submodules;

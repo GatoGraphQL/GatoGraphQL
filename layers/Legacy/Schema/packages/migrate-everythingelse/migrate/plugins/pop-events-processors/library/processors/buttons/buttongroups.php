@@ -15,9 +15,9 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
         );
     }
 
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONGROUP_CALENDARSECTION:
                 return POP_SCREEN_SECTIONCALENDAR;
             
@@ -28,7 +28,7 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
                 return POP_SCREEN_AUTHORSECTIONCALENDAR;
         }
 
-        return parent::getHeadersdataScreen($module, $props);
+        return parent::getHeadersdataScreen($componentVariation, $props);
     }
 }
 

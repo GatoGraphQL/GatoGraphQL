@@ -61,11 +61,11 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLGROUP_COMMENTS:
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
                 break;
@@ -185,7 +185,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
                     array(
                         [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT],
                     ),
-                    $module
+                    $componentVariation
                 )
                 ) {
                     $ret = array_merge(
@@ -200,7 +200,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
         if ($layouts = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_CustomControlGroups:layouts',
             array(),
-            $module
+            $componentVariation
         )
         ) {
             $ret = array_merge(

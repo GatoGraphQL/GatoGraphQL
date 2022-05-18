@@ -11,28 +11,28 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getDefaultLayoutSubmodule(array $module)
+    public function getDefaultLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS:
                 return [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_MAPDETAILS];
         }
 
-        return parent::getDefaultLayoutSubmodule($module);
+        return parent::getDefaultLayoutSubmodule($componentVariation);
     }
 
-    public function getMultipleLayoutSubmodules(array $module)
+    public function getMultipleLayoutSubmodules(array $componentVariation)
     {
         $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS:
                 $handles = array(
                     self::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS => POP_MULTILAYOUT_HANDLE_USERCONTENT,
                 );
-                return $multilayout_manager->getLayoutComponentVariations($handles[$module[1]], POP_FORMAT_MAP);
+                return $multilayout_manager->getLayoutComponentVariations($handles[$componentVariation[1]], POP_FORMAT_MAP);
         }
 
-        return parent::getMultipleLayoutSubmodules($module);
+        return parent::getMultipleLayoutSubmodules($componentVariation);
     }
 }
 

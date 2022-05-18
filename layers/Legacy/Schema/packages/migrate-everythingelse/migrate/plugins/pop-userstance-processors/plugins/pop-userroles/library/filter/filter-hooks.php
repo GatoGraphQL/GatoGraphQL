@@ -17,9 +17,9 @@ class UserStance_DataLoad_FilterHooks
         );
     }
 
-    public function filtercomponents($filterinputs, array $module)
+    public function filtercomponents($filterinputs, array $componentVariation)
     {
-        if (in_array($module, [
+        if (in_array($componentVariation, [
             [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES],
             [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES],
             [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_STANCE],
@@ -38,9 +38,9 @@ class UserStance_DataLoad_FilterHooks
         }
         return $filterinputs;
     }
-    public function simplefiltercomponents($filterinputs, array $module)
+    public function simplefiltercomponents($filterinputs, array $componentVariation)
     {
-        if (in_array($module, [
+        if (in_array($componentVariation, [
             [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES],
             [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES],
             [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],

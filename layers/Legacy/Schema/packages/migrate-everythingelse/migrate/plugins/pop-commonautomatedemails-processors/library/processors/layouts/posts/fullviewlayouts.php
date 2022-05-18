@@ -11,11 +11,11 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
         );
     }
 
-    // function getFooterSubmodules(array $module) {
+    // function getFooterSubmodules(array $componentVariation) {
 
-    //     $ret = parent::getFooterSubmodules($module);
+    //     $ret = parent::getFooterSubmodules($componentVariation);
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
 
@@ -26,18 +26,18 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
     //     return $ret;
     // }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
                 $sidebars = array(
                     self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST => [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$componentVariation[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 }
 

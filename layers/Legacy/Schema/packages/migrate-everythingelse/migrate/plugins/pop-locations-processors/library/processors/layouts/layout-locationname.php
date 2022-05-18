@@ -13,21 +13,21 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_LAYOUT_LOCATIONICONNAME:
                 return 'fa-fw fa-map-marker';
         }
         
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($fontawesome = $this->getFontawesome($module, $props)) {
+        if ($fontawesome = $this->getFontawesome($componentVariation, $props)) {
             $ret[GD_JS_FONTAWESOME] = $fontawesome;
         }
 

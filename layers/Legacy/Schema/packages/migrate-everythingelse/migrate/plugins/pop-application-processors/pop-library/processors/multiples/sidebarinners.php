@@ -49,11 +49,11 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Trending Tags has no filter
             case self::MODULE_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGS];

@@ -15,17 +15,17 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::MODULE_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::MODULE_BLOCK_MYCONTENT_TABLE_EDIT => POP_CONTENTCREATION_ROUTE_MYCONTENT,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_BLOCK_MYCONTENT_TABLE_EDIT => [PoP_ContentCreation_Module_Processor_MySectionDataloads::class, PoP_ContentCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT],
@@ -33,12 +33,12 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
             self::MODULE_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW => [PoP_ContentCreation_Module_Processor_MySectionDataloads::class, PoP_ContentCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $module)
+    protected function getSectionfilterModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_MYCONTENT_TABLE_EDIT:
             case self::MODULE_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
@@ -48,19 +48,19 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
                 break;
         }
 
-        return parent::getSectionfilterModule($module);
+        return parent::getSectionfilterModule($componentVariation);
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_MYCONTENT_TABLE_EDIT:
             case self::MODULE_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 }
 

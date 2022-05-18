@@ -12,9 +12,9 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
         );
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return sprintf(
                     '<span class="collapsed">%s</span><span class="expanded">%s</span>',
@@ -23,48 +23,48 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
                 );
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 
-    public function getTextField(array $module, array &$props)
+    public function getTextField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return 'userPostActivityCount';
             return 'commentCount';
         }
 
-        return parent::getTextField($module, $props);
+        return parent::getTextField($componentVariation, $props);
     }
 
-    public function getTextfieldOpen(array $module, array &$props)
+    public function getTextfieldOpen(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('(', 'poptheme-wassup');
         }
 
-        return parent::getTextfieldOpen($module, $props);
+        return parent::getTextfieldOpen($componentVariation, $props);
     }
-    public function getTextfieldClose(array $module, array &$props)
+    public function getTextfieldClose(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__(')', 'poptheme-wassup');
         }
 
-        return parent::getTextfieldClose($module, $props);
+        return parent::getTextfieldClose($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
-                $this->appendProp($module, $props, 'class', 'pop-collapse-btn');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-collapse-btn');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

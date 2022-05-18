@@ -17,11 +17,11 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETWRAPPER_REFERENCES:
                 $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_REFERENCES];
                 break;
@@ -42,11 +42,11 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $module)
+    public function getConditionFailedSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionFailedSubmodules($module);
+        $ret = parent::getConditionFailedSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
                 $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT];
                 break;
@@ -55,21 +55,21 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETWRAPPER_REFERENCES:
             case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
-                $this->appendProp($module, $props, 'class', 'references');
+                $this->appendProp($componentVariation, $props, 'class', 'references');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGETWRAPPER_REFERENCES:
             case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
                 return 'hasReferences';

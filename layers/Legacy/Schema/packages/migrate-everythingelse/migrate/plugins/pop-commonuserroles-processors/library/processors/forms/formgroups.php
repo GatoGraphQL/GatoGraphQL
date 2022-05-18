@@ -27,11 +27,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         );
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $componentVariation)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -41,11 +41,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $componentVariation)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -56,7 +56,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTPERSON => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON],
@@ -70,11 +70,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
             self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 }
 

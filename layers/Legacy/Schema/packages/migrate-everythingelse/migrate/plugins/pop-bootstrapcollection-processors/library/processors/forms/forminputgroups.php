@@ -13,11 +13,11 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
         );
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $componentVariation)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS:
             case self::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS:
                 $ret .= ' col-sm-2';
@@ -26,11 +26,11 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $componentVariation)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS:
             case self::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS:
                 $ret .= ' col-sm-10';
@@ -40,18 +40,18 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputs::class, PoP_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS],
             self::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputs::class, PoP_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 }
 

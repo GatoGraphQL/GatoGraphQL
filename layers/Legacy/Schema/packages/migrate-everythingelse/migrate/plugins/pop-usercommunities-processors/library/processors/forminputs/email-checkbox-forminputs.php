@@ -12,27 +12,27 @@ class GD_URE_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlat
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Joins a community', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getCheckboxValue(array $module, array &$props)
+    public function getCheckboxValue(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 $values = array(
                     self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY => POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
                 );
-                return $values[$module[1]];
+                return $values[$componentVariation[1]];
         }
 
-        return parent::getCheckboxValue($module, $props);
+        return parent::getCheckboxValue($componentVariation, $props);
     }
 }
 

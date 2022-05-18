@@ -14,12 +14,12 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $componentVariation, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($componentVariation, $props);
 
-        $action = $this->getProp($module, $props, 'action');
-        switch ($module[1]) {
+        $action = $this->getProp($componentVariation, $props, 'action');
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
                 $ret['usernotloggedin'] = sprintf(
@@ -34,7 +34,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
                 $ret['profilenotorganization'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Your user account is not an organization, as such you cannot %1$s under this URL.', 'poptheme-wassup'),
@@ -53,10 +53,10 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
-        parent::initModelProps($module, $props);
+        $this->setProp($componentVariation, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

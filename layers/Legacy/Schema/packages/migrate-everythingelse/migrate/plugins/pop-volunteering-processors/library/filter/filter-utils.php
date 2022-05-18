@@ -13,8 +13,8 @@ class PoP_VolunteeringProcessors_FilterUtils
             );
             self::$volunteer_modules = [];
             foreach ($volunteer_modules as $volunteer_module) {
-                $module = $volunteer_module['component-variation'];
-                $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
+                $componentVariation = $volunteer_module['component-variation'];
+                $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
                 self::$volunteer_modules[$moduleFullName] = $volunteer_module['volunteerModule'];
             }
         }
@@ -22,11 +22,11 @@ class PoP_VolunteeringProcessors_FilterUtils
         return self::$volunteer_modules;
     }
 
-    public static function maybeAddVolunteerFilterinput($filterinputs, array $module)
+    public static function maybeAddVolunteerFilterinput($filterinputs, array $componentVariation)
     {
         if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
             $volunteer_modules = self::getVolunteerComponentVariations();
-            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
+            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
             if ($volunteer_module = $volunteer_modules[$moduleFullName] ?? null) {
                 $filterinputs[] = $volunteer_module;
             }

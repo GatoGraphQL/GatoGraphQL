@@ -13,14 +13,14 @@ class PoP_Module_Processor_TagLayouts extends PoP_Module_Processor_TagLayoutsBas
         );
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_TAGH4:
                 return 'h4';
         }
     
-        return parent::getHtmlTag($module, $props);
+        return parent::getHtmlTag($componentVariation, $props);
     }
 }
 

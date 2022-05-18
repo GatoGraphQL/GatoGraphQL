@@ -2,19 +2,19 @@
 
 abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
-    protected function getActiveLinkMenuItemIds(array $module, array &$props)
+    protected function getActiveLinkMenuItemIds(array $componentVariation, array &$props)
     {
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids',
             array(),
-            $module,
+            $componentVariation,
             $props
         );
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // Add "active" to current links in corresponding links
         $this->addJsmethod($ret, 'activeLinks');
@@ -22,11 +22,11 @@ abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Process
         return $ret;
     }
 
-    public function getMutableonrequestJsconfiguration(array $module, array &$props): array
+    public function getMutableonrequestJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestJsconfiguration($module, $props);
+        $ret = parent::getMutableonrequestJsconfiguration($componentVariation, $props);
 
-        if ($active_link_menu_item_ids = $this->getActiveLinkMenuItemIds($module, $props)) {
+        if ($active_link_menu_item_ids = $this->getActiveLinkMenuItemIds($componentVariation, $props)) {
             $ret['activeLinks']['active-link-menu-item-ids'] = $active_link_menu_item_ids;
         }
 

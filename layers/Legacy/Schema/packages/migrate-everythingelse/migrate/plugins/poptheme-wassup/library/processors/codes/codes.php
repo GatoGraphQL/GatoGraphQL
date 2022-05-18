@@ -22,9 +22,9 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
             case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
             case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
@@ -34,12 +34,12 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                 return null;
         }
 
-        return parent::getHtmlTag($module, $props);
+        return parent::getHtmlTag($componentVariation, $props);
     }
 
-    protected function isStaticCode(array $module, array &$props)
+    protected function isStaticCode(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
             case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
             case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
@@ -49,15 +49,15 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                 return false;
         }
 
-        return parent::isStaticCode($module, $props);
+        return parent::isStaticCode($componentVariation, $props);
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
                 case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
                 case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
@@ -66,10 +66,10 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                         self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME],
                         self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
                     );
-                    $submodule = $submodules[$module[1]];
+                    $submodule = $submodules[$componentVariation[1]];
 
                     // This value must be set by the parent module
-                    $target_id = $this->getProp($module, $props, 'target-id');
+                    $target_id = $this->getProp($componentVariation, $props, 'target-id');
                     $target = '#'.$target_id;
                     $description = sprintf(
                         '<span id="%s" class="top-collapse"><a data-toggle="collapse" href="%s" aria-expanded="false" class="close" title="%s">%s</a></span>',
@@ -79,12 +79,12 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                         '<i class="fa fa-close"></i>'
                     );
 
-                    if ($module == [self::class, self::MODULE_HTMLCODE_HOMEWELCOMETOP] || $module == [self::class, self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP]) {
+                    if ($componentVariation == [self::class, self::MODULE_HTMLCODE_HOMEWELCOMETOP] || $componentVariation == [self::class, self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP]) {
                              // Allow qTrans to add the language links
                         $description = \PoP\Root\App::applyFilters(
                             'PoP_Module_Processor_HTMLCodes:homewelcometitle',
                             $description,
-                            $module
+                            $componentVariation
                         );
                     }
                     return $description;
@@ -110,19 +110,19 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                     );
 
                     // This value must be set by the parent module
-                    $target_id = $this->getProp($module, $props, 'target-id');
+                    $target_id = $this->getProp($componentVariation, $props, 'target-id');
                     $target = '#'.$target_id;
 
                     $welcometitle = sprintf(
                         '<a data-toggle="collapse" href="%s" aria-expanded="false" class="%s">%s</a>',
                         $target,
-                        $classes[$module[1]],
-                        $titles[$module[1]].' <i class="fa fa-angle-down"></i>'
+                        $classes[$componentVariation[1]],
+                        $titles[$componentVariation[1]].' <i class="fa fa-angle-down"></i>'
                     );
 
                     $welcome = sprintf(
                         '<%1$s id="%2$s" class="top-expand text-center">%3$s</%1$s>',
-                        $markups[$module[1]],
+                        $markups[$componentVariation[1]],
                         $target_id.'-expand',
                         $welcometitle
                     );
@@ -131,7 +131,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
             }
         }
 
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 }
 

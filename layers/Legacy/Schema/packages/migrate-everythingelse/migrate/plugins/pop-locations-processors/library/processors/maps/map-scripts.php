@@ -15,18 +15,18 @@ class PoP_Module_Processor_MapScripts extends PoP_Module_Processor_MapScriptsBas
         );
     }
 
-    public function getCustomizationSubmodule(array $module)
+    public function getCustomizationSubmodule(array $componentVariation)
     {
         $customizations = array(
             self::MODULE_MAP_SCRIPT_POST => [PoP_Module_Processor_PostMapScriptCustomizations::class, PoP_Module_Processor_PostMapScriptCustomizations::MODULE_MAP_SCRIPTCUSTOMIZATION_POST],
             self::MODULE_MAP_SCRIPT_USER => [PoP_Module_Processor_UserMapScriptCustomizations::class, PoP_Module_Processor_UserMapScriptCustomizations::MODULE_MAP_SCRIPTCUSTOMIZATION_USER],
         );
 
-        if ($customization = $customizations[$module[1]] ?? null) {
+        if ($customization = $customizations[$componentVariation[1]] ?? null) {
             return $customization;
         }
 
-        return parent::getCustomizationSubmodule($module);
+        return parent::getCustomizationSubmodule($componentVariation);
     }
 }
 

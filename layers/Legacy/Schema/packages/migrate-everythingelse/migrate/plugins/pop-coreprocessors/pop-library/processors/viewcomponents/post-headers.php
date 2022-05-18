@@ -13,25 +13,25 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
         );
     }
 
-    public function headerShowUrl(array $module, array &$props)
+    public function headerShowUrl(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_POST_URL:
                 return true;
         }
 
-        return parent::headerShowUrl($module, $props);
+        return parent::headerShowUrl($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_POST_URL:
-                $this->appendProp($module, $props, 'class', 'alert alert-warning alert-sm');
+                $this->appendProp($componentVariation, $props, 'class', 'alert alert-warning alert-sm');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

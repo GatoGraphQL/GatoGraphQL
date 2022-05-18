@@ -15,26 +15,26 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inner_modules = array(
             self::MODULE_DATALOAD_LATESTCOUNTS => [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_LATESTCOUNTS],
         );
 
-        if ($inner = $inner_modules[$module[1]] ?? null) {
+        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 PoP_Application_SectionUtils::addDataloadqueryargsLatestcounts($ret);
                 break;
@@ -43,7 +43,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         return $ret;
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $componentVariation): ?string
     {
 
         // Set the display configuration
@@ -51,48 +51,48 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
             [self::class, self::MODULE_DATALOAD_LATESTCOUNTS],
         );
 
-        if (in_array($module, $latestcounts)) {
+        if (in_array($componentVariation, $latestcounts)) {
             $format = POP_FORMAT_LATESTCOUNT;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($componentVariation);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($componentVariation);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 // It can be invisible, nothing to show
-                $this->appendProp($module, $props, 'class', 'hidden');
+                $this->appendProp($componentVariation, $props, 'class', 'hidden');
 
                 // Do not load initially. Load only needed when executing the setTimeout with loadLatest
                 if (\PoP\Root\App::getState('fetching-site')) {
-                    $this->setProp($module, $props, 'skip-data-load', true);
+                    $this->setProp($componentVariation, $props, 'skip-data-load', true);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

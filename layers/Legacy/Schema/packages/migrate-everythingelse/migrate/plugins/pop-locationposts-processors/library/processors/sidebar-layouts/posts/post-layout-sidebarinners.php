@@ -15,11 +15,11 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
                 $ret = array_merge(
@@ -39,20 +39,20 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($componentVariation);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
                 return 'col-xsm-4';
             
@@ -60,7 +60,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($componentVariation);
     }
 }
 

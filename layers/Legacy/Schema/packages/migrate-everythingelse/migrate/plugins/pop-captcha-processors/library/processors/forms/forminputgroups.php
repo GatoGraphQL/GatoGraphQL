@@ -12,34 +12,34 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
         );
     }
 
-    public function getComponentSubname(array $module)
+    public function getComponentSubname(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CAPTCHA:
                 return 'input';
         }
 
-        return parent::getComponentSubname($module);
+        return parent::getComponentSubname($componentVariation);
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_CAPTCHA => [PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CAPTCHA:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -47,11 +47,11 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CAPTCHA:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -61,23 +61,23 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CAPTCHA:
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always
                 if (!PoP_FormUtils::useLoggedinuserData()) {
-                    $this->appendProp($module, $props, 'class', 'visible-always');
+                    $this->appendProp($componentVariation, $props, 'class', 'visible-always');
                 }
 
                 $placeholder = TranslationAPIFacade::getInstance()->__('Type captcha here...', 'pop-coreprocessors');
-                $this->setProp($this->getComponentSubmodule($module), $props, 'placeholder', $placeholder);
+                $this->setProp($this->getComponentSubmodule($componentVariation), $props, 'placeholder', $placeholder);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

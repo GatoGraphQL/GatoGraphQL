@@ -13,11 +13,11 @@ class GD_URE_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_M
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_ORGANIZATION:
                 $ret[] = [GD_URE_Custom_Module_Processor_UserWidgets::class, GD_URE_Custom_Module_Processor_UserWidgets::MODULE_WIDGETCOMPACT_ORGANIZATIONINFO];
                 $ret[] = [GD_URE_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Module_Processor_SidebarComponentsWrappers::MODULE_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES];

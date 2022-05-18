@@ -2,29 +2,29 @@
 
 trait PoPTheme_Wassup_Module_Processor_PageTrait
 {
-    protected function getFrameoptionsSubmodules(array $module): array
+    protected function getFrameoptionsSubmodules(array $componentVariation): array
     {
         return array_merge(
-            $this->getFrametopoptionsSubmodules($module),
-            $this->getFramebottomoptionsSubmodules($module)
+            $this->getFrametopoptionsSubmodules($componentVariation),
+            $this->getFramebottomoptionsSubmodules($componentVariation)
         );
     }
 
-    public function getFrametopoptionsSubmodules(array $module): array
+    public function getFrametopoptionsSubmodules(array $componentVariation): array
     {
         return array();
     }
 
-    public function getFramebottomoptionsSubmodules(array $module): array
+    public function getFramebottomoptionsSubmodules(array $componentVariation): array
     {
         return array();
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
         return array_merge(
-            parent::getSubComponentVariations($module),
-            $this->getFrameoptionsSubmodules($module)
+            parent::getSubComponentVariations($componentVariation),
+            $this->getFrameoptionsSubmodules($componentVariation)
         );
     }
 
@@ -32,17 +32,17 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
-        foreach ($this->getSubComponentVariations($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
             $this->appendProp([$submodule], $props, 'class', 'pop-outerblock');
         }
 
-        $topframeoptions = $this->getFrametopoptionsSubmodules($module);
-        $bottomframeoptions = $this->getFramebottomoptionsSubmodules($module);
-        foreach ($this->getFrameoptionsSubmodules($module) as $submodule) {
+        $topframeoptions = $this->getFrametopoptionsSubmodules($componentVariation);
+        $bottomframeoptions = $this->getFramebottomoptionsSubmodules($componentVariation);
+        foreach ($this->getFrameoptionsSubmodules($componentVariation) as $submodule) {
             $this->appendProp([$submodule], $props, 'class', 'blocksection-controls pull-right');
 
             if (in_array($submodule, $topframeoptions)) {
@@ -52,6 +52,6 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

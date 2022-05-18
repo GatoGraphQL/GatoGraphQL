@@ -30,11 +30,11 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        $ret = parent::getLabel($module, $props);
+        $ret = parent::getLabel($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL:
                 $ret = '<i class="fa fa-fw fa-home"></i>'.$ret;
                 break;
@@ -43,7 +43,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_CUU_USERNAME => [PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_USERNAME],
@@ -58,36 +58,36 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
             self::MODULE_FORMINPUTGROUP_CUU_DESCRIPTION => [PoP_Module_Processor_CreateUpdateUserTextareaFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextareaFormInputs::MODULE_FORMINPUT_CUU_DESCRIPTION],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CUU_EMAIL:
                 return TranslationAPIFacade::getInstance()->__('Please be careful to fill-in the email properly! It will not only appear in the profile page, but also be used by our system to send you notifications.', 'pop-coreprocessors');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Override the placeholders
         $placeholders = array(
             self::MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL => 'https://...',
         );
-        if ($placeholder = $placeholders[$module[1]] ?? null) {
-            $component = $this->getComponentSubmodule($module);
+        if ($placeholder = $placeholders[$componentVariation[1]] ?? null) {
+            $component = $this->getComponentSubmodule($componentVariation);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -21,11 +21,11 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_LOGIN:
                 $ret = array_merge(
                     $ret,
@@ -85,9 +85,9 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_LOSTPWDRESET:
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
@@ -100,12 +100,12 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
                 break;
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 
-    // function initModelProps(array $module, array &$props) {
+    // function initModelProps(array $componentVariation, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_FORMINNER_LOSTPWDRESET:
 
@@ -124,7 +124,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     //             break;
     //     }
 
-    //     parent::initModelProps($module, $props);
+    //     parent::initModelProps($componentVariation, $props);
     // }
 }
 

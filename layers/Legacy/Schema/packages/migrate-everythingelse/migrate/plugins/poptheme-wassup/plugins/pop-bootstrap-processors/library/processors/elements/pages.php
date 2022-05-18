@@ -37,13 +37,13 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_ADDONS:
             case self::MODULE_PAGE_QUICKVIEW:
             case self::MODULE_PAGE_QUICKVIEWSIDEINFO:
@@ -70,15 +70,15 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                     self::MODULE_PAGE_BODYSIDEINFO => POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT,
                     self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
                 );
-                if ($page_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($module_groups[$module[1]] ?? null)) {
+                if ($page_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($module_groups[$componentVariation[1]] ?? null)) {
                     $ret[] = $page_module;
                 }
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_FRAMECOMPONENTS:
-                $moduleAtts = count($module) >= 3 ? $module[2] : null;
+                $moduleAtts = count($componentVariation) >= 3 ? $componentVariation[2] : null;
                 if (!$moduleAtts || !$moduleAtts['onlyinitial']) {
                      // Load targeted module
                     if ($page_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
@@ -97,13 +97,13 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function getFrametopoptionsSubmodules(array $module): array
+    public function getFrametopoptionsSubmodules(array $componentVariation): array
     {
-        $ret = parent::getFrametopoptionsSubmodules($module);
+        $ret = parent::getFrametopoptionsSubmodules($componentVariation);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_BODY:
             case self::MODULE_PAGE_QUICKVIEW:
                 if ($pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
@@ -112,7 +112,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                         self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMETOPOPTIONS,
                         self::MODULE_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS,
                     );
-                    if ($frameoptions_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$module[1]] ?? null)) {
+                    if ($frameoptions_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$componentVariation[1]] ?? null)) {
                         $ret[] = $frameoptions_module;
                     }
                 }
@@ -134,13 +134,13 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function getFramebottomoptionsSubmodules(array $module): array
+    public function getFramebottomoptionsSubmodules(array $componentVariation): array
     {
-        $ret = parent::getFramebottomoptionsSubmodules($module);
+        $ret = parent::getFramebottomoptionsSubmodules($componentVariation);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_BODY:
             case self::MODULE_PAGE_QUICKVIEW:
                 if ($pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
@@ -149,7 +149,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                         self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMEBOTTOMOPTIONS,
                         self::MODULE_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMEBOTTOMOPTIONS,
                     );
-                    if ($frameoptions_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$module[1]] ?? null)) {
+                    if ($frameoptions_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$componentVariation[1]] ?? null)) {
                         $ret[] = $frameoptions_module;
                     }
                 }
@@ -159,20 +159,20 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_ADDONS:
-                $this->appendProp($module, $props, 'class', 'tab-content');
+                $this->appendProp($componentVariation, $props, 'class', 'tab-content');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Make the frame components have a unique ID
             case self::MODULE_PAGE_FRAMECOMPONENTS:
                 foreach (RequestUtils::getFramecomponentComponentVariations() as $submodule) {
@@ -181,7 +181,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

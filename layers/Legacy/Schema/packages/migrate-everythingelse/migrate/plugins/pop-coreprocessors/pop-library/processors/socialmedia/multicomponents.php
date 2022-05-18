@@ -27,12 +27,12 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         $modules = array();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
@@ -70,7 +70,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         $modules = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
             $modules,
-            $module
+            $componentVariation
         );
         $ret = array_merge(
             $ret,
@@ -80,32 +80,32 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
-                $this->appendProp($module, $props, 'class', 'sm-group');
+                $this->appendProp($componentVariation, $props, 'class', 'sm-group');
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
             case self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
             case self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
-                $this->appendProp($module, $props, 'class', 'secinteractions-group');
+                $this->appendProp($componentVariation, $props, 'class', 'secinteractions-group');
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTOPTIONS:
             case self::MODULE_MULTICOMPONENT_USEROPTIONS:
             case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
-                $this->appendProp($module, $props, 'class', 'options-group');
-                foreach ($this->getSubComponentVariations($module) as $submodule) {
+                $this->appendProp($componentVariation, $props, 'class', 'options-group');
+                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -13,9 +13,9 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
         );
     }
 
-    protected function getLayoutSubmodule(array $module)
+    protected function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
                 return [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::MODULE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
 
@@ -26,14 +26,14 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
         return null;
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::MODULE_CONTENTINNER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:
-                $ret[] = $this->getLayoutSubmodule($module);
+                $ret[] = $this->getLayoutSubmodule($componentVariation);
                 break;
         }
 

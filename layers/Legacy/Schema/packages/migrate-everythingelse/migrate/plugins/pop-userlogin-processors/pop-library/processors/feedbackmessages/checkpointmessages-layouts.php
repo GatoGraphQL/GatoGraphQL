@@ -18,14 +18,14 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $componentVariation, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($componentVariation, $props);
 
-        $action = $this->getProp($module, $props, 'action');
+        $action = $this->getProp($componentVariation, $props, 'action');
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN:
                 // User already logged in (cannot welcome the person, can't say "Hi Peter!" since this message will be recorded at the beginning, when we still don't have the person logged in)
                 $ret['error-header'] = TranslationAPIFacade::getInstance()->__('Login/Register', 'pop-coreprocessors');
@@ -49,8 +49,8 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
                 // Allow to add extra messages by WSL for Change Pwd
                 $extra_checkpoint_msgs = \PoP\Root\App::applyFilters(
                     'GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts:checkpoint-messages:loggedin',
-                    $this->getProp($module, $props, 'extra-checkpoint-messages'),
-                    $module
+                    $this->getProp($componentVariation, $props, 'extra-checkpoint-messages'),
+                    $componentVariation
                 );
                 if ($extra_checkpoint_msgs) {
                     $ret = array_merge(
@@ -61,7 +61,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT:
                 $ret['usercannotedit'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You have no permissions to %1$s.', 'pop-coreprocessors'),
@@ -81,11 +81,11 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'extra-checkpoint-messages', array());
-        $this->setProp($module, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
-        parent::initModelProps($module, $props);
+        $this->setProp($componentVariation, $props, 'extra-checkpoint-messages', array());
+        $this->setProp($componentVariation, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

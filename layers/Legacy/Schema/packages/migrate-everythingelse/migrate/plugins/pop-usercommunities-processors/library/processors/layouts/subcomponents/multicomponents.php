@@ -11,11 +11,11 @@ class GD_URE_Module_Processor_MembersLayoutMultipleComponents extends PoP_Module
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_MULTICOMPONENT_COMMUNITYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_MembersLayouts::class, GD_URE_Module_Processor_MembersLayouts::MODULE_URE_LAYOUT_COMMUNITYMEMBERS];
                 break;
@@ -24,16 +24,16 @@ class GD_URE_Module_Processor_MembersLayoutMultipleComponents extends PoP_Module
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_MULTICOMPONENT_COMMUNITYMEMBERS:
-                $this->appendProp($module, $props, 'class', 'clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'clearfix');
                 $this->appendProp([GD_URE_Module_Processor_MembersLayouts::class, GD_URE_Module_Processor_MembersLayouts::MODULE_URE_LAYOUT_COMMUNITYMEMBERS], $props, 'class', 'pull-left');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

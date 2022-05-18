@@ -17,7 +17,7 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_SCROLL_WHOWEARE_DETAILS => [GD_Custom_Module_Processor_CustomScrollInners::class, GD_Custom_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_WHOWEARE_DETAILS],
@@ -26,16 +26,16 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
             self::MODULE_SCROLL_WHOWEARE_FULLVIEW => [GD_Custom_Module_Processor_CustomScrollInners::class, GD_Custom_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_WHOWEARE_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getFetchmoreButtonSubmodule(array $module)
+    public function getFetchmoreButtonSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLL_WHOWEARE_DETAILS:
             case self::MODULE_SCROLL_WHOWEARE_THUMBNAIL:
             case self::MODULE_SCROLL_WHOWEARE_LIST:
@@ -43,10 +43,10 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
                 return null;
         }
 
-        return parent::getFetchmoreButtonSubmodule($module);
+        return parent::getFetchmoreButtonSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Extra classes
@@ -64,18 +64,18 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
         );
 
         $extra_class = '';
-        if (in_array($module, $details)) {
+        if (in_array($componentVariation, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($componentVariation, $thumbnails)) {
             $extra_class = 'thumb';
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($componentVariation, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($componentVariation, $props, 'class', $extra_class);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

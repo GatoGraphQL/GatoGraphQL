@@ -8,30 +8,30 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_FETCHMORE];
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $ret[GD_JS_TITLES]['fetchmore'] = sprintf(
             '%s %s',
-            $this->getProp($module, $props, 'loading-spinner'),
-            $this->getProp($module, $props, 'fetchmore-msg')
+            $this->getProp($componentVariation, $props, 'loading-spinner'),
+            $this->getProp($componentVariation, $props, 'fetchmore-msg')
         );
-        $ret[GD_JS_TITLES]['loading'] = $this->getProp($module, $props, 'loading-msg');
+        $ret[GD_JS_TITLES]['loading'] = $this->getProp($componentVariation, $props, 'loading-msg');
 
-        $ret['hr'] = $this->getProp($module, $props, 'hr');
+        $ret['hr'] = $this->getProp($componentVariation, $props, 'hr');
 
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // Needed for clicking on 'Retry' when there was a problem in the block
         $this->addJsmethod($ret, 'saveLastClicked');
@@ -41,35 +41,35 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataCom
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // $classs = $this->get_general_prop($props, 'btn-submit-class') ? $this->get_general_prop($props, 'btn-submit-class') : 'btn btn-info btn-block';
-        $classs = $this->getProp($module, $props, 'btn-submit-class') ?? 'btn btn-info btn-block';
-        $this->setProp($module, $props, 'class', $classs);
-        $this->setProp($module, $props, 'fetchmore-msg', TranslationAPIFacade::getInstance()->__('Load more', 'pop-coreprocessors'));
-        $this->setProp($module, $props, 'loading-msg', GD_CONSTANT_LOADING_MSG);
-        $this->appendProp($module, $props, 'class', 'pop-scrollformore');
+        $classs = $this->getProp($componentVariation, $props, 'btn-submit-class') ?? 'btn btn-info btn-block';
+        $this->setProp($componentVariation, $props, 'class', $classs);
+        $this->setProp($componentVariation, $props, 'fetchmore-msg', TranslationAPIFacade::getInstance()->__('Load more', 'pop-coreprocessors'));
+        $this->setProp($componentVariation, $props, 'loading-msg', GD_CONSTANT_LOADING_MSG);
+        $this->appendProp($componentVariation, $props, 'class', 'pop-scrollformore');
 
         // Needed for clicking on 'Retry' when there was a problem in the block
-        // $this->appendProp($module, $props, 'class', 'pop-sendrequest-btn');
+        // $this->appendProp($componentVariation, $props, 'class', 'pop-sendrequest-btn');
 
         // Make infinite by default
-        $this->setProp($module, $props, 'infinite', true);
-        if ($this->getProp($module, $props, 'infinite')) {
-            $this->appendProp($module, $props, 'class', 'waypoint');
+        $this->setProp($componentVariation, $props, 'infinite', true);
+        if ($this->getProp($componentVariation, $props, 'infinite')) {
+            $this->appendProp($componentVariation, $props, 'class', 'waypoint');
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
     //-------------------------------------------------
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it

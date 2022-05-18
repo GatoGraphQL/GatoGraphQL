@@ -13,25 +13,25 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
         );
     }
 
-    public function getDescriptionMaxlength(array $module, array &$props)
+    public function getDescriptionMaxlength(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTAUTHOR_LIMITEDCONTENT:
                 return 300;
         }
 
-        return parent::getDescriptionMaxlength($module, $props);
+        return parent::getDescriptionMaxlength($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTAUTHOR_CONTENT:
-                $this->appendProp($module, $props, 'class', 'layoutauthor readable clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'layoutauthor readable clearfix');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

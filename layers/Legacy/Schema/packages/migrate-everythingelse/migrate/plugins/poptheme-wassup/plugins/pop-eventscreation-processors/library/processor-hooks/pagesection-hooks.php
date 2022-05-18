@@ -12,10 +12,10 @@ class PoP_EventsCreation_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $module, $props_in_array, $processor)
+    public function initModelPropsAddons(array $componentVariation, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     $submodules = array(

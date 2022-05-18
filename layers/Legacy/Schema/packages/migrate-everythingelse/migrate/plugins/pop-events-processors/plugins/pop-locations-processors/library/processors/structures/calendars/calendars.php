@@ -11,24 +11,24 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_CALENDAR_EVENTSMAP => [PoP_Events_Locations_Module_Processor_CalendarInners::class, PoP_Events_Locations_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTSMAP],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CALENDAR_EVENTSMAP:
                 $this->addJsmethod($ret, 'waypointsTheater');
                 break;
@@ -37,14 +37,14 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CALENDAR_EVENTSMAP:
                 // Make the offcanvas theater when the scroll reaches top of the page
-                $this->appendProp($module, $props, 'class', 'waypoint');
+                $this->appendProp($componentVariation, $props, 'class', 'waypoint');
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -54,14 +54,14 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CALENDAR_EVENTSMAP:
                 // Make it activeItem: highlight on viewing the corresponding fullview
                 $this->appendProp([GD_EM_Module_Processor_CustomPopoverLayouts::class, GD_EM_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_EVENT], $props, 'class', 'pop-openmapmarkers');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

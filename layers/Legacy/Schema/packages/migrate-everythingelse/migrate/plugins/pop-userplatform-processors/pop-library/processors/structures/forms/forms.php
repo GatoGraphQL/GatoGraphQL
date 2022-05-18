@@ -13,9 +13,9 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_INVITENEWUSERS:
                 return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::MODULE_FORMINNER_INVITENEWUSERS];
 
@@ -23,19 +23,19 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
                 return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::MODULE_FORMINNER_MYPREFERENCES];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_MYPREFERENCES:
                 // For security reasons: delete passwords (more since introducing Login block in offcanvas, so that it will stay there forever and other users could re-login using the exisiting filled-in info)
-                $this->appendProp($module, $props, 'class', 'form-mypreferences');
+                $this->appendProp($componentVariation, $props, 'class', 'form-mypreferences');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

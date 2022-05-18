@@ -12,37 +12,37 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_EVERYTHINGQUICKLINKS:
                 return [PoP_Core_Module_Processor_FormInners::class, PoP_Core_Module_Processor_FormInners::MODULE_FORMINNER_EVERYTHINGQUICKLINKS];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getMethod(array $module, array &$props)
+    public function getMethod(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_EVERYTHINGQUICKLINKS:
                 return 'GET';
         }
 
-        return parent::getMethod($module, $props);
+        return parent::getMethod($componentVariation, $props);
     }
 
-    public function getAction(array $module, array &$props)
+    public function getAction(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_EVERYTHINGQUICKLINKS:
                 // Dataload source: search posts (it will never every trigger to fetch this url, it is just a placeholder
                 // to trigger using js, eg: typeaheadSearch)
                 return RouteUtils::getRouteURL(POP_BLOG_ROUTE_SEARCHCONTENT);
         }
 
-        return parent::getAction($module, $props);
+        return parent::getAction($componentVariation, $props);
     }
 }
 

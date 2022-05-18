@@ -144,9 +144,9 @@ class PoP_ServerSideRendering
             $requestHelperService = RequestHelperServiceFacade::getInstance();
             throw new GenericSystemException(
                 sprintf(
-                    'No path registered for $template \'%s\', for $module \'%s\' (%s)',
+                    'No path registered for $template \'%s\', for $componentVariation \'%s\' (%s)',
                     $template,
-                    $module,
+                    $componentVariation,
                     $requestHelperService->getRequestedFullURL()
                 )
             );
@@ -167,17 +167,17 @@ class PoP_ServerSideRendering
         return $renderer($configuration);
     }
 
-    public function renderModule(array $module, $configuration)
+    public function renderModule(array $componentVariation, $configuration)
     {
         if (!$this->enabled) {
             return '';
         }
 
-        if (!$module) {
+        if (!$componentVariation) {
             $requestHelperService = RequestHelperServiceFacade::getInstance();
             throw new GenericSystemException(
                 sprintf(
-                    '$module cannot be null (%s)',
+                    '$componentVariation cannot be null (%s)',
                     $requestHelperService->getRequestedFullURL()
                 )
             );
@@ -186,7 +186,7 @@ class PoP_ServerSideRendering
         $templates = $this->getJsonTemplates();
 
         // If a template source is not defined, then it is the template itself (eg: the pageSection templates)
-        $template = $templates[$module[1]] ?? $module;
+        $template = $templates[$componentVariation[1]] ?? $componentVariation;
 
         // Render and return the html
         return $this->renderTemplate($template, $configuration);

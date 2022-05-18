@@ -25,11 +25,11 @@ class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_Conten
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_MENU_BUTTON:
                 $ret[] = [PoP_Module_Processor_AnchorMenuLayouts::class, PoP_Module_Processor_AnchorMenuLayouts::MODULE_LAYOUT_MENU_BUTTON];
                 break;

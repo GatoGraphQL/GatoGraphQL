@@ -2,20 +2,20 @@
 
 abstract class PoP_Module_Processor_TagTabPanelSectionBlocksBase extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
-    // public function getNature(array $module)
+    // public function getNature(array $componentVariation)
     // {
     //     return TagRequestNature::TAG;
     // }
 
-    protected function getControlgroupBottomSubmodule(array $module)
+    protected function getControlgroupBottomSubmodule(array $componentVariation)
     {
         return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUPOSTLIST];
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'blockgroup-tagsections');
+        $this->appendProp($componentVariation, $props, 'class', 'blockgroup-tagsections');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

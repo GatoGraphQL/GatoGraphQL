@@ -771,7 +771,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Add all the block methods
         if ($blockJSMethods) {
             foreach ($blockJSMethods as $pageSection => $blockModuleMethods) {
-                foreach ($blockModuleMethods as $module => $moduleMethods) {
+                foreach ($blockModuleMethods as $componentVariation => $moduleMethods) {
                     self::addBlockJsmethods($critical_js_methods, $moduleMethods, POP_PROGRESSIVEBOOTING_CRITICAL);
                     self::addBlockJsmethods($noncritical_js_methods, $moduleMethods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
                 }
@@ -795,7 +795,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function addPagesectionJsmethods(&$js_methods, $moduleMethods, $priority) {
 
-        foreach ($moduleMethods as $module => $priorityGroupMethods) {
+        foreach ($moduleMethods as $componentVariation => $priorityGroupMethods) {
             if ($groupMethods = $priorityGroupMethods[$priority] ?? null) {
                 foreach ($groupMethods as $group => $methods) {
                     foreach ($methods as $method) {

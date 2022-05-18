@@ -21,9 +21,9 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $componentVariation): bool
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERPROFILES:
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTAUTHORS:
@@ -33,12 +33,12 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
                 return true;
         }
 
-        return parent::isMultiple($module);
+        return parent::isMultiple($componentVariation);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES:
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS:
@@ -47,10 +47,10 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
                     self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES => 'profiles',
                     self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS => 'communityusers',
                 );
-                return $names[$module[1]];
+                return $names[$componentVariation[1]];
         }
         
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 }
 

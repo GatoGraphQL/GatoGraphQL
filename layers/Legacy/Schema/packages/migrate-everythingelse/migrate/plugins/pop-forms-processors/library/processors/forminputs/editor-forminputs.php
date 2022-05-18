@@ -12,34 +12,34 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EDITOR:
                 return TranslationAPIFacade::getInstance()->__('Content', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EDITOR:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
         // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EDITOR:
                 return 'forminputeditor';
         }
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 }
 

@@ -15,21 +15,21 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_TAGSUBSCRIBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGUSERS);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_TAGCONTENT:
                 $ret = array_merge(
                     $ret,
@@ -70,14 +70,14 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
         }
 
         // Allow Events Manager to add the Map format
-        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:modules', $ret, $module);
+        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:modules', $ret, $componentVariation);
 
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_TAGCONTENT:
                 $ret = array(
                     [
@@ -136,10 +136,10 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
         }
 
         if ($ret) {
-            return \PoP\Root\App::applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:panel_headers', $ret, $module);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:panel_headers', $ret, $componentVariation);
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

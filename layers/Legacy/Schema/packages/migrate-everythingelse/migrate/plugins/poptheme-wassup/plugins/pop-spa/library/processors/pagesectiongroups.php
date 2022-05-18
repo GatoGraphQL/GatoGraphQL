@@ -7,7 +7,7 @@ use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 {
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
         // If fetching a page, then load only the required pageSection modules and nothing else
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -16,7 +16,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
         if (\PoP\Root\App::getState('modulefilter') == $page->getName()) {
             $ret = array();
 
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_ENTRY_DEFAULT:
                     $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                     if ($content_pagesection_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)) {
@@ -54,7 +54,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
         }
 
         // If loading the site, then print all pageSection modules
-        return parent::getSubComponentVariations($module);
+        return parent::getSubComponentVariations($componentVariation);
     }
 }
 

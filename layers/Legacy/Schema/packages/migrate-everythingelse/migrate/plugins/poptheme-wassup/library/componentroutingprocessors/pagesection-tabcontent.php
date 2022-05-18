@@ -24,9 +24,9 @@ class PoP_Module_TabContentPageSectionComponentRoutingProcessor extends PoP_Modu
             PageRequestNature::PAGE => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_PAGE],
             RequestNature::GENERIC => [PoP_Module_Processor_PageTabsLayouts::class, PoP_Module_Processor_PageTabsLayouts::MODULE_LAYOUT_PAGETABS_ROUTE],
         );
-        foreach ($nature_modules as $nature => $module) {
+        foreach ($nature_modules as $nature => $componentVariation) {
             $ret[$nature][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
             ];
         }
 

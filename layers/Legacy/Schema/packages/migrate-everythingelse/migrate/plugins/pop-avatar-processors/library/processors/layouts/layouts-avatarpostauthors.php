@@ -19,9 +19,9 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getAvatarSize(array $module, array &$props)
+    public function getAvatarSize(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTPOST_AUTHORAVATAR:
                 return GD_AVATAR_SIZE_40;
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
                 return GD_AVATAR_SIZE_120;
         }
         
-        return parent::getAvatarSize($module, $props);
+        return parent::getAvatarSize($componentVariation, $props);
     }
 }
 

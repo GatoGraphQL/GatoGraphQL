@@ -7,27 +7,27 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
 {
     use FormMultipleInputComponentProcessorTrait;
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor::class, PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_CAPTCHA];
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Use the label as placeholder
-        $this->setProp($module, $props, 'placeholder', $this->getLabel($module, $props));
-        parent::initModelProps($module, $props);
+        $this->setProp($componentVariation, $props, 'placeholder', $this->getLabel($componentVariation, $props));
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getInputSubnames(array $module): array
+    public function getInputSubnames(array $componentVariation): array
     {
         return array('input', 'encoded', 'random');
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
 
         // Generate a random number for this captcha
         $captcha = GeneralUtils::generateRandomString(4, false, '0123456789');
@@ -48,15 +48,15 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($placeholder = $this->getProp($module, $props, 'placeholder')) {
+        if ($placeholder = $this->getProp($componentVariation, $props, 'placeholder')) {
             $ret['placeholder'] = $placeholder;
         }
 
-        if ($wrapper_class = $this->getProp($module, $props, 'wrapper-class')) {
+        if ($wrapper_class = $this->getProp($componentVariation, $props, 'wrapper-class')) {
             $ret[GD_JS_CLASSES]['wrapper'] = $wrapper_class;
         }
 

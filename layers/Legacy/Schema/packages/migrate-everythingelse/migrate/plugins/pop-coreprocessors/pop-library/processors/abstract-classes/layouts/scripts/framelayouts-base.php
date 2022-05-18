@@ -3,50 +3,50 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_SCRIPTFRAME];
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getScriptSubmodule(array $module)
+    public function getScriptSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
         return array_merge(
-            parent::getSubComponentVariations($module),
+            parent::getSubComponentVariations($componentVariation),
             array(
-                $this->getLayoutSubmodule($module),
-                $this->getScriptSubmodule($module),
+                $this->getLayoutSubmodule($componentVariation),
+                $this->getScriptSubmodule($componentVariation),
             )
         );
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $layout = $this->getLayoutSubmodule($module);
-        $script = $this->getScriptSubmodule($module);
+        $layout = $this->getLayoutSubmodule($componentVariation);
+        $script = $this->getScriptSubmodule($componentVariation);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script);
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $script = $this->getScriptSubmodule($module);
-        $this->setProp($script, $props, 'frame-module', $module);
-        parent::initModelProps($module, $props);
+        $script = $this->getScriptSubmodule($componentVariation);
+        $this->setProp($script, $props, 'frame-module', $componentVariation);
+        parent::initModelProps($componentVariation, $props);
     }
 }

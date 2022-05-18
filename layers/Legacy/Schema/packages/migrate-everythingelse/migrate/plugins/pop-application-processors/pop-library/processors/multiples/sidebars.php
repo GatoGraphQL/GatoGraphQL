@@ -51,11 +51,11 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR:
@@ -65,7 +65,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
                     self::MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$module[1]];
+                $ret[] = $filters[$componentVariation[1]];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR];
                 break;
 
@@ -81,7 +81,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::MODULE_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
                     self::MODULE_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$module[1]];
+                $ret[] = $filters[$componentVariation[1]];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR];
                 break;
 
@@ -100,7 +100,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR],
                     self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($inner = $inners[$module[1]] ?? null) {
+                if ($inner = $inners[$componentVariation[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -109,7 +109,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_CONTENT_SIDEBAR => POP_SCREEN_SECTION,
@@ -134,16 +134,16 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
             self::MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR => POP_SCREEN_SINGLEUSERS,
             self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR => POP_SCREEN_HOMESECTION,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTION_CONTENT_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_POSTS_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR:
@@ -170,20 +170,20 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR:
             case self::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR:
-                if ($module == [self::class, self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]) {
+                if ($componentVariation == [self::class, self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $target_modules = array(
                         '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                     );
-                } elseif ($module == [self::class, self::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR]) {
+                } elseif ($componentVariation == [self::class, self::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR]) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $target_modules = array(
                         '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],
@@ -209,7 +209,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                 $inners = array(
                     self::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR],
                 );
-                $submodule = $inners[$module[1]];
+                $submodule = $inners[$componentVariation[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
@@ -228,7 +228,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

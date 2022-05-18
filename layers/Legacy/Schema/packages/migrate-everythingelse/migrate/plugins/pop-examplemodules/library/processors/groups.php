@@ -18,11 +18,11 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EXAMPLE_HOME:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 if ($pageTypeAPI->getHomeStaticPageID()) {

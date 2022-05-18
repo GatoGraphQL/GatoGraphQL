@@ -13,25 +13,25 @@ class GD_URE_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proce
         );
     }
 
-    protected function isUserMap(array $module)
+    protected function isUserMap(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLMAP_ORGANIZATIONS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_INDIVIDUALS_SCROLLMAP:
                 return true;
         }
 
-        return parent::isUserMap($module);
+        return parent::isUserMap($componentVariation);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_SCROLLMAP_ORGANIZATIONS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USER_MAP],
             self::MODULE_SCROLLMAP_INDIVIDUALS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USER_MAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 }
 

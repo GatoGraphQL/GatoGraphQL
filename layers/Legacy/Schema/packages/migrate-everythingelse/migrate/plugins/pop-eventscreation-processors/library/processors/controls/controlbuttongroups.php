@@ -19,11 +19,11 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDEVENT:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDEVENT];
                 if (defined('POP_EVENTLINKSCREATIONPROCESSORS_INITIALIZED')) {

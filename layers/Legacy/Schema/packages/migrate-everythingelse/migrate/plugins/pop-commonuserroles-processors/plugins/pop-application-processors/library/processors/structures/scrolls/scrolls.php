@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_SCROLL_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS],
@@ -27,14 +27,14 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::MODULE_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Extra classes
@@ -48,14 +48,14 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
         );
 
         $extra_class = '';
-        if (in_array($module, $fullviews)) {
+        if (in_array($componentVariation, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($module, $details)) {
+        } elseif (in_array($componentVariation, $details)) {
             $extra_class = 'details';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($componentVariation, $props, 'class', $extra_class);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

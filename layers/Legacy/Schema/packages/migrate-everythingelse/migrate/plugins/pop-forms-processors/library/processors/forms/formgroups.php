@@ -11,11 +11,11 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
         );
     }
 
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $componentVariation)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBMITBUTTONFORMGROUP_SEARCH:
                 $ret .= ' col-sm-offset-2 col-sm-10';
                 break;
@@ -24,17 +24,17 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_SUBMITBUTTONFORMGROUP_SEARCH => [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SEARCH],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 }
 

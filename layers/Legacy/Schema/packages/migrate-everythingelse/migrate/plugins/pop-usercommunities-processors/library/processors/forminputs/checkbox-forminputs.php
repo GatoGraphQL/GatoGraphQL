@@ -13,24 +13,24 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Include members?', 'pop-genericforms');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($componentVariation);
     // }
 
     protected function getCommunitiesInput()
@@ -38,19 +38,19 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return [GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST];
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
                 return 'id';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
@@ -58,12 +58,12 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
                 return $componentprocessor_manager->getProcessor($input)->getName($input);
         }
         
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $componentVariation): bool
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
@@ -71,7 +71,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
                 return $componentprocessor_manager->getProcessor($input)->isMultiple($input);
         }
         
-        return parent::isMultiple($module);
+        return parent::isMultiple($componentVariation);
     }
 }
 

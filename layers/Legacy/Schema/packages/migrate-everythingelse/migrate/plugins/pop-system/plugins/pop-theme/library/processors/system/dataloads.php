@@ -14,26 +14,26 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadCo
         );
     }
 
-    public function shouldExecuteMutation(array $module, array &$props): bool
+    public function shouldExecuteMutation(array $componentVariation, array &$props): bool
     {
 
         // The actionexecution is triggered directly
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
                 return true;
         }
 
-        return parent::shouldExecuteMutation($module, $props);
+        return parent::shouldExecuteMutation($componentVariation, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
                 return $this->instanceManager->getInstance(GenerateThemeMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($componentVariation);
     }
 }
 

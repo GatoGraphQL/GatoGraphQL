@@ -12,25 +12,25 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_NEWSLETTER:
                 return TranslationAPIFacade::getInstance()->__('Subscribe to our Newsletter?', 'pop-genericforms');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputDefaultValue(array $module, array &$props): mixed
+    public function getInputDefaultValue(array $componentVariation, array &$props): mixed
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_CUP_NEWSLETTER:
                 // Subscribe to newsletter by default
                 return true;
         }
         
-        return parent::getInputDefaultValue($module, $props);
+        return parent::getInputDefaultValue($componentVariation, $props);
     }
 }
 

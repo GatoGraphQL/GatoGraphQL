@@ -18,9 +18,9 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Log in', 'pop-coreprocessors');
 
@@ -34,12 +34,12 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
                 return TranslationAPIFacade::getInstance()->__('Yes, please log me out', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
 
-    public function getLoadingText(array $module, array &$props)
+    public function getLoadingText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Logging in...', 'pop-coreprocessors');
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-coreprocessors');
         }
         
-        return parent::getLoadingText($module, $props);
+        return parent::getLoadingText($componentVariation, $props);
     }
 }
 

@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_NotificationActionIconLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_AAL_Processors_TemplateResourceLoaderProcessor::class, PoP_AAL_Processors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_NOTIFICATIONICON];
     }
@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_NotificationActionIconLayoutsBase extends Po
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($componentVariation, $props);
 
         // $ret[] = 'action';
         $ret[] = 'icon';
@@ -22,16 +22,16 @@ abstract class PoP_Module_Processor_NotificationActionIconLayoutsBase extends Po
         return $ret;
     }
 
-    public function getIconClass(array $module, array &$props)
+    public function getIconClass(array $componentVariation, array &$props)
     {
         return 'fa fa-fw';
     }
     
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $ret[GD_JS_CLASSES]['icon'] = $this->getIconClass($module, $props);
+        $ret[GD_JS_CLASSES]['icon'] = $this->getIconClass($componentVariation, $props);
 
         return $ret;
     }

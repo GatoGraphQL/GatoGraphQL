@@ -11,37 +11,37 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
                 $layouts = array(
                     self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
                 );
-                return $layouts[$module[1]];
+                return $layouts[$componentVariation[1]];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubmodule($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
                 return 'references';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 
-    public function getUrlParam(array $module)
+    public function getUrlParam(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
                 return POP_INPUTNAME_REFERENCES;
         }
 
-        return parent::getUrlParam($module);
+        return parent::getUrlParam($componentVariation);
     }
 }
 

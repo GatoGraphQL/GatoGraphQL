@@ -15,14 +15,14 @@ class PoPTheme_Wassup_UserAvatar_Module_OnlyMainContentComponentRoutingProcessor
         // Two different actions, handled through $moduleAtts:
         // 1. Upload the image to the S3 repository, when first accessing the page
         // 2. Update the avatar, on the POST operation
-        $module = [PoP_UserAvatarProcessors_Module_Processor_UserDataloads::class, PoP_UserAvatarProcessors_Module_Processor_UserDataloads::MODULE_DATALOAD_USERAVATAR_UPDATE];
+        $componentVariation = [PoP_UserAvatarProcessors_Module_Processor_UserDataloads::class, PoP_UserAvatarProcessors_Module_Processor_UserDataloads::MODULE_DATALOAD_USERAVATAR_UPDATE];
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
-            'component-variation' => $module,
+            'component-variation' => $componentVariation,
         ];
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
             'component-variation' => [
-                $module[0],
-                $module[1],
+                $componentVariation[0],
+                $componentVariation[1],
                 [
                     'executeupdate' => true,
                 ],

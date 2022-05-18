@@ -16,48 +16,48 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
         );
     }
 
-    public function getControlClass(array $module)
+    public function getControlClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getControlClass($module);
+        return parent::getControlClass($componentVariation);
     }
 
-    public function getTitleClass(array $module)
+    public function getTitleClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getTitleClass($module);
+        return parent::getTitleClass($componentVariation);
     }
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Members', 'poptheme-wassup');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
-    protected function getTitleLink(array $module, array &$props)
+    protected function getTitleLink(array $componentVariation, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
                 );
-                return RequestUtils::addRoute($url, $routes[$module[1]] ?? null);
+                return RequestUtils::addRoute($url, $routes[$componentVariation[1]] ?? null);
         }
 
-        return parent::getTitleLink($module, $props);
+        return parent::getTitleLink($componentVariation, $props);
     }
 }
 

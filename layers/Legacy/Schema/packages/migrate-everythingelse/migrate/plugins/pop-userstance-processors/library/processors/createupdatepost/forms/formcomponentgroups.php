@@ -13,25 +13,25 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET];
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
-                $this->appendProp($module, $props, 'class', 'pop-uniqueornone-selectabletypeahead-formgroup');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-uniqueornone-selectabletypeahead-formgroup');
 
-                $component = $this->getComponentSubmodule($module);
+                $component = $this->getComponentSubmodule($componentVariation);
 
                 $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
                 $description = sprintf(
@@ -42,17 +42,17 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return '';
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
 }
 

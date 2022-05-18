@@ -11,14 +11,14 @@ class GD_Custom_EM_Module_Processor_Layouts extends PoP_Module_Processor_Categor
         );
     }
 
-    public function getCategoriesField(array $module, array &$props)
+    public function getCategoriesField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_LOCATIONPOST_CATEGORIES:
                 return 'locationpostcategories-byname';
         }
         
-        return parent::getCategoriesField($module, $props);
+        return parent::getCategoriesField($componentVariation, $props);
     }
 }
 

@@ -129,7 +129,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         );
     }
 
-    public function getObjectName(array $module, array &$props)
+    public function getObjectName(array $componentVariation, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -193,14 +193,14 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$module[1]] ?? null) {
+        if ($cat = $cats[$componentVariation[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($componentVariation, $props);
     }
 
-    public function getObjectNames(array $module, array &$props)
+    public function getObjectNames(array $componentVariation, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -264,16 +264,16 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$module[1]] ?? null) {
+        if ($cat = $cats[$componentVariation[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
 
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($componentVariation, $props);
     }
 
-    public function isAuthor(array $module, array &$props)
+    public function isAuthor(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS02:
@@ -297,12 +297,12 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
                 return true;
         }
 
-        return parent::isAuthor($module, $props);
+        return parent::isAuthor($componentVariation, $props);
     }
 
-    public function isTag(array $module, array &$props)
+    public function isTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS02:
@@ -326,14 +326,14 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
                 return true;
         }
 
-        return parent::isTag($module, $props);
+        return parent::isTag($componentVariation, $props);
     }
 
-    public function getSectionClasses(array $module, array &$props)
+    public function getSectionClasses(array $componentVariation, array &$props)
     {
-        $ret = parent::getSectionClasses($module, $props);
+        $ret = parent::getSectionClasses($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS00:
@@ -459,7 +459,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         $ret = \PoP\Root\App::applyFilters(
             'latestcounts:categoryposts:classes',
             $ret,
-            $module,
+            $componentVariation,
             $props
         );
 

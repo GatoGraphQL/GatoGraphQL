@@ -17,9 +17,9 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_COMMENTS_LIST:
             case self::MODULE_SCROLLINNER_COMMENTS_ADD:
             case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS:
@@ -30,14 +30,14 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_COMMENTS_LIST:
             case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::MODULE_LAYOUT_COMMENTFRAME_LIST];

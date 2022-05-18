@@ -12,24 +12,24 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::MODULE_TABLEINNER_MYSTANCES],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function getHeaderTitles(array $module)
+    public function getHeaderTitles(array $componentVariation)
     {
-        $ret = parent::getHeaderTitles($module);
+        $ret = parent::getHeaderTitles($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYSTANCES:
                 $ret[] = PoP_UserStance_PostNameUtils::getNameUc();
                 $ret[] = TranslationAPIFacade::getInstance()->__('Date', 'pop-userstance-processors');
@@ -40,15 +40,15 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLE_MYSTANCES:
-                $this->appendProp($module, $props, 'class', 'table-mystances');
+                $this->appendProp($componentVariation, $props, 'class', 'table-mystances');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

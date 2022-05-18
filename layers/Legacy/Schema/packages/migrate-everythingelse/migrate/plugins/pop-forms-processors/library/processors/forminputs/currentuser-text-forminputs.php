@@ -16,9 +16,9 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_NAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
 
@@ -26,30 +26,30 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
                 return TranslationAPIFacade::getInstance()->__('Your Email', 'pop-genericforms');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_NAME:
             case self::MODULE_FORMINPUT_EMAIL:
                 return true;
         }
 
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 
-    public function getInputOptions(array $module): array
+    public function getInputOptions(array $componentVariation): array
     {
-        $options = parent::getInputOptions($module);
+        $options = parent::getInputOptions($componentVariation);
 
         // When submitting the form, if user is logged in, then use these values.
         // Otherwise, use the values sent in the form
         if (PoP_FormUtils::useLoggedinuserData() && doingPost() && \PoP\Root\App::getState('is-user-logged-in')) {
             $user_id = \PoP\Root\App::getState('current-user-id');
             $userTypeAPI = UserTypeAPIFacade::getInstance();
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_FORMINPUT_NAME:
                     $options['selected'] = $userTypeAPI->getUserDisplayName($user_id);
                     break;
@@ -63,11 +63,11 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         return $options;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_NAME:
             case self::MODULE_FORMINPUT_EMAIL:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -76,11 +76,11 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_NAME:
             case self::MODULE_FORMINPUT_EMAIL:
                 // For function addDomainClass
@@ -91,21 +91,21 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_NAME:
             case self::MODULE_FORMINPUT_EMAIL:
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always
                 if (!PoP_FormUtils::useLoggedinuserData()) {
-                    $this->appendProp($module, $props, 'class', 'visible-always');
+                    $this->appendProp($componentVariation, $props, 'class', 'visible-always');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

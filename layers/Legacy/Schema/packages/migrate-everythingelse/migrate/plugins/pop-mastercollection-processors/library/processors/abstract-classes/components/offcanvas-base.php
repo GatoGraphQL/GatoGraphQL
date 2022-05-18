@@ -3,75 +3,75 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_OFFCANVAS];
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        if ($this->addClosebutton($module, $props)) {
+        if ($this->addClosebutton($componentVariation, $props)) {
             $this->addJsmethod($ret, 'offcanvasToggle', 'close');
         }
 
         return $ret;
     }
 
-    protected function getHtmltag(array $module, array &$props)
+    protected function getHtmltag(array $componentVariation, array &$props)
     {
         return 'div';
     }
 
-    protected function getClosebuttonTitle(array $module, array &$props)
+    protected function getClosebuttonTitle(array $componentVariation, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('Close', 'pop-mastercollection-processors');
     }
 
-    protected function getClosebuttonClass(array $module, array &$props)
+    protected function getClosebuttonClass(array $componentVariation, array &$props)
     {
         return 'toggle-side close';
     }
 
-    protected function getWrapperClass(array $module, array &$props)
+    protected function getWrapperClass(array $componentVariation, array &$props)
     {
         return '';
     }
 
-    protected function getContentClass(array $module, array &$props)
+    protected function getContentClass(array $componentVariation, array &$props)
     {
         return '';
     }
 
-    protected function addClosebutton(array $module, array &$props)
+    protected function addClosebutton(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    abstract protected function getOffcanvasClass(array $module, array &$props);
+    abstract protected function getOffcanvasClass(array $componentVariation, array &$props);
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $ret['html-tag'] = $this->getHtmltag($module, $props);
-        if ($wrapper_class = $this->getWrapperClass($module, $props)) {
+        $ret['html-tag'] = $this->getHtmltag($componentVariation, $props);
+        if ($wrapper_class = $this->getWrapperClass($componentVariation, $props)) {
             $ret[GD_JS_CLASSES]['wrapper'] = $wrapper_class;
         }
-        if ($content_class = $this->getContentClass($module, $props)) {
+        if ($content_class = $this->getContentClass($componentVariation, $props)) {
             $ret[GD_JS_CLASSES]['content'] = $content_class;
         }
-        if ($this->addClosebutton($module, $props)) {
+        if ($this->addClosebutton($componentVariation, $props)) {
             $ret['add-closebutton'] = true;
-            if ($closebutton_class = $this->getClosebuttonClass($module, $props)) {
+            if ($closebutton_class = $this->getClosebuttonClass($componentVariation, $props)) {
                 $ret[GD_JS_CLASSES]['closebutton'] = $closebutton_class;
             }
-            if ($closebutton_title = $this->getClosebuttonTitle($module, $props)) {
+            if ($closebutton_title = $this->getClosebuttonTitle($componentVariation, $props)) {
                 $ret[GD_JS_TITLES]['closebutton'] = $closebutton_title;
             }
         }
-        if ($submodules = $this->getSubComponentVariations($module)) {
+        if ($submodules = $this->getSubComponentVariations($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
@@ -81,12 +81,12 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataCom
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $offcanvas_class = $this->getOffcanvasClass($module, $props);
-        $this->appendProp($module, $props, 'class', 'offcanvas '.$offcanvas_class);
+        $offcanvas_class = $this->getOffcanvasClass($componentVariation, $props);
+        $this->appendProp($componentVariation, $props, 'class', 'offcanvas '.$offcanvas_class);
         $this->mergeProp(
-            $module,
+            $componentVariation,
             $props,
             'params',
             array(
@@ -94,6 +94,6 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataCom
             )
         );
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

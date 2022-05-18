@@ -11,24 +11,24 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
                 return [PoP_Module_Processor_CommentHiddenInputAlertFormComponents::class, PoP_Module_Processor_CommentHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubmodule($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
                 return 'self';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

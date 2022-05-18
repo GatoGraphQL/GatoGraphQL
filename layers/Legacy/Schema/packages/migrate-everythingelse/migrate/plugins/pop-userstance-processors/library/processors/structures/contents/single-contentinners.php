@@ -15,9 +15,9 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         );
     }
 
-    protected function getCommentssingleLayouts(array $module)
+    protected function getCommentssingleLayouts(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $layouts = array(
                     [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
@@ -27,18 +27,18 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                 break;
         }
 
-        return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $module);
+        return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $componentVariation);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
-                    $this->getCommentssingleLayouts($module)
+                    $this->getCommentssingleLayouts($componentVariation)
                 );
                 break;
 
@@ -51,25 +51,25 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
-                $this->appendProp($module, $props, 'class', 'userpostinteraction-single');
+                $this->appendProp($componentVariation, $props, 'class', 'userpostinteraction-single');
                 break;
 
             case self::MODULE_CONTENTINNER_STANCESINGLE:
-                $this->appendProp($module, $props, 'class', 'alert');
+                $this->appendProp($componentVariation, $props, 'class', 'alert');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_STANCESINGLE:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if (POP_USERSTANCE_TERM_STANCE_PRO && $taxonomyapi->hasTerm(POP_USERSTANCE_TERM_STANCE_PRO, POP_USERSTANCE_TAXONOMY_STANCE, $post_id)) {
@@ -80,12 +80,12 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                     $class = 'alert-info';
                 }
                 if ($class) {
-                    $this->appendProp($module, $props, 'runtime-class', $class);
+                    $this->appendProp($componentVariation, $props, 'runtime-class', $class);
                 }
                 break;
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 }
 

@@ -13,11 +13,11 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         );
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MODAL_QUICKVIEW:
                 $this->addJsmethod($ret, 'customQuickView');
                 $this->addJsmethod($ret, 'destroyPageOnModalClose', 'close');
@@ -27,17 +27,17 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MODAL_QUICKVIEW:
                 $load_module = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_module = $componentVariation == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $quickview_module = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_QUICKVIEW];
@@ -65,11 +65,11 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBodyClass($module, $props);
+        $ret = parent::getBodyClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MODAL_QUICKVIEW:
                 $ret .= ' pop-pagesection-group quickviewpagesection-group row';
                 break;

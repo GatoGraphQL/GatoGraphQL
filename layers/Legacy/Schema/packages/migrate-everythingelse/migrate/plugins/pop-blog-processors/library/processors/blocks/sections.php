@@ -132,9 +132,9 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -188,11 +188,11 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_USERS_SCROLL_LIST => UsersModuleConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => UsersModuleConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => UsersModuleConfiguration::getUsersRoute(),
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_CONTENT_SCROLL_NAVIGATOR],
@@ -255,12 +255,12 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_USERS_CAROUSEL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_CAROUSEL],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $module)
+    protected function getSectionfilterModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
             case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
@@ -309,13 +309,13 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
                 return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS];
         }
 
-        return parent::getSectionfilterModule($module);
+        return parent::getSectionfilterModule($componentVariation);
     }
 
-    protected function getDescriptionBottom(array $module, array &$props)
+    protected function getDescriptionBottom(array $componentVariation, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
@@ -325,12 +325,12 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
                 );
         }
 
-        return parent::getDescriptionBottom($module, $props);
+        return parent::getDescriptionBottom($componentVariation, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
@@ -389,12 +389,12 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             case self::MODULE_BLOCK_USERS_SCROLL_LIST:
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 
-    public function getLatestcountSubmodule(array $module)
+    public function getLatestcountSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS:
             case self::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
@@ -436,30 +436,30 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
                 return [PoPThemeWassup_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_POSTS];
         }
 
-        return parent::getLatestcountSubmodule($module);
+        return parent::getLatestcountSubmodule($componentVariation);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest Content', 'poptheme-wassup');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_USERS_CAROUSEL:
-                $this->appendProp($module, $props, 'class', 'pop-block-carousel block-users-carousel');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

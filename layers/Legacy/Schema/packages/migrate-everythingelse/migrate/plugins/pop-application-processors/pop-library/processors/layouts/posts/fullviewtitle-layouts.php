@@ -15,9 +15,9 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
         );
     }
 
-    public function getHtmlmarkup(array $module, array &$props)
+    public function getHtmlmarkup(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOSTTITLE:
                 return 'h4';
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
                 return 'span';
         }
         
-        return parent::getHtmlmarkup($module, $props);
+        return parent::getHtmlmarkup($componentVariation, $props);
     }
 }
 

@@ -14,26 +14,26 @@ class PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners extends PoP_M
         );
     }
     
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
                 return 'fa-fw fa-envelope-o';
         }
         
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
                 return TranslationAPIFacade::getInstance()->__('Send message', 'pop-coreprocessors');
         }
         
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 }
 

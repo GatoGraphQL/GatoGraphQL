@@ -2,33 +2,33 @@
 
 abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_Module_Processor_AlertsBase
 {
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
-        $ret[] = $this->getLayoutSubmodule($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret[] = $this->getLayoutSubmodule($componentVariation);
         return $ret;
     }
 
-    public function addFeedbackobjectClass(array $module, array &$props)
+    public function addFeedbackobjectClass(array $componentVariation, array &$props)
     {
         return true;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
         $this->addJsmethod($ret, 'addDomainClass');
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
         // For function addDomainClass
         $ret['addDomainClass']['prefix'] = 'feedbackmessage-';
@@ -36,14 +36,14 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
         return $ret;
     }
 
-    public function getAlertClass(array $module, array &$props)
+    public function getAlertClass(array $componentVariation, array &$props)
     {
 
         // If the block is multidomain, then make the feedbackmessage look smaller,
         // since many of them may pile up on top of each other, for each domain
         // (eg: no events for this website, no events for that website)
         // if ($this->get_general_prop($props, 'is-multidomain')) {
-        if ($this->getProp($module, $props, 'multidomain')) {
+        if ($this->getProp($componentVariation, $props, 'multidomain')) {
             return 'alert-xs';
         }
 
@@ -51,9 +51,9 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
         return '';
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'pop-feedbackmessage');
-        parent::initModelProps($module, $props);
+        $this->appendProp($componentVariation, $props, 'class', 'pop-feedbackmessage');
+        parent::initModelProps($componentVariation, $props);
     }
 }

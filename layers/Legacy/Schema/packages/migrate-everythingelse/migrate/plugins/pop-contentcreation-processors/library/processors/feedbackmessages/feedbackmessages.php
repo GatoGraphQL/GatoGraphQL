@@ -15,7 +15,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_FEEDBACKMESSAGE_FLAG => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_FLAG],
@@ -23,11 +23,11 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
             self::MODULE_FEEDBACKMESSAGE_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_UPDATECONTENT],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

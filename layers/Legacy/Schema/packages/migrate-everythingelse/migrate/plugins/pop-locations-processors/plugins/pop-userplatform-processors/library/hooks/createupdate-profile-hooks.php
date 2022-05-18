@@ -19,7 +19,7 @@ class GD_EM_CreateUpdate_Profile_Hooks
         return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP];
     }
 
-    public function getComponentSubmodules($components, array $module, $processor)
+    public function getComponentSubmodules($components, array $componentVariation, $processor)
     {
 
         // Add before the Captcha

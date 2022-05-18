@@ -12,14 +12,14 @@ class PoP_Module_Processor_EmbedPreviewLayouts extends PoP_Module_Processor_Embe
             [self::class, self::MODULE_LAYOUT_USERINPUTEMBEDPREVIEW],
         );
     }
-    public function getFrameSrc(array $module, array &$props)
+    public function getFrameSrc(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_USERINPUTEMBEDPREVIEW:
                 return \PoP\Root\App::applyFilters('PoP_Module_Processor_EmbedPreviewLayouts:getFrameSrc', '');
         }
 
-        return parent::getFrameSrc($module, $props);
+        return parent::getFrameSrc($componentVariation, $props);
     }
 }
 

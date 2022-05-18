@@ -13,11 +13,11 @@ class GD_Custom_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Pro
 
 
     
-    public function getFooterSubmodules(array $module)
+    public function getFooterSubmodules(array $componentVariation)
     {
-        $ret = parent::getFooterSubmodules($module);
+        $ret = parent::getFooterSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST:
                 $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::MODULE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
                 $ret[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION];
@@ -31,18 +31,18 @@ class GD_Custom_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST:
                 $sidebars = array(
                     self::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$componentVariation[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 }
 

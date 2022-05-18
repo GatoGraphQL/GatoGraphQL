@@ -11,25 +11,25 @@ class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends 
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
                 return [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE];
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
-                $this->appendProp($module, $props, 'class', 'inline');
+                $this->appendProp($componentVariation, $props, 'class', 'inline');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -13,11 +13,11 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_WIDGETWRAPPER_COMMUNITIES:
                 $ret[] = [GD_URE_Module_Processor_Widgets::class, GD_URE_Module_Processor_Widgets::MODULE_URE_WIDGET_COMMUNITIES];
                 break;
@@ -30,9 +30,9 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_WIDGETWRAPPER_COMMUNITIES:
             case self::MODULE_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES:
                 return 'hasActiveCommunities';

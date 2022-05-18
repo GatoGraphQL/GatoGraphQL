@@ -29,11 +29,11 @@ class PoP_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FOLLOWUSER_STYLES:
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::MODULE_LAYOUT_FOLLOWUSER_HIDE_STYLES];
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::MODULE_LAYOUT_UNFOLLOWUSER_SHOW_STYLES];

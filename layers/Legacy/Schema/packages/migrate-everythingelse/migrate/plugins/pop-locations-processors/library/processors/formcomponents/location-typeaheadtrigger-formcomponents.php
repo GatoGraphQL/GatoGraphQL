@@ -13,24 +13,24 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION:
                 $layouts = array(
                     self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS => [PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATIONS],
                     self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION => [PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATION],
                 );
-                return $layouts[$module[1]];
+                return $layouts[$componentVariation[1]];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubmodule($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:
                 return 'locations';
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
                 return 'location';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

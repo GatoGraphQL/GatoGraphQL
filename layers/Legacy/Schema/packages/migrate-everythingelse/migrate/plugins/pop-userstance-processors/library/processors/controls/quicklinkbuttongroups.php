@@ -15,11 +15,11 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_STANCEEDIT:
                 $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_STANCEEDIT];
                 break;
@@ -39,15 +39,15 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE:
-                $this->appendProp($module, $props, 'class', 'pop-stance-count');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-stance-count');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

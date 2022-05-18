@@ -16,9 +16,9 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_POSTEDIT:
                 return [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT];
 
@@ -29,12 +29,12 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
                 return [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTPREVIEW];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_POSTEDIT:
                 return 'editURL';
 
@@ -42,12 +42,12 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
                 return 'previewURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
 
@@ -58,24 +58,24 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
                 return TranslationAPIFacade::getInstance()->__('Preview', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_POSTPREVIEW:
                 return PoP_Application_Utils::getPreviewTarget();
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_POSTEDIT:
             case self::MODULE_BUTTON_POSTVIEW:
             case self::MODULE_BUTTON_POSTPREVIEW:
@@ -86,18 +86,18 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_POSTPREVIEW:
                 // Allow to add data-sw-networkfirst="true"
                 if ($params = \PoP\Root\App::applyFilters('GD_ContentCreation_Module_Processor_Buttons:postpreview:params', array())) {
-                    $this->mergeProp($module, $props, 'params', $params);
+                    $this->mergeProp($componentVariation, $props, 'params', $params);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

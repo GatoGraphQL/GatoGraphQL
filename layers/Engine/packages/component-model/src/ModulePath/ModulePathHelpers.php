@@ -37,10 +37,10 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
-    public function getStringifiedModulePropagationCurrentPath(array $module): string
+    public function getStringifiedModulePropagationCurrentPath(array $componentVariation): string
     {
         $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
-        $module_propagation_current_path[] = $module;
+        $module_propagation_current_path[] = $componentVariation;
         return $this->stringifyModulePath($module_propagation_current_path);
     }
 

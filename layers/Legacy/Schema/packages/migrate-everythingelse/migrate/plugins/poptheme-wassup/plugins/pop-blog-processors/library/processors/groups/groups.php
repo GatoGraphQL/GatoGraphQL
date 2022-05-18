@@ -20,9 +20,9 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
@@ -35,37 +35,37 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
                     self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
                     self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST],
                 );
-                return $inners[$module[1]];
+                return $inners[$componentVariation[1]];
         }
 
         return null;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $submodule = $this->getInnerSubmodule($module);
+                $submodule = $this->getInnerSubmodule($componentVariation);
                 $this->setProp([$submodule], $props, 'title-htmltag', 'h2');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $submodule = $this->getInnerSubmodule($module);
+                $submodule = $this->getInnerSubmodule($componentVariation);
 
                 // Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
                 $title = getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
@@ -73,20 +73,20 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
                 break;
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $ret[] = $this->getInnerSubmodule($module);
+                $ret[] = $this->getInnerSubmodule($componentVariation);
                 break;
         }
 

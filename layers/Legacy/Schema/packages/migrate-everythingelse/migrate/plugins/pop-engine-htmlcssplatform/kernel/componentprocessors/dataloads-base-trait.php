@@ -6,17 +6,17 @@ use PoP\ComponentModel\State\ApplicationState;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 {
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         // Validate that the strata includes the required stratum
         if (!in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
-        if ($filter_module = $this->getFilterSubmodule($module)) {
-            if ($this->getProp($module, $props, 'show-filter')) {
+        if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
+            if ($this->getProp($componentVariation, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($filter_module);
@@ -25,27 +25,27 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-            $this->setProp($module, $props, 'show-filter', true);
+            $this->setProp($componentVariation, $props, 'show-filter', true);
 
-            if ($filter_module = $this->getFilterSubmodule($module)) {
+            if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
 
                 // Class needed for the proxyForm's selector when proxying this one block
-                $this->appendProp($module, $props, 'class', 'withfilter');
+                $this->appendProp($componentVariation, $props, 'class', 'withfilter');
 
                 // Filter hidden: always hide it, eg: for Full Post
-                if ($show_filter = $this->getProp($module, $props, 'show-filter')) {
+                if ($show_filter = $this->getProp($componentVariation, $props, 'show-filter')) {
 
                     // "pop-blockfilter": Class needed for the proxyForm's selector when proxying this one form
                     $class = 'pop-blockfilter collapse alert alert-info form-horizontal';
 
-                    if ($this->getProp($module, $props, 'filter-hidden')) {
+                    if ($this->getProp($componentVariation, $props, 'filter-hidden')) {
                         $class .= ' hidden';
                     }
 
@@ -53,22 +53,22 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                 }
             }
 
-            $this->metaInitProps($module, $props);
+            $this->metaInitProps($componentVariation, $props);
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-            if ($filter_module = $this->getFilterSubmodule($module)) {
+            if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
 
                 // Filter visible: if explicitly defined, or if currently filtering with it
-                if ($show_filter = $this->getProp($module, $props, 'show-filter')) {
+                if ($show_filter = $this->getProp($componentVariation, $props, 'show-filter')) {
 
                     // Comment Leo 31/10/2014: don't show the filter open when filtering by anymore for MESYM v4,
                     // it takes so much space specially in the embed, and in some case, eg:
@@ -77,9 +77,9 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                     // Comment Leo 15/04/2015: do not show the filter even if filtering for EMBED and PRINT
                     if (\PoP\Root\App::applyFilters(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, true)) {
                         // if ($filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module)) {
-                        $filterVisible = $this->getProp($module, $props, 'filter-visible');
+                        $filterVisible = $this->getProp($componentVariation, $props, 'filter-visible');
                         // if ($filterVisible || \PoP\Engine\FilterUtils::filteringBy($filter)) {
-                        if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringComponentVariations($module)) {
+                        if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation)) {
 
                             // Filter will be open depending on URL params, so make this class a runtime one
                             $this->appendProp($filter_module, $props, 'runtime-class', 'in');
@@ -90,14 +90,14 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             }
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 
     //-------------------------------------------------
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function filterVisible(array $module)
+    protected function filterVisible(array $componentVariation)
     {
         return false;
     }

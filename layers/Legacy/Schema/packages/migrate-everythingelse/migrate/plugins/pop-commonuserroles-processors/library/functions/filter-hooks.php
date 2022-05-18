@@ -4,9 +4,9 @@
  * Add filtercomponents
  */
 \PoP\Root\App::addFilter('CommonUserRoles:FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponent', 10, 2);
-function gdUreAddFiltercomponent($filterinputs, array $module)
+function gdUreAddFiltercomponent($filterinputs, array $componentVariation)
 {
-	if ($module == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS]) {
+	if ($componentVariation == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS]) {
 	    array_splice(
 	    	$filterinputs,
 	    	array_search(
@@ -18,7 +18,7 @@ function gdUreAddFiltercomponent($filterinputs, array $module)
 	    		[GD_CommonUserRoles_Module_Processor_ProfileFormGroups::class, GD_CommonUserRoles_Module_Processor_ProfileFormGroups::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS],
 	    	]
 	    );
-	} elseif ($module == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_ORGANIZATIONS]) {
+	} elseif ($componentVariation == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_ORGANIZATIONS]) {
 	    array_splice(
 	    	$filterinputs,
 	    	array_search(
@@ -35,9 +35,9 @@ function gdUreAddFiltercomponent($filterinputs, array $module)
     return $filterinputs;
 }
 \PoP\Root\App::addFilter('CommonUserRoles:SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponent', 10, 2);
-function gdUreAddSimpleFiltercomponent($filterinputs, array $module)
+function gdUreAddSimpleFiltercomponent($filterinputs, array $componentVariation)
 {
-	if ($module == [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS]) {
+	if ($componentVariation == [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS]) {
 	    array_splice(
 	    	$filterinputs,
 	    	array_search(
@@ -49,7 +49,7 @@ function gdUreAddSimpleFiltercomponent($filterinputs, array $module)
 	    		[GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS],
 	    	]
 	    );
-	} elseif ($module == [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS]) {
+	} elseif ($componentVariation == [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS]) {
 	    array_splice(
 	    	$filterinputs,
 	    	array_search(

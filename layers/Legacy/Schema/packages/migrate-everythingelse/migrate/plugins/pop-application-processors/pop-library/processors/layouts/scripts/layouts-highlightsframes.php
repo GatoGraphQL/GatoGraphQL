@@ -13,25 +13,25 @@ class PoP_Module_Processor_HighlightReferencesFramesLayouts extends PoP_Module_P
         );
     }
 
-    public function doAppend(array $module)
+    public function doAppend(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT:
                 return false;
         }
         
-        return parent::doAppend($module);
+        return parent::doAppend($componentVariation);
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_HIGHLIGHTS_APPENDTOSCRIPT:
             case self::MODULE_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT:
                 return [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::MODULE_SUBCOMPONENT_HIGHLIGHTS];
         }
         
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
 }
 

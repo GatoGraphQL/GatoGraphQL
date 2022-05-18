@@ -14,8 +14,8 @@ class PoP_ContactUs_GFHelpers
             POP_GENERICFORMS_GF_FORM_CONTACTUS_FIELDNAME_MESSAGE_ID => [PoP_ContactUs_Module_Processor_TextareaFormInputs::class, PoP_ContactUs_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGE],
         );
         $fieldnames = array();
-        foreach ($gfinputname_modules as $gf_field_name => $module) {
-            $fieldnames[$componentprocessor_manager->getProcessor($module)->getName($module)] = $gf_field_name;
+        foreach ($gfinputname_modules as $gf_field_name => $componentVariation) {
+            $fieldnames[$componentprocessor_manager->getProcessor($componentVariation)->getName($componentVariation)] = $gf_field_name;
         }
 
         return $fieldnames;

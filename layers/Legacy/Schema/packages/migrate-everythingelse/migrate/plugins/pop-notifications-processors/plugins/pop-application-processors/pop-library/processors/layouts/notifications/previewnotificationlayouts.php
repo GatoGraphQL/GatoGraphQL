@@ -13,16 +13,16 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
         );
     }
     
-    public function getUserAvatarModule(array $module)
+    public function getUserAvatarModule(array $componentVariation)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS:
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR60];
             }
         }
 
-        return parent::getUserAvatarModule($module);
+        return parent::getUserAvatarModule($componentVariation);
     }
 }
 

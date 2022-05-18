@@ -65,10 +65,10 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 
         // Apply filtering of the data
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
-            foreach ($filtering_modules as $module) {
+            foreach ($filtering_modules as $componentVariation) {
                 /** @var FilterDataComponentProcessorInterface */
-                $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-                $filterDataComponentProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
+                $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+                $filterDataComponentProcessor->filterHeadmoduleDataloadQueryArgs($componentVariation, $query);
             }
         }
 

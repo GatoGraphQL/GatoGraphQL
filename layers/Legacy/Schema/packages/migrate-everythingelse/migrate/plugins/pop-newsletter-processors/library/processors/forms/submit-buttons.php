@@ -14,9 +14,9 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-genericforms');
 
@@ -24,29 +24,29 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
                 return TranslationAPIFacade::getInstance()->__('Confirm unsubscription', 'pop-genericforms');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
     
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
             case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return 'btn btn-info';
         }
 
-        return parent::getBtnClass($module, $props);
+        return parent::getBtnClass($componentVariation, $props);
     }
 
-    public function getLoadingText(array $module, array &$props)
+    public function getLoadingText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
             case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms');
         }
         
-        return parent::getLoadingText($module, $props);
+        return parent::getLoadingText($componentVariation, $props);
     }
 }
 

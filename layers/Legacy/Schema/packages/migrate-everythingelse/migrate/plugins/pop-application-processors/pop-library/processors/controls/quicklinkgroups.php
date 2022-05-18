@@ -35,11 +35,11 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKGROUP_POST:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE];
                 break;
@@ -50,13 +50,13 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 $submodules = array();
                 $submodules[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
                 $submodules[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
-                if ($module == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
+                if ($componentVariation == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
                     $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
                 $submodules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
                     $submodules,
-                    $module
+                    $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
@@ -74,13 +74,13 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                     $submodules[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
                 }
-                if ($module == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
+                if ($componentVariation == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
                     $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
                 $submodules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
                     $submodules,
-                    $module
+                    $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
@@ -150,26 +150,26 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
-                $this->appendProp($module, $props, 'class', 'pop-functiongroup');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-functiongroup');
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
                     self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST => [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
                 );
-                // $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group bg-warning');
-                $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group');
+                // $this->appendProp($downlevels[$componentVariation[1]], $props, 'class', 'btn-group bg-warning');
+                $this->appendProp($downlevels[$componentVariation[1]], $props, 'class', 'btn-group');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

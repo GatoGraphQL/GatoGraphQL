@@ -4,17 +4,17 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_SUBCOMPONENT];
     }
 
-    public function getSubcomponentField(array $module)
+    public function getSubcomponentField(array $componentVariation)
     {
         return '';
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
         return array();
     }
@@ -22,41 +22,41 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubmodules(array $componentVariation): array
     {
         return [
             new RelationalModuleField(
-                $this->getSubcomponentField($module),
-                $this->getLayoutSubmodules($module)
+                $this->getSubcomponentField($componentVariation),
+                $this->getLayoutSubmodules($componentVariation)
             ),
         ];
     }
 
-    public function isIndividual(array $module, array &$props)
+    public function isIndividual(array $componentVariation, array &$props)
     {
         return true;
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
         return 'div';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret['subcomponent-field'] = $this->getSubcomponentField($module);
-        if ($layouts = $this->getLayoutSubmodules($module)) {
+        $ret['subcomponent-field'] = $this->getSubcomponentField($componentVariation);
+        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
-        $ret['individual'] = $this->isIndividual($module, $props);
-        $ret['html-tag'] = $this->getHtmlTag($module, $props);
+        $ret['individual'] = $this->isIndividual($componentVariation, $props);
+        $ret['html-tag'] = $this->getHtmlTag($componentVariation, $props);
 
         return $ret;
     }

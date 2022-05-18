@@ -17,38 +17,38 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
         );
     }
 
-    public function getMapdivSubmodule(array $module)
+    public function getMapdivSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MAP_INDIVIDUAL_POST:
             case self::MODULE_MAP_INDIVIDUAL_USER:
             case self::MODULE_MAP_SIDEBARINDIVIDUAL:
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
         }
 
-        return parent::getMapdivSubmodule($module);
+        return parent::getMapdivSubmodule($componentVariation);
     }
 
-    public function getDrawmarkersSubmodule(array $module)
+    public function getDrawmarkersSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MAP_INDIVIDUAL_POST:
             case self::MODULE_MAP_INDIVIDUAL_USER:
             case self::MODULE_MAP_SIDEBARINDIVIDUAL:
                 return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS];
         }
 
-        return parent::getDrawmarkersSubmodule($module);
+        return parent::getDrawmarkersSubmodule($componentVariation);
     }
 
-    public function openOnemarkerInfowindow(array $module)
+    public function openOnemarkerInfowindow(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MAP_SIDEBARINDIVIDUAL:
                 return false;
         }
 
-        return parent::openOnemarkerInfowindow($module);
+        return parent::openOnemarkerInfowindow($componentVariation);
     }
 }
 

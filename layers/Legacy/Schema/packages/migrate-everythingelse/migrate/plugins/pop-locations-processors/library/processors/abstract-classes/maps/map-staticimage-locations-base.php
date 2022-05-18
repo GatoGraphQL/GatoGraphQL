@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_STATICIMAGE_LOCATIONS];
     }
@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubmodules(array $componentVariation): array
     {
-        $urlparam = $this->getUrlparamSubmodule($module);
+        $urlparam = $this->getUrlparamSubmodule($componentVariation);
         return [
             new RelationalModuleField(
                 'locations',
@@ -25,18 +25,18 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         ];
     }
 
-    public function getUrlparamSubmodule(array $module)
+    public function getUrlparamSubmodule(array $componentVariation)
     {
         return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::MODULE_MAP_STATICIMAGE_URLPARAM];
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $urlparam = $this->getUrlparamSubmodule($module);
+        $urlparam = $this->getUrlparamSubmodule($componentVariation);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
 
         return $ret;

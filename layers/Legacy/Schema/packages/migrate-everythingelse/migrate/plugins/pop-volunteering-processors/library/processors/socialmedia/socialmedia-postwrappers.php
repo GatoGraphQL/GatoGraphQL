@@ -13,18 +13,18 @@ class PoPCore_GenericForms_Module_Processor_SocialMediaPostWrappers extends PoP_
         );
     }
 
-    public function getSocialmediaModule(array $module)
+    public function getSocialmediaModule(array $componentVariation)
     {
         $socialmedias = array(
             self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER => [PoPCore_GenericForms_Module_Processor_SocialMedia::class, PoPCore_GenericForms_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER],
             self::MODULE_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER => [PoPCore_GenericForms_Module_Processor_SocialMedia::class, PoPCore_GenericForms_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA_VOLUNTEER],
         );
 
-        if ($socialmedia = $socialmedias[$module[1]] ?? null) {
+        if ($socialmedia = $socialmedias[$componentVariation[1]] ?? null) {
             return $socialmedia;
         }
 
-        return parent::getSocialmediaModule($module);
+        return parent::getSocialmediaModule($componentVariation);
     }
 }
 

@@ -13,9 +13,9 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
         );
     }
 
-    public function getUrlparamSubmodule(array $module)
+    public function getUrlparamSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MAP_STATICIMAGE:
                 return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::MODULE_MAP_STATICIMAGE_URLPARAM];
 
@@ -23,19 +23,19 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
                 return [PoP_Module_Processor_MapStaticImageLocations::class, PoP_Module_Processor_MapStaticImageLocations::MODULE_MAP_STATICIMAGE_LOCATIONS];
         }
 
-        return parent::getUrlparamSubmodule($module);
+        return parent::getUrlparamSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MAP_STATICIMAGE:
             case self::MODULE_MAP_STATICIMAGE_USERORPOST:
-                $this->appendProp($module, $props, 'class', 'img-responsive');
+                $this->appendProp($componentVariation, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

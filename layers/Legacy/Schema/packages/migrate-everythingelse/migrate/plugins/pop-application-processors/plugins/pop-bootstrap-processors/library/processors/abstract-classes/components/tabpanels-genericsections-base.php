@@ -5,7 +5,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends PoP_Module_Processor_FormatActiveTabPanelComponentsBase
 {
-    public function getPanelHeaderThumbs(array $module, array &$props)
+    public function getPanelHeaderThumbs(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubComponentVariations($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
             $processor = $componentprocessor_manager->getProcessor($submodule);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
@@ -36,9 +36,9 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             return $ret;
         }
 
-        return parent::getPanelHeaderThumbs($module, $props);
+        return parent::getPanelHeaderThumbs($componentVariation, $props);
     }
-    public function getPanelHeaderTitles(array $module, array &$props)
+    public function getPanelHeaderTitles(array $componentVariation, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubComponentVariations($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
             $processor = $componentprocessor_manager->getProcessor($submodule);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
@@ -69,10 +69,10 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             return $ret;
         }
 
-        return parent::getPanelHeaderTitles($module, $props);
+        return parent::getPanelHeaderTitles($componentVariation, $props);
     }
 
-    protected function lazyLoadInactivePanels(array $module, array &$props)
+    protected function lazyLoadInactivePanels(array $componentVariation, array &$props)
     {
         return true;
     }

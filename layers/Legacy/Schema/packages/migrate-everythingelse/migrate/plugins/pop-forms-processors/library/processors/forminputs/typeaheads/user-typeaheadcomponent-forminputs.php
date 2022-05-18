@@ -16,23 +16,23 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    // protected function getSourceFilter(array $module, array &$props)
+    // protected function getSourceFilter(array $componentVariation, array &$props)
     // {
     //     return POP_FILTER_USERS;
     // }
-    protected function getSourceFilterParams(array $module, array &$props)
+    protected function getSourceFilterParams(array $componentVariation, array &$props)
     {
-        $ret = parent::getSourceFilterParams($module, $props);
+        $ret = parent::getSourceFilterParams($componentVariation, $props);
 
         if (defined('POP_POSTS_INITIALIZED')) {
             $ret[] = [
@@ -43,9 +43,9 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 
         return $ret;
     }
-    protected function getRemoteUrl(array $module, array &$props)
+    protected function getRemoteUrl(array $componentVariation, array &$props)
     {
-        $url = parent::getRemoteUrl($module, $props);
+        $url = parent::getRemoteUrl($componentVariation, $props);
 
         $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
         return $dataloadHelperService->addFilterParams(
@@ -59,15 +59,15 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
         );
     }
 
-    protected function getTypeaheadDataloadSource(array $module, array &$props)
+    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 
-        return parent::getTypeaheadDataloadSource($module, $props);
+        return parent::getTypeaheadDataloadSource($componentVariation, $props);
     }
 }
 

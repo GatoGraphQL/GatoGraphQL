@@ -17,11 +17,11 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
                 $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::MODULE_LAYOUT_USERSTANCEPOSTINTERACTION];
                 break;
@@ -38,9 +38,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
@@ -50,17 +50,17 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return null;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
-                $this->appendProp($module, $props, 'class', 'userpostinteraction clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'userpostinteraction clearfix');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

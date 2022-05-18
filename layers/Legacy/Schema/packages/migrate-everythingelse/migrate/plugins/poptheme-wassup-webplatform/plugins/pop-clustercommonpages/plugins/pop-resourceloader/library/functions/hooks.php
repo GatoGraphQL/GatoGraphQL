@@ -12,9 +12,9 @@ class PoPTheme_Wassup_CommonPages_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getModuleCssResources($resources, array $module, array $templateResource, $template, array $props, $processor)
+    public function getModuleCssResources($resources, array $componentVariation, array $templateResource, $template, array $props, $processor)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case GD_ClusterCommonPages_Module_Processor_CustomScrolls::MODULE_SCROLL_OURSPONSORS_SMALLDETAILS:
                 $resources[] = [PoPTheme_Wassup_CommonPages_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CommonPages_CSSResourceLoaderProcessor::RESOURCE_CSS_SMALLDETAILS];
                 break;

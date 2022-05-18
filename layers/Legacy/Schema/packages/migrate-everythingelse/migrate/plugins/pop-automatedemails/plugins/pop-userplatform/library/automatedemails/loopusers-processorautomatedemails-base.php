@@ -23,8 +23,8 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
-            $module = $engine->getEntryComponent();
-            $processor = $componentprocessor_manager->getProcessor($module);
+            $componentVariation = $engine->getEntryComponent();
+            $processor = $componentprocessor_manager->getProcessor($componentVariation);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
 
@@ -62,7 +62,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $request['hist_time'] = ($lastaccess && $lastaccess > $yesterday) ? $lastaccess : $yesterday;
 
                 // Regenerate the data
-                $data = $engine->getModuleData($module, $processor, $engineState->props, $formatter, $request);
+                $data = $engine->getModuleData($componentVariation, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
                 // Simply check if the dbobjectids for the user is empty, for the main block

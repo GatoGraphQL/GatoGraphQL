@@ -15,9 +15,9 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
                 return TranslationAPIFacade::getInstance()->__('View all', 'pop-notifications-processors');
 
@@ -25,11 +25,11 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                 return TranslationAPIFacade::getInstance()->__('Mark all as read', 'pop-notifications-processors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
                 return getRouteIcon(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS, false);
 
@@ -37,42 +37,42 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                 return getRouteIcon(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD, false);
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 $routes = array(
                     self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
                     self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
                 );
-                $route = $routes[$module[1]];
+                $route = $routes[$componentVariation[1]];
 
                 return RouteUtils::getRouteURL($route);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
-                $this->appendProp($module, $props, 'class', 'btn btn-link btn-compact');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 // Only if the user is logged in on any one domain
-                $this->appendProp($module, $props, 'class', 'visible-loggedin-anydomain');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-loggedin-anydomain');
 
                 // Tell the Search engines to not follow the link
                 $this->mergeProp(
-                    $module,
+                    $componentVariation,
                     $props,
                     'params',
                     array(
@@ -82,7 +82,7 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

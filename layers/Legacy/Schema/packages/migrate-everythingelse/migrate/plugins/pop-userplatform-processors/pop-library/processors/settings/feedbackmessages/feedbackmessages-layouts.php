@@ -12,11 +12,11 @@ class PoP_Module_Processor_SettingsFeedbackMessageLayouts extends PoP_Module_Pro
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $componentVariation, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Alright, everything set up', 'poptheme-wassup');
                 $ret['success'] = sprintf(

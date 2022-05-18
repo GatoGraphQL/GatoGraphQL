@@ -14,43 +14,43 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
         );
     }
 
-    public function getControlClass(array $module)
+    public function getControlClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_USERS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getControlClass($module);
+        return parent::getControlClass($componentVariation);
     }
 
-    public function getTitleClass(array $module)
+    public function getTitleClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_USERS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getTitleClass($module);
+        return parent::getTitleClass($componentVariation);
     }
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users', 'poptheme-wassup');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
-    protected function getTitleLink(array $module, array &$props)
+    protected function getTitleLink(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 
-        return parent::getTitleLink($module, $props);
+        return parent::getTitleLink($componentVariation, $props);
     }
 }
 

@@ -12,14 +12,14 @@ class PoP_Volunteering_Module_Processor_TextFormInputs extends PoP_Module_Proces
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_PHONE:
                 return TranslationAPIFacade::getInstance()->__('Your Phone number', 'pop-genericforms');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 }
 

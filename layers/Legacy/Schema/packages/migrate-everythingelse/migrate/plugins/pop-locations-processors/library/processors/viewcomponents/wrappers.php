@@ -21,11 +21,11 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS];
                 break;
@@ -54,9 +54,9 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:
@@ -69,11 +69,11 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return null;
     }
 
-    public function getConditionFailedSubmodules(array $module)
+    public function getConditionFailedSubmodules(array $componentVariation)
     {
-        $ret = parent::getConditionFailedSubmodules($module);
+        $ret = parent::getConditionFailedSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:

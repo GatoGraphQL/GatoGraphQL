@@ -15,11 +15,11 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
                 $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
                 break;
@@ -36,15 +36,15 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
                 $this->appendProp([PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::MODULE_LAYOUT_SIMPLEPOSTAUTHORS], $props, 'class', 'pull-right');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

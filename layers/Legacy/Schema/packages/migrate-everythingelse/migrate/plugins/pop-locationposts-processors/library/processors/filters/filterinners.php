@@ -15,9 +15,9 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS => [
@@ -42,8 +42,8 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -53,18 +53,18 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS => POP_FILTER_LOCATIONPOSTS,
     //         self::MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS => POP_FILTER_AUTHORLOCATIONPOSTS,
     //         self::MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS => POP_FILTER_TAGLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

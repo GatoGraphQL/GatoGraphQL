@@ -85,9 +85,9 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_CONTENT_THUMBNAIL:
             case self::MODULE_SCROLLINNER_HIGHLIGHTS_THUMBNAIL:
             case self::MODULE_SCROLLINNER_POSTS_THUMBNAIL:
@@ -146,12 +146,12 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
@@ -194,7 +194,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
             self::MODULE_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_AUTHORLAYOUT_FULLVIEW_POST],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 

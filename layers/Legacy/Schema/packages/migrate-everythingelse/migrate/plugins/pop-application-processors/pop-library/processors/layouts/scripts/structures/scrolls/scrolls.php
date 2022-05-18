@@ -17,9 +17,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS];
 
@@ -33,12 +33,12 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function addFetchedData(array $module, array &$props)
+    public function addFetchedData(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
@@ -46,24 +46,24 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
                 return false;
         }
 
-        return parent::addFetchedData($module, $props);
+        return parent::addFetchedData($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 $classes = array(
                     self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE => 'references',
                 );
 
-                $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
+                $this->setProp($componentVariation, $props, 'appendable', true);
+                $this->setProp($componentVariation, $props, 'appendable-class', $classes[$componentVariation[1]] ?? null);
 
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

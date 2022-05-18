@@ -10,24 +10,24 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getValueFormat(array $module, array &$props)
+    public function getValueFormat(array $componentVariation, array &$props)
     {
         return null;
     }
 
-    public function isHidden(array $module, array &$props)
+    public function isHidden(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        return $this->getLabelText($module, $props).($this->isMandatory($module, $props) ? GD_CONSTANT_MANDATORY : '');
+        return $this->getLabelText($componentVariation, $props).($this->isMandatory($componentVariation, $props) ? GD_CONSTANT_MANDATORY : '');
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        if ($this->getProp($module, $props, 'mandatory')) {
+        if ($this->getProp($componentVariation, $props, 'mandatory')) {
             return true;
         }
 
@@ -38,56 +38,56 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
     // OTHER Functions (Organize!)
     //-------------------------------------------------
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
         return '';
     }
 
-    public function executeClearInput(array $module, array &$props)
+    public function executeClearInput(array $componentVariation, array &$props)
     {
-        if ($this->getProp($module, $props, 'pop-form-clear')) {
+        if ($this->getProp($componentVariation, $props, 'pop-form-clear')) {
             return true;
         }
 
-        return $this->clearInput($module, $props);
+        return $this->clearInput($componentVariation, $props);
     }
 
-    public function clearInput(array $module, array &$props)
+    public function clearInput(array $componentVariation, array &$props)
     {
         return false;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        if ($this->executeClearInput($module, $props)) {
+        if ($this->executeClearInput($componentVariation, $props)) {
             $this->addJsmethod($ret, 'clearInput');
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($this->isHidden($module, $props)) {
-            $this->appendProp($module, $props, 'class', 'hidden');
+        if ($this->isHidden($componentVariation, $props)) {
+            $this->appendProp($componentVariation, $props, 'class', 'hidden');
         }
 
-        $this->appendProp($module, $props, 'input-class', GD_FORM_INPUT);
+        $this->appendProp($componentVariation, $props, 'input-class', GD_FORM_INPUT);
 
         // first set mandatory, only then label, since label will use the value of mandatory
         // The label can be overridden (normally done by the FormGroup)
-        $this->setProp($module, $props, 'label', $this->getLabel($module, $props));
+        $this->setProp($componentVariation, $props, 'label', $this->getLabel($componentVariation, $props));
 
-        if ($this->getProp($module, $props, 'disabled')) {
-            $this->appendProp($module, $props, 'class', 'disabled');
+        if ($this->getProp($componentVariation, $props, 'disabled')) {
+            $this->appendProp($componentVariation, $props, 'class', 'disabled');
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $componentVariation)
     // {
     //     return false;
     // }
@@ -97,43 +97,43 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
-        $this->addMetaFormcomponentDataFields($ret, $module, $props);
+        $ret = parent::getDataFields($componentVariation, $props);
+        $this->addMetaFormcomponentDataFields($ret, $componentVariation, $props);
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        $this->addMetaFormcomponentModuleConfiguration($ret, $module, $props);
+        $this->addMetaFormcomponentModuleConfiguration($ret, $componentVariation, $props);
 
-        if ($value_format = $this->getValueFormat($module, $props)) {
+        if ($value_format = $this->getValueFormat($componentVariation, $props)) {
             $ret['value-format'] = $value_format;
         }
 
-        $ret[GD_JS_CLASSES]['input'] = $this->getProp($module, $props, 'input-class');
+        $ret[GD_JS_CLASSES]['input'] = $this->getProp($componentVariation, $props, 'input-class');
 
-        $ret['name'] = $this->getInputName($module, $props);
-        $ret['label'] = $this->getProp($module, $props, 'label');
+        $ret['name'] = $this->getInputName($componentVariation, $props);
+        $ret['label'] = $this->getProp($componentVariation, $props, 'label');
 
-        if ($this->getProp($module, $props, 'readonly')) {
+        if ($this->getProp($componentVariation, $props, 'readonly')) {
             $ret['readonly'] = true;
         }
-        if ($this->getProp($module, $props, 'disabled')) {
+        if ($this->getProp($componentVariation, $props, 'disabled')) {
             $ret['disabled'] = true;
         }
 
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
 
-        $this->addMetaFormcomponentModuleRuntimeconfiguration($ret, $module, $props);
+        $this->addMetaFormcomponentModuleRuntimeconfiguration($ret, $componentVariation, $props);
 
         return $ret;
     }

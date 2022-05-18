@@ -9,20 +9,20 @@ define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');
 
 abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Processor_FiltersBase
 {
-    public function getAction(array $module, array &$props)
+    public function getAction(array $componentVariation, array &$props)
     {
         // The delegator filter will simply point to the current page, adding ?modulefilter=maincontentmodule so that is the module that gets filtered
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         return $requestHelperService->getCurrentURL();
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MainContentModule */
         $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
         $this->mergeImmutableJsconfigurationProp(
-            $module,
+            $componentVariation,
             $props,
             array(
                 'fetchparams' => array(
@@ -30,15 +30,15 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
                 ),
             )
         );
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // Depending on the form type, execute a js method or another
-        $form_type = $this->getFormType($module, $props);
+        $form_type = $this->getFormType($componentVariation, $props);
         if ($form_type == GD_SUBMITFORMTYPE_DELEGATE) {
             $this->addJsmethod($ret, 'initDelegatorFilter');
         }
@@ -46,24 +46,24 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getFormType(array $module, array &$props)
+    public function getFormType(array $componentVariation, array &$props)
     {
         return GD_SUBMITFORMTYPE_DELEGATE;
     }
 
     // Method to override, giving the jQuery selector to the proxied form
-    public function getBlockTarget(array $module, array &$props)
+    public function getBlockTarget(array $componentVariation, array &$props)
     {
         return null;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Specify the block target
-        if ($block_target = $this->getBlockTarget($module, $props)) {
+        if ($block_target = $this->getBlockTarget($componentVariation, $props)) {
             $this->mergeProp(
-                $module,
+                $componentVariation,
                 $props,
                 'params',
                 array(
@@ -72,6 +72,6 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
             );
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

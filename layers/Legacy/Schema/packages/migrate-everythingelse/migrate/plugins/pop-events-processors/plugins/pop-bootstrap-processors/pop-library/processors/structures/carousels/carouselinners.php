@@ -15,9 +15,9 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELINNER_EVENTS:
             case self::MODULE_CAROUSELINNER_AUTHOREVENTS:
             case self::MODULE_CAROUSELINNER_TAGEVENTS:
@@ -31,14 +31,14 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELINNER_EVENTS:
             case self::MODULE_CAROUSELINNER_AUTHOREVENTS:
             case self::MODULE_CAROUSELINNER_TAGEVENTS:
@@ -46,7 +46,7 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
                 $layout = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomCarouselInners:layout', 
                     [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST], 
-                    $module
+                    $componentVariation
                 );
                 $ret[] = $layout;
                 break;

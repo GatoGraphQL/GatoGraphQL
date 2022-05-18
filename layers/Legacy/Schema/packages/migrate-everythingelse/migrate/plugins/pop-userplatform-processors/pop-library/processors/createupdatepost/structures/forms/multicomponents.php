@@ -35,11 +35,11 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         // );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH:
                 $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_CUP_STATUS];
                 $ret[] = [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SUBMIT];
@@ -102,14 +102,14 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE:
             case self::MODULE_MULTICOMPONENT_FORM_POST_RIGHTSIDE:
-                if (!($classs = $this->getProp($module, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
+                if (!($classs = $this->getProp($componentVariation, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
                     $classs = 'alert alert-info';
                 }
                 $status = GD_CreateUpdate_Utils::moderate() ?
@@ -127,7 +127,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -32,9 +32,9 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $blocks = array(
             self::MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR],
@@ -46,10 +46,10 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR],
             self::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]] ?? null) {
+        if ($block = $blocks[$componentVariation[1]] ?? null) {
             $ret[] = $block;
         } else {
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR:
@@ -59,7 +59,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                         self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],
                         self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR],
                     );
-                    $ret[] = $filters[$module[1]];
+                    $ret[] = $filters[$componentVariation[1]];
 
                     // Allow User Role Editor to add blocks specific to that user role
                     $ret = \PoP\Root\App::applyFilters(
@@ -74,7 +74,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $componentVariation)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR => POP_SCREEN_SECTIONCALENDAR,
@@ -89,16 +89,16 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR => POP_SCREEN_AUTHORSECTIONCALENDAR,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($componentVariation);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_EVENTS_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR:
@@ -113,19 +113,19 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($componentVariation);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR:
                 $inners = array(
                     self::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR],
                     self::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
                 );
-                $submodule = $inners[$module[1]];
+                $submodule = $inners[$componentVariation[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
@@ -144,7 +144,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

@@ -51,11 +51,11 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
     }
 
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $componentVariation)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTGROUP_LINKCATEGORIES:
             case self::MODULE_FILTERINPUTGROUP_APPLIESTO:
             case self::MODULE_FILTERINPUTGROUP_CATEGORIES:
@@ -71,11 +71,11 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $componentVariation)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTGROUP_LINKCATEGORIES:
             case self::MODULE_FILTERINPUTGROUP_APPLIESTO:
             case self::MODULE_FILTERINPUTGROUP_CATEGORIES:
@@ -92,9 +92,9 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CUP_TITLE:
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE:
                 return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_FORMINPUT_CUP_TITLE];
@@ -154,12 +154,12 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
                 return [PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::class, PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS];
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_CUP_STATUS:
                 return TranslationAPIFacade::getInstance()->__('\'Draft\': still editing, our website admin will not publish it yet. \'Finished editing\': our website admin will publish it (almost) immediately. \'Already published\': our website admin has published it, post is already online.', 'poptheme-wassup');
 
@@ -173,13 +173,13 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
                 return TranslationAPIFacade::getInstance()->__('Please copy/paste any important content from the original post.', 'poptheme-wassup');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $component = $this->getComponentSubmodule($module);
-        switch ($module[1]) {
+        $component = $this->getComponentSubmodule($componentVariation);
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK:
                 $this->setProp($component, $props, 'placeholder', 'https://...');
                 break;
@@ -204,17 +204,17 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Highlight:', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
 }
 

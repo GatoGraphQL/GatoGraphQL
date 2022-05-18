@@ -22,20 +22,20 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
             self::MODULE_DATALOAD_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
             self::MODULE_DATALOAD_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
             self::MODULE_DATALOAD_LOGIN => POP_USERLOGIN_ROUTE_LOGIN,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $componentVariation, array &$props): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LOGOUT:
             case self::MODULE_DATALOAD_LOSTPWD:
             case self::MODULE_DATALOAD_LOSTPWDRESET:
@@ -43,12 +43,12 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($module, $props);
+        return parent::getRelevantRouteCheckpointTarget($componentVariation, $props);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inner_modules = array(
             self::MODULE_DATALOAD_LOGIN => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::MODULE_FORM_LOGIN],
@@ -57,16 +57,16 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
             self::MODULE_DATALOAD_LOGOUT => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::MODULE_FORM_LOGOUT],
         );
 
-        if ($inner = $inner_modules[$module[1]] ?? null) {
+        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LOGIN:
                 return $this->instanceManager->getInstance(LoginMutationResolverBridge::class);
 
@@ -80,12 +80,12 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
                 return $this->instanceManager->getInstance(LogoutMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($componentVariation);
     }
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackmessageModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LOGIN:
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_LOGIN];
 
@@ -99,23 +99,23 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_LOGOUT];
         }
 
-        return parent::getFeedbackmessageModule($module);
+        return parent::getFeedbackmessageModule($componentVariation);
     }
 
-    protected function getCheckpointmessageModule(array $module)
+    protected function getCheckpointmessageModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LOSTPWD:
             case self::MODULE_DATALOAD_LOSTPWDRESET:
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_NOTLOGGEDIN];
         }
 
-        return parent::getCheckpointmessageModule($module);
+        return parent::getCheckpointmessageModule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LOGIN:
             case self::MODULE_DATALOAD_LOSTPWD:
             case self::MODULE_DATALOAD_LOSTPWDRESET:
@@ -125,7 +125,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

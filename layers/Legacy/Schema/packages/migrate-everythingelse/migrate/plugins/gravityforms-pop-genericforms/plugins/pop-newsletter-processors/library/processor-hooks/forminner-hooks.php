@@ -18,9 +18,9 @@ class PoP_Newsletter_Module_Processor_GFFormInnerHooks
         );
     }
 
-    public function getLayoutSubmodules($layouts, array $module)
+    public function getLayoutSubmodules($layouts, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Newsletter_Module_Processor_GFFormInners::MODULE_FORMINNER_NEWSLETTER:
                 $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID];
                 break;
@@ -29,10 +29,10 @@ class PoP_Newsletter_Module_Processor_GFFormInnerHooks
         return $layouts;
     }
 
-    public function initModelProps(array $module, $props_in_array, $processor)
+    public function initModelProps(array $componentVariation, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Newsletter_Module_Processor_GFFormInners::MODULE_FORMINNER_NEWSLETTER:
                 // Form ID
                 $form_id = PoP_Newsletter_GFHelpers::getNewsletterFormId();

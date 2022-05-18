@@ -37,8 +37,8 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     public function getFilterInputComponentVariations(array $filterInputModules): array
     {
         $modules = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputComponentVariations();
-        foreach ($modules as $module) {
-            $pos = array_search($module, $filterInputModules);
+        foreach ($modules as $componentVariation) {
+            $pos = array_search($componentVariation, $filterInputModules);
             if ($pos !== false) {
                 array_splice($filterInputModules, $pos, 1);
             }

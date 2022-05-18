@@ -36,11 +36,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS:
                 $ret[] = [PoP_Module_Processor_HighlightedPostSubcomponentLayouts::class, PoP_Module_Processor_HighlightedPostSubcomponentLayouts::MODULE_LAYOUT_HIGHLIGHTEDPOST_ADDONS];
                 break;
@@ -85,7 +85,7 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $componentVariation, array &$props)
     {
         $extracts = TranslationAPIFacade::getInstance()->__('Highlights', 'poptheme-wassup');
         $additionals = TranslationAPIFacade::getInstance()->__('Responses', 'pop-coreprocessors');
@@ -105,9 +105,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW => $additionals,
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$componentVariation[1]] ?? null;
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGET_HIGHLIGHTS => 'fa-asterisk',
@@ -125,11 +125,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW => 'fa-asterisk',
         );
 
-        return $fontawesomes[$module[1]] ?? null;
+        return $fontawesomes[$componentVariation[1]] ?? null;
     }
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_DETAILS:
@@ -147,11 +147,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return 'panel-body';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($componentVariation, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_DETAILS:
@@ -167,11 +167,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return '';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($componentVariation, $props);
     }
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_DETAILS:
@@ -187,11 +187,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return 'panel panel-default panel-sm';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($componentVariation, $props);
     }
-    public function getTitleWrapperClass(array $module, array &$props)
+    public function getTitleWrapperClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_DETAILS:
@@ -202,11 +202,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return '';
         }
 
-        return parent::getTitleWrapperClass($module, $props);
+        return parent::getTitleWrapperClass($componentVariation, $props);
     }
-    public function getTitleClass(array $module, array &$props)
+    public function getTitleClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_DETAILS:
@@ -216,11 +216,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return 'panel-title';
         }
 
-        return parent::getTitleClass($module, $props);
+        return parent::getTitleClass($componentVariation, $props);
     }
-    public function getQuicklinkgroupSubmodule(array $module)
+    public function getQuicklinkgroupSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
@@ -234,11 +234,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return [PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::class, PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST];
         }
 
-        return parent::getQuicklinkgroupSubmodule($module);
+        return parent::getQuicklinkgroupSubmodule($componentVariation);
     }
-    public function collapsible(array $module, array &$props)
+    public function collapsible(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_HIGHLIGHTS_DETAILS:
             case self::MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
             case self::MODULE_WIDGET_REFERENCEDBY_DETAILS:
@@ -246,7 +246,7 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return true;
         }
 
-        return parent::collapsible($module, $props);
+        return parent::collapsible($componentVariation, $props);
     }
 }
 

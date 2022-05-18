@@ -23,9 +23,9 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES => [
@@ -81,8 +81,8 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'Stances:SimpleFilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -92,7 +92,7 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES => POP_FILTER_STANCES,
@@ -103,11 +103,11 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE => POP_FILTER_AUTHORSTANCES_STANCE,
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE => POP_FILTER_STANCES_GENERALSTANCE,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

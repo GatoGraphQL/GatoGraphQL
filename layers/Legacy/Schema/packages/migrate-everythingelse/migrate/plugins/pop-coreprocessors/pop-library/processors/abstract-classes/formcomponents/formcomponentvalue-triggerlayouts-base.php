@@ -8,21 +8,21 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 {
     use FormComponentValueTrait, FormComponentModuleDelegatorTrait;
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENTVALUE_TRIGGERLAYOUT];
     }
 
-    public function getFormcomponentModule(array $module)
+    public function getFormcomponentModule(array $componentVariation)
     {
-        return $this->getTriggerSubmodule($module);
+        return $this->getTriggerSubmodule($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        // if ($this->getProp($module, $props, 'replicable')) {
+        // if ($this->getProp($componentVariation, $props, 'replicable')) {
 
         $this->addJsmethod($ret, 'renderDBObjectLayoutFromURLParam');
         // }
@@ -30,92 +30,92 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $ret;
     }
 
-    public function getTriggerRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
+    public function getTriggerRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
     {
         return null;
     }
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubmodule(array $componentVariation): ?array
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        $ret[] = $this->getTriggerSubmodule($module);
+        $ret[] = $this->getTriggerSubmodule($componentVariation);
 
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        $trigger_module = $this->getTriggerSubmodule($module);
+        $trigger_module = $this->getTriggerSubmodule($componentVariation);
 
         // Add the class to be able to merge
-        $this->appendProp($module, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($trigger_module));
+        $this->appendProp($componentVariation, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($trigger_module));
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 
-    public function getUrlParam(array $module)
+    public function getUrlParam(array $componentVariation)
     {
 
         // By default, it is the field name. However, it is disassociated: we can pass "references" in the URL to initially set the value,
         // however the form field has a different name, for security (eg: fight spammers)
-        return $this->getName($module);
+        return $this->getName($componentVariation);
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $componentVariation, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($module, $props);
+        $this->metaFormcomponentInitModuleRequestProps($componentVariation, $props);
 
         // Because the URL param and the field name are disassociated, instead of getting ->getValue (which gets the value for the fieldname),
         // we do $_GET instead
-        if ($value = \PoP\Root\App::query($this->getUrlParam($module))) {
-            $trigger_module = $this->getTriggerSubmodule($module);
+        if ($value = \PoP\Root\App::query($this->getUrlParam($componentVariation))) {
+            $trigger_module = $this->getTriggerSubmodule($componentVariation);
             $this->setProp($trigger_module, $props, 'default-value', $value);
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $trigger_module = $this->getTriggerSubmodule($module);
+        $trigger_module = $this->getTriggerSubmodule($componentVariation);
 
         // // Because the triggered layout will need to be rendered, it needs to have its template_path printed in the webplatform
         // $this->setProp($trigger_module, $props, 'module-path', true);
         $this->setProp($trigger_module, $props, 'dynamic-module', true);
 
         // // Initialize typeahead value for replicable/webplatform
-        // if ($this->getProp($module, $props, 'replicable')) {
+        // if ($this->getProp($componentVariation, $props, 'replicable')) {
 
-        if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($module)) {
+        if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($componentVariation)) {
             $database_key = $triggerTypeResolver->getTypeOutputDBKey();
 
             // Needed to execute fillInput on the typeahead input to get the value from the request
             $this->mergeProp(
-                $module,
+                $componentVariation,
                 $props,
                 'params',
                 array(
                     'data-database-key' => $database_key,
-                    'data-urlparam' => $this->getUrlParam($module),
+                    'data-urlparam' => $this->getUrlParam($componentVariation),
                 )
             );
             // }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        // if ($this->getProp($module, $props, 'replicable')) {
-        $ret['renderDBObjectLayoutFromURLParam']['trigger-layout'] = $this->getTriggerSubmodule($module);
+        // if ($this->getProp($componentVariation, $props, 'replicable')) {
+        $ret['renderDBObjectLayoutFromURLParam']['trigger-layout'] = $this->getTriggerSubmodule($componentVariation);
         // }
 
         return $ret;
@@ -126,25 +126,25 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
-        $this->addMetaFormcomponentDataFields($ret, $module, $props);
+        $ret = parent::getDataFields($componentVariation, $props);
+        $this->addMetaFormcomponentDataFields($ret, $componentVariation, $props);
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($module)) {
+        if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($componentVariation)) {
             $ret['dbkey'] = $triggerTypeResolver->getTypeOutputDBKey();
         }
 
-        $trigger_module = $this->getTriggerSubmodule($module);
+        $trigger_module = $this->getTriggerSubmodule($componentVariation);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_module);
 
-        $this->addMetaFormcomponentModuleConfiguration($ret, $module, $props);
+        $this->addMetaFormcomponentModuleConfiguration($ret, $componentVariation, $props);
 
         return $ret;
     }
@@ -152,52 +152,52 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubmodules(array $componentVariation): array
     {
-        if ($field = $this->getDbobjectField($module)) {
+        if ($field = $this->getDbobjectField($componentVariation)) {
             return [
                 new RelationalModuleField(
                     $field,
                     [
-                        $this->getTriggerSubmodule($module),
+                        $this->getTriggerSubmodule($componentVariation),
                     ]
                 ),
             ];
         }
 
-        return parent::getRelationalSubmodules($module);
+        return parent::getRelationalSubmodules($componentVariation);
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
-        $this->addMetaFormcomponentModuleRuntimeconfiguration($ret, $module, $props);
+        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
+        $this->addMetaFormcomponentModuleRuntimeconfiguration($ret, $componentVariation, $props);
         return $ret;
     }
 
-    protected function getModuleMutableonrequestSupplementaryDbobjectdataValues(array $module, array &$props)
+    protected function getModuleMutableonrequestSupplementaryDbobjectdataValues(array $componentVariation, array &$props)
     {
 
         // Load all the potential values for the Typeahead Trigger:
         // First check for the value. If it has one, that's it
         // If not, in the webplatform it will possibly need 2 other values: 'default-value', and the URL param value
         // But the latter one, only if the URL param is different than the name. If it is not, that case is already covered by ->getValue()
-        // $filter = $this->getProp($module, $props, 'filter');
-        if ($value = $this->getValue($module)) {
+        // $filter = $this->getProp($componentVariation, $props, 'filter');
+        if ($value = $this->getValue($componentVariation)) {
             // If not multiinput, the $value may not be an array
             if (!is_array($value)) {
                 $value = array($value);
             }
         } else {
             $value = array();
-            if ($default_value = $this->getProp($module, $props, 'default-value')) {
+            if ($default_value = $this->getProp($componentVariation, $props, 'default-value')) {
                 $value = array_merge(
                     $value,
                     is_array($default_value) ? $default_value : array($default_value)
                 );
             }
-            if ($this->getUrlParam($module) != $this->getName($module)) {
-                if ($urlparam_value = \PoP\Root\App::query($this->getUrlParam($module))) {
+            if ($this->getUrlParam($componentVariation) != $this->getName($componentVariation)) {
+                if ($urlparam_value = \PoP\Root\App::query($this->getUrlParam($componentVariation))) {
                     $value = array_merge(
                         $value,
                         is_array($urlparam_value) ? $urlparam_value : array($urlparam_value)
@@ -209,25 +209,25 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $value;
     }
 
-    public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array
+    public function getMutableonrequestSupplementaryDbobjectdata(array $componentVariation, array &$props): array
     {
-        if ($value = $this->getModuleMutableonrequestSupplementaryDbobjectdataValues($module, $props)) {
+        if ($value = $this->getModuleMutableonrequestSupplementaryDbobjectdataValues($componentVariation, $props)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
-            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-            $trigger_module = $this->getTriggerSubmodule($module);
+            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
+            $trigger_module = $this->getTriggerSubmodule($componentVariation);
             $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_module)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
 
             // Extend the dataload ids
             return array(
-                $this->getTriggerRelationalTypeResolver($module)->getTypeName() => array(
+                $this->getTriggerRelationalTypeResolver($componentVariation)->getTypeName() => array(
                     'ids' => $value,
                     'data-fields' => $trigger_data_properties['data-fields'],
                 ),
             );
         }
 
-        return parent::getMutableonrequestSupplementaryDbobjectdata($module, $props);
+        return parent::getMutableonrequestSupplementaryDbobjectdata($componentVariation, $props);
     }
 }

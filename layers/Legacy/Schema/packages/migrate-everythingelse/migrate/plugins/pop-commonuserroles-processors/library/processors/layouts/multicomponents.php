@@ -11,11 +11,11 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
                 $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_ORGANIZATIONTYPES];
                 $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_ORGANIZATIONCATEGORIES];
@@ -25,18 +25,18 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
-                $modules = $this->getSubComponentVariations($module);
+                $modules = $this->getSubComponentVariations($componentVariation);
                 foreach ($modules as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

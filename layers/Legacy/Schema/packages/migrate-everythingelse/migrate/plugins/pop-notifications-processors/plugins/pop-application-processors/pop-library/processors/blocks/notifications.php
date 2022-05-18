@@ -16,36 +16,36 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $inner_modules = array(
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS => [AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST => [AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_modules[$module[1]] ?? null) {
+        if ($inner = $inner_modules[$componentVariation[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDescription(array $module, array &$props)
+    public function getDescription(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Ask the user to log-in to see the personal notifications
@@ -59,14 +59,14 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
             break;
         }
 
-        return parent::getDescription($module, $props);
+        return parent::getDescription($componentVariation, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Fetch latest notifications every 30 seconds
@@ -80,16 +80,16 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Needed to set the notifications count on the top bar, bell button
-                // if ($target = $this->getProp($module, $props, 'datasetcount-target')) {
-                if ($this->getProp($module, $props, 'set-datasetcount')) {
+                // if ($target = $this->getProp($componentVariation, $props, 'datasetcount-target')) {
+                if ($this->getProp($componentVariation, $props, 'set-datasetcount')) {
                     $ret['timeoutLoadLatestBlock']['datasetcount-target'] = '#'.AAL_PoPProcessors_NotificationUtils::getNotificationcountId();//$target;
                     $ret['timeoutLoadLatestBlock']['datasetcount-updatetitle'] = true;
                 }
@@ -110,29 +110,29 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 return [AAL_PoPProcessors_Module_Processor_ControlGroups::class, AAL_PoPProcessors_Module_Processor_ControlGroups::MODULE_AAL_CONTROLGROUP_NOTIFICATIONLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'block-notifications');
-                $this->appendProp($module, $props, 'class', 'block-notifications');
+                $this->setProp($componentVariation, $props, 'resourceloader', 'block-notifications');
+                $this->appendProp($componentVariation, $props, 'class', 'block-notifications');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

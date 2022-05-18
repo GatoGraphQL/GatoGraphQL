@@ -21,7 +21,7 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getAvatarSize(array $module)
+    public function getAvatarSize(array $componentVariation)
     {
         $avatars = array(
             self::MODULE_LAYOUT_USERAVATAR_40 => GD_AVATAR_SIZE_40,
@@ -32,24 +32,24 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
             self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE => GD_AVATAR_SIZE_150,
         );
 
-        if ($avatar = $avatars[$module[1]] ?? null) {
+        if ($avatar = $avatars[$componentVariation[1]] ?? null) {
             return $avatar;
         }
 
-        return parent::getAvatarSize($module);
+        return parent::getAvatarSize($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE:
             case self::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE:
             case self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE:
-                $this->appendProp($module, $props, 'class', 'img-responsive');
+                $this->appendProp($componentVariation, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -49,7 +49,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 }
 
 // \PoP\Root\App::addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
-// function popAddMenuitemParentpageActive($add_active, array $module, array &$props) {
+// function popAddMenuitemParentpageActive($add_active, array $componentVariation, array &$props) {
 
 //     // Only if not in Side or Top pageSections
 //     $pagesection_settings_id = $props['pagesection-moduleoutputname'];

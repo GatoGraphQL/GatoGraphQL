@@ -35,15 +35,15 @@ class PoP_CategoryPostsCreation_Module_MainContentComponentRoutingProcessor exte
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS18 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS18_TABLE_EDIT],
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS19_TABLE_EDIT],
         );
-        foreach ($routemodules_mycontent as $route => $module) {
+        foreach ($routemodules_mycontent as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
             }
         }
         $routemodules_mycontent_simpleviewpreviews = array(
@@ -68,15 +68,15 @@ class PoP_CategoryPostsCreation_Module_MainContentComponentRoutingProcessor exte
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS18 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
+        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
             }
         }
         $routemodules_mycontent_fullviewpreviews = array(
@@ -101,15 +101,15 @@ class PoP_CategoryPostsCreation_Module_MainContentComponentRoutingProcessor exte
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS18 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
+        foreach ($routemodules_mycontent_fullviewpreviews as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
             }
         }
 

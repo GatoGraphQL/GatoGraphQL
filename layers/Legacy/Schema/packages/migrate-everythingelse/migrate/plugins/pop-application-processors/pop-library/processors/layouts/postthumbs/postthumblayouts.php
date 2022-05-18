@@ -39,9 +39,9 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         );
     }
 
-    protected function getThumbFieldArgs(array $module, array &$props)
+    protected function getThumbFieldArgs(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_FAVICON:
                 return ['size' => 'favicon'];
 
@@ -72,12 +72,12 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
                 return ['size' => 'thumb-feed'];
         }
 
-        return parent::getThumbFieldArgs($module, $props);
+        return parent::getThumbFieldArgs($componentVariation, $props);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
@@ -90,12 +90,12 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
                 return 'editURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -103,14 +103,14 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
                 break;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getExtraThumbLayoutSubmodules(array $module)
+    public function getExtraThumbLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getExtraThumbLayoutSubmodules($module);
+        $ret = parent::getExtraThumbLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
@@ -131,31 +131,31 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return $ret;
     }
 
-    public function getThumbLinkClass(array $module)
+    public function getThumbLinkClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
                 return 'thumbnail';
         }
 
-        return parent::getThumbLinkClass($module);
+        return parent::getThumbLinkClass($componentVariation);
     }
 
-    public function getThumbImgClass(array $module)
+    public function getThumbImgClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
                 return 'img-responsive';
         }
 
-        return parent::getThumbImgClass($module);
+        return parent::getThumbImgClass($componentVariation);
     }
 
-    public function getDbobjectParams(array $module): array
+    public function getDbobjectParams(array $componentVariation): array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
@@ -167,26 +167,26 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
                 );
         }
 
-        return parent::getDbobjectParams($module);
+        return parent::getDbobjectParams($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED:
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'thumb-feed');
+                $this->setProp($componentVariation, $props, 'resourceloader', 'thumb-feed');
 
                 // Style to add a background-image while loading the feed image
-                $this->appendProp($module, $props, 'class', 'thumb-feed');
+                $this->appendProp($componentVariation, $props, 'class', 'thumb-feed');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_UrlParamTextFormInputsBase extends PoP_Module_Processor_HiddenIDTextFormInputsBase
 {
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
         // If not loading the value, it's because we're retrieving the values for these in the front-end
-        // if ($this->getProp($module, $props, 'replicable')) {
+        // if ($this->getProp($componentVariation, $props, 'replicable')) {
 
         // fill the input when showing the modal
         $this->addJsmethod($ret, 'fillURLParamInput');
@@ -16,21 +16,21 @@ abstract class PoP_Module_Processor_UrlParamTextFormInputsBase extends PoP_Modul
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
-        // if ($this->getProp($module, $props, 'replicable')) {
+        // if ($this->getProp($componentVariation, $props, 'replicable')) {
 
         $this->mergeProp(
-            $module,
+            $componentVariation,
             $props,
             'params',
             array(
-                'data-urlparam' => $this->getName($module)
+                'data-urlparam' => $this->getName($componentVariation)
             )
         );
         // }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

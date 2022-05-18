@@ -21,45 +21,45 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
         );
     }
 
-    public function getControlClass(array $module)
+    public function getControlClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
             case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getControlClass($module);
+        return parent::getControlClass($componentVariation);
     }
 
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
             case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
                 return POP_TARGET_QUICKVIEW;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
-    public function getTitleClass(array $module)
+    public function getTitleClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
             case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getTitleClass($module);
+        return parent::getTitleClass($componentVariation);
     }
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteTitle(POP_USERSTANCE_ROUTE_STANCES);
 
@@ -86,13 +86,13 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
-    protected function getTitleLink(array $module, array &$props)
+    protected function getTitleLink(array $componentVariation, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);
 
@@ -106,7 +106,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 // Allow URE to override adding "+Members" param
                 return \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink',
-                    RequestUtils::addRoute($url, $routes[$module[1]])
+                    RequestUtils::addRoute($url, $routes[$componentVariation[1]])
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
@@ -117,11 +117,11 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
                 return \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:tagstances:titlelink',
-                    RequestUtils::addRoute($url, $routes[$module[1]])
+                    RequestUtils::addRoute($url, $routes[$componentVariation[1]])
                 );
         }
 
-        return parent::getTitleLink($module, $props);
+        return parent::getTitleLink($componentVariation, $props);
     }
 }
 

@@ -11,9 +11,9 @@ class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCo
         );
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_DOMAINSTYLES:
                 // Print all the inline styles for this domain
                 $domain = PoP_Application_Utils::getRequestDomain();
@@ -26,7 +26,7 @@ class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCo
                 );
         }
     
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 }
 

@@ -13,11 +13,11 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT:
                 $ret[] = [PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::class, PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT];
                 $ret[] = [PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::class, PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTVIEW];
@@ -33,19 +33,19 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
                     self::MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT => [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST],
                 );
-                $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group');
+                $this->appendProp($downlevels[$componentVariation[1]], $props, 'class', 'btn-group');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

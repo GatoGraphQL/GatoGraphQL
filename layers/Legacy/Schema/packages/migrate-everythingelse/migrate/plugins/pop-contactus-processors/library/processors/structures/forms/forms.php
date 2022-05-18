@@ -12,22 +12,22 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inners = array(
             self::MODULE_FORM_CONTACTUS => [PoP_ContactUs_Module_Processor_GFFormInners::class, PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$componentVariation[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_CONTACTUS:
                 $email = '';
                 if (defined('POP_EMAILSENDER_INITIALIZED')) {
@@ -50,12 +50,12 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
                             $email
                         )
                     );
-                    $this->setProp($module, $props, 'description', $description);
+                    $this->setProp($componentVariation, $props, 'description', $description);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

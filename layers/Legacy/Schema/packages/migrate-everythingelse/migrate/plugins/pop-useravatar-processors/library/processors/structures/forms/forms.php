@@ -11,14 +11,14 @@ class PoP_UserAvatarProcessors_Module_Processor_UserForms extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORM_USERAVATAR_UPDATE:
                 return [PoP_UserAvatarProcessors_Module_Processor_UserFormInners::class, PoP_UserAvatarProcessors_Module_Processor_UserFormInners::MODULE_FORMINNER_USERAVATAR_UPDATE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 }
 

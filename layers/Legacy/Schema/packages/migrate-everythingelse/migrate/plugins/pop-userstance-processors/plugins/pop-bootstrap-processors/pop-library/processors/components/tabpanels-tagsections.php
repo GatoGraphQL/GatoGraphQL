@@ -17,9 +17,9 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_TAGSTANCES:
             case self::MODULE_TABPANEL_TAGSTANCES_PRO:
             case self::MODULE_TABPANEL_TAGSTANCES_NEUTRAL:
@@ -27,14 +27,14 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_TAGSTANCES);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_TAGSTANCES:
                 $ret = array_merge(
                     $ret,
@@ -83,9 +83,9 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_TAGSTANCES:
                 $ret = array(
                     [
@@ -147,7 +147,7 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($module, $props);
+        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

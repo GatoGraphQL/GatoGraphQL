@@ -11,11 +11,11 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_ICAL];
@@ -25,24 +25,24 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
         return $ret;
     }
 
-    public function getBtnClass(array $module)
+    public function getBtnClass(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'btn btn-compact btn-link';
         }
         
-        return parent::getBtnClass($module);
+        return parent::getBtnClass($componentVariation);
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'fa-thumb-tack';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 }
 

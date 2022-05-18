@@ -15,11 +15,11 @@ class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Modu
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR:
                 $ret[] = [PoP_UserCommunities_ComponentProcessor_ButtonGroups::class, PoP_UserCommunities_ComponentProcessor_ButtonGroups::MODULE_BUTTONGROUP_MYUSERS];
                 $ret[] = [PoP_UserCommunities_Module_Processor_CustomDelegatorFilters::class, PoP_UserCommunities_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYMEMBERS];

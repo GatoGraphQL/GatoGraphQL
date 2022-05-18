@@ -14,24 +14,24 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
             [self::class, self::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS],
         );
     }
-    public function getSeparator(array $module, array &$props)
+    public function getSeparator(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_LAYOUT_DATETIMEHORIZONTAL:
                 return '&nbsp;';
         }
 
-        return parent::getSeparator($module, $props);
+        return parent::getSeparator($componentVariation, $props);
     }
 
-    public function addDownloadlinks(array $module)
+    public function addDownloadlinks(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS:
                 return true;
         }
 
-        return parent::addDownloadlinks($module);
+        return parent::addDownloadlinks($componentVariation);
     }
 }
 

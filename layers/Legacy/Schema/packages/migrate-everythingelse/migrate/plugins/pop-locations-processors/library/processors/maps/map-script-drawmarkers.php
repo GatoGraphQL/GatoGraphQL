@@ -15,9 +15,9 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
         );
     }
 
-    public function getMapdivSubmodule(array $module)
+    public function getMapdivSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS:
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_DIV];
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
         }
     
-        return parent::getMapdivSubmodule($module);
+        return parent::getMapdivSubmodule($componentVariation);
     }
 }
 

@@ -19,32 +19,32 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
         );
     }
 
-    public function doAppend(array $module)
+    public function doAppend(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCRIPT_COMMENTSEMPTY:
             case self::MODULE_SCRIPT_REFERENCESEMPTY:
                 return false;
         }
         
-        return parent::doAppend($module);
+        return parent::doAppend($componentVariation);
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCRIPT_SINGLECOMMENT:
                 return [PoP_Module_Processor_AppendCommentLayouts::class, PoP_Module_Processor_AppendCommentLayouts::MODULE_SCRIPT_APPENDCOMMENT];
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
     
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCRIPT_SINGLECOMMENT:
             case self::MODULE_SCRIPT_COMMENTS:
             case self::MODULE_SCRIPT_COMMENTSEMPTY:
@@ -57,7 +57,7 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
                     self::MODULE_SCRIPT_REFERENCES => 'references',
                     self::MODULE_SCRIPT_REFERENCESEMPTY => 'references',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$module[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$componentVariation[1]];
                 break;
         }
         

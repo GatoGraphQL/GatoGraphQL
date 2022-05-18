@@ -16,15 +16,15 @@ class Wassup_EM_CAP_Module_MainContentComponentRoutingProcessor extends \PoP\App
         $routemodules_map = array(
             POP_ROUTE_AUTHORS => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $module) {
+        foreach ($routemodules_map as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $componentVariation];
             }
         }
 

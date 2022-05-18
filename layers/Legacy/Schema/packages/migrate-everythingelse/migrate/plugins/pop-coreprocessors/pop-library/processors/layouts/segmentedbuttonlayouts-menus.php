@@ -13,12 +13,12 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         );
     }
 
-    public function getCollapseClass(array $module)
+    public function getCollapseClass(array $componentVariation)
     {
-        $ret = parent::getCollapseClass($module);
+        $ret = parent::getCollapseClass($componentVariation);
 
         // Fix: Comment Leo 29/03/2014: open all collapses immediately
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
                 $ret .= ' in';
                 break;
@@ -32,22 +32,22 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MENU_SEGMENTEDBUTTON:
             case self::MODULE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
                 return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
         }
 
-        return parent::getDataFields($module, $props);
+        return parent::getDataFields($componentVariation, $props);
     }
 
-    public function getSegmentedbuttonSubmodules(array $module)
+    public function getSegmentedbuttonSubmodules(array $componentVariation)
     {
-        $ret = parent::getSegmentedbuttonSubmodules($module);
+        $ret = parent::getSegmentedbuttonSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
                 $ret[] = [PoP_Module_Processor_SegmentedButtonLinks::class, PoP_Module_Processor_SegmentedButtonLinks::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR];
                 break;
@@ -55,11 +55,11 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
 
         return $ret;
     }
-    public function getDropdownsegmentedbuttonSubmodules(array $module)
+    public function getDropdownsegmentedbuttonSubmodules(array $componentVariation)
     {
-        $ret = parent::getDropdownsegmentedbuttonSubmodules($module);
+        $ret = parent::getDropdownsegmentedbuttonSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
                 $ret[] = [PoP_Module_Processor_SegmentedButtonLinks::class, PoP_Module_Processor_SegmentedButtonLinks::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR];
                 // $ret[] = [PoP_Module_Processor_SegmentedButtonLinks::class, PoP_Module_Processor_SegmentedButtonLinks::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR];
@@ -69,11 +69,11 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_MENU_SEGMENTEDBUTTON:
             case self::MODULE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
                 $ret .= ' btn-background';

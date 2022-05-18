@@ -24,7 +24,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         );
     }
 
-    public function getShareSubmodules($submodules, array $module)
+    public function getShareSubmodules($submodules, array $componentVariation)
     {
         // Insert at the beginning
         array_splice(
@@ -39,9 +39,9 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         return $submodules;
     }
 
-    public function getDropdownSubmodules($submodules, array $module)
+    public function getDropdownSubmodules($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
                     $submodules, 
@@ -82,9 +82,9 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         return $submodules;
     }
 
-    public function getSocialmediaprovidersSubmodules($submodules, array $module)
+    public function getSocialmediaprovidersSubmodules($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
                 array_splice(
                     $submodules, 

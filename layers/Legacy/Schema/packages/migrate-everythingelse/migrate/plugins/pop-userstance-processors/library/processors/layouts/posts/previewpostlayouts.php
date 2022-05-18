@@ -22,19 +22,19 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         );
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT:
                 return 'editURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -42,12 +42,12 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 break;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT:
                 return [UserStance_Module_Processor_CustomQuicklinkGroups::class, UserStance_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_STANCEEDIT];
 
@@ -59,12 +59,12 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return [UserStance_Module_Processor_CustomQuicklinkGroups::class, UserStance_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_STANCECONTENT];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
     }
 
-    public function showPosttitle(array $module)
+    public function showPosttitle(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
@@ -74,12 +74,12 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return false;
         }
 
-        return parent::showPosttitle($module);
+        return parent::showPosttitle($componentVariation);
     }
 
-    public function getContentSubmodule(array $module)
+    public function getContentSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
@@ -89,14 +89,14 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POSTCOMPACT];
         }
 
-        return parent::getContentSubmodule($module);
+        return parent::getContentSubmodule($componentVariation);
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubmodules(array $componentVariation)
     {
-        $ret = parent::getAbovecontentSubmodules($module);
+        $ret = parent::getAbovecontentSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
@@ -109,10 +109,10 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getAuthorAvatarModule(array $module)
+    public function getAuthorAvatarModule(array $componentVariation)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($module[1]) {
+            switch ($componentVariation[1]) {
                 case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
                 case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
                 case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
@@ -120,14 +120,14 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
             }
         }
 
-        return parent::getAuthorAvatarModule($module);
+        return parent::getAuthorAvatarModule($componentVariation);
     }
 
-    public function getBottomSubmodules(array $module)
+    public function getBottomSubmodules(array $componentVariation)
     {
-        $ret = parent::getBottomSubmodules($module);
+        $ret = parent::getBottomSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT:
                 $ret[] = [PoP_Module_Processor_StanceTargetSubcomponentLayouts::class, PoP_Module_Processor_StanceTargetSubcomponentLayouts::MODULE_LAYOUT_STANCETARGET_LINE];
                 break;
@@ -136,11 +136,11 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getBelowcontentSubmodules(array $module)
+    public function getBelowcontentSubmodules(array $componentVariation)
     {
-        $ret = parent::getBelowcontentSubmodules($module);
+        $ret = parent::getBelowcontentSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
                 $ret[] = [PoP_Module_Processor_StanceTargetSubcomponentLayouts::class, PoP_Module_Processor_StanceTargetSubcomponentLayouts::MODULE_LAYOUT_STANCETARGET_POSTTITLE];
                 break;
@@ -155,9 +155,9 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
@@ -167,12 +167,12 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return null;
         }
 
-        return parent::getPostThumbSubmodule($module);
+        return parent::getPostThumbSubmodule($componentVariation);
     }
 
-    public function authorPositions(array $module)
+    public function authorPositions(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR:
@@ -186,14 +186,14 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return array();
         }
 
-        return parent::authorPositions($module);
+        return parent::authorPositions($componentVariation);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_THUMBNAIL:
@@ -203,7 +203,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
@@ -219,9 +219,9 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getTitleBeforeauthors(array $module, array &$props)
+    public function getTitleBeforeauthors(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR:
@@ -234,22 +234,22 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 );
         }
 
-        return parent::getTitleBeforeauthors($module, $props);
+        return parent::getTitleBeforeauthors($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_THUMBNAIL:
-                $this->appendProp($module, $props, 'class', 'alert alert-stance stances');
+                $this->appendProp($componentVariation, $props, 'class', 'alert alert-stance stances');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

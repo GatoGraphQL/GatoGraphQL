@@ -22,21 +22,21 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         }
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
 
         // If PoP Resource Loader is not defined, then there is no PoP_ResourceLoaderProcessorUtils
         if (defined('POP_RESOURCELOADER_INITIALIZED')) {
-            // Comment Leo 23/01/2018: if we are executing `getSubComponentVariations($module)` then this module is included in the output,
+            // Comment Leo 23/01/2018: if we are executing `getSubComponentVariations($componentVariation)` then this module is included in the output,
             // then we can already add its dependencies
             // In the past, this was done in `get_js_setting`, but this doesn't work consistently between generating bundlegroups pregenerated or in runtime,
             // since that function may or may not be executed. But calling `getSubComponentVariations` will always work
             // Comment Leo 20/10/2017: Important! Because the module will be rendered on runtime in the front-end,
             // we must make sure that this module is delivered on the ResourceLoader when doing code-splitting
-            $this->resources[] = $this->getComponentTemplateResource($module);
+            $this->resources[] = $this->getComponentTemplateResource($componentVariation);
         }
 
-        return parent::getSubComponentVariations($module);
+        return parent::getSubComponentVariations($componentVariation);
     }
 
     public function getDependencies($resources)
@@ -53,29 +53,29 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         return $resources;
     }
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
-        return $this->getComponentTemplateResource($module);
+        return $this->getComponentTemplateResource($componentVariation);
     }
-    protected function getComponentTemplateResource(array $module)
+    protected function getComponentTemplateResource(array $componentVariation)
     {
         return null;
     }
 
-    protected function getValueKey(array $module, array &$props)
+    protected function getValueKey(array $componentVariation, array &$props)
     {
         return 'id';
     }
-    protected function getTokenizerKeys(array $module, array &$props)
+    protected function getTokenizerKeys(array $componentVariation, array &$props)
     {
         return array();
     }
-    protected function getLimit(array $module, array &$props)
+    protected function getLimit(array $componentVariation, array &$props)
     {
         return 5;
     }
 
-    protected function getThumbprintQuery(array $module, array &$props)
+    protected function getThumbprintQuery(array $componentVariation, array &$props)
     {
         return array();
     }
@@ -83,42 +83,42 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
     {
         return array();
     }
-    protected function getThumbprint(array $module, array &$props)
+    protected function getThumbprint(array $componentVariation, array &$props)
     {
-        $query = $this->getThumbprintQuery($module, $props);
+        $query = $this->getThumbprintQuery($componentVariation, $props);
         $results = $this->executeThumbprint($query);
 
         return (int) $results[0];
     }
-    protected function getTypeaheadDataloadSource(array $module, array &$props)
+    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
     {
         return null;
     }
-    // protected function getSourceFilter(array $module, array &$props)
+    // protected function getSourceFilter(array $componentVariation, array &$props)
     // {
     //     return null;
     // }
-    protected function getSourceFilterParams(array $module, array &$props)
+    protected function getSourceFilterParams(array $componentVariation, array &$props)
     {
         return [];
     }
-    protected function getSourceUrl(array $module, array &$props)
+    protected function getSourceUrl(array $componentVariation, array &$props)
     {
-        $url = $this->getTypeaheadDataloadSource($module, $props);
+        $url = $this->getTypeaheadDataloadSource($componentVariation, $props);
 
         // Add the output=json params, typeahead datastructure
         $url = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($url, POP_FORMAT_TYPEAHEAD);
 
-        if ($filter_params = $this->getSourceFilterParams($module, $props)) {
+        if ($filter_params = $this->getSourceFilterParams($componentVariation, $props)) {
             $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
             $url = $dataloadHelperService->addFilterParams($url, $filter_params);
         }
 
         return $url;
     }
-    protected function getPrefetchUrl(array $module, array &$props)
+    protected function getPrefetchUrl(array $componentVariation, array &$props)
     {
-        $url = $this->getSourceUrl($module, $props);
+        $url = $this->getSourceUrl($componentVariation, $props);
 
         // Bring 10 times the pre-defined result set
         $cmsService = CMSServiceFacade::getInstance();
@@ -127,68 +127,68 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
             \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $limit,
         ], $url);
     }
-    protected function getRemoteUrl(array $module, array &$props)
+    protected function getRemoteUrl(array $componentVariation, array &$props)
     {
-        $url = $this->getSourceUrl($module, $props);
+        $url = $this->getSourceUrl($componentVariation, $props);
         return GeneralUtils::addQueryArgs([
             \PoP\ComponentModel\Constants\PaginationParams::LIMIT => 12,
         ], $url);
     }
-    protected function getStaticSuggestions(array $module, array &$props)
+    protected function getStaticSuggestions(array $componentVariation, array &$props)
     {
         return array();
     }
-    protected function getPendingMsg(array $module)
+    protected function getPendingMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Suggestions', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $module)
+    protected function getNotfoundMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('No Results', 'pop-coreprocessors');
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        $label = $this->getLabel($module, $props);
+        $label = $this->getLabel($componentVariation, $props);
 
         // Dataset
         global $pop_resourceloaderprocessor_manager;
-        $templateResource = $this->getComponentTemplateResource($module);
+        $templateResource = $this->getComponentTemplateResource($componentVariation);
         $resourceprocessor = $pop_resourceloaderprocessor_manager->getProcessor($templateResource);
         $template = $resourceprocessor->getTemplate($templateResource);
         $ret['typeahead']['dataset'] = array(
             'template' => $template,
-            'name' => $module,
+            'name' => $componentVariation,
             'header' => $label ? '<strong class="menu-text">'.$label.'</strong>' : '',
-            'pending' => '<p class="clearfix menu-text text-warning"><em>'.GD_CONSTANT_LOADING_SPINNER.' '.$this->getPendingMsg($module).'</em></p>',
-            'notFound' => '<p class="clearfix menu-text"><em>'.$this->getNotfoundMsg($module).'</em></p>',
-            'valueKey' => $this->getValueKey($module, $props),
-            'limit' => $this->getLimit($module, $props),
-            'tokenizerKeys' => $this->getTokenizerKeys($module, $props),
+            'pending' => '<p class="clearfix menu-text text-warning"><em>'.GD_CONSTANT_LOADING_SPINNER.' '.$this->getPendingMsg($componentVariation).'</em></p>',
+            'notFound' => '<p class="clearfix menu-text"><em>'.$this->getNotfoundMsg($componentVariation).'</em></p>',
+            'valueKey' => $this->getValueKey($componentVariation, $props),
+            'limit' => $this->getLimit($componentVariation, $props),
+            'tokenizerKeys' => $this->getTokenizerKeys($componentVariation, $props),
         );
 
         // Static suggestions: no need for remote/prefetch
-        if ($staticSuggestions = $this->getStaticSuggestions($module, $props)) {
+        if ($staticSuggestions = $this->getStaticSuggestions($componentVariation, $props)) {
             $ret['typeahead']['dataset']['staticSuggestions'] = $staticSuggestions;
             $ret['typeahead']['dataset']['local'] = array(); // local attribute is mandatory if no remove/prefetch provided
         } else {
-            $ret['typeahead']['dataset']['remote'] = $this->getRemoteUrl($module, $props);
-            $ret['typeahead']['dataset']['prefetch'] = $this->getPrefetchUrl($module, $props);
+            $ret['typeahead']['dataset']['remote'] = $this->getRemoteUrl($componentVariation, $props);
+            $ret['typeahead']['dataset']['prefetch'] = $this->getPrefetchUrl($componentVariation, $props);
         }
 
         return $ret;
     }
 
-    public function getMutableonrequestJsconfiguration(array $module, array &$props): array
+    public function getMutableonrequestJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getMutableonrequestJsconfiguration($module, $props);
+        $ret = parent::getMutableonrequestJsconfiguration($componentVariation, $props);
 
         // Comment Leo 10/08/2017: the thumbprint value will make the ETag for a page to change whenever there is a new post,
         // even if this new post is show in that page
         // Then, this 'thumbprint' key+value will need to be removed before doing wp_hash
-        if ($thumbprint = $this->getThumbprint($module, $props)) {
+        if ($thumbprint = $this->getThumbprint($componentVariation, $props)) {
             $ret['typeahead']['dataset'] = array(
                 POP_KEYS_THUMBPRINT => $thumbprint,
             );

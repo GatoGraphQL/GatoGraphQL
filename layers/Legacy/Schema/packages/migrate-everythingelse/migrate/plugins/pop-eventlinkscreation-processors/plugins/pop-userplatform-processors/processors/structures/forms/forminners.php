@@ -11,35 +11,35 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         );
     }
 
-    protected function isLink(array $module)
+    protected function isLink(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
                 return true;
         }
 
-        return parent::isLink($module);
+        return parent::isLink($componentVariation);
     }
-    protected function volunteering(array $module)
+    protected function volunteering(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
                 return true;
         }
 
-        return parent::volunteering($module);
+        return parent::volunteering($componentVariation);
     }
-    protected function getLocationsInput(array $module)
+    protected function getLocationsInput(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
         }
 
-        return parent::getLocationsInput($module);
+        return parent::getLocationsInput($componentVariation);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -47,9 +47,9 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         // Why? because otherwise, if first loading an Edit Discussion (eg: http://m3l.localhost/edit-discussion/?_wpnonce=e88efa07c5&pid=17887)
         // being the user logged out and only then he log in, the refetchBlock doesn't work because it doesn't have the pid/_wpnonce values
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
                 return array_merge(
                     $ret,
@@ -60,24 +60,24 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
                 );
         }
 
-        return parent::getComponentSubmodules($module, $props);
+        return parent::getComponentSubmodules($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
                 $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 
                 // Make it into left/right columns
                 $rightside_module = [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE];
-                $leftside_module = $this->isLink($module) ?
+                $leftside_module = $this->isLink($componentVariation) ?
                     [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
                     [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
-                if (!($form_left_class = $this->getProp($module, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
+                if (!($form_left_class = $this->getProp($componentVariation, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
                 }
-                if (!($form_right_class = $this->getProp($module, $props, 'form-right-class')/*$this->get_general_prop($props, 'form-right-class')*/)) {
+                if (!($form_right_class = $this->getProp($componentVariation, $props, 'form-right-class')/*$this->get_general_prop($props, 'form-right-class')*/)) {
                     $form_right_class = 'col-sm-4';
                 }
                 $this->appendProp($leftside_module, $props, 'class', $form_left_class);
@@ -85,7 +85,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

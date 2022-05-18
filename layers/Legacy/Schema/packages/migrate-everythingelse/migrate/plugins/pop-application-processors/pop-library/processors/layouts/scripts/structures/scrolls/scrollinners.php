@@ -17,9 +17,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS:
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW:
@@ -30,14 +30,14 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_RELATED];
                 break;

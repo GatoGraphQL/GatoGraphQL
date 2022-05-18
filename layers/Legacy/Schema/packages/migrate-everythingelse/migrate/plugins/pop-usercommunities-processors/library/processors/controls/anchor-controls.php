@@ -18,9 +18,9 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Show Content from: Community + Members', 'ure-popprocessors');
 
@@ -28,11 +28,11 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 return TranslationAPIFacade::getInstance()->__('Show Content from: Community', 'ure-popprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
                 return
             '<i class="fa fa-fw fa-user-circle"></i>'.
@@ -43,18 +43,18 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 return '<i class="fa fa-fw fa-user-circle"></i>';
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 $sources = array(
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
-                $source = $sources[$module[1]];
+                $source = $sources[$componentVariation[1]];
 
                 $requestHelperService = RequestHelperServiceFacade::getInstance();
                 $url = $requestHelperService->getCurrentURL();
@@ -64,29 +64,29 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 return PoP_URE_ModuleManager_Utils::addSource($url, $source);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 $sources = array(
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
-                $source = $sources[$module[1]];
+                $source = $sources[$componentVariation[1]];
 
-                $this->appendProp($module, $props, 'class', 'btn btn-sm btn-default');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-sm btn-default');
                 if ($source == \PoP\Root\App::getState('source')) {
-                    $this->appendProp($module, $props, 'class', 'active');
+                    $this->appendProp($componentVariation, $props, 'class', 'active');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

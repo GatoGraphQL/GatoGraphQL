@@ -11,11 +11,11 @@ class PoP_Core_Module_Processor_FormInners extends PoP_Module_Processor_FormInne
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
     
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_EVERYTHINGQUICKLINKS:
                 $ret[] = [PoP_Module_Processor_FetchlinkTypeaheadFormComponents::class, PoP_Module_Processor_FetchlinkTypeaheadFormComponents::MODULE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING];
                 break;

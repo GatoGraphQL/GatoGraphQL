@@ -12,9 +12,9 @@ class PoP_CommonPagesProcessors_Application_Hooks
         );
     }
 
-    public function getSubComponentVariations($submodules, array $module)
+    public function getSubComponentVariations($submodules, array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEPOST:
             case PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATERESETPOST:
             case PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_EDITPOST:

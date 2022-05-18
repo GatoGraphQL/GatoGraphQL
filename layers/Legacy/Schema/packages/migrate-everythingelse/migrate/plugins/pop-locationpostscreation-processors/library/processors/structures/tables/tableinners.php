@@ -11,12 +11,12 @@ class GD_Custom_EM_Module_Processor_TableInners extends PoP_Module_Processor_Tab
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         // Main layout
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABLEINNER_MYLOCATIONPOSTS:
                 $ret[] = [PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::class, PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT];
                 $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::MODULE_LAYOUTPOST_DATE];

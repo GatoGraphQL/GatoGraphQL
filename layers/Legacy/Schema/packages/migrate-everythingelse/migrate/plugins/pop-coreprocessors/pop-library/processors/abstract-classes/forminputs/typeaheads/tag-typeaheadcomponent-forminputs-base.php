@@ -8,27 +8,27 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
-    protected function getValueKey(array $module, array &$props)
+    protected function getValueKey(array $componentVariation, array &$props)
     {
         return 'symbolnamedescription';
     }
-    protected function getComponentTemplateResource(array $module)
+    protected function getComponentTemplateResource(array $componentVariation)
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTTAG_TYPEAHEAD_COMPONENT];
     }
-    protected function getTokenizerKeys(array $module, array &$props)
+    protected function getTokenizerKeys(array $componentVariation, array &$props)
     {
         return array('symbolnamedescription');
     }
 
-    // protected function getSourceFilter(array $module, array &$props)
+    // protected function getSourceFilter(array $componentVariation, array &$props)
     // {
     //     return POP_FILTER_TAGS;
     // }
 
-    protected function getSourceFilterParams(array $module, array &$props)
+    protected function getSourceFilterParams(array $componentVariation, array &$props)
     {
-        $ret = parent::getSourceFilterParams($module, $props);
+        $ret = parent::getSourceFilterParams($componentVariation, $props);
 
         // bring the tags ordering by tag count
         $ret[] = [
@@ -38,9 +38,9 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
 
         return $ret;
     }
-    protected function getRemoteUrl(array $module, array &$props)
+    protected function getRemoteUrl(array $componentVariation, array &$props)
     {
-        $url = parent::getRemoteUrl($module, $props);
+        $url = parent::getRemoteUrl($componentVariation, $props);
 
         // Add the query from typeahead.js to filter (http://twitter.github.io/typeahead.js/examples/)
         return GeneralUtils::addQueryArgs([
@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
         ], $url);
     }
 
-    protected function getThumbprintQuery(array $module, array &$props)
+    protected function getThumbprintQuery(array $componentVariation, array &$props)
     {
         return array(
             // 'fields' => 'ids',
@@ -63,11 +63,11 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
         return $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
-    protected function getPendingMsg(array $module)
+    protected function getPendingMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Tags', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $module)
+    protected function getNotfoundMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('No Tags found', 'pop-coreprocessors');
     }

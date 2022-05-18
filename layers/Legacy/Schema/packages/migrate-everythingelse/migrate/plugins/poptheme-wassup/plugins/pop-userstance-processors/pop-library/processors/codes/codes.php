@@ -11,24 +11,24 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
         );
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
                 return 'h1';
         }
     
-        return parent::getHtmlTag($module, $props);
+        return parent::getHtmlTag($componentVariation, $props);
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).PoP_UserStanceProcessors_Utils::getLatestvotesTitle();
         }
     
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 }
 

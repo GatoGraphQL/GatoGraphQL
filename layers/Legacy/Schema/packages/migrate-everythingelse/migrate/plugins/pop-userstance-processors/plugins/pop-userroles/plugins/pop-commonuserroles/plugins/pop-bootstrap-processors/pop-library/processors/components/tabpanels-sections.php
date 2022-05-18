@@ -13,22 +13,22 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::MODULE_TABPANEL_STANCES_BYINDIVIDUALS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_STANCES);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array_merge(
                     $ret,
@@ -55,9 +55,9 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array(
                     [
@@ -89,7 +89,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($module, $props);
+        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
     }
 }
 

@@ -34,11 +34,11 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         );
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $componentVariation)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTGROUP_ORDERUSER:
             case self::MODULE_FILTERINPUTGROUP_ORDERPOST:
             case self::MODULE_FILTERINPUTGROUP_ORDERTAG:
@@ -52,11 +52,11 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $componentVariation)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FILTERINPUTGROUP_ORDERUSER:
             case self::MODULE_FILTERINPUTGROUP_ORDERPOST:
             case self::MODULE_FILTERINPUTGROUP_ORDERTAG:
@@ -71,7 +71,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_EDITOR => [PoP_Module_Processor_EditorFormInputs::class, PoP_Module_Processor_EditorFormInputs::MODULE_FORMINPUT_EDITOR],
@@ -88,18 +88,18 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
             self::MODULE_FORMINPUTGROUP_ADDITIONALMESSAGE => [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_ADDITIONALMESSAGE],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$componentVariation[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_SENDERNAME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -107,11 +107,11 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_SENDERNAME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -121,25 +121,25 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUTGROUP_SENDERNAME:
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always
                 if (!PoP_FormUtils::useLoggedinuserData()) {
-                    $this->appendProp($module, $props, 'class', 'visible-always');
+                    $this->appendProp($componentVariation, $props, 'class', 'visible-always');
                 }
                 break;
 
             case self::MODULE_FORMINPUTGROUP_EMAILS:
                 $placeholder = TranslationAPIFacade::getInstance()->__('Type emails here, separated by space or comma (" " or ","), or 1 email per line', 'pop-coreprocessors');
-                $this->setProp($this->getComponentSubmodule($module), $props, 'placeholder', $placeholder);
+                $this->setProp($this->getComponentSubmodule($componentVariation), $props, 'placeholder', $placeholder);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

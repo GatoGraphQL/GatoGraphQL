@@ -15,11 +15,11 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         );
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props)
+    protected function addHeaddatasetmoduleDataProperties(&$ret, array $componentVariation, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $module, $props);
+        parent::addHeaddatasetmoduleDataProperties($ret, $componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
                 // If the user is not logged in, then do not load the data
                 if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
@@ -29,34 +29,34 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         }
     }
 
-    protected function getStatusSubmodule(array $module)
+    protected function getStatusSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
                 return null;
         }
 
-        return parent::getStatusSubmodule($module);
+        return parent::getStatusSubmodule($componentVariation);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
                 return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
         
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class);
         }
         
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($componentVariation);
     }
 }
 

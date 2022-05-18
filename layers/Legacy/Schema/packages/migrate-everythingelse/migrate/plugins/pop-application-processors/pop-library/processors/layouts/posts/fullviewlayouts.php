@@ -30,12 +30,12 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         );
     }
 
-    public function getFooterSubmodules(array $module)
+    public function getFooterSubmodules(array $componentVariation)
     {
-        $ret = parent::getFooterSubmodules($module);
+        $ret = parent::getFooterSubmodules($componentVariation);
 
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_POST:
             case self::MODULE_AUTHORLAYOUT_FULLVIEW_POST:
             case self::MODULE_SINGLELAYOUT_FULLVIEW_POST:
@@ -70,9 +70,9 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW:
             case self::MODULE_LAYOUT_FULLVIEW_HIGHLIGHT:
             case self::MODULE_LAYOUT_FULLVIEW_POST:
@@ -94,19 +94,19 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
                     self::MODULE_SINGLELAYOUT_FULLVIEW_POST => [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$componentVariation[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_HIGHLIGHT:
             case self::MODULE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT:
             case self::MODULE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT:

@@ -11,11 +11,11 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::MODULE_SCROLLLAYOUT_POSTCOMMENT];
                 break;
@@ -24,29 +24,29 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getSubcomponentField(array $module)
+    public function getSubcomponentField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 return 'commentObjectID';
         }
 
-        return parent::getSubcomponentField($module);
+        return parent::getSubcomponentField($componentVariation);
     }
 
-    public function isIndividual(array $module, array &$props)
+    public function isIndividual(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 return false;
         }
 
-        return parent::isIndividual($module, $props);
+        return parent::isIndividual($componentVariation, $props);
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 // Make the comment shine whenever added, similar to PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_ADD
                 // but without adding the scrollTop effect
@@ -57,7 +57,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
                 break;
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($componentVariation, $props);
     }
 }
 

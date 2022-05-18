@@ -27,9 +27,9 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE],
             POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYSTANCES],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -43,9 +43,9 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_AuthorSectionTabPanelBlocks::class, UserStance_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_AuthorSectionTabPanelBlocks::class, UserStance_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -59,9 +59,9 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_TagSectionTabPanelBlocks::class, UserStance_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_TagSectionTabPanelBlocks::class, UserStance_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGSTANCES_AGAINST],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -75,9 +75,9 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelBlocks::class, UserStance_Module_Processor_SingleSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelBlocks::class, UserStance_Module_Processor_SingleSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

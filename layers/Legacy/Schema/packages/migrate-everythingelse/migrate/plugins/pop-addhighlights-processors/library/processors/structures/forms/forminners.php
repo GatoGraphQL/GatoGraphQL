@@ -11,58 +11,58 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
         );
     }
 
-    protected function getFeaturedimageInput(array $module)
+    protected function getFeaturedimageInput(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_HIGHLIGHT:
                 return null;
         }
 
-        return parent::getFeaturedimageInput($module);
+        return parent::getFeaturedimageInput($componentVariation);
     }
-    protected function getCoauthorsInput(array $module)
+    protected function getCoauthorsInput(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_HIGHLIGHT:
                 return null;
         }
 
-        return parent::getCoauthorsInput($module);
+        return parent::getCoauthorsInput($componentVariation);
     }
-    protected function getTitleInput(array $module)
+    protected function getTitleInput(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_HIGHLIGHT:
                 return null;
         }
 
-        return parent::getTitleInput($module);
+        return parent::getTitleInput($componentVariation);
     }
-    protected function getEditorInput(array $module)
+    protected function getEditorInput(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_HIGHLIGHT:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
         }
 
-        return parent::getEditorInput($module);
+        return parent::getEditorInput($componentVariation);
     }
-    protected function getStatusInput(array $module)
+    protected function getStatusInput(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_HIGHLIGHT:
                 // Highlights are always published immediately, independently of value of GD_CONF_CREATEUPDATEPOST_MODERATE
                 return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT];
         }
 
-        return parent::getStatusInput($module);
+        return parent::getStatusInput($componentVariation);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
         
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINNER_HIGHLIGHT:
                 return array_merge(
                     $ret,
@@ -74,7 +74,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
                 );
         }
 
-        return parent::getComponentSubmodules($module, $props);
+        return parent::getComponentSubmodules($componentVariation, $props);
     }
 }
 

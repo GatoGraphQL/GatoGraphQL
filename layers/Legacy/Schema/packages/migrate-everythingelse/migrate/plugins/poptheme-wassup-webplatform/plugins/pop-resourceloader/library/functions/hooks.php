@@ -22,9 +22,9 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getModuleCssResources($resources, array $module, array $templateResource, $template, array $props, $processor)
+    public function getModuleCssResources($resources, array $componentVariation, array $templateResource, $template, array $props, $processor)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_WELCOME:
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_COMPACTWELCOME:
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_DESCRIPTION:
@@ -93,12 +93,12 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
                 break;
         }
 
-        if ($processor->getProp($module, $props, 'use-skeletonscreen')) {
+        if ($processor->getProp($componentVariation, $props, 'use-skeletonscreen')) {
             $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_SKELETONSCREEN];
         }
 
         // Artificial property added to identify the template when adding module-resources
-        if ($resourceloader_att = $processor->getProp($module, $props, 'resourceloader')) {
+        if ($resourceloader_att = $processor->getProp($componentVariation, $props, 'resourceloader')) {
             if ($resourceloader_att == 'block-carousel') {
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_BLOCKCAROUSEL];
             } elseif ($resourceloader_att == 'blockgroup-authorsections') {
@@ -128,8 +128,8 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
             }
         }
 
-        // Allow to inject the $module here for several cases
-        if ($module == \PoP\Root\App::applyFilters(
+        // Allow to inject the $componentVariation here for several cases
+        if ($componentVariation == \PoP\Root\App::applyFilters(
             'PoPTheme_Wassup_ResourceLoaderProcessor_Hooks:css-resources:collapse-hometop',
             null
         )) {

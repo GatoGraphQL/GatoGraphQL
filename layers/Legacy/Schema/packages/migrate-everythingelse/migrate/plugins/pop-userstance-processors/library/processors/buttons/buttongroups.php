@@ -17,7 +17,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
         );
     }
 
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $componentVariation, array &$props)
     {
         $screens = array(
             self::MODULE_BUTTONGROUP_STANCES => POP_USERSTANCE_SCREEN_STANCES,
@@ -25,18 +25,18 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
             self::MODULE_BUTTONGROUP_AUTHORSTANCES => POP_USERSTANCE_SCREEN_AUTHORSTANCES,
             self::MODULE_BUTTONGROUP_TAGSTANCES => POP_USERSTANCE_SCREEN_TAGSTANCES,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$componentVariation[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($module, $props);
+        return parent::getHeadersdataScreen($componentVariation, $props);
     }
 
-    protected function getHeadersdataFormats(array $module, array &$props)
+    protected function getHeadersdataFormats(array $componentVariation, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen
-        $screen = $this->getHeadersdataScreen($module, $props);
+        $screen = $this->getHeadersdataScreen($componentVariation, $props);
         switch ($screen) {
             case POP_USERSTANCE_SCREEN_STANCES:
             case POP_USERSTANCE_SCREEN_AUTHORSTANCES:
@@ -57,7 +57,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
                 );
         }
 
-        return parent::getHeadersdataFormats($module, $props);
+        return parent::getHeadersdataFormats($componentVariation, $props);
     }
 }
 

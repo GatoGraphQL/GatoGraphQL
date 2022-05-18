@@ -12,9 +12,9 @@ class Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts extends GD_URE_Mod
         );
     }
 
-    public function getDescription(array $module, array &$props)
+    public function getDescription(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_UREAAL_LAYOUTUSER_MEMBERPRIVILEGES:
                 return sprintf(
                     '<em>%s</em>',
@@ -22,7 +22,7 @@ class Wassup_URE_AAL_Module_Processor_MemberPrivilegesLayouts extends GD_URE_Mod
                 );
         }
 
-        return parent::getDescription($module, $props);
+        return parent::getDescription($componentVariation, $props);
     }
 }
 

@@ -23,9 +23,9 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Calendar', 'poptheme-wassup');
 
@@ -35,11 +35,11 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return TranslationAPIFacade::getInstance()->__('Past Events', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
                 return getRouteIcon(POP_EVENTS_ROUTE_EVENTSCALENDAR, false);
 
@@ -49,20 +49,20 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return getRouteIcon(POP_EVENTS_ROUTE_PASTEVENTS, false);
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
                 $routes = array(
                     self::MODULE_CUSTOMANCHORCONTROL_CALENDAR => POP_EVENTS_ROUTE_EVENTSCALENDAR,
                     self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
                 );
-                $route = $routes[$module[1]];
+                $route = $routes[$componentVariation[1]];
 
                 return RouteUtils::getRouteURL($route);
 
@@ -81,22 +81,22 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
 
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
             case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $this->appendProp($module, $props, 'class', 'btn btn-link btn-compact');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

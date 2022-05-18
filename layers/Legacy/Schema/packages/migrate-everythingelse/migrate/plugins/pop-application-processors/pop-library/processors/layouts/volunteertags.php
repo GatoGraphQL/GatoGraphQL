@@ -11,15 +11,15 @@ class PoP_Module_Processor_VolunteerTagLayouts extends PoP_Module_Processor_Volu
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER:
-                $this->appendProp($module, $props, 'class', 'label label-warning');
+                $this->appendProp($componentVariation, $props, 'class', 'label label-warning');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

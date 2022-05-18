@@ -12,12 +12,12 @@ class PoPTheme_Wassup_PageSectionHooks
         );
     }
 
-    public function initModelPropsSideinfo(array $module, $props_in_array, $processor)
+    public function initModelPropsSideinfo(array $componentVariation, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
 
         $submodule = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
-        // if (in_array($submodule, $processor->getSubComponentVariations($module))) {
+        // if (in_array($submodule, $processor->getSubComponentVariations($componentVariation))) {
 
         // We need to lazy-load it, so that it doesn't change the ETag value
         // for when visiting any one page on the site (eg: viewing a post should not say "click here to update" since the post itself was not updated,

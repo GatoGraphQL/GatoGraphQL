@@ -14,9 +14,9 @@ class PoPTheme_EM_Processors_ContentHooks
         );
     }
 
-    public function contentInner($inner, array $module)
+    public function contentInner($inner, array $componentVariation)
     {
-        if (($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
+        if (($componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $eventTypeAPI = EventTypeAPIFacade::getInstance();
             if ($eventTypeAPI->isEvent($post_id)) {

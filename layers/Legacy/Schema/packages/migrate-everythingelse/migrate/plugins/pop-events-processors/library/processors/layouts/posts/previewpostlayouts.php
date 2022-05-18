@@ -42,20 +42,20 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         );
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return 'editURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
@@ -64,22 +64,22 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 break;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getAuthorModule(array $module)
+    public function getAuthorModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
         }
 
-        return parent::getAuthorModule($module);
+        return parent::getAuthorModule($componentVariation);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
@@ -91,12 +91,12 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
@@ -112,14 +112,14 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
     }
 
-    public function getBelowthumbLayoutSubmodules(array $module)
+    public function getBelowthumbLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($module);
+        $ret = parent::getBelowthumbLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
@@ -139,11 +139,11 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getBottomSubmodules(array $module)
+    public function getBottomSubmodules(array $componentVariation)
     {
-        $ret = parent::getBottomSubmodules($module);
+        $ret = parent::getBottomSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
@@ -166,7 +166,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 $ret = array_merge(
                     $ret,
-                    $this->getDetailsfeedBottomSubmodules($module)
+                    $this->getDetailsfeedBottomSubmodules($componentVariation)
                 );
                 break;
         }
@@ -174,9 +174,9 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
@@ -206,34 +206,34 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL];
         }
 
-        return parent::getPostThumbSubmodule($module);
+        return parent::getPostThumbSubmodule($componentVariation);
     }
 
-    public function showExcerpt(array $module)
+    public function showExcerpt(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 return true;
         }
 
-        return parent::showExcerpt($module);
+        return parent::showExcerpt($componentVariation);
     }
 
-    public function getTitleHtmlmarkup(array $module, array &$props)
+    public function getTitleHtmlmarkup(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 return 'h3';
         }
 
-        return parent::getTitleHtmlmarkup($module, $props);
+        return parent::getTitleHtmlmarkup($componentVariation, $props);
     }
 
-    public function authorPositions(array $module)
+    public function authorPositions(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
@@ -262,12 +262,12 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 return array();
         }
 
-        return parent::authorPositions($module);
+        return parent::authorPositions($componentVariation);
     }
 
-    public function getTitleBeforeauthors(array $module, array &$props)
+    public function getTitleBeforeauthors(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
@@ -286,24 +286,24 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 );
         }
 
-        return parent::getTitleBeforeauthors($module, $props);
+        return parent::getTitleBeforeauthors($componentVariation, $props);
     }
 
-    public function horizontalLayout(array $module)
+    public function horizontalLayout(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
                 return true;
         }
 
-        return parent::horizontalLayout($module);
+        return parent::horizontalLayout($componentVariation);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
@@ -315,15 +315,15 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($componentVariation);
     }
 
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
@@ -334,21 +334,21 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 // Hide for small screens since otherwise it doesn't fit in the viewport and the whole popover is then not visible
                 $ret[GD_JS_CLASSES]['thumb'] = 'hidden-xs';
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
@@ -368,15 +368,15 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
-                $this->appendProp($module, $props, 'class', 'events-carousel');
+                $this->appendProp($componentVariation, $props, 'class', 'events-carousel');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

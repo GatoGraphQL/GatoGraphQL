@@ -21,13 +21,13 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
-    public function getFilterInputComponentVariations(array $filterInputModules, array $module): array
+    public function getFilterInputComponentVariations(array $filterInputModules, array $componentVariation): array
     {
         $adminModuleNames = [
             UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERS,
             UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT,
         ];
-        if (in_array($module[1], $adminModuleNames)) {
+        if (in_array($componentVariation[1], $adminModuleNames)) {
             return [
                 ...$filterInputModules,
                 ...$this->getUserFilterInputComponentVariations(),

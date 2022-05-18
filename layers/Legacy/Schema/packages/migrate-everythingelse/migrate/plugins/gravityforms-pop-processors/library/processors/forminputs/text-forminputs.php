@@ -11,25 +11,25 @@ class GD_GF_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
         );
     }
 
-    public function isHidden(array $module, array &$props)
+    public function isHidden(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_GF_FORMINPUT_FORMID:
                 return true;
         }
         
-        return parent::isHidden($module, $props);
+        return parent::isHidden($componentVariation, $props);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             // Do not change the name of this input below!
             case self::MODULE_GF_FORMINPUT_FORMID:
                 return 'gform_submit';
         }
         
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 }
 

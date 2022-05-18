@@ -11,13 +11,13 @@ class PoP_UserStance_Processor_HiddenInputFormInputs extends PoP_Module_Processo
         );
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_STANCETARGET:
                 return POP_INPUTNAME_STANCETARGET;
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
 }

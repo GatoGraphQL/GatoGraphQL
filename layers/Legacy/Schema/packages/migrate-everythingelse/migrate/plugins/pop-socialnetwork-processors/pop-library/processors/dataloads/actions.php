@@ -48,9 +48,9 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
             self::MODULE_DATALOADACTION_FOLLOWUSER => POP_SOCIALNETWORK_ROUTE_FOLLOWUSER,
             self::MODULE_DATALOADACTION_RECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST,
@@ -61,11 +61,11 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_UNRECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST,
             self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG => POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG,
             self::MODULE_DATALOADACTION_UPVOTEPOST => POP_SOCIALNETWORK_ROUTE_UPVOTEPOST,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $executers = array(
             self::MODULE_DATALOADACTION_FOLLOWUSER => FollowUserMutationResolverBridge::class,
@@ -79,17 +79,17 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => DownvoteCustomPostMutationResolverBridge::class,
             self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => UndoDownvoteCustomPostMutationResolverBridge::class,
         );
-        if ($executer = $executers[$module[1]] ?? null) {
+        if ($executer = $executers[$componentVariation[1]] ?? null) {
             return $executer;
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($componentVariation);
     }
 
-    // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
+    // function getActionexecutionCheckpointConfiguration(array $componentVariation, array &$props) {
 
     //     // The actionexecution is triggered when clicking on the link, not when submitting a form
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_DATALOADACTION_FOLLOWUSER:
     //         case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
@@ -105,13 +105,13 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     //             return null;
     //     }
 
-    //     return parent::getActionexecutionCheckpointConfiguration($module, $props);
+    //     return parent::getActionexecutionCheckpointConfiguration($componentVariation, $props);
     // }
 
-    public function shouldExecuteMutation(array $module, array &$props): bool
+    public function shouldExecuteMutation(array $componentVariation, array &$props): bool
     {
         // The actionexecution is triggered when clicking on the link, not when submitting a form
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -125,12 +125,12 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return true;
         }
 
-        return parent::shouldExecuteMutation($module, $props);
+        return parent::shouldExecuteMutation($componentVariation, $props);
     }
 
-    protected function getCheckpointmessageModule(array $module)
+    protected function getCheckpointmessageModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -144,12 +144,12 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_LOGGEDIN];
         }
 
-        return parent::getCheckpointmessageModule($module);
+        return parent::getCheckpointmessageModule($componentVariation);
     }
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackmessageModule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -163,14 +163,14 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::MODULE_FEEDBACKMESSAGE_EMPTY];
         }
 
-        return parent::getFeedbackmessageModule($module);
+        return parent::getFeedbackmessageModule($componentVariation);
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(array $componentVariation, array &$props, array &$data_properties): void
     {
-        parent::prepareDataPropertiesAfterMutationExecution($module, $props, $data_properties);
+        parent::prepareDataPropertiesAfterMutationExecution($componentVariation, $props, $data_properties);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -181,7 +181,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                if ($target_id = App::getMutationResolutionStore()->getResult($this->getComponentMutationResolverBridge($module))) {
+                if ($target_id = App::getMutationResolutionStore()->getResult($this->getComponentMutationResolverBridge($componentVariation))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
@@ -190,9 +190,9 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         }
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_DATALOADACTION_FOLLOWUSER => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_FOLLOWSUSERS],
@@ -206,16 +206,16 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_DOWNVOTESPOSTS],
             self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_UNDODOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UNRECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UPVOTEPOST:
@@ -226,14 +226,14 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($componentVariation, $props, $data_properties);
         }
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(array $componentVariation, array &$props, array &$data_properties): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UNRECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UPVOTEPOST:
@@ -251,9 +251,9 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return null;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
@@ -271,10 +271,10 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $towhats = array(
             self::MODULE_DATALOADACTION_FOLLOWUSER => TranslationAPIFacade::getInstance()->__('follow users', 'pop-coreprocessors'),
@@ -288,7 +288,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => TranslationAPIFacade::getInstance()->__('down-vote posts', 'pop-coreprocessors'),
             self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => TranslationAPIFacade::getInstance()->__('stop down-voting posts', 'pop-coreprocessors'),
         );
-        if ($towhat = $towhats[$module[1]] ?? null) {
+        if ($towhat = $towhats[$componentVariation[1]] ?? null) {
             $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', $towhat);
         }
 
@@ -296,7 +296,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY], $props, 'error-header', '');
         $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY], $props, 'success-header', '');
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -307,11 +307,11 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                $this->appendProp($module, $props, 'class', 'hidden');
+                $this->appendProp($componentVariation, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

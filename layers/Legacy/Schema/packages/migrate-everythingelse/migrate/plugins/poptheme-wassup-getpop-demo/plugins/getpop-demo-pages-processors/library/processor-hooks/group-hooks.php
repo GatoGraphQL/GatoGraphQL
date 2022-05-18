@@ -26,20 +26,20 @@ class GetPoPDemo_Processors_GroupHooks
         );
     }
 
-    public function setModelProps(array $module, $props_in_array, $processor)
+    public function setModelProps(array $componentVariation, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA:
                 // Hide if block is empty
-                foreach ($processor->getSubComponentVariations($module) as $submodule) {
+                foreach ($processor->getSubComponentVariations($componentVariation) as $submodule) {
                     $processor->setProp([$submodule], $props, 'do-not-render-if-no-results', true);
                 }
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
                 // Format
                 $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');

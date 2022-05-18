@@ -16,9 +16,9 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
                 
@@ -37,12 +37,12 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 );
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
                 
@@ -53,12 +53,12 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 return GD_FormInput_OrganizationTypes::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($componentVariation);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES:
                 return 'organizationtypes';
 
@@ -69,7 +69,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 return 'individualinterests';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

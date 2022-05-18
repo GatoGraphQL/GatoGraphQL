@@ -22,7 +22,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
         );
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
         $routes = array(
             self::MODULE_BUTTONINNER_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
@@ -32,14 +32,14 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             self::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::MODULE_BUTTONINNER_POSTSTANCE_AGAINST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$module[1]] ?? null) {
+        if ($route = $routes[$componentVariation[1]] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $componentVariation)
     {
 
         // Allow Events to have a different title
@@ -59,16 +59,16 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             self::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::MODULE_BUTTONINNER_POSTSTANCE_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$module[1]] ?? null) {
+        if ($title = $titles[$componentVariation[1]] ?? null) {
             return $title;
         }
 
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($componentVariation);
     }
 
-    public function getTextField(array $module, array &$props)
+    public function getTextField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTONINNER_POSTSTANCE_PRO:
                 return 'stanceProCount';
 
@@ -79,7 +79,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
                 return 'stanceAgainstCount';
         }
 
-        return parent::getTextField($module, $props);
+        return parent::getTextField($componentVariation, $props);
     }
 }
 

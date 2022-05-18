@@ -10,25 +10,25 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
             [self::class, self::MODULE_CONTENT_COMMENTSINGLE],
         );
     }
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENT_COMMENTSINGLE:
                 return [PoP_Module_Processor_CommentContentInners::class, PoP_Module_Processor_CommentContentInners::MODULE_CONTENTINNER_COMMENTSINGLE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENT_COMMENTSINGLE:
-                $this->appendProp($module, $props, 'class', 'well well-sm');
+                $this->appendProp($componentVariation, $props, 'class', 'well well-sm');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

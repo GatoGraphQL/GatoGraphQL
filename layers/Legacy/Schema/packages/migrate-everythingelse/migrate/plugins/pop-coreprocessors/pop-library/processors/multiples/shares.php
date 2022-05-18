@@ -15,11 +15,11 @@ class PoP_Module_Processor_ShareMultiples extends PoP_Module_Processor_Multiples
         );
     }
     
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_EMBED:
                 $ret[] = [PoP_Module_Processor_ShareContents::class, PoP_Module_Processor_ShareContents::MODULE_CONTENT_EMBED];
                 $ret[] = [PoP_Module_Processor_ShareContents::class, PoP_Module_Processor_ShareContents::MODULE_CONTENT_EMBEDPREVIEW];

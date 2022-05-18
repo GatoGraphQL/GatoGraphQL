@@ -11,48 +11,48 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POPOVER_EVENT:
                 return [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER];
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
 
-    public function getLayoutContentSubmodule(array $module)
+    public function getLayoutContentSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POPOVER_EVENT:
                 return [PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::MODULE_LAYOUTCALENDAR_CONTENT_POPOVER];
         }
 
-        return parent::getLayoutContentSubmodule($module);
+        return parent::getLayoutContentSubmodule($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_POPOVER_EVENT:
                 // Use no Author popover
-                $this->appendProp($module, $props, 'class', 'pop-elem');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-elem');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 
-    // function getModulePath(array $module, array &$props) {
+    // function getModulePath(array $componentVariation, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //         case self::MODULE_LAYOUT_POPOVER_EVENT:
 
-    //             return $module;
+    //             return $componentVariation;
     //     }
 
-    //     return parent::getModulePath($module, $props);
+    //     return parent::getModulePath($componentVariation, $props);
     // }
 }
 

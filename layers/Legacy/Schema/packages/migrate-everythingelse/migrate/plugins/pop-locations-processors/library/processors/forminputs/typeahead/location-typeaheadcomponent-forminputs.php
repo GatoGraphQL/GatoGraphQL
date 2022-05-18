@@ -13,34 +13,34 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
         );
     }
 
-    protected function getLimit(array $module, array &$props)
+    protected function getLimit(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return 8;
         }
 
-        return parent::getLimit($module, $props);
+        return parent::getLimit($componentVariation, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $module, array &$props)
+    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONS);
         }
 
-        return parent::getTypeaheadDataloadSource($module, $props);
+        return parent::getTypeaheadDataloadSource($componentVariation, $props);
     }
 
-    // protected function getSourceFilter(array $module, array &$props)
+    // protected function getSourceFilter(array $componentVariation, array &$props)
     // {
     //     return POP_FILTER_CONTENT;
     // }
-    protected function getRemoteUrl(array $module, array &$props)
+    protected function getRemoteUrl(array $componentVariation, array &$props)
     {
-        $url = parent::getRemoteUrl($module, $props);
+        $url = parent::getRemoteUrl($componentVariation, $props);
         
         $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
         return $dataloadHelperService->addFilterParams(

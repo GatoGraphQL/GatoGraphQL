@@ -14,9 +14,9 @@ class PoP_LocationPostsCreation_Bootstrap_Module_MainPageSectionComponentRouting
         $routemodules = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

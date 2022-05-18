@@ -5,7 +5,7 @@ define('GD_CONSTANT_FULLUSER_TITLEPOSITION_BODY', 'body');
 
 abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FULLUSER];
     }
@@ -15,47 +15,47 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
         return array_merge(
-            parent::getDataFields($module, $props),
+            parent::getDataFields($componentVariation, $props),
             array('shortDescriptionFormatted', 'descriptionFormatted')
         );
     }
 
-    public function titlePosition(array $module, array &$props)
+    public function titlePosition(array $componentVariation, array &$props)
     {
         return GD_CONSTANT_FULLUSER_TITLEPOSITION_TOP;
     }
 
-    public function showDescription(array $module, array &$props)
+    public function showDescription(array $componentVariation, array &$props)
     {
         return true;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
-        if ($this->getTitleSubmodule($module, $props)) {
-            $ret['title-position'] = $this->titlePosition($module, $props);
+        if ($this->getTitleSubmodule($componentVariation, $props)) {
+            $ret['title-position'] = $this->titlePosition($componentVariation, $props);
         }
 
-        if ($this->showDescription($module, $props)) {
+        if ($this->showDescription($componentVariation, $props)) {
             $ret['show-description'] = true;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        if ($this->showDescription($module, $props)) {
-            $this->appendProp($module, $props, 'class', 'showdescription');
+        if ($this->showDescription($componentVariation, $props)) {
+            $this->appendProp($componentVariation, $props, 'class', 'showdescription');
         } else {
-            $this->appendProp($module, $props, 'class', 'nodescription');
+            $this->appendProp($componentVariation, $props, 'class', 'nodescription');
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

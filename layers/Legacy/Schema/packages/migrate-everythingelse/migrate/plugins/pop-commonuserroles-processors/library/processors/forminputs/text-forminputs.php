@@ -16,9 +16,9 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_LASTNAME:
                 return TranslationAPIFacade::getInstance()->__('Last name', 'ure-popprocessors');
 
@@ -29,14 +29,14 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
                 return TranslationAPIFacade::getInstance()->__('Telephone / Fax', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        $ret = parent::getLabel($module, $props);
+        $ret = parent::getLabel($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON:
                 return '<i class="fa fa-fw fa-user"></i>'.$ret;
 
@@ -47,9 +47,9 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         return $ret;
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_LASTNAME:
                 return 'lastName';
 
@@ -60,7 +60,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
                 return 'contactNumber';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($componentVariation);
     }
 }
 

@@ -7,11 +7,11 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getDataloadSource(array $module, array &$props): string
+    public function getDataloadSource(array $componentVariation, array &$props): string
     {
-        $ret = parent::getDataloadSource($module, $props);
+        $ret = parent::getDataloadSource($componentVariation, $props);
 
-        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($componentVariation)) {
         if (\PoP\Root\App::getState('nature') == UserRequestNature::USER) {
             // Allow URE to add the Organization/Community content source attribute
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -22,14 +22,14 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
 
         // Allow to override the limit by $props (eg: for the Website Features, Filter section)
-        if ($limit = $this->getProp($module, $props, 'limit')) {
+        if ($limit = $this->getProp($componentVariation, $props, 'limit')) {
             $ret['limit'] = $limit;
-        } elseif ($format = $this->getFormat($module)) {
+        } elseif ($format = $this->getFormat($componentVariation)) {
             $limits = array(
                 POP_FORMAT_SIMPLEVIEW => 6,
                 POP_FORMAT_FULLVIEW => 6,
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         }
 
         // Allow to override the include by $props (eg: for GetPoP Organization Membes demonstration)
-        if ($include = $this->getProp($module, $props, 'include')) {
+        if ($include = $this->getProp($componentVariation, $props, 'include')) {
             $ret['include'] = $include;
         }
 
@@ -55,42 +55,42 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackmessageModule(array $componentVariation)
     {
         return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::MODULE_FEEDBACKMESSAGE_ITEMLIST];
     }
 
-    protected function getFeedbackmessagesPosition(array $module)
+    protected function getFeedbackmessagesPosition(array $componentVariation)
     {
         return 'bottom';
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
     {
         return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
-        if ($inner_module = $this->getInnerSubmodule($module)) {
+        if ($inner_module = $this->getInnerSubmodule($componentVariation)) {
             $ret[] = $inner_module;
         }
 
         return $ret;
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         return null;
     }
 
-    // public function getModelPropsForDescendantComponentVariations(array $module, array &$props): array
+    // public function getModelPropsForDescendantComponentVariations(array $componentVariation, array &$props): array
     // {
-    //     $ret = parent::getModelPropsForDescendantComponentVariations($module, $props);
+    //     $ret = parent::getModelPropsForDescendantComponentVariations($componentVariation, $props);
 
-    //     if ($filter_module = $this->getFilterSubmodule($module)) {
+    //     if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $ret['filter-module'] = $filter_module;
     //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);

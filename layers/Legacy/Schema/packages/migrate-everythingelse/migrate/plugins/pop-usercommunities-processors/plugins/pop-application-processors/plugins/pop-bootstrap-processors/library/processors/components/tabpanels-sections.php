@@ -13,22 +13,22 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_COMMUNITIES:
             case self::MODULE_TABPANEL_MYMEMBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($componentVariation);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubmodules(array $componentVariation)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_COMMUNITIES:
                 $ret = array_merge(
                     $ret,
@@ -56,9 +56,9 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TABPANEL_COMMUNITIES:
                 return array(
                     [
@@ -78,6 +78,6 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
                 );
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($componentVariation, $props);
     }
 }

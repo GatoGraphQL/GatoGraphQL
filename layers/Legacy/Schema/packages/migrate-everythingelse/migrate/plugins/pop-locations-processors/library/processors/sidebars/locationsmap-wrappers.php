@@ -13,9 +13,9 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
         );
     }
 
-    public function getLocationlinksTemplate(array $module)
+    public function getLocationlinksTemplate(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP:
                 return [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS];
             ;
@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
                 return [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS];
         }
         
-        return parent::getLocationlinksTemplate($module);
+        return parent::getLocationlinksTemplate($componentVariation);
     }
 }
 

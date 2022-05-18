@@ -11,14 +11,14 @@ class PoP_Module_Processor_Alerts extends PoP_Module_Processor_AlertsBase
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ALERT_STICKY:
                 return [PoP_Module_Processor_AnnouncementSpeechBubbles::class, PoP_Module_Processor_AnnouncementSpeechBubbles::MODULE_ANNOUNCEMENTSPEECHBUBBLE_STICKY];
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubmodule($componentVariation);
     }
 }
 

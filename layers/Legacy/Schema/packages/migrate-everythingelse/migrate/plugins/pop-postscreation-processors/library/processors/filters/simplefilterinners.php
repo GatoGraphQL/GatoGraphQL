@@ -11,9 +11,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLINKS => [
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
             ],
         ];
         // Add the link access filter
-        if (($inputmodules[$module[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputmodules[$componentVariation[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
             array_splice(
                 $ret,
                 array_search(
@@ -42,8 +42,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         }
         if ($modules = \PoP\Root\App::applyFilters(
             'Links:SimpleFilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -53,16 +53,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

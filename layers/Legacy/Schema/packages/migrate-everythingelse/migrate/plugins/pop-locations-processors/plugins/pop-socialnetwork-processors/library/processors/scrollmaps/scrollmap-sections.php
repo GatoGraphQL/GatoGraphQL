@@ -21,7 +21,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections exten
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
             self::MODULE_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
@@ -32,12 +32,12 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections exten
             self::MODULE_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    protected function isUserMap(array $module)
+    protected function isUserMap(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_AUTHORFOLLOWINGUSERS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_SINGLERECOMMENDEDBY_SCROLLMAP:
@@ -47,7 +47,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections exten
                 return true;
         }
 
-        return parent::isUserMap($module);
+        return parent::isUserMap($componentVariation);
     }
 }
 

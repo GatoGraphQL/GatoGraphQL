@@ -33,11 +33,11 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS:
                 $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS];
                 break;
@@ -90,15 +90,15 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS:
-                $this->appendProp($module, $props, 'class', 'hidden-sm hidden-md hidden-lg');
+                $this->appendProp($componentVariation, $props, 'class', 'hidden-sm hidden-md hidden-lg');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

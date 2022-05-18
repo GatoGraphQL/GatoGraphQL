@@ -17,13 +17,13 @@ class PoP_WebPlatform_CSSConverter_Hooks
         );
     }
 
-    public function getImmutableConfiguration($configuration, array $module, array $props, $processor)
+    public function getImmutableConfiguration($configuration, array $componentVariation, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
-        if ($processor->getProp($module, $props, 'convert-classes-to-styles')) {
-            $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
+        if ($processor->getProp($componentVariation, $props, 'convert-classes-to-styles')) {
+            $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($componentVariation);
 
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration[GD_JS_CLASS]))) {
@@ -53,12 +53,12 @@ class PoP_WebPlatform_CSSConverter_Hooks
         return $configuration;
     }
 
-    public function getMutableonrequestConfiguration($configuration, array $module, array $props, $processor)
+    public function getMutableonrequestConfiguration($configuration, array $componentVariation, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
-        if ($processor->getProp($module, $props, 'convert-classes-to-styles')) {
+        if ($processor->getProp($componentVariation, $props, 'convert-classes-to-styles')) {
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration['runtime-class']))) {
                 $styles = PoP_CSSConverter_ConversionUtils::getStylesFromClasses($allclasses);

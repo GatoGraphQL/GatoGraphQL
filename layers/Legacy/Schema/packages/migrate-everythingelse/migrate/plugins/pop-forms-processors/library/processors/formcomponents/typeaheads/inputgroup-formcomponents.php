@@ -11,11 +11,11 @@ class PoP_Module_Processor_InputGroupFormComponents extends PoP_Module_Processor
         );
     }
 
-    public function getInputSubmodule(array $module)
+    public function getInputSubmodule(array $componentVariation)
     {
-        $ret = parent::getInputSubmodule($module);
+        $ret = parent::getInputSubmodule($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADSEARCH:
                 return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH];
         }
@@ -23,11 +23,11 @@ class PoP_Module_Processor_InputGroupFormComponents extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getControlSubmodules(array $module)
+    public function getControlSubmodules(array $componentVariation)
     {
-        $ret = parent::getControlSubmodules($module);
+        $ret = parent::getControlSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADSEARCH:
                 $ret[] = [PoP_Module_Processor_TypeaheadButtonControls::class, PoP_Module_Processor_TypeaheadButtonControls::MODULE_BUTTONCONTROL_TYPEAHEADSEARCH];
                 break;

@@ -26,9 +26,9 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
                 return TranslationAPIFacade::getInstance()->__('Name', 'em-popprocessors');
 
@@ -48,34 +48,34 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
                 return TranslationAPIFacade::getInstance()->__('Region', 'em-popprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
             case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
                 return true;
         }
 
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($componentVariation, $props);
     }
 
-    public function isHidden(array $module, array &$props)
+    public function isHidden(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
             case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
                 return true;
         }
 
-        return parent::isHidden($module, $props);
+        return parent::isHidden($componentVariation, $props);
     }
 
-    public function clearInput(array $module, array &$props)
+    public function clearInput(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONNAME:
             case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
             case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
@@ -87,12 +87,12 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
                 return true;
         }
 
-        return parent::clearInput($module, $props);
+        return parent::clearInput($componentVariation, $props);
     }
 
-    // function getName(array $module) {
+    // function getName(array $componentVariation) {
 
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
 
     //          // Names needed by EM to create the Location
     //         case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
@@ -128,18 +128,18 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     //             return 'location_region';
     //     }
 
-    //     return parent::getName($module);
+    //     return parent::getName($componentVariation);
     // }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
-                $this->appendProp($module, $props, 'class', 'address-lat');
+                $this->appendProp($componentVariation, $props, 'class', 'address-lat');
                 break;
 
             case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
-                $this->appendProp($module, $props, 'class', 'address-lng');
+                $this->appendProp($componentVariation, $props, 'class', 'address-lng');
                 break;
 
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
@@ -148,11 +148,11 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
             case self::MODULE_FORMINPUT_EM_LOCATIONSTATE:
             case self::MODULE_FORMINPUT_EM_LOCATIONPOSTCODE:
             case self::MODULE_FORMINPUT_EM_LOCATIONREGION:
-                $this->appendProp($module, $props, 'class', 'address-input');
+                $this->appendProp($componentVariation, $props, 'class', 'address-input');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -47,9 +47,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
         );
     }
 
-    public function getProvider(array $module)
+    public function getProvider(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -75,12 +75,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return GD_SOCIALMEDIA_PROVIDER_LINKEDIN;
         }
 
-        return parent::getProvider($module);
+        return parent::getProvider($componentVariation);
     }
 
-    public function getShareurlField(array $module, array &$props)
+    public function getShareurlField(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -106,12 +106,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'linkedin']);
         }
 
-        return parent::getTitleField($module);
+        return parent::getTitleField($componentVariation);
     }
 
-    public function getName(array $module): string
+    public function getName(array $componentVariation): string
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -137,11 +137,11 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return TranslationAPIFacade::getInstance()->__('LinkedIn', 'pop-coreprocessors');
         }
 
-        return parent::getName($module);
+        return parent::getName($componentVariation);
     }
-    public function getShortname(array $module)
+    public function getShortname(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -168,11 +168,11 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return 'linkedin';
         }
 
-        return parent::getShortname($module);
+        return parent::getShortname($componentVariation);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -204,12 +204,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return 'fa-linkedin';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -220,12 +220,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
             case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'socialmediaproviders');
-                $this->appendProp($module, $props, 'class', 'socialmediaproviders-changebg icon-only');
+                $this->setProp($componentVariation, $props, 'resourceloader', 'socialmediaproviders');
+                $this->appendProp($componentVariation, $props, 'class', 'socialmediaproviders-changebg icon-only');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

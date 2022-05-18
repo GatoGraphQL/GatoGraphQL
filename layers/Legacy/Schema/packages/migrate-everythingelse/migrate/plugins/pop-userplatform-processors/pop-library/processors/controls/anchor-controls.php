@@ -15,9 +15,9 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return TranslationAPIFacade::getInstance()->__('Email', 'pop-coreprocessors');
 
@@ -25,11 +25,11 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
                 return TranslationAPIFacade::getInstance()->__('Invite your friends to join!', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return 'fa-envelope';
 
@@ -37,40 +37,40 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
                 return 'fa-user-plus';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
             case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return RouteUtils::getRouteURL(POP_USERPLATFORM_ROUTE_INVITENEWUSERS);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
 
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
             case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return POP_TARGET_MODALS;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
-                $this->appendProp($module, $props, 'class', 'btn btn-default btn-block btn-invitenewusers');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-default btn-block btn-invitenewusers');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

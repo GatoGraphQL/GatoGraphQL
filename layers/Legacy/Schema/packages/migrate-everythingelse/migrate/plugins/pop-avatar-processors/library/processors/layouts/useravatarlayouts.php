@@ -13,26 +13,26 @@ class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAv
         );
     }
 
-    public function getAvatarSize(array $module)
+    public function getAvatarSize(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_USERAVATAR_60:
             case self::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE:
                 return GD_AVATAR_SIZE_60;
         }
 
-        return parent::getAvatarSize($module);
+        return parent::getAvatarSize($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE:
-                $this->appendProp($module, $props, 'class', 'img-responsive');
+                $this->appendProp($componentVariation, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

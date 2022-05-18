@@ -17,9 +17,9 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS:
             case self::MODULE_SCROLLINNER_INDIVIDUALS_DETAILS:
             case self::MODULE_SCROLLINNER_ORGANIZATIONS_FULLVIEW:
@@ -30,12 +30,12 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomPreviewUserLayouts::class, GD_URE_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS],
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
             self::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomFullUserLayouts::class, GD_URE_Module_Processor_CustomFullUserLayouts::MODULE_LAYOUT_FULLUSER_INDIVIDUAL],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$componentVariation[1]] ?? null) {
             $ret[] = $layout;
         }
 

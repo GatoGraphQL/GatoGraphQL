@@ -19,11 +19,11 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_AUTHOR:
                 $ret[] = [PoP_Module_Processor_AuthorContentLayouts::class, PoP_Module_Processor_AuthorContentLayouts::MODULE_LAYOUTAUTHOR_CONTENT];
                 break;
@@ -45,16 +45,16 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CONTENTINNER_HIGHLIGHTSINGLE:
                 // Highlights: it has a different set-up
-                $this->appendProp($module, $props, 'class', 'well');
+                $this->appendProp($componentVariation, $props, 'class', 'well');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

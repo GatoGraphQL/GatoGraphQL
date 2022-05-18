@@ -2,37 +2,37 @@
 
 abstract class PoP_Module_Processor_SocialLoginElementsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_SocialLoginWebPlatform_TemplateResourceLoaderProcessor::class, PoP_SocialLoginWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_SOCIALLOGIN_NETWORKLINKS];
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
         $this->addJsmethod($ret, 'socialLoginNetworkLink', 'links');
         return $ret;
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
         return 'btn btn-default';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $ret['networklinks'] = getSocialloginNetworklinks();
-        $ret[GD_JS_CLASSES]['link'] = $this->getBtnClass($module, $props);
+        $ret[GD_JS_CLASSES]['link'] = $this->getBtnClass($componentVariation, $props);
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'sociallogin-networklinks');
+        $this->appendProp($componentVariation, $props, 'class', 'sociallogin-networklinks');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

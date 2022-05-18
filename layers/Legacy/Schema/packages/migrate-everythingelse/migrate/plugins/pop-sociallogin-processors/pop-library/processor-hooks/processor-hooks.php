@@ -50,14 +50,14 @@ class GD_WSL_ProcessorHooks
         return $hooks;
     }
 
-    public function setModelProps(array $module, &$props, $processor)
+    public function setModelProps(array $componentVariation, &$props, $processor)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         // Method called by the PoP_Module_Processor_LoginGroups::MODULE_GROUP_LOGIN processor to allow hooks to set $props
         // Make PoP_Module_Processor_LoginGroups::MODULE_GROUP_LOGIN the block to have a Disabled Layer on top
         // while waiting for the server authenticating the FB/Twitter user
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $blocktarget = '#'.$processor->getFrontendId($module, $props);
+            $blocktarget = '#'.$processor->getFrontendId($componentVariation, $props);
             $processor->setProp([[PoP_Module_Processor_SocialLoginElements::class, PoP_Module_Processor_SocialLoginElements::MODULE_SOCIALLOGIN_NETWORKLINKS]], $props, 'loginblock-target', $blocktarget);
         }
         $processor->setProp(

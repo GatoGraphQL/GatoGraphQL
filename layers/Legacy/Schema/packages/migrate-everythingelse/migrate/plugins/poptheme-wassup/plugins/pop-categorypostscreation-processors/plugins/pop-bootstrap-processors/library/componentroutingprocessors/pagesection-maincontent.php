@@ -35,9 +35,9 @@ class PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionComponentRouting
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_SectionTabPanelBlocks::class, LPPC_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS19],
         );
 
-        foreach ($routemodules as $route => $module) {
+        foreach ($routemodules as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $module,
+                'component-variation' => $componentVariation,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

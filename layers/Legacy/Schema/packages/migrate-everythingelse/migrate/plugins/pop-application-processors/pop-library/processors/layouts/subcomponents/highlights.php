@@ -13,9 +13,9 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         );
     }
 
-    public function getSubcomponentField(array $module)
+    public function getSubcomponentField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
                 return 'highlights';
 
@@ -24,11 +24,11 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         }
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
                 $ret[] = [Wassup_Module_Processor_LayoutContents::class, Wassup_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_HIGHLIGHTS];
                 break;
@@ -41,27 +41,27 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function isIndividual(array $module, array &$props)
+    public function isIndividual(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
                 return false;
         }
 
-        return parent::isIndividual($module, $props);
+        return parent::isIndividual($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
-                $this->appendProp($module, $props, 'class', 'referencedby clearfix');
+                $this->appendProp($componentVariation, $props, 'class', 'referencedby clearfix');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

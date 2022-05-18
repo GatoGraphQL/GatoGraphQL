@@ -13,9 +13,9 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('Add %s', 'pop-locationpostscreation-processors'),
@@ -24,38 +24,38 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
             break;
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 return 'fa-plus';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 if (defined('POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST') && POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST) {
                     $routes = array(
                         self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
                     );
-                    $route = $routes[$module[1]];
+                    $route = $routes[$componentVariation[1]];
 
                     return RouteUtils::getRouteURL($route);
                 }
                 break;
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -63,17 +63,17 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
                 break;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
-                $this->appendProp($module, $props, 'class', 'btn btn-primary');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-primary');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

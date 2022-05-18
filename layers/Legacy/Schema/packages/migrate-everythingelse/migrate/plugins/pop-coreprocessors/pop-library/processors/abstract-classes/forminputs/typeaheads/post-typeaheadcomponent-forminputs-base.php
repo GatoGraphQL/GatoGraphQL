@@ -7,20 +7,20 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
-    protected function getValueKey(array $module, array &$props)
+    protected function getValueKey(array $componentVariation, array &$props)
     {
         return 'title';
     }
-    protected function getComponentTemplateResource(array $module)
+    protected function getComponentTemplateResource(array $componentVariation)
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTPOST_TYPEAHEAD_COMPONENT];
     }
-    protected function getTokenizerKeys(array $module, array &$props)
+    protected function getTokenizerKeys(array $componentVariation, array &$props)
     {
         return array('title');
     }
 
-    protected function getThumbprintQuery(array $module, array &$props)
+    protected function getThumbprintQuery(array $componentVariation, array &$props)
     {
         return array(
             // 'fields' => 'ids',
@@ -35,11 +35,11 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends
         return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
-    protected function getPendingMsg(array $module)
+    protected function getPendingMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Content', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $module)
+    protected function getNotfoundMsg(array $componentVariation)
     {
         return TranslationAPIFacade::getInstance()->__('No Content found', 'pop-coreprocessors');
     }

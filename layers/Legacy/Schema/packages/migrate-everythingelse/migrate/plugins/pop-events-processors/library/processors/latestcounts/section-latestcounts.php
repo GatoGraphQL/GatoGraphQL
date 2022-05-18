@@ -24,9 +24,9 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         );
     }
 
-    public function getObjectName(array $module, array &$props)
+    public function getObjectName(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
             case self::MODULE_LATESTCOUNT_TAG_EVENTS:
@@ -38,12 +38,12 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
                 return TranslationAPIFacade::getInstance()->__('past event', 'poptheme-wassup');
         }
 
-        return parent::getObjectName($module, $props);
+        return parent::getObjectName($componentVariation, $props);
     }
 
-    public function getObjectNames(array $module, array &$props)
+    public function getObjectNames(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
             case self::MODULE_LATESTCOUNT_TAG_EVENTS:
@@ -55,16 +55,16 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
                 return TranslationAPIFacade::getInstance()->__('past events', 'poptheme-wassup');
         }
 
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($componentVariation, $props);
     }
 
-    public function getSectionClasses(array $module, array &$props)
+    public function getSectionClasses(array $componentVariation, array &$props)
     {
-        $ret = parent::getSectionClasses($module, $props);
+        $ret = parent::getSectionClasses($componentVariation, $props);
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
             case self::MODULE_LATESTCOUNT_TAG_EVENTS:
@@ -82,26 +82,26 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         return $ret;
     }
 
-    public function isAuthor(array $module, array &$props)
+    public function isAuthor(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
                 return true;
         }
 
-        return parent::isAuthor($module, $props);
+        return parent::isAuthor($componentVariation, $props);
     }
 
-    public function isTag(array $module, array &$props)
+    public function isTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LATESTCOUNT_TAG_EVENTS:
             case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
                 return true;
         }
 
-        return parent::isTag($module, $props);
+        return parent::isTag($componentVariation, $props);
     }
 }
 

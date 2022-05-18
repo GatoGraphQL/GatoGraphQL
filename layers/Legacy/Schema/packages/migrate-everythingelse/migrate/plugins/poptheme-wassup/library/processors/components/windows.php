@@ -13,23 +13,23 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
         return array_merge(
-            parent::getSubComponentVariations($module),
-            $this->getInnerSubmodules($module)
+            parent::getSubComponentVariations($componentVariation),
+            $this->getInnerSubmodules($componentVariation)
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubmodules(array $componentVariation): array
     {
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WINDOW_ADDONS:
                 $load_module = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_module = $componentVariation == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $addons_module = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS];
@@ -60,14 +60,14 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         return null;
     }
 
-    protected function getModuleClasses(array $module, array &$props)
+    protected function getModuleClasses(array $componentVariation, array &$props)
     {
-        $ret = parent::getModuleClasses($module, $props);
+        $ret = parent::getModuleClasses($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WINDOW_ADDONS:
-                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($module);
+                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($componentVariation);
                 $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
                 $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
                 $ret[$addonsSubmoduleOutputName] = 'container-fluid offcanvas pop-waypoints-context scrollable addons perfect-scrollbar vertical';
@@ -78,14 +78,14 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         return $ret;
     }
 
-    protected function getModuleParams(array $module, array &$props)
+    protected function getModuleParams(array $componentVariation, array &$props)
     {
-        $ret = parent::getModuleParams($module, $props);
+        $ret = parent::getModuleParams($componentVariation, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WINDOW_ADDONS:
-                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($module);
+                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($componentVariation);
                 $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
                 $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
                 $ret[$addonsSubmoduleOutputName] = array(

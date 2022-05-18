@@ -15,9 +15,9 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELINNER_STANCES:
             case self::MODULE_CAROUSELINNER_AUTHORSTANCES:
             case self::MODULE_CAROUSELINNER_TAGSTANCES:
@@ -28,14 +28,14 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($componentVariation, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELINNER_STANCES:
             case self::MODULE_CAROUSELINNER_AUTHORSTANCES:
             case self::MODULE_CAROUSELINNER_TAGSTANCES:

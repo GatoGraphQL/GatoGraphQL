@@ -12,14 +12,14 @@ class GD_URE_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Process
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS:
                 return TranslationAPIFacade::getInstance()->__('Organization', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 }
 

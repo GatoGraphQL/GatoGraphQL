@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {
-    public function getTargetDynamicallyRenderedSubmodules(array $module)
+    public function getTargetDynamicallyRenderedSubmodules(array $componentVariation)
     {
         return array();
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalModuleField[]
      */
-    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $module)
+    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $componentVariation)
     {
         return array();
     }
@@ -20,13 +20,13 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubmodules(array $componentVariation): array
     {
-        $ret = parent::getRelationalSubmodules($module);
+        $ret = parent::getRelationalSubmodules($componentVariation);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded
-        if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($module)) {
+        if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
                 $dynamic_modules
@@ -36,13 +36,13 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded
-        if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($module)) {
+        if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
                 $dynamic_modules
@@ -52,18 +52,18 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
 
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
-            if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($module)) {
+            if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($componentVariation)) {
                 foreach ($dynamic_modules as $dynamic_module) {
                     $this->setProp($dynamic_module, $props, 'needs-dynamic-data', true);
                 }
             }
 
-            if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($module)) {
+            if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($componentVariation)) {
                 foreach ($subcomponent_dynamic_templates as $data_field => $modules) {
                     foreach ($modules as $dynamic_module) {
                         $this->setProp($dynamic_module, $props, 'needs-dynamic-data', true);
@@ -72,6 +72,6 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }

@@ -14,9 +14,9 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
                 return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::MODULE_EM_BUTTONINNER_GOOGLECALENDAR];
 
@@ -24,12 +24,12 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::MODULE_EM_BUTTONINNER_ICAL];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
                 return 'googleCalendarURL';
 
@@ -37,23 +37,23 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return 'icalURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
             case self::MODULE_EM_BUTTON_ICAL:
                 return '_blank';
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Google Calendar', 'em-popprocessors');
 
@@ -61,7 +61,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return TranslationAPIFacade::getInstance()->__('iCal', 'em-popprocessors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 }
 

@@ -39,9 +39,9 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $componentVariation, array &$props): ?string
     {
-        return match($module[1]) {
+        return match($componentVariation[1]) {
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_ADDONS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_DETAILS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
@@ -56,11 +56,11 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
             self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
-            default => parent::getRelevantRoute($module, $props),
+            default => parent::getRelevantRoute($componentVariation, $props),
         };
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubmodule(array $componentVariation)
     {
         $inner_modules = array(
 
@@ -96,12 +96,12 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_LIST],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_modules[$componentVariation[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubmodule(array $componentVariation): ?array
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_INDIVIDUALS_TYPEAHEAD:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW:
@@ -117,10 +117,10 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
                 return [PoP_CommonUserRoles_Module_Processor_CustomFilters::class, PoP_CommonUserRoles_Module_Processor_CustomFilters::MODULE_FILTER_ORGANIZATIONS];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubmodule($componentVariation);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $componentVariation): ?string
     {
         $details = array(
             [self::class, self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
@@ -138,24 +138,24 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             [self::class, self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_LIST],
             [self::class, self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST],
         );
-        if (in_array($module, $details)) {
+        if (in_array($componentVariation, $details)) {
             $format = POP_FORMAT_DETAILS;
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($componentVariation, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($componentVariation, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($componentVariation, $lists)) {
             $format = POP_FORMAT_LIST;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($componentVariation);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
@@ -180,9 +180,9 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
@@ -200,12 +200,12 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($componentVariation);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS:
@@ -224,7 +224,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('individuals', 'poptheme-wassup'));
                 break;
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

@@ -14,13 +14,13 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubmodules(array $componentVariation): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubmodules($componentVariation);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_ADDONTABS:
             case self::MODULE_PAGE_BODYTABS:
                 if ($tab_module = $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
@@ -32,9 +32,9 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
         return $ret;
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_PAGE_ADDONTABS:
                 return 'btn btn-warning btn-sm';
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
                 return 'btn btn-inverse btn-sm';
         }
 
-        return parent::getBtnClass($module, $props);
+        return parent::getBtnClass($componentVariation, $props);
     }
 }
 

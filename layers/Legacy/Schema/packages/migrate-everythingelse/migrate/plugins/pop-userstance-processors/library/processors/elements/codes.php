@@ -23,9 +23,9 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
         );
     }
 
-    public function getCode(array $module, array &$props)
+    public function getCode(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_REFERENCEDAFTERREADING:
                 return TranslationAPIFacade::getInstance()->__('After reading', 'pop-userstance-processors');
 
@@ -66,12 +66,12 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                 );
         }
 
-        return parent::getCode($module, $props);
+        return parent::getCode($componentVariation, $props);
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_REFERENCEDAFTERREADING:
             case self::MODULE_CODE_AUTHORREFERENCEDAFTERREADING:
                 // case self::MODULE_CODE_STANCECOUNT_GENERAL:
@@ -81,29 +81,29 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                 return 'span';
         }
 
-        return parent::getHtmlTag($module, $props);
+        return parent::getHtmlTag($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
          // case self::MODULE_CODE_STANCECOUNT_GENERAL:
          // case self::MODULE_CODE_STANCECOUNT_ARTICLE:
          // case self::MODULE_CODE_STANCECOUNT:
             case self::MODULE_CODE_POSTSTANCE:
-                $this->appendProp($module, $props, 'class', 'btn btn-span');
+                $this->appendProp($componentVariation, $props, 'class', 'btn btn-span');
                 break;
         }
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CODE_STANCECOUNT:
-                $this->appendProp($module, $props, 'class', 'pop-stance-combined');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-stance-combined');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

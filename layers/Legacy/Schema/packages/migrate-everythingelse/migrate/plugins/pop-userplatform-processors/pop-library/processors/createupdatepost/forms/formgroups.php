@@ -12,24 +12,24 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMGROUP_EMBEDPREVIEW:
                 return [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_USERINPUTEMBEDPREVIEW];
         }
         
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubmodule($componentVariation);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_FORMGROUP_EMBEDPREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Preview', 'poptheme-wassup');
         }
         
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
 }
 

@@ -11,9 +11,9 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubmodules(array $componentVariation)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubmodules($componentVariation);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
@@ -24,8 +24,8 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
         ];
         if ($modules = \PoP\Root\App::applyFilters(
             'Comments:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+            $inputmodules[$componentVariation[1]],
+            $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
@@ -35,14 +35,14 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $componentVariation)
     // {
-    //     switch ($module[1]) {
+    //     switch ($componentVariation[1]) {
     //         case self::MODULE_FILTERINPUTCONTAINER_COMMENTS:
     //             return POP_FILTER_COMMENTS;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($componentVariation);
     // }
 }
 

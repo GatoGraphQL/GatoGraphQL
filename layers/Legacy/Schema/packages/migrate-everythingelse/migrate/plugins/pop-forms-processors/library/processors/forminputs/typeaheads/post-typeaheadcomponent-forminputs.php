@@ -15,35 +15,35 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_CONTENT:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Content:', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $module, array &$props)
+    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_CONTENT:
                 return RouteUtils::getRouteURL(POP_BLOG_ROUTE_CONTENT);
         }
 
-        return parent::getTypeaheadDataloadSource($module, $props);
+        return parent::getTypeaheadDataloadSource($componentVariation, $props);
     }
 
 
-    // protected function getSourceFilter(array $module, array &$props)
+    // protected function getSourceFilter(array $componentVariation, array &$props)
     // {
     //     return POP_FILTER_CONTENT;
     // }
-    protected function getSourceFilterParams(array $module, array &$props)
+    protected function getSourceFilterParams(array $componentVariation, array &$props)
     {
-        $ret = parent::getSourceFilterParams($module, $props);
+        $ret = parent::getSourceFilterParams($componentVariation, $props);
 
         // bring the posts ordering by comment count
         if (defined('POP_COMMENTS_INITIALIZED')) {
@@ -55,9 +55,9 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
 
         return $ret;
     }
-    protected function getRemoteUrl(array $module, array &$props)
+    protected function getRemoteUrl(array $componentVariation, array &$props)
     {
-        $url = parent::getRemoteUrl($module, $props);
+        $url = parent::getRemoteUrl($componentVariation, $props);
 
         $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
         return $dataloadHelperService->addFilterParams(

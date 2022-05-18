@@ -15,9 +15,9 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
                 return TranslationAPIFacade::getInstance()->__('FAQ: Adding Content', 'poptheme-wassup');
 
@@ -25,65 +25,65 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
                 return TranslationAPIFacade::getInstance()->__('FAQ: Registration', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($componentVariation, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return 'fa-question';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($componentVariation, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $componentVariation, array &$props)
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 $pages = array(
                     self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
                     self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
                 );
-                $page_id = $pages[$module[1]];
+                $page_id = $pages[$componentVariation[1]];
                 return $pageTypeAPI->getPermalink($page_id);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($componentVariation, $props);
     }
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return POP_TARGET_MODALS;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($componentVariation, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($componentVariation, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 // pop-btn-faq: to hide it for the addons
-                $this->appendProp($module, $props, 'class', 'pop-btn-faq btn btn-link btn-compact');
+                $this->appendProp($componentVariation, $props, 'class', 'pop-btn-faq btn btn-link btn-compact');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

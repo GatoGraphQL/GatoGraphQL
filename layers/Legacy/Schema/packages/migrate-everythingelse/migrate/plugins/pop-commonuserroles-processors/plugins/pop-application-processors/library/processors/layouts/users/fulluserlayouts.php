@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
         );
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLUSER_ORGANIZATION:
             case self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL:
                 $sidebars = array(
@@ -23,10 +23,10 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
                     self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$componentVariation[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 }
 

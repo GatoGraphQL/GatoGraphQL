@@ -18,11 +18,11 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
                 $ret[] = [GD_ContentCreation_Module_Processor_FormInputGroups::class, GD_ContentCreation_Module_Processor_FormInputGroups::MODULE_FORMCOMPONENTGROUP_FEATUREDIMAGE];
                 break;
@@ -63,7 +63,7 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $componentVariation, array &$props)
     {
         $titles = array(
             self::MODULE_WIDGET_FORM_FEATUREDIMAGE => TranslationAPIFacade::getInstance()->__('Featured Image', 'poptheme-wassup'),
@@ -72,29 +72,29 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
             self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS => TranslationAPIFacade::getInstance()->__('Post details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$componentVariation[1]] ?? null;
     }
 
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
             case self::MODULE_WIDGET_FORM_METAINFORMATION:
             case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
             case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
-                if ($class = $this->getProp($module, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
+                if ($class = $this->getProp($componentVariation, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
                 }
 
                 return 'panel panel-info';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($componentVariation, $props);
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
             case self::MODULE_WIDGET_FORM_METAINFORMATION:
             case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
@@ -102,11 +102,11 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
                 return 'panel-body';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($componentVariation, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
             case self::MODULE_WIDGET_FORM_METAINFORMATION:
             case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
@@ -114,12 +114,12 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
                 return '';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($componentVariation, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
                 $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER], $props, 'setbtn-class', 'btn btn-sm btn-link');
                 $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER], $props, 'removebtn-class', 'btn btn-sm btn-link');
@@ -129,19 +129,19 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
             case self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS:
                 // If the widget has nothing inside, then hide it
                 if (!PoP_ApplicationProcessors_Utils::addCategories() && !PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $this->appendProp($module, $props, 'class', 'hidden');
+                    $this->appendProp($componentVariation, $props, 'class', 'hidden');
                 }
                 break;
 
             case self::MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
                 // If the widget has nothing inside, then hide it
                 if (!PoP_ApplicationProcessors_Utils::addCategories() && !PoP_ApplicationProcessors_Utils::addAppliesto() && !PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-                    $this->appendProp($module, $props, 'class', 'hidden');
+                    $this->appendProp($componentVariation, $props, 'class', 'hidden');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

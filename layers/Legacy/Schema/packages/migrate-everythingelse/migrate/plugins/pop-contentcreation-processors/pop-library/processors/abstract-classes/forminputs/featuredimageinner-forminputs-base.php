@@ -3,23 +3,23 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $componentVariation, array &$props): ?array
     {
         return [PoP_ContentCreation_TemplateResourceLoaderProcessor::class, PoP_ContentCreation_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_FEATUREDIMAGE_INNER];
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $componentVariation, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($componentVariation, $props);
         $this->addJsmethod($ret, 'addDomainClass');
         $this->addJsmethod($ret, 'featuredImageSet', 'set');
         $this->addJsmethod($ret, 'featuredImageRemove', 'remove');
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($componentVariation, $props);
 
         $ret[GD_JS_TITLES] = array(
             'btn-add' => TranslationAPIFacade::getInstance()->__('Set Featured Image', 'pop-coreprocessors'),
@@ -30,11 +30,11 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
             )
         );
 
-        $ret['default-img'] = $this->getProp($module, $props, 'default-img');
-        $ret[GD_JS_CLASSES]['img'] = $this->getProp($module, $props, 'img-class');
-        $ret[GD_JS_CLASSES]['set-btn'] = $this->getProp($module, $props, 'setbtn-class');
-        $ret[GD_JS_CLASSES]['remove-btn'] = $this->getProp($module, $props, 'removebtn-class');
-        $ret[GD_JS_CLASSES]['options'] = $this->getProp($module, $props, 'options-class');
+        $ret['default-img'] = $this->getProp($componentVariation, $props, 'default-img');
+        $ret[GD_JS_CLASSES]['img'] = $this->getProp($componentVariation, $props, 'img-class');
+        $ret[GD_JS_CLASSES]['set-btn'] = $this->getProp($componentVariation, $props, 'setbtn-class');
+        $ret[GD_JS_CLASSES]['remove-btn'] = $this->getProp($componentVariation, $props, 'removebtn-class');
+        $ret[GD_JS_CLASSES]['options'] = $this->getProp($componentVariation, $props, 'options-class');
 
         $ret['fields'] = array(
             'featuredImageAttrs' => 'featuredImageAttrs',
@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
         return $ret;
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $componentVariation): ?string
     {
         return 'featuredImage';
     }
@@ -60,16 +60,16 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $componentVariation, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($componentVariation, $props);
         $ret[] = 'featuredImageAttrs';
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
 
         // For function addDomainClass
         $ret['addDomainClass']['prefix'] = 'featuredimage-';
@@ -91,12 +91,12 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        $this->setProp($module, $props, 'img-class', 'img-responsive');
-        $this->setProp($module, $props, 'setbtn-class', 'btn btn-sm btn-primary');
-        $this->setProp($module, $props, 'removebtn-class', 'btn btn-sm btn-danger');
-        $this->setProp($module, $props, 'options-class', 'options');
-        parent::initModelProps($module, $props);
+        $this->setProp($componentVariation, $props, 'img-class', 'img-responsive');
+        $this->setProp($componentVariation, $props, 'setbtn-class', 'btn btn-sm btn-primary');
+        $this->setProp($componentVariation, $props, 'removebtn-class', 'btn btn-sm btn-danger');
+        $this->setProp($componentVariation, $props, 'options-class', 'options');
+        parent::initModelProps($componentVariation, $props);
     }
 }

@@ -20,9 +20,9 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN];
 
@@ -39,12 +39,12 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubmodule($componentVariation);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return 'printURL';
@@ -54,12 +54,12 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return 'commentsURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($componentVariation);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return TranslationAPIFacade::getInstance()->__('Print', 'pop-coreprocessors');
@@ -78,25 +78,25 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($componentVariation, $props);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return GD_URLPARAM_TARGET_PRINT;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($componentVariation, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $componentVariation, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-print';
                 break;
@@ -111,16 +111,16 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'socialmedia');
+                $this->setProp($componentVariation, $props, 'resourceloader', 'socialmedia');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

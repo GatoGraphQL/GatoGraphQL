@@ -13,21 +13,21 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $componentVariation, array &$props)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 return getRouteIcon(POP_BLOG_ROUTE_SEARCHCONTENT, true).TranslationAPIFacade::getInstance()->__('Search:', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($componentVariation, $props);
     }
 
-    protected function getStaticSuggestions(array $module, array &$props)
+    protected function getStaticSuggestions(array $componentVariation, array &$props)
     {
-        $ret = parent::getStaticSuggestions($module, $props);
+        $ret = parent::getStaticSuggestions($componentVariation, $props);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 $query_wildcard = GD_JSPLACEHOLDER_QUERY;
                 $ret[] = array(

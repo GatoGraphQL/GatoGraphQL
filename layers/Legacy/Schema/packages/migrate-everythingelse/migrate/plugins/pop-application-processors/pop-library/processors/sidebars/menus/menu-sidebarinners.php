@@ -11,11 +11,11 @@ class PoP_Module_Processor_CustomMenuSidebarInners extends PoP_Module_Processor_
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubmodules(array $componentVariation)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_SIDEBARINNER_MENU_ABOUT:
                 $ret[] = [GD_Custom_Module_Processor_MenuWidgets::class, GD_Custom_Module_Processor_MenuWidgets::MODULE_WIDGET_MENU_ABOUT];
                 break;

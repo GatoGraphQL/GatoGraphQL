@@ -13,11 +13,11 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getFooterSubmodules(array $module)
+    public function getFooterSubmodules(array $componentVariation)
     {
-        $ret = parent::getFooterSubmodules($module);
+        $ret = parent::getFooterSubmodules($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_EVENT:
             case self::MODULE_LAYOUT_FULLVIEW_PASTEVENT:
                 $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::MODULE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
@@ -27,7 +27,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
                 $ret = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
                     $ret,
-                    $module
+                    $componentVariation
                 );
                 break;
         }
@@ -35,9 +35,9 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubmodule(array $componentVariation)
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_EVENT:
             case self::MODULE_LAYOUT_FULLVIEW_PASTEVENT:
                 $sidebars = array(
@@ -45,10 +45,10 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
                     self::MODULE_LAYOUT_FULLVIEW_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$componentVariation[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubmodule($componentVariation);
     }
 }
 

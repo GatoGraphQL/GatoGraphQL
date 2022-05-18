@@ -15,11 +15,11 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
         );
     }
 
-    public function getSubComponentVariations(array $module): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubComponentVariations($module);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW:
                 $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW];
                 $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW];
@@ -42,9 +42,9 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $componentVariation, array &$props): void
     {
-        switch ($module[1]) {
+        switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW:
                 // Make the User Post Interaction group a collapse, initially collapsed
                 $this->appendProp([self::class, self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY], $props, 'class', 'collapse');
@@ -54,7 +54,7 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($componentVariation, $props);
     }
 }
 

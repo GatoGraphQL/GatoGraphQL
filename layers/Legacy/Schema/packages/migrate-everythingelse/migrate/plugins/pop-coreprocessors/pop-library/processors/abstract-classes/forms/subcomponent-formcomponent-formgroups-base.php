@@ -3,16 +3,16 @@ use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterf
 
 abstract class PoP_Module_Processor_SubcomponentFormComponentGroupsBase extends PoP_Module_Processor_FormComponentGroupsBase implements FormComponentComponentProcessorInterface
 {
-    public function getComponentSubname(array $module)
+    public function getComponentSubname(array $componentVariation)
     {
         return null;
     }
 
-    public function getComponentName(array $module)
+    public function getComponentName(array $componentVariation)
     {
 
         // input-name is an array, return the specific subcomponent field
-        $name = parent::getComponentName($module);
-        return $name[$this->getComponentSubname($module)];
+        $name = parent::getComponentName($componentVariation);
+        return $name[$this->getComponentSubname($componentVariation)];
     }
 }
