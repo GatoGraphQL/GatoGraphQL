@@ -43,9 +43,9 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         return \PoP\Root\App::applyFilters('PoP_Module_Processor_FullObjectLayoutsBase:footer_modules', $this->getFooterSubmodules($module), $module);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($title = $this->getTitleSubmodule($module)) {
             $ret[] = $title;

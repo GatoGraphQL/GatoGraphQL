@@ -16,7 +16,7 @@ class PoPTheme_Wassup_WebPlatform_PageSectionHooks
     {
         $props = &$props_in_array[0];
 
-        foreach ($processor->getSubmodules($module) as $submodule) {
+        foreach ($processor->getSubComponentVariations($module) as $submodule) {
             // Needed to erase previous feedback messages when a pageSection opens. Eg: Reset password
             $processor->mergeJsmethodsProp([$submodule], $props, array('closeFeedbackMessagesOnPageSectionOpen'));
         }

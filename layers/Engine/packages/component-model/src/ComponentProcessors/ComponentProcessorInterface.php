@@ -15,7 +15,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 interface ComponentProcessorInterface
 {
     public function getComponentVariationsToProcess(): array;
-    public function getSubmodules(array $componentVariation): array;
+    public function getSubComponentVariations(array $componentVariation): array;
     public function getAllSubmodules(array $componentVariation): array;
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $componentVariation, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;

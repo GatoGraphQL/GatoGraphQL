@@ -8,10 +8,10 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BOOTSTRAPCOMPONENT_VIEWCOMPONENT];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
         return array_merge(
-            parent::getSubmodules($module),
+            parent::getSubComponentVariations($module),
             $this->getInnerSubmodules($module)
         );
     }

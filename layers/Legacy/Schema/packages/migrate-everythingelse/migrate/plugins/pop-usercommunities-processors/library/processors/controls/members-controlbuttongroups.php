@@ -11,9 +11,9 @@ class GD_URE_Module_Processor_CustomControlButtonGroups extends PoP_Module_Proce
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
     
         switch ($module[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS:

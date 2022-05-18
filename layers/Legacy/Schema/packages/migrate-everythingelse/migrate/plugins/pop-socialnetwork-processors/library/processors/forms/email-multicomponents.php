@@ -13,9 +13,9 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK:

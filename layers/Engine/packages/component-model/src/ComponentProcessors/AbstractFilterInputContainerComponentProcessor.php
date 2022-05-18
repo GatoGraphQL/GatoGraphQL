@@ -11,7 +11,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    final public function getSubmodules(array $componentVariation): array
+    final public function getSubComponentVariations(array $componentVariation): array
     {
         $filterInputModules = $this->getFilterInputComponentVariations($componentVariation);
 
@@ -26,7 +26,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
         // Add the filterInputs to whatever came from the parent (if anything)
         return array_merge(
-            parent::getSubmodules($componentVariation),
+            parent::getSubComponentVariations($componentVariation),
             $filterInputModules
         );
     }

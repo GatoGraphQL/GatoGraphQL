@@ -26,12 +26,12 @@ abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataC
     public function initModelProps(array $module, array &$props): void
     {
         $title = $this->getProp($module, $props, 'title');
-        foreach ($this->getSubmodules($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($module) as $submodule) {
             $this->setProp([$submodule], $props, 'title', $title);
         }
 
         if ($this->useCounter($module)) {
-            foreach ($this->getSubmodules($module) as $submodule) {
+            foreach ($this->getSubComponentVariations($module) as $submodule) {
                 $this->setProp([$submodule], $props, 'load-socialmedia-counter', true);
             }
         }

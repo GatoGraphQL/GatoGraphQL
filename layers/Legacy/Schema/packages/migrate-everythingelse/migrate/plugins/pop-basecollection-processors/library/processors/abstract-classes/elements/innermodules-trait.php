@@ -8,10 +8,10 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
         return array();
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
         return array_merge(
-            parent::getSubmodules($module),
+            parent::getSubComponentVariations($module),
             $this->getInnerSubmodules($module)
         );
     }

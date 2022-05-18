@@ -44,9 +44,9 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
         return '';
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
         $ret[] = $this->getComponentSubmodule($module);
         return $ret;
     }

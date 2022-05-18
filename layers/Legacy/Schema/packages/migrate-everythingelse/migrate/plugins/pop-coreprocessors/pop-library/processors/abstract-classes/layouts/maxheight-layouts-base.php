@@ -9,9 +9,9 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MAXHEIGHT];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($inners = $this->getInnerSubmodules($module)) {
             $ret = array_merge(

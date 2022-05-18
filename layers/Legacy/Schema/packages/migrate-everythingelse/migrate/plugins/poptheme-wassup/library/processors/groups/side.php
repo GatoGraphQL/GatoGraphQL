@@ -11,9 +11,9 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_GROUP_SIDE:

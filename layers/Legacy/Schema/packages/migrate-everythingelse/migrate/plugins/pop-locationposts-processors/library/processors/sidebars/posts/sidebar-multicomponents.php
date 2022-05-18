@@ -11,9 +11,9 @@ class GD_SP_Custom_EM_Module_Processor_PostMultipleSidebarComponents extends PoP
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_LOCATIONPOST:

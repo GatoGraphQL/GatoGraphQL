@@ -49,9 +49,9 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],

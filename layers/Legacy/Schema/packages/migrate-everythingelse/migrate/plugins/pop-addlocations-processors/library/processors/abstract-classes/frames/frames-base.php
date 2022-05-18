@@ -21,7 +21,7 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         parent::initModelProps($module, $props);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_FRAME_CREATELOCATIONMAP:
@@ -31,7 +31,7 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
                 );
         }
 
-        return parent::getSubmodules($module);
+        return parent::getSubComponentVariations($module);
     }
 
     public function getFormSubmodule(array $module)

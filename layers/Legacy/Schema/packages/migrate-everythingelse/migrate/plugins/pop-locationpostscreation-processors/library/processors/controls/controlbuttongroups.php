@@ -11,9 +11,9 @@ class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Pro
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
     
         switch ($module[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDLOCATIONPOST:

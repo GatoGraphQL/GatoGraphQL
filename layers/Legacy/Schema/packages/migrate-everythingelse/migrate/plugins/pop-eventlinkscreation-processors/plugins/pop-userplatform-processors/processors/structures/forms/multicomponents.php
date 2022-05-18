@@ -12,9 +12,9 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents exte
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $status = GD_CreateUpdate_Utils::moderate() ?
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :

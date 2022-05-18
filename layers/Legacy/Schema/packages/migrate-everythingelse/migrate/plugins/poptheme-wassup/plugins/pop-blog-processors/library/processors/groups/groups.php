@@ -76,9 +76,9 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         parent::initRequestProps($module, $props);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:

@@ -15,9 +15,9 @@ class GD_Custom_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Modul
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR:

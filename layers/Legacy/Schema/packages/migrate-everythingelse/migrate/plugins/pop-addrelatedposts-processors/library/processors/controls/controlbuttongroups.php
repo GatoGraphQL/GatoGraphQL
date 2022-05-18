@@ -11,9 +11,9 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
     
         switch ($module[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST:

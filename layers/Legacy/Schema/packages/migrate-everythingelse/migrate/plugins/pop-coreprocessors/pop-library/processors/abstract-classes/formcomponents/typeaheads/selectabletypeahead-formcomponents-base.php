@@ -55,9 +55,9 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $ret[] = $this->getTriggerLayoutSubmodule($module);
 

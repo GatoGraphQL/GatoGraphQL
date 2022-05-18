@@ -11,9 +11,9 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
@@ -31,7 +31,7 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
                 $this->appendProp($module, $props, 'class', 'pop-usermembership');
-                foreach ($this->getSubmodules($module) as $submodule) {
+                foreach ($this->getSubComponentVariations($module) as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'item');
                 }
                 break;

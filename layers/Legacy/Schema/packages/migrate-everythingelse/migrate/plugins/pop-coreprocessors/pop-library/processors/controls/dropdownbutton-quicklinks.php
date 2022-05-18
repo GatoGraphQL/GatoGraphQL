@@ -18,9 +18,9 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $modules = array();
         switch ($module[1]) {

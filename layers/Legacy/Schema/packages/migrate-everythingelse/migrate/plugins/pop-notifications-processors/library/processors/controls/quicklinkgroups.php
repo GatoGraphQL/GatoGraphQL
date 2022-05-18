@@ -11,9 +11,9 @@ class GD_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_Contr
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION:

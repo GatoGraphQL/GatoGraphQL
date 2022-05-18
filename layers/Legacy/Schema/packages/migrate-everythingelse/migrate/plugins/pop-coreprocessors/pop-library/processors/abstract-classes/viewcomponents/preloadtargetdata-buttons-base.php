@@ -36,9 +36,9 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded

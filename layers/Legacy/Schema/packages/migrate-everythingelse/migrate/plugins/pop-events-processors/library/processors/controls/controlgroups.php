@@ -17,9 +17,9 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_CONTROLGROUP_EVENTLIST:

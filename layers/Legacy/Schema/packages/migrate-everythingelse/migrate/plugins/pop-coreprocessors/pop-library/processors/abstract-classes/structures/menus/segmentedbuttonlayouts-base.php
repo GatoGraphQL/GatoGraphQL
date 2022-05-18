@@ -18,9 +18,9 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         return array();
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $ret = array_merge(
             $ret,

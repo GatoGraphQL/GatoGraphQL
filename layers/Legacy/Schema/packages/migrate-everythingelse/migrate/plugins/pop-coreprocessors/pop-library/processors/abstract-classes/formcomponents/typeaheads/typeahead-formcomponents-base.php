@@ -76,9 +76,9 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         return array_merge(
             $ret,

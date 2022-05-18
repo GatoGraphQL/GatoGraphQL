@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
     {
         $ret = array();
 
-        foreach ($this->getSubmodules($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($module) as $submodule) {
             $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
             $ret[$submoduleOutputName] = 'modal-body';
         }

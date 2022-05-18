@@ -13,9 +13,9 @@ class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Modul
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR:

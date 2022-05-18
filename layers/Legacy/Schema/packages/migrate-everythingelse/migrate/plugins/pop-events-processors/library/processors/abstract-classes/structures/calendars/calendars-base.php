@@ -28,9 +28,9 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($controlgroup = $this->getControlgroupSubmodule($module)) {
             $ret[] = $controlgroup;

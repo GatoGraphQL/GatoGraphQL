@@ -18,9 +18,9 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_HOME:

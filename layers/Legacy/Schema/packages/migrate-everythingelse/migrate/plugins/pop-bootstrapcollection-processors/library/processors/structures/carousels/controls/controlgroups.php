@@ -11,9 +11,9 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
                 if ($target = $this->getProp($module, $props, 'carousel-target')) {
-                    foreach ($this->getSubmodules($module) as $submodule) {
+                    foreach ($this->getSubComponentVariations($module) as $submodule) {
                         $this->setProp([$submodule], $props, 'carousel-target', $target);
                     }
                 }

@@ -21,9 +21,9 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE:

@@ -35,9 +35,9 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $this->getProp($module, $props, 'title') ?? $this->getTitle($module, $props);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($block_inners = $this->getInnerSubmodules($module)) {
             $ret = array_merge(

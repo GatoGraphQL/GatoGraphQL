@@ -11,9 +11,9 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_GROUP_WHOWEARE:

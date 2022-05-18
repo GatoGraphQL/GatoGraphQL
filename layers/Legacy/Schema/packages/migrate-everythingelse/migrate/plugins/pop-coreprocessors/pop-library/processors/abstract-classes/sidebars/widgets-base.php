@@ -8,9 +8,9 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_WIDGET];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret = array_merge(

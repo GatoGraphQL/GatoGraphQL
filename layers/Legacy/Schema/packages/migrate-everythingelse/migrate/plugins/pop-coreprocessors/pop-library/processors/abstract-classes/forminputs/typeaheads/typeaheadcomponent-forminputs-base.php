@@ -22,21 +22,21 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         }
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
 
         // If PoP Resource Loader is not defined, then there is no PoP_ResourceLoaderProcessorUtils
         if (defined('POP_RESOURCELOADER_INITIALIZED')) {
-            // Comment Leo 23/01/2018: if we are executing `getSubmodules($module)` then this module is included in the output,
+            // Comment Leo 23/01/2018: if we are executing `getSubComponentVariations($module)` then this module is included in the output,
             // then we can already add its dependencies
             // In the past, this was done in `get_js_setting`, but this doesn't work consistently between generating bundlegroups pregenerated or in runtime,
-            // since that function may or may not be executed. But calling `getSubmodules` will always work
+            // since that function may or may not be executed. But calling `getSubComponentVariations` will always work
             // Comment Leo 20/10/2017: Important! Because the module will be rendered on runtime in the front-end,
             // we must make sure that this module is delivered on the ResourceLoader when doing code-splitting
             $this->resources[] = $this->getComponentTemplateResource($module);
         }
 
-        return parent::getSubmodules($module);
+        return parent::getSubComponentVariations($module);
     }
 
     public function getDependencies($resources)

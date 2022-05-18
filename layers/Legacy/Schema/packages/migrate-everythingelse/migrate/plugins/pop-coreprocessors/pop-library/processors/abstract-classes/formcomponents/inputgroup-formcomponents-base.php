@@ -52,9 +52,9 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($input = $this->getInputSubmodule($module)) {
             $ret[] = $input;

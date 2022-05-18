@@ -49,9 +49,9 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
          // Trending Tags has no filter

@@ -13,9 +13,9 @@ abstract class PoP_Module_Processor_SpeechBubblesBase extends PoPEngine_QueryDat
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $ret[] = $this->getLayoutSubmodule($module);
         

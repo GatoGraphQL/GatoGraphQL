@@ -11,9 +11,9 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_GROUP_LOGIN:
@@ -35,7 +35,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
                 $this->appendProp($module, $props, 'class', 'blockgroup-login');
 
                 // Make the Login Block and others show the submenu
-                foreach ($this->getSubmodules($module) as $submodule) {
+                foreach ($this->getSubComponentVariations($module) as $submodule) {
                     $this->setProp([$submodule], $props, 'show-submenu', true);
 
                     // Allow to set $props for the extra blocks. Eg: WSL setting the loginBlock for setting the disabled layer

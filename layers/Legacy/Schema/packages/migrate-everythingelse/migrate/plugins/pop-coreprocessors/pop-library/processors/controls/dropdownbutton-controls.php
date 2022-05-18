@@ -13,9 +13,9 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
     
         switch ($module[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:

@@ -17,9 +17,9 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:

@@ -12,9 +12,9 @@ class PoP_TrendingTags_Module_Processor_CustomControlGroups extends PoP_Module_P
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

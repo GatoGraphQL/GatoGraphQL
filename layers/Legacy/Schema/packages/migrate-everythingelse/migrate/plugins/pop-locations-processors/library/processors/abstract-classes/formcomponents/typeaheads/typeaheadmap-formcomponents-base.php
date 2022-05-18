@@ -6,9 +6,9 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $ret[] = $this->getLocationsTypeaheadSubmodule($module);
         $ret[] = $this->getMapSubmodule($module);

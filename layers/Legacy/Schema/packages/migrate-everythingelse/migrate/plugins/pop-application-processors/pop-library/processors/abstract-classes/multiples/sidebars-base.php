@@ -30,9 +30,9 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
         );
     }
     
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         // Add the corresponding blocks
         if ($modules = $this->getInnerSubmodules($module)) {

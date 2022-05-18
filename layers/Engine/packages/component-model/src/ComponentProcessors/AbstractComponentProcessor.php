@@ -125,7 +125,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
-    public function getSubmodules(array $componentVariation): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
         return [];
     }
@@ -256,7 +256,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         if ($relationalTypeResolver !== null) {
             // Set the property "succeeding-typeResolver" on all descendants: the same typeResolver for all submodules, and the explicit one (or get the default one for "*") for relational objects
-            foreach ($this->getSubmodules($componentVariation) as $submodule) {
+            foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
                 $this->setProp($submodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
@@ -678,7 +678,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Only modules which do not load data
-            $submodules = array_filter($this->getSubmodules($componentVariation), function ($submodule) {
+            $submodules = array_filter($this->getSubComponentVariations($componentVariation), function ($submodule) {
                 return !$this->getComponentProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
             });
             foreach ($submodules as $submodule) {
@@ -1120,7 +1120,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($componentVariation);
             $conditionalRelationalModuleFields = $this->getConditionalOnDataFieldRelationalSubmodules($componentVariation);
             if ($conditionalLeafModuleFields !== [] || $conditionalRelationalModuleFields !== []) {
-                $directSubmodules = $this->getSubmodules($componentVariation);
+                $directSubmodules = $this->getSubComponentVariations($componentVariation);
                 $conditionalModuleFields = [];
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
@@ -1329,7 +1329,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if (in_array(self::MODULECOMPONENT_SUBMODULES, $components)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             $ret = array_unique(
-                $this->getSubmodules($componentVariation),
+                $this->getSubComponentVariations($componentVariation),
                 SORT_REGULAR
             );
         }

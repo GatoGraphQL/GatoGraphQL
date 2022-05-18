@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
         return [PoP_UserAvatarWebPlatform_TemplateResourceLoaderProcessor::class, PoP_UserAvatarWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_FILEUPLOAD_PICTURE];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
         return array(
             $this->getDownloadpictureSubmodule($module),

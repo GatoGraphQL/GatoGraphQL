@@ -32,9 +32,9 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($module)) {
             $ret[] = $quicklinkgroup_top;

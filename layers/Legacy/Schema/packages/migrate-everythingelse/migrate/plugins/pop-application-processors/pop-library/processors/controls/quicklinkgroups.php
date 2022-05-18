@@ -35,9 +35,9 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_QUICKLINKGROUP_POST:

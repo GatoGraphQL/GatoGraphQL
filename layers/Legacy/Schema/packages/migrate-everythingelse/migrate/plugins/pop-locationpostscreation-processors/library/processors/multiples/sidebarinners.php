@@ -11,9 +11,9 @@ class PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners exte
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR:

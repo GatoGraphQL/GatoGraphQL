@@ -9,9 +9,9 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_EDITOR];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         // Allow Mentions to add its required templates (User/Tag Mention Layout)
         if ($layouts = $this->getEditorLayoutSubmodules($module)) {

@@ -19,9 +19,9 @@ class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
     
         switch ($module[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER:

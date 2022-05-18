@@ -10,9 +10,9 @@ trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 
-    public function getSubmodules(array $componentVariation): array
+    public function getSubComponentVariations(array $componentVariation): array
     {
-        $ret = parent::getSubmodules($componentVariation);
+        $ret = parent::getSubComponentVariations($componentVariation);
 
         if ($filter_module = $this->getFilterSubmodule($componentVariation)) {
             $ret[] = $filter_module;

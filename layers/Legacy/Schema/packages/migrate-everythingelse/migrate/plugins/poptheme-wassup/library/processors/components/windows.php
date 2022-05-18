@@ -13,10 +13,10 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
         return array_merge(
-            parent::getSubmodules($module),
+            parent::getSubComponentVariations($module),
             $this->getInnerSubmodules($module)
         );
     }

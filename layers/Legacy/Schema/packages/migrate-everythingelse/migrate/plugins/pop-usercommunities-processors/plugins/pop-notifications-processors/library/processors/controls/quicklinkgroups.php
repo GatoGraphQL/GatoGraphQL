@@ -11,9 +11,9 @@ class GD_URE_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_C
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY:

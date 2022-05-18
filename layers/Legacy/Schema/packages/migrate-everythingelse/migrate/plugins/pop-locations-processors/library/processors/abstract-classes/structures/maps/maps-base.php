@@ -8,9 +8,9 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP];
     }
     
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
         $ret[] = $this->getMapdivSubmodule($module);
         return $ret;
     }

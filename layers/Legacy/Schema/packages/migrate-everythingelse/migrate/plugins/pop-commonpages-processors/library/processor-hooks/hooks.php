@@ -6,13 +6,13 @@ class PoP_CommonPagesProcessors_Application_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:layouts',
-            $this->getSubmodules(...),
+            $this->getSubComponentVariations(...),
             0,
             2
         );
     }
 
-    public function getSubmodules($submodules, array $module)
+    public function getSubComponentVariations($submodules, array $module)
     {
         switch ($module[1]) {
             case PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEPOST:

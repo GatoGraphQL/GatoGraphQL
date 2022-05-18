@@ -17,7 +17,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_ENTRY_DEFAULT:
@@ -56,7 +56,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                 );
         }
 
-        return parent::getSubmodules($module);
+        return parent::getSubComponentVariations($module);
     }
 
     public function initModelProps(array $module, array &$props): void
@@ -79,7 +79,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                 // This way, passing &limit=4 doesn't affect the results on the widgets
                 $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $submodules = array_diff(
-                    $this->getSubmodules($module),
+                    $this->getSubComponentVariations($module),
                     [
                         $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)
                     ]

@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_MultiplesBase extends PoPEngine_QueryDataCom
 
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        if ($submodules = $this->getSubmodules($module)) {
+        if ($submodules = $this->getSubComponentVariations($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $submodules

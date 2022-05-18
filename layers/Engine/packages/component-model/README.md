@@ -652,9 +652,9 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
     );
   }
 
-  function getSubmodules($componentVariation) 
+  function getSubComponentVariations($componentVariation) 
   {
-    $ret = parent::getSubmodules($componentVariation);
+    $ret = parent::getSubComponentVariations($componentVariation);
 
     switch ($componentVariation[1]) {
       
@@ -909,14 +909,14 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
 ### Composition
 
-Modules are composed of other modules through function `getSubmodules`:
+Modules are composed of other modules through function `getSubComponentVariations`:
 
 ```php
 class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  function getSubmodules($componentVariation) 
+  function getSubComponentVariations($componentVariation) 
   {
-    $ret = parent::getSubmodules($componentVariation);
+    $ret = parent::getSubComponentVariations($componentVariation);
 
     switch ($componentVariation[1]) 
     {
@@ -939,16 +939,16 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 }
 ```
 
-> Note: the component hierarchy is created by calling `getSubmodules` on the entry-module and then repeating the process, iteratively, for its descendant modules.
+> Note: the component hierarchy is created by calling `getSubComponentVariations` on the entry-module and then repeating the process, iteratively, for its descendant modules.
 
 Abstract ComponentProcessors can define what descendant modules will be required through placeholder functions, to be implemented by an inheriting ComponentProcessor:
 
 ```php
 abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
-  function getSubmodules($componentVariation) {
+  function getSubComponentVariations($componentVariation) {
   
-    $ret = parent::getSubmodules($componentVariation);
+    $ret = parent::getSubComponentVariations($componentVariation);
 
     if ($thumbnail_module = $this->getThumbnailModule($componentVariation)) 
     {
@@ -1110,7 +1110,7 @@ Modules can set props on descendant modules whichever number of levels below in 
 
 Setting props is done through functions `initModelProps($componentVariation, &$props)` and `initRequestProps($componentVariation, &$props)`. A prop must be implemented in either function, but not on both of them. `initRequestProps` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `initModelProps` is used for everything else. 
 
-Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getSubmodules` and those inner functions invoked by `getSubmodules`), every function in the `ComponentProcessor` can receive `$props`. 
+Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getSubComponentVariations` and those inner functions invoked by `getSubComponentVariations`), every function in the `ComponentProcessor` can receive `$props`. 
 
 `initModelProps` and `initRequestProps` store the props under parameter `$props`, hence it is passed by reference. In all other functions, `$props` may also be passed by reference, but only for performance issues, to not duplicate the object in memory.
 

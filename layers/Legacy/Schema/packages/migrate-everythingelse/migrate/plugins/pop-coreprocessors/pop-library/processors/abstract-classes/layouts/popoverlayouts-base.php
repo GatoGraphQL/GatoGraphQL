@@ -17,9 +17,9 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($layout = $this->getLayoutSubmodule($module)) {
             $ret[] = $layout;

@@ -8,9 +8,9 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_DIV];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($inners = $this->getInnerSubmodules($module)) {
             $ret = array_merge(

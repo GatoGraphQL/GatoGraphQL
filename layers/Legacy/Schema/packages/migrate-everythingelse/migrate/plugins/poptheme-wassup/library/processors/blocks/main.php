@@ -128,13 +128,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($module[1]) {
             case self::MODULE_BLOCK_404:
             case self::MODULE_BLOCK_BACKGROUNDMENU:
-                foreach ($this->getSubmodules($module) as $submodule) {
+                foreach ($this->getSubComponentVariations($module) as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'col-xs-12 col-sm-4');
                 }
                 break;
 
             case self::MODULE_BLOCK_SINGLEPOST:
-                foreach ($this->getSubmodules($module) as $submodule) {
+                foreach ($this->getSubComponentVariations($module) as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'col-xs-12');
                 }
 
@@ -193,7 +193,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
                 $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $submodules = array_diff(
-                    $this->getSubmodules($module),
+                    $this->getSubComponentVariations($module),
                     [
                         $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
                     ]
@@ -281,9 +281,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getTitle($module, $props);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 

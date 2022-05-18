@@ -14,9 +14,9 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($script_customize = $this->getCustomizationSubmodule($module)) {
             $ret[] = $script_customize;

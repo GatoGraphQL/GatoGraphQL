@@ -8,9 +8,9 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_REPLYCOMMENT];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         if ($post_module = $this->getPostSubmodule($module)) {
             $ret[] = $post_module;

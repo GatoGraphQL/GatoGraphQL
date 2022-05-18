@@ -18,7 +18,7 @@ class PoP_Events_PageSectionHooks
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $submodule = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
-        // if (in_array($submodule, $processor->getSubmodules($module))) {
+        // if (in_array($submodule, $processor->getSubComponentVariations($module))) {
 
         $props = &$props_in_array[0];
         

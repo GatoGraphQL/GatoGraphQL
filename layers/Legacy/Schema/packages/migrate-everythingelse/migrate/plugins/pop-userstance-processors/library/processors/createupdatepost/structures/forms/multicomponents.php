@@ -13,9 +13,9 @@ class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE:

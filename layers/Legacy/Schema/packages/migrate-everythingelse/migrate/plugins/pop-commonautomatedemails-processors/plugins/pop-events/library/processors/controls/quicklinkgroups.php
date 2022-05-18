@@ -11,9 +11,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_QuicklinkGroups extends PoP_Module_
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_QUICKLINKGROUP_EVENTBOTTOM:

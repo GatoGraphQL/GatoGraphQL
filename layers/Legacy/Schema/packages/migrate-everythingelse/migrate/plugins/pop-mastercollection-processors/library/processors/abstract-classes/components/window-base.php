@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
             $ret['moduleparams'] = $moduleparams;
         }
         
-        if ($submodules = $this->getSubmodules($module)) {
+        if ($submodules = $this->getSubComponentVariations($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $submodules

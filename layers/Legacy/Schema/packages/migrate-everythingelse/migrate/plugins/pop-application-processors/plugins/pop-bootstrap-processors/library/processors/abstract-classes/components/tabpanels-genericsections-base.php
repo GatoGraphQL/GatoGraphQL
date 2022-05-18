@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubmodules($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($module) as $submodule) {
             $processor = $componentprocessor_manager->getProcessor($submodule);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubmodules($module) as $submodule) {
+        foreach ($this->getSubComponentVariations($module) as $submodule) {
             $processor = $componentprocessor_manager->getProcessor($submodule);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);

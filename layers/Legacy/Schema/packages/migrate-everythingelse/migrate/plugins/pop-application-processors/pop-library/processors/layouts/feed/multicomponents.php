@@ -15,9 +15,9 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubComponentVariations(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubComponentVariations($module);
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW:
