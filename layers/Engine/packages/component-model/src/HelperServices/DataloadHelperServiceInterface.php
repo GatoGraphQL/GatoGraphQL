@@ -11,7 +11,7 @@ interface DataloadHelperServiceInterface
     public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, string $subcomponent_data_field): ?RelationalTypeResolverInterface;
 
     /**
-     * @param array<array<string, mixed>> $moduleValues
+     * @param array<array<string, mixed>> $componentVariationValues
      */
-    public function addFilterParams(string $url, array $moduleValues = []): string;
+    public function addFilterParams(string $url, array $componentVariationValues = []): string;
 }

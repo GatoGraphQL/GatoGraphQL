@@ -98,17 +98,17 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     }
 
     /**
-     * @param array<array<string, mixed>> $moduleValues
+     * @param array<array<string, mixed>> $componentVariationValues
      */
-    public function addFilterParams(string $url, array $moduleValues = []): string
+    public function addFilterParams(string $url, array $componentVariationValues = []): string
     {
         $args = [];
-        foreach ($moduleValues as $moduleValue) {
-            $module = $moduleValue['component-variation'];
-            $value = $moduleValue['value'];
+        foreach ($componentVariationValues as $componentVariationValue) {
+            $componentVariation = $componentVariationValue['component-variation'];
+            $value = $componentVariationValue['value'];
             /** @var FilterInputComponentProcessorInterface */
-            $componentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-            $args[$componentProcessor->getName($module)] = $value;
+            $componentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+            $args[$componentProcessor->getName($componentVariation)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);
     }
