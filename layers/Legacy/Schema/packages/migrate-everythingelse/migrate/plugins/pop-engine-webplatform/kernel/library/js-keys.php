@@ -4,7 +4,7 @@ use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_COMPONENT', $compact ? 'm' : 'module');
-define('GD_JS_COMPONENTOUTPUTNAME', $compact ? 's' : 'moduleoutputname');
+define('GD_JS_COMPONENTOUTPUTNAME', $compact ? 's' : 'componentoutputname');
 define('GD_JS_INTERCEPTURLS', $compact ? 'xu' : 'intercept-urls');
 define('GD_JS_EXTRAINTERCEPTURLS', $compact ? 'exu' : 'extra-intercept-urls');
 

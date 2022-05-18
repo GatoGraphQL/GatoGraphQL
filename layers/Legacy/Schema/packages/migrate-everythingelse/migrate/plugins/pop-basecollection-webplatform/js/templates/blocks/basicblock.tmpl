@@ -1,5 +1,5 @@
 {{#unless feedback.do-not-render}}
-	<div class="{{class}}" style="{{style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-moduleoutputname="{{moduleoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="{{class}}" style="{{style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-componentoutputname="{{componentoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 		{{#if title}}
 			<div class="blocksection-title {{classes.blocksection-title}}" style="{{styles.blocksection-title}}">
 				<{{title-htmltag}} class="title {{classes.block-title}}" style="{{styles.block-title}}">

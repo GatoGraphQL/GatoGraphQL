@@ -56,8 +56,8 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     {
         $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
         // if ($this->fixedId($component, $props)) {
-        // 	$pagesection_settings_id = $props['pagesection-moduleoutputname'];
-        // 	$block_settings_id = $props['block-moduleoutputname'];
+        // 	$pagesection_settings_id = $props['pagesection-componentoutputname'];
+        // 	$block_settings_id = $props['block-componentoutputname'];
         // 	return $pagesection_settings_id.'_'.$block_settings_id.'_'.$moduleOutputName;
         // }
 

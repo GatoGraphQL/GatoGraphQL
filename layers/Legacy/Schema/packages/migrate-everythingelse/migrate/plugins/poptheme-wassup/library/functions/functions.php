@@ -52,7 +52,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 // function popAddMenuitemParentpageActive($add_active, array $component, array &$props) {
 
 //     // Only if not in Side or Top pageSections
-//     $pagesection_settings_id = $props['pagesection-moduleoutputname'];
+//     $pagesection_settings_id = $props['pagesection-componentoutputname'];
 //     $include = array(
 //         [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY],
 //         [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO],

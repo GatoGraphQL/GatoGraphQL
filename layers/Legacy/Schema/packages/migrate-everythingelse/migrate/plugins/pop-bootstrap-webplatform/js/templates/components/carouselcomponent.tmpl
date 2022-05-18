@@ -6,7 +6,7 @@
 		<div class="carousel-indicators {{classes.panelheader}}" style="{{styles.panelheader}}" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 			{{#compare panel-header-type "indicators"}}
 				{{#each panel-headers}}
-					<div class="{{#compare ../active moduleoutputname}}active{{/compare}}" data-target="#{{lastGeneratedId context=../. group=../bootstrap-type}}" data-slide-to="{{@index}}">
+					<div class="{{#compare ../active componentoutputname}}active{{/compare}}" data-target="#{{lastGeneratedId context=../. group=../bootstrap-type}}" data-slide-to="{{@index}}">
 						{{{title}}}
 					</div>
 				{{/each}}
@@ -28,7 +28,7 @@
 					{{#compare ../panel-header-type "indicators-internal"}}
 						<div class="carousel-indicators {{../panelheader-class}}" style="{{../styles.panelheader}}" {{#each ../panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 							{{#each ../panel-headers}}
-								<div class="{{#compare ../../active moduleoutputname}}active{{/compare}}" data-target="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}" data-slide-to="{{@index}}">
+								<div class="{{#compare ../../active componentoutputname}}active{{/compare}}" data-target="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}" data-slide-to="{{@index}}">
 									<h5>{{{title}}}</h5>
 								</div>
 							{{/each}}

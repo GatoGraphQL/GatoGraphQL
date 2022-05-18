@@ -126,7 +126,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        // If we don't initialize the markers, simply do not send the moduleoutputname for those modules, and they will not be drawn
+        // If we don't initialize the markers, simply do not send the componentoutputname for those modules, and they will not be drawn
         if ($this->initMarkers($component)) {
             $map_script = $this->getMapscriptSubmodule($component);
             $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];

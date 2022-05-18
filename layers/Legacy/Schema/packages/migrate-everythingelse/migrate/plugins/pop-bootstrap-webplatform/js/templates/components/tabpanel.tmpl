@@ -2,22 +2,22 @@
 	{{#compare panel-header-type "tab"}}
 		<ul id="{{lastGeneratedId group=bootstrap-type}}-panel-title" class="nav nav-tabs {{classes.panelheader}}" style="{{styles.panelheader}}" role="tablist" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 			{{#each panel-headers}}
-				<li role="presentation" class="{{../classes.panelheader-item}} {{#compare ../active moduleoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active moduleoutputname}}active{{/compare}}{{/each}}{{/compare}} {{#if subheaders}}dropdown{{/if}}" style="{{../styles.panelheader-item}}" {{#if tooltip}} {{#generateId context=../. group="tooltip"}}{{../id}}-{{moduleoutputname}}{{/generateId}} title="{{tooltip}}"{{/if}}>
+				<li role="presentation" class="{{../classes.panelheader-item}} {{#compare ../active componentoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active componentoutputname}}active{{/compare}}{{/each}}{{/compare}} {{#if subheaders}}dropdown{{/if}}" style="{{../styles.panelheader-item}}" {{#if tooltip}} {{#generateId context=../. group="tooltip"}}{{../id}}-{{componentoutputname}}{{/generateId}} title="{{tooltip}}"{{/if}}>
 					{{#if ../intercept}}
-						<a {{#generateId context=../. group='tablink'}}{{../id}}-{{moduleoutputname}}{{/generateId}} href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+						<a {{#generateId context=../. group='tablink'}}{{../id}}-{{componentoutputname}}{{/generateId}} href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../componentoutputname}}{{/withSublevel}}{{/with}}">
 					{{else}}
-						<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+						<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{componentoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{componentoutputname}}" role="tab" data-toggle="tab">
 					{{/if}}
 						{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-title">{{{title}}}</span>{{#if subheaders}} <span class="caret"></span>{{/if}}
 					</a>
 					{{#if subheaders}}
 						<ul class="dropdown-menu pull-right" role="menu">
 							{{#each subheaders}}
-								<li role="presentation" class="{{#compare ../../active moduleoutputname}}active{{/compare}}">
+								<li role="presentation" class="{{#compare ../../active componentoutputname}}active{{/compare}}">
 									{{#if ../../intercept}}
-										<a href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+										<a href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../componentoutputname}}{{/withSublevel}}{{/with}}">
 									{{else}}
-										<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+										<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{componentoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{componentoutputname}}" role="tab" data-toggle="tab">
 									{{/if}}
 										{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-subtitle">{{{title}}}</span>
 									</a>
@@ -32,17 +32,17 @@
 	{{#compare panel-header-type "btn-group"}}
 		<div id="{{lastGeneratedId group=bootstrap-type}}-panel-title" class="{{classes.panelheader}}" style="{{styles.panelheader}}" role="group" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 			{{#each panel-headers}}
-				<a class="{{#compare ../active moduleoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active moduleoutputname}}active{{/compare}}{{/each}}{{/compare}} {{../classes.panelheader-item}}" style="{{../styles.panelheader-item}}" {{#if ../intercept}} href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab"{{/if}}>
+				<a class="{{#compare ../active componentoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active componentoutputname}}active{{/compare}}{{/each}}{{/compare}} {{../classes.panelheader-item}}" style="{{../styles.panelheader-item}}" {{#if ../intercept}} href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../componentoutputname}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{componentoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{componentoutputname}}" role="tab" data-toggle="tab"{{/if}}>
 					{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 				</a>
 				{{#if subheaders}}
 					<span class="btn-group-dropdown dropdown">
-						<button type="button" class="{{#compare ../active moduleoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active moduleoutputname}}active{{/compare}}{{/each}}{{/compare}} {{classes.panelheader-item}} dropdown-toggle" style="{{styles.panelheader-item}}" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+						<button type="button" class="{{#compare ../active componentoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active componentoutputname}}active{{/compare}}{{/each}}{{/compare}} {{classes.panelheader-item}} dropdown-toggle" style="{{styles.panelheader-item}}" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
 						<ul class="dropdown-menu pull-right" role="menu">
 							{{#each subheaders}}
-								<li role="presentation" class="{{#compare ../../active moduleoutputname}}active{{/compare}}">
+								<li role="presentation" class="{{#compare ../../active componentoutputname}}active{{/compare}}">
 									<a {{#if ../../intercept}}
-										href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab" {{/if}}</a>
+										href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../componentoutputname}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{componentoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{componentoutputname}}" role="tab" data-toggle="tab" {{/if}}</a>
 										{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 									</a>
 								</li>
@@ -61,9 +61,9 @@
 					{{#each panel-headers}}
 						<li role="presentation">
 							{{#if ../intercept}}
-								<a href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+								<a href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../componentoutputname}}{{/withSublevel}}{{/with}}">
 							{{else}}
-								<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+								<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{componentoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{componentoutputname}}" role="tab" data-toggle="tab">
 							{{/if}}
 								{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 							</a>
@@ -71,9 +71,9 @@
 						{{#each subheaders}}
 							<li role="presentation" class="menu-item-parent">
 								{{#if ../../intercept}}
-									<a href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+									<a href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../componentoutputname}}{{/withSublevel}}{{/with}}">
 								{{else}}
-									<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+									<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{componentoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{componentoutputname}}" role="tab" data-toggle="tab">
 								{{/if}}
 									{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 								</a>
