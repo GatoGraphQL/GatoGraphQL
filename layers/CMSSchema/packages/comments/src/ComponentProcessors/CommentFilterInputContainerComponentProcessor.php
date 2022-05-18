@@ -26,7 +26,7 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS = 'filterinputcontainer-custompost-admincomments';
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT = 'filterinputcontainer-custompost-admincommentcount';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],

@@ -15,7 +15,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
     public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS = 'filterinputcontainer-mycustomposts';
     public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT = 'filterinputcontainer-mycustompostcount';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS],

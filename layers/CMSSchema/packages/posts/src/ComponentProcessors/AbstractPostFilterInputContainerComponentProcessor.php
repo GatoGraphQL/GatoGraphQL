@@ -17,7 +17,7 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
     public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
     public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],

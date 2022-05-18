@@ -53,7 +53,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_CUSTOMPOST_IDS],

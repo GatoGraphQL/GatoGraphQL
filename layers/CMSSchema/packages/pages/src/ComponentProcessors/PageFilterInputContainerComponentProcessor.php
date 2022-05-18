@@ -16,7 +16,7 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
     public final const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST = 'filterinputcontainer-adminpagelist';
     public final const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT = 'filterinputcontainer-adminpagecount';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_PAGELISTLIST],

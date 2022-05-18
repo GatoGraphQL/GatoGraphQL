@@ -26,7 +26,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_PAGE],

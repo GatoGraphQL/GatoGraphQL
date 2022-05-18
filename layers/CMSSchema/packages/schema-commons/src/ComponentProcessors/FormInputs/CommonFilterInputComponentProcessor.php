@@ -75,7 +75,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_SORT],

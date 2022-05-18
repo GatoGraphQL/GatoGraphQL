@@ -14,7 +14,7 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
     public final const MODULE_FILTERINPUTCONTAINER_MENUS = 'filterinputcontainer-menus';
     public final const MODULE_FILTERINPUTCONTAINER_MENUCOUNT = 'filterinputcontainer-menucount';
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MENUS],

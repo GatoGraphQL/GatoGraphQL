@@ -39,7 +39,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],

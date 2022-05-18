@@ -29,7 +29,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY],

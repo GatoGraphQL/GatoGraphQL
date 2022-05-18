@@ -27,7 +27,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentVariationsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT],
