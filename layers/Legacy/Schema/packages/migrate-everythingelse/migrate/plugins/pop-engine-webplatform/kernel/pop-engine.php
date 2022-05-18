@@ -359,7 +359,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	$json_settings['templates'] = $processor->getTemplates($component, $props);
 
     // 	return \PoP\Root\App::applyFilters(
-    // 		'PoPWebPlatform_Engine:json-module-immutable-settings',
+    // 		'PoPWebPlatform_Engine:json-component-immutable-settings',
     // 		$json_settings,
     // 		$component,
     // 		$props,
