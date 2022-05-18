@@ -32,7 +32,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
 
         $ret[RequestNature::QUERY_ROOT][] = [
-            'component' => [
+            'component-variation' => [
                 RootRelationalFieldDataloadComponentProcessor::class,
                 RootRelationalFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT
             ],
@@ -43,7 +43,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
             ],
         ];
         $ret[RequestNature::QUERY_ROOT][] = [
-            'component' => [
+            'component-variation' => [
                 RootRelationalFieldDataloadComponentProcessor::class,
                 RootRelationalFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
             ],

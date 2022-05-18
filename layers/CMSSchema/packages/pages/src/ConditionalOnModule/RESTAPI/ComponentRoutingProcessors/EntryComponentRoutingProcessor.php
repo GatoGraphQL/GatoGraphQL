@@ -25,7 +25,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret = array();
 
         $ret[RequestNature::PAGE][] = [
-            'component' => [
+            'component-variation' => [
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
