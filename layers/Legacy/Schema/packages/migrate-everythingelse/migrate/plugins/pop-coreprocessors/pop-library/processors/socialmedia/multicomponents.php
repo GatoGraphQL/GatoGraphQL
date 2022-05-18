@@ -31,7 +31,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        $modules = array();
+        $componentVariations = array();
         switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
@@ -39,42 +39,42 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $modules[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
             case self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
-                $modules[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
             case self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
-                $modules[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTOPTIONS:
-                $modules[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA];
-                $modules[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS];
+                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA];
+                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS];
                 break;
 
             case self::MODULE_MULTICOMPONENT_USEROPTIONS:
-                $modules[] = [self::class, self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA];
-                $modules[] = [self::class, self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS];
+                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA];
+                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS];
                 break;
 
             case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
-                $modules[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA];
-                $modules[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS];
+                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA];
+                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS];
                 break;
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $modules = \PoP\Root\App::applyFilters(
+        $componentVariations = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            $modules,
+            $componentVariations,
             $componentVariation
         );
         $ret = array_merge(
             $ret,
-            $modules
+            $componentVariations
         );
 
         return $ret;

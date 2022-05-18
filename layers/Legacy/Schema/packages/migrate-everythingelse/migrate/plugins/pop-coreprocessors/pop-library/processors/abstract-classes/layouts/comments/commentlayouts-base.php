@@ -62,19 +62,19 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     {
         $ret = parent::getRelationalSubmodules($componentVariation);
 
-        $modules = array(
+        $componentVariations = array(
             $this->getAuthornameModule($componentVariation),
         );
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($authoravatar = $this->getAuthoravatarModule($componentVariation)) {
-                $modules[] = $authoravatar;
+                $componentVariations[] = $authoravatar;
             }
         }
 
         $ret[] = new RelationalModuleField(
             'author',
-            $modules
+            $componentVariations
         );
 
         return $ret;

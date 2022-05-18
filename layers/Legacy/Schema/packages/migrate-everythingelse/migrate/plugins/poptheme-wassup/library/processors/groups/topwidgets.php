@@ -62,45 +62,45 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_GROUP_HOME_WIDGETAREA:
                 // Add the blocks
-                if ($modules = \PoP\Root\App::applyFilters(
+                if ($componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:home_widgetarea',
                     array(),
                     $componentVariation
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $modules
+                        $componentVariations
                     );
                 }
                 break;
 
             case self::MODULE_GROUP_AUTHOR_WIDGETAREA:
                 // Add the blocks
-                if ($modules = \PoP\Root\App::applyFilters(
+                if ($componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
                     array(),
                     $componentVariation
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $modules
+                        $componentVariations
                     );
                 }
                 break;
 
             case self::MODULE_GROUP_TAG_WIDGETAREA:
-                $modules = array();
-                $modules[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT];
+                $componentVariations = array();
+                $componentVariations[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT];
 
                 // Allow to add the Featured Carousel
-                if ($modules = \PoP\Root\App::applyFilters(
+                if ($componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea',
-                    $modules,
+                    $componentVariations,
                     $componentVariation
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $modules
+                        $componentVariations
                     );
                 }
                 break;

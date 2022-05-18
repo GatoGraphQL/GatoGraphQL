@@ -64,8 +64,8 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
             }
 
             if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($componentVariation)) {
-                foreach ($subcomponent_dynamic_templates as $data_field => $modules) {
-                    foreach ($modules as $dynamic_module) {
+                foreach ($subcomponent_dynamic_templates as $data_field => $componentVariations) {
+                    foreach ($componentVariations as $dynamic_module) {
                         $this->setProp($dynamic_module, $props, 'needs-dynamic-data', true);
                     }
                 }

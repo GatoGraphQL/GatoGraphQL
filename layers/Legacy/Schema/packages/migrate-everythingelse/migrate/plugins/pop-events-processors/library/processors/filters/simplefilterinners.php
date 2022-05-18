@@ -60,14 +60,14 @@ class PoP_Events_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Pr
                 [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
             ],
         ];
-        if ($modules = \PoP\Root\App::applyFilters(
+        if ($componentVariations = \PoP\Root\App::applyFilters(
             'Events:SimpleFilterInners:inputmodules',
             $inputmodules[$componentVariation[1]],
             $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
         return $ret;

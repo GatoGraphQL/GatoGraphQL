@@ -14,13 +14,13 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  */
 
 \PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
-function getWassupFramecomponentComponentVariations($modules)
+function getWassupFramecomponentComponentVariations($componentVariations)
 {
     if (\PoP\Root\App::applyFilters('poptheme_wassup_loadlatest', true)) {
-        $modules[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
+        $componentVariations[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
     }
 
-    return $modules;
+    return $componentVariations;
 }
 
 

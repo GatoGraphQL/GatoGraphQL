@@ -40,14 +40,14 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
                 [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
             ],
         ];
-        if ($modules = \PoP\Root\App::applyFilters(
+        if ($componentVariations = \PoP\Root\App::applyFilters(
             'Highlights:SimpleFilterInners:inputmodules',
             $inputmodules[$componentVariation[1]],
             $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
         return $ret;

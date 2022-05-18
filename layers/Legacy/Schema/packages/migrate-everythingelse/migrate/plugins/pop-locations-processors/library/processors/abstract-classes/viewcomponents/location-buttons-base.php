@@ -52,19 +52,19 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     public function getRelationalSubmodules(array $componentVariation): array
     {
         if ($this->showEachLocation($componentVariation)) {
-            $modules = [];
+            $componentVariations = [];
             if ($location_module = $this->getLocationModule($componentVariation)) {
-                $modules[] = $location_module;
+                $componentVariations[] = $location_module;
             }
             if ($location_complement = $this->getLocationComplementModule($componentVariation)) {
-                $modules[] = $location_complement;
+                $componentVariations[] = $location_complement;
             }
 
-            if ($modules) {
+            if ($componentVariations) {
                 return [
                     new RelationalModuleField(
                         'locations',
-                        $modules
+                        $componentVariations
                     ),
                 ];
             }

@@ -29,14 +29,14 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
                 [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
             ],
         ];
-        if ($modules = \PoP\Root\App::applyFilters(
+        if ($componentVariations = \PoP\Root\App::applyFilters(
             'CommonUserRoles:SimpleFilterInners:inputmodules',
             $inputmodules[$componentVariation[1]],
             $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
         return $ret;

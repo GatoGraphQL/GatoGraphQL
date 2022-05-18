@@ -22,34 +22,34 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     {
         $ret = parent::getSubComponentVariations($componentVariation);
 
-        $modules = array();
+        $componentVariations = array();
         switch ($componentVariation[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $modules[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-                $modules[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
-                $modules[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
-                $modules[] = [PoP_Module_Processor_UserQuickLinkLayouts::class, PoP_Module_Processor_UserQuickLinkLayouts::MODULE_LAYOUTUSER_QUICKLINKS];
+                $componentVariations[] = [PoP_Module_Processor_UserQuickLinkLayouts::class, PoP_Module_Processor_UserQuickLinkLayouts::MODULE_LAYOUTUSER_QUICKLINKS];
                 break;
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $modules = \PoP\Root\App::applyFilters(
+        $componentVariations = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            $modules,
+            $componentVariations,
             $componentVariation
         );
         $ret = array_merge(
             $ret,
-            $modules
+            $componentVariations
         );
 
         return $ret;

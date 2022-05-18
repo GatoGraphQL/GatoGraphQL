@@ -18,14 +18,14 @@ class AAL_PoPProcessors_ProcessorHooks
         );
     }
 
-    public function getLoginComponentVariations($modules)
+    public function getLoginComponentVariations($componentVariations)
     {
 
         // Add the Notifications since the last time the user fetched content from website
         if ($this->enableLatestnotifications()) {
-            $modules[] = [AAL_PoPProcessors_Module_Processor_Multiples::class, AAL_PoPProcessors_Module_Processor_Multiples::MODULE_MULTIPLE_LATESTNOTIFICATIONS];
+            $componentVariations[] = [AAL_PoPProcessors_Module_Processor_Multiples::class, AAL_PoPProcessors_Module_Processor_Multiples::MODULE_MULTIPLE_LATESTNOTIFICATIONS];
         }
-        return $modules;
+        return $componentVariations;
     }
 }
 

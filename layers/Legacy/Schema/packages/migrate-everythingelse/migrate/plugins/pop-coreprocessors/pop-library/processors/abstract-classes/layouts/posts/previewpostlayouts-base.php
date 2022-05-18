@@ -77,24 +77,24 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         $ret = parent::getRelationalSubmodules($componentVariation);
 
-        $modules = [];
+        $componentVariations = [];
 
         // Show author or not: if position defined
         if ($author_module = $this->getAuthorModule($componentVariation)) {
-            $modules[] = $author_module;
+            $componentVariations[] = $author_module;
         }
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
         if (!$this->getPostThumbSubmodule($componentVariation)) {
             if ($author_avatar = $this->getAuthorAvatarModule($componentVariation)) {
-                $modules[] = $author_avatar;
+                $componentVariations[] = $author_avatar;
             }
         }
 
-        if ($modules) {
+        if ($componentVariations) {
             $ret[] = new RelationalModuleField(
                 'authors',
-                $modules
+                $componentVariations
             );
         }
 

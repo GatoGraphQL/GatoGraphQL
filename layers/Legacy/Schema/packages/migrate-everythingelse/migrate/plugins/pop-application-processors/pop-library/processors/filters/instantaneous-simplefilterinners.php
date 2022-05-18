@@ -25,14 +25,14 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
                 [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS],
             ],
         ];
-        if ($modules = \PoP\Root\App::applyFilters(
+        if ($componentVariations = \PoP\Root\App::applyFilters(
             'Blog:InstantaneousFilterInners:inputmodules',
             $inputmodules[$componentVariation[1]],
             $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
         return $ret;

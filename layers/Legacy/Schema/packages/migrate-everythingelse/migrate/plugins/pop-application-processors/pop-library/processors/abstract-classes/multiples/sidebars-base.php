@@ -35,18 +35,18 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
         $ret = parent::getSubComponentVariations($componentVariation);
 
         // Add the corresponding blocks
-        if ($modules = $this->getInnerSubmodules($componentVariation)) {
+        if ($componentVariations = $this->getInnerSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
         
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
-        if ($modules = $this->getPermanentSubmodules($componentVariation)) {
+        if ($componentVariations = $this->getPermanentSubmodules($componentVariation)) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
 

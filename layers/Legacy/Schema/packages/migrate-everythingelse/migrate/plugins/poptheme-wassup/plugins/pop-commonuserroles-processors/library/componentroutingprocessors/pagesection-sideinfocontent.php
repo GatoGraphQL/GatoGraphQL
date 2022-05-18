@@ -11,11 +11,11 @@ class PoPTheme_Wassup_CommonUserRoles_Module_SideInfoContentPageSectionComponent
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_SidebarMultiples::class, GD_URE_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR],
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SidebarMultiples::class, GD_URE_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 

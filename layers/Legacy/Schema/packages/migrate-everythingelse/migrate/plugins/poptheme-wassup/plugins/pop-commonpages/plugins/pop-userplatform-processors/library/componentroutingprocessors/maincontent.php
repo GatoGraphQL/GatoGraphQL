@@ -11,10 +11,10 @@ class PoP_CommonPages_UserPlatform_Module_MainContentComponentRoutingProcessor e
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_COMMONPAGES_PAGE_ACCOUNTFAQ => [GD_CommonPages_Module_Processor_CustomBlocks::class, GD_CommonPages_Module_Processor_CustomBlocks::MODULE_BLOCK_ACCOUNTFAQ],
         );
-        foreach ($modules as $page => $componentVariation) {
+        foreach ($componentVariations as $page => $componentVariation) {
             $ret[PageRequestNature::PAGE][] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

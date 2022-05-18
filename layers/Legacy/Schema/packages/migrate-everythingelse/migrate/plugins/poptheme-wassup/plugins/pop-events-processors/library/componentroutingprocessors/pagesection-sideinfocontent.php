@@ -15,30 +15,30 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
         }
 
-        $modules = array(
+        $componentVariations = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_EVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_PASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
         }
 
-        $modules = array(
+        $componentVariations = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_EVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 

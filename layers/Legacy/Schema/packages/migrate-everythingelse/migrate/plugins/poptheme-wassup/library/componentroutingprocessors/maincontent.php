@@ -16,17 +16,17 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
         $ret = array();
 
         // Author
-        $modules = array(
+        $componentVariations = array(
             POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
         }
         // Tag
-        $modules = array(
+        $componentVariations = array(
             POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
         }
 

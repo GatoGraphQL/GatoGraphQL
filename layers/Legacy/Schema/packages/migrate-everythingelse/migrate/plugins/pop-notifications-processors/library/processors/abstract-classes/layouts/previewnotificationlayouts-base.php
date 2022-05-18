@@ -62,19 +62,19 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     {
         $ret = parent::getRelationalSubmodules($componentVariation);
 
-        $modules = array();
+        $componentVariations = array();
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
         if (!$this->getPostThumbSubmodule($componentVariation) && PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($user_avatar = $this->getUserAvatarModule($componentVariation)) {
-                $modules[] = $user_avatar;
+                $componentVariations[] = $user_avatar;
             }
         }
 
-        if ($modules) {
+        if ($componentVariations) {
             $ret[] = new RelationalModuleField(
                 'userID',
-                $modules
+                $componentVariations
             );
         }
 

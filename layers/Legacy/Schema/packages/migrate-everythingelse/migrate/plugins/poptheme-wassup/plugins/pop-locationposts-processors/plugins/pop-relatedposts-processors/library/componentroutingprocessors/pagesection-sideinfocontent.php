@@ -11,10 +11,10 @@ class PoPTheme_Wassup_LocationPosts_RelatedPosts_Module_SideInfoContentPageSecti
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_LocationPosts_RelatedContent_Module_Processor_SidebarMultiples::class, PoP_LocationPosts_RelatedContent_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

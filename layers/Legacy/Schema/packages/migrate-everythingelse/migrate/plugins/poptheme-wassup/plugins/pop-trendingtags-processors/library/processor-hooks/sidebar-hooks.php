@@ -12,7 +12,7 @@ class PoP_TrendingTags_SidebarHooks
         );
     }
 
-    public function getSidebarSubmodules($modules, $screengroup, $screen, array $componentVariation)
+    public function getSidebarSubmodules($componentVariations, $screengroup, $screen, array $componentVariation)
     {
 
         // Add the Trending Tags to all Groups in the Sideinfo
@@ -27,10 +27,10 @@ class PoP_TrendingTags_SidebarHooks
             POP_SCREEN_TAGS,
         );
         if (in_array($screengroup, $includeScreengroups) && !in_array($screen, $exclude_screens)) {
-            $modules[] = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
+            $componentVariations[] = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
         }
 
-        return $modules;
+        return $componentVariations;
     }
 }
 

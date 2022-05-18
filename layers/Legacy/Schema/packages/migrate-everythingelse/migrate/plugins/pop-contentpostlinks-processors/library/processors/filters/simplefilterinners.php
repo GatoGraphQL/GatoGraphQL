@@ -55,14 +55,14 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
                 ]
             );
         }
-        if ($modules = \PoP\Root\App::applyFilters(
+        if ($componentVariations = \PoP\Root\App::applyFilters(
             'Links:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$componentVariation[1]],
             $componentVariation
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $componentVariations
             );
         }
         return $ret;

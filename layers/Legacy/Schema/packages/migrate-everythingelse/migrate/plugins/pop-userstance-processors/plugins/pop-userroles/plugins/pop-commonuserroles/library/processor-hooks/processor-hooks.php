@@ -11,15 +11,15 @@ class UserStance_URE_ProcessorHooks
         );
     }
 
-    public function getInnerSubmodules($modules)
+    public function getInnerSubmodules($componentVariations)
     {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsOrganization($author)) {
-            $modules[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];
+            $componentVariations[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];
         } elseif (gdUreIsIndividual($author)) {
-            $modules[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL];
+            $componentVariations[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL];
         }
-        return $modules;
+        return $componentVariations;
     }
 }
 

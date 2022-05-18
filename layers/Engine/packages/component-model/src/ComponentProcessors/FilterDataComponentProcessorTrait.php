@@ -42,11 +42,11 @@ trait FilterDataComponentProcessorTrait
             return $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$componentVariation[1]];
         }
 
-        $modules = [];
+        $componentVariations = [];
         // Check if the component variation has any filtercomponent
         if ($dataloadQueryArgsFilteringModules = $this->getDataloadQueryArgsFilteringComponentVariations($componentVariation)) {
             // Check if if we're currently filtering by any filtercomponent
-            $modules = array_filter(
+            $componentVariations = array_filter(
                 $dataloadQueryArgsFilteringModules,
                 function (array $componentVariation) use ($source) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
@@ -56,8 +56,8 @@ trait FilterDataComponentProcessorTrait
             );
         }
 
-        $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$componentVariation[1]] = $modules;
-        return $modules;
+        $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$componentVariation[1]] = $componentVariations;
+        return $componentVariations;
     }
 
     public function getDataloadQueryArgsFilteringComponentVariations(array $componentVariation): array

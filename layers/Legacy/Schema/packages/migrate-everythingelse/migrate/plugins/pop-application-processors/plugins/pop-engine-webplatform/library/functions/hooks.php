@@ -1,8 +1,8 @@
 <?php
 
 \PoP\Root\App::addFilter('PoP_ApplicationProcessors_Utils:initializedomain:modules', 'addDomainstylesModule');
-function addDomainstylesModule($modules)
+function addDomainstylesModule($componentVariations)
 {
-    $modules[] = [PoP_Module_Processor_DomainStyleCodes::class, PoP_Module_Processor_DomainStyleCodes::MODULE_CODE_DOMAINSTYLES];
-    return $modules;
+    $componentVariations[] = [PoP_Module_Processor_DomainStyleCodes::class, PoP_Module_Processor_DomainStyleCodes::MODULE_CODE_DOMAINSTYLES];
+    return $componentVariations;
 }

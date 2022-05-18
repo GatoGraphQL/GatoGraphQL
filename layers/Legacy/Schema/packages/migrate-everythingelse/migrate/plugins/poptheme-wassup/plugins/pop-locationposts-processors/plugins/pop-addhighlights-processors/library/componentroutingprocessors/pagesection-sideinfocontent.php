@@ -11,10 +11,10 @@ class PoPTheme_Wassup_LocationPosts_AddHighlights_Module_SideInfoContentPageSect
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

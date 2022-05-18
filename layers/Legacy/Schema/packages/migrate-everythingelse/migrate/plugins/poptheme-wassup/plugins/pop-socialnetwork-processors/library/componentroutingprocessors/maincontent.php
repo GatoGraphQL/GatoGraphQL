@@ -14,7 +14,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_SOCIALNETWORK_ROUTE_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_Blocks::class, PoP_SocialNetwork_Module_Processor_Blocks::MODULE_BLOCK_CONTACTUSER],
             POP_SOCIALNETWORK_ROUTE_FOLLOWUSER => [PoP_Module_Processor_FunctionsBlocks::class, PoP_Module_Processor_FunctionsBlocks::MODULE_BLOCK_FOLLOWUSER],
             POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER => [PoP_Module_Processor_FunctionsBlocks::class, PoP_Module_Processor_FunctionsBlocks::MODULE_BLOCK_UNFOLLOWUSER],
@@ -27,7 +27,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST => [PoP_Module_Processor_FunctionsBlocks::class, PoP_Module_Processor_FunctionsBlocks::MODULE_BLOCK_DOWNVOTEPOST],
             POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST => [PoP_Module_Processor_FunctionsBlocks::class, PoP_Module_Processor_FunctionsBlocks::MODULE_BLOCK_UNDODOWNVOTEPOST],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 

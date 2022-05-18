@@ -10,10 +10,10 @@ class PoP_UserCommunitiesProcessors_MyPreferencesHooks
         );
     }
 
-    public function getForminputgroups($modules)
+    public function getForminputgroups($componentVariations)
     {
         return array_merge(
-            $modules,
+            $componentVariations,
             array(
                 [PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups::class, PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups::MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
             )

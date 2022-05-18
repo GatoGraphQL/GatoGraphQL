@@ -29,8 +29,8 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
     {
         switch ($componentVariation[1]) {
             case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
-                $modules = $this->getSubComponentVariations($componentVariation);
-                foreach ($modules as $submodule) {
+                $componentVariations = $this->getSubComponentVariations($componentVariation);
+                foreach ($componentVariations as $submodule) {
                     $this->appendProp([$submodule], $props, 'class', 'inline');
                 }
                 break;

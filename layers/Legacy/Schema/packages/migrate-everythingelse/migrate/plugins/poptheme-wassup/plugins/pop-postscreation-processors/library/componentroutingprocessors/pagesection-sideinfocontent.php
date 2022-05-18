@@ -11,10 +11,10 @@ class PoPTheme_Wassup_PostsCreation_Module_SideInfoContentPageSectionComponentRo
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 

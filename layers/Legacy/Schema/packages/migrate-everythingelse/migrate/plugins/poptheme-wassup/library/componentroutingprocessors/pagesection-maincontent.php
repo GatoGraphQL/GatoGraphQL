@@ -15,11 +15,11 @@ class PoP_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_Mai
         $ret = array();
 
         // Author
-        $modules = array(
+        $componentVariations = array(
             POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHORDESCRIPTION],
             POPTHEME_WASSUP_ROUTE_SUMMARY => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHORSUMMARY],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
         }
 

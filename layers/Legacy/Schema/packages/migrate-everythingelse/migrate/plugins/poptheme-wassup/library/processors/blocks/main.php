@@ -364,17 +364,17 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
             case self::MODULE_BLOCK_SINGLEPOST:
                 // Allow TPPDebate to override this, adding the "What do you think about TPP" Create Block
-                $modules = array(
+                $componentVariations = array(
                     [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
                     [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT],
                 );
-                $modules = \PoP\Root\App::applyFilters(
+                $componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:single',
-                    $modules
+                    $componentVariations
                 );
                 $ret = array_merge(
                     $ret,
-                    $modules
+                    $componentVariations
                 );
                 break;
         }

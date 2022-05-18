@@ -15,10 +15,10 @@ class PoPTheme_Wassup_Events_AddHighlights_Module_SideInfoContentPageSectionComp
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
-        $modules = array(
+        $componentVariations = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [
@@ -31,10 +31,10 @@ class PoPTheme_Wassup_Events_AddHighlights_Module_SideInfoContentPageSectionComp
         }
 
         // Future and current single event
-        $modules = array(
+        $componentVariations = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

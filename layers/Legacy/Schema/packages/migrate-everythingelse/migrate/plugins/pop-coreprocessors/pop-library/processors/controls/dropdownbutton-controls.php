@@ -20,18 +20,18 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         switch ($componentVariation[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
             case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
-                $modules = array();
-                $modules[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_PRINT];
+                $componentVariations = array();
+                $componentVariations[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_PRINT];
 
                 // Allow PoP Generic Forms Processors to add modules
-                $modules = \PoP\Root\App::applyFilters(
+                $componentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_DropdownButtonControls:modules:share',
-                    $modules,
+                    $componentVariations,
                     $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
-                    $modules
+                    $componentVariations
                 );
                 break;
         }

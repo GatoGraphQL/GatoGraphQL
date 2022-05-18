@@ -715,10 +715,10 @@ class Engine implements EngineInterface
         if (!is_null($not_excluded_componentVariation_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
-            foreach ($not_excluded_componentVariation_sets as $modules) {
+            foreach ($not_excluded_componentVariation_sets as $componentVariations) {
                 $filteredsettings[] = array_map(
                     [$this->getModuleHelpers(), 'getModuleOutputName'],
-                    $modules
+                    $componentVariations
                 );
             }
             $meta['filteredcomponents'] = $filteredsettings;

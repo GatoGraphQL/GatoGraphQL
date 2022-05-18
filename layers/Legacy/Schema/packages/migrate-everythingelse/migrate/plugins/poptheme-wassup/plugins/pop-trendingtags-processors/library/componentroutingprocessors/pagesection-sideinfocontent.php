@@ -11,10 +11,10 @@ class PoPTheme_Wassup_TrendingTags_Module_SideInfoContentPageSectionComponentRou
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
         }
 

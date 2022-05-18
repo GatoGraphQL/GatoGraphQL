@@ -12,7 +12,7 @@ class PoPTheme_Wassup_EM_SidebarHooks
         );
     }
 
-    public function getSidebarSubmodules($modules, $screengroup, $screen, array $componentVariation)
+    public function getSidebarSubmodules($componentVariations, $screengroup, $screen, array $componentVariation)
     {
 
         // Add the Events Calendar to all Groups in the Sideinfo
@@ -23,10 +23,10 @@ class PoPTheme_Wassup_EM_SidebarHooks
             )
         );
         if (in_array($screengroup, $includeScreengroups)/* && !in_array($screen, $exclude_screens)*/) {
-            $modules[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
+            $componentVariations[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
         }
 
-        return $modules;
+        return $componentVariations;
     }
 }
 

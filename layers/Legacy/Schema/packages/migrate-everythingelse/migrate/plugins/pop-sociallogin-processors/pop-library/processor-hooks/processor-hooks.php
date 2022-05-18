@@ -15,27 +15,27 @@ class GD_WSL_ProcessorHooks
         );
     }
 
-    public function loginchannels($modules)
+    public function loginchannels($componentVariations)
     {
 
         // Only if there are service providers
         if (!getSocialloginNetworklinks()) {
-            return $modules;
+            return $componentVariations;
         }
 
         // Add Facebook, Twitter, etc, after the Login Block
         array_splice(
-            $modules, 
+            $componentVariations, 
             array_search(
                 [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN], 
-                $modules
+                $componentVariations
             )+1, 
             0, 
             array(
                 [PoP_Module_Processor_SocialLoginElements::class, PoP_Module_Processor_SocialLoginElements::MODULE_SOCIALLOGIN_NETWORKLINKS],
             )
         );
-        return $modules;
+        return $componentVariations;
     }
 
     public function addHook($hooks)

@@ -11,10 +11,10 @@ class PoPTheme_Wassup_SocialNetwork_SocialNetwork_Module_SideInfoContentPageSect
     {
         $ret = array();
 
-        $modules = array(
+        $componentVariations = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_LocationPosts_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_LocationPosts_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR],
         );
-        foreach ($modules as $route => $componentVariation) {
+        foreach ($componentVariations as $route => $componentVariation) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component-variation' => $componentVariation,
                 'conditions' => [

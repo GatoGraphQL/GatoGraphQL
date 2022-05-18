@@ -56,31 +56,31 @@ class GetPoPDemo_Processors_GroupHooks
     }
 
     
-    public function homeTopmodules($modules)
+    public function homeTopmodules($componentVariations)
     {
         return array(
             [GetPoPDemo_Module_Processor_CustomGroups::class, GetPoPDemo_Module_Processor_CustomGroups::MODULE_GETPOPDEMO_GROUP_HOMETOP],
         );
     }
 
-    public function getAuthortopWidgetSubmodules($modules)
+    public function getAuthortopWidgetSubmodules($componentVariations)
     {
 
         // Add the Group which has the Featured widget
         if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-            $modules[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP];
+            $componentVariations[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP];
         }
-        return $modules;
+        return $componentVariations;
     }
 
-    public function getTagtopWidgetSubmodules($modules)
+    public function getTagtopWidgetSubmodules($componentVariations)
     {
 
         // Add the Group which has the Featured widget
         if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-            $modules[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP];
+            $componentVariations[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP];
         }
-        return $modules;
+        return $componentVariations;
     }
 }
 
