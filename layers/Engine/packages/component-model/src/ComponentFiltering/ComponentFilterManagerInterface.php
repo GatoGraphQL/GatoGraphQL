@@ -14,7 +14,7 @@ interface ComponentFilterManagerInterface
     public function getNotExcludedComponentVariationSets(): ?array;
     public function setNeverExclude(bool $neverExclude): void;
     public function excludeModule(array $componentVariation, array &$props): bool;
-    public function removeExcludedSubmodules(array $componentVariation, array $submodules): array;
+    public function removeExcludedSubmodules(array $componentVariation, array $subComponentVariations): array;
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */

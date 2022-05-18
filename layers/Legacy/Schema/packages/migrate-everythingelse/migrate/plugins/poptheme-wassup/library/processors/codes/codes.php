@@ -61,12 +61,12 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                 case self::MODULE_HTMLCODE_HOMEWELCOMETOP:
                 case self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP:
                 case self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP:
-                    $submodules = array(
+                    $subComponentVariations = array(
                         self::MODULE_HTMLCODE_HOMEWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME],
                         self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME],
                         self::MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
                     );
-                    $submodule = $submodules[$componentVariation[1]];
+                    $submodule = $subComponentVariations[$componentVariation[1]];
 
                     // This value must be set by the parent module
                     $target_id = $this->getProp($componentVariation, $props, 'target-id');

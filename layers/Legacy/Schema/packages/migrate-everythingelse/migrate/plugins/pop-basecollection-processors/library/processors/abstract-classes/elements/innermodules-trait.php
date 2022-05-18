@@ -22,10 +22,10 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
 
         $ret = parent::getMutableonmodelConfiguration($componentVariation, $props);
 
-        if ($submodules = $this->getInnerSubmodules($componentVariation)) {
+        if ($subComponentVariations = $this->getInnerSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $submodules
+                $subComponentVariations
             );
         }
         

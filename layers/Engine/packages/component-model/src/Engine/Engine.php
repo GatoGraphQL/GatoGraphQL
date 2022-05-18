@@ -932,12 +932,12 @@ class Engine implements EngineInterface
         );
 
         // Propagate to its inner modules
-        $submodules = $processor->getAllSubmodules($componentVariation);
-        $submodules = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
+        $subComponentVariations = $processor->getAllSubmodules($componentVariation);
+        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($submodules as $submodule) {
+        foreach ($subComponentVariations as $submodule) {
             $this->addInterreferencedComponentVariationFullPaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
@@ -980,12 +980,12 @@ class Engine implements EngineInterface
         );
 
         // Propagate to its inner modules
-        $submodules = $processor->getAllSubmodules($componentVariation);
-        $submodules = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
+        $subComponentVariations = $processor->getAllSubmodules($componentVariation);
+        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($submodules as $submodule) {
+        foreach ($subComponentVariations as $submodule) {
             $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);

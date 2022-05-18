@@ -72,7 +72,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 // If not told to be empty, then add the page submodule
                 $moduleAtts = count($componentVariation) >= 3 ? $componentVariation[2] : null;
                 if (!($moduleAtts && $moduleAtts['empty'])) {
-                    $submodules = array(
+                    $subComponentVariations = array(
                         self::MODULE_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEW],
                         self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEWSIDEINFO],
                         self::MODULE_PAGESECTION_ADDONTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::MODULE_PAGE_ADDONTABS],
@@ -86,7 +86,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                         self::MODULE_PAGESECTION_BODYTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::MODULE_PAGE_BODYTABS],
                         self::MODULE_PAGESECTION_BODY => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_BODY],
                     );
-                    $ret[] = $submodules[$componentVariation[1]];
+                    $ret[] = $subComponentVariations[$componentVariation[1]];
                 }
                 break;
 

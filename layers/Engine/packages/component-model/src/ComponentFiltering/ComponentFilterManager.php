@@ -139,20 +139,20 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return false;
     }
 
-    public function removeExcludedSubmodules(array $componentVariation, array $submodules): array
+    public function removeExcludedSubmodules(array $componentVariation, array $subComponentVariations): array
     {
         if (!$this->initialized) {
             $this->init();
         }
         if ($this->selected_filter_name) {
             if ($this->neverExclude) {
-                return $submodules;
+                return $subComponentVariations;
             }
 
-            return $this->selected_filter->removeExcludedSubmodules($componentVariation, $submodules);
+            return $this->selected_filter->removeExcludedSubmodules($componentVariation, $subComponentVariations);
         }
 
-        return $submodules;
+        return $subComponentVariations;
     }
 
     /**

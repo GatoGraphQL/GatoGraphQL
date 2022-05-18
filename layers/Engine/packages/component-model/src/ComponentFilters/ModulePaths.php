@@ -83,7 +83,7 @@ class ModulePaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubmodules(array $componentVariation, array $submodules): array
+    public function removeExcludedSubmodules(array $componentVariation, array $subComponentVariations): array
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -91,7 +91,7 @@ class ModulePaths extends AbstractComponentFilter
 
         // If there are no remaining path left, then everything goes in
         if (!$this->propagation_unsettled_paths) {
-            return $submodules;
+            return $subComponentVariations;
         }
 
         // $module_unsettled_path: Start only from the specified module. It is passed under URL param "modulepaths", and it's the list of module paths
@@ -105,12 +105,12 @@ class ModulePaths extends AbstractComponentFilter
             if (count($unsettled_path) == 1) {
                 // We reached the end of the unsettled path => from now on, all modules must be included
                 if ($unsettled_path_module == $componentVariation) {
-                    return $submodules;
+                    return $subComponentVariations;
                 }
             } else {
                 // Then, check that the following element in the unsettled_path, which is the submodule, is on the submodules
                 $unsettled_path_submodule = $unsettled_path[1];
-                if ($unsettled_path_module == $componentVariation && in_array($unsettled_path_submodule, $submodules) && !in_array($unsettled_path_submodule, $matching_submodules)) {
+                if ($unsettled_path_module == $componentVariation && in_array($unsettled_path_submodule, $subComponentVariations) && !in_array($unsettled_path_submodule, $matching_submodules)) {
                     $matching_submodules[] = $unsettled_path_submodule;
                 }
             }

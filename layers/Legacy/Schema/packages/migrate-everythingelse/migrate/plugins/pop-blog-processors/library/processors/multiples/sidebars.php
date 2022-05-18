@@ -90,11 +90,11 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
     {
         switch ($componentVariation[1]) {
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
-                $submodules = array_diff(
+                $subComponentVariations = array_diff(
                     $this->getSubComponentVariations($componentVariation),
                     $this->getPermanentSubmodules($componentVariation)
                 );
-                foreach ($submodules as $submodule) {
+                foreach ($subComponentVariations as $submodule) {
                       // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 

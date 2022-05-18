@@ -18,11 +18,11 @@ class PoP_LocationPostsCreation_PageSectionHooks
         switch ($componentVariation[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $submodules = array(
+                    $subComponentVariations = array(
                         [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOST_CREATE],
                         [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOST_UPDATE],
                     );
-                    foreach ($submodules as $submodule) {
+                    foreach ($subComponentVariations as $submodule) {
                         $processor->setProp($submodule, $props, 'title', '');
                     }
                 }

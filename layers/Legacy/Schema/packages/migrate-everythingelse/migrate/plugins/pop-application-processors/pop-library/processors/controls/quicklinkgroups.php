@@ -47,44 +47,44 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOM:
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED:
                 // Allow TPP Debate website to remove the Comments from the post list
-                $submodules = array();
-                $submodules[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
-                $submodules[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
+                $subComponentVariations = array();
+                $subComponentVariations[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
+                $subComponentVariations[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
                 if ($componentVariation == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
-                    $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
+                    $subComponentVariations[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $submodules = \PoP\Root\App::applyFilters(
+                $subComponentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
-                    $submodules,
+                    $subComponentVariations,
                     $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
-                    $submodules
+                    $subComponentVariations
                 );
                 break;
 
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER:
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER:
                 // Allow TPP Debate website to remove the Comments from the post list
-                $submodules = array();
-                $submodules[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
-                $submodules[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
+                $subComponentVariations = array();
+                $subComponentVariations[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
+                $subComponentVariations[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-                    $submodules[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
+                    $subComponentVariations[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
                 }
                 if ($componentVariation == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
-                    $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
+                    $subComponentVariations[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $submodules = \PoP\Root\App::applyFilters(
+                $subComponentVariations = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
-                    $submodules,
+                    $subComponentVariations,
                     $componentVariation
                 );
                 $ret = array_merge(
                     $ret,
-                    $submodules
+                    $subComponentVariations
                 );
                 break;
 

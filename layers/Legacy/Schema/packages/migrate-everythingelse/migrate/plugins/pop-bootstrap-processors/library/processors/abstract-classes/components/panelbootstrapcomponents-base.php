@@ -106,8 +106,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     }
     public function getActivepanelSubmodule(array $componentVariation)
     {
-        $submodules = $this->getSubComponentVariations($componentVariation);
-        foreach ($submodules as $submodule) {
+        $subComponentVariations = $this->getSubComponentVariations($componentVariation);
+        foreach ($subComponentVariations as $submodule) {
             if ($this->isSubmoduleActivePanel($componentVariation, $submodule)) {
                 return $submodule;
             }
@@ -128,8 +128,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
 
         // Simply return the first one
-        $submodules = $this->getSubComponentVariations($componentVariation);
-        return $submodules[0];
+        $subComponentVariations = $this->getSubComponentVariations($componentVariation);
+        return $subComponentVariations[0];
     }
 
     public function getPanelTitle(array $componentVariation)

@@ -18,11 +18,11 @@ class PoP_EventLinksCreation_PageSectionHooks
         switch ($componentVariation[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $submodules = array(
+                    $subComponentVariations = array(
                         [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENTLINK_CREATE],
                         [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENTLINK_UPDATE],
                     );
-                    foreach ($submodules as $submodule) {
+                    foreach ($subComponentVariations as $submodule) {
                         $processor->setProp($submodule, $props, 'title', '');
                     }
                 }

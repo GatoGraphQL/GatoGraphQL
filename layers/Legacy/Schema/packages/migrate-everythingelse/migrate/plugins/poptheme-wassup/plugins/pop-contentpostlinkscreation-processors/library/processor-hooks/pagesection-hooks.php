@@ -18,12 +18,12 @@ class PoPTheme_Wassup_ContentPostLinksProcessors_PageSectionHooks
         switch ($componentVariation[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $submodules = array(
+                    $subComponentVariations = array(
                         [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_CONTENTPOSTLINK_CREATE],
                         [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE],
                     );
                 }
-                foreach ($submodules as $submodule) {
+                foreach ($subComponentVariations as $submodule) {
                     $processor->setProp($submodule, $props, 'title', '');
                 }
                 break;

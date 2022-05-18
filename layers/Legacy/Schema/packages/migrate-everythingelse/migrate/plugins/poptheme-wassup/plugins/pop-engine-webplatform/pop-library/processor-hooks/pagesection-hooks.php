@@ -21,11 +21,11 @@ class PoPTheme_Wassup_WebPlatform_PageSectionHooks
             $processor->mergeJsmethodsProp([$submodule], $props, array('closeFeedbackMessagesOnPageSectionOpen'));
         }
 
-        $submodules = array(
+        $subComponentVariations = array(
             [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN],
             [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGOUT],
         );
-        foreach ($submodules as $submodule) {
+        foreach ($subComponentVariations as $submodule) {
             $processor->mergeJsmethodsProp(
                 $submodule,
                 $props,

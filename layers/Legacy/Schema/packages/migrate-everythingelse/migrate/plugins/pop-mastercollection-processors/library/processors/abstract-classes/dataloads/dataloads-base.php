@@ -39,10 +39,10 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($submodules = $this->getInnerSubmodules($componentVariation)) {
+        if ($subComponentVariations = $this->getInnerSubmodules($componentVariation)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $submodules
+                $subComponentVariations
             );
         }
 

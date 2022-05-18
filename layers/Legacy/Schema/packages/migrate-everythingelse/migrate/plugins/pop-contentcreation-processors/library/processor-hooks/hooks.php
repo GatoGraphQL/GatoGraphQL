@@ -18,26 +18,26 @@ class PoP_GenericFormsProcessors_Hooks
         );
     }
 
-    public function getDropdownSubmodules($submodules, array $componentVariation)
+    public function getDropdownSubmodules($subComponentVariations, array $componentVariation)
     {
         switch ($componentVariation[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $submodules[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN];
+                $subComponentVariations[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN];
                 break;
         }
         
-        return $submodules;
+        return $subComponentVariations;
     }
 
-    public function getSocialmediaSubmodules($submodules, array $componentVariation)
+    public function getSocialmediaSubmodules($subComponentVariations, array $componentVariation)
     {
         switch ($componentVariation[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $submodules[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA];
+                $subComponentVariations[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA];
                 break;
         }
         
-        return $submodules;
+        return $subComponentVariations;
     }
 }
 

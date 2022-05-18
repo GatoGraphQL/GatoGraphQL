@@ -209,8 +209,8 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	}
 
     // 	// Add the path from this component variation to its components
-    // 	$submodules = $this->getSubmodulesByGroup($componentVariation);
-    // 	foreach ($submodules as $submodule) {
+    // 	$subComponentVariations = $this->getSubmodulesByGroup($componentVariation);
+    // 	foreach ($subComponentVariations as $submodule) {
 
     // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($submodule)->getModulesPaths($submodule, $props)) {
 

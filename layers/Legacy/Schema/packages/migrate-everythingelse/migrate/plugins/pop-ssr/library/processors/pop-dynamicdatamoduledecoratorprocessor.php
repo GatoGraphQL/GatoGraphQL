@@ -136,8 +136,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $processor = $this->getDecoratedcomponentProcessor($componentVariation);
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($componentVariation, $props);
-        if ($submodules = $processor->getModulesToPropagateDataProperties($componentVariation)) {
-            foreach ($submodules as $submodule) {
+        if ($subComponentVariations = $processor->getModulesToPropagateDataProperties($componentVariation)) {
+            foreach ($subComponentVariations as $submodule) {
                 $submodule_processor = $componentprocessor_manager->getProcessor($submodule);
 
                 // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
