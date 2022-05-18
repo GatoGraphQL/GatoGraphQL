@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 /**
  * Add the filtercomponents to all filters
  */
-\PoP\Root\App::addFilter('Users:FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::addFilter('Users:FilterInnerComponentProcessor:inputComponents', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $component)
 {
     if (in_array($component, [
@@ -27,7 +27,7 @@ function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $component)
     }
     return $filterinputs;
 }
-\PoP\Root\App::addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::addFilter('SimpleFilterInners:inputComponents', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $component)
 {
     if (in_array($component, [
@@ -51,7 +51,7 @@ function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $comp
     return $filterinputs;
 }
 
-\PoP\Root\App::addFilter('FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
+\PoP\Root\App::addFilter('FilterInnerComponentProcessor:inputComponents', 'gdUreAddFiltercomponentCommunitiesPost');
 function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 {
     // Place the 'communities' component before the 'profiles' one, so that we can use {{lastGeneratedId}} to reference it
@@ -91,7 +91,7 @@ function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 }
 
 // Add the author users filtercomponent on the Community author page
-\PoP\Root\App::addFilter('Blog:FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::addFilter('Blog:FilterInnerComponentProcessor:inputComponents', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
 function gdUreAddFiltercomponentCommunityusers($filterinputs, array $component)
 {
     if (in_array($component, [
@@ -119,7 +119,7 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $component)
     }
     return $filterinputs;
 }
-\PoP\Root\App::addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::addFilter('SimpleFilterInners:inputComponents', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
 function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $component)
 {
     if (in_array($component, [

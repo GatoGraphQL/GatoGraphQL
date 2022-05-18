@@ -27,7 +27,7 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 [UserStance_Module_Processor_MultiSelectFilterInputs::class, UserStance_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_STANCE_MULTISELECT],
@@ -80,8 +80,8 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Stances:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Stances:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

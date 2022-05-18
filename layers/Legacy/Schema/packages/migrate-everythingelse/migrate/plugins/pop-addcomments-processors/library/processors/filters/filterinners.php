@@ -15,7 +15,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
                 [PoP_Module_Processor_FormComponentGroups::class, PoP_Module_Processor_FormComponentGroups::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES],
@@ -23,8 +23,8 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Comments:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'Comments:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

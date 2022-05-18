@@ -15,7 +15,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS => [
                 GD_CreateUpdate_Utils::moderate() ?
                     [PoP_Module_Processor_MultiSelectFilterInputs::class, PoP_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS] :
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
             ],
         ];
         // Add the link access filter
-        if (($inputmodules[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputComponents[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
             array_splice(
                 $ret,
                 array_search(
@@ -41,8 +41,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
             );
         }
         if ($components = \PoP\Root\App::applyFilters(
-            'Links:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Links:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

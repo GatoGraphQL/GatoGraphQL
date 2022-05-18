@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_NAME],
                 [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS],
@@ -32,8 +32,8 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'UserCommunities:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'UserCommunities:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

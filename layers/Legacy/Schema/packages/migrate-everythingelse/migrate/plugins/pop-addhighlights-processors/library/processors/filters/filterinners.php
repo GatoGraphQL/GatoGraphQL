@@ -19,7 +19,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_HIGHLIGHTS => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
                 [PoP_Module_Processor_FormComponentGroups::class, PoP_Module_Processor_FormComponentGroups::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES],
@@ -41,8 +41,8 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Highlights:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'Highlights:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

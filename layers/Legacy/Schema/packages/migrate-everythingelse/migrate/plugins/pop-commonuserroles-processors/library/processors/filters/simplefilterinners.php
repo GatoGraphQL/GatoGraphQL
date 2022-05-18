@@ -17,7 +17,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_NAME],
                 [GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER],
@@ -30,8 +30,8 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'CommonUserRoles:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'CommonUserRoles:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

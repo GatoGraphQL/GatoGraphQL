@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_NAME],
                 [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS],
@@ -32,8 +32,8 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'UserCommunities:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'UserCommunities:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

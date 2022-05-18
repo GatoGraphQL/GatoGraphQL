@@ -19,7 +19,7 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
@@ -41,8 +41,8 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Highlights:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Highlights:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

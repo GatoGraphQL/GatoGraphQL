@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_POSTS => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
                 [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_POSTSECTIONS],
@@ -142,8 +142,8 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Blog:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'Blog:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

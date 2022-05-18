@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_POSTS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_POSTSECTIONS],
@@ -142,8 +142,8 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Blog:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Blog:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

@@ -25,7 +25,7 @@ class PoP_Events_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Pr
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_EVENTS => [
                 // Events: cannot filter by categories, since em_get_events() has no support for meta_query
                 // Events: cannot filter by tags, since using arg "tag" searchs for its own post type for event tag, and not the standard post tag
@@ -61,8 +61,8 @@ class PoP_Events_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Pr
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Events:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Events:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

@@ -15,14 +15,14 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Locations:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'Locations:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

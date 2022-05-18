@@ -5,12 +5,12 @@ class UserStance_DataLoad_FilterHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'Stances:FilterInnerComponentProcessor:inputmodules',
+            'Stances:FilterInnerComponentProcessor:inputComponents',
             $this->filtercomponents(...),
             10,
             2
         );\PoP\Root\App::addFilter(
-            'Stances:SimpleFilterInners:inputmodules',
+            'Stances:SimpleFilterInners:inputComponents',
             $this->simplefiltercomponents(...),
             10,
             2

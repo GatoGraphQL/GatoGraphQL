@@ -17,7 +17,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS => [
                 [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS],
             ],
@@ -26,8 +26,8 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Blog:InstantaneousFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Blog:InstantaneousFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

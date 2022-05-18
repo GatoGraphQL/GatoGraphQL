@@ -19,7 +19,7 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_HASHTAGS],
@@ -41,8 +41,8 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Locations:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Locations:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

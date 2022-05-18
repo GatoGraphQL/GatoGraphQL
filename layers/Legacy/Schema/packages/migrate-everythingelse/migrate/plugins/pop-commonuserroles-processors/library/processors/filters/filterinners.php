@@ -17,7 +17,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_INDIVIDUALS => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_NAME],
                 [GD_URE_Module_Processor_FormGroups::class, GD_URE_Module_Processor_FormGroups::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_USER],
@@ -30,8 +30,8 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'CommonUserRoles:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'CommonUserRoles:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

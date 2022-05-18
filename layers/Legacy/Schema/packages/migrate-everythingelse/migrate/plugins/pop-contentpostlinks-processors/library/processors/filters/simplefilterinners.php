@@ -19,7 +19,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS => [
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_HASHTAGS],
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
             ],
         ];
         // Add the link access filter
-        if (($inputmodules[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputComponents[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
                 $ret,
@@ -56,8 +56,8 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
             );
         }
         if ($components = \PoP\Root\App::applyFilters(
-            'Links:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'Links:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

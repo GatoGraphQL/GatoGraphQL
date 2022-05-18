@@ -27,7 +27,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_STANCES => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
                 [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE],
@@ -80,8 +80,8 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Stances:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$component[1]],
+            'Stances:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(

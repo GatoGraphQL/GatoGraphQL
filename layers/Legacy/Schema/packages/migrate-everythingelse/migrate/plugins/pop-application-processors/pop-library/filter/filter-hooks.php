@@ -6,13 +6,13 @@ class PoPThemeWassup_DataLoad_FilterHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'Blog:FilterInnerComponentProcessor:inputmodules',
+            'Blog:FilterInnerComponentProcessor:inputComponents',
             $this->modifyPostFilterInputs(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
-            'Blog:SimpleFilterInners:inputmodules',
+            'Blog:SimpleFilterInners:inputComponents',
             $this->modifyPostSimpleFilterInputs(...),
             10,
             2

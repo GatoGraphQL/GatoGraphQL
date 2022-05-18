@@ -15,7 +15,7 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
     {
         $ret = parent::getInputSubmodules($component);
 
-        $inputmodules = [
+        $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS => [
                 GD_CreateUpdate_Utils::moderate() ?
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
@@ -27,8 +27,8 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
             ],
         ];
         if ($components = \PoP\Root\App::applyFilters(
-            'Locations:SimpleFilterInners:inputmodules',
-            $inputmodules[$component[1]],
+            'Locations:SimpleFilterInners:inputComponents',
+            $inputComponents[$component[1]],
             $component
         )) {
             $ret = array_merge(
