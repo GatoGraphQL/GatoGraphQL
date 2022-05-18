@@ -22,7 +22,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     /**
      * @var array<string, ComponentFilterInterface>
      */
-    protected array $modulefilters = [];
+    protected array $componentfilters = [];
     protected bool $initialized = false;
     /**
      * From the moment in which a module is not excluded, every module from then on must also be included
@@ -65,7 +65,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
 
     public function addComponentFilter(ComponentFilterInterface $moduleFilter): void
     {
-        $this->modulefilters[$moduleFilter->getName()] = $moduleFilter;
+        $this->componentfilters[$moduleFilter->getName()] = $moduleFilter;
     }
 
     protected function init(): void
@@ -73,7 +73,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Lazy initialize so that we can inject all the moduleFilters before checking the selected one
         $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedComponentFilterName();
         if ($this->selected_filter_name) {
-            $this->selected_filter = $this->modulefilters[$this->selected_filter_name];
+            $this->selected_filter = $this->componentfilters[$this->selected_filter_name];
 
             // Initialize only if we are intending to filter modules. This way, passing modulefilter=somewrongpath will return an empty array, meaning to not render anything
             $this->not_excluded_componentVariation_sets = $this->not_excluded_componentVariation_sets_as_string = array();
@@ -102,7 +102,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
 
         // Only valid if there's a corresponding moduleFilter
         $selectedComponentFilterName = Request::getComponentFilter();
-        if ($selectedComponentFilterName !== null && in_array($selectedComponentFilterName, array_keys($this->modulefilters))) {
+        if ($selectedComponentFilterName !== null && in_array($selectedComponentFilterName, array_keys($this->componentfilters))) {
             return $selectedComponentFilterName;
         }
 
