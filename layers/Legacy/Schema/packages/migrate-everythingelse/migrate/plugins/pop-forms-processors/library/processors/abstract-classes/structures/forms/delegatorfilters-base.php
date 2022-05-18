@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
 {
     public function getAction(array $component, array &$props)
     {
-        // The delegator filter will simply point to the current page, adding ?componentFilter=maincontentmodule so that is the module that gets filtered
+        // The delegator filter will simply point to the current page, adding ?componentFilter=mainContentComponent so that is the module that gets filtered
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         return $requestHelperService->getCurrentURL();
     }
