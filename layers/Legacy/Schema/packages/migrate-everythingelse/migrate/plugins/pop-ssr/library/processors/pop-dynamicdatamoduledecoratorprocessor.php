@@ -173,36 +173,36 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         foreach ($processor->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first
             $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
-            $subcomponent_modules_data_properties = array(
+            $subcomponent_componentVariations_data_properties = array(
                 'data-fields' => array(),
                 'subcomponents' => array()
             );
-            foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_module) {
-                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
-                    $subcomponent_modules_data_properties = array_merge_recursive(
-                        $subcomponent_modules_data_properties,
-                        $subcomponent_module_data_properties
+            foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_componentVariation) {
+                if ($subcomponent_componentVariation_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_componentVariation))->$propagate_fn($subcomponent_componentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                    $subcomponent_componentVariations_data_properties = array_merge_recursive(
+                        $subcomponent_componentVariations_data_properties,
+                        $subcomponent_componentVariation_data_properties
                     );
                 }
             }
 
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_modules_data_properties['data-fields'] ?? null) {
-                $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
+            if ($subcomponent_componentVariations_data_properties['data-fields'] ?? null) {
+                $subcomponent_componentVariations_data_properties['data-fields'] = array_unique($subcomponent_componentVariations_data_properties['data-fields']);
 
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = array_unique(
                     array_merge(
                         $ret['subcomponents'][$subcomponent_data_field]['data-fields'],
-                        $subcomponent_modules_data_properties['data-fields']
+                        $subcomponent_componentVariations_data_properties['data-fields']
                     )
                 );
             }
-            if ($subcomponent_modules_data_properties['subcomponents'] ?? null) {
+            if ($subcomponent_componentVariations_data_properties['subcomponents'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
                     $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
-                    $subcomponent_modules_data_properties['subcomponents']
+                    $subcomponent_componentVariations_data_properties['subcomponents']
                 );
             }
         }

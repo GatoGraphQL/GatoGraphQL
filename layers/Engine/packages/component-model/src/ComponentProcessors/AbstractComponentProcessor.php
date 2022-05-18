@@ -263,8 +263,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // @todo Pass the ModuleField directly, do not convert to string first
                 $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
-                    foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_module) {
-                        $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
+                    foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_componentVariation) {
+                        $this->setProp($subcomponent_componentVariation, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                     }
                 }
             }
@@ -648,14 +648,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
                 // Only modules which do not load data
-                $subcomponent_modules = array_filter(
+                $subcomponent_componentVariations = array_filter(
                     $relationalModuleField->getNestedComponentVariations(),
                     function ($subComponentVariation) {
                         return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
                     }
                 );
-                foreach ($subcomponent_modules as $subcomponent_module) {
-                    $this->getComponentProcessorManager()->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                foreach ($subcomponent_componentVariations as $subcomponent_componentVariation) {
+                    $this->getComponentProcessorManager()->getProcessor($subcomponent_componentVariation)->addToDatasetDatabaseKeys($subcomponent_componentVariation, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
             foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
@@ -665,14 +665,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     // @see https://github.com/leoloso/PoP/issues/1050
                     $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
                     // Only modules which do not load data
-                    $subcomponent_modules = array_filter(
+                    $subcomponent_componentVariations = array_filter(
                         $relationalModuleField->getNestedComponentVariations(),
                         function ($subComponentVariation) {
                             return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
                         }
                     );
-                    foreach ($subcomponent_modules as $subcomponent_module) {
-                        $this->getComponentProcessorManager()->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    foreach ($subcomponent_componentVariations as $subcomponent_componentVariation) {
+                        $this->getComponentProcessorManager()->getProcessor($subcomponent_componentVariation)->addToDatasetDatabaseKeys($subcomponent_componentVariation, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                     }
                 }
             }
@@ -1239,33 +1239,33 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($relationalSubmodules as $subcomponent_data_field => $subcomponent_modules) {
-            $subcomponent_modules_data_properties = array(
+        foreach ($relationalSubmodules as $subcomponent_data_field => $subcomponent_componentVariations) {
+            $subcomponent_componentVariations_data_properties = array(
                 'data-fields' => array(),
                 'conditional-data-fields' => array(),
                 'subcomponents' => array()
             );
-            foreach ($subcomponent_modules as $subcomponent_module) {
-                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent_module);
-                if ($subcomponent_module_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES])) {
-                    $subcomponent_modules_data_properties = array_merge_recursive(
-                        $subcomponent_modules_data_properties,
-                        $subcomponent_module_data_properties
+            foreach ($subcomponent_componentVariations as $subcomponent_componentVariation) {
+                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent_componentVariation);
+                if ($subcomponent_componentVariation_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_componentVariation, $props[$moduleFullName][Props::SUBMODULES])) {
+                    $subcomponent_componentVariations_data_properties = array_merge_recursive(
+                        $subcomponent_componentVariations_data_properties,
+                        $subcomponent_componentVariation_data_properties
                     );
                 }
             }
 
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_modules_data_properties['data-fields'] ?? null) {
-                $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
+            if ($subcomponent_componentVariations_data_properties['data-fields'] ?? null) {
+                $subcomponent_componentVariations_data_properties['data-fields'] = array_unique($subcomponent_componentVariations_data_properties['data-fields']);
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = array_values(array_unique(array_merge(
                     $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? [],
-                    $subcomponent_modules_data_properties['data-fields']
+                    $subcomponent_componentVariations_data_properties['data-fields']
                 )));
             }
-            if ($subcomponent_modules_data_properties['conditional-data-fields'] ?? null) {
+            if ($subcomponent_componentVariations_data_properties['conditional-data-fields'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'] ?? [];
-                foreach ($subcomponent_modules_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
+                foreach ($subcomponent_componentVariations_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
                     $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField] = array_merge_recursive(
                         $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField] ?? [],
                         $conditionalDataFields
@@ -1273,11 +1273,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 }
             }
 
-            if ($subcomponent_modules_data_properties['subcomponents'] ?? null) {
+            if ($subcomponent_componentVariations_data_properties['subcomponents'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
                     $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
-                    $subcomponent_modules_data_properties['subcomponents']
+                    $subcomponent_componentVariations_data_properties['subcomponents']
                 );
             }
         }
