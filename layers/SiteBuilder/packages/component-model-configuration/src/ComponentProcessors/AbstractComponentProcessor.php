@@ -172,8 +172,8 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         $stringified_component_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($component);
         $ret = GeneralUtils::addQueryArgs(
             [
-                Params::MODULEFILTER => $this->getModulePaths()->getName(),
-                Params::MODULEPATHS . '[]' => $stringified_component_propagation_current_path,
+                Params::COMPONENTFILTER => $this->getModulePaths()->getName(),
+                Params::COMPONENTPATHS . '[]' => $stringified_component_propagation_current_path,
             ],
             $this->getRequestHelperService()->getCurrentURL()
         );
@@ -189,7 +189,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         if ($extra_component_paths = $this->getProp($component, $props, 'dataload-source-add-componentPaths')) {
             foreach ($extra_component_paths as $componentPath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($componentPath),
+                    Params::COMPONENTPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($componentPath),
                 ], $ret);
             }
         }

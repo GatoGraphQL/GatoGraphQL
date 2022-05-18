@@ -696,7 +696,7 @@ class Engine implements EngineInterface
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $meta = array(
-            Response::ENTRY_MODULE => $this->getEntryComponent()[1],
+            Response::ENTRY_COMPONENT => $this->getEntryComponent()[1],
             Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );

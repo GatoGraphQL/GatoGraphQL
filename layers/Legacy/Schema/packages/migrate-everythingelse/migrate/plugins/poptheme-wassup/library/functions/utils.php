@@ -49,7 +49,7 @@ class PoPThemeWassup_Utils
                     PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_HOVER => 'hover',
                 );
                 foreach ($possiblyOpenPageSections as $possiblyOpenPageSection => $class) {
-                    $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBMODULEOUTPUTNAMES] ?? []));
+                    $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBCOMPONENTOUTPUTNAMES] ?? []));
                     if ($pageSectionBlocks) {
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
                         if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO) {

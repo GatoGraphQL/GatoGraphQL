@@ -12,7 +12,7 @@
         '</div>';
 ?>
 <div id="<?php echo POP_IDS_APPSTATUS ?>">
-    <?php printf($status, POP_MODULEID_PAGESECTIONCONTAINERID_BODY) ?>
-    <?php printf($status, POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEW) ?>
-    <?php printf($status, POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR) ?>
+    <?php printf($status, POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY) ?>
+    <?php printf($status, POP_COMPONENTID_PAGESECTIONCONTAINERID_QUICKVIEW) ?>
+    <?php printf($status, POP_COMPONENTID_PAGESECTIONCONTAINERID_NAVIGATOR) ?>
 </div>

@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_SpeechBubblesBase extends PoPEngine_QueryDat
         );
         
         $layout = $this->getLayoutSubmodule($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         
         return $ret;
     }

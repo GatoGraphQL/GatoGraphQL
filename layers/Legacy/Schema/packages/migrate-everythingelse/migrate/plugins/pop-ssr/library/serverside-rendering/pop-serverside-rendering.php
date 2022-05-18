@@ -231,7 +231,7 @@ class PoP_ServerSideRendering
         // Expand the JS Keys first, since the template key may be the compacted one
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $popManager->expandJSKeys($pagesection_configuration);
-        if (!$pagesection_component = $pagesection_configuration[GD_JS_MODULE]) {
+        if (!$pagesection_component = $pagesection_configuration[GD_JS_COMPONENT]) {
             throw new GenericSystemException(
                 sprintf(
                     'No template defined in context (%s)',
@@ -246,7 +246,7 @@ class PoP_ServerSideRendering
         $render_context = $pagesection_configuration;
         if ($block) {
             $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-submodules')][$block];
-            $renderModule = $render_context[GD_JS_MODULE];
+            $renderModule = $render_context[GD_JS_COMPONENT];
         }
 
         return $this->renderModule($renderModule, $render_context);

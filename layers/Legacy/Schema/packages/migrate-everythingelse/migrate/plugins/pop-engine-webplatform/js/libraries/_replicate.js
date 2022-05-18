@@ -97,7 +97,7 @@
             var tlFeedback = pop.Manager.getTopLevelFeedback(domain);
             // var tlFeedback = memory.feedback.toplevel;
             $.each(
-                replicableMemory.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE],
+                replicableMemory.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT],
                 function (key, value) {
 
                     // If it is an empty array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
@@ -202,7 +202,7 @@
             psConfiguration[pop.c.JS_INTERCEPTURLS][moduleName][moduleName] = tlFeedback[pop.c.URLPARAM_URL];
 
             // Set what blocks must be replicated in 'blockunits', replicable must be empty since the "tell me what blocks are to be replicated" was already executed
-            psConfiguration[pop.c.JS_MODULE] = moduleName;
+            psConfiguration[pop.c.JS_COMPONENT] = moduleName;
 
             // Comment Leo 05/11/2015: the configuration of the block-settings-ids to be drawn is passed as settings
             // next to the interceptor link, on <span class="pop-interceptor-blocksettingsids"/>

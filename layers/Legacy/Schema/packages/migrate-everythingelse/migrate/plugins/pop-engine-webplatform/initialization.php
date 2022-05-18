@@ -173,7 +173,7 @@ class PoPWebPlatform_Initialization
         $keepopentabs = \PoP\Root\App::applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
         // $multilayout_keyfields = PoP_WebPlatform_ConfigurationUtils::get_multilayout_keyfields();
-        $domcontainer_id = \PoP\Root\App::applyFilters('pop_componentmanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
+        $domcontainer_id = \PoP\Root\App::applyFilters('pop_componentmanager:domcontainer_id', POP_COMPONENTID_PAGESECTIONCONTAINERID_CONTAINER);
         $addanchorspinner = \PoP\Root\App::applyFilters('pop_componentmanager:add_anchor_spinner', true);
         $api_urlparams = \PoP\Root\App::applyFilters('pop_componentmanager:api_urlparams', array(
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,

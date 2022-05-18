@@ -1,15 +1,15 @@
 <?php
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
-const POP_MODULEID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';
-const POP_MODULEID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS = 'ps-framecomponents';
-const POP_MODULEID_PAGESECTIONCONTAINERID_TOP = 'ps-top';
-const POP_MODULEID_PAGESECTIONCONTAINERID_SIDE = 'ps-side';
-const POP_MODULEID_PAGESECTIONCONTAINERID_BACKGROUND = 'ps-background';
-const POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER = 'ps-container';
-const POP_MODULEID_PAGESECTIONCONTAINERID_MODALS = 'ps-modals';
-const POP_MODULEID_PAGESECTIONCONTAINERID_ADDONTABS = 'ps-addontabs';
-const POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS = 'ps-bodytabs';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS = 'ps-framecomponents';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_TOP = 'ps-top';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_SIDE = 'ps-side';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_BACKGROUND = 'ps-background';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_CONTAINER = 'ps-container';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_MODALS = 'ps-modals';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONTABS = 'ps-addontabs';
+const POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYTABS = 'ps-bodytabs';
 
 class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBase
 {
@@ -93,7 +93,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $subComponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_FRAMECOMPONENTS];
@@ -126,46 +126,46 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_HOVER:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_HOVER;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_HOVER;
 
             case self::COMPONENT_PAGESECTION_NAVIGATOR:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_NAVIGATOR;
 
             case self::COMPONENT_PAGESECTION_SIDE:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_SIDE;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_SIDE;
 
             case self::COMPONENT_PAGESECTION_TOP:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_TOP;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_TOP;
 
             case self::COMPONENT_PAGESECTION_ADDONTABS:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_ADDONTABS;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONTABS;
 
             case self::COMPONENT_PAGESECTION_BODYSIDEINFO:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_BODYSIDEINFO;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYSIDEINFO;
 
             case self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO;
 
             case self::COMPONENT_PAGESECTION_BODY:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_BODY;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY;
 
             case self::COMPONENT_PAGESECTION_QUICKVIEW:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEW;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_QUICKVIEW;
 
             case self::COMPONENT_PAGESECTION_BACKGROUND:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_BACKGROUND;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_BACKGROUND;
 
             case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS;
 
             case self::COMPONENT_PAGESECTION_HOLE:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_HOLE;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_HOLE;
 
             case self::COMPONENT_PAGESECTION_MODALS:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_MODALS;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_MODALS;
 
             case self::COMPONENT_PAGESECTION_BODYTABS:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYTABS;
         }
 
         return parent::getID($component, $props);

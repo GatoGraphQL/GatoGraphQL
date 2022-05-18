@@ -14,7 +14,7 @@ abstract class AbstractMainContentComponentRoutingProcessor extends \PoP\Compone
         return \PoP\Root\App::applyFilters(
             '\PoP\Application\AbstractMainContentComponentRoutingProcessor:maincontentgroups',
             array(
-                POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE,
+                POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT,
             )
         );
     }

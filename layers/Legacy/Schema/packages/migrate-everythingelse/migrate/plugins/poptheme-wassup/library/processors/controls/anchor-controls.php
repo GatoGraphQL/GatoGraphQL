@@ -81,7 +81,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                     'params',
                     array(
                         'data-toggle' => 'offcanvas-toggle',
-                        'data-target' => '#'.POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO,
+                        'data-target' => '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO,
                     )
                 );
                 break;
@@ -119,7 +119,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                     'params',
                     array(
                         'data-toggle' => 'offcanvas-toggle',
-                        'data-target' => '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYSIDEINFO,
+                        'data-target' => '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYSIDEINFO,
                         'data-mode' => $mode,
                     )
                 );
@@ -144,7 +144,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                     'params',
                     array(
                         'data-toggle' => 'offcanvas-toggle',
-                        'data-target' => '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS,
+                        'data-target' => '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYTABS,
                         'data-mode' => $mode,
                     )
                 );

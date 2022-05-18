@@ -11,19 +11,19 @@ define('GD_CONSTANT_FEEDBACKMSG_MULTIDOMAIN', TranslationAPIFacade::getInstance(
 
 define('GD_SETTINGS_PARAMSSCOPE_URL', 'url');
 
-define('POP_MODULEID_PAGESECTIONGROUP_ID', 'pagesection-group');
-define('POP_MODULEID_QUICKVIEWPAGESECTIONGROUP_ID', 'quickviewpagesection-group');
+define('POP_COMPONENTID_PAGESECTIONGROUP_ID', 'pagesection-group');
+define('POP_COMPONENTID_QUICKVIEWPAGESECTIONGROUP_ID', 'quickviewpagesection-group');
 
 // wpEditor
-define('GD_MODULESETTINGS_EDITOR_NAME', 'editorcomponent');
+define('GD_COMPONENTSETTINGS_EDITOR_NAME', 'editorcomponent');
 
 // define ('GD_INTERCEPTOR_WITHPARAMS', 'with-params');
 define('GD_JS_INITIALIZED', 'js-initialized');
 define('GD_CRITICALJS_INITIALIZED', 'criticaljs-initialized');
 
-// define ('GD_MODULECALLBACK_ACTION_LOADCONTENT', 'loadcontent');
-// define ('GD_MODULECALLBACK_ACTION_REFETCH', 'refetch');
-// define ('GD_MODULECALLBACK_ACTION_RESET', 'reset');
+// define ('GD_COMPONENTCALLBACK_ACTION_LOADCONTENT', 'loadcontent');
+// define ('GD_COMPONENTCALLBACK_ACTION_REFETCH', 'refetch');
+// define ('GD_COMPONENTCALLBACK_ACTION_RESET', 'reset');
 
 define('GD_JSPLACEHOLDER_QUERY', '*QUERY*'); // Replaced from '%QUERY' because using '%' gives a JS error (Uncaught URIError: URI malformed) on function splitParams in utils.js when trying to add yet another parameter on that URL
 
@@ -39,16 +39,16 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
     // ------------------------------------------
     $jqueryConstants['ID_SEPARATOR'] = POP_CONSTANT_ID_SEPARATOR;
     // $jqueryConstants['ID_JSON'] = POP_ID_JSON;
-    $jqueryConstants['MODULESETTINGS_ENTRYCOMPONENT'] = "must-remove-this-constant";//POP_MODULESETTINGS_ENTRYCOMPONENT;
+    $jqueryConstants['COMPONENTSETTINGS_ENTRYCOMPONENT'] = "must-remove-this-constant";//POP_COMPONENTSETTINGS_ENTRYCOMPONENT;
     $jqueryConstants['JSMETHOD_GROUP_MAIN'] = GD_JSMETHOD_GROUP_MAIN;
     // ------------------------------------------
 
     $jqueryConstants['SETTINGS_PARAMSSCOPE_URL'] = GD_SETTINGS_PARAMSSCOPE_URL;
 
-    $jqueryConstants['MODULEID_PAGESECTIONGROUP_ID'] = POP_MODULEID_PAGESECTIONGROUP_ID;
+    $jqueryConstants['COMPONENTID_PAGESECTIONGROUP_ID'] = POP_COMPONENTID_PAGESECTIONGROUP_ID;
 
     // wpEditor
-    $jqueryConstants['MODULESETTINGS_EDITOR_NAME'] = GD_MODULESETTINGS_EDITOR_NAME;
+    $jqueryConstants['COMPONENTSETTINGS_EDITOR_NAME'] = GD_COMPONENTSETTINGS_EDITOR_NAME;
 
     $jqueryConstants['SEPARATOR'] = GD_SEPARATOR;
 
@@ -56,9 +56,9 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
     $jqueryConstants['JS_INITIALIZED'] = GD_JS_INITIALIZED;
     $jqueryConstants['CRITICALJS_INITIALIZED'] = GD_CRITICALJS_INITIALIZED;
 
-    // $jqueryConstants['CBACTION_LOADCONTENT'] = GD_MODULECALLBACK_ACTION_LOADCONTENT;
-    // $jqueryConstants['CBACTION_REFETCH'] = GD_MODULECALLBACK_ACTION_REFETCH;
-    // $jqueryConstants['CBACTION_RESET'] = GD_MODULECALLBACK_ACTION_RESET;
+    // $jqueryConstants['CBACTION_LOADCONTENT'] = GD_COMPONENTCALLBACK_ACTION_LOADCONTENT;
+    // $jqueryConstants['CBACTION_REFETCH'] = GD_COMPONENTCALLBACK_ACTION_REFETCH;
+    // $jqueryConstants['CBACTION_RESET'] = GD_COMPONENTCALLBACK_ACTION_RESET;
 
     $jqueryConstants['ERROR_MSG'] = sprintf(
         '%s <a href="{0}" target="{1}">%s</a>',

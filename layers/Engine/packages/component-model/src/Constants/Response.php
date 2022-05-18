@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Constants;
 class Response
 {
     public final const UNIQUE_ID = 'unique-id';
-    public final const ENTRY_MODULE = 'entrycomponent';
+    public final const ENTRY_COMPONENT = 'entrycomponent';
     public final const BACKGROUND_LOAD_URLS = 'backgroundloadurls';
     public final const URL = 'url';
     public final const ERROR = 'error';

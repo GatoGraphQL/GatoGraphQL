@@ -60,7 +60,7 @@ class Request
 
     public static function getComponentFilter(): ?string
     {
-        return App::request(Params::MODULEFILTER) ?? App::query(Params::MODULEFILTER);
+        return App::request(Params::COMPONENTFILTER) ?? App::query(Params::COMPONENTFILTER);
     }
 
     /**
@@ -68,7 +68,7 @@ class Request
      */
     public static function getModulePaths(): array
     {
-        $modulePaths = App::getRequest()->request->all()[Params::MODULEPATHS] ?? App::getRequest()->query->all()[Params::MODULEPATHS] ?? [];
+        $modulePaths = App::getRequest()->request->all()[Params::COMPONENTPATHS] ?? App::getRequest()->query->all()[Params::COMPONENTPATHS] ?? [];
         if (!is_array($modulePaths)) {
             return [$modulePaths];
         }

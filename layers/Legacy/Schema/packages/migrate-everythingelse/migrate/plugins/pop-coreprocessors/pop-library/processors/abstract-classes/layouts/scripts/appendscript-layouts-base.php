@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
             $ret['operation'] = $this->getOperation($component, $props);
 
             if ($layout = $this->getLayoutSubmodule($component)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
             }
         }
         

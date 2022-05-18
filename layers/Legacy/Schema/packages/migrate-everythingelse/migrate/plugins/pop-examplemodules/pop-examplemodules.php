@@ -11,8 +11,8 @@ namespace PoP\ExampleModules;
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define('POP_EXAMPLEMODULES_VERSION', 0.106);
-define('POP_EXAMPLEMODULES_DIR', dirname(__FILE__));
+define('POP_EXAMPLECOMPONENTS_VERSION', 0.106);
+define('POP_EXAMPLECOMPONENTS_DIR', dirname(__FILE__));
 
 class Plugin
 {
@@ -26,7 +26,7 @@ class Plugin
     {
         if ($this->validate()) {
             $this->initialize();
-            define('POP_EXAMPLEMODULES_INITIALIZED', true);
+            define('POP_EXAMPLECOMPONENTS_INITIALIZED', true);
         }
     }
     public function validate()

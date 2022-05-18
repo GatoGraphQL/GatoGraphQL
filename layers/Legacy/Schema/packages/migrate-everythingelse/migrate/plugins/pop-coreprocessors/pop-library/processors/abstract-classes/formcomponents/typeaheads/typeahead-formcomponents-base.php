@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $input = $this->getInputSubmodule($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
 
         return $ret;
     }

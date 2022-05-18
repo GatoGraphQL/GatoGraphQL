@@ -24,7 +24,7 @@ class PoPCore_ModuleManager_Utils
         $args = [
             Params::VERSION => ApplicationInfoFacade::getInstance()->getVersion(),
             Params::OUTPUT => Outputs::JSON,
-            Params::MODULEFILTER => $mainContentModule->getName(),
+            Params::COMPONENTFILTER => $mainContentModule->getName(),
             Params::DATA_OUTPUT_ITEMS => [
                 DataOutputItems::DATABASES,
             ],

@@ -82,7 +82,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
         }
 
         if ($extras = $this->getAdditionalSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['extras'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['extras'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $extras
             );

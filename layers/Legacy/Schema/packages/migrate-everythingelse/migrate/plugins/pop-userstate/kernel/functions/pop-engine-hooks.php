@@ -59,7 +59,7 @@ class PoP_UserState_EngineHooks
                         DataOutputItems::COMPONENT_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    Params::MODULEFILTER => POP_MODULEFILTER_USERSTATE,
+                    Params::COMPONENTFILTER => POP_COMPONENTFILTER_USERSTATE,
                     Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
                 ],
                 $requestHelperService->getCurrentURL()

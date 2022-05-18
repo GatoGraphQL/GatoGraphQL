@@ -47,8 +47,8 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Add the submoduleoutputnames of all blocks
-        if (!$ret[GD_JS_SUBMODULEOUTPUTNAMES]) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES] = array();
+        if (!$ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES] = array();
         }
 
         $ret[GD_JS_TITLES]['toggle'] = TranslationAPIFacade::getInstance()->__('Toggle menu', 'pop-coreprocessors');
@@ -56,13 +56,13 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($component);
 
         $segmentedbuttons = $this->getSegmentedbuttonSubmodules($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['segmentedbuttons'] = array_map(
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['segmentedbuttons'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons
         );
 
         $segmentedbuttons = $this->getDropdownsegmentedbuttonSubmodules($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons
         );

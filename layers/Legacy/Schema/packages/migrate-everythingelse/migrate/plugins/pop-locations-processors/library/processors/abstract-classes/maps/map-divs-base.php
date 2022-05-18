@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($inners = $this->getInnerSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $inners
             );

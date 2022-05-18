@@ -17,8 +17,8 @@ class Params
     public final const DATA_SOURCE = 'datasource';
     public final const EXTRA_ROUTES = 'extraroutes';
     public final const OUTPUT = 'output';
-    public final const MODULEFILTER = 'modulefilter';
-    public final const MODULEPATHS = 'componentPaths';
+    public final const COMPONENTFILTER = 'componentfilter';
+    public final const COMPONENTPATHS = 'componentPaths';
 
     /**
      * What version constraint to use for the API

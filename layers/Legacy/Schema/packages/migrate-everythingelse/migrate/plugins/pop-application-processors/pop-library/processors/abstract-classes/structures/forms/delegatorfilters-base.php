@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_CustomDelegatorFiltersBase extends PoP_Modul
         // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
         // Comment Leo 12/01/2017: Actually, for the forms we must use .active instead of :last-child, because the selector is executed
         // on runtime, and not when initializing the JS
-        return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .pop-block.withfilter';
+        return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .pop-block.withfilter';
     }
 
     public function getClasses(array $component, array &$props)

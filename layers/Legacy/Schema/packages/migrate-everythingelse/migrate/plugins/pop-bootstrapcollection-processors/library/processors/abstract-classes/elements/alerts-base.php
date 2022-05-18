@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($layouts = $this->getLayoutSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );

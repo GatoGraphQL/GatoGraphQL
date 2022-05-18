@@ -75,14 +75,14 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
         }
 
         if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovecontent_components
             );
         }
 
         if ($content_components = $this->getContentSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['content'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $content_components
             );

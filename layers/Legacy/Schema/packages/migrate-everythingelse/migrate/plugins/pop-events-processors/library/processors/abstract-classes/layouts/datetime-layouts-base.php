@@ -40,7 +40,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
     
         if ($this->addDownloadlinks($component)) {
             $dropdownlinks_component = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN];
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-downloadlinks'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($dropdownlinks_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-downloadlinks'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($dropdownlinks_component);
 
             if ($downloadlinks_class = $this->getDownloadlinksClass($component)) {
                 $ret[GD_JS_CLASSES]['downloadlinks'] = $downloadlinks_class;

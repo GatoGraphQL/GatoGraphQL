@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $urlparam = $this->getUrlparamSubmodule($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
 
         return $ret;
     }

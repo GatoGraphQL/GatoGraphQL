@@ -1,6 +1,6 @@
 <?php
 
-define('POP_MODULEFILTER_USERSTATE', 'userstate');
+define('POP_COMPONENTFILTER_USERSTATE', 'userstate');
 
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\ComponentFilters\AbstractComponentFilter;
@@ -9,7 +9,7 @@ class PoP_ComponentFilter_UserState extends AbstractComponentFilter
 {
     public function getName(): string
     {
-        return POP_MODULEFILTER_USERSTATE;
+        return POP_COMPONENTFILTER_USERSTATE;
     }
 
     /**

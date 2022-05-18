@@ -111,7 +111,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         }
 
         if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['thumb-extras'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['thumb-extras'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $thumb_extras
             );

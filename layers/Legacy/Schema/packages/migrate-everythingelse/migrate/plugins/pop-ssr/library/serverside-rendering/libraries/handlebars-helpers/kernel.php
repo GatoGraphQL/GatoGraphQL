@@ -42,7 +42,7 @@ class PoP_ServerSide_KernelHelpers
         $context = $options['hash']['context'] ?? $options['_this'];
         $pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
         $targetId = $options['hash']['targetId'] ?? $context['bs']['bsId'];
-        $moduleName = $options['hash']['module'] ?? $context[GD_JS_MODULE];
+        $moduleName = $options['hash']['module'] ?? $context[GD_JS_COMPONENT];
         $fixed = $options['hash']['fixed'] ?? $context[GD_JS_FIXEDID];
         $isIdUnique = $options['hash']['idUnique'] ?? $context[GD_JS_ISIDUNIQUE];
         $group = $options['hash']['group'];
@@ -76,7 +76,7 @@ class PoP_ServerSide_KernelHelpers
         $context = $options['hash']['context'] ?? $options['_this'];
         $pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
         $targetId = $options['hash']['targetId'] ?? $context['bs']['bsId'];
-        $moduleName = $options['hash']['module'] ?? $context[GD_JS_MODULE];
+        $moduleName = $options['hash']['module'] ?? $context[GD_JS_COMPONENT];
 
         $domain = $context['tls']['domain'];
         $group = $options['hash']['group'];
@@ -99,7 +99,7 @@ class PoP_ServerSide_KernelHelpers
 
         // The context can be passed as a param, or if null, use the current one
         $context = $options['hash']['context'] ?? $options['_this'];
-        $moduleName = $options['hash']['module'] ?? $context[GD_JS_MODULE];
+        $moduleName = $options['hash']['module'] ?? $context[GD_JS_COMPONENT];
 
         // From the prevContext we rescue the topLevel/pageSection/block Settings
         $tls = $prevContext['tls'];
@@ -230,12 +230,12 @@ class PoP_ServerSide_KernelHelpers
     public function withModule($context, $moduleName, $options)
     {
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
-        if (!$context || !isset($context[GD_JS_SUBMODULEOUTPUTNAMES]) || !isset($context[GD_JS_SUBMODULEOUTPUTNAMES][$moduleName])) {
+        if (!$context || !isset($context[GD_JS_SUBCOMPONENTOUTPUTNAMES]) || !isset($context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$moduleName])) {
             return;
         }
 
         // Get the module settings id from the configuration
-        $moduleOutputName = $context[GD_JS_SUBMODULEOUTPUTNAMES][$moduleName];
+        $moduleOutputName = $context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$moduleName];
 
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
         if (!isset($context[ComponentModelModuleInfo::get('response-prop-submodules')]) || !isset($context[ComponentModelModuleInfo::get('response-prop-submodules')][$moduleOutputName])) {

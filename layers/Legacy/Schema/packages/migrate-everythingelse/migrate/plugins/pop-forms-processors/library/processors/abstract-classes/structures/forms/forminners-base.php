@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_FormInnersBase extends PoP_Module_Processor_
     //     // The form inner module, execute it only when doing init-lazy, eg: Edit Individual Profile
     //     // Otherwise do not re-merge it, no need for the form
     //     return array(
-    //         GD_MODULECALLBACK_ACTION_LOADCONTENT,
-    //         GD_MODULECALLBACK_ACTION_REFETCH,
-    //         GD_MODULECALLBACK_ACTION_RESET,
+    //         GD_COMPONENTCALLBACK_ACTION_LOADCONTENT,
+    //         GD_COMPONENTCALLBACK_ACTION_REFETCH,
+    //         GD_COMPONENTCALLBACK_ACTION_RESET,
     //     );
     // }
 }

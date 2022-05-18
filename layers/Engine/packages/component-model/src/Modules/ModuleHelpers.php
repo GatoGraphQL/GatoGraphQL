@@ -21,10 +21,10 @@ class ModuleHelpers implements ModuleHelpersInterface
     }
     public function getModuleOutputName(array $component): string
     {
-        return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::MODULES);
+        return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::COMPONENTS);
     }
     public function getModuleFromOutputName(string $moduleOutputName): ?array
     {
-        return ProcessorItemUtils::getItemFromOutputName($moduleOutputName, DefinitionGroups::MODULES);
+        return ProcessorItemUtils::getItemFromOutputName($moduleOutputName, DefinitionGroups::COMPONENTS);
     }
 }

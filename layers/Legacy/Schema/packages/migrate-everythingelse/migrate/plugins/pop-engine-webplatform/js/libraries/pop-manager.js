@@ -169,7 +169,7 @@ window.pop.Manager = {
 	// 	storeData.statelessdata = json.statelessdata || {};
 
 	// 	// Stateful data is to be integrated under the corresponding URL
-	// 	var url = json.moduledata.stateful.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.URLPARAM_URL];
+	// 	var url = json.moduledata.stateful.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
 	// 	url = "temporary-hack";
 	// 	storeData.statefuldata = {};
 	// 	storeData.statefuldata[url] = json.moduledata.stateful || {};
@@ -196,7 +196,7 @@ window.pop.Manager = {
 	// addInitialBlockMemory : function(response) {
 
 	// 	var that = this;
-	// 	var url = response.statefuldata.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.URLPARAM_URL];
+	// 	var url = response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
 	// 	if (!that.initialBlockMemory[url]) {
 	// 		that.initialBlockMemory[url] = {
 	// 			dbobjectids: {},
@@ -213,25 +213,25 @@ window.pop.Manager = {
 	// 		};
 	// 	}
 	// 	var initialMemory = that.initialBlockMemory[url];
-	// 	$.each(response.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE], function(pssId, rpsConfiguration) {
+	// 	$.each(response.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(pssId, rpsConfiguration) {
 
-	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE]) {
-	// 			initialMemory.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE] = {};
-	// 			initialMemory.querystate.uniquetodomain[pop.c.MODULESETTINGS_ENTRYMODULE] = {};
-	// 			initialMemory.dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE] = {};
-	// 			initialMemory.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE] = {};
+	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT]) {
+	// 			initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
+	// 			initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
+	// 			initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
+	// 			initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 		}
-	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]) {
-	// 			initialMemory.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = {};
-	// 			initialMemory.querystate.uniquetodomain[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = {};
+	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]) {
+	// 			initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
+	// 			initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			// initialMemory.runtimesettings.configuration[pssId] = {};
-	// 			initialMemory.dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = {};
-	// 			initialMemory.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = {};
+	// 			initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
+	// 			initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 		}
-	// 		$.extend(initialMemory.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], response.statefuldata.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]);
-	// 		$.extend(initialMemory.querystate.uniquetodomain[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], response.statefuldata.querystate.uniquetodomain[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]);
-	// 		$.extend(initialMemory.dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], response.statefuldata.dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]);
-	// 		$.extend(initialMemory.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]);
+	// 		$.extend(initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
+	// 		$.extend(initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
+	// 		$.extend(initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
+	// 		$.extend(initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 	});
 	// },
 	// getRuntimeMemory : function(domain, pageSection, target, options) {
@@ -278,13 +278,13 @@ window.pop.Manager = {
 	// 	var pssId = that.getSettingsId(pageSection);
 	// 	var targetId = that.getSettingsId(target);
 
-	// 	if (!mempage[pop.c.MODULESETTINGS_ENTRYMODULE]) {
-	// 		mempage[pop.c.MODULESETTINGS_ENTRYMODULE] = {};
+	// 	if (!mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT]) {
+	// 		mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 	}
-	// 	if (!mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]) {
-	// 		mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = {};
+	// 	if (!mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]) {
+	// 		mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 	}
-	// 	mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId] = {
+	// 	mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId] = {
 	// 		querystate: {
 	// 			sharedbydomains: {},
 	// 			uniquetodomain: {},
@@ -292,7 +292,7 @@ window.pop.Manager = {
 	// 		id: null
 	// 	};
 
-	// 	return mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId];
+	// 	return mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId];
 	// },
 	// deleteRuntimeMemoryPage : function(domain, pageSection, target, options) {
 
@@ -302,11 +302,11 @@ window.pop.Manager = {
 	// 	var pssId = that.getSettingsId(pageSection);
 	// 	var targetId = that.getSettingsId(target);
 
-	// 	if (mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]) {
-	// 		delete mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId];
+	// 	if (mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]) {
+	// 		delete mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId];
 
-	// 		if ($.isEmptyObject(mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId])) {
-	// 			delete mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId];
+	// 		if ($.isEmptyObject(mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId])) {
+	// 			delete mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	// 		}
 	// 	}
 	// },
@@ -343,7 +343,7 @@ window.pop.Manager = {
 
 		// // If this doesn't exist, it's because the tab was closed and we are still retrieving the mempage later on (eg: a fetch-more had been invoked and the response came after tab was closed)
 		// // Since this behavior is not right, then just thrown an exception
-		// if (!mempage[pop.c.MODULESETTINGS_ENTRYMODULE] || !mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || !mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId]) {
+		// if (!mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] || !mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || !mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId]) {
 
 		// 	var error = "Mempage not available";
 		// 	if (url) {
@@ -352,7 +352,7 @@ window.pop.Manager = {
 		// 	throw new Error(error);
 		// }
 
-		// return mempage[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId];
+		// return mempage[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId];
 	},
 
 	isFirstLoad : function(pageSection) {
@@ -413,8 +413,8 @@ window.pop.Manager = {
 		// and then execute all JS on them (that.pageSectionInitialized(pageSection)), and in between remove the "loading" screen
 		// this way, the first paint is much faster, for a better user experience
 		// Step 0: initialize the pageSection
-		// $.each(that.getCombinedStateData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE], function(pssId, psConfiguration) {
-		// // $.each(that.getStatelessData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE], function(pssId, psConfiguration) {
+		// $.each(that.getCombinedStateData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(pssId, psConfiguration) {
+		// // $.each(that.getStatelessData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(pssId, psConfiguration) {
 
 		// 	// var psId = psConfiguration[pop.c.JS_FRONTENDID];
 		// 	var psId = psConfiguration['frontend-id'];
@@ -427,7 +427,7 @@ window.pop.Manager = {
 		// 	that.initPageSectionSettings(domain, pageSection, psConfiguration);
 
 		// 	// Insert into the Runtime to generate the ID
-		// 	that.addPageSectionIds(domain, pageSection, psConfiguration[pop.c.JS_MODULE]);
+		// 	that.addPageSectionIds(domain, pageSection, psConfiguration[pop.c.JS_COMPONENT]);
 
 		// 	// Allow plugins to catch events for the rendering
 		// 	that.initPageSection(domain, pageSection);
@@ -543,17 +543,17 @@ window.pop.Manager = {
 			if (context[pop.c.JS_SUBCOMPONENTS]) {
 				context.modules = context[pop.c.JS_SUBCOMPONENTS];
 			}
-			if (context[pop.c.JS_MODULE]) {
-				context['module'] = context[pop.c.JS_MODULE];
+			if (context[pop.c.JS_COMPONENT]) {
+				context['module'] = context[pop.c.JS_COMPONENT];
 			}
 			if (context[pop.c.JS_TEMPLATE]) {
 				context['template'] = context[pop.c.JS_TEMPLATE];
 			}
-			if (context[pop.c.JS_MODULEOUTPUTNAME]) {
-				context['moduleoutputname'] = context[pop.c.JS_MODULEOUTPUTNAME];
+			if (context[pop.c.JS_COMPONENTOUTPUTNAME]) {
+				context['moduleoutputname'] = context[pop.c.JS_COMPONENTOUTPUTNAME];
 			}
-			if (context[pop.c.JS_SUBMODULEOUTPUTNAMES]) {
-				context['submoduleoutputnames'] = context[pop.c.JS_SUBMODULEOUTPUTNAMES];
+			if (context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES]) {
+				context['submoduleoutputnames'] = context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES];
 			}
 			if (context[pop.c.JS_TEMPLATES]) {
 				context['templates'] = context[pop.c.JS_TEMPLATES];
@@ -561,8 +561,8 @@ window.pop.Manager = {
 			if (context[pop.c.JS_INTERCEPT]) {
 				context.intercept = context[pop.c.JS_INTERCEPT];
 			}
-			if (context[pop.c.JS_BLOCKMODULEOUTPUTNAMES]) {
-				context['block-submoduleoutputnames'] = context[pop.c.JS_BLOCKMODULEOUTPUTNAMES];
+			if (context[pop.c.JS_BLOCKCOMPONENTOUTPUTNAMES]) {
+				context['block-submoduleoutputnames'] = context[pop.c.JS_BLOCKCOMPONENTOUTPUTNAMES];
 			}
 
 			// Params
@@ -572,8 +572,8 @@ window.pop.Manager = {
 			if (context[pop.c.JS_DBOBJECTPARAMS]) {
 				context['dbobject-params'] = context[pop.c.JS_DBOBJECTPARAMS];
 			}
-			if (context[pop.c.JS_PREVIOUSMODULESIDS]) {
-				context['previousmodules-ids'] = context[pop.c.JS_PREVIOUSMODULESIDS];
+			if (context[pop.c.JS_PREVIOUSCOMPONENTSIDS]) {
+				context['previousmodules-ids'] = context[pop.c.JS_PREVIOUSCOMPONENTSIDS];
 			}
 
 			// Appendable
@@ -1289,7 +1289,7 @@ window.pop.Manager = {
 
 		// For each module, analyze what methods must be executed, and then continue down the line
 		// doing the same for contained modules
-		var moduleName = moduleMethods[pop.c.JS_MODULE];
+		var moduleName = moduleMethods[pop.c.JS_COMPONENT];
 		if (executedModules.indexOf(moduleName) == -1) {
 			
 			executedModules.push(moduleName);
@@ -1357,7 +1357,7 @@ window.pop.Manager = {
 
 		// Check if the current level is the module we're looking for. If so, we found it, return it
 		// and it will crawl all the way back up
-		if (moduleMethods[pop.c.JS_MODULE] == moduleFrom) {
+		if (moduleMethods[pop.c.JS_COMPONENT] == moduleFrom) {
 
 			return moduleMethods;
 		}
@@ -2067,8 +2067,8 @@ window.pop.Manager = {
 		// Important: do not change the order in which these attributes are added, or it can ruin other things,
 		// eg: adding the get_precache_list pages for BACKGROUND_LOAD in plugins/poptheme-wassup/themes/wassup/thememodes/simple/thememode.php
 		fetchUrl = add_query_arg(pop.c.URLPARAM_TARGET, target, fetchUrl);
-		// fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, fetchUrl);
-		// fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_MODULEDATA, fetchUrl);
+		// fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_COMPONENTSETTINGS, fetchUrl);
+		// fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_COMPONENTDATA, fetchUrl);
 		// fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_DATABASES, fetchUrl);
 		// fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_SESSION, fetchUrl);
 		fetchUrl = add_query_arg(pop.c.URLPARAM_OUTPUT, pop.c.URLPARAM_OUTPUT_JSON, fetchUrl);
@@ -2179,7 +2179,7 @@ window.pop.Manager = {
 				// replace the original one with the new one in PoP:openTabs, or otherwise it will keep adding new tabs to the openTabs, 
 				// which are the same tab but duplicated for having different hashtags in the URL
 				var url = params.url[jqXHR.url];
-				var feedbackURL = response.statefuldata.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.URLPARAM_URL];
+				var feedbackURL = response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
 				var target = params.target[jqXHR.url];
 				
 				if (url != feedbackURL) {
@@ -2200,7 +2200,7 @@ window.pop.Manager = {
 				// by adding "parent-context" and "root-context" making the object circular, upon which JSON.stringify fails
 				// ("Uncaught TypeError: Converting circular structure to JSON")
 				// Store only for local domain
-				if (response.statefuldata.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.URLPARAM_STORELOCAL] && domain == pop.c.HOME_DOMAIN) {
+				if (response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_STORELOCAL] && domain == pop.c.HOME_DOMAIN) {
 						
 					that.addLocalStorageData(localStorageKey, response);
 				}
@@ -2230,7 +2230,7 @@ window.pop.Manager = {
 		that.pageSectionFetchSuccess(pageSection, response, options);
 
 		// The server might have requested to load extra URLs (eg: forcedserverload_fields)
-		that.backgroundLoad(response.statefuldata.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.URLPARAM_BACKGROUNDLOADURLS]);
+		that.backgroundLoad(response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_BACKGROUNDLOADURLS]);
 	},
 
 	getCrossDomainOptions : function(url) {
@@ -2423,7 +2423,7 @@ window.pop.Manager = {
 		// First Check if the response also includes other pageSections. Eg: when fetching Projects, it will also bring its MainRelated
 		// Check first so that later on it can refer javascript on these already created objects
 		pop.JSRuntimeManager.setPageSectionURL(url);
-		$.each(response.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE], function(rpssId, rpsConfiguration) {
+		$.each(response.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(rpssId, rpsConfiguration) {
 
 			var psId = rpsConfiguration[pop.c.JS_FRONTENDID];//rpsConfiguration['frontend-id'];
 			var pageSection = $('#'+psId);
@@ -2704,7 +2704,7 @@ window.pop.Manager = {
 			// Add a param to tell the back-end we are doing ajax
 			var target = that.getTarget(pageSection);
 			fetchUrl = add_query_arg(pop.c.URLPARAM_TARGET, target, fetchUrl);
-			fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_MODULEDATA, fetchUrl);
+			fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_COMPONENTDATA, fetchUrl);
 			fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_DATABASES, fetchUrl);
 			fetchUrl = add_query_arg(pop.c.URLPARAM_DATAOUTPUTITEMS+'[]', pop.c.URLPARAM_DATAOUTPUTITEMS_SESSION, fetchUrl);
 			fetchUrl = add_query_arg(pop.c.URLPARAM_OUTPUT, pop.c.URLPARAM_OUTPUT_JSON, fetchUrl);
@@ -2821,7 +2821,7 @@ window.pop.Manager = {
 						that.blockFetchSuccess(pageSection, block, response);
 
 						// Start loading extra urls
-						that.backgroundLoad(response.statefuldata.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.URLPARAM_BACKGROUNDLOADURLS]);
+						that.backgroundLoad(response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_BACKGROUNDLOADURLS]);
 
 						// loadLatest: when it comes back, hide the latestcount div
 						if (options['hide-latestcount']) {
@@ -3226,7 +3226,7 @@ window.pop.Manager = {
 		// that.integrateDatabases(domain, response);
 
 		// Integrate the block
-		$.each(response.statefuldata.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE], function(rpssId, rpsParams) {
+		$.each(response.statefuldata.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(rpssId, rpsParams) {
 
 			var psConfiguration = that.getPageSectionConfiguration(domain, rpssId);
 			var rPageSection = $('#'+psConfiguration.id);
@@ -3258,7 +3258,7 @@ window.pop.Manager = {
 					// skip-params: used for the loadLatest, so that the response of the params is not integrated back, messing up the paged, limit, etc
 					$.extend(that.getBlockQueryState(rPageSection, rBlock, runtimeOptions), rbParams);
 					// Also extend the domain querystate
-					$.extend(that.getBlockDomainQueryState(domain, rPageSection, rBlock, runtimeOptions), response.statefuldata.querystate.uniquetodomain[pop.c.MODULESETTINGS_ENTRYMODULE][rpssId][rbsId]);
+					$.extend(that.getBlockDomainQueryState(domain, rPageSection, rBlock, runtimeOptions), response.statefuldata.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][rpssId][rbsId]);
 
 					// When loading content, we can say to re-draw the block if there is data to be drawn, and do nothing instead
 					// This is needed for the "Add your Thought on TPP": if the user is not logged in, and writes a Thought, and then logs in,
@@ -3267,7 +3267,7 @@ window.pop.Manager = {
 					if (process_actions.indexOf(action) > -1) {
 
 						var jsSettings = that.getJsSettings(domain, rPageSection, rBlock);
-						if (jsSettings['processblock-ifhasdata'] && !response.statefuldata.dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][rpssId][rbsId].length) {
+						if (jsSettings['processblock-ifhasdata'] && !response.statefuldata.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][rpssId][rbsId].length) {
 							return;	
 						}
 					}
@@ -3605,10 +3605,10 @@ window.pop.Manager = {
 		
 		var pssId = that.getSettingsId(pageSection);
 
-		return that.getCombinedStateData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId];
-		// return $.extend(true, {}, that.getStatefulData(domain, that.getPageSectionTopLevelURL(domain, pageSection)).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], that.getStatelessData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId]);
+		return that.getCombinedStateData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
+		// return $.extend(true, {}, that.getStatefulData(domain, that.getPageSectionTopLevelURL(domain, pageSection)).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], that.getStatelessData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 		// return that.getMemory(domain).statelessdata.settings.configuration[pssId];
-		return that.getStatelessData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId];
+		return that.getStatelessData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	},
 
 	getTargetConfiguration : function(domain, pageSection, target, moduleName) {
@@ -3746,10 +3746,10 @@ window.pop.Manager = {
 	// 	var pssId = that.getSettingsId(pageSection);
 	// 	var bsId = that.getSettingsId(block);
 
-	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] || {};
-	// 	statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] || {};
-	// 	var runtimeConfiguration = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId];
+	// 	statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+	// 	statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS] = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS] || {};
+	// 	statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS][bsId] = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS][bsId] || {};
+	// 	var runtimeConfiguration = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS][bsId];
 
 	// 	runtimeMempage.id = block.attr('id');
 	// 	runtimeMempage['query-url'] = runtimeConfiguration['query-url'];
@@ -3759,7 +3759,7 @@ window.pop.Manager = {
 	// 	// #1 contains params that are unique to the block, which are equally posted to all sources, eg: filter
 	// 	// #2 contains params whose value can change from source to source, eg: stop-loading
 	// 	runtimeMempage.querystate = {
-	// 		sharedbydomains: $.extend(that.getBlockDefaultParams(), statefulData.querystate.sharedbydomains[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId]),
+	// 		sharedbydomains: $.extend(that.getBlockDefaultParams(), statefulData.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId]),
 	// 		uniquetodomain: {},
 	// 	};
 	// 	var multidomain_urls = runtimeConfiguration['query-multidomain-urls'];
@@ -3767,7 +3767,7 @@ window.pop.Manager = {
 
 	// 		var query_url_domain = getDomain(query_url);
 	// 		runtimeMempage['query-multidomain-urls'][query_url_domain] = query_url;
-	// 		runtimeMempage.querystate.uniquetodomain[query_url_domain] = $.extend(that.getBlockDefaultMultiDomainParams(), statefulData.querystate.uniquetodomain[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId]);
+	// 		runtimeMempage.querystate.uniquetodomain[query_url_domain] = $.extend(that.getBlockDefaultMultiDomainParams(), statefulData.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId]);
 	// 	})
 
 	// 	// Allow JS libraries to hook up and initialize their own params
@@ -3901,7 +3901,7 @@ window.pop.Manager = {
 	// 	var psId = psConfiguration[pop.c.JS_FRONTENDID];
 	// 	$.extend(psConfiguration, {pss: pss});	
 	// 	// // In addition, the pageSection must merge with the runtimeConfiguration, which is otherwise done in function enterModule
-	// 	// $.extend(psConfiguration, that.getRuntimeConfiguration(domain, pssId, pssId, psConfiguration[pop.c.JS_MODULE]));	
+	// 	// $.extend(psConfiguration, that.getRuntimeConfiguration(domain, pssId, pssId, psConfiguration[pop.c.JS_COMPONENT]));	
 
 	// 	// Expand the JS Keys for the configuration
 	// 	that.expandJSKeys(psConfiguration);
@@ -3912,8 +3912,8 @@ window.pop.Manager = {
 	// 	// Fill each block configuration with its pssId/bsId/settings
 	// 	if (psConfiguration[pop.c.JS_SUBCOMPONENTS]) {
 	// 		$.each(psConfiguration[pop.c.JS_SUBCOMPONENTS], function(bsId, bConfiguration) {
-	// 	// if (storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS]) {
-	// 	// 	$.each(storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS], function(bsId, rbConfiguration) {
+	// 	// if (storeData.statefuldata[url].settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS]) {
+	// 	// 	$.each(storeData.statefuldata[url].settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS], function(bsId, rbConfiguration) {
 				
 	// 			var bConfiguration = psConfiguration[pop.c.JS_SUBCOMPONENTS][bsId];
 	// 			var bId = bConfiguration[pop.c.JS_FRONTENDID];
@@ -4002,16 +4002,16 @@ window.pop.Manager = {
 	// 	$.extend(true, storeData.statefuldata[url], response.statefuldata || {});
 	// 	$.extend(true, storeData.combinedstatedata[url], response.statelessdata || {});
 	// 	$.extend(true, storeData.combinedstatedata[url], response.statefuldata || {});
-	// 	// $.each(storeData.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE], function(pssId, rpsConfiguration) {
+	// 	// $.each(storeData.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(pssId, rpsConfiguration) {
 
-	// 	// 	$.extend(true, storeData.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = $.extend(true, storeData.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-	// 	// 	$.extend(true, storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = $.extend(true, storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
+	// 	// 	$.extend(true, storeData.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = $.extend(true, storeData.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+	// 	// 	$.extend(true, storeData.statefuldata[url].settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = $.extend(true, storeData.statefuldata[url].settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
 
-	// 	// 	$.extend(true, storeData.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], response.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {});
-	// 	// 	$.extend(true, storeData.statefuldata[url].settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId], response.statefuldata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {});
+	// 	// 	$.extend(true, storeData.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {});
+	// 	// 	$.extend(true, storeData.statefuldata[url].settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {});
 	// 	// }
 
-	// 	$.each(response.statelessdata.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE], function(pssId, rpsConfiguration) {
+	// 	$.each(response.statelessdata.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT], function(pssId, rpsConfiguration) {
 
 	// 		// // Initialize all the pageSection keys if needed 
 	// 		// // (this is only needed since adding support for multicomponent, since their response may involve a pageSection which had never been initialized)
@@ -4046,8 +4046,8 @@ window.pop.Manager = {
 
 	// 		// // Configuration: first copy the modules, and then the 1st level configuration => pageSection configuration
 	// 		// // This is a special case because the blocks are located under 'modules', so doing $.extend will override the existing modules in 'memory', however we want to keep them
-	// 		// var psConfiguration = that.getStatelessData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId];
-	// 		var psConfiguration = that.getCombinedStateData(domain).settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId];
+	// 		// var psConfiguration = that.getStatelessData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
+	// 		var psConfiguration = that.getCombinedStateData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	// 		// $.each(rpsConfiguration, function(key, value) {
 
 	// 		// 	// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
@@ -4097,10 +4097,10 @@ window.pop.Manager = {
 		var url = that.getBlockTopLevelURL(blockTLDomain, bsId);
 		var statefulData = that.getStatefulData(blockTLDomain, url);
 
-		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS] || {};
-		statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId] || {};
-		var runtimeConfiguration = statefulData.settings.configuration[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][pop.c.JS_SUBCOMPONENTS][bsId];
+		statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS] = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS] || {};
+		statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS][bsId] = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS][bsId] || {};
+		var runtimeConfiguration = statefulData.settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][pop.c.JS_SUBCOMPONENTS][bsId];
 
 		// Comments Leo 27/07/2017: the query-multidomain-urls are stored under the domain from which the block was initially rendered,
 		// and not that from where the data is being rendered
@@ -4135,9 +4135,9 @@ window.pop.Manager = {
 		var url = that.getBlockTopLevelURL(domain, block);
 		
 		// return that.getMemory(domain).statefuldata.dbobjectids[pssId][bsId];
-		that.getStatefulData(domain, url).dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = that.getStatefulData(domain, url).dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		that.getStatefulData(domain, url).dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId] = that.getStatefulData(domain, url).dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId] || {};
-		return that.getStatefulData(domain, url).dbobjectids[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+		that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] = that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
+		return that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 	},
 
 	getBlockFeedback : function(domain, pageSection, block) {
@@ -4148,9 +4148,9 @@ window.pop.Manager = {
 		var url = that.getBlockTopLevelURL(domain, block);
 		
 		// return that.getMemory(domain).statefuldata.feedback.block[pssId][bsId];
-		that.getStatefulData(domain, url).feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = that.getStatefulData(domain, url).feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		that.getStatefulData(domain, url).feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId] = that.getStatefulData(domain, url).feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId] || {};
-		return that.getStatefulData(domain, url).feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+		that.getStatefulData(domain, url).feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		that.getStatefulData(domain, url).feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] = that.getStatefulData(domain, url).feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
+		return that.getStatefulData(domain, url).feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 	},
 
 	getPageSectionFeedback : function(domain, pageSection) {
@@ -4158,15 +4158,15 @@ window.pop.Manager = {
 		var that = this;
 		var pssId = that.getSettingsId(pageSection);
 		var url = that.getPageSectionTopLevelURL(domain, pageSection);
-		that.getStatefulData(domain, url).feedback.pagesection[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = that.getStatefulData(domain, url).feedback.pagesection[pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		return that.getStatefulData(domain, url).feedback.pagesection[pop.c.MODULESETTINGS_ENTRYMODULE][pssId];
+		that.getStatefulData(domain, url).feedback.pagesection[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).feedback.pagesection[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		return that.getStatefulData(domain, url).feedback.pagesection[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	},
 
 	// getTopLevelFeedback : function(domain) {
 	
 	// 	var that = this;
 	// 	var url = window.location.href;
-	// 	return that.getStatefulData(domain, url).feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE];
+	// 	return that.getStatefulData(domain, url).feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT];
 	// },
 
 	getStatefulSettings : function(domain, url, pageSection, target, item) {
@@ -4177,9 +4177,9 @@ window.pop.Manager = {
 		var targetId = that.getSettingsId(target);
 		var statefulData = that.getStatefulData(domain, url);
 
-		statefulData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = statefulData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		statefulData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId] = statefulData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId] || {};
-		return statefulData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId];
+		statefulData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = statefulData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		statefulData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId] = statefulData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId] || {};
+		return statefulData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId];
 	},
 	getStatelessSettings : function(domain, pageSection, target, item) {
 	
@@ -4189,9 +4189,9 @@ window.pop.Manager = {
 		var targetId = that.getSettingsId(target);
 		var statelessData = that.getStatelessData(domain);
 
-		statelessData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId] = statelessData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
-		statelessData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId] = statelessData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId] || {};
-		return statelessData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId];
+		statelessData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = statelessData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		statelessData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId] = statelessData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId] || {};
+		return statelessData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId];
 	},
 	// getCombinedStateSettings : function(domain, url, pageSection, target, item) {
 	
@@ -4201,7 +4201,7 @@ window.pop.Manager = {
 	// 	var targetId = that.getSettingsId(target);
 	// 	var combinedStateData = that.getCombinedStateData(domain, url);
 
-	// 	return combinedStateData.settings[item][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][targetId];
+	// 	return combinedStateData.settings[item][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][targetId];
 	// },
 	// getRuntimeSettings : function(domain, pageSection, target, item) {
 	
@@ -4361,7 +4361,7 @@ window.pop.Manager = {
 
 		var pssId = that.getSettingsId(pageSection);
 		// var memory = that.getMemory(domain);
-		return that.getStatelessData(domain).settings['jsmethods']['pagesection'][pop.c.MODULESETTINGS_ENTRYMODULE][pssId] || {};
+		return that.getStatelessData(domain).settings['jsmethods']['pagesection'][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
 	},
 	getBlockJsMethods : function(domain, pageSection, block) {
 	
@@ -4371,7 +4371,7 @@ window.pop.Manager = {
 		var bsId = that.getSettingsId(block);
 		// var memory = that.getMemory(domain);
 
-		return that.getStatelessData(domain).settings['jsmethods']['block'][pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId] || {};
+		return that.getStatelessData(domain).settings['jsmethods']['block'][pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
 	},
 	// restoreInitialBlockMemory : function(pageSection, block, options) {
 

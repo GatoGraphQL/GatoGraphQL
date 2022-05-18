@@ -40,18 +40,18 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($subComponents = $this->getInnerSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $subComponents
             );
         }
 
         if ($status = $this->getStatusSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['status'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($status);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['status'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($status);
         }
 
         if ($feedbackmessages = $this->getFeedbackmessageSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['feedbackmessages'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['feedbackmessages'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $feedbackmessages
             );

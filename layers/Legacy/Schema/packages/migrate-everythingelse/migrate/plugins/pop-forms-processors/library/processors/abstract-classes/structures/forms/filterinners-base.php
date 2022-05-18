@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     //     // Comment Leo 23/08/2017: The filter must not be re-drawn after reloading/refreshing content,
     //     // it must not be affected by the data coming back from fetching json data, the filter is outside this scope
     //     return array(
-    //         GD_MODULECALLBACK_ACTION_RESET,
+    //         GD_COMPONENTCALLBACK_ACTION_RESET,
     //     );
     // }
 }

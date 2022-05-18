@@ -782,7 +782,7 @@ const COMPONENT_SOMENAME = 'somename';
 
 All the properties of the modules are implemented through objects called [ComponentProcessor](#componentprocessor).
 <!--
-> Note: the name of a module cannot include the special character "|" (`POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`), as will be explained below
+> Note: the name of a module cannot include the special character "|" (`POP_CONSTANT_VIRTUALCOMPONENTATTS_SEPARATOR`), as will be explained below
 -->
 ### Virtual Modules
 
@@ -790,7 +790,7 @@ Virtual modules are "dynamically-generated" modules: modules with a base persona
 <!--
 Another example (yet to be implemented) involves the integration of PoP with [WordPress Gutenberg](https://wordpress.org/gutenberg/): Gutenberg allows to drag-and-drop blocks to the page and customize them through properties; then, to have Gutenberg input modules and PoP save them, two blocks from the same block/component must be made unique, hence they can be dynamically created by selecting a base module for its personality (a scroll of posts, a calendar of events, etc) and then assigning a random id to each, or a serialization of their properties, for its dynamic behaviour.
 -->
-Virtual modules cannot depend on props for defining their behaviour, because at the time of creating the component hierarchy we don't have the `$props` available (otherwise it's a chicken or egg situation). Hence, the particular properties given to a virtual module are coded into the module name itself<!-- as a serialized array separated from the module name with a `"|"` (which is represented under constant `POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`): `modulename|virtualmoduleatts`-->. Then, the personality of the module is given by the module with name `"modulename"`, and the virtual module attributes <!--(`"virtualmoduleatts"`)-->are the runtime element which define its dynamic behaviour.
+Virtual modules cannot depend on props for defining their behaviour, because at the time of creating the component hierarchy we don't have the `$props` available (otherwise it's a chicken or egg situation). Hence, the particular properties given to a virtual module are coded into the module name itself<!-- as a serialized array separated from the module name with a `"|"` (which is represented under constant `POP_CONSTANT_VIRTUALCOMPONENTATTS_SEPARATOR`): `modulename|virtualmoduleatts`-->. Then, the personality of the module is given by the module with name `"modulename"`, and the virtual module attributes <!--(`"virtualmoduleatts"`)-->are the runtime element which define its dynamic behaviour.
 <!--
 Extracting the pair of module name and virtual module atts from the module is done through function `extract_virtualmodule`, like this:
 
@@ -1873,7 +1873,7 @@ For instance, a module that needs to validate that the user's IP is whitelisted 
 function getDataAccessCheckpoints($component, &$props) 
 {
   switch ($component[1]) {
-    case self::COMPONENT_SOMEMODULE:
+    case self::COMPONENT_SOMECOMPONENT:
     
       return [CHECKPOINT_WHITELISTEDIP];
   }

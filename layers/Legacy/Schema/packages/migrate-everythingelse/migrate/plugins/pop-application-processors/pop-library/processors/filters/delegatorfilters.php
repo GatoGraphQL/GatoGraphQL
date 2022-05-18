@@ -84,14 +84,14 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         switch ($component[1]) {
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::COMPONENT_DELEGATORFILTER_HOMECONTENT:
-                return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
+                return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
 
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT:
-                return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
+                return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
             case self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT:
-                return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter';
+                return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter';
         }
 
         return parent::getBlockTarget($component, $props);

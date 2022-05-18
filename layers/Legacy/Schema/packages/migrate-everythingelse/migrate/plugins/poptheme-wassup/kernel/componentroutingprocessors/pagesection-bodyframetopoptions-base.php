@@ -7,6 +7,6 @@ abstract class PoP_Module_BodyFrameTopOptionsPageSectionComponentRoutingProcesso
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMETOPOPTIONS);
+        return array(POP_PAGECOMPONENTGROUP_PAGESECTION_BODYFRAMETOPOPTIONS);
     }
 }

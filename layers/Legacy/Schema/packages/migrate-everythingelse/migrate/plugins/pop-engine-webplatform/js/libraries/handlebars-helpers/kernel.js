@@ -31,7 +31,7 @@ Handlebars.registerHelper('generateId', function(options) {
 	var context = options.hash.context || this;
 	var pssId = options.hash.pssId || context.pss.pssId;
 	var targetId = options.hash.targetId || context.bs.bsId;
-	var moduleName = options.hash.module || context[pop.c.JS_MODULE];
+	var moduleName = options.hash.module || context[pop.c.JS_COMPONENT];
 	var fixed = options.hash.fixed || context[pop.c.JS_FIXEDID];
 	var isIdUnique = options.hash.idUnique || context[pop.c.JS_ISIDUNIQUE];
 	var group = options.hash.group;
@@ -64,7 +64,7 @@ Handlebars.registerHelper('lastGeneratedId', function(options) {
 	var context = options.hash.context || this;
 	var pssId = options.hash.pssId || context.pss.pssId;
 	var targetId = options.hash.targetId || context.bs.bsId;
-	var moduleName = options.hash.module || context[pop.c.JS_MODULE];
+	var moduleName = options.hash.module || context[pop.c.JS_COMPONENT];
 	// Allow to set the domain explicitly. Eg: in the decentralized map, the "mapdiv-module" gets drawn on the block-toplevel-domain, not on the data domain
 	var domain = options.hash.domain || context.tls.domain;
 	var group = options.hash.group;
@@ -83,7 +83,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 
 	// The context can be passed as a param, or if null, use the current one
 	var context = options.hash.context || this;
-	var moduleName = options.hash.module || context[pop.c.JS_MODULE];
+	var moduleName = options.hash.module || context[pop.c.JS_COMPONENT];
 
 	// From the prevContext we rescue the topLevel/pageSection/block Settings
 	var tls = prevContext.tls;
@@ -233,8 +233,8 @@ Handlebars.registerHelper('withModule', function(context, moduleSetingsIdOrPoint
 
 	// Get the module settings id: it is either a pointer to its value in the configuration, or already the value
 	var moduleSettingsId;
-	if (context[pop.c.JS_SUBMODULEOUTPUTNAMES] && context[pop.c.JS_SUBMODULEOUTPUTNAMES][moduleSetingsIdOrPointer]) {
-		moduleSettingsId = context[pop.c.JS_SUBMODULEOUTPUTNAMES][moduleSetingsIdOrPointer];
+	if (context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES] && context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES][moduleSetingsIdOrPointer]) {
+		moduleSettingsId = context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES][moduleSetingsIdOrPointer];
 	}
 	else {
 		moduleSettingsId = moduleSetingsIdOrPointer;

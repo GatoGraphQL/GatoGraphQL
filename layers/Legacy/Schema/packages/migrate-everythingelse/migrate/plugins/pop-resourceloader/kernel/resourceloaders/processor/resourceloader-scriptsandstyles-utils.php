@@ -580,7 +580,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
                         // Check if results are already on the cache
                         if ($useCache) {
-                            self::$dynamic_component_resources = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES);
+                            self::$dynamic_component_resources = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICCOMPONENTRESOURCES);
                         }
                         if (!self::$dynamic_component_resources) {
 
@@ -598,7 +598,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
                             // And store them on the cache
                             if ($useCache) {
-                                $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES, self::$dynamic_component_resources);
+                                $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICCOMPONENTRESOURCES, self::$dynamic_component_resources);
                             }
                         }
                     }

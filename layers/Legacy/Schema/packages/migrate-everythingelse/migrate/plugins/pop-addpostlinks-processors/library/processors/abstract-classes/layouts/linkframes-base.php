@@ -85,7 +85,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         $ret[GD_JS_TITLES]['opennewtab'] = TranslationAPIFacade::getInstance()->__('Open link in new tab', 'pop-addpostlinks-processors');
 
         if ($layout = $this->getLayoutSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         
         return $ret;

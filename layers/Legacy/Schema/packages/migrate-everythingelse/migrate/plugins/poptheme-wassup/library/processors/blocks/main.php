@@ -195,7 +195,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 $subComponents = array_diff(
                     $this->getSubcomponents($component),
                     [
-                        $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
+                        $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)
                     ]
                 );
                 foreach ($subComponents as $subComponent) {
@@ -303,7 +303,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
 
                 // Content module
-                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)) {
                     $ret[] = $content_component;
                 }
                 break;
@@ -322,7 +322,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
 
                 // Content module
-                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)) {
                     $ret[] = $content_component;
                 }
                 break;
@@ -341,7 +341,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
 
                 // Content module
-                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)) {
                     $ret[] = $content_component;
                 }
                 break;

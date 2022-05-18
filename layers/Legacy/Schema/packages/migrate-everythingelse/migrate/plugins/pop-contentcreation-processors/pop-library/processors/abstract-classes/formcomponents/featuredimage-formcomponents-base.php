@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
         // Hack: re-use multiple.tmpl
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = [
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = [
             \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($featuredimageinner),
         ];
 

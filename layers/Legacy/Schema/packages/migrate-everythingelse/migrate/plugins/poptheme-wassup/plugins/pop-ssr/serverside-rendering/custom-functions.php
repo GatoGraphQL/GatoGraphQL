@@ -17,17 +17,17 @@ class Wassup_ServerSide_CustomFunctions
         $pssId = $popManager->getSettingsId($pageSection);
         // $psId = $pageSection->attr('id');
 
-        // if ($psId == POP_MODULEID_PAGESECTIONCONTAINERID_HOVER) {
+        // if ($psId == POP_COMPONENTID_PAGESECTIONCONTAINERID_HOVER) {
         if ($pssId == PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_HOVER) {
-            $psId = POP_MODULEID_PAGESECTIONCONTAINERID_HOVER;
+            $psId = POP_COMPONENTID_PAGESECTIONCONTAINERID_HOVER;
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'closehover');
         }
-        // else if ($psId == POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR) {
+        // else if ($psId == POP_COMPONENTID_PAGESECTIONCONTAINERID_NAVIGATOR) {
         elseif ($pssId == PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_NAVIGATOR) {
-            $psId = POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
+            $psId = POP_COMPONENTID_PAGESECTIONCONTAINERID_NAVIGATOR;
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'closenavigator');
         } elseif ($pssId == PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS) {
-            $psId = POP_MODULEID_PAGESECTIONCONTAINERID_ADDONS;
+            $psId = POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONS;
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'window-fullsize');
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'window-maximize');
             $popJSRuntimeManager->addPageSectionId($domain, $pssId, $moduleName, $psId, 'window-minimize');

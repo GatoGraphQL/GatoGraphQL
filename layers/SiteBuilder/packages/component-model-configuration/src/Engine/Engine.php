@@ -59,7 +59,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $dataoutputitems = App::getState('dataoutputitems');
 
         $data = [];
-        if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
+        if (in_array(DataOutputItems::COMPONENTSETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
                 $this->getModuleSettings($component, $engineState->model_props, $engineState->props)

@@ -2,7 +2,7 @@
 namespace PoP\ExampleModules;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-define('POP_EXAMPLEMODULES_POP_ENGINE_MIN_VERSION', 0.1);
+define('POP_EXAMPLECOMPONENTS_POP_ENGINE_MIN_VERSION', 0.1);
 
 class Validation
 {
@@ -18,7 +18,7 @@ class Validation
             \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
             \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
-        } elseif (POP_EXAMPLEMODULES_POP_ENGINE_MIN_VERSION > POP_ENGINE_VERSION) {
+        } elseif (POP_EXAMPLECOMPONENTS_POP_ENGINE_MIN_VERSION > POP_ENGINE_VERSION) {
             \PoP\Root\App::addAction('admin_notices', $this->versionWarning(...));
             \PoP\Root\App::addAction('network_admin_notices', $this->versionWarning(...));
         }
@@ -46,7 +46,7 @@ class Validation
             TranslationAPIFacade::getInstance()->__('PoP Example Modules', 'pop-examplemodules'),
             TranslationAPIFacade::getInstance()->__('PoP Engine', 'pop-examplemodules'),
             'https://github.com/leoloso/PoP',
-            POP_EXAMPLEMODULES_POP_ENGINE_MIN_VERSION
+            POP_EXAMPLECOMPONENTS_POP_ENGINE_MIN_VERSION
         );
     }
     protected function dependencyInstallationWarning($plugin, $dependency, $dependency_url)

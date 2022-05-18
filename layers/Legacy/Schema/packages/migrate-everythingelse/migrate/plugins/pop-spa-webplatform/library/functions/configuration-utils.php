@@ -20,7 +20,7 @@ class PoP_SPAWebPlatform_ConfigurationUtils
                 $page = $instanceManager->getInstance(Page::class);
 
                 $url = GeneralUtils::addQueryArgs([
-                    Params::MODULEFILTER => $page->getName(),
+                    Params::COMPONENTFILTER => $page->getName(),
                     Params::ACTIONS . '[]' => GD_URLPARAM_ACTION_PRELOAD,
                 ], $url);
             }

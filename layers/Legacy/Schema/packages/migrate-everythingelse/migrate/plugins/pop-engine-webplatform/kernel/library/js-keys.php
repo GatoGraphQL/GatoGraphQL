@@ -3,8 +3,8 @@ use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 
 
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
-define('GD_JS_MODULE', $compact ? 'm' : 'module');
-define('GD_JS_MODULEOUTPUTNAME', $compact ? 's' : 'moduleoutputname');
+define('GD_JS_COMPONENT', $compact ? 'm' : 'module');
+define('GD_JS_COMPONENTOUTPUTNAME', $compact ? 's' : 'moduleoutputname');
 define('GD_JS_INTERCEPTURLS', $compact ? 'xu' : 'intercept-urls');
 define('GD_JS_EXTRAINTERCEPTURLS', $compact ? 'exu' : 'extra-intercept-urls');
 
@@ -20,13 +20,13 @@ function gdJqueryConstantsJsparams($jqueryConstants)
 {
 
     // From PoP Engine
-    $jqueryConstants['JS_MODULE'] = GD_JS_MODULE;
+    $jqueryConstants['JS_COMPONENT'] = GD_JS_COMPONENT;
     $jqueryConstants['JS_SUBCOMPONENTS'] = ComponentModelModuleInfo::get('response-prop-submodules');
-    $jqueryConstants['JS_MODULEOUTPUTNAME'] = GD_JS_MODULEOUTPUTNAME;
+    $jqueryConstants['JS_COMPONENTOUTPUTNAME'] = GD_JS_COMPONENTOUTPUTNAME;
 
     // From Web Platform PoP Engine
     $jqueryConstants['JS_TEMPLATE'] = GD_JS_TEMPLATE;
-    $jqueryConstants['JS_SUBMODULEOUTPUTNAMES'] = GD_JS_SUBMODULEOUTPUTNAMES;
+    $jqueryConstants['JS_SUBCOMPONENTOUTPUTNAMES'] = GD_JS_SUBCOMPONENTOUTPUTNAMES;
     $jqueryConstants['JS_TEMPLATES'] = POP_JS_TEMPLATES;
     $jqueryConstants['JS_METHODS'] = GD_JS_METHODS;
     $jqueryConstants['JS_NEXT'] = GD_JS_NEXT;
@@ -42,7 +42,7 @@ function gdJqueryConstantsJsparams($jqueryConstants)
     $jqueryConstants['JS_TITLES'] = GD_JS_TITLES;
     $jqueryConstants['JS_PARAMS'] = GD_JS_PARAMS;
     $jqueryConstants['JS_DBOBJECTPARAMS'] = GD_JS_DBOBJECTPARAMS;
-    $jqueryConstants['JS_PREVIOUSMODULESIDS'] = GD_JS_PREVIOUSMODULESIDS;
+    $jqueryConstants['JS_PREVIOUSCOMPONENTSIDS'] = GD_JS_PREVIOUSCOMPONENTSIDS;
     $jqueryConstants['JS_INTERCEPT'] = GD_JS_INTERCEPT;
     $jqueryConstants['JS_TYPE'] = GD_JS_TYPE;
     $jqueryConstants['JS_SETTINGS'] = GD_JS_SETTINGS;

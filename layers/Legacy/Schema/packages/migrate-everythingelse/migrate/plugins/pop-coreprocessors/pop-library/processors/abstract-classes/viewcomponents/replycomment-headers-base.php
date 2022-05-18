@@ -47,11 +47,11 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($component, $props);
 
         if ($post_component = $this->getPostSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_component);
         }
 
         if ($comment_component = $this->getCommentSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_component);
         }
 
         return $ret;

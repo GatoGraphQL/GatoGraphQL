@@ -159,7 +159,7 @@ class PoP_ServerSideManager
         foreach ($this->getCombinedStateData($domain, $url)['settings']['configuration'] as $pssId => &$psConfiguration) {
             $this->initPageSectionSettings($domain, $pssId, $psConfiguration); // Changed line in PHP, different in JS
             // Insert into the Runtime to generate the ID
-            $this->addPageSectionIds($domain, $pssId, $psConfiguration[GD_JS_MODULE]); // Changed line in PHP, different in JS
+            $this->addPageSectionIds($domain, $pssId, $psConfiguration[GD_JS_COMPONENT]); // Changed line in PHP, different in JS
         }
     }
 
@@ -186,17 +186,17 @@ class PoP_ServerSideManager
             if ($context['bs']['dbkeys'] ?? null) {
                 $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
             }
-            if ($context[GD_JS_MODULE] ?? null) {
-                $context['module'] = $context[GD_JS_MODULE];
+            if ($context[GD_JS_COMPONENT] ?? null) {
+                $context['module'] = $context[GD_JS_COMPONENT];
             }
             if ($context[GD_JS_TEMPLATE] ?? null) {
                 $context['template'] = $context[GD_JS_TEMPLATE];
             }
-            if ($context[GD_JS_MODULEOUTPUTNAME] ?? null) {
-                $context['moduleoutputname'] = $context[GD_JS_MODULEOUTPUTNAME];
+            if ($context[GD_JS_COMPONENTOUTPUTNAME] ?? null) {
+                $context['moduleoutputname'] = $context[GD_JS_COMPONENTOUTPUTNAME];
             }
-            if ($context[GD_JS_SUBMODULEOUTPUTNAMES] ?? null) {
-                $context['submoduleoutputnames'] = $context[GD_JS_SUBMODULEOUTPUTNAMES];
+            if ($context[GD_JS_SUBCOMPONENTOUTPUTNAMES] ?? null) {
+                $context['submoduleoutputnames'] = $context[GD_JS_SUBCOMPONENTOUTPUTNAMES];
             }
             if ($context[POP_JS_TEMPLATES] ?? null) {
                 $context['templates'] = $context[POP_JS_TEMPLATES];
@@ -212,8 +212,8 @@ class PoP_ServerSideManager
             if ($context[GD_JS_DBOBJECTPARAMS] ?? null) {
                 $context['dbobject-params'] = $context[GD_JS_DBOBJECTPARAMS];
             }
-            if ($context[GD_JS_PREVIOUSMODULESIDS] ?? null) {
-                $context['previousmodules-ids'] = $context[GD_JS_PREVIOUSMODULESIDS];
+            if ($context[GD_JS_PREVIOUSCOMPONENTSIDS] ?? null) {
+                $context['previousmodules-ids'] = $context[GD_JS_PREVIOUSCOMPONENTSIDS];
             }
 
             // Appendable
@@ -355,7 +355,7 @@ class PoP_ServerSideManager
         $pss['psId'] = $psId; // This line was added to the PHP, it's not there in the JS
         $psConfiguration['pss'] = $pss;
         // // In addition, the pageSection must merge with the runtimeConfiguration, which is otherwise done in function enterModule
-        // if ($psRuntimeConfiguration = $this->getRuntimeConfiguration($domain, $pssId, $pssId, $psConfiguration[GD_JS_MODULE])) {
+        // if ($psRuntimeConfiguration = $this->getRuntimeConfiguration($domain, $pssId, $pssId, $psConfiguration[GD_JS_COMPONENT])) {
         //     foreach ($psRuntimeConfiguration as $key => $value) {
         //         $psConfiguration[$key] = $value;
         //     }

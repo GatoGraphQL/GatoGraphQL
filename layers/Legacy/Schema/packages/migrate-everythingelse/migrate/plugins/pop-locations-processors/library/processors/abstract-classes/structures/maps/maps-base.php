@@ -37,7 +37,7 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $mapdiv = $this->getMapdivSubmodule($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
         
         return $ret;
     }

@@ -89,7 +89,7 @@ class LazyLoadHookSet extends AbstractHookSet
                         DataOutputItems::COMPONENT_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    Params::MODULEFILTER => $this->getLazy()->getName(),
+                    Params::COMPONENTFILTER => $this->getLazy()->getName(),
                     Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
                 $this->getRequestHelperService()->getCurrentURL()

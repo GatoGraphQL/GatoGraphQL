@@ -57,14 +57,14 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($layouts = $this->getLayoutSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
 
         if ($user_avatar = $this->getLoggedinUseravatarSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
         }
 
         $ret['add-useravatar'] = $this->addUseravatar($component, $props);

@@ -64,7 +64,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         $query = App::applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
 
         // Apply filtering of the data
-        if ($filtering_components = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
+        if ($filtering_components = $data_properties[DataloadingConstants::QUERYARGSFILTERINGCOMPONENTS] ?? null) {
             foreach ($filtering_components as $component) {
                 /** @var FilterDataComponentProcessorInterface */
                 $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);

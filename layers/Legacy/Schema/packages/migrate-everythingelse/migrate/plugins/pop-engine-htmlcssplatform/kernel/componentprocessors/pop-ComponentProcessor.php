@@ -311,7 +311,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         }
         if ($previousmodules_ids = $this->getProp($component, $props, 'previousmodules-ids')) {
             // We receive entries of key => component, convert them to key => moduleOutputName
-            $ret[GD_JS_PREVIOUSMODULESIDS] = array_map(
+            $ret[GD_JS_PREVIOUSCOMPONENTSIDS] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $previousmodules_ids
             );

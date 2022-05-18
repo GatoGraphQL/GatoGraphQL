@@ -104,7 +104,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                 if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($component)) {
                     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
 
                     // Load the typeResolver from the trigger, for the suggestions
                     $trigger_layout = $this->getTriggerLayoutSubmodule($component);

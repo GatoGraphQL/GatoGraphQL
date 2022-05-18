@@ -57,7 +57,7 @@ window.pop.Forms = {
 		block.on('fetched', function(e, response) {
 	
 			// Delete the textarea / fields if the form was successful
-			var blockFeedback = response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+			var blockFeedback = response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 
 			// result = true means it was successful
 			if (blockFeedback.result === true) {

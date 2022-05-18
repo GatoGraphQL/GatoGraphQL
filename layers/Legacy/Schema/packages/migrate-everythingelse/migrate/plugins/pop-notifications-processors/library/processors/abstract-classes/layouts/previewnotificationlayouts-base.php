@@ -204,23 +204,23 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($link = $this->getLinkSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($link);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($link);
         }
         if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
         }
         if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
         }
         if ($this->getBottomSubmodules($component)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $this->getBottomSubmodules($component)
             );
             foreach ($this->getConditionalBottomSubmodules($component) as $conditionalLeafModuleField) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_merge(
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_merge(
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'],
                     array_map(
                         [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                         $conditionalLeafModuleField->getConditionalNestedComponents()
@@ -230,10 +230,10 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($post_thumb = $this->getPostThumbSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
         } elseif (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($user_avatar = $this->getUserAvatarModule($component)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['user-avatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['user-avatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
             }
         }
 

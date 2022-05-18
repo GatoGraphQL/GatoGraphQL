@@ -193,14 +193,14 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
         }
 
         if ($layouts = $this->getLayoutSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
         if ($quicklinkgroup = $this->getQuicklinkgroupSubmodule($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup'] = 'sidebarwidget-quicklinkgroup pull-right';
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup);
         }
 
         return $ret;

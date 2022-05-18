@@ -47,10 +47,10 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($script_customize = $this->getCustomizationSubmodule($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-customize'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script_customize);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-customize'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script_customize);
         }
         $markers = [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS];
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($markers);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($markers);
 
         return $ret;
     }

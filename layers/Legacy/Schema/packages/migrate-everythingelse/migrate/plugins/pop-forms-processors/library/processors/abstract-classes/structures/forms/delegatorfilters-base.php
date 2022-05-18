@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
             $props,
             array(
                 'fetchparams' => array(
-                    Params::MODULEFILTER => $mainContentModule->getName(),
+                    Params::COMPONENTFILTER => $mainContentModule->getName(),
                 ),
             )
         );

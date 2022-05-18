@@ -57,18 +57,18 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
             case self::COMPONENT_PAGE_BODYSIDEINFO:
             case self::COMPONENT_PAGE_BODY:
                 $module_groups = array(
-                    self::COMPONENT_PAGE_ADDONS => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
-                    self::COMPONENT_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
-                    self::COMPONENT_PAGE_QUICKVIEWSIDEINFO => POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT,
-                    self::COMPONENT_PAGE_BACKGROUND => POP_PAGEMODULEGROUP_PAGESECTION_BACKGROUNDFRAMECONTENT,
-                    self::COMPONENT_PAGE_HOLE => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
-                    self::COMPONENT_PAGE_HOVER => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
-                    self::COMPONENT_PAGE_NAVIGATOR => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
-                    self::COMPONENT_PAGE_MODALS => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
-                    self::COMPONENT_PAGE_SIDE => POP_PAGEMODULEGROUP_PAGESECTION_SIDEFRAMECONTENT,
-                    self::COMPONENT_PAGE_TOP => POP_PAGEMODULEGROUP_PAGESECTION_TOPFRAMECONTENT,
-                    self::COMPONENT_PAGE_BODYSIDEINFO => POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT,
-                    self::COMPONENT_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_ADDONS => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_QUICKVIEW => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_QUICKVIEWSIDEINFO => POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEINFOCONTENT,
+                    self::COMPONENT_PAGE_BACKGROUND => POP_PAGECOMPONENTGROUP_PAGESECTION_BACKGROUNDFRAMECONTENT,
+                    self::COMPONENT_PAGE_HOLE => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_HOVER => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_NAVIGATOR => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_MODALS => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
+                    self::COMPONENT_PAGE_SIDE => POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEFRAMECONTENT,
+                    self::COMPONENT_PAGE_TOP => POP_PAGECOMPONENTGROUP_PAGESECTION_TOPFRAMECONTENT,
+                    self::COMPONENT_PAGE_BODYSIDEINFO => POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEINFOCONTENT,
+                    self::COMPONENT_PAGE_BODY => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
                 );
                 if ($page_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($module_groups[$component[1]] ?? null)) {
                     $ret[] = $page_component;
@@ -81,7 +81,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                 $componentAtts = count($component) >= 3 ? $component[2] : null;
                 if (!$componentAtts || !$componentAtts['onlyinitial']) {
                      // Load targeted module
-                    if ($page_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
+                    if ($page_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT)) {
                         $ret[] = $page_component;
                     }
                 }
@@ -106,11 +106,11 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         switch ($component[1]) {
             case self::COMPONENT_PAGE_BODY:
             case self::COMPONENT_PAGE_QUICKVIEW:
-                if ($pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
+                if ($pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT)) {
                      // Add only if the corresponding content module exists
                     $groups = array(
-                        self::COMPONENT_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMETOPOPTIONS,
-                        self::COMPONENT_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS,
+                        self::COMPONENT_PAGE_BODY => POP_PAGECOMPONENTGROUP_PAGESECTION_BODYFRAMETOPOPTIONS,
+                        self::COMPONENT_PAGE_QUICKVIEW => POP_PAGECOMPONENTGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS,
                     );
                     if ($frameoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$component[1]] ?? null)) {
                         $ret[] = $frameoptions_component;
@@ -121,10 +121,10 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
             case self::COMPONENT_PAGE_BODYSIDEINFO:
             case self::COMPONENT_PAGE_QUICKVIEWSIDEINFO:
                 // If there is a sideinfo module then add the options module
-                if ($sideinfocontent_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT)) {
+                if ($sideinfocontent_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEINFOCONTENT)) {
                     // If the added sideinfo module is the empty one, then no need for the frame
                     if ($sideinfocontent_component != [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTYSIDEINFO]) {
-                        if ($sideinfoframeoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOFRAMEOPTIONS)) {
+                        if ($sideinfoframeoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEINFOFRAMEOPTIONS)) {
                             $ret[] = $sideinfoframeoptions_component;
                         }
                     }
@@ -143,11 +143,11 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         switch ($component[1]) {
             case self::COMPONENT_PAGE_BODY:
             case self::COMPONENT_PAGE_QUICKVIEW:
-                if ($pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
+                if ($pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT)) {
                      // Add only if the corresponding content module exists
                     $groups = array(
-                        self::COMPONENT_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMEBOTTOMOPTIONS,
-                        self::COMPONENT_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMEBOTTOMOPTIONS,
+                        self::COMPONENT_PAGE_BODY => POP_PAGECOMPONENTGROUP_PAGESECTION_BODYFRAMEBOTTOMOPTIONS,
+                        self::COMPONENT_PAGE_QUICKVIEW => POP_PAGECOMPONENTGROUP_PAGESECTION_QUICKVIEWFRAMEBOTTOMOPTIONS,
                     );
                     if ($frameoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$component[1]] ?? null)) {
                         $ret[] = $frameoptions_component;

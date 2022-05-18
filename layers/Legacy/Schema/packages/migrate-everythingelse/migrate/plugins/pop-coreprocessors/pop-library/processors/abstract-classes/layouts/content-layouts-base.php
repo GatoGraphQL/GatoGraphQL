@@ -65,7 +65,7 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $abovecontent_components
             );

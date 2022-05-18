@@ -106,7 +106,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        $componentroutingprocessors = $pop_component_componentroutingprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        $componentroutingprocessors = $pop_component_componentroutingprocessor_manager->getProcessors(POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         foreach ($componentroutingprocessors as $componentroutingprocessor) {
             foreach ($componentroutingprocessor->getStatePropertiesToSelectComponentByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
@@ -371,7 +371,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars['nature'] = $nature;
         $vars['dataoutputitems'] = array(
             \PoP\ComponentModel\Constants\DataOutputItems::META,
-            \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+            \PoP\ConfigurationComponentModel\Constants\DataOutputItems::COMPONENTSETTINGS,
             \PoP\ComponentModel\Constants\DataOutputItems::COMPONENT_DATA,
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,

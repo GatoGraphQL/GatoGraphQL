@@ -33,7 +33,7 @@ window.pop.AddEditPost = {
 		var bsId = pop.Manager.getSettingsId(block);
 		block.on('fetched', function(e, response) {
 	
-			var blockFeedback = response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+			var blockFeedback = response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 
 			// result = true means it was successful
 			if (blockFeedback.result === true) {
@@ -53,7 +53,7 @@ window.pop.AddEditPost = {
 
 		var pssId = pop.Manager.getSettingsId(pageSection);
 		var bsId = pop.Manager.getSettingsId(block);		
-		var blockFeedback = response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+		var blockFeedback = response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 
 		// result = true means it was successful
 		if (blockFeedback.result === true) {

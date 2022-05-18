@@ -2,7 +2,7 @@
 
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_TEMPLATE', $compact ? 't' : 'template');
-define('GD_JS_SUBMODULEOUTPUTNAMES', $compact ? 'ss' : 'submoduleoutputnames');
+define('GD_JS_SUBCOMPONENTOUTPUTNAMES', $compact ? 'ss' : 'submoduleoutputnames');
 define('POP_JS_TEMPLATES', $compact ? 'tx' : 'templates');
 define('GD_JS_METHODS', $compact ? 'mt' : 'methods');
 define('GD_JS_NEXT', $compact ? 'n' : 'next');
@@ -18,5 +18,5 @@ define('GD_JS_STYLES', $compact ? 'ys' : 'styles');
 define('GD_JS_TITLES', $compact ? 'tt' : 'titles');
 define('GD_JS_PARAMS', $compact ? 'p' : 'params');
 define('GD_JS_DBOBJECTPARAMS', $compact ? 'dop' : 'dbobject-params');
-define('GD_JS_PREVIOUSMODULESIDS', $compact ? 'pt' : 'previousmodules-ids');
+define('GD_JS_PREVIOUSCOMPONENTSIDS', $compact ? 'pt' : 'previousmodules-ids');
 define('GD_JS_DESCRIPTION', $compact ? 'd' : 'description');

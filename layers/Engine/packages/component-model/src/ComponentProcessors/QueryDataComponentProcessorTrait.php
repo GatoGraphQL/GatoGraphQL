@@ -59,7 +59,7 @@ trait QueryDataComponentProcessorTrait
 
         // Attributes overriding the query args, taken from the request
         if (!isset($ret[DataloadingConstants::IGNOREREQUESTPARAMS]) || !$ret[DataloadingConstants::IGNOREREQUESTPARAMS]) {
-            $ret[DataloadingConstants::QUERYARGSFILTERINGMODULES] = $this->getQueryArgsFilteringComponents($component, $props);
+            $ret[DataloadingConstants::QUERYARGSFILTERINGCOMPONENTS] = $this->getQueryArgsFilteringComponents($component, $props);
         }
 
         // // Set the filter if it has one

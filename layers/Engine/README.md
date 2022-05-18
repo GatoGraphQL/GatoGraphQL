@@ -521,7 +521,7 @@ PoP allows the configuration of the following properties, set in file wp-config.
 
 `ENABLE_VERSION_BY_PARAMS` (`true`|`false`, default: `false`): Enable to set the application version through URL param "version".
 
-`POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name.
+`POP_SERVER_FAILIFCOMPONENTSDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
 

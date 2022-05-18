@@ -14,7 +14,7 @@ class PoP_EditorUtils
     public static function createMainEditor()
     {
         ob_start();
-        wp_editor('', GD_MODULESETTINGS_EDITOR_NAME);
+        wp_editor('', GD_COMPONENTSETTINGS_EDITOR_NAME);
         ob_get_clean();
     }
 

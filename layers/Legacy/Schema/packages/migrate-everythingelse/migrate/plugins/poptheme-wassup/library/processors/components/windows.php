@@ -29,7 +29,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
             case self::COMPONENT_WINDOW_ADDONS:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $addons_component = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS];

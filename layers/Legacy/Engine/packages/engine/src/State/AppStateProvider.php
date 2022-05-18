@@ -100,7 +100,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
         if ($state['modulefilter'] === $this->mainContentModule->getName()) {
-            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         }
     }
 }

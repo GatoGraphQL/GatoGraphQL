@@ -6,5 +6,5 @@ namespace PoP\Engine\Constants;
 
 class Params
 {
-    public final const HEADMODULE = 'headmodule';
+    public final const HEADCOMPONENT = 'headcomponent';
 }

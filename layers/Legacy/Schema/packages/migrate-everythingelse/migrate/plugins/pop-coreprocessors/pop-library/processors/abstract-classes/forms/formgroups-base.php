@@ -67,7 +67,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
 
         $component = $this->getComponentSubmodule($component);
         $component_processor = $componentprocessor_manager->getProcessor($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
 
         // Re-use the label from the component
         if ($label = $this->getProp($component, $props, 'label')) {

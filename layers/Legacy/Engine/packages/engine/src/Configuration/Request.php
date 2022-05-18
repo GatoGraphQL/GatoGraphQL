@@ -11,6 +11,6 @@ class Request
 {
     public static function getHeadModule(): ?string
     {
-        return App::query(Params::HEADMODULE);
+        return App::query(Params::HEADCOMPONENT);
     }
 }

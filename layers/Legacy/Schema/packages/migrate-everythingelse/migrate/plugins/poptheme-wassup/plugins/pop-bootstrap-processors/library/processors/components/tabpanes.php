@@ -64,7 +64,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_ADDONS:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_ADDONS;
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONS;
         }
 
         return parent::getID($component, $props);

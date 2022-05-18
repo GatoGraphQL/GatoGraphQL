@@ -90,13 +90,13 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($belowavatar_components = $this->getBelowavatarLayoutSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowavatar'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['belowavatar'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $belowavatar_components
             );
         }
         if ($belowexcerpt_components = $this->getBelowexcerptLayoutSubmodules($component)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowexcerpt'] = array_map(
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['belowexcerpt'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $belowexcerpt_components
             );
@@ -107,7 +107,7 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($useravatar = $this->getUseravatarSubmodule($component)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($useravatar);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($useravatar);
             }
         }
 
