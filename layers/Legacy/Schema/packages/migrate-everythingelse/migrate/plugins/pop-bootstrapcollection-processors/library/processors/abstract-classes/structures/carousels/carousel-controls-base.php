@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['carousel-module'] = $this->getProp($component, $props, 'carousel-module');
+        $ret['carousel-component'] = $this->getProp($component, $props, 'carousel-component');
         $ret['html-tag'] = $this->getProp($component, $props, 'html-tag');
 
         if ($control_class = $this->getControlClass($component)) {

@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
     public function initModelProps(array $component, array &$props): void
     {
         $script = $this->getScriptSubmodule($component);
-        $this->setProp($script, $props, 'frame-module', $component);
+        $this->setProp($script, $props, 'frame-component', $component);
         parent::initModelProps($component, $props);
     }
 }

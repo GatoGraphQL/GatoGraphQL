@@ -16,7 +16,7 @@ window.pop.TypeaheadMapSelectable = {
 			var typeaheadMap = $(this);
 			var typeahead = typeaheadMap.find('.pop-typeahead');
 			var map = typeaheadMap.find('.pop-map');
-			var moduleName = typeaheadMap.data('addmarker-module');
+			var moduleName = typeaheadMap.data('addmarker-component');
 			var trigger = pop.TypeaheadSelectable.getTypeaheadTrigger(typeahead);
 
 			trigger.on('dbObjectLayoutRendered', function(e, targetDomain, targetPageSection, targetBlock, target, datum) {

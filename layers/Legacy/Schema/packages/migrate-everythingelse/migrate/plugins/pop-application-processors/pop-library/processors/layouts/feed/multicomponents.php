@@ -50,7 +50,7 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
                 $this->appendProp([self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY], $props, 'class', 'collapse');
 
                 // Indicate the button what collapse to open
-                $this->setProp([PoP_Module_Processor_FeedButtons::class, PoP_Module_Processor_FeedButtons::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY], $props, 'target-module', [self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY]);
+                $this->setProp([PoP_Module_Processor_FeedButtons::class, PoP_Module_Processor_FeedButtons::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY], $props, 'target-component', [self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY]);
                 break;
         }
 

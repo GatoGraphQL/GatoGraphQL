@@ -122,8 +122,8 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
             case self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE:
                 // Bind the Embed iframe and the input together. When the input value changes, the iframe
                 // will update itself with the URL in the input
-                $this->setProp([PoP_Module_Processor_ReloadEmbedPreviewConnectors::class, PoP_Module_Processor_ReloadEmbedPreviewConnectors::COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR], $props, 'iframe-module', [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW]);
-                $this->setProp([PoP_Module_Processor_ReloadEmbedPreviewConnectors::class, PoP_Module_Processor_ReloadEmbedPreviewConnectors::COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR], $props, 'input-module', [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK]);
+                $this->setProp([PoP_Module_Processor_ReloadEmbedPreviewConnectors::class, PoP_Module_Processor_ReloadEmbedPreviewConnectors::COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR], $props, 'iframe-component', [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW]);
+                $this->setProp([PoP_Module_Processor_ReloadEmbedPreviewConnectors::class, PoP_Module_Processor_ReloadEmbedPreviewConnectors::COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR], $props, 'input-component', [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK]);
                 break;
         }
 

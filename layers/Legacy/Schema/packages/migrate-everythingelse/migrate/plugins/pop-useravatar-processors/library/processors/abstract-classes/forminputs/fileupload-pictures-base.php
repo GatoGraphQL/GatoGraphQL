@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
         // // The downloadpicture module will need to be rendered dynamically on runtime
         // $downloadpicture_component = $this->getDownloadpictureSubmodule($component);
         // $this->setProp($downloadpicture_component, $props, 'module-path', true);
-        $this->setProp($downloadpicture_component, $props, 'dynamic-module', true);
+        $this->setProp($downloadpicture_component, $props, 'dynamic-component', true);
 
         $this->appendProp($component, $props, 'class', 'pop-fileupload');
 

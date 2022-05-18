@@ -94,13 +94,13 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
     public function initModelProps(array $component, array &$props): void
     {
         if ($controls_bottom = $this->getControlsBottomSubmodule($component)) {
-            $this->setProp($controls_bottom, $props, 'carousel-module', $component);
+            $this->setProp($controls_bottom, $props, 'carousel-component', $component);
         }
         if ($controls_top = $this->getControlsTopSubmodule($component)) {
-            $this->setProp($controls_top, $props, 'carousel-module', $component);
+            $this->setProp($controls_top, $props, 'carousel-component', $component);
         }
         if ($indicators = $this->getLayoutIndicatorSubmodules($component)) {
-            $this->setProp($indicators, $props, 'carousel-module', $component);
+            $this->setProp($indicators, $props, 'carousel-component', $component);
         }
 
         parent::initModelProps($component, $props);

@@ -58,7 +58,7 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
 
         if ($this->doAppend($component)) {
             $ret['do-append'] = true;
-            $ret['frame-module'] = $this->getProp($component, $props, 'frame-module');
+            $ret['frame-component'] = $this->getProp($component, $props, 'frame-component');
             $ret['operation'] = $this->getOperation($component, $props);
 
             if ($layout = $this->getLayoutSubmodule($component)) {

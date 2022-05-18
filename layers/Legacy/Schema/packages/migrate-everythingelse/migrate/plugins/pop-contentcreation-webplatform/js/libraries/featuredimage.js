@@ -64,7 +64,7 @@ window.pop.FeaturedImage = {
 					var domain = pop.Manager.getBlockTopLevelDomain(block);
 
 					// The datum placeholder was saved in FeaturedImageInner's JS settings
-					var moduleName = featuredImage.data('merge-module');
+					var moduleName = featuredImage.data('merge-component');
 					var jsSettings = pop.Manager.getJsSettings(domain, pageSection, block, moduleName);
 					var datum_placeholder = jsSettings['datum-placeholder'];
 					
@@ -144,7 +144,7 @@ window.pop.FeaturedImage = {
 		}
 		
 		// Run again the Handlebars module to re-print the image with the new data
-		var moduleName = featuredImage.data('merge-module');
+		var moduleName = featuredImage.data('merge-component');
 		pop.DynamicRender.render(domain, pageSection, block, moduleName, featuredImage, context, options);
 	},
 	remove : function(domain, pageSection, block, featuredImage) {

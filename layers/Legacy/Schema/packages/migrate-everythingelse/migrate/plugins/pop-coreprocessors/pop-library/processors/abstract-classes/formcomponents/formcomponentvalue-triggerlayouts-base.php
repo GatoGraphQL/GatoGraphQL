@@ -86,7 +86,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
         // // Because the triggered layout will need to be rendered, it needs to have its template_path printed in the webplatform
         // $this->setProp($trigger_component, $props, 'module-path', true);
-        $this->setProp($trigger_component, $props, 'dynamic-module', true);
+        $this->setProp($trigger_component, $props, 'dynamic-component', true);
 
         // // Initialize typeahead value for replicable/webplatform
         // if ($this->getProp($component, $props, 'replicable')) {

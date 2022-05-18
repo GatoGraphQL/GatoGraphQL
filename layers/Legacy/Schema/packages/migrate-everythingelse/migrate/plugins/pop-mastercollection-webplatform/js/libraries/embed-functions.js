@@ -91,7 +91,7 @@ window.pop.EmbedFunctions = {
 			
 			// Comment Leo 16/08/2016: not using iframe-target anymore, instead using iframe-module, and calculating the last id for that module
 			// Comment Leo 16/08/2016: discarded this code, not needed, but kept for the time being
-			// var moduleName = connector.data('iframe-module');
+			// var moduleName = connector.data('iframe-component');
 			// var iframeid = pop.JSRuntimeManager.getLastGeneratedId(pop.Manager.getSettingsId(pageSection), pop.Manager.getSettingsId(block), moduleName);
 			// var iframe = $('#'+iframeid);
 

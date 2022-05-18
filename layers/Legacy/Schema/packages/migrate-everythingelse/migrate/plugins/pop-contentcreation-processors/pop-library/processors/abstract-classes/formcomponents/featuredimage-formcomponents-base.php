@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
         // // The featuredimageinner module will need to be rendered dynamically on runtime
         // $this->setProp($featuredimageinner, $props, 'module-path', true);
-        $this->setProp($featuredimageinner, $props, 'dynamic-module', true);
+        $this->setProp($featuredimageinner, $props, 'dynamic-component', true);
 
         // Set the needed params
         $img_size = $this->getImageSize($component, $props);
@@ -87,7 +87,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
             $props,
             'params',
             array(
-                'data-merge-module' => $featuredimageinner,
+                'data-merge-component' => $featuredimageinner,
                 'data-img-size' => $img_size,
             )
         );

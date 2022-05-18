@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_MapDrawMarkerScriptsBase extends PoPEngine_Q
     public function getImmutableConfiguration(array $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
-        $ret['mapdiv-module'] = $this->getMapdivSubmodule($component);
+        $ret['mapdiv-component'] = $this->getMapdivSubmodule($component);
         return $ret;
     }
 }

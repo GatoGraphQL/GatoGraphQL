@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_InstantaneousFiltersBase extends PoP_Module_
 
         // Add for the target for the onActionThenClick function
         if ($inner = $this->getInnerSubmodule($component)) {
-            $this->setProp($inner, $props, 'trigger-module', $component);
+            $this->setProp($inner, $props, 'trigger-component', $component);
         }
         parent::initModelProps($component, $props);
     }
