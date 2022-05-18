@@ -10,11 +10,11 @@ use PoP\Root\App;
 abstract class AbstractComponentRoutingProcessorManager implements ComponentRoutingProcessorManagerInterface
 {
     /**
-     * @var array<string, AbstractComponentRoutingProcessor[]>
+     * @var array<string, ComponentRoutingProcessorInterface[]>
      */
     protected array $processors = [];
 
-    public function addComponentRoutingProcessor(AbstractComponentRoutingProcessor $processor): void
+    public function addComponentRoutingProcessor(ComponentRoutingProcessorInterface $processor): void
     {
         foreach ($processor->getGroups() as $group) {
             $this->processors[$group] ??= [];
@@ -23,7 +23,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
     }
 
     /**
-     * @return AbstractComponentRoutingProcessor[]
+     * @return ComponentRoutingProcessorInterface[]
      */
     public function getProcessors(string $group = null): array
     {

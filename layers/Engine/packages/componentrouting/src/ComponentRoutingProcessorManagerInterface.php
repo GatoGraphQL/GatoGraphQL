@@ -6,9 +6,9 @@ namespace PoP\ComponentRouting;
 
 interface ComponentRoutingProcessorManagerInterface
 {
-    public function addComponentRoutingProcessor(AbstractComponentRoutingProcessor $processor): void;
+    public function addComponentRoutingProcessor(ComponentRoutingProcessorInterface $processor): void;
     /**
-     * @return AbstractComponentRoutingProcessor[]
+     * @return ComponentRoutingProcessorInterface[]
      */
     public function getProcessors(string $group = null): array;
     public function getDefaultGroup(): string;
