@@ -93,7 +93,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
         if ($state['modulefilter'] === $this->modulePaths->getName()) {
             if ($enablePassingStateViaRequest) {
-                $state['modulepaths'] = $this->getModulePathHelpers()->getModulePaths();
+                $state['componentVariationPaths'] = $this->getModulePathHelpers()->getModulePaths();
             }
         }
         // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state

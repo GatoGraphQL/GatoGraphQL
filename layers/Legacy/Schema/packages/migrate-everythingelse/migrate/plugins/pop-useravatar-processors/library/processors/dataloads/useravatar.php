@@ -94,7 +94,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getDataloadSource(array $componentVariation, array &$props): string
     {
-        // Replace the routes in the "modulepaths" and "actionpath" parameters:
+        // Replace the routes in the "componentVariationPaths" and "actionpath" parameters:
         // point to the "execute" block instead
         switch ($componentVariation[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:

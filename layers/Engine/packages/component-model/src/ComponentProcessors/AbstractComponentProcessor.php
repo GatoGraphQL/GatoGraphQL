@@ -387,14 +387,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    protected function addPropGroupField(string $group, array $componentVariation_or_componentVariationPath, array &$props, $field, $value, array $starting_from_modulepath = array(), array $options = array()): void
+    protected function addPropGroupField(string $group, array $componentVariation_or_componentVariationPath, array &$props, $field, $value, array $starting_from_componentVariationPath = array(), array $options = array()): void
     {
         // Iterate down to the submodule, which must be an array of modules
-        if ($starting_from_modulepath) {
+        if ($starting_from_componentVariationPath) {
             // Convert it to string
             $startingFromModulepathFullNames = array_map(
                 [$this->getModuleHelpers(), 'getModuleFullName'],
-                $starting_from_modulepath
+                $starting_from_componentVariationPath
             );
 
             // Attach the current component variation, which is not included on "starting_from", to step down this level too
@@ -435,14 +435,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $module_props = &$props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES];
         } else {
             // Calculate the path to iterate down
-            $modulepath = $this->getModulepath($componentVariation_or_componentVariationPath, $props);
+            $componentVariationPath = $this->getModulepath($componentVariation_or_componentVariationPath, $props);
 
             // Extract the lastlevel, that's the component variation to with to add the att
-            $attModuleFullName = array_pop($modulepath);
+            $attModuleFullName = array_pop($componentVariationPath);
 
             // Descend into the path to find the component variation for which to add the att
             $module_props = &$props;
-            foreach ($modulepath as $pathlevelFullName) {
+            foreach ($componentVariationPath as $pathlevelFullName) {
                 $module_props[$pathlevelFullName][Props::SUBMODULES] = $module_props[$pathlevelFullName][Props::SUBMODULES] ?? array();
                 $module_props = &$module_props[$pathlevelFullName][Props::SUBMODULES];
             }
@@ -485,23 +485,23 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // Restore original $props
-        if ($starting_from_modulepath) {
+        if ($starting_from_componentVariationPath) {
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, array $componentVariation, array &$props, string $field, array $starting_from_modulepath = array()): mixed
+    protected function getPropGroupField(string $group, array $componentVariation, array &$props, string $field, array $starting_from_componentVariationPath = array()): mixed
     {
-        $group = $this->getPropGroup($group, $componentVariation, $props, $starting_from_modulepath);
+        $group = $this->getPropGroup($group, $componentVariation, $props, $starting_from_componentVariationPath);
         return $group[$field] ?? null;
     }
-    protected function getPropGroup(string $group, array $componentVariation, array &$props, array $starting_from_modulepath = array()): array
+    protected function getPropGroup(string $group, array $componentVariation, array &$props, array $starting_from_componentVariationPath = array()): array
     {
         if (!$props) {
             return [];
         }
 
         $module_props = &$props;
-        foreach ($starting_from_modulepath as $pathlevelModule) {
+        foreach ($starting_from_componentVariationPath as $pathlevelModule) {
             $pathlevelModuleFullName = $this->getModuleHelpers()->getModuleFullName($pathlevelModule);
             $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBMODULES];
         }
@@ -509,49 +509,49 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
         return $module_props[$moduleFullName][$group] ?? array();
     }
-    protected function addGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    protected function addGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath);
+        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
     }
-    public function setProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function setProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->addGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath);
+        $this->addGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
     }
-    public function appendGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function appendGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath, array('append' => true));
+        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('append' => true));
     }
-    public function appendProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function appendProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->appendGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath);
+        $this->appendGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
     }
-    public function mergeGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function mergeGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath, array('array' => true, 'merge' => true));
+        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('array' => true, 'merge' => true));
     }
-    public function mergeProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function mergeProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->mergeGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath);
+        $this->mergeGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
     }
-    public function getGroupProp(string $group, array $componentVariation, array &$props, string $field, array $starting_from_modulepath = array()): mixed
+    public function getGroupProp(string $group, array $componentVariation, array &$props, string $field, array $starting_from_componentVariationPath = array()): mixed
     {
-        return $this->getPropGroupField($group, $componentVariation, $props, $field, $starting_from_modulepath);
+        return $this->getPropGroupField($group, $componentVariation, $props, $field, $starting_from_componentVariationPath);
     }
-    public function getProp(array $componentVariation, array &$props, string $field, array $starting_from_modulepath = array()): mixed
+    public function getProp(array $componentVariation, array &$props, string $field, array $starting_from_componentVariationPath = array()): mixed
     {
-        return $this->getGroupProp(Props::ATTRIBUTES, $componentVariation, $props, $field, $starting_from_modulepath);
+        return $this->getGroupProp(Props::ATTRIBUTES, $componentVariation, $props, $field, $starting_from_componentVariationPath);
     }
-    public function mergeGroupIterateKeyProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function mergeGroupIterateKeyProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath, array('array' => true, 'merge-iterate-key' => true));
+        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('array' => true, 'merge-iterate-key' => true));
     }
-    public function mergeIterateKeyProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function mergeIterateKeyProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath);
+        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
     }
-    public function pushProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
+    public function pushProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_modulepath, array('array' => true, 'push' => true));
+        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('array' => true, 'push' => true));
     }
 
     //-------------------------------------------------

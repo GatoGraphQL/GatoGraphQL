@@ -167,7 +167,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
             return null;
         }
 
-        // Because a component can interact with itself by adding ?modulepaths=...,
+        // Because a component can interact with itself by adding ?componentVariationPaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($componentVariation);
         $ret = GeneralUtils::addQueryArgs(
@@ -185,11 +185,11 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
             ], $ret);
         }
 
-        // Allow to add extra modulepaths set from above
-        if ($extra_module_paths = $this->getProp($componentVariation, $props, 'dataload-source-add-modulepaths')) {
-            foreach ($extra_module_paths as $modulepath) {
+        // Allow to add extra componentVariationPaths set from above
+        if ($extra_module_paths = $this->getProp($componentVariation, $props, 'dataload-source-add-componentVariationPaths')) {
+            foreach ($extra_module_paths as $componentVariationPath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
+                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($componentVariationPath),
                 ], $ret);
             }
         }

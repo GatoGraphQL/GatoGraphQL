@@ -37,7 +37,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
     {
         switch ($componentVariation[1]) {
             case self::MODULE_BLOCK_CREATELOCATION:
-                // Add an extra modulepath to the dataload-source for the create-location block, saying to also load the data block
+                // Add an extra componentVariationPath to the dataload-source for the create-location block, saying to also load the data block
                 $module_path_manager = ModulePathManagerFacade::getInstance();
                 $submodule_propagation_path = $module_path_manager->getPropagationCurrentPath();
                 $submodule_propagation_path[] = $componentVariation;
@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
                         [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::MODULE_DATALOAD_CREATELOCATION]
                     ],
                     $props,
-                    'dataload-source-add-modulepaths',
+                    'dataload-source-add-componentVariationPaths',
                     array(
                         $submodule_propagation_path,
                     )

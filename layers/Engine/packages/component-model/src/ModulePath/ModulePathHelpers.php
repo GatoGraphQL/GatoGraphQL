@@ -44,24 +44,24 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         return $this->stringifyModulePath($module_propagation_current_path);
     }
 
-    public function stringifyModulePath(array $modulepath): string
+    public function stringifyModulePath(array $componentVariationPath): string
     {
         return implode(
             ModulePath::MODULE_SEPARATOR,
             array_map(
                 [$this->getModuleHelpers(), 'getModuleOutputName'],
-                $modulepath
+                $componentVariationPath
             )
         );
     }
 
-    public function recastModulePath(string $modulepath_as_string): array
+    public function recastModulePath(string $componentVariationPath_as_string): array
     {
         return array_map(
             [$this->getModuleHelpers(), 'getModuleFromOutputName'],
             explode(
                 ModulePath::MODULE_SEPARATOR,
-                $modulepath_as_string
+                $componentVariationPath_as_string
             )
         );
     }
@@ -83,7 +83,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         }
 
         // If any path is a substring from another one, then it is its root, and only this one will be taken into account, so remove its substrings
-        // Eg: toplevel.pagesection-top is substring of toplevel, so if passing these 2 modulepaths, keep only toplevel
+        // Eg: toplevel.pagesection-top is substring of toplevel, so if passing these 2 componentVariationPaths, keep only toplevel
         // Check that the last character is ".", to avoid toplevel1 to be removed
         $paths = array_filter(
             $paths,

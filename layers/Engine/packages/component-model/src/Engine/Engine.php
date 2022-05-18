@@ -710,7 +710,7 @@ class Engine implements EngineInterface
             $meta[Response::BACKGROUND_LOAD_URLS] = $engineState->backgroundload_urls;
         };
 
-        // Starting from what component variations must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
+        // Starting from what component variations must do the rendering. Allow for empty arrays (eg: componentVariationPaths[]=somewhatevervalue)
         $not_excluded_componentVariation_sets = $this->getComponentFilterManager()->getNotExcludedComponentVariationSets();
         if (!is_null($not_excluded_componentVariation_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
@@ -909,13 +909,13 @@ class Engine implements EngineInterface
         $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             // If the current module loads data, then add its path to the list
-            if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedComponentVariationPath($componentVariation, $props)) {
-                $referenced_modulepath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_modulepath);
-                $paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? [];
-                $paths[$referenced_modulepath][] = array_merge(
+            if ($interreferenced_componentVariationPath = $processor->getDataFeedbackInterreferencedComponentVariationPath($componentVariation, $props)) {
+                $referenced_componentVariationPath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_componentVariationPath);
+                $paths[$referenced_componentVariationPath] = $paths[$referenced_componentVariationPath] ?? [];
+                $paths[$referenced_componentVariationPath][] = array_merge(
                     $module_path,
                     array(
                         $componentVariation
@@ -959,7 +959,7 @@ class Engine implements EngineInterface
         $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             // If the current module loads data, then add its path to the list
             if ($processor->moduleLoadsData($componentVariation)) {
@@ -1327,12 +1327,12 @@ class Engine implements EngineInterface
 
             // Allow other modules to produce their own feedback using this module's data results
             if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($componentVariation)))] ?? null) {
-                foreach ($referencer_modulefullpaths as $referencer_modulepath) {
-                    $referencer_module = array_pop($referencer_modulepath);
+                foreach ($referencer_modulefullpaths as $referencer_componentVariationPath) {
+                    $referencer_module = array_pop($referencer_componentVariationPath);
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
-                    foreach ($referencer_modulepath as $subComponentVariation) {
+                    foreach ($referencer_componentVariationPath as $subComponentVariation) {
                         $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
                         $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBMODULES];
                         $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBMODULES];
@@ -1351,7 +1351,7 @@ class Engine implements EngineInterface
                     } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                         $referencer_module_props = &$referencer_props;
                     }
-                    $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+                    $this->processAndAddModuleData($referencer_componentVariationPath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
             }
 

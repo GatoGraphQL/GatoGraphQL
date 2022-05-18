@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\ModulePath;
 interface ModulePathHelpersInterface
 {
     public function getStringifiedModulePropagationCurrentPath(array $componentVariation): string;
-    public function stringifyModulePath(array $modulepath): string;
-    public function recastModulePath(string $modulepath_as_string): array;
+    public function stringifyModulePath(array $componentVariationPath): string;
+    public function recastModulePath(string $componentVariationPath_as_string): array;
     /**
      * @return array<string[]>
      */

@@ -53,7 +53,7 @@ class ModulePaths extends AbstractComponentFilter
 
     public function getName(): string
     {
-        return 'modulepaths';
+        return 'componentVariationPaths';
     }
 
     public function excludeModule(array $componentVariation, array &$props): bool
@@ -73,7 +73,7 @@ class ModulePaths extends AbstractComponentFilter
             return false;
         }
 
-        // Check if this module is the last item of any modulepath
+        // Check if this module is the last item of any componentVariationPath
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
             if (count($unsettled_path) == 1 && $unsettled_path[0] == $componentVariation) {
                 return false;
@@ -94,8 +94,8 @@ class ModulePaths extends AbstractComponentFilter
             return $subComponentVariations;
         }
 
-        // $componentVariation_unsettled_path: Start only from the specified module. It is passed under URL param "modulepaths", and it's the list of module paths
-        // starting from the entry, and joined by ".", like this: modulepaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
+        // $componentVariation_unsettled_path: Start only from the specified module. It is passed under URL param "componentVariationPaths", and it's the list of module paths
+        // starting from the entry, and joined by ".", like this: componentVariationPaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
         // This way, the component can interact with itself to fetch or post data, etc
         $matching_subComponentVariations = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
@@ -120,7 +120,7 @@ class ModulePaths extends AbstractComponentFilter
     }
 
     /**
-     * The `prepare` function advances the modulepath one level down, when interating into the subComponentVariations, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentVariationPath one level down, when interating into the subComponentVariations, and then calling `restore` the value goes one level up again
      */
     public function prepareForPropagation(array $componentVariation, array &$props): void
     {

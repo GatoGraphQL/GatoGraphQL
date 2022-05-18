@@ -61,7 +61,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         // If the module path has been set to true, then from this module downwards all modules are dynamic
         if ($this->isDynamicModule($componentVariation, $props)) {
 
-            // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+            // If componentVariationPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
             if (!$modulefilter_manager->excludeModule($componentVariation, $props)) {
 
                 return $this->getResourcesMergedmoduletree($componentVariation, $props);
@@ -132,7 +132,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $processor = $this->getDecoratedcomponentProcessor($componentVariation);
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
 
         // If the module path has been set to true, then from this module downwards all modules are dynamic

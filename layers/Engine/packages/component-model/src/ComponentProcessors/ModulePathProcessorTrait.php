@@ -29,7 +29,7 @@ trait ModulePathProcessorTrait
         $key = $this->getModuleHelpers()->getModuleOutputName($componentVariation);
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             if ($module_ret = $this->$eval_self_fn($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
                 $ret[$key] = $module_ret;
@@ -66,7 +66,7 @@ trait ModulePathProcessorTrait
     {
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             $ret = $this->$eval_self_fn($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         } else {
@@ -100,7 +100,7 @@ trait ModulePathProcessorTrait
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
         $key = $use_module_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($componentVariation) : $moduleFullName;
 
-        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             // Maybe only execute function on the dataloading modules
             if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($componentVariation)->startDataloadingSection($componentVariation)) {
@@ -137,7 +137,7 @@ trait ModulePathProcessorTrait
     {
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
+        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
             $ret = $this->$eval_self_fn($componentVariation, $props);
         } else {
