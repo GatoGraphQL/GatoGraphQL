@@ -70,7 +70,7 @@ class PoP_ServerSideManager
     public function &getTemplates($domain)
     {
         $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
-        $templates =& $datastore->store[$domain]['modulesettings']['combinedstate']['templates'] ?? array();
+        $templates =& $datastore->store[$domain]['componentsettings']['combinedstate']['templates'] ?? array();
         return $templates;
     }
 
@@ -88,10 +88,10 @@ class PoP_ServerSideManager
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $url = $requestHelperService->getCurrentURL();
         $datastore->store[$domain]['mutableonrequestdata'] = array(
-            $url => $json['moduledata']['mutableonrequest'],
+            $url => $json['componentdata']['mutableonrequest'],
         );
         $datastore->store[$domain]['combinedstatedata'] = array(
-            $url => $json['moduledata']['combinedstate'],
+            $url => $json['componentdata']['combinedstate'],
         );
     }
 

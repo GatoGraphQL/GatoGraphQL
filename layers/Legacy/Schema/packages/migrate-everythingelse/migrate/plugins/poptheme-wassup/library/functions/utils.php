@@ -40,7 +40,7 @@ class PoPThemeWassup_Utils
             if (!PoP_SSR_ServerUtils::disableServerSideRendering()) {
                 $engineState = App::getEngineState();
                 $data = $engineState->data;
-                $configuration = $data['modulesettings']['combinedstate']['configuration'];
+                $configuration = $data['componentsettings']['combinedstate']['configuration'];
                 // Because the pageSection names may be mangled (so that "body" will be "x3" or something like that),
                 // repeat the name of the pageSection/class below
                 $possiblyOpenPageSections = array(

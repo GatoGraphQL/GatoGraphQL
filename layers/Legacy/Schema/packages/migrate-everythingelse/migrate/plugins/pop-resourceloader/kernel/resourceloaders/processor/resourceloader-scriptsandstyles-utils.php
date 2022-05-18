@@ -495,15 +495,15 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
         // Add all the pageSection methods
         $data = $engineState->data;
-        $pageSectionJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['pagesection'];
-        $blockJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['block'];
+        $pageSectionJSMethods = $data['componentsettings']['combinedstate']['jsmethods']['pagesection'];
+        $blockJSMethods = $data['componentsettings']['combinedstate']['jsmethods']['block'];
 
         $methods = PoP_ResourceLoaderProcessorUtils::getJsmethods($pageSectionJSMethods, $blockJSMethods, true);
         $critical_methods = $methods[POP_PROGRESSIVEBOOTING_CRITICAL];
         $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
 
         // Get all the resources the template is dependent on. Eg: inline CSS styles
-        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['modulesettings']['combinedstate']['module-resources'] ?? array()))));
+        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['componentsettings']['combinedstate']['module-resources'] ?? array()))));
         $modules_resources = $engineState->helperCalculations['module-resources'];
 
         // Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods

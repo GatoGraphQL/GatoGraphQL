@@ -103,7 +103,7 @@ trait ModulePathProcessorTrait
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
             // Maybe only execute function on the dataloading modules
-            if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($component)->startDataloadingSection($component)) {
+            if (!isset($options['only-execute-on-dataloading-components']) || !$options['only-execute-on-dataloading-components'] || $this->getComponentProcessor($component)->startDataloadingSection($component)) {
                 if ($component_ret = $this->$eval_self_fn($component, $props)) {
                     $ret[$key] = $component_ret;
                 }

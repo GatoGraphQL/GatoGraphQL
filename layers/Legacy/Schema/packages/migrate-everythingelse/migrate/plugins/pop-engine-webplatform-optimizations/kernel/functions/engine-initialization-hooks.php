@@ -22,7 +22,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
             // Instead, save the settings contents into a javascript file, and enqueue it
             if (PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {
                 // Settings
-                $this->optimizeEncodedData($data, $processor, array('modulesettings'), POP_RUNTIMECONTENTTYPE_SETTINGS, true);
+                $this->optimizeEncodedData($data, $processor, array('componentsettings'), POP_RUNTIMECONTENTTYPE_SETTINGS, true);
             }
         }
             

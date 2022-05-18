@@ -129,7 +129,7 @@ class PoP_SSR_EngineInitialization_Hooks
         $dynamicdatabases = array();
 
         // From the dbobjectids, we obtain the needed data only for the required IDs and nothing else
-        $dbobjectids = $data['datasetmoduledata']['combinedstate']['dbobjectids'];
+        $dbobjectids = $data['datasetcomponentdata']['combinedstate']['dbobjectids'];
 
         // Calculate the dynamic data settings
         $entryComponent = $engine->getEntryComponent();

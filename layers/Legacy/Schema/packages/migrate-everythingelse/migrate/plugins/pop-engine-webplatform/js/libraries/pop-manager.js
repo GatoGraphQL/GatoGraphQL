@@ -169,10 +169,10 @@ window.pop.Manager = {
 	// 	storeData.statelessdata = json.statelessdata || {};
 
 	// 	// Stateful data is to be integrated under the corresponding URL
-	// 	var url = json.moduledata.stateful.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
+	// 	var url = json.componentdata.stateful.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
 	// 	url = "temporary-hack";
 	// 	storeData.statefuldata = {};
-	// 	storeData.statefuldata[url] = json.moduledata.stateful || {};
+	// 	storeData.statefuldata[url] = json.componentdata.stateful || {};
 	// 	storeData.combinedstatedata = {};
 	// 	storeData.combinedstatedata[url] = $.extend(true, {}, storeData.statelessdata, storeData.statefuldata[url]);
 

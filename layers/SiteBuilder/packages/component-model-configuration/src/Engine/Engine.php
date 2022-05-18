@@ -116,13 +116,13 @@ class Engine extends UpstreamEngine implements EngineInterface
         if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
             // Save the model settings
             if ($immutable_settings) {
-                $ret['modulesettings']['immutable'] = $immutable_settings;
+                $ret['componentsettings']['immutable'] = $immutable_settings;
             }
             if ($mutableonmodel_settings) {
-                $ret['modulesettings']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_settings) : $mutableonmodel_settings;
+                $ret['componentsettings']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_settings) : $mutableonmodel_settings;
             }
             if ($mutableonrequest_settings) {
-                $ret['modulesettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
+                $ret['componentsettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
             }
         } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
@@ -133,7 +133,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                     $mutableonrequest_settings ?? array()
                 )
             ) {
-                $ret['modulesettings'] = $has_extra_routes ? array($current_uri => $combined_settings) : $combined_settings;
+                $ret['componentsettings'] = $has_extra_routes ? array($current_uri => $combined_settings) : $combined_settings;
             }
         }
 

@@ -584,28 +584,28 @@ class Engine implements EngineInterface
 
         // Comment Leo 14/09/2018: Re-enable here:
         // // Combine the statelessdata and mutableonrequestdata objects
-        // if ($data['modulesettings'] ?? null) {
+        // if ($data['componentsettings'] ?? null) {
 
-        //     $data['modulesettings']['combinedstate'] = array_merge_recursive(
-        //         $data['modulesettings']['immutable'] ?? []
-        //         $data['modulesettings']['mutableonmodel'] ?? []
-        //         $data['modulesettings']['mutableonrequest'] ?? [],
+        //     $data['componentsettings']['combinedstate'] = array_merge_recursive(
+        //         $data['componentsettings']['immutable'] ?? []
+        //         $data['componentsettings']['mutableonmodel'] ?? []
+        //         $data['componentsettings']['mutableonrequest'] ?? [],
         //     );
         // }
-        // if ($data['moduledata'] ?? null) {
+        // if ($data['componentdata'] ?? null) {
 
-        //     $data['moduledata']['combinedstate'] = array_merge_recursive(
-        //         $data['moduledata']['immutable'] ?? []
-        //         $data['moduledata']['mutableonmodel'] ?? []
-        //         $data['moduledata']['mutableonrequest'] ?? [],
+        //     $data['componentdata']['combinedstate'] = array_merge_recursive(
+        //         $data['componentdata']['immutable'] ?? []
+        //         $data['componentdata']['mutableonmodel'] ?? []
+        //         $data['componentdata']['mutableonrequest'] ?? [],
         //     );
         // }
-        // if ($data['datasetmoduledata'] ?? null) {
+        // if ($data['datasetcomponentdata'] ?? null) {
 
-        //     $data['datasetmoduledata']['combinedstate'] = array_merge_recursive(
-        //         $data['datasetmoduledata']['immutable'] ?? []
-        //         $data['datasetmoduledata']['mutableonmodel'] ?? []
-        //         $data['datasetmoduledata']['mutableonrequest'] ?? [],
+        //     $data['datasetcomponentdata']['combinedstate'] = array_merge_recursive(
+        //         $data['datasetcomponentdata']['immutable'] ?? []
+        //         $data['datasetcomponentdata']['mutableonmodel'] ?? []
+        //         $data['datasetcomponentdata']['mutableonrequest'] ?? [],
         //     );
         // }
 
@@ -679,12 +679,12 @@ class Engine implements EngineInterface
 
         if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
             if ($immutable_datasetsettings) {
-                $ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
+                $ret['datasetcomponentsettings']['immutable'] = $immutable_datasetsettings;
             }
         } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if ($combined_datasetsettings = $immutable_datasetsettings) {
-                $ret['datasetmodulesettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
+                $ret['datasetcomponentsettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
             }
         }
 
@@ -1054,7 +1054,7 @@ class Engine implements EngineInterface
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
 
         $immutable_componentdata = $mutableonmodel_componentdata = $mutableonrequest_componentdata = [];
-        $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = [];
+        $immutable_datasetcomponentdata = $mutableonmodel_datasetcomponentdata = $mutableonrequest_datasetcomponentdata = [];
         if ($add_meta) {
             $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = [];
         }
@@ -1286,31 +1286,31 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
-            $datasetmoduledata = $datasetmodulemeta = null;
+            $datasetcomponentdata = $datasetmodulemeta = null;
             if ($datasource == DataSources::IMMUTABLE) {
-                $datasetmoduledata = &$immutable_datasetmoduledata;
+                $datasetcomponentdata = &$immutable_datasetcomponentdata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$immutable_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$immutable_componentdata;
+                $engineState->componentdata = &$immutable_componentdata;
             } elseif ($datasource == DataSources::MUTABLEONMODEL) {
-                $datasetmoduledata = &$mutableonmodel_datasetmoduledata;
+                $datasetcomponentdata = &$mutableonmodel_datasetcomponentdata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$mutableonmodel_componentdata;
+                $engineState->componentdata = &$mutableonmodel_componentdata;
             } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
-                $datasetmoduledata = &$mutableonrequest_datasetmoduledata;
+                $datasetcomponentdata = &$mutableonrequest_datasetcomponentdata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$mutableonrequest_componentdata;
+                $engineState->componentdata = &$mutableonrequest_componentdata;
             }
 
-            // Integrate the dbobjectids into $datasetmoduledata
+            // Integrate the dbobjectids into $datasetcomponentdata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
-            if ($datasetmoduledata !== null) {
-                $this->assignValueForModule($datasetmoduledata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
+            if ($datasetcomponentdata !== null) {
+                $this->assignValueForModule($datasetcomponentdata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
             // Save the meta into $datasetmodulemeta
@@ -1322,7 +1322,7 @@ class Engine implements EngineInterface
                 }
             }
 
-            // Integrate the feedback into $moduledata
+            // Integrate the feedback into $componentdata
             $this->processAndAddModuleData($module_path, $component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
@@ -1389,27 +1389,27 @@ class Engine implements EngineInterface
             if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
                 /** @phpstan-ignore-next-line */
                 if ($immutable_componentdata) {
-                    $ret['moduledata']['immutable'] = $immutable_componentdata;
+                    $ret['componentdata']['immutable'] = $immutable_componentdata;
                 }
                 /** @phpstan-ignore-next-line */
                 if ($mutableonmodel_componentdata) {
-                    $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_componentdata) : $mutableonmodel_componentdata;
+                    $ret['componentdata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_componentdata) : $mutableonmodel_componentdata;
                 }
                 /** @phpstan-ignore-next-line */
                 if ($mutableonrequest_componentdata) {
-                    $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_componentdata) : $mutableonrequest_componentdata;
+                    $ret['componentdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_componentdata) : $mutableonrequest_componentdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($immutable_datasetmoduledata) {
-                    $ret['datasetmoduledata']['immutable'] = $immutable_datasetmoduledata;
+                if ($immutable_datasetcomponentdata) {
+                    $ret['datasetcomponentdata']['immutable'] = $immutable_datasetcomponentdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($mutableonmodel_datasetmoduledata) {
-                    $ret['datasetmoduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmoduledata) : $mutableonmodel_datasetmoduledata;
+                if ($mutableonmodel_datasetcomponentdata) {
+                    $ret['datasetcomponentdata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetcomponentdata) : $mutableonmodel_datasetcomponentdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($mutableonrequest_datasetmoduledata) {
-                    $ret['datasetmoduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmoduledata) : $mutableonrequest_datasetmoduledata;
+                if ($mutableonrequest_datasetcomponentdata) {
+                    $ret['datasetcomponentdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetcomponentdata) : $mutableonrequest_datasetcomponentdata;
                 }
 
                 if ($add_meta) {
@@ -1435,16 +1435,16 @@ class Engine implements EngineInterface
                         $mutableonrequest_componentdata
                     )
                 ) {
-                    $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_componentdata) : $combined_componentdata;
+                    $ret['componentdata'] = $has_extra_routes ? array($current_uri => $combined_componentdata) : $combined_componentdata;
                 }
                 if (
-                    $combined_datasetmoduledata = array_merge_recursive(
-                        $immutable_datasetmoduledata,
-                        $mutableonmodel_datasetmoduledata,
-                        $mutableonrequest_datasetmoduledata
+                    $combined_datasetcomponentdata = array_merge_recursive(
+                        $immutable_datasetcomponentdata,
+                        $mutableonmodel_datasetcomponentdata,
+                        $mutableonrequest_datasetcomponentdata
                     )
                 ) {
-                    $ret['datasetmoduledata'] = $has_extra_routes ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
+                    $ret['datasetcomponentdata'] = $has_extra_routes ? array($current_uri => $combined_datasetcomponentdata) : $combined_datasetcomponentdata;
                 }
                 if ($add_meta) {
                     if (
@@ -2300,7 +2300,7 @@ class Engine implements EngineInterface
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
                             // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetmodulesettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
+                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
                                 function ($field_id) use ($typedSubcomponentIDs) {
@@ -2451,9 +2451,9 @@ class Engine implements EngineInterface
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
         $engineState = App::getEngineState();
 
-        // Integrate the feedback into $moduledata
-        if ($engineState->moduledata !== null) {
-            $moduledata = &$engineState->moduledata;
+        // Integrate the feedback into $componentdata
+        if ($engineState->componentdata !== null) {
+            $componentdata = &$engineState->componentdata;
 
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
@@ -2464,12 +2464,12 @@ class Engine implements EngineInterface
                 // Advance the position of the array into the current module
                 foreach ($module_path as $subComponent) {
                     $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
-                    $moduledata[$submoduleOutputName][$submodulesOutputProperty] = $moduledata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
-                    $moduledata = &$moduledata[$submoduleOutputName][$submodulesOutputProperty];
+                    $componentdata[$submoduleOutputName][$submodulesOutputProperty] = $componentdata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
+                    $componentdata = &$componentdata[$submoduleOutputName][$submodulesOutputProperty];
                 }
                 // Merge the feedback in
-                $moduledata = array_merge_recursive(
-                    $moduledata,
+                $componentdata = array_merge_recursive(
+                    $componentdata,
                     $feedback
                 );
             }
