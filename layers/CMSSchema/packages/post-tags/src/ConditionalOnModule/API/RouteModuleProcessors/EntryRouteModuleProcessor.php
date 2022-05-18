@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;

@@ -10,7 +10,7 @@ use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\RouteModuleProcessorManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;

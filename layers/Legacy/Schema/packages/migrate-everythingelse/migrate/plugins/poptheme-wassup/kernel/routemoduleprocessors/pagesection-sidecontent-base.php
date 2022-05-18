@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_SideContentPageSectionRouteModuleProcessorBase extends \PoP\ModuleRouting\AbstractRouteModuleProcessor
+abstract class PoP_Module_SideContentPageSectionRouteModuleProcessorBase extends \PoP\ComponentRouting\AbstractRouteModuleProcessor
 {
     /**
      * @return string[]

@@ -59,7 +59,7 @@ class Wassup_AAL_PoPProcessors_Module_MainContentRouteModuleProcessor extends \P
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new Wassup_AAL_PoPProcessors_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

@@ -32,7 +32,7 @@ class UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor extends \P
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

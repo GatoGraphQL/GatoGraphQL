@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
 {

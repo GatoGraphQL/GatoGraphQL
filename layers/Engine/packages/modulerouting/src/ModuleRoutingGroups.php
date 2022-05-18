@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting;
+namespace PoP\ComponentRouting;
 
-class ModuleRoutingGroups
+class ComponentRoutingGroups
 {
     // We have at least one Group defined: the Entry Module (not mandatory to use it though)
     const ENTRYCOMPONENT = 'entrycomponent';

@@ -63,7 +63,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Mod
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);
 }, 200);

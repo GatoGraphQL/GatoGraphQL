@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;

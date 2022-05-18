@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
 {

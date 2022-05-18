@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting;
+namespace PoP\ComponentRouting;
 
 interface RouteModuleProcessorManagerInterface
 {

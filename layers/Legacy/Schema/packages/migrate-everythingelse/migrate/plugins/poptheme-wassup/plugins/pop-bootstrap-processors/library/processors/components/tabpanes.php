@@ -1,5 +1,5 @@
 <?php
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 
 /**
  * All PageSections

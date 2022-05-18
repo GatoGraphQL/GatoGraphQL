@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostCategories\ConditionalOnModule\API\RouteModuleProcess
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPCMSSchema\PostCategories\Module;

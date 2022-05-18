@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting;
+namespace PoP\ComponentRouting;
 
-use PoP\ModuleRouting\Helpers\Methods;
+use PoP\ComponentRouting\Helpers\Methods;
 use PoP\Root\App;
 
 abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcessorManagerInterface
@@ -33,7 +33,7 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
 
     public function getDefaultGroup(): string
     {
-        return ModuleRoutingGroups::ENTRYCOMPONENT;
+        return ComponentRoutingGroups::ENTRYCOMPONENT;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting\Helpers;
+namespace PoP\ComponentRouting\Helpers;
 
 use PoP\Root\Helpers\Methods as RootMethods;
 

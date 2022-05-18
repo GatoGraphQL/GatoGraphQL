@@ -1,5 +1,5 @@
 <?php
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
 {

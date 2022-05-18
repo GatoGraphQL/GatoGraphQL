@@ -1,5 +1,5 @@
 <?php
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 
 const POP_MODULEID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';
 const POP_MODULEID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS = 'ps-framecomponents';

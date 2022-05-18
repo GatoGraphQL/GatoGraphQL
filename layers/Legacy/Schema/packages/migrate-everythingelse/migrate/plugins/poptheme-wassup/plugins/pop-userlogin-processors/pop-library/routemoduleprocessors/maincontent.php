@@ -30,7 +30,7 @@ class PoPTheme_Wassup_UserLogin_Module_MainContentRouteModuleProcessor extends \
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_UserLogin_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\ModuleRouting;
+namespace PoP\ComponentRouting;
 
 use PoP\Root\AbstractModuleTest;
 

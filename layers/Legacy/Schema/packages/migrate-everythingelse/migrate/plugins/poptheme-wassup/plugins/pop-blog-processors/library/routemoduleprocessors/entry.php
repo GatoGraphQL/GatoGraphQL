@@ -1,7 +1,7 @@
 <?php
 
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
@@ -115,7 +115,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
     new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
 	);
 }, 888200);

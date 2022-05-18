@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\ModuleRouting\\": "src"
+            "PoP\\ComponentRouting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\ModuleRouting\\": "tests"
+            "PoP\\ComponentRouting\\": "tests"
         }
     },
     "scripts": {

@@ -2,7 +2,7 @@
 
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\SPA\ModuleFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries

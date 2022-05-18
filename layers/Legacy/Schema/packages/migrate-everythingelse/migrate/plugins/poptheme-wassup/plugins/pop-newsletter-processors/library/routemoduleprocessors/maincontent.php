@@ -27,7 +27,7 @@ class Wassup_Newsletter_Module_MainContentRouteModuleProcessor extends \PoP\Appl
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new Wassup_Newsletter_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

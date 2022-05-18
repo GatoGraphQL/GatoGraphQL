@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting;
+namespace PoP\ComponentRouting;
 
 abstract class AbstractEntryRouteModuleProcessor extends AbstractRouteModuleProcessor
 {
@@ -12,7 +12,7 @@ abstract class AbstractEntryRouteModuleProcessor extends AbstractRouteModuleProc
     public function getGroups(): array
     {
         return [
-            ModuleRoutingGroups::ENTRYCOMPONENT,
+            ComponentRoutingGroups::ENTRYCOMPONENT,
         ];
     }
 }

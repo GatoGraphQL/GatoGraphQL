@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 
 class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor extends PoP_Module_QuickviewFrameTopOptionsPageSectionRouteModuleProcessorBase
@@ -34,7 +34,7 @@ class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor exte
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor()
 	);
 }, 200);

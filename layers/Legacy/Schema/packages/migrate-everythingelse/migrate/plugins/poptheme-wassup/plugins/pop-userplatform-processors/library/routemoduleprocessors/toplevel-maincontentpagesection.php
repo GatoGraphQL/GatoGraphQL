@@ -32,7 +32,7 @@ class PoPTheme_Wassup_UserPlatform_Module_ContentPageSectionTopLevelRouteModuleP
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_UserPlatform_Module_ContentPageSectionTopLevelRouteModuleProcessor()
 	);
 }, 200);

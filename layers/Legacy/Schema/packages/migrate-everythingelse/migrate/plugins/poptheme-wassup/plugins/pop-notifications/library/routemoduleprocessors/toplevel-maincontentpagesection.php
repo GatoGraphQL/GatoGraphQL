@@ -33,7 +33,7 @@ class PoPTheme_Wassup_Notifications_Module_ContentPageSectionTopLevelRouteModule
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_Notifications_Module_ContentPageSectionTopLevelRouteModuleProcessor()
 	);
 }, 200);

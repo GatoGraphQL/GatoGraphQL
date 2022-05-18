@@ -26,7 +26,7 @@ class MultiDomain_Module_MainContentRouteModuleProcessor extends \PoP\Applicatio
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new MultiDomain_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

@@ -6,8 +6,8 @@ namespace PoP\ComponentModel\EntryComponent;
 
 use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\ModuleRouting\ModuleRoutingGroups;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\ComponentRoutingGroups;
+use PoP\ComponentRouting\RouteModuleProcessorManagerInterface;
 
 class EntryComponentManager implements EntryComponentManagerInterface
 {
@@ -26,6 +26,6 @@ class EntryComponentManager implements EntryComponentManagerInterface
 
     public function getEntryComponent(): ?array
     {
-        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYCOMPONENT);
+        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ComponentRoutingGroups::ENTRYCOMPONENT);
     }
 }

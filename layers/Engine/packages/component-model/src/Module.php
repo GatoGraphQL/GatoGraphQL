@@ -20,7 +20,7 @@ class Module extends AbstractModule
             \PoP\FieldQuery\Module::class,
             \PoP\GraphQLParser\Module::class,
             \PoP\LooseContracts\Module::class,
-            \PoP\ModuleRouting\Module::class,
+            \PoP\ComponentRouting\Module::class,
         ];
     }
 

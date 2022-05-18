@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\ModuleProcessors\RootRelationalFieldDataloadModul
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

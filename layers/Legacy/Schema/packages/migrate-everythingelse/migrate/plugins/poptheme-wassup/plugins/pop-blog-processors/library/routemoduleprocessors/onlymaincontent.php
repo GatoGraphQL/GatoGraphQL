@@ -89,7 +89,7 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends Po
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor()
 	);
 }, 200);

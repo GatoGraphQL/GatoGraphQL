@@ -26,7 +26,7 @@ class Domain_Module_MainContentRouteModuleProcessor extends \PoP\Application\Abs
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new Domain_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

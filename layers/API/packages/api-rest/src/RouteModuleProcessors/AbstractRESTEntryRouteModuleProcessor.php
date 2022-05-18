@@ -6,7 +6,7 @@ namespace PoPAPI\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Schema\FieldQueryConvertorInterface;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 use PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
 

@@ -21,7 +21,7 @@ class PoP_Module_SideContentPageSectionRouteModuleProcessor extends PoP_Module_S
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Module_SideContentPageSectionRouteModuleProcessor()
 	);
 }, 200);

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Application;
 
-class RouteModuleProcessorManager extends \PoP\ComponentModel\ModuleRouting\RouteModuleProcessorManager
+class RouteModuleProcessorManager extends \PoP\ComponentModel\ComponentRouting\RouteModuleProcessorManager
 {
     public function getDefaultGroup(): string
     {

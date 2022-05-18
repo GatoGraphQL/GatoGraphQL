@@ -33,7 +33,7 @@ class PoPTheme_Wassup_LocationPosts_AddHighlights_Module_SideInfoContentPageSect
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_LocationPosts_AddHighlights_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);
 }, 200);

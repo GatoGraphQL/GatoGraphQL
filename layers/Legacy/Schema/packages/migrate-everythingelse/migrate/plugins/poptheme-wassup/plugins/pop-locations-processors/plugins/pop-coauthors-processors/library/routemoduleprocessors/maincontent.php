@@ -36,7 +36,7 @@ class Wassup_EM_CAP_Module_MainContentRouteModuleProcessor extends \PoP\Applicat
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new Wassup_EM_CAP_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

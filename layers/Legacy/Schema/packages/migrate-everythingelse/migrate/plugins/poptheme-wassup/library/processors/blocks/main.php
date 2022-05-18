@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Types\Status;

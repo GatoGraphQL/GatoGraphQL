@@ -120,7 +120,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentRouteModuleProcessor e
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_NoSearchCategoryPostsCreation_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

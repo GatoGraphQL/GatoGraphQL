@@ -53,7 +53,7 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRoute
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);
 }, 200);

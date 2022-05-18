@@ -35,7 +35,7 @@ class PoP_CommonPages_ContentCreation_Module_MainContentRouteModuleProcessor ext
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_CommonPages_ContentCreation_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

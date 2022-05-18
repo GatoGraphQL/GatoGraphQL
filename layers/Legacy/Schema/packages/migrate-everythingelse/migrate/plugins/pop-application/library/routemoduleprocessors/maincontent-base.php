@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Application;
 
-abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ModuleRouting\AbstractRouteModuleProcessor
+abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ComponentRouting\AbstractRouteModuleProcessor
 {
     /**
      * @return string[]

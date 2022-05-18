@@ -35,7 +35,7 @@ class PoP_Module_TopContentPageSectionRouteModuleProcessor extends PoP_Module_To
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Module_TopContentPageSectionRouteModuleProcessor()
 	);
 }, 200);

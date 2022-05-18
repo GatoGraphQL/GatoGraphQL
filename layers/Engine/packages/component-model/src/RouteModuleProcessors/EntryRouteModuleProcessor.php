@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\RouteModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\RootModuleProcessors;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

@@ -47,7 +47,7 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProc
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProcessor()
 	);
 }, 200);

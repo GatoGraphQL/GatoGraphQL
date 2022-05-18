@@ -32,7 +32,7 @@ class PoP_EventsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor ex
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_EventsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);
 }, 200);

@@ -26,7 +26,7 @@ class Wassup_Share_Module_MainContentRouteModuleProcessor extends \PoP\Applicati
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new Wassup_Share_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

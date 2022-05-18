@@ -27,7 +27,7 @@ class PoPTheme_Wassup_EventsCreation_Module_SideInfoContentPageSectionRouteModul
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_EventsCreation_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);
 }, 200);

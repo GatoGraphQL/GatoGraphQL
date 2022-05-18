@@ -64,7 +64,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleP
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);
 }, 200);

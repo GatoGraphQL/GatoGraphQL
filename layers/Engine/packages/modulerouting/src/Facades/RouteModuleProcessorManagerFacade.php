@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting\Facades;
+namespace PoP\ComponentRouting\Facades;
 
 use PoP\Root\App;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\RouteModuleProcessorManagerInterface;
 
 class RouteModuleProcessorManagerFacade
 {

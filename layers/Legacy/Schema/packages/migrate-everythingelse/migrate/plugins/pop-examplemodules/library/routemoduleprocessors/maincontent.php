@@ -52,7 +52,7 @@ class MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainConte
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new MainContentRouteModuleProcessor()
 	);
 }, 200);

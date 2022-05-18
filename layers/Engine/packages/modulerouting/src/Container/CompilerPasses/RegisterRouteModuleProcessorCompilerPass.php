@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ModuleRouting\Container\CompilerPasses;
+namespace PoP\ComponentRouting\Container\CompilerPasses;
 
-use PoP\ModuleRouting\AbstractRouteModuleProcessor;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\AbstractRouteModuleProcessor;
+use PoP\ComponentRouting\RouteModuleProcessorManagerInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterRouteModuleProcessorCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

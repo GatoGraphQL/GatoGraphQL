@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\ModuleRouting\Container\CompilerPasses\:
+    PoP\ComponentRouting\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'

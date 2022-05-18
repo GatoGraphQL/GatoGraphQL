@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Pages\ConditionalOnModule\API\RouteModuleProcessors;
 
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
 use PoPCMSSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Pages\Routing\RequestNature;
 

@@ -75,7 +75,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Module_MainPageSectionRouteModuleProcessor()
 	);
 }, 200);

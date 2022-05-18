@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleRouting;
+namespace PoP\ComponentModel\ComponentRouting;
 
-use PoP\ModuleRouting\AbstractRouteModuleProcessorManager;
+use PoP\ComponentRouting\AbstractRouteModuleProcessorManager;
 
 class RouteModuleProcessorManager extends AbstractRouteModuleProcessorManager
 {

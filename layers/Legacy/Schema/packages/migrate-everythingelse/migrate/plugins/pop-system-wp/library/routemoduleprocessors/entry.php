@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class PoPSystem_WP_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
+class PoPSystem_WP_Module_EntryRouteModuleProcessor extends \PoP\ComponentRouting\AbstractEntryRouteModuleProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -26,7 +26,7 @@ class PoPSystem_WP_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\A
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
     new PoPSystem_WP_Module_EntryRouteModuleProcessor()
 	);
 }, 200);

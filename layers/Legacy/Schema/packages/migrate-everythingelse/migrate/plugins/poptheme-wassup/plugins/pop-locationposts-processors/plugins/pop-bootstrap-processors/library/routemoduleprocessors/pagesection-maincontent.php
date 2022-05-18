@@ -55,7 +55,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentRouteModuleProcessor ext
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

@@ -117,7 +117,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionRouteModulePro
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
+	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);
 }, 200);
