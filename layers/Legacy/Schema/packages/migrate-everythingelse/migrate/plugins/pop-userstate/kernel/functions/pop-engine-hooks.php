@@ -16,7 +16,7 @@ class PoP_UserState_EngineHooks
             4
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
+            '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
             $this->calculateDataloadingModuleData(...),
             10,
             8

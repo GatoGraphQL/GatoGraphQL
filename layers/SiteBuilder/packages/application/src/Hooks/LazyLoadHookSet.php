@@ -47,7 +47,7 @@ class LazyLoadHookSet extends AbstractHookSet
             4
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
+            '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
             $this->calculateDataloadingModuleData(...),
             10,
             8

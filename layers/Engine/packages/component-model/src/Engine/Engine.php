@@ -231,7 +231,7 @@ class Engine implements EngineInterface
         $engineState->entryComponent = $this->getEntryComponentManager()->getEntryComponent();
         if ($engineState->entryComponent === null) {
             throw new ImpossibleToHappenException(
-                $this->__('No entry module for this request', 'component-model')
+                $this->__('No entry component for this request', 'component-model')
             );
         }
 
@@ -287,7 +287,7 @@ class Engine implements EngineInterface
          * and
          * "userpostactivity-count":1
          *
-         * Please notice: ?module=settings doesn't have 'nocache-fields'
+         * Please notice: ?component=settings doesn't have 'nocache-fields'
          */
         if ($engineState->nocache_fields) {
             $commoncode = preg_replace('/"(' . implode('|', $engineState->nocache_fields) . ')":[0-9]+,?/', '', $commoncode);
@@ -516,7 +516,7 @@ class Engine implements EngineInterface
         // From the state we know if to process static/staful content or both
         $datasourceselector = App::getState('datasourceselector');
 
-        // Get the entry module based on the application configuration and the nature
+        // Get the entry component based on the application configuration and the nature
         $component = $this->getEntryComponent();
 
         $engineState = App::getEngineState();
@@ -713,7 +713,7 @@ class Engine implements EngineInterface
         // Starting from what components must do the rendering. Allow for empty arrays (eg: componentPaths[]=somewhatevervalue)
         $not_excluded_component_sets = $this->getComponentFilterManager()->getNotExcludedComponentSets();
         if (!is_null($not_excluded_component_sets)) {
-            // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::COMPONENT_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::COMPONENT_BLOCK_USERAVATAR_UPDATE)
+            // Print the settings id of each component. Then, a component can feed data to another one by sharing the same settings id (eg: self::COMPONENT_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::COMPONENT_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
             foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
@@ -909,9 +909,9 @@ class Engine implements EngineInterface
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
-            // If the current module loads data, then add its path to the list
+            // If the current component loads data, then add its path to the list
             if ($interreferenced_componentPath = $processor->getDataFeedbackInterreferencedComponentPath($component, $props)) {
                 $referenced_componentPath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_componentPath);
                 $paths[$referenced_componentPath] = $paths[$referenced_componentPath] ?? [];
@@ -935,7 +935,7 @@ class Engine implements EngineInterface
         $subComponents = $processor->getAllSubmodules($component);
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
             $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
@@ -959,9 +959,9 @@ class Engine implements EngineInterface
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
-            // If the current module loads data, then add its path to the list
+            // If the current component loads data, then add its path to the list
             if ($processor->moduleLoadsData($component)) {
                 $paths[] = array_merge(
                     $module_path,
@@ -983,7 +983,7 @@ class Engine implements EngineInterface
         $subComponents = $processor->getAllSubmodules($component);
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
             $this->addDataloadingModuleFullpaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
@@ -1112,10 +1112,10 @@ class Engine implements EngineInterface
             );
         }
 
-        // Get the list of all modules which calculate their data feedback using another module's results
+        // Get the list of all modules which calculate their data feedback using another component's results
         $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
-        // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
+        // Get the list of all modules which load data, as a list of the component path starting from the top element (the entry component)
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_component, $root_props);
 
         /** @var ModuleInfo */
@@ -1125,8 +1125,8 @@ class Engine implements EngineInterface
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
         foreach ($module_fullpaths as $module_path) {
-            // The module is the last element in the path.
-            // Notice that the module is removed from the path, providing the path to all its properties
+            // The component is the last element in the path.
+            // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($module_path);
             $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
@@ -1142,7 +1142,7 @@ class Engine implements EngineInterface
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
-            // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it
+            // If we are only requesting data from the model alone, and this dataloading component depends on mutableonrequest, then skip it
             if ($datasourceselector == DataSourceSelectors::ONLYMODEL && $datasource == DataSources::MUTABLEONREQUEST) {
                 continue;
             }
@@ -1156,7 +1156,7 @@ class Engine implements EngineInterface
             // Load data if the checkpoint did not fail
             $dataaccess_checkpoint_validation = null;
             if ($load_data && $checkpoints = ($data_properties[DataLoading::DATA_ACCESS_CHECKPOINTS] ?? null)) {
-                // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
+                // Check if the component fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                 $dataaccess_checkpoint_validation = $this->validateCheckpoints($checkpoints);
                 $load_data = $dataaccess_checkpoint_validation !== null;
             }
@@ -1187,7 +1187,7 @@ class Engine implements EngineInterface
 
             $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
-            // The module path key is used for storing temporary results for later retrieval
+            // The component path key is used for storing temporary results for later retrieval
             $module_path_key = $this->getModulePathKey($module_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
@@ -1207,7 +1207,7 @@ class Engine implements EngineInterface
                     $execute = true;
                     $mutation_checkpoint_validation = null;
                     if ($mutation_checkpoints = $data_properties[DataLoading::ACTION_EXECUTION_CHECKPOINTS] ?? null) {
-                        // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
+                        // Check if the component fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                         $mutation_checkpoint_validation = $this->validateCheckpoints($mutation_checkpoints);
                         $execute = $mutation_checkpoint_validation !== null;
                     }
@@ -1308,7 +1308,7 @@ class Engine implements EngineInterface
             }
 
             // Integrate the dbobjectids into $datasetcomponentdata
-            // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
+            // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous component when iterating down
             if ($datasetcomponentdata !== null) {
                 $this->assignValueForModule($datasetcomponentdata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
@@ -1325,7 +1325,7 @@ class Engine implements EngineInterface
             // Integrate the feedback into $componentdata
             $this->processAndAddModuleData($module_path, $component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
-            // Allow other modules to produce their own feedback using this module's data results
+            // Allow other modules to produce their own feedback using this component's data results
             if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
@@ -1363,7 +1363,7 @@ class Engine implements EngineInterface
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
-                '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
+                '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
                 $component,
                 array(&$module_props),
                 array(&$data_properties),
@@ -2300,7 +2300,7 @@ class Engine implements EngineInterface
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
                             // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
+                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
                                 function ($field_id) use ($typedSubcomponentIDs) {
@@ -2461,7 +2461,7 @@ class Engine implements EngineInterface
                 $moduleInfo = App::getModule(Module::class)->getInfo();
                 $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
-                // Advance the position of the array into the current module
+                // Advance the position of the array into the current component
                 foreach ($module_path as $subComponent) {
                     $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
                     $componentdata[$submoduleOutputName][$submodulesOutputProperty] = $componentdata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
