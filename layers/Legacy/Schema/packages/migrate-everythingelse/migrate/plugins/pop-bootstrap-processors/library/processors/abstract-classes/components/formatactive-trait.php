@@ -12,8 +12,8 @@ trait FormatActiveTrait
 
     protected function getSubmoduleFormat(array $module, $submodule)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($submodule);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $processor = $componentprocessor_manager->getProcessor($submodule);
         if ($processor instanceof FormattableModuleInterface) {
             return $processor->getFormat($submodule);
         }

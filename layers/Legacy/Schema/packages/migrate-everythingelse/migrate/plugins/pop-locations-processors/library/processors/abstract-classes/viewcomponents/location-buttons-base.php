@@ -124,7 +124,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // If we don't initialize the markers, simply do not send the moduleoutputname for those modules, and they will not be drawn
         if ($this->initMarkers($module)) {

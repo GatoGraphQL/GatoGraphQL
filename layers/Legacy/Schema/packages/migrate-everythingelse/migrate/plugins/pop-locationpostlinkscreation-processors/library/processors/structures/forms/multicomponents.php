@@ -37,7 +37,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents exte
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE:

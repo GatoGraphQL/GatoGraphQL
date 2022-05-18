@@ -451,7 +451,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_BLOCK_USERS_CAROUSEL:

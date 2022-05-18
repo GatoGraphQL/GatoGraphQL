@@ -30,7 +30,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
 
     protected function getInnerSubmodules(array $module): array
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getInnerSubmodules($module);
 

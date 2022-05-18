@@ -25,13 +25,13 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG:
                 $component = $this->getComponentSubmodule($module);
 
-                $trigger = $moduleprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Flag as inappropriate:', 'pop-application-processors')

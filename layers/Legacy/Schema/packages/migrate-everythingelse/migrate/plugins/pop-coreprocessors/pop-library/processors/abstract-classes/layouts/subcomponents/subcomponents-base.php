@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret['subcomponent-field'] = $this->getSubcomponentField($module);
         if ($layouts = $this->getLayoutSubmodules($module)) {

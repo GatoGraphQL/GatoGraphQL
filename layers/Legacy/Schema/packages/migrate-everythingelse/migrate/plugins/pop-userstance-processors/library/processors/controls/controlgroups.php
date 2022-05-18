@@ -51,7 +51,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_CONTROLGROUP_STANCESTATS:

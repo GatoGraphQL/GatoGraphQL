@@ -638,7 +638,7 @@ Having the component-based structure, we can now add the actual information requ
 }
 ```
 
-Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ComponentProcessor](#moduleprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ComponentProcessor, and create the nested associative array with all properties for all modules. A ComponentProcessor for a module called `MODULE_SOMENAME` looks like this:
+Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ComponentProcessor](#componentprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ComponentProcessor, and create the nested associative array with all properties for all modules. A ComponentProcessor for a module called `MODULE_SOMENAME` looks like this:
 
 ```php
 class SomeComponentProcessor extends AbstractComponentProcessor {
@@ -780,7 +780,7 @@ Every module has a unique name that identifies it, defined as a constant:
 const MODULE_SOMENAME = 'somename';
 ```
 
-All the properties of the modules are implemented through objects called [ComponentProcessor](#moduleprocessor).
+All the properties of the modules are implemented through objects called [ComponentProcessor](#componentprocessor).
 <!--
 > Note: the name of a module cannot include the special character "|" (`POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`), as will be explained below
 -->
@@ -847,10 +847,10 @@ To access the properties of a module, we must reference its corresponding Compon
 
 ```php
 // Retrive the PoP_ComponentProcessor_Manager object from the factory
-$moduleprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
+$componentprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
 // Obtain the ComponentProcessor for module MODULE_SOMENAME
-$processor = $moduleprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::MODULE_SOMENAME]);
+$processor = $componentprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::MODULE_SOMENAME]);
 
 // Do something...
 // $processor->...
@@ -1980,7 +1980,7 @@ Keeping these properties in `$vars` is needed for the following reasons:
 
 _1. To calculate the `modelInstanceId`:_ the `modelInstanceId` is the unique identifier representing the particular instance of the component hierarchy. This id is calculated by function `ModelInstanceProcessor_Utils::getModelInstanceId()`, which simply calculates a hash of the values of all properties which alter the component hierarchy. Because not all properties in `$vars` alter the component hierarchy, these ones must be defined by implementing hook `"ModelInstanceProcessor:model_instance_components"`.
 
-_2. To determine the entry module_: The component hierarchy's top-most module is called the entry module. Every potential entry module must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry module (more on this under [PageComponentProcessors](#pagemoduleprocessor)).
+_2. To determine the entry module_: The component hierarchy's top-most module is called the entry module. Every potential entry module must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry module (more on this under [PageComponentProcessors](#pagecomponentprocessor)).
 
 _3. To decouple processed page from requested page_: Storing all properties which modify the component hierarchy under `$vars`, making sure that these properties are only accessed through `$vars` all throughout the application, and then modifying these values directly in `$vars`, makes it possible to manipulate the response, for instance adding more data. This way, it is possible to fetch more than one page's content on a single request (for preloading views to cache on the client or other use cases), or send personalized transactional emails to many users on a single request, among other use cases.
 

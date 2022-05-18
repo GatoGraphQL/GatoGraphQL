@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
 {
     public function getPanelHeaderThumbs(array $module, array &$props)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $format_thumbs = array(
             POP_FORMAT_DETAILS => 'fa-th-list',
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
 
         $ret = array();
         foreach ($this->getSubmodules($module) as $submodule) {
-            $processor = $moduleprocessor_manager->getProcessor($submodule);
+            $processor = $componentprocessor_manager->getProcessor($submodule);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
                 if ($thumb = $format_thumbs[$format] ?? null) {
@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
     }
     public function getPanelHeaderTitles(array $module, array &$props)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $format_titles = array(
             POP_FORMAT_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
 
         $ret = array();
         foreach ($this->getSubmodules($module) as $submodule) {
-            $processor = $moduleprocessor_manager->getProcessor($submodule);
+            $processor = $componentprocessor_manager->getProcessor($submodule);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
                 if ($title = $format_titles[$format] ?? null) {

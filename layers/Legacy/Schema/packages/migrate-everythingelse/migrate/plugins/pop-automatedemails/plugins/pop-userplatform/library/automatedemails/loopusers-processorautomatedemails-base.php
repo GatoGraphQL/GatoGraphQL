@@ -19,12 +19,12 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
         if ($users = $this->getUsers()) {
             // All the variables needed to operate into the pop-engine.php getData function
             $userTypeAPI = UserTypeAPIFacade::getInstance();
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
             $module = $engine->getEntryComponent();
-            $processor = $moduleprocessor_manager->getProcessor($module);
+            $processor = $componentprocessor_manager->getProcessor($module);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
 

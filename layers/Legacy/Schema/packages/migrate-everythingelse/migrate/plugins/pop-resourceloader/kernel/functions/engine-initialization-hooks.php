@@ -45,11 +45,11 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 		if (RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
 			global $pop_resourcemoduledecoratorprocessor_manager;
-			$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+			$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 			$props = &$props_in_array[0];
 			$helperCalculations = &$helper_calculations_in_array[0];
 
-			$processor = $moduleprocessor_manager->getProcessor($module);
+			$processor = $componentprocessor_manager->getProcessor($module);
 			$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
 			
 			// Do array_merge because it may already contain data from doing 'extra-uris'

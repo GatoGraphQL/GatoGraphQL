@@ -688,7 +688,7 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function getResourcesFromCurrentVars($modulefilter, $options = array()) {
 
         global $pop_resourcemoduledecoratorprocessor_manager;
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Get the current model_instance_id where to store $noncritical_resources
         $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
@@ -709,7 +709,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
         $methods = array();
-        $entry_processor = $moduleprocessor_manager->getProcessor($entryComponent);
+        $entry_processor = $componentprocessor_manager->getProcessor($entryComponent);
         $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
@@ -741,8 +741,8 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function getJsmethodsFromModule($addInitial, $entryComponent, $entry_model_props) {
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($entryComponent);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $processor = $componentprocessor_manager->getProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
         $blockJSMethods = $processor->getJsmethodsModuletree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);

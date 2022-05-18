@@ -60,7 +60,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
 
     public function getName(array $module): string
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:
@@ -73,7 +73,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
                     self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_POSTSECTIONS],
                 );
                 $input = $inputs[$module[1]];
-                return $moduleprocessor_manager->getProcessor($input)->getName($input);
+                return $componentprocessor_manager->getProcessor($input)->getName($input);
         }
 
         return parent::getName($module);

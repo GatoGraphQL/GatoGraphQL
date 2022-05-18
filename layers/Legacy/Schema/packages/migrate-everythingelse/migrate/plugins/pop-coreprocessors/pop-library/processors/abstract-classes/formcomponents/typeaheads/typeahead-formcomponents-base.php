@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
     public function getLabel(array $module, array &$props)
     {
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $input = $this->getInputSubmodule($module);
 
         // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         if ($props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]) {
             $submodule_props = &$props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
         }
-        return $moduleprocessor_manager->getProcessor($input)->getLabel($input, $submodule_props);
+        return $componentprocessor_manager->getProcessor($input)->getLabel($input, $submodule_props);
     }
 
     public function initRequestProps(array $module, array &$props): void
@@ -68,7 +68,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $input = $this->getInputSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);

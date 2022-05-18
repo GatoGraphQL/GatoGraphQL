@@ -25,7 +25,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
@@ -33,7 +33,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
 
                 $component = $this->getComponentSubmodule($module);
 
-                $trigger = $moduleprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('After reading...', 'pop-userstance-processors')

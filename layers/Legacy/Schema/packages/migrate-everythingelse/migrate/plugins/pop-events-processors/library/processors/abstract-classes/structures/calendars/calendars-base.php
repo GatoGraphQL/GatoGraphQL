@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($controlgroup = $this->getControlgroupSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup);
@@ -66,10 +66,10 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
     {
         $ret = parent::getImmutableJsconfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $inner = $this->getInnerSubmodule($module);
-        $ret['calendar']['layouts'] = $moduleprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
+        $ret['calendar']['layouts'] = $componentprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
 
         if ($options = $this->getOptions($module, $props)) {
             $ret['calendar']['options'] = $options;
@@ -80,13 +80,13 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // The Calendar uses JS to be rendered, so we need the DB data to be always present in the webplatform
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
             $inner = $this->getInnerSubmodule($module);
-            $layouts = $moduleprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
+            $layouts = $componentprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
             foreach ($layouts as $layout) {
                 $this->setProp($layout, $props, 'needs-dynamic-data', true);
             }

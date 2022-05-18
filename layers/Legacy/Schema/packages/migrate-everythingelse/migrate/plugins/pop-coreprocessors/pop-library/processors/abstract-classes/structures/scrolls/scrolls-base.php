@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         if ($this->useFetchmore($module, $props)) {
             $fetchmore = $this->getFetchmoreButtonSubmodule($module);
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['fetchmore'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($fetchmore);

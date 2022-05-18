@@ -167,7 +167,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret['menu-title'] = $this->getProp($module, $props, 'menu-title');
         $ret[GD_JS_FONTAWESOME] = $this->getProp($module, $props, 'fontawesome');

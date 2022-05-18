@@ -22,7 +22,7 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
     {
         $ret = parent::getSubmodules($module);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST:

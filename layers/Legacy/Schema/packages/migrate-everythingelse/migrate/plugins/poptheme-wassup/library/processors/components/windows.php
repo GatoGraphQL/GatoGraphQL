@@ -64,7 +64,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
     {
         $ret = parent::getModuleClasses($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_WINDOW_ADDONS:
                 list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($module);
@@ -82,7 +82,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
     {
         $ret = parent::getModuleParams($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_WINDOW_ADDONS:
                 list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($module);

@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_CustomFullViewLayoutsBase extends PoP_Module
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
 

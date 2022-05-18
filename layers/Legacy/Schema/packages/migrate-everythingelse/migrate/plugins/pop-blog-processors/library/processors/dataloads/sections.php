@@ -811,8 +811,8 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST:
                 // Search: don't bring anything unless we're filtering (no results initially)
                 // if ($filter_module = $this->getFilterSubmodule($module)) {
-                //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                //     $filter = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+                //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                //     $filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
                 if (!$this->getActiveDataloadQueryArgsFilteringModules($module)) {

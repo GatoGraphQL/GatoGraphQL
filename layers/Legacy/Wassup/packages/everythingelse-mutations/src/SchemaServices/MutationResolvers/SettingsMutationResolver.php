@@ -32,11 +32,11 @@ class SettingsMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(array $form_data): mixed
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
 
         // Return the redirect. Use Hard redirect
-        // $redirect_to = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL]);
+        // $redirect_to = $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL]);
         // if (!$redirect_to) {
         //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         //     $redirect_to = $cmsengineapi->getHomeURL();
@@ -48,7 +48,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
 
         // Add all the params selected by the user
         foreach ($this->fieldoperators as $fieldoperator) {
-            $value = trim($moduleprocessor_manager->getProcessor($fieldoperator['field'])->getValue($fieldoperator['field']));
+            $value = trim($componentprocessor_manager->getProcessor($fieldoperator['field'])->getValue($fieldoperator['field']));
             $redirect_to = $fieldoperator['operator']->getUrl($redirect_to, $fieldoperator['field'], $value);
         }
 

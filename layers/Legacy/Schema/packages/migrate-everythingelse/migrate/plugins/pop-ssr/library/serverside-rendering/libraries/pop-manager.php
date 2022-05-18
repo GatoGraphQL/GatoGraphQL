@@ -267,9 +267,9 @@ class PoP_ServerSideManager
         // We need to provide the proper $props, however just to get the pageSection id it works without $props too, so just pass array()
         // (this is hacky, but well, it works)
         // $psId = pageSection.attr('id');
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $props = array();
-        $psId = $moduleprocessor_manager->getProcessor($moduleName)->getID($moduleName, $props);
+        $psId = $componentprocessor_manager->getProcessor($moduleName)->getID($moduleName, $props);
 
         // Insert into the Runtime to generate the ID
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();

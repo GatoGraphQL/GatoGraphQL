@@ -9,39 +9,39 @@ trait FormComponentModuleDelegatorTrait
     }
     public function getValue(array $module, ?array $source = null): mixed
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getValue($formcomponent_module, $source);
+        return $componentprocessor_manager->getProcessor($formcomponent_module)->getValue($formcomponent_module, $source);
     }
     public function getDefaultValue(array $module, array &$props): mixed
     {
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
+        return $componentprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
     }
     public function getName(array $module): string
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getName($formcomponent_module);
+        return $componentprocessor_manager->getProcessor($formcomponent_module)->getName($formcomponent_module);
     }
     public function getInputName(array $module): string
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getInputName($formcomponent_module);
+        return $componentprocessor_manager->getProcessor($formcomponent_module)->getInputName($formcomponent_module);
     }
     public function isMultiple(array $module): bool
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->isMultiple($formcomponent_module);
+        return $componentprocessor_manager->getProcessor($formcomponent_module)->isMultiple($formcomponent_module);
     }
     public function getLabel(array $module, array &$props)
     {
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
 
         // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
@@ -50,7 +50,7 @@ trait FormComponentModuleDelegatorTrait
         if ($props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]) {
             $submodule_props = &$props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
         }
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getLabel($formcomponent_module, $submodule_props);
+        return $componentprocessor_manager->getProcessor($formcomponent_module)->getLabel($formcomponent_module, $submodule_props);
     }
 
     public function metaFormcomponentInitModuleRequestProps(array $module, array &$props)

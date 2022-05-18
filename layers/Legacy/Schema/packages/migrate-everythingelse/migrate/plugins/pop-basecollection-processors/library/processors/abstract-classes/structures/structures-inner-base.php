@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
 

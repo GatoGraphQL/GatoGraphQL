@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_FullObjectTitleLayoutsBase extends PoPEngine
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES]['title'] = 'title';
 

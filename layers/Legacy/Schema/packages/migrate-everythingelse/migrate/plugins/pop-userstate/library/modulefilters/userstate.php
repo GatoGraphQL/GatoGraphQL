@@ -16,8 +16,8 @@ class PoP_ModuleFilter_UserState extends AbstractModuleFilter
     {
 
         // Exclude if it has no user state
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $processor = $componentprocessor_manager->getProcessor($module);
         $processoruserstate = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessorDecorator($processor);
         return !$processoruserstate->requiresUserState($module, $props);
     }

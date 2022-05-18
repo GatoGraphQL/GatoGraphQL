@@ -61,14 +61,14 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
 
     // public function getFilterObject(array $module)
     // {
-    //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubmodule($module);
-    //     return $moduleprocessor_manager->getProcessor($filterinner)->getFilterObject($filterinner);
+    //     return $componentprocessor_manager->getProcessor($filterinner)->getFilterObject($filterinner);
     // }
     // public function getFilter(array $module)
     // {
-    //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubmodule($module);
-    //     return $moduleprocessor_manager->getProcessor($filterinner)->getFilter($filterinner);
+    //     return $componentprocessor_manager->getProcessor($filterinner)->getFilter($filterinner);
     // }
 }

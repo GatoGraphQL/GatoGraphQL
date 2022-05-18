@@ -5,7 +5,7 @@ class PoP_Volunteering_GFHelpers
 {
     public static function getVolunteerFormFieldNames()
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $gfinputname_modules = array(
             POP_GENERICFORMS_GF_FORM_VOLUNTEER_FIELDNAME_NAME_ID => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME],
             POP_GENERICFORMS_GF_FORM_VOLUNTEER_FIELDNAME_EMAIL_ID => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL],
@@ -16,7 +16,7 @@ class PoP_Volunteering_GFHelpers
         );
         $fieldnames = array();
         foreach ($gfinputname_modules as $gf_field_name => $module) {
-            $fieldnames[$moduleprocessor_manager->getProcessor($module)->getName($module)] = $gf_field_name;
+            $fieldnames[$componentprocessor_manager->getProcessor($module)->getName($module)] = $gf_field_name;
         }
         
         return $fieldnames;

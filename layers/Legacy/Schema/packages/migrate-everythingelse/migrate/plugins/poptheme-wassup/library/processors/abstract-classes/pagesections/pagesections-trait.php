@@ -40,7 +40,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 
     public function getMutableonmodelConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getMutableonmodelConfiguration($module, $props);
 

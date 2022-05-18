@@ -102,14 +102,14 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                 $ret['suggestions'] = $suggestions;
 
                 if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($module)) {
-                    $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                    $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
 
                     // Load the typeResolver from the trigger, for the suggestions
                     $trigger_layout = $this->getTriggerLayoutSubmodule($module);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
-                    $triggerComponentProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
+                    $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);
                     $suggestions_typeResolver = $triggerComponentProcessor->getTriggerRelationalTypeResolver($trigger_layout);
                     $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeOutputDBKey();
                 }
@@ -137,13 +137,13 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
             // Pre-loaded suggestions, allowing the user to select the locations easily
             if ($suggestions = $this->getProp($module, $props, 'suggestions')) {
                 if ($trigger_layout = $this->getTriggerLayoutSubmodule($module)) {
-                    $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                    $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'
                     $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-                    $data_properties = $moduleprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
+                    $data_properties = $componentprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
-                    $triggerComponentProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
+                    $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);
                     $suggestions_typeResolver = $triggerComponentProcessor->getTriggerRelationalTypeResolver($trigger_layout);
 
                     // Extend the dataload ids

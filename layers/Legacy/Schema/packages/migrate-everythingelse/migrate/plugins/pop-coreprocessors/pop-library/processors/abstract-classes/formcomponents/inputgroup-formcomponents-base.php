@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES]['input-group-btn'] = $this->getInputgroupbtnClass($module);
 

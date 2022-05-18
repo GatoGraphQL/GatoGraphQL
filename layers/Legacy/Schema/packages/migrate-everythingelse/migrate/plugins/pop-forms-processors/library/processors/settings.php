@@ -3,8 +3,8 @@
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 // Override ComponentProcessorClass
-$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-$moduleprocessor_manager->overrideProcessorClass(
+$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+$componentprocessor_manager->overrideProcessorClass(
     PoP_Posts_Module_Processor_TextFilterInputs::class,
     PoP_Module_Processor_TextFilterInputs::class,
     [

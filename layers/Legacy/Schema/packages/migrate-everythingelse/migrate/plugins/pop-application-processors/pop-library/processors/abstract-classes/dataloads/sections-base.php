@@ -91,9 +91,9 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     //     $ret = parent::getModelPropsForDescendantModules($module, $props);
 
     //     if ($filter_module = $this->getFilterSubmodule($module)) {
-    //         $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $ret['filter-module'] = $filter_module;
-    //         // $ret['filter'] = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+    //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
     //     }
 
     //     return $ret;

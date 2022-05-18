@@ -109,7 +109,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
 
     //         case self::MODULE_FORMINNER_LOSTPWDRESET:
 
-    //             $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     //             // If loading the page straight, then set the value on the input directly
     //             // Otherwise, use Javascript to fill in the value
@@ -118,7 +118,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     //             //     // This also works for replicable
     //             //     $this->mergeJsmethodsProp([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE], $props, array('fillURLParamInput'));
     //             //     $this->mergeProp([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE], $props, 'params', array(
-    //             //         'data-urlparam' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getName([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]),
+    //             //         'data-urlparam' => $componentprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getName([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]),
     //             //     ));
     //             // }
     //             break;

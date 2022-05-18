@@ -52,7 +52,7 @@ class GD_Core_Bootstrap_Module_Processor_AnchorControls extends PoP_Module_Proce
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             switch ($module[1]) {
                 case self::MODULE_ANCHORCONTROL_EMBED:
                 case self::MODULE_ANCHORCONTROL_API:
@@ -63,7 +63,7 @@ class GD_Core_Bootstrap_Module_Processor_AnchorControls extends PoP_Module_Proce
                         self::MODULE_ANCHORCONTROL_COPYSEARCHURL => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_COPYSEARCHURL],
                     );
                     $modal = $modals[$module[1]];
-                    return '#'.$moduleprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
+                    return '#'.$componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
             }
         }
 

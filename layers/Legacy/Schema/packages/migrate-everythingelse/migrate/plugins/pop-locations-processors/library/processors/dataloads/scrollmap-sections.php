@@ -236,8 +236,8 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
                 // if ($filter_module = $this->getFilterSubmodule($module)) {
-                //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                //     $filter = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+                //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                //     $filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
                 if (!$this->getActiveDataloadQueryArgsFilteringModules($module)) {

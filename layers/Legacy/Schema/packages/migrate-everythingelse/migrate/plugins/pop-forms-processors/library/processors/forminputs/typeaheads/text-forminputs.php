@@ -56,8 +56,8 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 // Comment Leo 08/12/2017: Assign the input the "searchfor" name, so that it works to perform search
                 // even when JS is disabled or fails
-                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                return $moduleprocessor_manager->getProcessor([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH])->getName([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH]);
+                $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                return $componentprocessor_manager->getProcessor([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH])->getName([PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH]);
         }
         
         return parent::getName($module);

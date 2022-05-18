@@ -40,8 +40,8 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                     self::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT => 'bg-warning',
                 );
 
-                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                $trigger = $moduleprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
 
                 $descriptions = array(
                     self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST => TranslationAPIFacade::getInstance()->__('Add a comment for:', 'pop-application-processors'),

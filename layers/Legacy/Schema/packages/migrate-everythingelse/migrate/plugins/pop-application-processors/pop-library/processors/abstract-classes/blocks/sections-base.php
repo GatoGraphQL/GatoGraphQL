@@ -20,8 +20,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     // public function getNature(array $module)
     // {
     //     if ($inner = $this->getInnerSubmodule($module)) {
-    //         $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //         $processor = $moduleprocessor_manager->getProcessor($inner);
+    //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //         $processor = $componentprocessor_manager->getProcessor($inner);
     //         return $processor->getNature($inner);
     //     }
 
@@ -101,8 +101,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     public function getFormat(array $module): ?string
     {
         if ($inner = $this->getInnerSubmodule($module)) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            $processor = $moduleprocessor_manager->getProcessor($inner);
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof FormattableModuleInterface) {
                 return $processor->getFormat($inner);
             }
@@ -115,8 +115,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
         // If the inner module is a DataloadingModule, then transfer dataloading properties to its contained module
         if ($inner_module = $this->getInnerSubmodule($module)) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            if ($moduleprocessor_manager->getProcessor($inner_module) instanceof DataloadingModuleInterface) {
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            if ($componentprocessor_manager->getProcessor($inner_module) instanceof DataloadingModuleInterface) {
 
                 $skip_data_load = $this->getProp($module, $props, 'skip-data-load');
                 if (!is_null($skip_data_load)) {
@@ -206,8 +206,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // If the inner module is a DataloadingModule, then calculate the datafeedback of this module
         // based on the results from the inner dataloading module. Then, can calculate "do-not-render-if-no-results"
         if ($inner = $this->getInnerSubmodule($module)) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            $processor = $moduleprocessor_manager->getProcessor($inner);
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {
                 $module_path_manager = ModulePathManagerFacade::getInstance();
                 $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();

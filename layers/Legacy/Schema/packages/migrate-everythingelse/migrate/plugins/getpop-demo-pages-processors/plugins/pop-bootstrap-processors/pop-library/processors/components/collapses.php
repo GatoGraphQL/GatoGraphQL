@@ -61,7 +61,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
 
     public function getPanelTitle(array $module)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $placeholder =
         '<div class="media">'.
         '<div class="media-left">'.

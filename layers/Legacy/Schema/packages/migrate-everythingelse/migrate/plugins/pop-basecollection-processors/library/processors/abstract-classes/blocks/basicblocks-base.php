@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-inners'] = array_map(
@@ -116,7 +116,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $this->appendProp($module, $props, 'class', 'pop-block');
 

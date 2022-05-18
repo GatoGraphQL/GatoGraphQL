@@ -7,7 +7,7 @@ abstract class GD_EM_Module_Processor_ScrollMapBlocksBase extends PoP_Module_Pro
 {
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $this->appendProp($module, $props, 'class', 'pop-block-map');
         $this->appendProp($module, $props, 'class', 'pop-block-scrollmap');
@@ -24,8 +24,8 @@ abstract class GD_EM_Module_Processor_ScrollMapBlocksBase extends PoP_Module_Pro
             $this->appendProp($module, $props, 'class', 'collapsible');
 
             // Add class "collapse" to the map, and properties to execute the cookies JS to open/close it as last done by the user
-            $scrollmap = $moduleprocessor_manager->getProcessor($inner)->getInnerSubmodule($inner);
-            $map = $moduleprocessor_manager->getProcessor($scrollmap)->getMapSubmodule($scrollmap);
+            $scrollmap = $componentprocessor_manager->getProcessor($inner)->getInnerSubmodule($inner);
+            $map = $componentprocessor_manager->getProcessor($scrollmap)->getMapSubmodule($scrollmap);
             $this->appendProp([$inner, $scrollmap, $map], $props, 'class', 'collapse');
         }
 

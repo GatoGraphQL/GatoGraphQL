@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Add the URL in the header? Sometimes yes (eg: Addon) sometimes not (eg: modal)
         if ($this->headerShowUrl($module, $props)) {

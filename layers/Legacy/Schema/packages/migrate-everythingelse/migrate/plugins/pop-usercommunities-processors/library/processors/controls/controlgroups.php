@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_Control
     {
         $ret = parent::getSubmodules($module);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_URE_CONTROLGROUP_CONTENTSOURCE:

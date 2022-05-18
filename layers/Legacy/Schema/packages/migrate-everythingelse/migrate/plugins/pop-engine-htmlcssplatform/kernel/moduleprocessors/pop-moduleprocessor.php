@@ -154,7 +154,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // function getModulesCbs(array $module, array &$props) {
 
-    // 	$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array(
@@ -176,7 +176,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	}
     // 	foreach ($this->getSubmodulesByGroup($module) as $submodule) {
 
-    // 		if ($submodule_ret = $moduleprocessor_manager->getProcessor($submodule)->getModulesCbs($submodule, $props)) {
+    // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($submodule)->getModulesCbs($submodule, $props)) {
 
     // 			$ret['cbs'] = array_merge(
     // 				$ret['cbs'],
@@ -194,7 +194,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // function getModulesPaths(array $module, array &$props) {
 
-    // 	$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
@@ -212,7 +212,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	$submodules = $this->getSubmodulesByGroup($module);
     // 	foreach ($submodules as $submodule) {
 
-    // 		if ($submodule_ret = $moduleprocessor_manager->getProcessor($submodule)->getModulesPaths($submodule, $props)) {
+    // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($submodule)->getModulesPaths($submodule, $props)) {
 
     // 			// Add the extra path to the module
     // 			foreach ($submodule_ret as $submodule_module => $submodule_module_path) {

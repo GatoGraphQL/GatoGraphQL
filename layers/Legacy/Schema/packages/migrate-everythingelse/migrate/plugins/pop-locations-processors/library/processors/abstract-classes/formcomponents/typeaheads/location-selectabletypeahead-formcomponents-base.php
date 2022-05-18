@@ -26,11 +26,11 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Set the typeahead id on all the controls from the input module
         $input = $this->getInputSubmodule($module);
-        $controls = $moduleprocessor_manager->getProcessor($input)->getControlSubmodules($input);
+        $controls = $componentprocessor_manager->getProcessor($input)->getControlSubmodules($input);
         foreach ($controls as $control) {
             $this->mergeProp(
                 $control,

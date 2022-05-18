@@ -212,12 +212,12 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array
     {
         if ($value = $this->getModuleMutableonrequestSupplementaryDbobjectdataValues($module, $props)) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
             $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
             $trigger_module = $this->getTriggerSubmodule($module);
-            $trigger_data_properties = $moduleprocessor_manager->getProcessor($trigger_module)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
+            $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_module)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
 
             // Extend the dataload ids
             return array(

@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_UserLoggedInsBase extends PoPEngine_QueryDat
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($this->addLink($module, $props)) {
             $ret['add-link'] = true;

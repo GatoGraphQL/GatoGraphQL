@@ -48,7 +48,7 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $mapdiv = $this->getMapdivSubmodule($module);
         $form = $this->getFormSubmodule($module);

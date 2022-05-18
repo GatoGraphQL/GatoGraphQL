@@ -28,7 +28,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     protected function getInnerSubmodules(array $module): array
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getInnerSubmodules($module);
 

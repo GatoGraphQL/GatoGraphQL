@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $markers = $this->getMarkerscriptSubmodule($module);
         $resetmarkers = $this->getResetmarkerscriptSubmodule($module);

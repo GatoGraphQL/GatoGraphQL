@@ -122,7 +122,7 @@ class PoP_SSR_EngineInitialization_Hooks
             return;
         }
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Swap the DBs: send the ones with the dynamic data-fields instead (those fields which are always needed in the webplatform, as such they can't be removed)
         // Calculate the Dynamic Databases
@@ -147,10 +147,10 @@ class PoP_SSR_EngineInitialization_Hooks
         }
         if ($dynamic_data_properties === null) {
             global $pop_module_processordynamicdatadecorator_manager;
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $engineState = App::getEngineState();
             $entry_model_props = $engineState->model_props;
-            $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetmoduletree($entryComponent, $entry_model_props);
+            $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetmoduletree($entryComponent, $entry_model_props);
 
             if ($useCache) {
                 $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES, $dynamic_data_properties);

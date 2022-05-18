@@ -64,8 +64,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // If it needs dynamic data then that's it, simply return the data properties
         if ($this->needsDynamicData($module, $props)) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            return $moduleprocessor_manager->getProcessor($module)->getDatasetmoduletreeSectionFlattenedDataFields($module, $props);
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            return $componentprocessor_manager->getProcessor($module)->getDatasetmoduletreeSectionFlattenedDataFields($module, $props);
         }
 
         // Otherwise, propagate to the modules and submodules
@@ -110,8 +110,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //     // If it needs dynamic data then that's it, simply return the data properties
     //     if ($this->needsDynamicData($module, $props)) {
 
-    //         $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //         return $moduleprocessor_manager->getProcessor($module)->get_mutableonrequest_data_properties_datasetmoduletree_section($module, $props);
+    //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //         return $componentprocessor_manager->getProcessor($module)->get_mutableonrequest_data_properties_datasetmoduletree_section($module, $props);
     //     }
 
     //     // Otherwise, propagate to the modules and submodules
@@ -129,7 +129,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props)
     {
         global $pop_module_processordynamicdatadecorator_manager;
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // Exclude the subcomponent modules here
@@ -138,11 +138,11 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $modulefilter_manager->prepareForPropagation($module, $props);
         if ($submodules = $processor->getModulesToPropagateDataProperties($module)) {
             foreach ($submodules as $submodule) {
-                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+                $submodule_processor = $componentprocessor_manager->getProcessor($submodule);
 
                 // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
                 if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
-                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($submodule))->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($submodule))->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -163,7 +163,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     protected function flattenRelationaldbobjectDataProperties($propagate_fn, &$ret, array $module, array &$props)
     {
         global $pop_module_processordynamicdatadecorator_manager;
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
@@ -178,7 +178,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 'subcomponents' => array()
             );
             foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
-                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                     $subcomponent_modules_data_properties = array_merge_recursive(
                         $subcomponent_modules_data_properties,
                         $subcomponent_module_data_properties

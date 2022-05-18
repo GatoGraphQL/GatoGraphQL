@@ -104,7 +104,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE:

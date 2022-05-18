@@ -37,7 +37,7 @@ class GD_Custom_EM_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE:

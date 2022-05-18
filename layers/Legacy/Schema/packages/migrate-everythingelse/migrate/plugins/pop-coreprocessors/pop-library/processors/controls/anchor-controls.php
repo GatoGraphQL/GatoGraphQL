@@ -103,7 +103,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
     }
     public function getHref(array $module, array &$props)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
@@ -122,7 +122,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                     // Comment Leo 26/03/2019: This must be re-implemented through Handlebars function `upcomingModuleId`
                     // // The Filter is set in the props
                     // if ($filter = $this->getProp($module, $props, 'filter-module')) {
-                    //     $filter_id = $moduleprocessor_manager->getProcessor($filter)->getFrontendId($filter, $props);
+                    //     $filter_id = $componentprocessor_manager->getProcessor($filter)->getFrontendId($filter, $props);
                     //     return '#'.$filter_id;
                     // }
                     return '#'; // This must be replaced! Not working now!
@@ -157,7 +157,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:

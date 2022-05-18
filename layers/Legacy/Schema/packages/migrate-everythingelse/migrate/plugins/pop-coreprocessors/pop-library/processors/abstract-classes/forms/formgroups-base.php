@@ -61,12 +61,12 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $component = $this->getComponentSubmodule($module);
-        $component_processor = $moduleprocessor_manager->getProcessor($component);
+        $component_processor = $componentprocessor_manager->getProcessor($component);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
 
         // Re-use the label from the component

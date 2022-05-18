@@ -83,7 +83,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             switch ($module[1]) {
                 case self::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
                 case self::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN:
@@ -93,7 +93,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
                     );
 
                     $modal = $modals[$module[1]];
-                    $modal_id = $moduleprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
+                    $modal_id = $componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
                     return '#'.PoP_Bootstrap_Utils::getFrontendId($modal_id, 'modal');
             }
         }

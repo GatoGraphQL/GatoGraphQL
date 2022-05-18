@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
     {
         $ret = parent::getInitjsBlockbranches($module, $props);
         
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         
         $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($module, $props), $this->getType($module));
         $ret[] = '#'.$frontend_id.'-container > div.pop-block';

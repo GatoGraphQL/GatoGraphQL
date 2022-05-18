@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_VolunteerTagLayoutsBase extends PoPEngine_Qu
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     
         $ret[GD_JS_TITLES] = array(
             'volunteer' => $this->getTitle($module, $props)

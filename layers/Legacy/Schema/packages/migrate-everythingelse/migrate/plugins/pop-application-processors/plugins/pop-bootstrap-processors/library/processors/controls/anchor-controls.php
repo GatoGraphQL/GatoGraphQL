@@ -36,14 +36,14 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             switch ($module[1]) {
                 case self::MODULE_ANCHORCONTROL_SHAREBYEMAIL:
                     $modals = array(
                         self::MODULE_ANCHORCONTROL_SHAREBYEMAIL => [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::MODULE_MODAL_SHAREBYEMAIL],
                     );
                     $modal = $modals[$module[1]];
-                    return '#'.$moduleprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
+                    return '#'.$componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
             }
         }
 

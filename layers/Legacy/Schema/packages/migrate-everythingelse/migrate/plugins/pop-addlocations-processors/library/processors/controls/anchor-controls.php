@@ -23,7 +23,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
     }
     public function getTarget(array $module, array &$props)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_CREATELOCATION:
@@ -34,7 +34,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
     }
     public function getHref(array $module, array &$props)
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
@@ -46,7 +46,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
     }
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_CREATELOCATION:

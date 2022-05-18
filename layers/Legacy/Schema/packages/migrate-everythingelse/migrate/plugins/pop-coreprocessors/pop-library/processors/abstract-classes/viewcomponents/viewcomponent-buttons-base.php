@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($url = $this->getUrl($module, $props)) {
             $ret['url'] = $url;

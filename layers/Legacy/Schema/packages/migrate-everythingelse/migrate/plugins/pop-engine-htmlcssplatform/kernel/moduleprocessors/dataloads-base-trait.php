@@ -30,7 +30,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             $this->setProp($module, $props, 'show-filter', true);
 
@@ -63,7 +63,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
-            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             if ($filter_module = $this->getFilterSubmodule($module)) {
 
@@ -76,7 +76,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                     // it doesn't even show any param being filtered (month or year not chosen in filter)
                     // Comment Leo 15/04/2015: do not show the filter even if filtering for EMBED and PRINT
                     if (\PoP\Root\App::applyFilters(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, true)) {
-                        // if ($filter = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module)) {
+                        // if ($filter = $componentprocessor_manager->getProcessor($filter_module)->getFilter($filter_module)) {
                         $filterVisible = $this->getProp($module, $props, 'filter-visible');
                         // if ($filterVisible || \PoP\Engine\FilterUtils::filteringBy($filter)) {
                         if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringModules($module)) {
