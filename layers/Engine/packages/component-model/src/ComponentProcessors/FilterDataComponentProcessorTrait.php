@@ -43,7 +43,7 @@ trait FilterDataComponentProcessorTrait
         }
 
         $modules = [];
-        // Check if the module has any filtercomponent
+        // Check if the component variation has any filtercomponent
         if ($dataloadQueryArgsFilteringModules = $this->getDataloadQueryArgsFilteringModules($componentVariation)) {
             // Check if if we're currently filtering by any filtercomponent
             $modules = array_filter(

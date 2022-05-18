@@ -16,7 +16,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         // Then we gotta make that ID fixed, it won't add the counter in {{#generateId}}, so the same ID can be calculated in PHP
         // More often than not, whenever we need to invoke function ->getFrontendId() in PHP, then fixedId will have to be true
 
-        // If the parent set the 'frontend-id' on a module, then treat it as fixed
+        // If the parent set the 'frontend-id' on a component variation, then treat it as fixed
         if ($this->getProp($componentVariation, $props, 'frontend-id')) {
             return true;
         }
@@ -34,7 +34,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     public function getFrontendId(array $componentVariation, array &$props)
     {
 
-        // Allow a parent module to set this value
+        // Allow a parent component variation to set this value
         if ($frontend_id = $this->getProp($componentVariation, $props, 'frontend-id')) {
             return $frontend_id;
         }
@@ -110,7 +110,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // 	// Allow to be set from upper modules. Eg: from the embed Modal to the embedPreview layout,
     // 	// so it knows it must refresh it value when it opens
-    // 	return $this->getProp($componentVariation, $props, 'module-cb');
+    // 	return $this->getProp($componentVariation, $props, 'component variation-cb');
     // }
     // function getModuleCbActions(array $componentVariation, array &$props) {
 
@@ -119,9 +119,9 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // function getModulePath(array $componentVariation, array &$props) {
 
-    // 	// Allow to be set from upper modules. Eg: Datum Dynamic Layout can set it to its triggered module,
+    // 	// Allow to be set from upper modules. Eg: Datum Dynamic Layout can set it to its triggered component variation,
     // 	// which will need to be rendered dynamically on the htmlcssplatform on runtime
-    // 	if ($this->getProp($componentVariation, $props, 'module-path')) {
+    // 	if ($this->getProp($componentVariation, $props, 'component variation-path')) {
 
     // 		return true;
     // 	}
@@ -137,7 +137,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     public function getTemplateResources(array $componentVariation, array &$props): array
     {
 
-        // We must send always the template, even if it's similar to the module,
+        // We must send always the template, even if it's similar to the component variation,
         // so that we have the information of all required templates for the ResourceLoader
         // Eg: otherwise loading template 'status' fails
         $templateResource = $this->getTemplateResource($componentVariation, $props);
@@ -162,10 +162,10 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 		'actions' => array()
     // 	);
 
-    // 	// Has this level a module cb?
+    // 	// Has this level a component variation cb?
     // 	if ($module_cb = $this->getModuleCb($componentVariation, $props)) {
 
-    // 		// Key: module / Value: path to arrive to this module
+    // 		// Key: component variation / Value: path to arrive to this component variation
     // 		$ret['cbs'][] = $componentVariation;
 
     // 		// The cb applies to what actions
@@ -201,20 +201,20 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
 
-    // 	// Has this level a module cb?
+    // 	// Has this level a component variation cb?
     // 	if ($module_path = $this->getModulePath($componentVariation, $props)) {
 
-    // 		// Key: module / Value: path to arrive to this module
+    // 		// Key: component variation / Value: path to arrive to this component variation
     // 		$ret[$componentVariation[1]] = array(ComponentModelModuleInfo::get('response-prop-submodules'), $moduleOutputName);
     // 	}
 
-    // 	// Add the path from this module to its components
+    // 	// Add the path from this component variation to its components
     // 	$submodules = $this->getSubmodulesByGroup($componentVariation);
     // 	foreach ($submodules as $submodule) {
 
     // 		if ($submodule_ret = $componentprocessor_manager->getProcessor($submodule)->getModulesPaths($submodule, $props)) {
 
-    // 			// Add the extra path to the module
+    // 			// Add the extra path to the component variation
     // 			foreach ($submodule_ret as $submodule_module => $submodule_module_path) {
 
     // 				$ret[$submodule_module] = array_merge(
@@ -245,13 +245,13 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         if ($this->fixedId($componentVariation, $props)) {
 
             // Whenever the id is fixed, we can already know what the front-end id will be
-            // this is needed for the module to print its id in advance
+            // this is needed for the component variation to print its id in advance
             $ret[GD_JS_FRONTENDID] = $this->getFrontendId($componentVariation, $props);
         }
 
         // Allow CSS to Styles to modify these value
         return \PoP\Root\App::applyFilters(
-            'PoP_HTMLCSSPlatformQueryDataComponentProcessorBase:module-mutableonrequest-configuration',
+            'PoP_HTMLCSSPlatformQueryDataComponentProcessorBase:component variation-mutableonrequest-configuration',
             $ret,
             $componentVariation,
             $props,
@@ -310,7 +310,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
             $ret[GD_JS_DBOBJECTPARAMS] = $dbobject_params;
         }
         if ($previousmodules_ids = $this->getProp($componentVariation, $props, 'previousmodules-ids')) {
-            // We receive entries of key => module, convert them to key => moduleOutputName
+            // We receive entries of key => component variation, convert them to key => moduleOutputName
             $ret[GD_JS_PREVIOUSMODULESIDS] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $previousmodules_ids
@@ -334,7 +334,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
         // Allow PoP Resource Loader to inject this value
         return \PoP\Root\App::applyFilters(
-            'PoP_HTMLCSSPlatformQueryDataComponentProcessorBase:module-immutable-configuration',
+            'PoP_HTMLCSSPlatformQueryDataComponentProcessorBase:component variation-immutable-configuration',
             $ret,
             $componentVariation,
             $props,

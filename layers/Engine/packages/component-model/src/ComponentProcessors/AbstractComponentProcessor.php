@@ -146,11 +146,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $componentVariation, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
-        // Convert the module to its string representation to access it in the array
+        // Convert the component variation to its string representation to access it in the array
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // Initialize. If this module had been added props, then use them already
-        // 1st element to merge: the general props for this module passed down the line
+        // Initialize. If this component variation had been added props, then use them already
+        // 1st element to merge: the general props for this component variation passed down the line
         // 2nd element to merge: the props set exactly to the path. They have more priority, that's why they are 2nd
         // It may contain more than one group (\PoP\ComponentModel\Constants\Props::ATTRIBUTES). Eg: maybe also POP_PROPS_JSMETHODS
         $props[$moduleFullName] = array_merge_recursive(
@@ -158,12 +158,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props[$moduleFullName] ?? array()
         );
 
-        // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
+        // The component variation must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
         $module_props = array(
             $moduleFullName => &$props[$moduleFullName],
         );
 
-        // If ancestor modules set general props, or props targetted at this current module, then add them to the current module props
+        // If ancestor modules set general props, or props targetted at this current component variation, then add them to the current component variation props
         foreach ($wildcard_props_to_propagate as $key => $value) {
             $this->setProp($componentVariation, $module_props, $key, $value);
         }
@@ -181,7 +181,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $targetted_props_to_propagate = $module_props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES];
         unset($module_props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES]);
 
-        // But because modules can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current module from the targeted props
+        // But because modules can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current component variation from the targeted props
         unset($targetted_props_to_propagate[$moduleFullName]);
 
         // Allow the $componentVariation to add general props for all its descendant modules
@@ -194,7 +194,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $submodules = $this->getAllSubmodules($componentVariation);
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
         if ($submodules) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
@@ -225,13 +225,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        // If we set property 'skip-data-load' on any module, not just dataset, spread it down to its children so it reaches its contained dataset submodules
+        // If we set property 'skip-data-load' on any component variation, not just dataset, spread it down to its children so it reaches its contained dataset submodules
         $skip_data_load = $this->getProp($componentVariation, $props, 'skip-data-load');
         if (!is_null($skip_data_load)) {
             $ret['skip-data-load'] = $skip_data_load;
         }
 
-        // Property 'ignore-request-params' => true makes a dataloading module not get values from the request
+        // Property 'ignore-request-params' => true makes a dataloading component variation not get values from the request
         $ignore_params_from_request = $this->getProp($componentVariation, $props, 'ignore-request-params');
         if (!is_null($ignore_params_from_request)) {
             $ret['ignore-request-params'] = $ignore_params_from_request;
@@ -247,11 +247,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function initModelProps(array $componentVariation, array &$props): void
     {
-        // Set property "succeeding-typeResolver" on every module, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
+        // Set property "succeeding-typeResolver" on every component variation, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($componentVariation)) {
             $this->setProp($componentVariation, $props, 'succeeding-typeResolver', $relationalTypeResolver);
         } else {
-            // Get the prop assigned to the module by its ancestor
+            // Get the prop assigned to the component variation by its ancestor
             $relationalTypeResolver = $this->getProp($componentVariation, $props, 'succeeding-typeResolver');
         }
         if ($relationalTypeResolver !== null) {
@@ -330,29 +330,29 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     private function getPathHeadModule(array &$props): string
     {
-        // From the root of the $props we obtain the current module
+        // From the root of the $props we obtain the current component variation
         reset($props);
         return (string)key($props);
     }
 
     private function isModulePath(array $module_or_modulepath): bool
     {
-        // $module_or_modulepath can be either a single module (the current one, or its descendant), or a targetted path of modules
-        // Because a module is itself represented as an array, to know which is the case, we must ask if it is:
-        // - an array => single module
-        // - an array of arrays (module path)
+        // $module_or_modulepath can be either a single component variation (the current one, or its descendant), or a targetted path of modules
+        // Because a component variation is itself represented as an array, to know which is the case, we must ask if it is:
+        // - an array => single component variation
+        // - an array of arrays (component variation path)
         return is_array($module_or_modulepath[0]);
     }
 
     private function isDescendantModule(array $module_or_modulepath, array &$props): bool
     {
-        // If it is not an array of arrays, then this array is directly the module, or the descendant module on which to set the property
+        // If it is not an array of arrays, then this array is directly the component variation, or the descendant component variation on which to set the property
         if (!$this->isModulePath($module_or_modulepath)) {
-            // From the root of the $props we obtain the current module
+            // From the root of the $props we obtain the current component variation
             $moduleFullName = $this->getPathHeadModule($props);
 
-            // If the module were we are adding the att, is this same module, then we are already at the path
-            // If it is not, then go down one level to that module
+            // If the component variation were we are adding the att, is this same component variation, then we are already at the path
+            // If it is not, then go down one level to that component variation
             return ($moduleFullName !== $this->getModuleHelpers()->getModuleFullName($module_or_modulepath));
         }
 
@@ -361,19 +361,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     protected function getModulepath(array $module_or_modulepath, array &$props): array
     {
-        // This function is used to get the path to the current module, or to a module path
-        // It is not used for getting the path to a single module which is not the current one (since we do not know its path)
+        // This function is used to get the path to the current component variation, or to a component variation path
+        // It is not used for getting the path to a single component variation which is not the current one (since we do not know its path)
         if (!$props) {
             return [];
         }
 
-        // From the root of the $props we obtain the current module
+        // From the root of the $props we obtain the current component variation
         $moduleFullName = $this->getPathHeadModule($props);
 
-        // Calculate the path to iterate down. It always starts with the current module
+        // Calculate the path to iterate down. It always starts with the current component variation
         $ret = array($moduleFullName);
 
-        // If it is an array, then we're passing the path to find the module to which to add the att
+        // If it is an array, then we're passing the path to find the component variation to which to add the att
         if ($this->isModulePath($module_or_modulepath)) {
             $ret = array_merge(
                 $ret,
@@ -397,11 +397,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $starting_from_modulepath
             );
 
-            // Attach the current module, which is not included on "starting_from", to step down this level too
+            // Attach the current component variation, which is not included on "starting_from", to step down this level too
             $moduleFullName = $this->getPathHeadModule($props);
             array_unshift($startingFromModulepathFullNames, $moduleFullName);
 
-            // Descend into the path to find the module for which to add the att
+            // Descend into the path to find the component variation for which to add the att
             $module_props = &$props;
             foreach ($startingFromModulepathFullNames as $pathlevelModuleFullName) {
                 $last_module_props = &$module_props;
@@ -419,15 +419,15 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
         }
 
-        // If the module is a string, there are 2 possibilities: either it is the current module or not
-        // If it is not, then it is a descendant module, which will appear at some point down the path.
+        // If the component variation is a string, there are 2 possibilities: either it is the current component variation or not
+        // If it is not, then it is a descendant component variation, which will appear at some point down the path.
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsModuletree`
         if ($this->isDescendantModule($module_or_modulepath, $props)) {
-            // It is a child module
+            // It is a child component variation
             $att_module = $module_or_modulepath;
             $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_module);
 
-            // From the root of the $props we obtain the current module
+            // From the root of the $props we obtain the current component variation
             $moduleFullName = $this->getPathHeadModule($props);
 
             // Set the child attributes under a different entry
@@ -437,10 +437,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Calculate the path to iterate down
             $modulepath = $this->getModulepath($module_or_modulepath, $props);
 
-            // Extract the lastlevel, that's the module to with to add the att
+            // Extract the lastlevel, that's the component variation to with to add the att
             $attModuleFullName = array_pop($modulepath);
 
-            // Descend into the path to find the module for which to add the att
+            // Descend into the path to find the component variation for which to add the att
             $module_props = &$props;
             foreach ($modulepath as $pathlevelFullName) {
                 $module_props[$pathlevelFullName][Props::SUBMODULES] = $module_props[$pathlevelFullName][Props::SUBMODULES] ?? array();
@@ -625,7 +625,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function addToDatasetDatabaseKeys(array $componentVariation, array &$props, array $path, array &$ret): void
     {
-        // Add the current module's dbkeys
+        // Add the current component variation's dbkeys
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($componentVariation)) {
             $dbkeys = $this->getDatabaseKeys($componentVariation, $props);
             foreach ($dbkeys as $field => $dbkey) {
@@ -701,7 +701,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getDatasource(array $componentVariation, array &$props): string
     {
-        // Each module can only return one piece of data, and it must be indicated if it static or mutableonrequest
+        // Each component variation can only return one piece of data, and it must be indicated if it static or mutableonrequest
         // Retrieving only 1 piece is needed so that its children do not get confused what data their getDataFields applies to
         return DataSources::MUTABLEONREQUEST;
     }
@@ -774,8 +774,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getImmutableDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array
     {
-        // The data-properties start on a dataloading module, and finish on the next dataloding module down the line
-        // This way, we can collect all the data-fields that the module will need to load for its dbobjects
+        // The data-properties start on a dataloading component variation, and finish on the next dataloding component variation down the line
+        // This way, we can collect all the data-fields that the component variation will need to load for its dbobjects
         return $this->executeOnSelfAndPropagateToModules('getImmutableDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
     }
 
@@ -783,7 +783,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        // Only if this module loads data => We are at the head nodule of the dataset section
+        // Only if this component variation loads data => We are at the head nodule of the dataset section
         if ($this->moduleLoadsData($componentVariation)) {
             // Load the data-fields from all modules inside this section
             // And then, only for the top node, add its extra properties
@@ -936,7 +936,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        // Only if this module loads data
+        // Only if this component variation loads data
         if ($this->moduleLoadsData($componentVariation)) {
             $properties = $this->getMutableonmodelHeaddatasetmoduleDataProperties($componentVariation, $props);
             if ($properties) {
@@ -981,7 +981,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        // Only if this module loads data
+        // Only if this component variation loads data
         if ($this->moduleLoadsData($componentVariation)) {
             // // Load the data-fields from all modules inside this section
             // // And then, only for the top node, add its extra properties
@@ -1093,7 +1093,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function shouldExecuteMutation(array $componentVariation, array &$props): bool
     {
-        // By default, execute only if the module is targeted for execution and doing POST
+        // By default, execute only if the component variation is targeted for execution and doing POST
         return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($componentVariation);
     }
 
@@ -1162,7 +1162,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                     }
                                     unset($submodule_ret['data-fields']);
                                 }
-                                // Chain the conditional-data-fields at the end of the one from this module
+                                // Chain the conditional-data-fields at the end of the one from this component variation
                                 if ($submodule_ret['conditional-data-fields'] ?? null) {
                                     foreach ($submodule_ret['conditional-data-fields'] as $submodule_condition_data_field => $submodule_conditional_data_fields) {
                                         $ret['conditional-data-fields'][$conditionDataField][$submodule_condition_data_field] = array_merge(

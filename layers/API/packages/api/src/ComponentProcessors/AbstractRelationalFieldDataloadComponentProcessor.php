@@ -12,7 +12,7 @@ abstract class AbstractRelationalFieldDataloadComponentProcessor extends Abstrac
     protected function getInnerSubmodules(array $componentVariation): array
     {
         $ret = parent::getInnerSubmodules($componentVariation);
-        // The fields to retrieve are passed through module atts, so simply transfer all module atts down the line
+        // The fields to retrieve are passed through component variation atts, so simply transfer all component variation atts down the line
         $ret[] = [RelationalFieldQueryDataComponentProcessor::class, RelationalFieldQueryDataComponentProcessor::MODULE_LAYOUT_RELATIONALFIELDS, $componentVariation[2] ?? null];
         return $ret;
     }

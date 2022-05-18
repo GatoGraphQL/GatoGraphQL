@@ -29,7 +29,7 @@ trait ModulePathProcessorTrait
         $key = $this->getModuleHelpers()->getModuleOutputName($componentVariation);
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($componentVariation, $props)) {
             if ($module_ret = $this->$eval_self_fn($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
                 $ret[$key] = $module_ret;
@@ -42,7 +42,7 @@ trait ModulePathProcessorTrait
         });
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
         $submodules_ret = array();
         foreach ($submodules as $submodule) {
@@ -66,7 +66,7 @@ trait ModulePathProcessorTrait
     {
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($componentVariation, $props)) {
             $ret = $this->$eval_self_fn($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         } else {
@@ -79,7 +79,7 @@ trait ModulePathProcessorTrait
         });
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
         foreach ($submodules as $submodule) {
             $ret = array_merge_recursive(
@@ -100,7 +100,7 @@ trait ModulePathProcessorTrait
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
         $key = $use_module_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($componentVariation) : $moduleFullName;
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($componentVariation, $props)) {
             // Maybe only execute function on the dataloading modules
             if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($componentVariation)->startDataloadingSection($componentVariation)) {
@@ -113,7 +113,7 @@ trait ModulePathProcessorTrait
         $submodules = $this->getAllSubmodules($componentVariation);
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
         $submodules_ret = array();
         foreach ($submodules as $submodule) {
@@ -137,7 +137,7 @@ trait ModulePathProcessorTrait
     {
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
-        // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        // If modulepaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($componentVariation, $props)) {
             $ret = $this->$eval_self_fn($componentVariation, $props);
         } else {
@@ -147,7 +147,7 @@ trait ModulePathProcessorTrait
         $submodules = $this->getAllSubmodules($componentVariation);
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
         foreach ($submodules as $submodule) {
             $submodule_ret = $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $recursive);

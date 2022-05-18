@@ -52,7 +52,7 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
 
     // This function CANNOT have $props, since we do not always go through initModelProps to set the name of the input
     // Eg: we change the input name through $props 'name' when displaying the form, however in the actionexecuter, it doesn't
-    // load that same module (it just accesses directly its value), then it fails retrieving the value since it tries get it from a different field name
+    // load that same component variation (it just accesses directly its value), then it fails retrieving the value since it tries get it from a different field name
     public function getName(array $componentVariation): string
     {
         return $this->getModuleHelpers()->getModuleOutputName($componentVariation);

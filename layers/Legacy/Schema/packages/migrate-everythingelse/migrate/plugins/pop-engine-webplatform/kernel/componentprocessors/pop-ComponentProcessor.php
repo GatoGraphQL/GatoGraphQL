@@ -40,7 +40,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         // Allow PoP Resource Loader to inject this value
         return \PoP\Root\App::applyFilters(
-            'PoP_WebPlatformQueryDataComponentProcessorBase:module-immutable-settings',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component variation-immutable-settings',
             $ret,
             $componentVariation,
             $props,
@@ -56,9 +56,9 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         return \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, $jsmethods, $componentVariation);
 
         // // $ret data structure:
-        // // module
+        // // component variation
         // // methods: map of group => methods
-        // // next: repeats this sequence down the line for all the module's modules
+        // // next: repeats this sequence down the line for all the component variation's modules
         // if ($priority_jsmethod = $this->get_module_filtered_jsmethods($componentVariation, $props)) {
 
         // 	foreach ($priority_jsmethod as $priority => $jsmethod) {
@@ -82,9 +82,9 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         $methods = array();
 
         // $ret data structure:
-        // module
+        // component variation
         // methods: map of group => methods
-        // next: repeats this sequence down the line for all the module's modules
+        // next: repeats this sequence down the line for all the component variation's modules
         if ($priority_jsmethod = $this->getModuleFilteredPagesectionJsmethods($componentVariation, $props)) {
             foreach ($priority_jsmethod as $priority => $jsmethod) {
                 if (!$jsmethod) {
@@ -244,7 +244,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         // Allow CSS to Styles to modify these value
         return \PoP\Root\App::applyFilters(
-            'PoP_WebPlatformQueryDataComponentProcessorBase:module-mutableonrequest-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component variation-mutableonrequest-configuration',
             $ret,
             $componentVariation,
             $props,
@@ -299,7 +299,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         // Allow PoP Resource Loader to inject this value
         return \PoP\Root\App::applyFilters(
-            'PoP_WebPlatformQueryDataComponentProcessorBase:module-immutable-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component variation-immutable-configuration',
             $ret,
             $componentVariation,
             $props,

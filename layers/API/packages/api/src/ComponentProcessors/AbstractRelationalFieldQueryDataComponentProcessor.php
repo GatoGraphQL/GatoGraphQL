@@ -34,7 +34,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     {
         if ($moduleAtts === null) {
             /**
-             * There are not virtual module atts when loading the module
+             * There are not virtual component variation atts when loading the component variation
              * the first time (i.e. for the fields at the root level).
              */
             $executableDocument = App::getState('executable-document-ast');
@@ -62,7 +62,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         }
 
         /**
-         * When the virtual module has atts, the field IDs are coded within.
+         * When the virtual component variation has atts, the field IDs are coded within.
          */
         return $this->retrieveAstFieldFragmentModelsTuplesFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
     }
@@ -182,7 +182,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
-     * Flag used to process the conditional field from the module or not
+     * Flag used to process the conditional field from the component variation or not
      */
     public function ignoreConditionalFields(?array $moduleAtts): bool
     {
@@ -240,8 +240,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         $ret = [];
 
         /**
-         * Create a "virtual" module with the fields
-         * corresponding to the next level module.
+         * Create a "virtual" component variation with the fields
+         * corresponding to the next level component variation.
          */
         foreach ($relationalFields as $relationalField) {
             $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
@@ -291,7 +291,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * relational fields (eg: "author").
      *
      * Using `getConditionalOnDataFieldRelationalSubmodules` to
-     * load relational fields does not work, because the module to
+     * load relational fields does not work, because the component variation to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
      * of them will add their entry "author" under 'conditional-data-fields',
