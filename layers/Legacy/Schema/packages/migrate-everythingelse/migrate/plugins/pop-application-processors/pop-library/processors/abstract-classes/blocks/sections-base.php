@@ -209,11 +209,11 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {
-                $module_path_manager = ModulePathManagerFacade::getInstance();
-                $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $component;
-                $module_propagation_current_path[] = $inner;
-                return $module_propagation_current_path;
+                $component_path_manager = ModulePathManagerFacade::getInstance();
+                $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();
+                $component_propagation_current_path[] = $component;
+                $component_propagation_current_path[] = $inner;
+                return $component_propagation_current_path;
             }
         }
 

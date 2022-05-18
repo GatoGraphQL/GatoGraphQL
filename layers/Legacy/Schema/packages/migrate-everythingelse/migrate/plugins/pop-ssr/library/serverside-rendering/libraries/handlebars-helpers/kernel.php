@@ -42,7 +42,7 @@ class PoP_ServerSide_KernelHelpers
         $context = $options['hash']['context'] ?? $options['_this'];
         $pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
         $targetId = $options['hash']['targetId'] ?? $context['bs']['bsId'];
-        $moduleName = $options['hash']['module'] ?? $context[GD_JS_COMPONENT];
+        $componentName = $options['hash']['component'] ?? $context[GD_JS_COMPONENT];
         $fixed = $options['hash']['fixed'] ?? $context[GD_JS_FIXEDID];
         $isIdUnique = $options['hash']['idUnique'] ?? $context[GD_JS_ISIDUNIQUE];
         $group = $options['hash']['group'];
@@ -58,10 +58,10 @@ class PoP_ServerSide_KernelHelpers
             $popJSRuntimeManager->setBlockURL($domain, $url);
         }
 
-        $generatedId = $popJSRuntimeManager->addModule($domain, $pssId, $targetId, $moduleName, $id, $group, $fixed, $isIdUnique, $ignorePSRuntimeId);
+        $generatedId = $popJSRuntimeManager->addModule($domain, $pssId, $targetId, $componentName, $id, $group, $fixed, $isIdUnique, $ignorePSRuntimeId);
         $items = array();
         $items[] = 'id="'.$generatedId.'"';
-        $items[] = 'data-modulename="'.$moduleName.'"';
+        $items[] = 'data-componentname="'.$componentName.'"';
 
         // For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
         if ($url) {
@@ -76,12 +76,12 @@ class PoP_ServerSide_KernelHelpers
         $context = $options['hash']['context'] ?? $options['_this'];
         $pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
         $targetId = $options['hash']['targetId'] ?? $context['bs']['bsId'];
-        $moduleName = $options['hash']['module'] ?? $context[GD_JS_COMPONENT];
+        $componentName = $options['hash']['component'] ?? $context[GD_JS_COMPONENT];
 
         $domain = $context['tls']['domain'];
         $group = $options['hash']['group'];
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();
-        return $popJSRuntimeManager->getLastGeneratedId($domain, $pssId, $targetId, $moduleName, $group);
+        return $popJSRuntimeManager->getLastGeneratedId($domain, $pssId, $targetId, $componentName, $group);
     }
 
     public function enterTemplate($template, $options)
@@ -99,7 +99,7 @@ class PoP_ServerSide_KernelHelpers
 
         // The context can be passed as a param, or if null, use the current one
         $context = $options['hash']['context'] ?? $options['_this'];
-        $moduleName = $options['hash']['module'] ?? $context[GD_JS_COMPONENT];
+        $componentName = $options['hash']['component'] ?? $context[GD_JS_COMPONENT];
 
         // From the prevContext we rescue the topLevel/pageSection/block Settings
         $tls = $prevContext['tls'];
@@ -114,7 +114,7 @@ class PoP_ServerSide_KernelHelpers
         $dbKey = $options['hash']['dbKey'] ?? $prevContext['dbKey'];
         $objectIDs = $options['hash']['objectIDs'] ?? $prevContext['objectIDs'];
 
-        // Add all these vars to the context for this module
+        // Add all these vars to the context for this component
         $extend = array(
             'dbObject' => $dbObject,
             'dbObjectDBKey' => $dbObjectDBKey,
@@ -136,11 +136,11 @@ class PoP_ServerSide_KernelHelpers
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         // $context = array_merge(
         //     $context,
-        //     $popManager->getRuntimeConfiguration($domain, $pssId, $bsId, $moduleName)
+        //     $popManager->getRuntimeConfiguration($domain, $pssId, $bsId, $componentName)
         // );
 
         // Expand the JS Keys
-        // Needed in addition to withModule because it's not always used. Eg: controlbuttongroup.tmpl it iterates directly on modules and do enterModule on each, no #with involved
+        // Needed in addition to withModule because it's not always used. Eg: controlbuttongroup.tmpl it iterates directly on components and do enterModule on each, no #with involved
         // Do it after extending with getRuntimeConfiguration, so that these keys are also expanded
         $popManager->expandJSKeys($context);
 
@@ -205,14 +205,14 @@ class PoP_ServerSide_KernelHelpers
             $extend
         );
 
-        $response = $popManager->getHtml($domain, $moduleName, $context);
+        $response = $popManager->getHtml($domain, $componentName, $context);
 
         // Allow PoP Resource Loader to modify the response, to add embedded scripts
         $response = \PoP\Root\App::applyFilters(
             'handlebars-helpers:enterModule:response',
             $response,
             $context,
-            $moduleName,
+            $componentName,
             $domain,
             $pssId,
             $psId,
@@ -227,23 +227,23 @@ class PoP_ServerSide_KernelHelpers
         return new LS($response);
     }
 
-    public function withModule($context, $moduleName, $options)
+    public function withModule($context, $componentName, $options)
     {
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
-        if (!$context || !isset($context[GD_JS_SUBCOMPONENTOUTPUTNAMES]) || !isset($context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$moduleName])) {
+        if (!$context || !isset($context[GD_JS_SUBCOMPONENTOUTPUTNAMES]) || !isset($context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$componentName])) {
             return;
         }
 
-        // Get the module settings id from the configuration
-        $moduleOutputName = $context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$moduleName];
+        // Get the component settings id from the configuration
+        $componentOutputName = $context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$componentName];
 
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
-        if (!isset($context[ComponentModelModuleInfo::get('response-prop-subcomponents')]) || !isset($context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$moduleOutputName])) {
+        if (!isset($context[ComponentModelModuleInfo::get('response-prop-subcomponents')]) || !isset($context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$componentOutputName])) {
             return;
         }
 
-        // Go down to the module
-        $context = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$moduleOutputName];
+        // Go down to the component
+        $context = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$componentOutputName];
 
         // Expand the JS Keys
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();

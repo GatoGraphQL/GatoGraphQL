@@ -100,7 +100,7 @@
                 replicableMemory.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT],
                 function (key, value) {
 
-                    // If it is an empty array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+                    // If it is an empty array then do nothing but set the object: this happens when the pageSection has no components (eg: sideInfo for Discussions page)
                     // and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
                     if ($.type(value) == 'array' && value.length == 0) {
                          // do Nothing
@@ -176,7 +176,7 @@
 
             var bsId = link.data('block-settingsid');
             var pssId = pop.Manager.getSettingsId(pageSection);
-            var moduleName = link.data('modulename');
+            var componentName = link.data('componentname');
         
             var interceptUrl = link.data('intercept-url');
             var domain = getDomain(interceptUrl);
@@ -198,11 +198,11 @@
             // Intercept URL: the newly created URL, assigned already to the toplevel feedback on the fuction above
             var tlFeedback = pop.Manager.getTopLevelFeedback(domain);
             var psConfiguration = pop.Manager.getPageSectionConfiguration(domain, pageSection);
-            psConfiguration[pop.c.JS_INTERCEPTURLS][moduleName] = psConfiguration[pop.c.JS_INTERCEPTURLS][moduleName] || {};
-            psConfiguration[pop.c.JS_INTERCEPTURLS][moduleName][moduleName] = tlFeedback[pop.c.URLPARAM_URL];
+            psConfiguration[pop.c.JS_INTERCEPTURLS][componentName] = psConfiguration[pop.c.JS_INTERCEPTURLS][componentName] || {};
+            psConfiguration[pop.c.JS_INTERCEPTURLS][componentName][componentName] = tlFeedback[pop.c.URLPARAM_URL];
 
             // Set what blocks must be replicated in 'blockunits', replicable must be empty since the "tell me what blocks are to be replicated" was already executed
-            psConfiguration[pop.c.JS_COMPONENT] = moduleName;
+            psConfiguration[pop.c.JS_COMPONENT] = componentName;
 
             // Comment Leo 05/11/2015: the configuration of the block-settings-ids to be drawn is passed as settings
             // next to the interceptor link, on <span class="pop-interceptor-blocksettingsids"/>

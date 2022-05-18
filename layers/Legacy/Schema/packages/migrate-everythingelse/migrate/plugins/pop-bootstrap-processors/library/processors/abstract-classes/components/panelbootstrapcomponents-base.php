@@ -221,11 +221,11 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
             $panel_headers = array();
             foreach ($this->getPanelHeaders($component, $props) as $panelHeader) {
-                $header_submodule = $panelHeader['header-subcomponent'];
-                $subheader_submodules = $panelHeader['subheader-submodules'];
-                $headerSubmoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($header_submodule);
+                $header_subcomponent = $panelHeader['header-subcomponent'];
+                $subheader_subcomponents = $panelHeader['subheader-submodules'];
+                $headerSubmoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($header_subcomponent);
                 $header = array(
-                    'moduleoutputname' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header_submodule)
+                    'componentoutputname' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header_subcomponent)
                 );
                 if ($title = $titles[$headerSubmoduleFullName] ?? null) {
                     $header['title'] = $title;
@@ -237,12 +237,12 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                     $header['tooltip'] = $tooltip;
                 }
 
-                if ($subheader_submodules) {
+                if ($subheader_subcomponents) {
                     $subheaders = array();
-                    foreach ($subheader_submodules as $subheader_submodule) {
-                        $subheaderSubmoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($subheader_submodule);
+                    foreach ($subheader_subcomponents as $subheader_subcomponent) {
+                        $subheaderSubmoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($subheader_subcomponent);
                         $subheader = array(
-                            'moduleoutputname' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subheader_submodule)
+                            'componentoutputname' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subheader_subcomponent)
                         );
                         if ($title = $titles[$subheaderSubmoduleFullName] ?? null) {
                             $subheader['title'] = $title;
@@ -310,8 +310,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($active_submodule = $this->getActivepanelSubmodule($component)) {
-            $ret['active'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($active_submodule);
+        if ($active_subcomponent = $this->getActivepanelSubmodule($component)) {
+            $ret['active'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($active_subcomponent);
         }
 
         return $ret;
@@ -325,14 +325,14 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     public function initModelProps(array $component, array &$props): void
     {
         if ($this->lazyLoadInactivePanels($component, $props)) {
-            $active_submodule = $this->getActivepanelSubmodule($component);
-            $inactive_submodules = array_diff(
+            $active_subcomponent = $this->getActivepanelSubmodule($component);
+            $inactive_subcomponents = array_diff(
                 $this->getSubcomponents($component),
                 array(
-                    $active_submodule
+                    $active_subcomponent
                 )
             );
-            foreach ($inactive_submodules as $subComponent) {
+            foreach ($inactive_subcomponents as $subComponent) {
                 $this->setProp([$subComponent], $props, 'skip-data-load', true);
             }
         }

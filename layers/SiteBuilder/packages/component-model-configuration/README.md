@@ -46,7 +46,7 @@ Configuration values are added under functions:
 For instance:
 
 ```php
-// Implement the modules properties ...
+// Implement the components properties ...
 function getImmutableConfiguration($component, &$props) 
 {
   $ret = parent::getImmutableConfiguration($component, $props);
@@ -65,7 +65,7 @@ function getImmutableConfiguration($component, &$props)
 Please notice that the configuration receives the `$props` parameter, hence it can print configuration values set through props. `immutable` and `mutable on model` configuration values are initialized through `initModelProps`, and `mutable on request` ones are initialized through `initRequestProps`:
 
 ```php
-// Implement the modules properties ...
+// Implement the components properties ...
 function getImmutableConfiguration($component, &$props) 
 {
   $ret = parent::getImmutableConfiguration($component, $props);
@@ -95,16 +95,16 @@ function initModelProps($component, &$props)
 
 ### Client-Side Caching
 
-To cache the configuration for all modules in the client, and keep them available to be reused, we simply deep merge all the responses together. For instance, if the first request brings this response:
+To cache the configuration for all components in the client, and keep them available to be reused, we simply deep merge all the responses together. For instance, if the first request brings this response:
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module2": {
+    components: {
+      "component2": {
         configuration: {
           class: "some-class"
         }
@@ -118,12 +118,12 @@ And the second response brings this response:
 
 ```javascript
 {
-  "module3": {
+  "component3": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module4": {
+    components: {
+      "component4": {
         configuration: {
           class: "another-class"
         }
@@ -137,24 +137,24 @@ Then deep merging the responses together will result in:
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module2": {
+    components: {
+      "component2": {
         configuration: {
           class: "some-class"
         }
       }
     }
   },
-  "module3": {
+  "component3": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module4": {
+    components: {
+      "component4": {
         configuration: {
           class: "another-class"
         }
@@ -164,13 +164,13 @@ Then deep merging the responses together will result in:
 }
 ```
 
-And we can perfectly reuse the configuration starting from "module1" to reprint the first request, and the configuration starting from "module3" to reprint the second request.
+And we can perfectly reuse the configuration starting from "component1" to reprint the first request, and the configuration starting from "component3" to reprint the second request.
 
-That was easy, however from now on it gets more complicated. What happens if the module's descendants are not static, but can change depending on the context, such as the requested URL or other inputs? For instance, we could have a module "single-post" which changes its descendant module based on the post type of the requested object, choosing between modules "layout-post" or "layout-event", so that the component hierarchy alternates from this:
+That was easy, however from now on it gets more complicated. What happens if the component's descendants are not static, but can change depending on the context, such as the requested URL or other inputs? For instance, we could have a component "single-post" which changes its descendant component based on the post type of the requested object, choosing between components "layout-post" or "layout-event", so that the component hierarchy alternates from this:
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-post"
 ```
 
@@ -178,15 +178,15 @@ to this:
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-event"
 ```
 
-Similarly, even within the same component hierarchy, a module could have a property value change for different URLs. For instance, a module "post-layout" can have a property "class" with value "post-{id}", where "{id}" is the id of the requested post, so that we can add styles for specific posts such as `.post-37 { background-color: red; }` and `.post-224 { background-color: green; }`. Then, posts with ids 37 and 224, even though they have the same component hierarchy, their configurations will alternate from this:
+Similarly, even within the same component hierarchy, a component could have a property value change for different URLs. For instance, a component "post-layout" can have a property "class" with value "post-{id}", where "{id}" is the id of the requested post, so that we can add styles for specific posts such as `.post-37 { background-color: red; }` and `.post-224 { background-color: green; }`. Then, posts with ids 37 and 224, even though they have the same component hierarchy, their configurations will alternate from this:
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-post"
       configuration
         class: "post-37"
@@ -196,7 +196,7 @@ to this:
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-post"
       configuration
         class: "post-224"
@@ -206,12 +206,12 @@ Let's explore what happens in these two situations described above when deep mer
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module2": {
+    components: {
+      "component2": {
         configuration: {
           class: "some-class"
         }
@@ -225,12 +225,12 @@ And the second response brings this response:
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module3": {
+    components: {
+      "component3": {
         configuration: {
           class: "another-class"
         }
@@ -244,17 +244,17 @@ Then deep merging the responses together will result in:
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule"
+      class: "topcomponent"
     },
-    modules: {
-      "module2": {
+    components: {
+      "component2": {
         configuration: {
           class: "some-class"
         }
       },
-      "module3": {
+      "component3": {
         configuration: {
           class: "another-class"
         }
@@ -264,19 +264,19 @@ Then deep merging the responses together will result in:
 }
 ```
 
-As it can be seen, after merging the response from the second request, the data that was the same (`class: "topmodule"`) didn't affect the merged object, and the new information was appended to the existing object but without overriding any data. However, originally the first response has "module1" with only "module2" as a descendant, but after the merge, "module1" has two descendants, "module2" and "module3". Then, if loading again the URL for the first response and reusing the cached configuration, below "module1" it will print "module2" and "module3" instead of only "module2" as it should be.
+As it can be seen, after merging the response from the second request, the data that was the same (`class: "topcomponent"`) didn't affect the merged object, and the new information was appended to the existing object but without overriding any data. However, originally the first response has "component1" with only "component2" as a descendant, but after the merge, "component1" has two descendants, "component2" and "component3". Then, if loading again the URL for the first response and reusing the cached configuration, below "component1" it will print "component2" and "component3" instead of only "component2" as it should be.
 
-To address this issue, the configuration can add a property "descendants" explicitly declaring which are its submodules, to know which modules must be rendered and ignore the rest, even though their data is still part of the merged JSON object. Then, the first and second response will look like this:
+To address this issue, the configuration can add a property "descendants" explicitly declaring which are its subcomponents, to know which components must be rendered and ignore the rest, even though their data is still part of the merged JSON object. Then, the first and second response will look like this:
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule",
-      descendants: ["module2"]
+      class: "topcomponent",
+      descendants: ["component2"]
     },
-    modules: {
-      "module2": {
+    components: {
+      "component2": {
         configuration: {
           class: "some-class"
         }
@@ -286,13 +286,13 @@ To address this issue, the configuration can add a property "descendants" explic
 }
 
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule",
-      descendants: ["module3"]
+      class: "topcomponent",
+      descendants: ["component3"]
     },
-    modules: {
-      "module3": {
+    components: {
+      "component3": {
         configuration: {
           class: "another-class"
         }
@@ -306,18 +306,18 @@ And the merged configuration will look like this:
 
 ```javascript
 {
-  "module1": {
+  "component1": {
     configuration: {
-      class: "topmodule",
-      descendants: ["module3"]
+      class: "topcomponent",
+      descendants: ["component3"]
     },
-    modules: {
-      "module2": {
+    components: {
+      "component2": {
         configuration: {
           class: "some-class"
         }
       },
-      "module3": {
+      "component3": {
         configuration: {
           class: "another-class"
         }
@@ -327,13 +327,13 @@ And the merged configuration will look like this:
 }
 ```
 
-But now, the value for property "descendants" in the cached object has been overriden with the value from the second response, bringing us to the second issue stated earlier on about differing property values. Then, if loading again the URL for the first response and reusing the cached configuration, below "module1" it will print "module3" instead of "module2" as it should be.
+But now, the value for property "descendants" in the cached object has been overriden with the value from the second response, bringing us to the second issue stated earlier on about differing property values. Then, if loading again the URL for the first response and reusing the cached configuration, below "component1" it will print "component3" instead of "component2" as it should be.
 
 The issue about differing properties arises from the fact that configuration values are set not only according to the component hierarchy, but also to the requested URL. For instance, the following component hierarchy:
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-post"
 ```
 
@@ -341,7 +341,7 @@ Can produce the following two different configuration outputs:
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-post"
       configuration
         class: "post-37"
@@ -351,7 +351,7 @@ and
 
 ```javascript
 "single-post"
-  modules
+  components
     "layout-post"
       configuration
         class: "post-224"
@@ -359,8 +359,8 @@ and
 
 The solution is to deep merge the configurations from different requests without overriding differing properties, either at the component hierarchy or URL levels, is to have the configuration split into 3 separate subsections: "immutable", "mutableonmodel" (where "model" is equivalent to "component hierarchy") and "mutableonrequest". Every property in the configuration must be placed under exactly 1 of the 3 sections, like this:
 
-- **immutable:** Contains properties which never change, such as `class: "topmodule"`
-- **mutableonmodel:** Contains properties which can change based on the component hierarchy, such as `descendants: ["module2"]`
+- **immutable:** Contains properties which never change, such as `class: "topcomponent"`
+- **mutableonmodel:** Contains properties which can change based on the component hierarchy, such as `descendants: ["component2"]`
 - **mutableonrequest:** Contains properties which can change based on the requested URL, such as `class: "post-37"`
 
 Following this scheme, a first request may produce the following response:
@@ -370,7 +370,7 @@ Following this scheme, a first request may produce the following response:
   immutable: {
     "single-post": {
       configuration: {
-        class: "topmodule"
+        class: "topcomponent"
       }
     }
   },
@@ -383,7 +383,7 @@ Following this scheme, a first request may produce the following response:
   },
   mutableonrequest: {
     "single-post": {
-      modules: {
+      components: {
         "layout-post": {
           configuration: {
             class: "post-37"
@@ -401,10 +401,10 @@ As it can be observed, because the properties from the 3 sections do not overlap
 {
   "single-post": {
     configuration: {
-      class: "topmodule",
+      class: "topcomponent",
       descendants: ["layout-post"]
     },
-    modules: {
+    components: {
       "layout-post": {
         configuration: {
           class: "post-37"
@@ -422,7 +422,7 @@ immutable =>
   {
     "single-post": {
       configuration: {
-        class: "topmodule"
+        class: "topcomponent"
       }
     }
   }
@@ -442,7 +442,7 @@ mutableonrequest =>
   {
     "/posts/some-post/": {
       "single-post": {
-        modules: {
+        components: {
           "layout-post": {
             configuration: {
               class: "post-37"
@@ -461,7 +461,7 @@ immutable =>
   {
     "single-post": {
       configuration: {
-        class: "topmodule"
+        class: "topcomponent"
       }
     }
   }
@@ -488,7 +488,7 @@ mutableonrequest =>
   {
     "/posts/some-post/": {
       "single-post": {
-        modules: {
+        components: {
           "layout-post": {
             configuration: {
               class: "post-37"
@@ -499,7 +499,7 @@ mutableonrequest =>
     },
     "/posts/some-event/": {
       "single-post": {
-        modules: {
+        components: {
           "layout-event": {
             configuration: {
               class: "post-45"

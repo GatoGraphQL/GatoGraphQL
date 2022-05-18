@@ -39,7 +39,7 @@ window.pop.JSRuntimeManager = {
 		that.setPageSectionURL(url);
 	},
 
-	initBlockVarPaths : function(vars, url, domain, pssId, targetId, moduleName, group) {
+	initBlockVarPaths : function(vars, url, domain, pssId, targetId, componentName, group) {
 	
 		var that = this;
 		group = group || pop.c.JSMETHOD_GROUP_MAIN;
@@ -56,18 +56,18 @@ window.pop.JSRuntimeManager = {
 		if (!vars[url][domain][pssId][targetId]) {
 			vars[url][domain][pssId][targetId] = {};
 		}
-		if (!vars[url][domain][pssId][targetId][moduleName]) {
-			vars[url][domain][pssId][targetId][moduleName] = {};
+		if (!vars[url][domain][pssId][targetId][componentName]) {
+			vars[url][domain][pssId][targetId][componentName] = {};
 		}
-		if (!vars[url][domain][pssId][targetId][moduleName][group]) {
-			vars[url][domain][pssId][targetId][moduleName][group] = [];
+		if (!vars[url][domain][pssId][targetId][componentName][group]) {
+			vars[url][domain][pssId][targetId][componentName][group] = [];
 		}
 	},
-	initVars : function(url, domain, pssId, targetId, moduleName, group) {
+	initVars : function(url, domain, pssId, targetId, componentName, group) {
 	
 		var that = this;
-		that.initBlockVarPaths(that['full-session-ids'], url, domain, pssId, targetId, moduleName, group);
-		that.initBlockVarPaths(that['last-session-ids'], url, domain, pssId, targetId, moduleName, group);
+		that.initBlockVarPaths(that['full-session-ids'], url, domain, pssId, targetId, componentName, group);
+		that.initBlockVarPaths(that['last-session-ids'], url, domain, pssId, targetId, componentName, group);
 	},
 
 	addGroup : function(id, group) {
@@ -80,12 +80,12 @@ window.pop.JSRuntimeManager = {
 		
 		return id;
 	},
-	addPageSectionId : function(domain, pssId, moduleName, id, group) {
+	addPageSectionId : function(domain, pssId, componentName, id, group) {
 	
 		var that = this;
-		return that.addModule(domain, pssId, pssId, moduleName, id, group, true, true);
+		return that.addModule(domain, pssId, pssId, componentName, id, group, true, true);
 	},
-	addModule : function(domain, pssId, targetId, moduleName, id, group, fixed, isIdUnique, ignorePSRuntimeId) {
+	addModule : function(domain, pssId, targetId, componentName, id, group, fixed, isIdUnique, ignorePSRuntimeId) {
 	
 		var that = this;
 		
@@ -105,32 +105,32 @@ window.pop.JSRuntimeManager = {
 		// Add under both pageSection and block, unless the targetId is the pssId, then no need for the block (eg: pagesection-tabpane.tmpl for the group="interceptor" link)
 		// ignorePSRuntimeId: to not add the runtime ID for the pageSection when re-drawing data inside a block (the IDs will be generated again, but no need to add them to the pageSection side, since pageSection js methods will not be executed again)
 		if (!ignorePSRuntimeId) {
-			that.addTargetId(that.pageSectionURL, domain, pssId, pssId, moduleName, group, id);
+			that.addTargetId(that.pageSectionURL, domain, pssId, pssId, componentName, group, id);
 		}
 		if (pssId != targetId) {
-			that.addTargetId(that.blockURL, domain, pssId, targetId, moduleName, group, id);
+			that.addTargetId(that.blockURL, domain, pssId, targetId, componentName, group, id);
 		}
 		return id;
 	},
-	addTargetId : function(url, domain, pssId, targetId, moduleName, group, id) {
+	addTargetId : function(url, domain, pssId, targetId, componentName, group, id) {
 	
 		var that = this;
 		group = group || pop.c.JSMETHOD_GROUP_MAIN;
 
-		that.initVars(url, domain, pssId, targetId, moduleName, group);
-		that['full-session-ids'][url][domain][pssId][targetId][moduleName][group].push(id);
-		that['last-session-ids'][url][domain][pssId][targetId][moduleName][group].push(id);
+		that.initVars(url, domain, pssId, targetId, componentName, group);
+		that['full-session-ids'][url][domain][pssId][targetId][componentName][group].push(id);
+		that['last-session-ids'][url][domain][pssId][targetId][componentName][group].push(id);
 
 		return id;
 	},
-	getLastGeneratedId : function(domain, pssId, targetId, moduleName, group) {
+	getLastGeneratedId : function(domain, pssId, targetId, componentName, group) {
 	
 		var that = this;
 		group = group || pop.c.JSMETHOD_GROUP_MAIN;
 
 		// Is it a pageSection? or a block?
 		var url = (pssId == targetId) ? that.pageSectionURL : that.blockURL;
-		var ids = that['full-session-ids'][url][domain][pssId][targetId][moduleName][group];
+		var ids = that['full-session-ids'][url][domain][pssId][targetId][componentName][group];
 		return ids[ids.length-1];
 	},
 

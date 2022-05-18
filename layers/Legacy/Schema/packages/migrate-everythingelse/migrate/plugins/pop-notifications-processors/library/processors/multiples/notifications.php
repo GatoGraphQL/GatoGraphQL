@@ -52,11 +52,11 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
-                $module_path_manager = ModulePathManagerFacade::getInstance();
-                $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $component;
-                $module_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS];
-                return $module_propagation_current_path;
+                $component_path_manager = ModulePathManagerFacade::getInstance();
+                $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();
+                $component_propagation_current_path[] = $component;
+                $component_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS];
+                return $component_propagation_current_path;
         }
 
         return parent::getDataFeedbackInterreferencedComponentPath($component, $props);

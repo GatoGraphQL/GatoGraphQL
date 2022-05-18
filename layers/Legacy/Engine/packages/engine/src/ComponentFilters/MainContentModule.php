@@ -11,11 +11,11 @@ class MainContentModule extends AbstractComponentFilter
 {
     public function getName(): string
     {
-        return 'maincontentmodule';
+        return 'mainContentComponent';
     }
 
     public function excludeModule(array $component, array &$props): bool
     {
-        return App::getState('maincontentmodule') !== $component;
+        return App::getState('mainContentComponent') !== $component;
     }
 }

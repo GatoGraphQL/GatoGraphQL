@@ -13,7 +13,7 @@ use PoP\Root\Hooks\AbstractHookSet;
 class HeadModuleHookSet extends AbstractHookSet
 {
     private ?HeadModule $headComponent = null;
-    private ?ModuleHelpersInterface $moduleHelpers = null;
+    private ?ModuleHelpersInterface $componentHelpers = null;
     
     final public function setHeadModule(HeadModule $headComponent): void
     {
@@ -23,13 +23,13 @@ class HeadModuleHookSet extends AbstractHookSet
     {
         return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
     {
-        $this->moduleHelpers = $moduleHelpers;
+        $this->componentHelpers = $componentHelpers;
     }
     final protected function getModuleHelpers(): ModuleHelpersInterface
     {
-        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
     protected function init(): void

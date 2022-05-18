@@ -14,10 +14,10 @@ class PoP_ServerSide_MultiLayoutHelpers
 
         // Fetch the layout for that particular configuration
         $layout = '';
-        foreach ($conditionDataFieldModules as $conditionField => $moduleOutputName) {
-            // Check if the property evals to `true`. If so, use the corresponding module
+        foreach ($conditionDataFieldModules as $conditionField => $componentOutputName) {
+            // Check if the property evals to `true`. If so, use the corresponding component
             if ($dbObject[$conditionField]) {
-                $layout = $moduleOutputName;
+                $layout = $componentOutputName;
                 break;
             }
         }

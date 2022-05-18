@@ -31,7 +31,7 @@ Handlebars.registerHelper('generateId', function(options) {
 	var context = options.hash.context || this;
 	var pssId = options.hash.pssId || context.pss.pssId;
 	var targetId = options.hash.targetId || context.bs.bsId;
-	var moduleName = options.hash.module || context[pop.c.JS_COMPONENT];
+	var componentName = options.hash.component || context[pop.c.JS_COMPONENT];
 	var fixed = options.hash.fixed || context[pop.c.JS_FIXEDID];
 	var isIdUnique = options.hash.idUnique || context[pop.c.JS_ISIDUNIQUE];
 	var group = options.hash.group;
@@ -46,10 +46,10 @@ Handlebars.registerHelper('generateId', function(options) {
 		pop.JSRuntimeManager.setBlockURL(domain, url);
 	}
 
-	var generatedId = pop.JSRuntimeManager.addModule(domain, pssId, targetId, moduleName, id, group, fixed, isIdUnique, ignorePSRuntimeId);
+	var generatedId = pop.JSRuntimeManager.addModule(domain, pssId, targetId, componentName, id, group, fixed, isIdUnique, ignorePSRuntimeId);
 	var items = [];
 	items.push('id="'+generatedId+'"'); 
-	items.push('data-modulename="'+moduleName+'"');
+	items.push('data-componentname="'+componentName+'"');
 	
 	// For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
 	if (url) {
@@ -64,11 +64,11 @@ Handlebars.registerHelper('lastGeneratedId', function(options) {
 	var context = options.hash.context || this;
 	var pssId = options.hash.pssId || context.pss.pssId;
 	var targetId = options.hash.targetId || context.bs.bsId;
-	var moduleName = options.hash.module || context[pop.c.JS_COMPONENT];
-	// Allow to set the domain explicitly. Eg: in the decentralized map, the "mapdiv-module" gets drawn on the block-toplevel-domain, not on the data domain
+	var componentName = options.hash.component || context[pop.c.JS_COMPONENT];
+	// Allow to set the domain explicitly. Eg: in the decentralized map, the "mapdiv-component" gets drawn on the block-toplevel-domain, not on the data domain
 	var domain = options.hash.domain || context.tls.domain;
 	var group = options.hash.group;
-	return pop.JSRuntimeManager.getLastGeneratedId(domain, pssId, targetId, moduleName, group);
+	return pop.JSRuntimeManager.getLastGeneratedId(domain, pssId, targetId, componentName, group);
 });
 
 Handlebars.registerHelper('enterTemplate', function(template, options){
@@ -83,7 +83,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 
 	// The context can be passed as a param, or if null, use the current one
 	var context = options.hash.context || this;
-	var moduleName = options.hash.module || context[pop.c.JS_COMPONENT];
+	var componentName = options.hash.component || context[pop.c.JS_COMPONENT];
 
 	// From the prevContext we rescue the topLevel/pageSection/block Settings
 	var tls = prevContext.tls;
@@ -101,7 +101,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		dbObjectIDs = null;
 	}
 	
-	// Add all these vars to the context for this module
+	// Add all these vars to the context for this component
 	var extend = {
 		dbObject: dbObject, 
 		dbObjectDBKey: dbObjectDBKey, 
@@ -120,10 +120,10 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var bsId = bs.bsId;
 	var bId = bs.bId;
 
-	// jQuery.extend(context, pop.Manager.getRuntimeConfiguration(domain, pssId, bsId, moduleName));
+	// jQuery.extend(context, pop.Manager.getRuntimeConfiguration(domain, pssId, bsId, componentName));
 
 	// Expand the JS Keys
-	// Needed in addition to withModule because it's not always used. Eg: controlbuttongroup.tmpl it iterates directly on modules and do enterModule on each, no #with involved
+	// Needed in addition to withModule because it's not always used. Eg: controlbuttongroup.tmpl it iterates directly on components and do enterModule on each, no #with involved
 	// Do it after extending with getRuntimeConfiguration, so that these keys are also expanded
 	pop.Manager.expandJSKeys(context);
 
@@ -201,13 +201,13 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	
 	jQuery.extend(context, extend);
 
-	var response = pop.Manager.getHtml(domain, moduleName, context);
+	var response = pop.Manager.getHtml(domain, componentName, context);
 
 	// Allow PoP Resource Loader to modify the response, to add embedded scripts
 	var args = {
 		response: response,
 		context: context,
-		module: moduleName,
+		component: componentName,
 		domain: domain,
 		pssId: pssId,
 		psId: psId,
@@ -224,29 +224,29 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	return new Handlebars.SafeString(response);
 });
 
-Handlebars.registerHelper('withModule', function(context, moduleSetingsIdOrPointer, options) {
+Handlebars.registerHelper('withModule', function(context, componentSetingsIdOrPointer, options) {
 
 	if (typeof context == 'undefined' || typeof context[pop.c.JS_SUBCOMPONENTS] == 'undefined') {
 
 		return;
 	}
 
-	// Get the module settings id: it is either a pointer to its value in the configuration, or already the value
-	var moduleSettingsId;
-	if (context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES] && context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES][moduleSetingsIdOrPointer]) {
-		moduleSettingsId = context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES][moduleSetingsIdOrPointer];
+	// Get the component settings id: it is either a pointer to its value in the configuration, or already the value
+	var componentSettingsId;
+	if (context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES] && context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES][componentSetingsIdOrPointer]) {
+		componentSettingsId = context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES][componentSetingsIdOrPointer];
 	}
 	else {
-		moduleSettingsId = moduleSetingsIdOrPointer;
+		componentSettingsId = componentSetingsIdOrPointer;
 	}
 
-	if (typeof context[pop.c.JS_SUBCOMPONENTS][moduleSettingsId] == 'undefined') {
+	if (typeof context[pop.c.JS_SUBCOMPONENTS][componentSettingsId] == 'undefined') {
 
 		return;
 	}
 
-	// Go down to the module
-	context = context[pop.c.JS_SUBCOMPONENTS][moduleSettingsId];
+	// Go down to the component
+	context = context[pop.c.JS_SUBCOMPONENTS][componentSettingsId];
 
 	// Expand the JS Keys
 	pop.Manager.expandJSKeys(context);

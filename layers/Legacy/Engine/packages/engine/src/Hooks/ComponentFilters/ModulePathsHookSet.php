@@ -35,9 +35,9 @@ class ModulePathsHookSet extends AbstractHookSet
     {
         if (App::getState('componentFilter') === $this->componentPaths->getName()) {
             if ($componentPaths = App::getState('componentPaths')) {
-                $modulePathHelpers = ModulePathHelpersFacade::getInstance();
+                $componentPathHelpers = ModulePathHelpersFacade::getInstance();
                 $paths = array_map(
-                    fn ($componentPath) => $modulePathHelpers->stringifyModulePath($componentPath),
+                    fn ($componentPath) => $componentPathHelpers->stringifyModulePath($componentPath),
                     $componentPaths
                 );
                 $components[] = $this->getTranslationAPI()->__('component paths:', 'engine') . implode(',', $paths);

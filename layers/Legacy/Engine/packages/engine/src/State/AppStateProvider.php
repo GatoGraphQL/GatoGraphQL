@@ -22,8 +22,8 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?ModulePaths $componentPaths = null;
     private ?MainContentModule $mainContentComponent = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
-    private ?ModulePathHelpersInterface $modulePathHelpers = null;
-    private ?ModuleHelpersInterface $moduleHelpers = null;
+    private ?ModulePathHelpersInterface $componentPathHelpers = null;
+    private ?ModuleHelpersInterface $componentHelpers = null;
 
     final public function setHeadModule(HeadModule $headComponent): void
     {
@@ -57,21 +57,21 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
     {
-        $this->modulePathHelpers = $modulePathHelpers;
+        $this->componentPathHelpers = $componentPathHelpers;
     }
     final protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
     {
-        $this->moduleHelpers = $moduleHelpers;
+        $this->componentHelpers = $componentHelpers;
     }
     final protected function getModuleHelpers(): ModuleHelpersInterface
     {
-        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
     public function augment(array &$state): void
@@ -100,7 +100,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Hence, calculate only at the very end
         // If filtering component by "maincontent", then calculate which is the main content component
         if ($state['componentFilter'] === $this->mainContentComponent->getName()) {
-            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
+            $state['mainContentComponent'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         }
     }
 }

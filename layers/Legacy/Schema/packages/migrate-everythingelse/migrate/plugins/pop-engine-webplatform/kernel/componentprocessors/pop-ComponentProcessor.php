@@ -58,7 +58,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // // $ret data structure:
         // // component
         // // methods: map of group => methods
-        // // next: repeats this sequence down the line for all the component's modules
+        // // next: repeats this sequence down the line for all the component's components
         // if ($priority_jsmethod = $this->get_component_filtered_jsmethods($component, $props)) {
 
         // 	foreach ($priority_jsmethod as $priority => $jsmethod) {
@@ -84,7 +84,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // $ret data structure:
         // component
         // methods: map of group => methods
-        // next: repeats this sequence down the line for all the component's modules
+        // next: repeats this sequence down the line for all the component's components
         if ($priority_jsmethod = $this->getComponentFilteredPagesectionJsmethods($component, $props)) {
             foreach ($priority_jsmethod as $priority => $jsmethod) {
                 if (!$jsmethod) {
@@ -201,9 +201,9 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
 
-    public function getJsdataFeedbackDatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedbackDatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        return $this->executeOnSelfAndPropagateToDatasetmodules('getJsdataFeedbackModuletree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        return $this->executeOnSelfAndPropagateToDatasetcomponents('getJsdataFeedbackModuletree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
     public function getJsdataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
@@ -231,15 +231,15 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
             return $ret;
         }
 
-        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
 
         // The Intercept URLs are runtime instead of static, since they contains information
         // given through the URL, which cannot not cached in the static file
         if ($intercept_urls = $this->getModuleInterceptUrls($component, $props)) {
-            $ret[GD_JS_INTERCEPTURLS][$moduleOutputName] = $intercept_urls;
+            $ret[GD_JS_INTERCEPTURLS][$componentOutputName] = $intercept_urls;
         }
         if ($extra_intercept_urls = $this->getModuleExtraInterceptUrls($component, $props)) {
-            $ret[GD_JS_EXTRAINTERCEPTURLS][$moduleOutputName] = $extra_intercept_urls;
+            $ret[GD_JS_EXTRAINTERCEPTURLS][$componentOutputName] = $extra_intercept_urls;
         }
 
         // Allow CSS to Styles to modify these value
@@ -311,15 +311,15 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // Intercept URLs
     //-------------------------------------------------
 
-    public function getIntercepturlsMergedmoduletree(array $component, array &$props)
+    public function getIntercepturlsMergedcomponenttree(array $component, array &$props)
     {
         return $this->executeOnSelfAndMergeWithComponents('getInterceptUrls', __FUNCTION__, $component, $props, false);
     }
 
     public function getInterceptUrls(array $component, array &$props)
     {
-        if ($module_intercept_urls = $this->getModuleInterceptUrls($component, $props)) {
-            return array_unique(array_values($module_intercept_urls));
+        if ($component_intercept_urls = $this->getModuleInterceptUrls($component, $props)) {
+            return array_unique(array_values($component_intercept_urls));
         }
 
         return array();

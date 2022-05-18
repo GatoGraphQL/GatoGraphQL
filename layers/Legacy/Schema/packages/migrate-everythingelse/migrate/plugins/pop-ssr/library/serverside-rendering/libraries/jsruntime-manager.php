@@ -44,7 +44,7 @@ class PoP_ServerSide_JSRuntimeManager
         $this->setPageSectionURL($url);
     }
 
-    public function initBlockVarPaths(&$blockVars, $url, $domain, $pssId, $targetId, $moduleName, $group = null)
+    public function initBlockVarPaths(&$blockVars, $url, $domain, $pssId, $targetId, $componentName, $group = null)
     {
         $group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
@@ -60,18 +60,18 @@ class PoP_ServerSide_JSRuntimeManager
         if (!$blockVars[$url][$domain][$pssId][$targetId]) {
             $blockVars[$url][$domain][$pssId][$targetId] = array();
         }
-        if (!$blockVars[$url][$domain][$pssId][$targetId][$moduleName]) {
-            $blockVars[$url][$domain][$pssId][$targetId][$moduleName] = array();
+        if (!$blockVars[$url][$domain][$pssId][$targetId][$componentName]) {
+            $blockVars[$url][$domain][$pssId][$targetId][$componentName] = array();
         }
-        if (!$blockVars[$url][$domain][$pssId][$targetId][$moduleName][$group]) {
-            $blockVars[$url][$domain][$pssId][$targetId][$moduleName][$group] = array();
+        if (!$blockVars[$url][$domain][$pssId][$targetId][$componentName][$group]) {
+            $blockVars[$url][$domain][$pssId][$targetId][$componentName][$group] = array();
         }
     }
 
-    public function initVars($url, $domain, $pssId, $targetId, $moduleName, $group)
+    public function initVars($url, $domain, $pssId, $targetId, $componentName, $group)
     {
-        $this->initBlockVarPaths($this->full_session_ids, $url, $domain, $pssId, $targetId, $moduleName, $group);
-        $this->initBlockVarPaths($this->last_session_ids, $url, $domain, $pssId, $targetId, $moduleName, $group);
+        $this->initBlockVarPaths($this->full_session_ids, $url, $domain, $pssId, $targetId, $componentName, $group);
+        $this->initBlockVarPaths($this->last_session_ids, $url, $domain, $pssId, $targetId, $componentName, $group);
     }
 
     public function addGroup($id, $group)
@@ -83,12 +83,12 @@ class PoP_ServerSide_JSRuntimeManager
         return $id;
     }
 
-    public function addPageSectionId($domain, $pssId, $moduleName, $id, $group = null)
+    public function addPageSectionId($domain, $pssId, $componentName, $id, $group = null)
     {
-        return $this->addModule($domain, $pssId, $pssId, $moduleName, $id, $group, $true, $true);
+        return $this->addModule($domain, $pssId, $pssId, $componentName, $id, $group, $true, $true);
     }
 
-    public function addModule($domain, $pssId, $targetId, $moduleName, $id, $group = null, $fixed = null, $isIdUnique = null, $ignorePSRuntimeId = null)
+    public function addModule($domain, $pssId, $targetId, $componentName, $id, $group = null, $fixed = null, $isIdUnique = null, $ignorePSRuntimeId = null)
     {
     
         // If the ID is not unique, then we gotta make it unique, getting the POP_ENGINEWEBPLATFORM_CONSTANT_UNIQUE_ID from the topLevel feedback
@@ -108,32 +108,32 @@ class PoP_ServerSide_JSRuntimeManager
         // Add under both pageSection and block, unless the targetId is the pssId, then no need for the block (eg: pagesection-tabpane.tmpl for the group="interceptor" link)
         // ignorePSRuntimeId: to not add the runtime ID for the pageSection when re-drawing data inside a block (the IDs will be generated again, but no need to add them to the pageSection side, since pageSection js methods will not be executed again)
         if (!$ignorePSRuntimeId) {
-            $this->addTargetId($this->pageSectionURL, $domain, $pssId, $pssId, $moduleName, $group, $id);
+            $this->addTargetId($this->pageSectionURL, $domain, $pssId, $pssId, $componentName, $group, $id);
         }
         if ($pssId != $targetId) {
-            $this->addTargetId($this->blockURL, $domain, $pssId, $targetId, $moduleName, $group, $id);
+            $this->addTargetId($this->blockURL, $domain, $pssId, $targetId, $componentName, $group, $id);
         }
         return $id;
     }
 
-    public function addTargetId($url, $domain, $pssId, $targetId, $moduleName, $group, $id)
+    public function addTargetId($url, $domain, $pssId, $targetId, $componentName, $group, $id)
     {
         $group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
-        $this->initVars($url, $domain, $pssId, $targetId, $moduleName, $group);
-        $this->full_session_ids[$url][$domain][$pssId][$targetId][$moduleName][$group][] = $id;
-        $this->last_session_ids[$url][$domain][$pssId][$targetId][$moduleName][$group][] = $id;
+        $this->initVars($url, $domain, $pssId, $targetId, $componentName, $group);
+        $this->full_session_ids[$url][$domain][$pssId][$targetId][$componentName][$group][] = $id;
+        $this->last_session_ids[$url][$domain][$pssId][$targetId][$componentName][$group][] = $id;
 
         return $id;
     }
 
-    public function getLastGeneratedId($domain, $pssId, $targetId, $moduleName, $group = null)
+    public function getLastGeneratedId($domain, $pssId, $targetId, $componentName, $group = null)
     {
         $group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
         // Is it a pageSection? or a block?
         $url = ($pssId == $targetId) ? $this->pageSectionURL : $this->blockURL;
-        $ids = $this->full_session_ids[$url][$domain][$pssId][$targetId][$moduleName][$group];
+        $ids = $this->full_session_ids[$url][$domain][$pssId][$targetId][$componentName][$group];
         return $ids[count($ids)-1];
     }
 }
