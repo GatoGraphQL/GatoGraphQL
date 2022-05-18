@@ -16,10 +16,10 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST = 'dataload-relationalfields-genericcustompostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-genericcustompostcount';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST = 'dataload-relationalfields-admingenericcustompostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-admingenericcustompostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST = 'dataload-relationalfields-genericcustompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-genericcustompostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST = 'dataload-relationalfields-admingenericcustompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-admingenericcustompostcount';
 
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -44,18 +44,18 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT],
         );
     }
 
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return $this->getGenericCustomPostObjectTypeResolver();
         }
 
@@ -65,8 +65,8 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -76,25 +76,25 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
                 return [
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
-                    GenericCustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT:
                 return [
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
-                    GenericCustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return [
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
-                    GenericCustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT:
                 return [
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
-                    GenericCustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
                 ];
         }
 

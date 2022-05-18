@@ -14,7 +14,7 @@ use PoPCMSSchema\Categories\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    public final const MODULE_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
+    public final const COMPONENT_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
@@ -30,14 +30,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_CATEGORY_IDS],
+            [self::class, self::COMPONENT_FILTERINPUT_CATEGORY_IDS],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CATEGORY_IDS],
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CATEGORY_IDS],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -45,7 +45,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_CATEGORY_IDS:
+            case self::COMPONENT_FILTERINPUT_CATEGORY_IDS:
                 return FormMultipleInput::class;
         }
 
@@ -55,7 +55,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getName(array $component): string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => 'categoryIDs',
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => 'categoryIDs',
             default => parent::getName($component),
         };
     }
@@ -63,7 +63,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->getIDScalarTypeResolver(),
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->getIDScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -71,7 +71,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
@@ -79,7 +79,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(array $component): ?string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->__('Limit results to elements with the given ids', 'categories'),
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->__('Limit results to elements with the given ids', 'categories'),
             default => null,
         };
     }

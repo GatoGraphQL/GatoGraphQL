@@ -11,14 +11,14 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_MENUS = 'filterinputcontainer-menus';
-    public final const MODULE_FILTERINPUTCONTAINER_MENUCOUNT = 'filterinputcontainer-menucount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MENUS = 'filterinputcontainer-menus';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT = 'filterinputcontainer-menucount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MENUS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MENUCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MENUS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT],
         );
     }
 
@@ -26,16 +26,16 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
     {
         $menuFilterInputModules = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MENUS => [
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUS => [
                 ...$menuFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_MENUCOUNT => $menuFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT => $menuFilterInputModules,
             default => [],
         };
     }

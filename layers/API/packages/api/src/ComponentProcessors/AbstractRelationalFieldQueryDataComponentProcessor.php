@@ -24,8 +24,8 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
-    protected const MODULE_ATTS_FIELD_IDS = 'fieldIDs';
-    protected const MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS = 'ignoreConditionalFields';
+    protected const COMPONENT_ATTS_FIELD_IDS = 'fieldIDs';
+    protected const COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS = 'ignoreConditionalFields';
 
     /**
      * @return FieldFragmentModelsTuple[]
@@ -64,7 +64,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         /**
          * When the virtual component has atts, the field IDs are coded within.
          */
-        return $this->retrieveAstFieldFragmentModelsTuplesFromAppState($componentAtts[self::MODULE_ATTS_FIELD_IDS]);
+        return $this->retrieveAstFieldFragmentModelsTuplesFromAppState($componentAtts[self::COMPONENT_ATTS_FIELD_IDS]);
     }
 
     /**
@@ -186,7 +186,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     public function ignoreConditionalFields(?array $componentAtts): bool
     {
-        return $componentAtts === null ? true : $componentAtts[self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
+        return $componentAtts === null ? true : $componentAtts[self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
     }
 
     /**
@@ -261,7 +261,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $component[0],
                 $component[1],
                 [
-                    self::MODULE_ATTS_FIELD_IDS => $nestedFieldIDs,
+                    self::COMPONENT_ATTS_FIELD_IDS => $nestedFieldIDs,
                 ]
             ];
             $ret[] = RelationalModuleField::fromRelationalField(
@@ -358,8 +358,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $component[0],
                 $component[1],
                 [
-                    self::MODULE_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
-                    self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+                    self::COMPONENT_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
+                    self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
                 ]
             ];
             $fragmentModelListFieldAliasFriendlyIDs = array_map(
@@ -442,8 +442,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //             $component[0],
     //             $component[1],
     //             [
-    //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
-    //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+    //                 self::COMPONENT_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
+    //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
     //             ]
     //         ];
     //         /**
@@ -505,8 +505,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //             $component[0],
     //             $component[1],
     //             [
-    //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
-    //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+    //                 self::COMPONENT_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
+    //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
     //             ]
     //         ];
     //         $nestedRelationalModuleField = RelationalModuleField::fromRelationalField(

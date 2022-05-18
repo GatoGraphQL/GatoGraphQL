@@ -13,8 +13,8 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT = 'dataload-relationalfields-queryroot';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT = 'dataload-relationalfields-mutationroot';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT = 'dataload-relationalfields-queryroot';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT = 'dataload-relationalfields-mutationroot';
 
     private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
 
@@ -30,8 +30,8 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
         );
     }
 
@@ -41,9 +41,9 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
             return null;
         }
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return QueryRoot::ID;
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
                 return MutationRoot::ID;
         }
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
@@ -52,9 +52,9 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
                 return $this->getGraphQLSchemaDefinitionService()->getSchemaMutationRootObjectTypeResolver();
         }
 

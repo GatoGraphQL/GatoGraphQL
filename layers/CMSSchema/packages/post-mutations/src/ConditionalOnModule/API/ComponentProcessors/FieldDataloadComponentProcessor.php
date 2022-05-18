@@ -16,8 +16,8 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST = 'dataload-relationalfields-mypostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT = 'dataload-relationalfields-mypostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTLIST = 'dataload-relationalfields-mypostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT = 'dataload-relationalfields-mypostcount';
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -42,16 +42,16 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT],
         );
     }
 
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
                 return $this->getPostObjectTypeResolver();
         }
 
@@ -61,7 +61,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -71,10 +71,10 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
-                return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
-                return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
+                return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
+                return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT];
         }
 
         return parent::getFilterSubmodule($component);

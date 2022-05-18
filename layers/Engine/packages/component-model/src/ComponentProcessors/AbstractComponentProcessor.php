@@ -35,7 +35,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
-    public final const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
+    public final const HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
 
     protected const MODULECOMPONENT_SUBMODULES = 'submodules';
     protected const MODULECOMPONENT_RELATIONALSUBMODULES = 'relational-submodules';
@@ -919,7 +919,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
          * Allow to add more stuff
          */
         App::doAction(
-            self::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
+            self::HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES,
             array(&$ret),
             $component,
             array(&$props),

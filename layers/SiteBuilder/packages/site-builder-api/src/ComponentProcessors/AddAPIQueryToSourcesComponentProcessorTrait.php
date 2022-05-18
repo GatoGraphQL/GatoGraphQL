@@ -60,7 +60,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
                             APIUtils::getEndpoint(
                                 $source,
                                 [
-                                    DataOutputItems::MODULE_DATA,
+                                    DataOutputItems::COMPONENT_DATA,
                                     DataOutputItems::DATABASES,
                                     DataOutputItems::META,
                                 ]

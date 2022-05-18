@@ -15,8 +15,8 @@ use PoPCMSSchema\Tags\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    public final const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
-    public final const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
+    public final const COMPONENT_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
+    public final const COMPONENT_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -41,16 +41,16 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_TAG_SLUGS],
-            [self::class, self::MODULE_FILTERINPUT_TAG_IDS],
+            [self::class, self::COMPONENT_FILTERINPUT_TAG_SLUGS],
+            [self::class, self::COMPONENT_FILTERINPUT_TAG_IDS],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_TAG_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_SLUGS],
-            self::MODULE_FILTERINPUT_TAG_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_IDS],
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_SLUGS],
+            self::COMPONENT_FILTERINPUT_TAG_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_IDS],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -58,8 +58,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_TAG_SLUGS:
-            case self::MODULE_FILTERINPUT_TAG_IDS:
+            case self::COMPONENT_FILTERINPUT_TAG_SLUGS:
+            case self::COMPONENT_FILTERINPUT_TAG_IDS:
                 return FormMultipleInput::class;
         }
 
@@ -69,8 +69,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getName(array $component): string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => 'tagSlugs',
-            self::MODULE_FILTERINPUT_TAG_IDS => 'tagIDs',
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS => 'tagSlugs',
+            self::COMPONENT_FILTERINPUT_TAG_IDS => 'tagIDs',
             default => parent::getName($component),
         };
     }
@@ -78,8 +78,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->getStringScalarTypeResolver(),
-            self::MODULE_FILTERINPUT_TAG_IDS => $this->getIDScalarTypeResolver(),
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->getStringScalarTypeResolver(),
+            self::COMPONENT_FILTERINPUT_TAG_IDS => $this->getIDScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -87,8 +87,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS,
-            self::MODULE_FILTERINPUT_TAG_IDS
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS,
+            self::COMPONENT_FILTERINPUT_TAG_IDS
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
@@ -98,8 +98,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(array $component): ?string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->__('Limit results to elements with the given tags', 'tags'),
-            self::MODULE_FILTERINPUT_TAG_IDS => $this->__('Limit results to elements with the given ids', 'tags'),
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->__('Limit results to elements with the given tags', 'tags'),
+            self::COMPONENT_FILTERINPUT_TAG_IDS => $this->__('Limit results to elements with the given ids', 'tags'),
             default => null,
         };
     }

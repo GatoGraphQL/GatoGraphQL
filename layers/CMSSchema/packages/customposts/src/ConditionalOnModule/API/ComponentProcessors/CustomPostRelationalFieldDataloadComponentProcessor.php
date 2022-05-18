@@ -16,15 +16,15 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST = 'dataload-relationalfields-singlecustompost';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST = 'dataload-relationalfields-unioncustompostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT = 'dataload-relationalfields-unioncustompostcount';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST = 'dataload-relationalfields-adminunioncustompostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT = 'dataload-relationalfields-adminunioncustompostcount';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST = 'dataload-relationalfields-custompostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT = 'dataload-relationalfields-custompostcount';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST = 'dataload-relationalfields-admincustompostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT = 'dataload-relationalfields-admincustompostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST = 'dataload-relationalfields-singlecustompost';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST = 'dataload-relationalfields-unioncustompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT = 'dataload-relationalfields-unioncustompostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST = 'dataload-relationalfields-adminunioncustompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT = 'dataload-relationalfields-adminunioncustompostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST = 'dataload-relationalfields-custompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT = 'dataload-relationalfields-custompostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST = 'dataload-relationalfields-admincustompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT = 'dataload-relationalfields-admincustompostcount';
 
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -49,22 +49,22 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT],
         );
     }
 
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -74,11 +74,11 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
                 return $this->getCustomPostUnionTypeResolver();
         }
 
@@ -88,10 +88,10 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -101,45 +101,45 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
                 ];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerComponentProcessor::class,
-                    CustomPostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
+                    CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
                 ];
         }
 

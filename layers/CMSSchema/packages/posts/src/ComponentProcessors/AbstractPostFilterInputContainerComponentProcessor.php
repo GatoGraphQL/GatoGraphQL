@@ -12,18 +12,18 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_POSTS = 'filterinputcontainer-posts';
-    public final const MODULE_FILTERINPUTCONTAINER_POSTCOUNT = 'filterinputcontainer-postcount';
-    public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
-    public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_POSTS = 'filterinputcontainer-posts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT = 'filterinputcontainer-postcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
         );
     }
 
@@ -31,24 +31,24 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
     {
         $postFilterInputModules = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
         ];
         $statusFilterInputModules = [
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_POSTS => [
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT => $postFilterInputModules,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS => [
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT => $postFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS => [
                 ...$postFilterInputModules,
                 ...$paginationFilterInputModules,
                 ...$statusFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT => [
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT => [
                 ...$postFilterInputModules,
                 ...$statusFilterInputModules,
             ],

@@ -6,12 +6,12 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 class RootComponentProcessors extends AbstractComponentProcessor
 {
-    public final const MODULE_EMPTY = 'empty';
+    public final const COMPONENT_EMPTY = 'empty';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EMPTY],
+            [self::class, self::COMPONENT_EMPTY],
         );
     }
 }

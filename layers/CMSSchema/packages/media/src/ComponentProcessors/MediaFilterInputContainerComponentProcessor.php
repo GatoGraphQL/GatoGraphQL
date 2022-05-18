@@ -12,14 +12,14 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinputcontainer-media-items';
-    public final const MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT = 'filterinputcontainer-media-item-count';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinputcontainer-media-items';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT = 'filterinputcontainer-media-item-count';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
         );
     }
 
@@ -27,16 +27,16 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
     {
         $mediaFilterInputModules = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_MIME_TYPES],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_MIME_TYPES],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS => [
+            self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS => [
                 ...$mediaFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT => [
+            self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT => [
                 ...$mediaFilterInputModules,
             ],
             default => [],

@@ -16,9 +16,9 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAG = 'dataload-relationalfields-tag';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'dataload-relationalfields-taglist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT = 'dataload-relationalfields-tagcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_TAG = 'dataload-relationalfields-tag';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST = 'dataload-relationalfields-taglist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT = 'dataload-relationalfields-tagcount';
 
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -43,16 +43,16 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT],
         );
     }
 
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -62,8 +62,8 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getPostTagObjectTypeResolver();
         }
 
@@ -73,7 +73,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -83,10 +83,10 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_TAGS];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
-                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
+                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
+                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT];
         }
 
         return parent::getFilterSubmodule($component);

@@ -13,18 +13,18 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST = 'filterinputcontainer-genericcustompostlist';
-    public final const MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT = 'filterinputcontainer-genericcustompostcount';
-    public final const MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST = 'filterinputcontainer-admingenericcustompostlist';
-    public final const MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT = 'filterinputcontainer-admingenericcustompostcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST = 'filterinputcontainer-genericcustompostlist';
+    public final const COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT = 'filterinputcontainer-genericcustompostcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST = 'filterinputcontainer-admingenericcustompostlist';
+    public final const COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT = 'filterinputcontainer-admingenericcustompostcount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT],
         );
     }
 
@@ -32,25 +32,25 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
     {
         $genericCustomPostFilterInputModules = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES],
         ];
         $adminGenericCustomPostFilterInputModules = [
-            [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+            [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
                 ...$genericCustomPostFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST => [
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST => [
                     ...$genericCustomPostFilterInputModules,
                     ...$adminGenericCustomPostFilterInputModules,
                     ...$paginationFilterInputModules,
                 ],
-            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT => $genericCustomPostFilterInputModules,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT => [
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT => $genericCustomPostFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT => [
                 ...$genericCustomPostFilterInputModules,
                 ...$adminGenericCustomPostFilterInputModules,
             ],

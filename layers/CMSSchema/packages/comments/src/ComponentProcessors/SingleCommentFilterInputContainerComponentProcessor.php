@@ -14,26 +14,26 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
-    public final const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
+    public final const COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
+    public final const COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
         );
     }
 
     public function getFilterInputComponents(array $component): array
     {
         return match ((string)$component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS => [
-                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS => [
+                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS],
             ],
-            self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID],
-                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID],
+                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS],
             ],
             default => [],
         };
@@ -43,10 +43,10 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
+            case self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,
-                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID
+                    CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;

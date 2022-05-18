@@ -13,7 +13,7 @@ use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
 class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -38,14 +38,14 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS],
         );
     }
 
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
                 return $this->getCommentObjectTypeResolver();
         }
 
@@ -55,7 +55,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -65,8 +65,8 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return [CommentFilterInputContainerComponentProcessor::class, CommentFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
+                return [CommentFilterInputContainerComponentProcessor::class, CommentFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_COMMENTS];
         }
 
         return parent::getFilterSubmodule($component);

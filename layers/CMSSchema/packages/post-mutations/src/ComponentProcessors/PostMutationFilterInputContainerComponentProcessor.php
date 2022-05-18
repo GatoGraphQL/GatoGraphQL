@@ -11,14 +11,14 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
-    public final const MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT = 'filterinputcontainer-mypostcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT = 'filterinputcontainer-mypostcount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT],
         );
     }
 
@@ -28,12 +28,12 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
     public function getFilterInputComponents(array $component): array
     {
         $targetModule = match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],
-            self::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
             default => null,
         };
         $filterInputModules = parent::getFilterInputComponents($targetModule);
-        $filterInputModules[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
+        $filterInputModules[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS];
         return $filterInputModules;
     }
 

@@ -12,8 +12,8 @@ class PostTagFieldDataloadComponentProcessor extends AbstractFieldDataloadCompon
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getPostTagObjectTypeResolver();
         }
 

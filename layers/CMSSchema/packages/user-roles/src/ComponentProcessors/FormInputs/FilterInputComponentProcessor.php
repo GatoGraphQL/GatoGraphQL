@@ -13,8 +13,8 @@ use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    public final const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
-    public final const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
+    public final const COMPONENT_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
+    public final const COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -30,16 +30,16 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_USER_ROLES],
-            [self::class, self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES],
+            [self::class, self::COMPONENT_FILTERINPUT_USER_ROLES],
+            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_USER_ROLES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USER_ROLES],
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_USER_ROLES],
+            self::COMPONENT_FILTERINPUT_USER_ROLES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USER_ROLES],
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_USER_ROLES],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -47,8 +47,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getName(array $component): string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => 'roles',
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => 'excludeRoles',
+            self::COMPONENT_FILTERINPUT_USER_ROLES => 'roles',
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => 'excludeRoles',
             default => parent::getName($component),
         };
     }
@@ -56,8 +56,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getStringScalarTypeResolver(),
+            self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -65,8 +65,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES,
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES
+            self::COMPONENT_FILTERINPUT_USER_ROLES,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
@@ -76,8 +76,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(array $component): ?string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
+            self::COMPONENT_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
             default => null,
         };
     }

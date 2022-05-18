@@ -6,12 +6,12 @@ namespace PoPAPI\API\ComponentProcessors;
 
 class RelationalFieldQueryDataComponentProcessor extends AbstractRelationalFieldQueryDataComponentProcessor
 {
-    public final const MODULE_LAYOUT_RELATIONALFIELDS = 'layout-relationalfields';
+    public final const COMPONENT_LAYOUT_RELATIONALFIELDS = 'layout-relationalfields';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_RELATIONALFIELDS],
+            [self::class, self::COMPONENT_LAYOUT_RELATIONALFIELDS],
         );
     }
 }

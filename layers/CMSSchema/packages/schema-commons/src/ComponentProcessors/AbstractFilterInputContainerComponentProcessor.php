@@ -28,9 +28,9 @@ abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAb
     protected function getPaginationFilterInputComponents(): array
     {
         return [
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SORT],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_LIMIT],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_OFFSET],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SORT],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_LIMIT],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_OFFSET],
         ];
     }
 
@@ -40,8 +40,8 @@ abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAb
     protected function getIDFilterInputComponents(): array
     {
         return [
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_IDS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_IDS],
         ];
     }
 }

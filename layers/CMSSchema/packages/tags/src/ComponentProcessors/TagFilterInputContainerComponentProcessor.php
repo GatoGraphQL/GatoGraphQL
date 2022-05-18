@@ -11,14 +11,14 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
-    public final const MODULE_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
+    public final const COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_TAGS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_TAGCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT],
         );
     }
 
@@ -26,16 +26,16 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
     {
         $tagFilterInputModules = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_TAGS => [
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGS => [
                 ...$tagFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_TAGCOUNT => $tagFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT => $tagFilterInputModules,
             default => [],
         };
     }

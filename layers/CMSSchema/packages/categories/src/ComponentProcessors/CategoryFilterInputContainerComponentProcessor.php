@@ -11,18 +11,18 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_CATEGORIES = 'filterinputcontainer-categories';
-    public final const MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinputcontainer-categorycount';
-    public final const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
-    public final const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_CATEGORIES = 'filterinputcontainer-categories';
+    public final const COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinputcontainer-categorycount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
+    public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT],
         );
     }
 
@@ -30,28 +30,28 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
     {
         $categoryFilterInputModules = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
         ];
         $topLevelCategoryFilterInputModules = [
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_ID],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_CATEGORIES => [
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES => [
                 ...$categoryFilterInputModules,
                 ...$topLevelCategoryFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES => [
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES => [
                 ...$categoryFilterInputModules,
                 ...$paginationFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT => [
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT => [
                 ...$categoryFilterInputModules,
                 ...$topLevelCategoryFilterInputModules,
             ],
-            self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT => $categoryFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT => $categoryFilterInputModules,
             default => [],
         };
     }

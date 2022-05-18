@@ -14,7 +14,7 @@ use PoPCMSSchema\Media\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    public final const MODULE_FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
+    public final const COMPONENT_FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -30,14 +30,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_MIME_TYPES],
+            [self::class, self::COMPONENT_FILTERINPUT_MIME_TYPES],
         );
     }
 
     public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_MIME_TYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_MIME_TYPES],
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_MIME_TYPES],
         ];
         return $filterInputs[$component[1]] ?? null;
     }
@@ -45,7 +45,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getInputClass(array $component): string
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUT_MIME_TYPES:
+            case self::COMPONENT_FILTERINPUT_MIME_TYPES:
                 return FormMultipleInput::class;
         }
 
@@ -56,7 +56,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         // Add a nice name, so that the URL params when filtering make sense
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => 'mimeTypes',
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => 'mimeTypes',
             default => parent::getName($component),
         };
     }
@@ -64,7 +64,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => $this->getStringScalarTypeResolver(),
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -72,7 +72,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputTypeModifiers(array $component): int
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
@@ -80,7 +80,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(array $component): ?string
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => $this->__('Limit results to elements with the given mime types', 'media'),
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->__('Limit results to elements with the given mime types', 'media'),
             default => null,
         };
     }

@@ -17,7 +17,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'dataload-relationalfields-tagpostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'dataload-relationalfields-tagpostlist';
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -42,14 +42,14 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
         );
     }
 
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 return $this->getPostObjectTypeResolver();
         }
 
@@ -59,7 +59,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -71,7 +71,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 $ret['tag-ids'] = [App::getState(['routing', 'queried-object-id'])];
                 break;
         }
@@ -82,8 +82,8 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_POSTS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS];
         }
 
         return parent::getFilterSubmodule($component);

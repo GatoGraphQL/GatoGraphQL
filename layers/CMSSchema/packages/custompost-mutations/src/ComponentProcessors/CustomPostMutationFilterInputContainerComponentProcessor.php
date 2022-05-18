@@ -12,14 +12,14 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS = 'filterinputcontainer-mycustomposts';
-    public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT = 'filterinputcontainer-mycustompostcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS = 'filterinputcontainer-mycustomposts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT = 'filterinputcontainer-mycustompostcount';
 
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT],
         );
     }
 
@@ -29,8 +29,8 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
     public function getFilterInputComponents(array $component): array
     {
         $targetModule = match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
-            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
             default => null,
         };
         /** @var FilterInputContainerComponentProcessorInterface */
@@ -39,7 +39,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
         return array_merge(
             $targetFilterInputModules,
             [
-                [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+                [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
             ]
         );
     }

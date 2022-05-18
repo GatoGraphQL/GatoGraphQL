@@ -13,11 +13,11 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public final const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
-    public final const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
-    public final const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
-    public final const MODULE_FILTERINPUTCONTAINER_GMTDATE = 'filterinputcontainer-utcdate';
-    public final const MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
+    public final const COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
+    public final const COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
+    public final const COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
+    public final const COMPONENT_FILTERINPUTCONTAINER_GMTDATE = 'filterinputcontainer-utcdate';
+    public final const COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
 
     private ?CMSServiceInterface $cmsService = null;
 
@@ -33,32 +33,32 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_GMTDATE],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
         );
     }
 
     public function getFilterInputComponents(array $component): array
     {
         return match ($component[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID],
+            self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID],
             ],
-            self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUG],
+            self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG => [
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG],
             ],
-            self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+            self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING => [
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT],
             ],
-            self::MODULE_FILTERINPUTCONTAINER_GMTDATE => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_GMT],
+            self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE => [
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT],
             ],
-            self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_DATEFORMAT],
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_GMT],
+            self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT],
             ],
             default => [],
         };
@@ -67,11 +67,11 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
     public function getFieldFilterInputDefaultValue(array $component, string $fieldArgName): mixed
     {
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
-            case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
+            case self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING:
+            case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $formatFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,
-                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_DATEFORMAT
+                    CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT
                 ]);
                 if ($fieldArgName === $formatFilterInputName) {
                     return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:dateFormat'));
@@ -79,11 +79,11 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
                 break;
         }
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_GMTDATE:
-            case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
+            case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE:
+            case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $gmtFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,
-                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_GMT
+                    CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT
                 ]);
                 if ($fieldArgName === $gmtFilterInputName) {
                     return false;
@@ -97,19 +97,19 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
         switch ($component[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
+            case self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,
-                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID
+                    CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
-            case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
+            case self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
                 $slugFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,
-                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUG
+                    CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG
                 ]);
                 if ($fieldArgName === $slugFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;

@@ -14,7 +14,7 @@ use PoPCMSSchema\Posts\ComponentProcessors\PostFilterInputContainerComponentProc
 
 class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST = 'dataload-relationalfields-authorcustompostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST = 'dataload-relationalfields-authorcustompostlist';
 
     private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -39,14 +39,14 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST],
         );
     }
 
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
                 return $this->getCustomPostObjectTypeResolver();
         }
 
@@ -56,7 +56,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -68,7 +68,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
                 $ret['authors'] = [
                     App::getState(['routing', 'queried-object-id']),
                 ];
@@ -81,8 +81,8 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_POSTS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
+                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS];
         }
 
         return parent::getFilterSubmodule($component);

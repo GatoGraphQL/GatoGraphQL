@@ -14,9 +14,9 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY = 'dataload-relationalfields-category';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST = 'dataload-relationalfields-categorylist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT = 'dataload-relationalfields-categorycount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY = 'dataload-relationalfields-category';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST = 'dataload-relationalfields-categorylist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT = 'dataload-relationalfields-categorycount';
 
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
@@ -32,16 +32,16 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT],
         );
     }
 
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -51,7 +51,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -61,10 +61,10 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
-                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
+                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
+                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT];
         }
 
         return parent::getFilterSubmodule($component);

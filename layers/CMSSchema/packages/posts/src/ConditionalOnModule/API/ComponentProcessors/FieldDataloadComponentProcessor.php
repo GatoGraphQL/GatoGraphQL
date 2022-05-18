@@ -16,11 +16,11 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST = 'dataload-relationalfields-singlepost';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST = 'dataload-relationalfields-postlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT = 'dataload-relationalfields-postcount';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST = 'dataload-relationalfields-adminpostlist';
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT = 'dataload-relationalfields-adminpostcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST = 'dataload-relationalfields-singlepost';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST = 'dataload-relationalfields-postlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT = 'dataload-relationalfields-postcount';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST = 'dataload-relationalfields-adminpostlist';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT = 'dataload-relationalfields-adminpostcount';
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
@@ -45,18 +45,18 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST],
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT],
         );
     }
 
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -66,11 +66,11 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
                 return $this->getPostObjectTypeResolver();
         }
 
@@ -80,8 +80,8 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
@@ -91,14 +91,14 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getFilterSubmodule(array $component): ?array
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_POSTS];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_POSTCOUNT];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS];
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
+                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
+                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
+                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS];
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
+                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT];
         }
 
         return parent::getFilterSubmodule($component);

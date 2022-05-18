@@ -13,7 +13,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
+    public final const COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
 
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
 
@@ -29,14 +29,14 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_PAGE],
+            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE],
         );
     }
 
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_PAGE:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
@@ -46,7 +46,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_PAGE:
+            case self::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE:
                 return $this->getPageObjectTypeResolver();
         }
 
