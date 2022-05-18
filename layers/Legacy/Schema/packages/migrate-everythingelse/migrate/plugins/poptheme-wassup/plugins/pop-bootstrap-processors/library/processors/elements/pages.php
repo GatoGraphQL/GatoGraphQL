@@ -78,8 +78,8 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
 
         switch ($component[1]) {
             case self::MODULE_PAGE_FRAMECOMPONENTS:
-                $moduleAtts = count($component) >= 3 ? $component[2] : null;
-                if (!$moduleAtts || !$moduleAtts['onlyinitial']) {
+                $componentAtts = count($component) >= 3 ? $component[2] : null;
+                if (!$componentAtts || !$componentAtts['onlyinitial']) {
                      // Load targeted module
                     if ($page_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT)) {
                         $ret[] = $page_component;

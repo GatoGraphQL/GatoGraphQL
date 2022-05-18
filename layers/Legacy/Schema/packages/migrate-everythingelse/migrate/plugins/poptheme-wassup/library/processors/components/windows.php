@@ -42,17 +42,17 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
                 }
 
                 // Tell the pageSections to have no pages inside
-                $moduleAtts = array('empty' => true);
+                $componentAtts = array('empty' => true);
                 return array(
                     [
                         $addons_component[0],
                         $addons_component[1],
-                        $moduleAtts
+                        $componentAtts
                     ],
                     [
                         $addontabs_component[0],
                         $addontabs_component[1],
-                        $moduleAtts
+                        $componentAtts
                     ],
                 );
         }

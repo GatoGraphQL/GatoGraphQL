@@ -70,8 +70,8 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_PAGESECTION_BODYTABS:
             case self::MODULE_PAGESECTION_BODY:
                 // If not told to be empty, then add the page submodule
-                $moduleAtts = count($component) >= 3 ? $component[2] : null;
-                if (!($moduleAtts && $moduleAtts['empty'])) {
+                $componentAtts = count($component) >= 3 ? $component[2] : null;
+                if (!($componentAtts && $componentAtts['empty'])) {
                     $subComponents = array(
                         self::MODULE_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEW],
                         self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_QUICKVIEWSIDEINFO],
@@ -97,17 +97,17 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 }
 
                 $subComponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_FRAMECOMPONENTS];
-                $moduleAtts = array();
+                $componentAtts = array();
 
                 // Requested a different target: load nothing
                 if (!$load_component) {
-                    $moduleAtts['onlyinitial'] = true;
+                    $componentAtts['onlyinitial'] = true;
                 }
-                if ($moduleAtts) {
+                if ($componentAtts) {
                     $ret[] = [
                         $subComponent[0],
                         $subComponent[1],
-                        $moduleAtts
+                        $componentAtts
                     ];
                 } else {
                     $ret[] = $subComponent;

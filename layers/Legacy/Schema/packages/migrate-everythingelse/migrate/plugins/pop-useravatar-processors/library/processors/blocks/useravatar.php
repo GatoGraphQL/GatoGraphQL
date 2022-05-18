@@ -27,7 +27,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserBlocks extends PoP_Module_Pr
 
         switch ($component[1]) {
             case self::MODULE_BLOCK_USERAVATAR_UPDATE:
-                // Either with or without moduleAtts
+                // Either with or without componentAtts
                 $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $ret[] = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
                 break;

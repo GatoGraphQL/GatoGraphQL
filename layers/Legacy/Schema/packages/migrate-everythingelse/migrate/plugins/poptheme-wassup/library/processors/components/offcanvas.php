@@ -54,11 +54,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $ret[] = $subComponent;
                 } else {
                     // Tell the pageSections to have no pages inside
-                    $moduleAtts = array('empty' => true);
+                    $componentAtts = array('empty' => true);
                     $ret[] = [
                         $subComponent[0],
                         $subComponent[1],
-                        $moduleAtts
+                        $componentAtts
                     ];
                 }
                 break;
@@ -84,11 +84,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $ret[] = $subComponent;
                 } else {
                     // Tell the pageSections to have no pages inside
-                    $moduleAtts = array('empty' => true);
+                    $componentAtts = array('empty' => true);
                     $ret[] = [
                         $subComponent[0],
                         $subComponent[1],
-                        $moduleAtts
+                        $componentAtts
                     ];
                 }
                 break;

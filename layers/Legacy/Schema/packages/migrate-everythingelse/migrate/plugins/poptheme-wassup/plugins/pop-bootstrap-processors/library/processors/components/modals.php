@@ -47,16 +47,16 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
                     $ret[] = $quickviewsideinfo_component;
                 } else {
                     // Tell the pageSections to have no pages inside
-                    $moduleAtts = array('empty' => true);
+                    $componentAtts = array('empty' => true);
                     $ret[] = [
                         $quickview_component[0],
                         $quickview_component[1], 
-                        $moduleAtts
+                        $componentAtts
                     ];
                     $ret[] = [
                         $quickviewsideinfo_component[0],
                         $quickviewsideinfo_component[1], 
-                        $moduleAtts
+                        $componentAtts
                     ];
                 }
                 break;

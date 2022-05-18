@@ -24,8 +24,8 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         switch ($component[1]) {
             case self::MODULE_PAGESECTION_ADDONS:
                 // If not told to be empty, then add the page submodule
-                $moduleAtts = count($component) >= 3 ? $component[2] : null;
-                if (!($moduleAtts && $moduleAtts['empty'])) {
+                $componentAtts = count($component) >= 3 ? $component[2] : null;
+                if (!($componentAtts && $componentAtts['empty'])) {
                     $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_ADDONS];
                 }
                 break;

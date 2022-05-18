@@ -98,7 +98,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         // point to the "execute" block instead
         switch ($component[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                // We also must add ?action=execute to tell the componentroutingprocessor to fetch the module with the "execute" moduleAtts
+                // We also must add ?action=execute to tell the componentroutingprocessor to fetch the module with the "execute" componentAtts
                 return GeneralUtils::addQueryArgs([
                     \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
                 ], parent::getDataloadSource($component, $props));
@@ -111,11 +111,11 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     {
         switch ($component[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                // Two different actions, handled through $moduleAtts:
+                // Two different actions, handled through $componentAtts:
                 // 1. Upload the image to the S3 repository, when first accessing the page
                 // 2. Update the avatar, on the POST operation
-                $moduleAtts = (count($component) >= 3) ? $component[2] : null;
-                if ($moduleAtts && $moduleAtts['executeupdate']) {
+                $componentAtts = (count($component) >= 3) ? $component[2] : null;
+                if ($componentAtts && $componentAtts['executeupdate']) {
                     return $this->instanceManager->getInstance(UpdateUserAvatarMutationResolverBridge::class);
                 }
 
@@ -130,8 +130,8 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         // Always execute this action
         switch ($component[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                $moduleAtts = (count($component) >= 3) ? $component[2] : null;
-                if (!$moduleAtts || !$moduleAtts['executeupdate']) {
+                $componentAtts = (count($component) >= 3) ? $component[2] : null;
+                if (!$componentAtts || !$componentAtts['executeupdate']) {
                     return true;
                 }
                 break;
