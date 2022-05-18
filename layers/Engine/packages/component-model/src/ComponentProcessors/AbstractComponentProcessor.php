@@ -1313,10 +1313,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
-    private function getSubmodulesByGroup(array $component, $components = array()): array
+    private function getSubmodulesByGroup(array $component, array $elements = array()): array
     {
-        if (empty($components)) {
-            $components = array(
+        if (empty($elements)) {
+            $elements = array(
                 self::MODULECOMPONENT_SUBCOMPONENTS,
                 self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS,
                 self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS,
@@ -1326,7 +1326,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         $ret = array();
 
-        if (in_array(self::MODULECOMPONENT_SUBCOMPONENTS, $components)) {
+        if (in_array(self::MODULECOMPONENT_SUBCOMPONENTS, $elements)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             $ret = array_unique(
                 $this->getSubComponents($component),
@@ -1334,7 +1334,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
         }
 
-        if (in_array(self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS, $components)) {
+        if (in_array(self::MODULECOMPONENT_RELATIONALSUBCOMPONENTS, $elements)) {
             foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 $ret = array_values(array_unique(
                     array_merge(
@@ -1346,7 +1346,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $components)) {
+        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $elements)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             foreach ($this->getConditionalOnDataFieldSubmodules($component) as $conditionalLeafModuleField) {
                 $ret = array_unique(
@@ -1359,7 +1359,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $components)) {
+        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $elements)) {
             foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $ret = array_values(
