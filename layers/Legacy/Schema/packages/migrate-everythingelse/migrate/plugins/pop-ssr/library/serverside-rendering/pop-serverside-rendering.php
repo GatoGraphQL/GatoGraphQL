@@ -245,7 +245,7 @@ class PoP_ServerSideRendering
         $renderModule = $pagesection_component;
         $render_context = $pagesection_configuration;
         if ($block) {
-            $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-submodules')][$block];
+            $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$block];
             $renderModule = $render_context[GD_JS_COMPONENT];
         }
 

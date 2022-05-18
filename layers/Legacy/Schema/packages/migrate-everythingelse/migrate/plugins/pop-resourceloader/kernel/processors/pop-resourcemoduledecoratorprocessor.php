@@ -82,7 +82,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicResourcesMergedmoduletree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicResourcesMergedmoduletree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -115,7 +115,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
     //     foreach ($this->getDecoratedcomponentProcessor($component)->get_descendant_components_to_propagate($component) as $subComponent) {
 
-    //         if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getModulesResources($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+    //         if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getModulesResources($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
     //             $ret = array_merge(
     //                 $ret,
@@ -158,7 +158,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicTemplateResourcesMergedmoduletree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicTemplateResourcesMergedmoduletree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(

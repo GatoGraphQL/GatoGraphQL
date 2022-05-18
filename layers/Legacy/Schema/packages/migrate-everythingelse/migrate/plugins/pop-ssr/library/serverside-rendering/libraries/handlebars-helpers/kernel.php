@@ -238,12 +238,12 @@ class PoP_ServerSide_KernelHelpers
         $moduleOutputName = $context[GD_JS_SUBCOMPONENTOUTPUTNAMES][$moduleName];
 
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
-        if (!isset($context[ComponentModelModuleInfo::get('response-prop-submodules')]) || !isset($context[ComponentModelModuleInfo::get('response-prop-submodules')][$moduleOutputName])) {
+        if (!isset($context[ComponentModelModuleInfo::get('response-prop-subcomponents')]) || !isset($context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$moduleOutputName])) {
             return;
         }
 
         // Go down to the module
-        $context = $context[ComponentModelModuleInfo::get('response-prop-submodules')][$moduleOutputName];
+        $context = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$moduleOutputName];
 
         // Expand the JS Keys
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();

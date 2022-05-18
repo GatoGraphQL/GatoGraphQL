@@ -107,8 +107,8 @@ window.pop.Manager = {
 		// 				pagesection: {},
 		// 				block: {},
 		// 			},
-		// 			'modules-cbs': {},
-		// 			'modules-paths': {},
+		// 			'components-cbs': {},
+		// 			'components-paths': {},
 		// 			'db-keys': {},
 		// 		},
 		// 	},
@@ -393,7 +393,7 @@ window.pop.Manager = {
 
 		var data = window.pop.Data[domain];
 		var requestMeta = data.requestmeta; 
-		var entryModule = requestMeta.entrymodule;
+		var entryModule = requestMeta.entrycomponent;
 		// var topLevelFeedback = that.getTopLevelFeedback(domain);
 		var url = requestMeta.url;
 
@@ -420,8 +420,8 @@ window.pop.Manager = {
 		// 	var psId = psConfiguration['frontend-id'];
 		// 	var pageSection = $('#'+psId);
 
-		// 	// Before anything: add the moduleoutputname to the div (so we can access below getPageSectionId)
-		// 	pageSection.attr('data-moduleoutputname', pssId);
+		// 	// Before anything: add the componentoutputname to the div (so we can access below getPageSectionId)
+		// 	pageSection.attr('data-componentoutputname', pssId);
 		// 	pageSection.addClass('pop-pagesection');
 
 		// 	that.initPageSectionSettings(domain, pageSection, psConfiguration);
@@ -494,7 +494,7 @@ window.pop.Manager = {
 		// This way, we bring forward the "Time to interactive", for all those functionalities that the user can see/is waiting for
 		// The backgroundLoad can be prioritized lower (the /loggedinuser-data/ page, brought thru backgroundLoad, would be nice to bring immediately, but is a tradeoff; application views can certainly wait)
 		// Comment Leo 15/04/2018: the backgroundLoad pages are loaded through GD_TEMPLATE_BLOCKGROUP_INITIALIZEDOMAIN
-		// that.backgroundLoad(pop.c.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
+		// that.backgroundLoad(pop.c.BACKGROUND_LOAD); // Initialization of components (eg: Modals, Addons)
 		that.backgroundLoad(background_load_urls); // Data to be loaded from server (eg: forceserverload_fields)
 
 		// Progressive booting: Execute the non-critical JS functions
@@ -535,25 +535,25 @@ window.pop.Manager = {
 	
 		var that = this;
 
-		// In order to save file size, context keys can be compressed, eg: 'modules' => 'ms', 'module' => 'm'. However they might be referenced with their full name
+		// In order to save file size, context keys can be compressed, eg: 'components' => 'ms', 'component' => 'm'. However they might be referenced with their full name
 		// in .tmpl files, so reconstruct the full name in the context duplicating these entries
 		if (context && pop.c.COMPACT_RESPONSE_JSON_KEYS) {
 
-			// Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
+			// Hardcoding always 'components' allows us to reference this key, with certainty of its name, in the .tmpl files
 			if (context[pop.c.JS_SUBCOMPONENTS]) {
-				context.modules = context[pop.c.JS_SUBCOMPONENTS];
+				context.components = context[pop.c.JS_SUBCOMPONENTS];
 			}
 			if (context[pop.c.JS_COMPONENT]) {
-				context['module'] = context[pop.c.JS_COMPONENT];
+				context['component'] = context[pop.c.JS_COMPONENT];
 			}
 			if (context[pop.c.JS_TEMPLATE]) {
 				context['template'] = context[pop.c.JS_TEMPLATE];
 			}
 			if (context[pop.c.JS_COMPONENTOUTPUTNAME]) {
-				context['moduleoutputname'] = context[pop.c.JS_COMPONENTOUTPUTNAME];
+				context['componentoutputname'] = context[pop.c.JS_COMPONENTOUTPUTNAME];
 			}
 			if (context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES]) {
-				context['submoduleoutputnames'] = context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES];
+				context['subcomponentoutputnames'] = context[pop.c.JS_SUBCOMPONENTOUTPUTNAMES];
 			}
 			if (context[pop.c.JS_TEMPLATES]) {
 				context['templates'] = context[pop.c.JS_TEMPLATES];
@@ -562,7 +562,7 @@ window.pop.Manager = {
 				context.intercept = context[pop.c.JS_INTERCEPT];
 			}
 			if (context[pop.c.JS_BLOCKCOMPONENTOUTPUTNAMES]) {
-				context['block-submoduleoutputnames'] = context[pop.c.JS_BLOCKCOMPONENTOUTPUTNAMES];
+				context['block-subcomponentoutputnames'] = context[pop.c.JS_BLOCKCOMPONENTOUTPUTNAMES];
 			}
 
 			// Params
@@ -573,7 +573,7 @@ window.pop.Manager = {
 				context['dbobject-params'] = context[pop.c.JS_DBOBJECTPARAMS];
 			}
 			if (context[pop.c.JS_PREVIOUSCOMPONENTSIDS]) {
-				context['previousmodules-ids'] = context[pop.c.JS_PREVIOUSCOMPONENTSIDS];
+				context['previouscomponents-ids'] = context[pop.c.JS_PREVIOUSCOMPONENTSIDS];
 			}
 
 			// Appendable
@@ -617,7 +617,7 @@ window.pop.Manager = {
 		}
 	},
 
-	// addPageSectionIds : function(domain, pageSection, moduleName) {
+	// addPageSectionIds : function(domain, pageSection, componentName) {
 	
 	// 	var that = this;
 
@@ -625,12 +625,12 @@ window.pop.Manager = {
 	// 	var psId = pageSection.attr('id');
 
 	// 	// Insert into the Runtime to generate the ID
-	// 	pop.JSRuntimeManager.addPageSectionId(domain, pssId, moduleName, psId);
+	// 	pop.JSRuntimeManager.addPageSectionId(domain, pssId, componentName, psId);
 
 	// 	var args = {
 	// 		domain: domain,
 	// 		pageSection: pageSection,
-	// 		module: moduleName
+	// 		component: componentName
 	// 	}
 
 	// 	pop.JSLibraryManager.execute('addPageSectionIds', args);
@@ -797,7 +797,7 @@ window.pop.Manager = {
 		pageSection.triggerHandler('completed');
 
 
-		// Once the module has been initialized, then that's it, no more JS running, set firstLoad in false
+		// Once the component has been initialized, then that's it, no more JS running, set firstLoad in false
 		that.firstLoad[that.getSettingsId(pageSection)] = false;
 	},
 
@@ -1226,17 +1226,17 @@ window.pop.Manager = {
 		var sessionIds = pop.JSRuntimeManager.getPageSectionSessionIds(domain, pageSection, 'last');
 		if (!sessionIds) return;
 
-		// Make sure it executes the JS in each module only once.
-		// Eg: Otherwise, since having MultiLayouts, it will execute 'popover' for each single 'layout-popover-user' module found, and it repeats itself inside a block many times
+		// Make sure it executes the JS in each component only once.
+		// Eg: Otherwise, since having MultiLayouts, it will execute 'popover' for each single 'layout-popover-user' component found, and it repeats itself inside a block many times
 		var executedModules = [];
-		var moduleMethods = that.getPageSectionJsMethods(domain, pageSection);
-		$.each(moduleMethods, function(moduleName, priorityGroupMethods) {
-			if (executedModules.indexOf(moduleName) == -1) {
-				executedModules.push(moduleName);
+		var componentMethods = that.getPageSectionJsMethods(domain, pageSection);
+		$.each(componentMethods, function(componentName, priorityGroupMethods) {
+			if (executedModules.indexOf(componentName) == -1) {
+				executedModules.push(componentName);
 				var groupMethods = that.getGroupMethodsByPriority(priorityGroupMethods, priority);
-				if (sessionIds[moduleName] && groupMethods) {
+				if (sessionIds[componentName] && groupMethods) {
 					$.each(groupMethods, function(group, methods) {
-						var ids = sessionIds[moduleName][group];
+						var ids = sessionIds[componentName][group];
 						if (ids) {
 							var selector = '#'+ids.join(', #');
 							var targets = $(selector);
@@ -1269,7 +1269,7 @@ window.pop.Manager = {
 			pop.JSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block);
 		}
 	},
-	runJSMethods : function(domain, pageSection, block, moduleFrom, session, priority, options) {
+	runJSMethods : function(domain, pageSection, block, componentFrom, session, priority, options) {
 	
 		var that = this;
 
@@ -1279,30 +1279,30 @@ window.pop.Manager = {
 		var sessionIds = pop.JSRuntimeManager.getBlockSessionIds(domain, pageSection, block, session);
 		if (!sessionIds) return;
 		
-		var moduleMethods = that.getModuleJSMethods(domain, pageSection, block, moduleFrom);
-		that.runJSMethodsInner(domain, pageSection, block, moduleMethods, sessionIds, [], priority, options);
+		var componentMethods = that.getModuleJSMethods(domain, pageSection, block, componentFrom);
+		that.runJSMethodsInner(domain, pageSection, block, componentMethods, sessionIds, [], priority, options);
 	},	
-	runJSMethodsInner : function(domain, pageSection, block, moduleMethods, sessionIds, executedModules, priority, options) {
+	runJSMethodsInner : function(domain, pageSection, block, componentMethods, sessionIds, executedModules, priority, options) {
 	
 		var that = this;
 		options = options || {};
 
-		// For each module, analyze what methods must be executed, and then continue down the line
-		// doing the same for contained modules
-		var moduleName = moduleMethods[pop.c.JS_COMPONENT];
-		if (executedModules.indexOf(moduleName) == -1) {
+		// For each component, analyze what methods must be executed, and then continue down the line
+		// doing the same for contained components
+		var componentName = componentMethods[pop.c.JS_COMPONENT];
+		if (executedModules.indexOf(componentName) == -1) {
 			
-			executedModules.push(moduleName);
+			executedModules.push(componentName);
 
-			if (moduleMethods[pop.c.JS_METHODS]) {
+			if (componentMethods[pop.c.JS_METHODS]) {
 		
 				// Execute methods: "critical" or "noncritical" if specified,
 				// or execute both when the priority is null (=> Progressive Booting is disabled, or calling this function not from pop.Manager.init())
 				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
-				var groupMethods = that.getGroupMethodsByPriority(moduleMethods[pop.c.JS_METHODS], priority);
-				if (sessionIds[moduleName] && groupMethods) {
+				var groupMethods = that.getGroupMethodsByPriority(componentMethods[pop.c.JS_METHODS], priority);
+				if (sessionIds[componentName] && groupMethods) {
 					$.each(groupMethods, function(group, methods) {
-						var ids = sessionIds[moduleName][group];
+						var ids = sessionIds[componentName][group];
 						if (ids) {
 							var selector = '#'+ids.join(', #');
 							var targets = $(selector);
@@ -1324,50 +1324,50 @@ window.pop.Manager = {
 			}
 		}
 
-		// Continue down the line to the following modules
-		if (moduleMethods[pop.c.JS_NEXT]) {
+		// Continue down the line to the following components
+		if (componentMethods[pop.c.JS_NEXT]) {
 
-			// Next is an array, since each module can contain many others.
-			$.each(moduleMethods[pop.c.JS_NEXT], function(index, next) {
+			// Next is an array, since each component can contain many others.
+			$.each(componentMethods[pop.c.JS_NEXT], function(index, next) {
 				
 				that.runJSMethodsInner(domain, pageSection, block, next, sessionIds, executedModules, priority, options);
 			})
 		}
 	},
-	getModuleJSMethods : function(domain, pageSection, block, moduleFrom) {
+	getModuleJSMethods : function(domain, pageSection, block, componentFrom) {
 	
 		var that = this;
 
-		var moduleMethods = that.getBlockJsMethods(domain, pageSection, block);
+		var componentMethods = that.getBlockJsMethods(domain, pageSection, block);
 		
-		// If not moduleFrom provided, then we're using the block as 'from' so we can already
-		// return the moduleMethods, which always start from the block
-		if (!moduleFrom) {
+		// If not componentFrom provided, then we're using the block as 'from' so we can already
+		// return the componentMethods, which always start from the block
+		if (!componentFrom) {
 
-			return moduleMethods;
+			return componentMethods;
 		}
 		
-		// Start searching for the moduleFrom down the line moduleMethods. 
-		// Once found, that's the moduleMethods needed => map of moduleFrom => methods to execute
-		return that.getModuleJSMethodsInner(pageSection, block, moduleFrom, moduleMethods);
+		// Start searching for the componentFrom down the line componentMethods. 
+		// Once found, that's the componentMethods needed => map of componentFrom => methods to execute
+		return that.getModuleJSMethodsInner(pageSection, block, componentFrom, componentMethods);
 	},	
-	getModuleJSMethodsInner : function(pageSection, block, moduleFrom, moduleMethods) {
+	getModuleJSMethodsInner : function(pageSection, block, componentFrom, componentMethods) {
 	
 		var that = this;
 
-		// Check if the current level is the module we're looking for. If so, we found it, return it
+		// Check if the current level is the component we're looking for. If so, we found it, return it
 		// and it will crawl all the way back up
-		if (moduleMethods[pop.c.JS_COMPONENT] == moduleFrom) {
+		if (componentMethods[pop.c.JS_COMPONENT] == componentFrom) {
 
-			return moduleMethods;
+			return componentMethods;
 		}
 
-		// If not, keep looking among the contained modules
+		// If not, keep looking among the contained components
 		var found;
-		if (moduleMethods[pop.c.JS_NEXT]) {
-			$.each(moduleMethods[pop.c.JS_NEXT], function(index, next) {
+		if (componentMethods[pop.c.JS_NEXT]) {
+			$.each(componentMethods[pop.c.JS_NEXT], function(index, next) {
 				
-				found = that.getModuleJSMethodsInner(pageSection, block, moduleFrom, next);
+				found = that.getModuleJSMethodsInner(pageSection, block, componentFrom, next);
 				if (found) {
 					// found the result => exit the loop and immediately return this result
 					return false;
@@ -2320,7 +2320,7 @@ window.pop.Manager = {
 
 		var that = this;
 
-		// Add to the queue of promises to execute and merge the module
+		// Add to the queue of promises to execute and merge the component
 		var dfd = $.Deferred();
 		var lastPromise = that.mergingPromise;
 		that.mergingPromise = dfd.promise();
@@ -2456,7 +2456,7 @@ window.pop.Manager = {
 		if ($.type(objectOrId) == 'object') {
 			
 			var object = objectOrId;
-			return object.attr('data-moduleoutputname');
+			return object.attr('data-componentoutputname');
 		}
 
 		return objectOrId;
@@ -2801,8 +2801,8 @@ window.pop.Manager = {
 						// Save the domain, so we can retrieve it later after the fetch comes back (the URL may be modified by the ContentCDN)
 						blockQueryState.domain[loadingUrl] = domain;
 						
-						// the url is needed to re-identify the block, since all it's given to us on the response is the moduleoutputname
-						// which is not enough anymore since we can have different blocks with the same moduleoutputname, so we need to find once again the id
+						// the url is needed to re-identify the block, since all it's given to us on the response is the componentoutputname
+						// which is not enough anymore since we can have different blocks with the same componentoutputname, so we need to find once again the id
 						blockQueryState['paramsscope-url'][loadingUrl] = that.getTargetParamsScopeURL(block);
 						
 						// Is it a realod?
@@ -2841,7 +2841,7 @@ window.pop.Manager = {
 
 						// Comment Leo 03/12/2015: Using Deferred Object for the following reason:
 						// Templates for 2 URLs cannot be merged at the same time, since they both access the same settings (unique thread)
-						// So we need to make the module merging process synchronous. For that we implement a queue of deferred object,
+						// So we need to make the component merging process synchronous. For that we implement a queue of deferred object,
 						// Where each one of them merges only after the previous one process has finished, + mergingPromise = false for the first case and when there are no other elements in the queue
 						// By the end of the success function all merging will be done, then we can proceed with following item in the queue
 						var lastPromise = that.mergingPromise;//[domain];
@@ -3100,27 +3100,27 @@ window.pop.Manager = {
 	// 				memory.statefuldata.settings['js-settings'][rpssId] = {};
 	// 				memory.statefuldata.settings.jsmethods.pagesection[rpssId] = $.extend({}, localMemory.settings.jsmethods.pagesection[rpssId]);
 	// 				memory.statefuldata.settings.jsmethods.block[rpssId] = {};
-	// 				memory.statelessdata.settings['modules-cbs'][rpssId] = {};
-	// 				memory.statelessdata.settings['modules-paths'][rpssId] = {};
+	// 				memory.statelessdata.settings['components-cbs'][rpssId] = {};
+	// 				memory.statelessdata.settings['components-paths'][rpssId] = {};
 	// 				memory.statelessdata.settings['db-keys'][rpssId] = {};
 	// 				memory.statefuldata.settings.configuration[rpssId] = {};
 	// 				memory.statelessdata.settings.configuration[rpssId] = {};
 	// 				memory.statelessdata.statelessdata.settings.configuration[rpssId][pop.c.JS_SUBCOMPONENTS] = {};
 
-	// 				// Configuration: first copy the modules, and then the 1st level configuration => pageSection configuration
-	// 				// This is a special case because the blocks are located under 'modules', so doing $.extend will override the existing modules in 'memory', however we want to keep them
+	// 				// Configuration: first copy the components, and then the 1st level configuration => pageSection configuration
+	// 				// This is a special case because the blocks are located under 'components', so doing $.extend will override the existing components in 'memory', however we want to keep them
 	// 				var psConfiguration = memory.statelessdata.settings.configuration[rpssId];
 	// 				var lpsConfiguration = localMemory.settings.configuration[rpssId];
 	// 				$.each(lpsConfiguration, function(key, value) {
 
-	// 					// Do not process the key modules, that will be done later
-	// 					if (key == pop.c.JS_SUBCOMPONENTS || key == 'modules') return;
+	// 					// Do not process the key components, that will be done later
+	// 					if (key == pop.c.JS_SUBCOMPONENTS || key == 'components') return;
 
 	// 					// Do not process the root-context and parent-context keys, which contain inner references,
 	// 					// to avoid JS error "Maximum call stack size called" when doing the deep extend below
 	// 					if (key == 'root-context' || key == 'parent-context') return;
 
-	// 					// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+	// 					// If it is an array then do nothing but set the object: this happens when the pageSection has no components (eg: sideInfo for Discussions page)
 	// 					// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
 	// 					that.copyToConfiguration(key, value, psConfiguration, true);
 	// 				});
@@ -3141,8 +3141,8 @@ window.pop.Manager = {
 	// 					memory.statefuldata.settings['js-settings'][rpssId][rbsId] = $.extend({}, localMemory.settings['js-settings'][rpssId][rbsId]);
 	// 					memory.statelessdata.settings['js-settings'][rpssId][rbsId] = $.extend({}, localMemory.settings['js-settings'][rpssId][rbsId]);
 	// 					memory.statelessdata.settings.jsmethods.block[rpssId][rbsId] = $.extend({}, localMemory.settings.jsmethods.block[rpssId][rbsId]);
-	// 					memory.statelessdata.settings['modules-cbs'][rpssId][rbsId] = $.extend({}, localMemory.settings['modules-cbs'][rpssId][rbsId]);
-	// 					memory.statelessdata.settings['modules-paths'][rpssId][rbsId] = $.extend({}, localMemory.settings['modules-paths'][rpssId][rbsId]);
+	// 					memory.statelessdata.settings['components-cbs'][rpssId][rbsId] = $.extend({}, localMemory.settings['components-cbs'][rpssId][rbsId]);
+	// 					memory.statelessdata.settings['components-paths'][rpssId][rbsId] = $.extend({}, localMemory.settings['components-paths'][rpssId][rbsId]);
 	// 					memory.statelessdata.settings['db-keys'][rpssId][rbsId] = $.extend({}, localMemory.settings['db-keys'][rpssId][rbsId]);
 						
 	// 					// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `that.mergingPromise` keeping a promise per domain...
@@ -3213,7 +3213,7 @@ window.pop.Manager = {
 		// 	$.each(response.statefuldata.querystate.sharedbydomains, function(rpssId, rpsParams) {	
 		// 		$.each(rpsParams, function(rbsId, rbParams) {
 		// 			// Use a direct reference instead of $.extend() because this one creates mess by messing up references when loading other
-		// 			// modules, since their initialBlockMemory will be cross-referencing and overriding each other
+		// 			// components, since their initialBlockMemory will be cross-referencing and overriding each other
 		// 			memory.runtimesettings.configuration[rpssId][rbsId] = initialMemory.runtimesettings.configuration[rpssId][rbsId];
 		// 		});
 		// 	});
@@ -3222,7 +3222,7 @@ window.pop.Manager = {
 		// Integrate topLevel
 		// that.integrateTopLevelFeedback(domain, response);
 
-		// Integrate the response data into the moduleSettings
+		// Integrate the response data into the componentSettings
 		// that.integrateDatabases(domain, response);
 
 		// Integrate the block
@@ -3305,7 +3305,7 @@ window.pop.Manager = {
 	// 	// This is done so that previously sent values (eg: lang, sent only on loading_frame()) are not overridden.
 	// 	$.each(response.statefuldata.feedback.toplevel, function(key, value) {
 
-	// 		// If it is an empty array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+	// 		// If it is an empty array then do nothing but set the object: this happens when the pageSection has no components (eg: sideInfo for Discussions page)
 	// 		// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
 	// 		if ($.type(value) == 'array' && value.length == 0) {
 	// 			// do Nothing
@@ -3362,18 +3362,18 @@ window.pop.Manager = {
 		return target;
 	},
 
-	getMergeClass : function(moduleName) {
+	getMergeClass : function(componentName) {
 	
 		var that = this;
-		return pop.c.CLASSPREFIX_MERGE + moduleName;
+		return pop.c.CLASSPREFIX_MERGE + componentName;
 	},
 
-	getMergeTarget : function(target, moduleName, options) {
+	getMergeTarget : function(target, componentName, options) {
 	
 		var that = this;
 		options = options || {};
 
-		var selector = '.' + that.getMergeClass(moduleName);
+		var selector = '.' + that.getMergeClass(componentName);
 
 		// Allow to set the target in the options. Eg: used in the Link Fullview feed to change the src of each iframe when Google translating
 		var mergeTarget = options['merge-target'] ? $(options['merge-target']) : target.find(selector).addBack(selector);
@@ -3416,7 +3416,7 @@ window.pop.Manager = {
 		return url+'#'+unique;
 	},
 
-	mergeTargetModule : function(domain, pageSection, target, moduleName, options) {
+	mergeTargetModule : function(domain, pageSection, target, componentName, options) {
 	
 		var that = this;
 		options = options || {};
@@ -3428,8 +3428,8 @@ window.pop.Manager = {
 			that.generateUniqueId(domain);
 		}
 		
-		var html = that.getModuleHtml(domain, pageSection, target, moduleName, options);
-		var targetContainer = that.getMergeTarget(target, moduleName, options);
+		var html = that.getModuleHtml(domain, pageSection, target, componentName, options);
+		var targetContainer = that.getMergeTarget(target, componentName, options);
 
 		// Default operation: REPLACE
 		options.operation = options.operation || pop.c.URLPARAM_OPERATION_REPLACE;
@@ -3440,7 +3440,7 @@ window.pop.Manager = {
 			// Allow others to do something before this is all gone (eg: destroy LocationsMap so it can be regenerated using same id)
 			target.triggerHandler('replace', [options.action]);
 			
-			// Needed because of module POP_TEMPLATE_FORM_INNER function get_module_cb_actions (processors/system/structures-inner.php)
+			// Needed because of component POP_TEMPLATE_FORM_INNER function get_component_cb_actions (processors/system/structures-inner.php)
 			// When any of these actions gets executed, the form will actually be re-drawn (ie not just data coming from the server, but all the components inside the form will be rendered again)
 			// This is needed when intercepting Edit Project and then, on the fly, loading that Project data to edit. This is currently not implemented
 			if (rerender) {
@@ -3452,7 +3452,7 @@ window.pop.Manager = {
 		}
 		var merged = that.mergeHtml(html, targetContainer, options.operation);
 
-		// Call the callback javascript functions under the moduleBlock (only aggregator one for PoPs)
+		// Call the callback javascript functions under the componentBlock (only aggregator one for PoPs)
 		target.triggerHandler('merged', [merged.newDOMs]);
 
 		return merged;
@@ -3538,13 +3538,13 @@ window.pop.Manager = {
 	
 		var that = this;
 
-		var modules_cbs = that.getModulesCbs(domain, pageSection, pageSection);
+		var components_cbs = that.getModulesCbs(domain, pageSection, pageSection);
 		var targetContainers = $();
 		var newDOMs = $();
-		$.each(modules_cbs, function(index, moduleName) {
+		$.each(components_cbs, function(index, componentName) {
 
 			// The DOMs are the existing elements on the pageSection merge target container
-			var targetContainer = that.getMergeTarget(pageSection, moduleName);
+			var targetContainer = that.getMergeTarget(pageSection, componentName);
 			targetContainers.add(targetContainer);
 			newDOMs = newDOMs.add(targetContainer.children());
 		});
@@ -3576,12 +3576,12 @@ window.pop.Manager = {
 		// And having set-up all the handlers, we can trigger the handler
 		target.triggerHandler('beforeRender', [options]);
 
-		var modules_cbs = that.getModulesCbs(domain, pageSection, target, options.action);
+		var components_cbs = that.getModulesCbs(domain, pageSection, target, options.action);
 		var targetContainers = $();
 		var newDOMs = $();
-		$.each(modules_cbs, function(index, moduleName) {
+		$.each(components_cbs, function(index, componentName) {
 
-			var merged = that.mergeTargetModule(domain, pageSection, target, moduleName, options);
+			var merged = that.mergeTargetModule(domain, pageSection, target, componentName, options);
 			targetContainers = targetContainers.add(merged.targetContainer);
 			newDOMs = newDOMs.add(merged.newDOMs);
 		});
@@ -3611,15 +3611,15 @@ window.pop.Manager = {
 		return that.getStatelessData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	},
 
-	getTargetConfiguration : function(domain, pageSection, target, moduleName) {
+	getTargetConfiguration : function(domain, pageSection, target, componentName) {
 	
 		var that = this;
-		var modulePath = that.getModulePath(domain, pageSection, target, moduleName);
+		var componentPath = that.getModulePath(domain, pageSection, target, componentName);
 		var targetConfiguration = that.getPageSectionConfiguration(domain, pageSection);
 		
-		// Go down all levels of the configuration, until finding the level for the module-cb
-		if (modulePath) {
-			$.each(modulePath, function(index, pathLevel) {
+		// Go down all levels of the configuration, until finding the level for the component-cb
+		if (componentPath) {
+			$.each(componentPath, function(index, pathLevel) {
 
 				targetConfiguration = targetConfiguration[pathLevel];
 			});
@@ -3629,17 +3629,17 @@ window.pop.Manager = {
 		return targetConfiguration;
 	},
 
-	getModuleHtml : function(domain, pageSection, target, moduleName, options, dbKey, objectID) {
+	getModuleHtml : function(domain, pageSection, target, componentName, options, dbKey, objectID) {
 
 		var that = this;
-		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, moduleName);
+		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, componentName);
 		options = options || {};
 
 		var targetContext = targetConfiguration;
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
-		var modulePath = that.getModulePath(domain, pageSection, target, moduleName);
-		if (modulePath.length) {
+		var componentPath = that.getModulePath(domain, pageSection, target, componentName);
+		if (componentPath.length) {
 			var block = that.getBlock(target);
 			that.initContextSettings(domain, pageSection, block, targetContext);
 			that.extendContext(targetContext, domain, dbKey, objectID);
@@ -3652,13 +3652,13 @@ window.pop.Manager = {
 			targetContext = $.extend({}, targetContext, extendContext);
 		}
 
-		return that.getHtml(domain, moduleName, targetContext);
+		return that.getHtml(domain, componentName, targetContext);
 	},
 
 	extendContext : function(context, domain, dbKey, objectID, override) {
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
-		// Also used from within function enterModules to create the context to pass to each module
+		// Also used from within function enterModules to create the context to pass to each component
 		var that = this;
 		override = override || {};
 		$.extend(context, override);
@@ -3690,7 +3690,7 @@ window.pop.Manager = {
 			'paramsscope-url': {},
 			'post-data': '',
 			// Filter params are actually initialized in setFilterParams function. 
-			// That is because a filter knows its moduleBlock, but a moduleBlock not its filter
+			// That is because a filter knows its componentBlock, but a componentBlock not its filter
 			// (eg: in the sidebar)
 			filter: ''
 		};
@@ -3880,12 +3880,12 @@ window.pop.Manager = {
 		return blockGroup.find('.pop-block');
 	},
 
-	getTemplate : function(domain, moduleOrTemplateName) {
+	getTemplate : function(domain, componentOrTemplateName) {
 	
-		// If empty, then the module is already the template
+		// If empty, then the component is already the template
 		var that = this;		
 		var templates = that.getTemplates(domain);
-		return templates[moduleOrTemplateName] || moduleOrTemplateName;
+		return templates[componentOrTemplateName] || componentOrTemplateName;
 	},
 
 	// initPageSectionSettings : function(domain, pageSection, psConfiguration) {
@@ -3950,9 +3950,9 @@ window.pop.Manager = {
 
 		// If there's no dbKey, also add it
 		// This is because there is a bug: first loading /log-in/, it will generate the settings adding dbKey when rendering
-		// the module down the path. However, it then calls /loaders/initial-frames?target=main, and it will bring 
+		// the component down the path. However, it then calls /loaders/initial-frames?target=main, and it will bring 
 		// again the /log-in preloading settings, which will override the ones from the log-in window that is open, making it lose the dbKey,
-		// which is needed by the content-inner module.
+		// which is needed by the content-inner component.
 		if (!context.dbKey) {
 			context.dbKey = bs.dbkeys.id;
 		}
@@ -3962,7 +3962,7 @@ window.pop.Manager = {
 
 		var that = this;
 
-		// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+		// If it is an array then do nothing but set the object: this happens when the pageSection has no components (eg: sideInfo for Discussions page)
 		// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
 		if ($.type(value) == 'array') {
 			configuration[key] = {};
@@ -4024,8 +4024,8 @@ window.pop.Manager = {
 	// 		// memory.statelessdata.settings['js-settings'][pssId] = memory.statelessdata.settings['js-settings'][pssId] || {};
 	// 		// memory.statelessdata.settings.jsmethods.pagesection[pssId] = memory.statelessdata.settings.jsmethods.pagesection[pssId] || {};
 	// 		// memory.statelessdata.settings.jsmethods.block[pssId] = memory.statelessdata.settings.jsmethods.block[pssId] || {};
-	// 		// memory.statelessdata.settings['modules-cbs'][pssId] = memory.statelessdata.settings['modules-cbs'][pssId] || {};
-	// 		// memory.statelessdata.settings['modules-paths'][pssId] = memory.statelessdata.settings['modules-paths'][pssId] || {};
+	// 		// memory.statelessdata.settings['components-cbs'][pssId] = memory.statelessdata.settings['components-cbs'][pssId] || {};
+	// 		// memory.statelessdata.settings['components-paths'][pssId] = memory.statelessdata.settings['components-paths'][pssId] || {};
 	// 		// memory.statelessdata.settings['db-keys'][pssId] = memory.statelessdata.settings['db-keys'][pssId] || {};
 	// 		// memory.statelessdata.settings.configuration[pssId] = memory.statelessdata.settings.configuration[pssId] || {};
 	// 		// memory.statefuldata.settings.configuration[pssId] = memory.statefuldata.settings.configuration[pssId] || {};
@@ -4040,17 +4040,17 @@ window.pop.Manager = {
 	// 		// $.extend(memory.statelessdata.settings['js-settings'][pssId], response.statelessdata.settings['js-settings'][pssId]);
 	// 		// $.extend(memory.statelessdata.settings.jsmethods.pagesection[pssId], response.statelessdata.settings.jsmethods.pagesection[pssId]);
 	// 		// $.extend(memory.statelessdata.settings.jsmethods.block[pssId], response.statelessdata.settings.jsmethods.block[pssId]);
-	// 		// $.extend(memory.statelessdata.settings['modules-cbs'][pssId], response.statelessdata.settings['modules-cbs'][pssId]);
-	// 		// $.extend(memory.statelessdata.settings['modules-paths'][pssId], response.statelessdata.settings['modules-paths'][pssId]);
+	// 		// $.extend(memory.statelessdata.settings['components-cbs'][pssId], response.statelessdata.settings['components-cbs'][pssId]);
+	// 		// $.extend(memory.statelessdata.settings['components-paths'][pssId], response.statelessdata.settings['components-paths'][pssId]);
 	// 		// $.extend(memory.statelessdata.settings['db-keys'][pssId], response.statelessdata.settings['db-keys'][pssId]);
 
-	// 		// // Configuration: first copy the modules, and then the 1st level configuration => pageSection configuration
-	// 		// // This is a special case because the blocks are located under 'modules', so doing $.extend will override the existing modules in 'memory', however we want to keep them
+	// 		// // Configuration: first copy the components, and then the 1st level configuration => pageSection configuration
+	// 		// // This is a special case because the blocks are located under 'components', so doing $.extend will override the existing components in 'memory', however we want to keep them
 	// 		// var psConfiguration = that.getStatelessData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	// 		var psConfiguration = that.getCombinedStateData(domain).settings.configuration[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId];
 	// 		// $.each(rpsConfiguration, function(key, value) {
 
-	// 		// 	// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+	// 		// 	// If it is an array then do nothing but set the object: this happens when the pageSection has no components (eg: sideInfo for Discussions page)
 	// 		// 	// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
 	// 		// 	that.copyToConfiguration(key, value, psConfiguration, false);
 	// 		// });
@@ -4314,7 +4314,7 @@ window.pop.Manager = {
 		// If it's an object, return an attribute	
 		if ($.type(el) == 'object') {
 
-			return el.data('modulename');
+			return el.data('componentname');
 		}
 
 		// String was passed, return it
@@ -4474,9 +4474,9 @@ window.pop.Manager = {
 
 		action = action || 'main';
 
-		var modulesCbs = that.getStatelessSettings(domain, pageSection, target, 'modules-cbs');
-		var cbs = modulesCbs.cbs;
-		var actions = modulesCbs.actions;
+		var componentsCbs = that.getStatelessSettings(domain, pageSection, target, 'components-cbs');
+		var cbs = componentsCbs.cbs;
+		var actions = componentsCbs.actions;
 
 		// If it's an empty array, return already (ask if it's array, because only when empty is array, when full it's object)
 		if ($.isArray(actions) && !actions.length) {
@@ -4491,7 +4491,7 @@ window.pop.Manager = {
 			// Exclude callback if it has actions, but not this one action
 			if (!actions[cb] || actions[cb].indexOf(action) > -1) {
 
-				// The action doesn't belong, kick the callback module out
+				// The action doesn't belong, kick the callback component out
 				allowed.push(cb);
 			}
 		});
@@ -4499,18 +4499,18 @@ window.pop.Manager = {
 		return allowed;
 	},
 
-	getModulePath : function(domain, pageSection, target, moduleName) {
+	getModulePath : function(domain, pageSection, target, componentName) {
 	
 		var that = this;
 		
-		var componentPaths = that.getStatelessSettings(domain, pageSection, target, 'modules-paths');
-		return componentPaths[moduleName];
+		var componentPaths = that.getStatelessSettings(domain, pageSection, target, 'components-paths');
+		return componentPaths[componentName];
 	},
 	
-	getExecutableTemplate : function(domain, moduleOrTemplateName) {
+	getExecutableTemplate : function(domain, componentOrTemplateName) {
 
 		var that = this;
-		var template = that.getTemplate(domain, moduleOrTemplateName);
+		var template = that.getTemplate(domain, componentOrTemplateName);
 		return Handlebars.templates[template];
 	},
 
@@ -4541,10 +4541,10 @@ window.pop.Manager = {
 		return that.getRuntimeMemoryPage(pageSection, block, options).id;
 	},
 	
-	getHtml : function(domain, moduleOrTemplateName, context) {
+	getHtml : function(domain, componentOrTemplateName, context) {
 
 		var that = this;	
-		var executableTemplate = that.getExecutableTemplate(domain, moduleOrTemplateName);
+		var executableTemplate = that.getExecutableTemplate(domain, componentOrTemplateName);
 
 		// Comment Leo 29/11/2014: some browser plug-ins will not allow the template to be created
 		// Eg: AdBlock Plus. So when that happens (eg: when requesting template "socialmedia-source") template is undefined
@@ -4552,7 +4552,7 @@ window.pop.Manager = {
 		var error = null;
 		if (typeof executableTemplate == 'undefined') {
 
-			error = new Error('No template for ' + moduleOrTemplateName);
+			error = new Error('No template for ' + componentOrTemplateName);
 		}
 		else {
 

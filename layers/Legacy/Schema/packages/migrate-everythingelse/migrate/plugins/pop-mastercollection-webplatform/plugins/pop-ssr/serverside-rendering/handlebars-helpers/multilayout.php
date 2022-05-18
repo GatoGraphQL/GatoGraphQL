@@ -31,7 +31,7 @@ class PoP_ServerSide_MultiLayoutHelpers
         }
 
         // Render the content from this layout
-        $layoutContext = $context[ComponentModelModuleInfo::get('response-prop-submodules')][$layout];
+        $layoutContext = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$layout];
 
         // Add dbKey and objectID back into the context
         $layoutContext = array_merge(
