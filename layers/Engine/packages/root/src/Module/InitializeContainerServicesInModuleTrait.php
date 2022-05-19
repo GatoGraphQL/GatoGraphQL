@@ -40,7 +40,7 @@ trait InitializeContainerServicesInModuleTrait
         string $configPath,
         string $fileName
     ): void {
-        $modulePath = $this->getComponentPath($moduleDir, $configPath);
+        $modulePath = $this->getModulePath($moduleDir, $configPath);
         $loader = new YamlFileLoader($containerBuilder, new FileLocator($modulePath));
         $loader->load($fileName);
     }
@@ -49,7 +49,7 @@ trait InitializeContainerServicesInModuleTrait
      * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
      */
-    protected function getComponentPath(
+    protected function getModulePath(
         string $moduleDir,
         string $configPath = ''
     ): string {
@@ -70,7 +70,7 @@ trait InitializeContainerServicesInModuleTrait
         if (!App::getContainerBuilderFactory()->isCached()) {
             /** @var ContainerBuilder */
             $containerBuilder = App::getContainer();
-            $modulePath = $this->getComponentPath($moduleDir, $configPath);
+            $modulePath = $this->getModulePath($moduleDir, $configPath);
             $autoconfigure = !$skipSchema;
             $loader = new ForceAutoconfigureYamlFileLoader(
                 $containerBuilder,
