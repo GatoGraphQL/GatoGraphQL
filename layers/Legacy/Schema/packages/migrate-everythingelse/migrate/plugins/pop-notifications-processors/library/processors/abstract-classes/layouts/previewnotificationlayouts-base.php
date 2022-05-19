@@ -127,9 +127,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array
+    public function getConditionalLeafComponentFields(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
+        $ret = parent::getConditionalLeafComponentFields($component);
 
         return array_merge(
             $ret,

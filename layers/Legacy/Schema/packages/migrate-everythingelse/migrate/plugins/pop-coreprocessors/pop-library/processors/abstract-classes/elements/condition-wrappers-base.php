@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array
+    public function getConditionalLeafComponentFields(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
+        $ret = parent::getConditionalLeafComponentFields($component);
 
         if ($conditionDataField = $this->getConditionField($component)) {
             if ($layouts = $this->getConditionSucceededSubcomponents($component)) {

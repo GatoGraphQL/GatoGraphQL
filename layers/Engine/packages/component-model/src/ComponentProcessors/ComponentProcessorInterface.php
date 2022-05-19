@@ -56,7 +56,7 @@ interface ComponentProcessorInterface
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array;
+    public function getConditionalLeafComponentFields(array $component): array;
     /**
      * @return ConditionalRelationalComponentField[]
      */

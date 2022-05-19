@@ -33,9 +33,9 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array
+    public function getConditionalLeafComponentFields(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
+        $ret = parent::getConditionalLeafComponentFields($component);
 
         // The function below returns an array with value => $subComponent.
         // It must be converted to value => [$subComponent]

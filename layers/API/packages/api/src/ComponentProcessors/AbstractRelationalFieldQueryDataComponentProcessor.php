@@ -306,7 +306,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array
+    public function getConditionalLeafComponentFields(array $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -417,7 +417,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalLeafComponentField[]
     //  */
-    // public function getConditionalOnDataFieldSubcomponents(array $component): array
+    // public function getConditionalLeafComponentFields(array $component): array
     // {
     //     $componentAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($componentAtts)) {
