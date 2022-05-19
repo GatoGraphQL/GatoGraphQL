@@ -78,7 +78,7 @@ class Engine implements EngineInterface
     private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
-    private ?ComponentHelpersInterface $moduleHelpers = null;
+    private ?ComponentHelpersInterface $componentHelpers = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -197,13 +197,13 @@ class Engine implements EngineInterface
     {
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
-    final public function setComponentHelpers(ComponentHelpersInterface $moduleHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
-        $this->moduleHelpers = $moduleHelpers;
+        $this->componentHelpers = $componentHelpers;
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     public function getOutputData(): array

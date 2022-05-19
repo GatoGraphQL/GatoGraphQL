@@ -18,7 +18,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     use BasicServiceTrait;
 
     private ?ComponentPathManagerInterface $componentPathManager = null;
-    private ?ComponentHelpersInterface $moduleHelpers = null;
+    private ?ComponentHelpersInterface $componentHelpers = null;
 
     final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
     {
@@ -28,13 +28,13 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     {
         return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
-    final public function setComponentHelpers(ComponentHelpersInterface $moduleHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
-        $this->moduleHelpers = $moduleHelpers;
+        $this->componentHelpers = $componentHelpers;
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     public function getStringifiedModulePropagationCurrentPath(array $component): string
