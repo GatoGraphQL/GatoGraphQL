@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     //     parent::initModelProps($component, $props);
     // }
 
-    // function getModuleCbActions(array $component, array &$props) {
+    // function getComponentCBActions(array $component, array &$props) {
 
     //     // Comment Leo 23/08/2017: The filter must not be re-drawn after reloading/refreshing content,
     //     // it must not be affected by the data coming back from fetching json data, the filter is outside this scope

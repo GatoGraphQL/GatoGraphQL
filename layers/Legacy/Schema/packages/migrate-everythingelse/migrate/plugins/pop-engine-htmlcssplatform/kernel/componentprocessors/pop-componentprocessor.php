@@ -106,13 +106,13 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return $ret;
     }
 
-    // function getModuleCb(array $component, array &$props) {
+    // function getComponentCB(array $component, array &$props) {
 
     // 	// Allow to be set from upper modules. Eg: from the embed Modal to the embedPreview layout,
     // 	// so it knows it must refresh it value when it opens
     // 	return $this->getProp($component, $props, 'component-cb');
     // }
-    // function getModuleCbActions(array $component, array &$props) {
+    // function getComponentCBActions(array $component, array &$props) {
 
     // 	return null;
     // }
@@ -126,7 +126,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 		return true;
     // 	}
 
-    // 	return $this->getModuleCb($component, $props);
+    // 	return $this->getComponentCB($component, $props);
     // }
 
     public function getTemplateResourcesMergedComponentTree(array $component, array &$props): array
@@ -163,13 +163,13 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	);
 
     // 	// Has this level a component cb?
-    // 	if ($module_cb = $this->getModuleCb($component, $props)) {
+    // 	if ($module_cb = $this->getComponentCB($component, $props)) {
 
     // 		// Key: component / Value: path to arrive to this component
     // 		$ret['cbs'][] = $component;
 
     // 		// The cb applies to what actions
-    // 		if ($module_cb_actions = $this->getModuleCbActions($component, $props)) {
+    // 		if ($module_cb_actions = $this->getComponentCBActions($component, $props)) {
 
     // 			$ret['actions'][$component[1]] = $module_cb_actions;
     // 		}
