@@ -716,14 +716,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return null;
     }
 
-    public function moduleLoadsData(array $component): bool
+    public function doesComponentLoadData(array $component): bool
     {
         return $this->getRelationalTypeResolver($component) !== null;
     }
 
     public function startDataloadingSection(array $component): bool
     {
-        return $this->moduleLoadsData($component);
+        return $this->doesComponentLoadData($component);
     }
 
     public function getComponentMutationResolverBridge(array $component): ?ComponentMutationResolverBridgeInterface
@@ -784,7 +784,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array();
 
         // Only if this component loads data => We are at the head nodule of the dataset section
-        if ($this->moduleLoadsData($component)) {
+        if ($this->doesComponentLoadData($component)) {
             // Load the data-fields from all components inside this section
             // And then, only for the top node, add its extra properties
             $properties = array_merge(
@@ -937,7 +937,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array();
 
         // Only if this component loads data
-        if ($this->moduleLoadsData($component)) {
+        if ($this->doesComponentLoadData($component)) {
             $properties = $this->getMutableonmodelHeaddatasetmoduleDataProperties($component, $props);
             if ($properties) {
                 $ret[DataLoading::DATA_PROPERTIES] = $properties;
@@ -982,7 +982,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array();
 
         // Only if this component loads data
-        if ($this->moduleLoadsData($component)) {
+        if ($this->doesComponentLoadData($component)) {
             // // Load the data-fields from all modules inside this section
             // // And then, only for the top node, add its extra properties
             // $properties = array_merge(

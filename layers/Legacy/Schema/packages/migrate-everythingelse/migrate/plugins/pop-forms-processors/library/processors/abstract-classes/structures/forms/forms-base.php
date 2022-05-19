@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
 
     public function getAction(array $component, array &$props)
     {
-        if ($this->moduleLoadsData($component)) {
+        if ($this->doesComponentLoadData($component)) {
             return $this->getDataloadSource($component, $props);
         }
 

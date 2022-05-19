@@ -25,7 +25,7 @@ class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProce
         $processor = $componentprocessor_manager->getProcessor($component);
 
         // Dataloading modules need to check for user state
-        if ($processor->moduleLoadsData($component)) {
+        if ($processor->doesComponentLoadData($component)) {
             // Check if the corresponding page requires state or not
             /*if ($checkpoint_configuration = $processor->getDataaccessCheckpointConfiguration($component, $props)) {
 

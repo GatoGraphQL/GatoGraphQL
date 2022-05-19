@@ -962,7 +962,7 @@ class Engine implements EngineInterface
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             // If the current component loads data, then add its path to the list
-            if ($processor->moduleLoadsData($component)) {
+            if ($processor->doesComponentLoadData($component)) {
                 $paths[] = array_merge(
                     $module_path,
                     array(

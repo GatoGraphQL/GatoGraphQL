@@ -50,7 +50,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         $ret = parent::getModelPropsForDescendantDatasetmodules($component, $props);
 
         // If this component loads data, then add several properties
-        if ($this->moduleLoadsData($component)) {
+        if ($this->doesComponentLoadData($component)) {
             if ($this->queriesExternalDomain($component, $props)) {
                 $ret['external-domain'] = true;
             }
@@ -142,7 +142,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     public function initModelProps(array $component, array &$props): void
     {
         // If it is a dataloading component, then set all the props related to data
-        if ($this->moduleLoadsData($component)) {
+        if ($this->doesComponentLoadData($component)) {
             // If it is multidomain, add a flag for inner layouts to know and react
             if ($this->isMultidomain($component, $props)) {
                 // $this->add_general_prop($props, 'is-multidomain', true);
