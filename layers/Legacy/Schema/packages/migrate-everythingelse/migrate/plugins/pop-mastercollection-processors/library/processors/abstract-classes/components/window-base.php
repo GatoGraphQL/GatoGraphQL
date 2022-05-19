@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
         return array();
     }
 
-    protected function getModuleParams(array $component, array &$props)
+    protected function getComponentParams(array $component, array &$props)
     {
         return array();
     }
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
             $ret['componentclasses'] = $componentclasses;
         }
 
-        if ($componentparams = $this->getModuleParams($component, $props)) {
+        if ($componentparams = $this->getComponentParams($component, $props)) {
             $ret['componentparams'] = $componentparams;
         }
         
