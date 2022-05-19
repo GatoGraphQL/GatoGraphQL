@@ -37,7 +37,7 @@ interface ComponentProcessorInterface
     public function mergeIterateKeyProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function pushProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function getDatabaseKeys(array $component, array &$props): array;
-    public function getImmutableSettingsDatasetmoduletree(array $component, array &$props): array;
+    public function getImmutableSettingsDatasetcomponenttree(array $component, array &$props): array;
     public function getImmutableDatasetsettings(array $component, array &$props): array;
     public function getDatasetDatabaseKeys(array $component, array &$props): array;
     public function getDatasource(array $component, array &$props): string;
@@ -61,22 +61,22 @@ interface ComponentProcessorInterface
      * @return ConditionalRelationalModuleField[]
      */
     public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array;
-    public function getImmutableDataPropertiesDatasetmoduletree(array $component, array &$props): array;
-    public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
-    public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array;
-    public function getDatasetmoduletreeSectionFlattenedComponents(array $component): array;
+    public function getImmutableDataPropertiesDatasetcomponenttree(array $component, array &$props): array;
+    public function getImmutableDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array;
+    public function getDatasetcomponenttreeSectionFlattenedDataFields(array $component, array &$props): array;
+    public function getDatasetcomponenttreeSectionFlattenedComponents(array $component): array;
     public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array;
-    public function getMutableonmodelDataPropertiesDatasetmoduletree(array $component, array &$props): array;
-    public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
+    public function getMutableonmodelDataPropertiesDatasetcomponenttree(array $component, array &$props): array;
+    public function getMutableonmodelDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array;
     public function getMutableonmodelHeaddatasetcomponentDataProperties(array $component, array &$props): array;
-    public function getMutableonrequestDataPropertiesDatasetmoduletree(array $component, array &$props): array;
-    public function getMutableonrequestDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
+    public function getMutableonrequestDataPropertiesDatasetcomponenttree(array $component, array &$props): array;
+    public function getMutableonrequestDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array;
     public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array;
-    public function getDataFeedbackDatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
+    public function getDataFeedbackDatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array;
-    public function getBackgroundurlsMergeddatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    public function getBackgroundurlsMergeddatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
     public function getBackgroundurls(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
     public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array;
     public function getDataAccessCheckpoints(array $component, array &$props): array;
@@ -90,5 +90,5 @@ interface ComponentProcessorInterface
     public function doesComponentLoadData(array $component): bool;
     public function startDataloadingSection(array $component): bool;
     public function addToDatasetDatabaseKeys(array $component, array &$props, array $path, array &$ret): void;
-    public function addDatasetmoduletreeSectionFlattenedComponents(&$ret, array $component): void;
+    public function addDatasetcomponenttreeSectionFlattenedComponents(&$ret, array $component): void;
 }

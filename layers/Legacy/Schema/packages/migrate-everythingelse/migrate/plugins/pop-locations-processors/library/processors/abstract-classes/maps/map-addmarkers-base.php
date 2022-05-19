@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
         return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
     }
 
-    public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array
+    public function getDatasetcomponenttreeSectionFlattenedDataFields(array $component, array &$props): array
     {
         // Important: Do not bring the data-fields for Add_Marker since they will apply to "post" and not to "location"
         return array();

@@ -604,7 +604,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getImmutableSettingsDatasetmoduletree(array $component, array &$props): array
+    public function getImmutableSettingsDatasetcomponenttree(array $component, array &$props): array
     {
         $options = array(
             'only-execute-on-dataloading-components' => true,
@@ -772,14 +772,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Properties
     //-------------------------------------------------
 
-    public function getImmutableDataPropertiesDatasetmoduletree(array $component, array &$props): array
+    public function getImmutableDataPropertiesDatasetcomponenttree(array $component, array &$props): array
     {
         // The data-properties start on a dataloading component, and finish on the next dataloding component down the line
         // This way, we can collect all the data-fields that the component will need to load for its dbobjects
-        return $this->executeOnSelfAndPropagateToComponents('getImmutableDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $component, $props, false);
+        return $this->executeOnSelfAndPropagateToComponents('getImmutableDataPropertiesDatasetcomponenttreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array
+    public function getImmutableDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array
     {
         $ret = array();
 
@@ -788,7 +788,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Load the data-fields from all components inside this section
             // And then, only for the top node, add its extra properties
             $properties = array_merge(
-                $this->getDatasetmoduletreeSectionFlattenedDataFields($component, $props),
+                $this->getDatasetcomponenttreeSectionFlattenedDataFields($component, $props),
                 $this->getImmutableHeaddatasetcomponentDataProperties($component, $props)
             );
 
@@ -800,7 +800,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array
+    public function getDatasetcomponenttreeSectionFlattenedDataFields(array $component, array &$props): array
     {
         $ret = array();
 
@@ -835,7 +835,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // Propagate down to the components
-        $this->flattenDatasetmoduletreeDataProperties(__FUNCTION__, $ret, $component, $props);
+        $this->flattenDatasetcomponenttreeDataProperties(__FUNCTION__, $ret, $component, $props);
 
         // Propagate down to the subcomponent components
         $this->flattenRelationalDBObjectDataProperties(__FUNCTION__, $ret, $component, $props);
@@ -843,11 +843,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetmoduletreeSectionFlattenedComponents(array $component): array
+    public function getDatasetcomponenttreeSectionFlattenedComponents(array $component): array
     {
         $ret = [];
 
-        $this->addDatasetmoduletreeSectionFlattenedComponents($ret, $component);
+        $this->addDatasetcomponenttreeSectionFlattenedComponents($ret, $component);
 
         return array_values(
             array_unique(
@@ -857,12 +857,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function addDatasetmoduletreeSectionFlattenedComponents(&$ret, array $component): void
+    public function addDatasetcomponenttreeSectionFlattenedComponents(&$ret, array $component): void
     {
         $ret[] = $component;
 
         // Propagate down to the components
-        // $this->flattenDatasetmoduletreeComponents(__FUNCTION__, $ret, $component);
+        // $this->flattenDatasetcomponenttreeComponents(__FUNCTION__, $ret, $component);
         // Exclude the subcomponent components here
         if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
             foreach ($subComponents as $subComponent) {
@@ -870,13 +870,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponenttree
                 if (!$subcomponent_processor->startDataloadingSection($subComponent)) {
-                    $subcomponent_processor->addDatasetmoduletreeSectionFlattenedComponents($ret, $subComponent);
+                    $subcomponent_processor->addDatasetcomponenttreeSectionFlattenedComponents($ret, $subComponent);
                 }
             }
         }
     }
 
-    // protected function flattenDatasetmoduletreeComponents($propagate_fn, &$ret, array $component)
+    // protected function flattenDatasetcomponenttreeComponents($propagate_fn, &$ret, array $component)
     // {
     //     // Exclude the subcomponent components here
     //     if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
@@ -927,12 +927,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function getMutableonmodelDataPropertiesDatasetmoduletree(array $component, array &$props): array
+    public function getMutableonmodelDataPropertiesDatasetcomponenttree(array $component, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $component, $props, false);
+        return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelDataPropertiesDatasetcomponenttreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array
+    public function getMutableonmodelDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array
     {
         $ret = array();
 
@@ -972,12 +972,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonrequestDataPropertiesDatasetmoduletree(array $component, array &$props): array
+    public function getMutableonrequestDataPropertiesDatasetcomponenttree(array $component, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $component, $props, false);
+        return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestDataPropertiesDatasetcomponenttreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getMutableonrequestDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array
+    public function getMutableonrequestDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array
     {
         $ret = array();
 
@@ -986,7 +986,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // // Load the data-fields from all modules inside this section
             // // And then, only for the top node, add its extra properties
             // $properties = array_merge(
-            //     $this->get_mutableonrequest_data_properties_datasetmoduletree_section($component, $props),
+            //     $this->get_mutableonrequest_data_properties_datasetcomponenttree_section($component, $props),
             //     $this->getMutableonrequestHeaddatasetcomponentDataProperties($component, $props)
             // );
             $properties = $this->getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
@@ -1028,7 +1028,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
 
-    public function getDataFeedbackDatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackDatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return $this->executeOnSelfAndPropagateToDatasetmodules('getDataFeedbackModuletree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
@@ -1058,7 +1058,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Background URLs
     //-------------------------------------------------
 
-    public function getBackgroundurlsMergeddatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurlsMergeddatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return $this->executeOnSelfAndMergeWithDatasetmodules('getBackgroundurls', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
     }
@@ -1108,7 +1108,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $component, array &$props): void
+    protected function flattenDatasetcomponenttreeDataProperties($propagate_fn, &$ret, array $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 

@@ -667,7 +667,7 @@ class Engine implements EngineInterface
         if ($immutable_datasetsettings !== null) {
             $engineState->cachedsettings = true;
         } else {
-            $immutable_datasetsettings = $processor->getImmutableSettingsDatasetmoduletree($component, $model_props);
+            $immutable_datasetsettings = $processor->getImmutableSettingsDatasetcomponenttree($component, $model_props);
 
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings);
@@ -1085,13 +1085,13 @@ class Engine implements EngineInterface
 
         // If there is no cached one, generate the props and cache it
         if ($immutable_data_properties === null) {
-            $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_component, $root_model_props);
+            $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetcomponenttree($root_component, $root_model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
             }
         }
         if ($mutableonmodel_data_properties === null) {
-            $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_component, $root_model_props);
+            $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetcomponenttree($root_component, $root_model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
             }
@@ -1105,7 +1105,7 @@ class Engine implements EngineInterface
         if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
-            $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_component, $root_props);
+            $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetcomponenttree($root_component, $root_props);
             $root_data_properties = array_merge_recursive(
                 $model_data_properties,
                 $mutableonrequest_data_properties
@@ -1358,7 +1358,7 @@ class Engine implements EngineInterface
             // Incorporate the background URLs
             $engineState->backgroundload_urls = array_merge(
                 $engineState->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetmoduletree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
+                $processor->getBackgroundurlsMergeddatasetcomponenttree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
@@ -2456,7 +2456,7 @@ class Engine implements EngineInterface
             $componentdata = &$engineState->componentdata;
 
             // Add the feedback into the object
-            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
+            if ($feedback = $processor->getDataFeedbackDatasetcomponenttree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 /** @var ModuleInfo */
                 $moduleInfo = App::getModule(Module::class)->getInfo();
                 $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();

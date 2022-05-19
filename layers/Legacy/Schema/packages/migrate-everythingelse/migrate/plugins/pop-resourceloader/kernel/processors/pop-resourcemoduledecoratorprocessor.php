@@ -19,7 +19,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     // PUBLIC Functions
     //-------------------------------------------------
 
-    function getResourcesMergedmoduletree(array $component, array &$props) {
+    function getResourcesMergedcomponenttree(array $component, array &$props) {
 
         return array_unique(
             $this->executeOnSelfAndMergeWithComponents('getResources', __FUNCTION__, $component, $props, false),
@@ -53,7 +53,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     }
 
     // function getDynamicModulesResources(array $component, array &$props) {
-    function getDynamicResourcesMergedmoduletree(array $component, array &$props) {
+    function getDynamicResourcesMergedcomponenttree(array $component, array &$props) {
 
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
@@ -64,7 +64,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
             // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
             if (!$modulefilter_manager->excludeSubcomponent($component, $props)) {
 
-                return $this->getResourcesMergedmoduletree($component, $props);
+                return $this->getResourcesMergedcomponenttree($component, $props);
             }
             else {
 
@@ -82,7 +82,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicResourcesMergedmoduletree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicResourcesMergedcomponenttree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -127,7 +127,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //     return $ret;
     // }
 
-    function getDynamicTemplateResourcesMergedmoduletree(array $component, array &$props) {
+    function getDynamicTemplateResourcesMergedcomponenttree(array $component, array &$props) {
 
         $processor = $this->getDecoratedcomponentProcessor($component);
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
@@ -140,7 +140,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
             if (!$modulefilter_manager->excludeSubcomponent($component, $props)) {
 
-                return $processor->getTemplateResourcesMergedmoduletree($component, $props);
+                return $processor->getTemplateResourcesMergedcomponenttree($component, $props);
             }
             else {
 
@@ -158,7 +158,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicTemplateResourcesMergedmoduletree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicTemplateResourcesMergedcomponenttree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(
