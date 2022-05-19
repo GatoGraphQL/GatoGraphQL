@@ -1607,7 +1607,6 @@ class Engine implements EngineInterface
             // By splitting the results into state-full and state-less, we can split all functionality
             // into cacheable and non-cacheable,
             // thus caching most of the website even for logged-in users
-            /** @phpstan-ignore-next-line */
             if ($iterationDBItems) {
                 // Conditional data fields: Store the loaded IDs/fields in an object,
                 // to avoid fetching them again in later iterations on the same typeResolver

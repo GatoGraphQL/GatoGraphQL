@@ -349,7 +349,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $separateEngineIterationFeedbackStore,
                 );
                 $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-                /** @phpstan-ignore-next-line */
                 if ($separateEngineIterationFeedbackStore->hasErrors()) {
                     continue;
                 }
