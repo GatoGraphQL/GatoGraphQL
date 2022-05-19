@@ -19,10 +19,10 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
-    public function getFilterInputComponents(array $filterInputModules): array
+    public function getFilterInputComponents(array $filterInputComponents): array
     {
         return [
-            ...$filterInputModules,
+            ...$filterInputComponents,
             [
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_TAG_SLUGS

@@ -46,70 +46,70 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
 
     public function getFilterInputComponents(array $component): array
     {
-        $responseFilterInputModules = [
+        $responseFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_TYPES],
         ];
-        $customPostCommentFilterInputModules = [
-            ...$responseFilterInputModules,
+        $customPostCommentFilterInputComponents = [
+            ...$responseFilterInputComponents,
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS],
         ];
-        $rootCommentFilterInputModules = [
-            ...$customPostCommentFilterInputModules,
+        $rootCommentFilterInputComponents = [
+            ...$customPostCommentFilterInputComponents,
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_ID],
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS],
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
             [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         ];
-        $adminCommentFilterInputModules = [
+        $adminCommentFilterInputComponents = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ((string)$component[1]) {
-            self::COMPONENT_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_RESPONSES => [
-                ...$responseFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$responseFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT => $customPostCommentFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT => $customPostCommentFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS => [
-                ...$customPostCommentFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$customPostCommentFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_COMMENTCOUNT => $rootCommentFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENTCOUNT => $rootCommentFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS => [
-                ...$rootCommentFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$rootCommentFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT => [
-                ...$responseFilterInputModules,
-                ...$adminCommentFilterInputModules,
+                ...$responseFilterInputComponents,
+                ...$adminCommentFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINRESPONSES => [
-                ...$responseFilterInputModules,
-                ...$paginationFilterInputModules,
-                ...$adminCommentFilterInputModules,
+                ...$responseFilterInputComponents,
+                ...$paginationFilterInputComponents,
+                ...$adminCommentFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT => [
-                ...$customPostCommentFilterInputModules,
-                ...$adminCommentFilterInputModules,
+                ...$customPostCommentFilterInputComponents,
+                ...$adminCommentFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS => [
-                ...$customPostCommentFilterInputModules,
-                ...$paginationFilterInputModules,
-                ...$adminCommentFilterInputModules,
+                ...$customPostCommentFilterInputComponents,
+                ...$paginationFilterInputComponents,
+                ...$adminCommentFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT => [
-                ...$rootCommentFilterInputModules,
-                ...$adminCommentFilterInputModules,
+                ...$rootCommentFilterInputComponents,
+                ...$adminCommentFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTS => [
-                ...$rootCommentFilterInputModules,
-                ...$paginationFilterInputModules,
-                ...$adminCommentFilterInputModules,
+                ...$rootCommentFilterInputComponents,
+                ...$paginationFilterInputComponents,
+                ...$adminCommentFilterInputComponents,
             ],
             default => [],
         };

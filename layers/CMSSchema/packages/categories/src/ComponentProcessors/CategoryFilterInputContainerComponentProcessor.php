@@ -28,30 +28,30 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
 
     public function getFilterInputComponents(array $component): array
     {
-        $categoryFilterInputModules = [
+        $categoryFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
         ];
-        $topLevelCategoryFilterInputModules = [
+        $topLevelCategoryFilterInputComponents = [
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES => [
-                ...$categoryFilterInputModules,
-                ...$topLevelCategoryFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$categoryFilterInputComponents,
+                ...$topLevelCategoryFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES => [
-                ...$categoryFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$categoryFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT => [
-                ...$categoryFilterInputModules,
-                ...$topLevelCategoryFilterInputModules,
+                ...$categoryFilterInputComponents,
+                ...$topLevelCategoryFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT => $categoryFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT => $categoryFilterInputComponents,
             default => [],
         };
     }

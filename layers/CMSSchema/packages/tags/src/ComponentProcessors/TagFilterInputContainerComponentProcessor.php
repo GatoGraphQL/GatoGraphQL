@@ -24,18 +24,18 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
 
     public function getFilterInputComponents(array $component): array
     {
-        $tagFilterInputModules = [
+        $tagFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_TAGS => [
-                ...$tagFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$tagFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT => $tagFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT => $tagFilterInputComponents,
             default => [],
         };
     }

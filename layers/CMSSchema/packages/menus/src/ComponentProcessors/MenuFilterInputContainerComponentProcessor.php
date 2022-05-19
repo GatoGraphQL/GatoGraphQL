@@ -24,18 +24,18 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
 
     public function getFilterInputComponents(array $component): array
     {
-        $menuFilterInputModules = [
+        $menuFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_MENUS => [
-                ...$menuFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$menuFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT => $menuFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT => $menuFilterInputComponents,
             default => [],
         };
     }

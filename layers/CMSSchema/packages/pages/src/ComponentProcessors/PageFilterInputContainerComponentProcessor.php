@@ -36,12 +36,12 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT],
             default => null,
         };
-        $filterInputModules = parent::getFilterInputComponents($targetModule);
+        $filterInputComponents = parent::getFilterInputComponents($targetModule);
         // Add the parentIDs and parentID filterInputs
-        $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS];
-        $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID];
-        $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS];
-        return $filterInputModules;
+        $filterInputComponents[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS];
+        $filterInputComponents[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID];
+        $filterInputComponents[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS];
+        return $filterInputComponents;
     }
 
     /**

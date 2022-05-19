@@ -32,9 +32,9 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
             self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
             default => null,
         };
-        $filterInputModules = parent::getFilterInputComponents($targetModule);
-        $filterInputModules[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS];
-        return $filterInputModules;
+        $filterInputComponents = parent::getFilterInputComponents($targetModule);
+        $filterInputComponents[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS];
+        return $filterInputComponents;
     }
 
     /**

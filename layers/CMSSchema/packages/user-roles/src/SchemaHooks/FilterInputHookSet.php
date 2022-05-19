@@ -21,7 +21,7 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
-    public function getFilterInputComponents(array $filterInputModules, array $component): array
+    public function getFilterInputComponents(array $filterInputComponents, array $component): array
     {
         $adminModuleNames = [
             UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS,
@@ -29,11 +29,11 @@ class FilterInputHookSet extends AbstractHookSet
         ];
         if (in_array($component[1], $adminModuleNames)) {
             return [
-                ...$filterInputModules,
+                ...$filterInputComponents,
                 ...$this->getUserFilterInputComponents(),
             ];
         }
-        return $filterInputModules;
+        return $filterInputComponents;
     }
 
     public function getUserFilterInputComponents(): array

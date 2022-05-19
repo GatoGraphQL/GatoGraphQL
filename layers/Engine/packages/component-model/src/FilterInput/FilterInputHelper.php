@@ -9,11 +9,11 @@ use PoP\ComponentModel\ComponentProcessors\FilterInputComponentProcessorInterfac
 
 class FilterInputHelper
 {
-    public static function getFilterInputName(array $filterInputModule): string
+    public static function getFilterInputName(array $filterInputComponent): string
     {
         $componentProcessorManager = ComponentProcessorManagerFacade::getInstance();
         /** @var FilterInputComponentProcessorInterface */
-        $filterInputComponentProcessor = $componentProcessorManager->getProcessor($filterInputModule);
-        return $filterInputComponentProcessor->getName($filterInputModule);
+        $filterInputComponentProcessor = $componentProcessorManager->getProcessor($filterInputComponent);
+        return $filterInputComponentProcessor->getName($filterInputComponent);
     }
 }

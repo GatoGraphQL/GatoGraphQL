@@ -29,28 +29,28 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
 
     public function getFilterInputComponents(array $component): array
     {
-        $postFilterInputModules = [
+        $postFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
         ];
-        $statusFilterInputModules = [
+        $statusFilterInputComponents = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_POSTS => [
-                ...$postFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$postFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT => $postFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT => $postFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS => [
-                ...$postFilterInputModules,
-                ...$paginationFilterInputModules,
-                ...$statusFilterInputModules,
+                ...$postFilterInputComponents,
+                ...$paginationFilterInputComponents,
+                ...$statusFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT => [
-                ...$postFilterInputModules,
-                ...$statusFilterInputModules,
+                ...$postFilterInputComponents,
+                ...$statusFilterInputComponents,
             ],
             default => [],
         };

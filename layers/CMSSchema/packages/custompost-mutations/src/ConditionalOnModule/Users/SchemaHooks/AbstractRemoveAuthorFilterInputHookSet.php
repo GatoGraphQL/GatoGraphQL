@@ -34,15 +34,15 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     /**
      * Remove author fieldArgs from field "myCustomPosts"
      */
-    public function getFilterInputComponents(array $filterInputModules): array
+    public function getFilterInputComponents(array $filterInputComponents): array
     {
         $components = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputComponents();
         foreach ($components as $component) {
-            $pos = array_search($component, $filterInputModules);
+            $pos = array_search($component, $filterInputComponents);
             if ($pos !== false) {
-                array_splice($filterInputModules, $pos, 1);
+                array_splice($filterInputComponents, $pos, 1);
             }
         }
-        return $filterInputModules;
+        return $filterInputComponents;
     }
 }

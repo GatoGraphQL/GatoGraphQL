@@ -25,19 +25,19 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
 
     public function getFilterInputComponents(array $component): array
     {
-        $mediaFilterInputModules = [
+        $mediaFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_MIME_TYPES],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS => [
-                ...$mediaFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$mediaFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT => [
-                ...$mediaFilterInputModules,
+                ...$mediaFilterInputComponents,
             ],
             default => [],
         };

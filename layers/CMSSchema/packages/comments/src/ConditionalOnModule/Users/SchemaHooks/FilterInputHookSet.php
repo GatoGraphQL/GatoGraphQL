@@ -20,10 +20,10 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
-    public function getFilterInputComponents(array $filterInputModules): array
+    public function getFilterInputComponents(array $filterInputComponents): array
     {
         return [
-            ...$filterInputModules,
+            ...$filterInputComponents,
             ...$this->getAuthorFilterInputComponents(),
             ...$this->getCustomPostAuthorFilterInputComponents(),
         ];

@@ -36,51 +36,51 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
 
     public function getFilterInputComponents(array $component): array
     {
-        $customPostFilterInputModules = [
+        $customPostFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
         ];
-        $unionCustomPostFilterInputModules = [
+        $unionCustomPostFilterInputComponents = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         ];
-        $adminCustomPostFilterInputModules = [
+        $adminCustomPostFilterInputComponents = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST => [
-                ...$customPostFilterInputModules,
-                ...$unionCustomPostFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$unionCustomPostFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST => [
-                ...$customPostFilterInputModules,
-                ...$unionCustomPostFilterInputModules,
-                ...$adminCustomPostFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$unionCustomPostFilterInputComponents,
+                ...$adminCustomPostFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST => [
-                ...$customPostFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST => [
-                ...$customPostFilterInputModules,
-                ...$adminCustomPostFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$adminCustomPostFilterInputComponents,
+                ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT => [
-                ...$customPostFilterInputModules,
-                ...$unionCustomPostFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$unionCustomPostFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT => [
-                ...$customPostFilterInputModules,
-                ...$adminCustomPostFilterInputModules,
-                ...$unionCustomPostFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$adminCustomPostFilterInputComponents,
+                ...$unionCustomPostFilterInputComponents,
             ],
-            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT => $customPostFilterInputModules,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT => $customPostFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT => [
-                ...$customPostFilterInputModules,
-                ...$adminCustomPostFilterInputModules,
+                ...$customPostFilterInputComponents,
+                ...$adminCustomPostFilterInputComponents,
             ],
             default => [],
         };

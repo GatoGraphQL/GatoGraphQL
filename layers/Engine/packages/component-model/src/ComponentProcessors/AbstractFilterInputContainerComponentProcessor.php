@@ -13,13 +13,13 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 
     final public function getSubcomponents(array $component): array
     {
-        $filterInputModules = $this->getFilterInputComponents($component);
+        $filterInputComponents = $this->getFilterInputComponents($component);
 
         // Enable extensions to add more FilterInputs
         foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
-            $filterInputModules = App::applyFilters(
+            $filterInputComponents = App::applyFilters(
                 $filterInputHookName,
-                $filterInputModules,
+                $filterInputComponents,
                 $component
             );
         }
@@ -27,7 +27,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         // Add the filterInputs to whatever came from the parent (if anything)
         return array_merge(
             parent::getSubcomponents($component),
-            $filterInputModules
+            $filterInputComponents
         );
     }
 
