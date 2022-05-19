@@ -7,8 +7,8 @@ use PoP\ComponentRouting\ComponentRoutingGroups;
 );
 function popEngineDefinePagemodulegroupContentModule()
 {
-    // the "Main Content Module" group initially represents the entry module, but this is overridable (eg: by the theme, setting it to be the Main PageSection module)
-    if (!defined('POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE')) {
-        define('POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE', ComponentRoutingGroups::ENTRYCOMPONENT);
+    // the "Main Content Module" group initially represents the entry component, but this is overridable (eg: by the theme, setting it to be the Main PageSection component)
+    if (!defined('POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT')) {
+        define('POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT', ComponentRoutingGroups::ENTRYCOMPONENT);
     }
 }

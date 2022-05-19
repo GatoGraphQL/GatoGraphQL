@@ -1,53 +1,53 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_ADDMARKER];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
         return array(
-            $this->getMarkerscriptSubmodule($module),
-            $this->getResetmarkerscriptSubmodule($module)
+            $this->getMarkerscriptSubcomponent($component),
+            $this->getResetmarkerscriptSubcomponent($component)
         );
     }
 
-    public function getMarkerscriptSubmodule(array $module)
+    public function getMarkerscriptSubcomponent(array $component)
     {
-        return [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS];
+        return [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS];
     }
 
-    public function getResetmarkerscriptSubmodule(array $module)
+    public function getResetmarkerscriptSubcomponent(array $component)
     {
-        return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
+        return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
     }
 
-    public function getDatasetmoduletreeSectionFlattenedDataFields(array $module, array &$props): array
+    public function getDatasetcomponentTreeSectionFlattenedDataFields(array $component, array &$props): array
     {
         // Important: Do not bring the data-fields for Add_Marker since they will apply to "post" and not to "location"
         return array();
     }
 
-    // function getModulePath(array $module, array &$props) {
+    // function getComponentPath(array $component, array &$props) {
     
-    //     return $module;
+    //     return $component;
     // }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $markers = $this->getMarkerscriptSubmodule($module);
-        $resetmarkers = $this->getResetmarkerscriptSubmodule($module);
+        $markers = $this->getMarkerscriptSubcomponent($component);
+        $resetmarkers = $this->getResetmarkerscriptSubcomponent($component);
 
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($markers);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($markers);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($resetmarkers);
         
         return $ret;
     }

@@ -1,5 +1,5 @@
 <div class="{{class}} {{runtime-class}} pop-structureinner" style="{{style}}{{runtime-style}}">
-	{{#each submoduleoutputnames.layouts}}
+	{{#each subcomponentoutputnames.layouts}}
 		{{#withModule ../. this}}
 			{{enterModule ../../. dbKey=../../dbKey objectID=../../dbObjectIDs}}
 		{{/withModule}}

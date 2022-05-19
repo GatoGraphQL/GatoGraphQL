@@ -2,32 +2,32 @@
 
 class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_LOGGEDINUSERDATA = 'group-loggedinuserdata';
+    public final const COMPONENT_GROUP_LOGGEDINUSERDATA = 'group-loggedinuserdata';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_LOGGEDINUSERDATA],
+            [self::class, self::COMPONENT_GROUP_LOGGEDINUSERDATA],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_GROUP_LOGGEDINUSERDATA => POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_GROUP_LOGGEDINUSERDATA => POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_GROUP_LOGGEDINUSERDATA:
+        switch ($component[1]) {
+            case self::COMPONENT_GROUP_LOGGEDINUSERDATA:
                 $ret = array_merge(
                     $ret,
-                    PoP_Module_Processor_UserAccountUtils::getLoginModules()
+                    PoP_Module_Processor_UserAccountUtils::getLoginComponents()
                 );
                 break;
         }
@@ -35,15 +35,15 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_GROUP_LOGGEDINUSERDATA:
-                $this->appendProp($module, $props, 'class', 'hidden');
+        switch ($component[1]) {
+            case self::COMPONENT_GROUP_LOGGEDINUSERDATA:
+                $this->appendProp($component, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

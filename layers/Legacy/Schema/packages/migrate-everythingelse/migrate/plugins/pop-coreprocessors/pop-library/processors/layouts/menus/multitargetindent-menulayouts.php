@@ -3,21 +3,21 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Processor_MultiTargetIndentMenuLayoutsBase
 {
-    public final const MODULE_LAYOUT_MENU_MULTITARGETINDENT = 'layout-menu-multitargetindent';
+    public final const COMPONENT_LAYOUT_MENU_MULTITARGETINDENT = 'layout-menu-multitargetindent';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MENU_MULTITARGETINDENT],
+            [self::class, self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT],
         );
     }
 
-    public function getTargets(array $module, array &$props)
+    public function getTargets(array $component, array &$props)
     {
-        $ret = parent::getTargets($module, $props);
+        $ret = parent::getTargets($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_MENU_MULTITARGETINDENT:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 $ret[POP_TARGET_NAVIGATOR] = '<i class="fa fa-fw fa-angle-right"></i>';
                 
                 // $icon = '<i class="fa fa-fw fa-angle-right"></i>';
@@ -30,38 +30,38 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getMultitargetClass(array $module, array &$props)
+    public function getMultitargetClass(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_MENU_MULTITARGETINDENT:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 // Do not show for mobile phone
                 return 'hidden-xs';
         }
 
-        return parent::getMultitargetClass($module, $props);
+        return parent::getMultitargetClass($component, $props);
     }
 
-    public function getMultitargetTooltip(array $module, array &$props)
+    public function getMultitargetTooltip(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_MENU_MULTITARGETINDENT:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 return TranslationAPIFacade::getInstance()->__('Navigate', 'pop-coreprocessors');
         }
 
-        return parent::getMultitargetTooltip($module, $props);
+        return parent::getMultitargetTooltip($component, $props);
     }
 
-    // function getDropdownmenuClass(array $module, array &$props) {
+    // function getDropdownmenuClass(array $component, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_LAYOUT_MENU_MULTITARGETINDENT:
+    //         case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 
     //             // Do not show for mobile phone
     //             return 'hidden-xs';
     //     }
 
-    //     return parent::getDropdownmenuClass($module, $props);
+    //     return parent::getDropdownmenuClass($component, $props);
     // }
 }
 

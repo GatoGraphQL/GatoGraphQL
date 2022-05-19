@@ -2,32 +2,32 @@
 
 class PoP_Module_Processor_SettingsFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_SETTINGS = 'forminner-settings';
+    public final const COMPONENT_FORMINNER_SETTINGS = 'forminner-settings';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_SETTINGS],
+            [self::class, self::COMPONENT_FORMINNER_SETTINGS],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_SETTINGS:
-                $ret[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_SETTINGS:
+                $ret[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_BROWSERURL];
                 
                 if (defined('POP_MULTILINGUALPROCESSORS_INITIALIZED')) {
                     $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();
                     $languages = $pluginapi->getEnabledLanguages();
                     if ($languages && count($languages) > 1) {
-                        $ret[] = [GD_QT_Module_Processor_FormGroups::class, GD_QT_Module_Processor_FormGroups::MODULE_QT_FORMINPUTGROUP_LANGUAGE];
+                        $ret[] = [GD_QT_Module_Processor_FormGroups::class, GD_QT_Module_Processor_FormGroups::COMPONENT_QT_FORMINPUTGROUP_LANGUAGE];
                     }
                 }
-                $ret[] = [GD_UserPlatform_Module_Processor_FormInputGroups::class, GD_UserPlatform_Module_Processor_FormInputGroups::MODULE_FORMINPUTGROUP_SETTINGSFORMAT];
-                $ret[] = [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_OK];
+                $ret[] = [GD_UserPlatform_Module_Processor_FormInputGroups::class, GD_UserPlatform_Module_Processor_FormInputGroups::COMPONENT_FORMINPUTGROUP_SETTINGSFORMAT];
+                $ret[] = [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_OK];
                 break;
         }
 

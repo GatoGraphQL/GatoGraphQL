@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_SettingsFeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS = 'layout-feedbackmessagealert-settings';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS = 'layout-feedbackmessagealert-settings';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS],
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
-            self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

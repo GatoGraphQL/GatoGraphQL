@@ -9,13 +9,13 @@ class PoP_Module_TopContentPageSectionComponentRoutingProcessor extends PoP_Modu
     {
         $ret = array();
 
-        $thememode_modules = array(
-            GD_THEMEMODE_WASSUP_SIMPLE => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOPSIMPLE],
-            GD_THEMEMODE_WASSUP_EMBED => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOPEMBED],
+        $thememode_components = array(
+            GD_THEMEMODE_WASSUP_SIMPLE => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::COMPONENT_FRAME_TOPSIMPLE],
+            GD_THEMEMODE_WASSUP_EMBED => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::COMPONENT_FRAME_TOPEMBED],
         );
-        foreach ($thememode_modules as $thememode => $module) {
+        foreach ($thememode_components as $thememode => $component) {
             $ret[] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'thememode' => $thememode,
                 ],
@@ -24,7 +24,7 @@ class PoP_Module_TopContentPageSectionComponentRoutingProcessor extends PoP_Modu
 
         // Default for everything
         $ret[] = [
-            'module' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOP],
+            'component' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::COMPONENT_FRAME_TOP],
         ];
 
         return $ret;

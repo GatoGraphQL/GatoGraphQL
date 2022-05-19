@@ -3,42 +3,42 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_FLAG = 'form-flag';
+    public final const COMPONENT_FORM_FLAG = 'form-flag';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_FLAG],
+            [self::class, self::COMPONENT_FORM_FLAG],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::MODULE_FORMINNER_FLAG],
+            self::COMPONENT_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::COMPONENT_FORMINNER_FLAG],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_FLAG:
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_FLAG:
                 // Add the description
                 $description = sprintf(
                     '<p><em>%s</em></p>',
                     TranslationAPIFacade::getInstance()->__('Based on our users\' feedback, we will consider removing this post. You will receive a confirmation by email.', 'pop-genericforms')
                 );
-                $this->setProp($module, $props, 'description', $description);
+                $this->setProp($component, $props, 'description', $description);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

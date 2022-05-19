@@ -2,57 +2,57 @@
 
 class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_DropdownButtonControlsBase
 {
-    public final const MODULE_DROPDOWNBUTTONCONTROL_CLOSETOGGLE = 'dropdownbuttoncontrol-closetoggle';
-    public final const MODULE_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE = 'dropdownbuttoncontrol-quickviewclosetoggle';
+    public final const COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE = 'dropdownbuttoncontrol-closetoggle';
+    public final const COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE = 'dropdownbuttoncontrol-quickviewclosetoggle';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_CLOSETOGGLE],
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
-                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLESIDEINFO];
-                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS];
-                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CLOSEPAGE];
+        switch ($component[1]) {
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
+                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO];
+                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS];
+                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_CLOSEPAGE];
                 break;
 
-            case self::MODULE_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
-                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO];
-                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CLOSEPAGE];
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
+                $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO];
+                $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_CLOSEPAGE];
                 break;
         }
         
         return $ret;
     }
 
-    public function getBtnClass(array $module)
+    public function getBtnClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
+        switch ($component[1]) {
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
                 return 'btn btn-link';
         }
         
-        return parent::getBtnClass($module);
+        return parent::getBtnClass($component);
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
+        switch ($component[1]) {
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
                 return 'fa-ellipsis-v';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($component, $props);
     }
 }
 

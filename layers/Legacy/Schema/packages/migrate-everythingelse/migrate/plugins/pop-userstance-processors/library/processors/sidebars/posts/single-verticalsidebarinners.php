@@ -2,24 +2,24 @@
 
 class UserStance_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE = 'vertical-sidebarinner-single-stance';
+    public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE = 'vertical-sidebarinner-single-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE:
                 $ret = array_merge(
                     $ret,
-                    UserStance_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_STANCE)
+                    UserStance_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_STANCE)
                 );
                 break;
         }

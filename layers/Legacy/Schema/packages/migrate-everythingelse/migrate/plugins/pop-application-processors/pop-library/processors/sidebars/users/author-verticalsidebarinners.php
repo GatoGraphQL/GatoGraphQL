@@ -2,24 +2,24 @@
 
 class PoP_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC = 'vertical-sidebarinner-author-generic';
+    public final const COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC = 'vertical-sidebarinner-author-generic';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC:
+        switch ($component[1]) {
+            case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC:
                 $ret = array_merge(
                     $ret,
-                    FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)
+                    FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_GENERICUSER)
                 );
                 break;
         }

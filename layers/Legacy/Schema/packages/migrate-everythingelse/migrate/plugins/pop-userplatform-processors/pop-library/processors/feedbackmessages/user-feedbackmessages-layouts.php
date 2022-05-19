@@ -3,21 +3,21 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES = 'layout-feedbackmessage-mypreferences';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES = 'layout-feedbackmessage-mypreferences';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES],
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Preferences saved.', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('You have successfully updated your preferences.', 'pop-coreprocessors');
                 break;

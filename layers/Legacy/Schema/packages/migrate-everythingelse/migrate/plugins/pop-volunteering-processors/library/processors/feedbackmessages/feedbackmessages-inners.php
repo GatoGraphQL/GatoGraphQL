@@ -2,24 +2,24 @@
 
 class PoP_Volunteering_Module_Processor_FeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_VOLUNTEER = 'feedbackmessageinner-volunteer';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER = 'feedbackmessageinner-volunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGEINNER_VOLUNTEER],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
-            self::MODULE_FEEDBACKMESSAGEINNER_VOLUNTEER => [PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER => [PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

@@ -2,22 +2,22 @@
 
 class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_EVERYTHING_QUICKLINKS = 'block-everything-quicklinks';
+    public final const COMPONENT_BLOCK_EVERYTHING_QUICKLINKS = 'block-everything-quicklinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_EVERYTHING_QUICKLINKS],
+            [self::class, self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
         
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_EVERYTHING_QUICKLINKS:
-                $ret[] = [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS:
+                $ret[] = [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::COMPONENT_FORM_EVERYTHINGQUICKLINKS];
                 break;
         }
     

@@ -1,24 +1,24 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor::class, PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_LINKFRAME];
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($layout = $this->getLayoutSubmodule($module)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[] = $layout;
         }
 
@@ -30,9 +30,9 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
         $ret[] = 'link';
         $ret[] = 'isLinkEmbeddable';
@@ -40,63 +40,63 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         return $ret;
     }
 
-    public function showFrameInCollapse(array $module, array &$props)
+    public function showFrameInCollapse(array $component, array &$props)
     {
         return false;
     }
 
-    public function getCollapseClass(array $module, array &$props)
+    public function getCollapseClass(array $component, array &$props)
     {
     
         // return 'collapse';
         return '';
     }
 
-    public function getLoadlinkBtnClass(array $module, array &$props)
+    public function getLoadlinkBtnClass(array $component, array &$props)
     {
         return 'btn btn-primary';
     }
-    public function getOpennewtabBtnClass(array $module, array &$props)
+    public function getOpennewtabBtnClass(array $component, array &$props)
     {
         return 'btn btn-default';
     }
-    public function printSource(array $module, array &$props)
+    public function printSource(array $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($this->printSource($module, $props)) {
+        if ($this->printSource($component, $props)) {
             $ret['print-source'] = true;
             $ret[GD_JS_TITLES]['source'] = TranslationAPIFacade::getInstance()->__('From external link:', 'pop-addpostlinks-processors');
         }
-        if ($this->showFrameInCollapse($module, $props)) {
+        if ($this->showFrameInCollapse($component, $props)) {
             $ret['show-frame-in-collapse'] = true;
-            $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($module, $props);
-            $ret[GD_JS_CLASSES]['loadlink-btn'] = $this->getLoadlinkBtnClass($module, $props);
+            $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($component, $props);
+            $ret[GD_JS_CLASSES]['loadlink-btn'] = $this->getLoadlinkBtnClass($component, $props);
             $ret[GD_JS_TITLES]['loadlink'] = TranslationAPIFacade::getInstance()->__('Load link', 'pop-addpostlinks-processors');
         }
-        $ret[GD_JS_CLASSES]['opennewtab-btn'] = $this->getOpennewtabBtnClass($module, $props);
+        $ret[GD_JS_CLASSES]['opennewtab-btn'] = $this->getOpennewtabBtnClass($component, $props);
         $ret[GD_JS_TITLES]['opennewtab'] = TranslationAPIFacade::getInstance()->__('Open link in new tab', 'pop-addpostlinks-processors');
 
-        if ($layout = $this->getLayoutSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+        if ($layout = $this->getLayoutSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($layout);
         }
         
         return $ret;
     }
 
-    // function initModelProps(array $module, array &$props) {
+    // function initModelProps(array $component, array &$props) {
 
-    //     if ($this->showFrameInCollapse($module, $props)) {
+    //     if ($this->showFrameInCollapse($component, $props)) {
 
-    //         $this->appendProp($module, $props, 'class', $this->getCollapseClass($module, $props));
+    //         $this->appendProp($component, $props, 'class', $this->getCollapseClass($component, $props));
     //     }
-    //     parent::initModelProps($module, $props);
+    //     parent::initModelProps($component, $props);
     // }
 }

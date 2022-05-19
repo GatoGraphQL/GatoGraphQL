@@ -6,38 +6,38 @@ class PoP_GenericFormsProcessors_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            $this->getDropdownSubmodules(...),
+            $this->getDropdownSubcomponents(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            $this->getSocialmediaSubmodules(...),
+            $this->getSocialmediaSubcomponents(...),
             10,
             2
         );
     }
 
-    public function getDropdownSubmodules($submodules, array $module)
+    public function getDropdownSubcomponents($subComponents, array $component)
     {
-        switch ($module[1]) {
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $submodules[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN];
+        switch ($component[1]) {
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+                $subComponents[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN];
                 break;
         }
         
-        return $submodules;
+        return $subComponents;
     }
 
-    public function getSocialmediaSubmodules($submodules, array $module)
+    public function getSocialmediaSubcomponents($subComponents, array $component)
     {
-        switch ($module[1]) {
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $submodules[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA];
+        switch ($component[1]) {
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
+                $subComponents[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA];
                 break;
         }
         
-        return $submodules;
+        return $subComponents;
     }
 }
 

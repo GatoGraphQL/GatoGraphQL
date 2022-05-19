@@ -11,12 +11,12 @@ class PoP_CommonPages_UserPlatform_Module_MainContentComponentRoutingProcessor e
     {
         $ret = array();
 
-        $modules = array(
-            POP_COMMONPAGES_PAGE_ACCOUNTFAQ => [GD_CommonPages_Module_Processor_CustomBlocks::class, GD_CommonPages_Module_Processor_CustomBlocks::MODULE_BLOCK_ACCOUNTFAQ],
+        $components = array(
+            POP_COMMONPAGES_PAGE_ACCOUNTFAQ => [GD_CommonPages_Module_Processor_CustomBlocks::class, GD_CommonPages_Module_Processor_CustomBlocks::COMPONENT_BLOCK_ACCOUNTFAQ],
         );
-        foreach ($modules as $page => $module) {
+        foreach ($components as $page => $component) {
             $ret[PageRequestNature::PAGE][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'routing' => [
                         'queried-object-id' => $page,

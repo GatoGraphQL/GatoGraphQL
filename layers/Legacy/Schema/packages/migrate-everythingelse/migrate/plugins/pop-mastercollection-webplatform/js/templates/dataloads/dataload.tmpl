@@ -1,5 +1,5 @@
 {{#unless feedback.do-not-render}}
-	<div class="{{class}} {{runtime-class}} {{feedback.class}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-moduleoutputname="{{moduleoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="{{class}} {{runtime-class}} {{feedback.class}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-componentoutputname="{{componentoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 
 		{{#if show-filter}}
 			{{#withModule . "filter"}}		
@@ -17,7 +17,7 @@
 
 		{{#if feedbackmessages-top}}
 			<div class="dataload-feedbackmessage">
-				{{#each submoduleoutputnames.feedbackmessages}}
+				{{#each subcomponentoutputnames.feedbackmessages}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}
@@ -26,9 +26,9 @@
 		{{/if}}
 
 		{{!This will be empty for BlockGroup}}
-		{{#if submoduleoutputnames.inners}}
+		{{#if subcomponentoutputnames.inners}}
 			<div class="dataload-inners clearfix">
-				{{#each submoduleoutputnames.inners}}
+				{{#each subcomponentoutputnames.inners}}
 					{{#withModule ../. this}}
 						{{enterModule ../../. dbKey=../../bs.dbkeys.id dbObjectIDs=../../bs.dbobjectids}}
 					{{/withModule}}
@@ -38,7 +38,7 @@
 
 		{{#if feedbackmessages-bottom}}
 			<div class="dataload-feedbackmessage">
-				{{#each submoduleoutputnames.feedbackmessages}}
+				{{#each subcomponentoutputnames.feedbackmessages}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}

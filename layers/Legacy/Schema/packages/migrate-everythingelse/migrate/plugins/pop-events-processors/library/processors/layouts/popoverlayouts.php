@@ -2,57 +2,57 @@
 
 class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_PopoverLayoutsBase
 {
-    public final const MODULE_LAYOUT_POPOVER_EVENT = 'layout-popover-event';
+    public final const COMPONENT_LAYOUT_POPOVER_EVENT = 'layout-popover-event';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POPOVER_EVENT],
+            [self::class, self::COMPONENT_LAYOUT_POPOVER_EVENT],
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POPOVER_EVENT:
-                return [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POPOVER_EVENT:
+                return [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER];
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubcomponent($component);
     }
 
-    public function getLayoutContentSubmodule(array $module)
+    public function getLayoutContentSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POPOVER_EVENT:
-                return [PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::MODULE_LAYOUTCALENDAR_CONTENT_POPOVER];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POPOVER_EVENT:
+                return [PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::COMPONENT_LAYOUTCALENDAR_CONTENT_POPOVER];
         }
 
-        return parent::getLayoutContentSubmodule($module);
+        return parent::getLayoutContentSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POPOVER_EVENT:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POPOVER_EVENT:
                 // Use no Author popover
-                $this->appendProp($module, $props, 'class', 'pop-elem');
+                $this->appendProp($component, $props, 'class', 'pop-elem');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    // function getModulePath(array $module, array &$props) {
+    // function getComponentPath(array $component, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_LAYOUT_POPOVER_EVENT:
+    //         case self::COMPONENT_LAYOUT_POPOVER_EVENT:
 
-    //             return $module;
+    //             return $component;
     //     }
 
-    //     return parent::getModulePath($module, $props);
+    //     return parent::getComponentPath($component, $props);
     // }
 }
 

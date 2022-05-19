@@ -2,15 +2,15 @@
 
 abstract class PoP_Module_Processor_StanceReferencesScriptFrameLayoutsBase extends PoP_Module_Processor_ScriptFrameLayoutsBase
 {
-    public function doAppend(array $module)
+    public function doAppend(array $component)
     {
         return true;
     }
 
-    public function getScriptSubmodule(array $module)
+    public function getScriptSubcomponent(array $component)
     {
-        return $this->doAppend($module) ? 
-        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_STANCES] : 
-        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_STANCESEMPTY];
+        return $this->doAppend($component) ? 
+        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_STANCES] : 
+        	[UserStance_Module_Processor_ScriptsLayouts::class, UserStance_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_STANCESEMPTY];
     }
 }

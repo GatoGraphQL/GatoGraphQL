@@ -1,5 +1,5 @@
 {{#each feedback.msgs}}
-	{{#each ../submoduleoutputnames.layouts}}
+	{{#each ../subcomponentoutputnames.layouts}}
 		{{#withModule ../../. this}}
 			{{enterModule ../../../. feedbackObject=../../.}}
 		{{/withModule}}

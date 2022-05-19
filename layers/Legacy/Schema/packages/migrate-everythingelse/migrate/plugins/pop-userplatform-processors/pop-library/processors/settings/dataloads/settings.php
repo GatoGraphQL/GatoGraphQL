@@ -5,74 +5,74 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_SETTINGS = 'dataload-settings';
+    public final const COMPONENT_DATALOAD_SETTINGS = 'dataload-settings';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_SETTINGS],
+            [self::class, self::COMPONENT_DATALOAD_SETTINGS],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SETTINGS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SETTINGS:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($module, $props);
+        return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SETTINGS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SETTINGS:
                 return $this->instanceManager->getInstance(SettingsMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SETTINGS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SETTINGS:
                 return $this->instanceManager->getInstance(RedirectQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SETTINGS:
-                $ret[] = [PoP_Module_Processor_SettingsForms::class, PoP_Module_Processor_SettingsForms::MODULE_FORM_SETTINGS];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SETTINGS:
+                $ret[] = [PoP_Module_Processor_SettingsForms::class, PoP_Module_Processor_SettingsForms::COMPONENT_FORM_SETTINGS];
                 break;
         }
 
         return $ret;
     }
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackMessageComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SETTINGS:
-                return [PoP_Module_Processor_SettingsFeedbackMessages::class, PoP_Module_Processor_SettingsFeedbackMessages::MODULE_FEEDBACKMESSAGE_SETTINGS];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SETTINGS:
+                return [PoP_Module_Processor_SettingsFeedbackMessages::class, PoP_Module_Processor_SettingsFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_SETTINGS];
         }
 
-        return parent::getFeedbackmessageModule($module);
+        return parent::getFeedbackMessageComponent($component);
     }
 }
 

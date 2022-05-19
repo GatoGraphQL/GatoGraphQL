@@ -4,10 +4,10 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManager;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
-use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\Engine\ComponentFilters\MainContentComponent;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPCore_ModuleManager_Utils
@@ -19,12 +19,12 @@ class PoPCore_ModuleManager_Utils
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DBItemListDataStructureFormatter */
         $dbItemListDataStructureFormatter = $instanceManager->getInstance(DBItemListDataStructureFormatter::class);
-        /** @var MainContentModule */
-        $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
+        /** @var MainContentComponent */
+        $mainContentComponent = $instanceManager->getInstance(MainContentComponent::class);
         $args = [
             Params::VERSION => ApplicationInfoFacade::getInstance()->getVersion(),
             Params::OUTPUT => Outputs::JSON,
-            Params::MODULEFILTER => $mainContentModule->getName(),
+            Params::COMPONENTFILTER => $mainContentComponent->getName(),
             Params::DATA_OUTPUT_ITEMS => [
                 DataOutputItems::DATABASES,
             ],

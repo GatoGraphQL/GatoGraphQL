@@ -6,24 +6,24 @@ class GetPoPDemo_URE_GroupHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
-            $this->getAuthortopWidgetSubmodules(...),
+            'PoP_Module_Processor_CustomGroups:components:author_widgetarea',
+            $this->getAuthortopWidgetSubcomponents(...),
             0
         );
     }
 
-    public function getAuthortopWidgetSubmodules($modules)
+    public function getAuthortopWidgetSubcomponents($components)
     {
 
         // Add the members only for communities
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsCommunity($author)) {
             if (defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {
-                $modules[] = [PoP_UserCommunities_Module_Processor_CustomSectionBlocks::class, PoP_UserCommunities_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL];
+                $components[] = [PoP_UserCommunities_Module_Processor_CustomSectionBlocks::class, PoP_UserCommunities_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL];
             }
         }
         
-        return $modules;
+        return $components;
     }
 }
 

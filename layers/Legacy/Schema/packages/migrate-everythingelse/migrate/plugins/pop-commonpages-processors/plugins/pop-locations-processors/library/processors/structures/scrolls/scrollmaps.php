@@ -2,27 +2,27 @@
 
 class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLL_WHOWEARE_MAP = 'scroll-whoweare-map';
+    public final const COMPONENT_SCROLL_WHOWEARE_MAP = 'scroll-whoweare-map';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_WHOWEARE_MAP],
+            [self::class, self::COMPONENT_SCROLL_WHOWEARE_MAP],
         );
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_WHOWEARE_MAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_WHOWEARE_MAP],
+            self::COMPONENT_SCROLL_WHOWEARE_MAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_MAP],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

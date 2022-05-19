@@ -11,11 +11,11 @@ class PoPTheme_Wassup_TrendingTags_Module_SideInfoContentPageSectionComponentRou
     {
         $ret = array();
 
-        $modules = array(
-            POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR],
+        $components = array(
+            POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

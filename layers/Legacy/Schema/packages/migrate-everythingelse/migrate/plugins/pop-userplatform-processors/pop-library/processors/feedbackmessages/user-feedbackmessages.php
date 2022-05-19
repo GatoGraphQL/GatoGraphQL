@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_UserFeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_MYPREFERENCES = 'feedbackmessage-mypreferences';
+    public final const COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES = 'feedbackmessage-mypreferences';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_MYPREFERENCES],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_MYPREFERENCES => [PoP_Module_Processor_UserFeedbackMessageInners::class, PoP_Module_Processor_UserFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_MYPREFERENCES],
+            self::COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES => [PoP_Module_Processor_UserFeedbackMessageInners::class, PoP_Module_Processor_UserFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_MYPREFERENCES],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

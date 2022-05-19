@@ -80,7 +80,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-            return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_SINGLE];
+            return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::COMPONENT_SUBMENU_SINGLE];
         }
 
         return null;
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         // Only filter if the 'author' attribute has not been set yet. If it has been set, it must've been done by the filter,
         // which will allow only members belonging to the community. So use that one instead
         // if (!$ret['author']) {
-        $authors = \PoP\Root\App::applyFilters('pop_module:dataload_query_args:authors', array($author));
+        $authors = \PoP\Root\App::applyFilters('pop_component:dataload_query_args:authors', array($author));
         $ret['authors'] = $authors;
         // }
     }

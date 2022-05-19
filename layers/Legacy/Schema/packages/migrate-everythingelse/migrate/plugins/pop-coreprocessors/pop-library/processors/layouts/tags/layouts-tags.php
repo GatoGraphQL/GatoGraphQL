@@ -2,25 +2,25 @@
 
 class PoP_Module_Processor_TagLayouts extends PoP_Module_Processor_TagLayoutsBase
 {
-    public final const MODULE_LAYOUT_TAG = 'layout-tag';
-    public final const MODULE_LAYOUT_TAGH4 = 'layout-tagh4';
+    public final const COMPONENT_LAYOUT_TAG = 'layout-tag';
+    public final const COMPONENT_LAYOUT_TAGH4 = 'layout-tagh4';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_TAG],
-            [self::class, self::MODULE_LAYOUT_TAGH4],
+            [self::class, self::COMPONENT_LAYOUT_TAG],
+            [self::class, self::COMPONENT_LAYOUT_TAGH4],
         );
     }
 
-    public function getHtmlTag(array $module, array &$props)
+    public function getHtmlTag(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_TAGH4:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_TAGH4:
                 return 'h4';
         }
     
-        return parent::getHtmlTag($module, $props);
+        return parent::getHtmlTag($component, $props);
     }
 }
 

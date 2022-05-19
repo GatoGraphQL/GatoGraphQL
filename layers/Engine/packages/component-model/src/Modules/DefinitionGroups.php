@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\Modules;
 
 class DefinitionGroups
 {
-    const MODULES = 'modules';
+    const COMPONENTS = 'components';
 }

@@ -12,12 +12,12 @@ class PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionComponentRout
         $ret = array();
 
         // Single
-        $routemodules = array(
-            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT],
+        $routeComponents = array(
+            POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routeComponents as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

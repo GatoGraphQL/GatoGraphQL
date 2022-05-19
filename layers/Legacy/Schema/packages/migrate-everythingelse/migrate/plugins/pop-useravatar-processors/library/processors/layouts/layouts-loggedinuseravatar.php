@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_LoggedInUserAvatars extends PoP_Module_Processor_LoggedInUserAvatarsBase
 {
-    public final const MODULE_LAYOUT_LOGGEDINUSERAVATAR = 'layout-loggedinuseravatar';
+    public final const COMPONENT_LAYOUT_LOGGEDINUSERAVATAR = 'layout-loggedinuseravatar';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_LOGGEDINUSERAVATAR],
+            [self::class, self::COMPONENT_LAYOUT_LOGGEDINUSERAVATAR],
         );
     }
 }

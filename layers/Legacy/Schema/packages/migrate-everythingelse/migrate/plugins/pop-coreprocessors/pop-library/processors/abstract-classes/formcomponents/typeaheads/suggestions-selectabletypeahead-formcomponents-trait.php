@@ -1,20 +1,20 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 trait SuggestionsSelectableTypeaheadFormComponentsTrait
 {
-    protected function enableSuggestions(array $module)
+    protected function enableSuggestions(array $component)
     {
         return false;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->enableSuggestions($module)) {
-            if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($module)) {
+        if ($this->enableSuggestions($component)) {
+            if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                 $this->addJsmethod($ret, 'renderDBObjectLayoutFromSuggestion', 'suggestions');
             }
         }
@@ -22,12 +22,12 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        if ($this->enableSuggestions($module)) {
-            if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($module)) {
+        if ($this->enableSuggestions($component)) {
+            if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                 $ret['renderDBObjectLayoutFromSuggestion']['trigger-layout'] = $suggestions_layout;
             }
         }
@@ -35,12 +35,12 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getExtraTemplateResources(array $module, array &$props): array
+    public function getExtraTemplateResources(array $component, array &$props): array
     {
-        $ret = parent::getExtraTemplateResources($module, $props);
+        $ret = parent::getExtraTemplateResources($component, $props);
 
-        if ($this->enableSuggestions($module)) {
-            if ($this->getSuggestionsLayoutSubmodule($module)) {
+        if ($this->enableSuggestions($component)) {
+            if ($this->getSuggestionsLayoutSubcomponent($component)) {
                 $ret['extras'] = array(
                     [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_EXTENSIONTYPEAHEADSUGGESTIONS],
                 );
@@ -50,19 +50,19 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getSuggestionsLayoutSubmodule(array $module)
+    public function getSuggestionsLayoutSubcomponent(array $component)
     {
         return null;
     }
-    public function getSuggestionsFontawesome(array $module, array &$props)
+    public function getSuggestionsFontawesome(array $component, array &$props)
     {
         return null;
     }
-    public function getSuggestionClass(array $module, array &$props)
+    public function getSuggestionClass(array $component, array &$props)
     {
         return 'btn btn-link btn-compact';
     }
-    public function getSuggestionsTitle(array $module, array &$props)
+    public function getSuggestionsTitle(array $component, array &$props)
     {
         return sprintf(
             '<hr/><div class="suggestions-title"><label>%s</label></div>',
@@ -70,12 +70,12 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($this->enableSuggestions($module)) {
-            if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($module)) {
+        if ($this->enableSuggestions($component)) {
+            if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                 $ret[] = $suggestions_layout;
             }
         }
@@ -83,43 +83,43 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($this->enableSuggestions($module)) {
+        if ($this->enableSuggestions($component)) {
             // No suggestions by default. It's overridable from above
-            $this->setProp($module, $props, 'suggestions', array());
+            $this->setProp($component, $props, 'suggestions', array());
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->enableSuggestions($module)) {
-            if ($suggestions = $this->getProp($module, $props, 'suggestions')) {
+        if ($this->enableSuggestions($component)) {
+            if ($suggestions = $this->getProp($component, $props, 'suggestions')) {
                 $ret['suggestions'] = $suggestions;
 
-                if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($module)) {
-                    $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
+                    $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($suggestions_layout);
 
                     // Load the typeResolver from the trigger, for the suggestions
-                    $trigger_layout = $this->getTriggerLayoutSubmodule($module);
+                    $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
-                    $triggerModuleProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
-                    $suggestions_typeResolver = $triggerModuleProcessor->getTriggerRelationalTypeResolver($trigger_layout);
+                    $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);
+                    $suggestions_typeResolver = $triggerComponentProcessor->getTriggerRelationalTypeResolver($trigger_layout);
                     $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeOutputDBKey();
                 }
-                if ($suggestions_fontawesome = $this->getSuggestionsFontawesome($module, $props)) {
+                if ($suggestions_fontawesome = $this->getSuggestionsFontawesome($component, $props)) {
                     $ret['suggestions-fontawesome'] = $suggestions_fontawesome;
                 }
-                if ($suggestion_class = $this->getSuggestionClass($module, $props)) {
+                if ($suggestion_class = $this->getSuggestionClass($component, $props)) {
                     $ret[GD_JS_CLASSES]['suggestion'] = $suggestion_class;
                 }
-                if ($suggestions_title = $this->getSuggestionsTitle($module, $props)) {
+                if ($suggestions_title = $this->getSuggestionsTitle($component, $props)) {
                     $ret[GD_JS_TITLES]['suggestions'] = $suggestions_title;
                 }
             }
@@ -128,23 +128,23 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getModelSupplementaryDBObjectData(array $module, array &$props): array
+    public function getModelSupplementaryDBObjectData(array $component, array &$props): array
     {
 
         // Please notice: the IDs to be extended here are permanent, so they can be saved in the configuration for the data-settings
         // If they were not (eg: they are obtained from the URL) then they should be placed under function `getMutableonrequestSupplementaryDbobjectdata` instead
-        if ($this->enableSuggestions($module)) {
+        if ($this->enableSuggestions($component)) {
             // Pre-loaded suggestions, allowing the user to select the locations easily
-            if ($suggestions = $this->getProp($module, $props, 'suggestions')) {
-                if ($trigger_layout = $this->getTriggerLayoutSubmodule($module)) {
-                    $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            if ($suggestions = $this->getProp($component, $props, 'suggestions')) {
+                if ($trigger_layout = $this->getTriggerLayoutSubcomponent($component)) {
+                    $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'
-                    $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-                    $data_properties = $moduleprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
+                    $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+                    $data_properties = $componentprocessor_manager->getProcessor($trigger_layout)->getDatasetcomponentTreeSectionFlattenedDataFields($trigger_layout, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
-                    $triggerModuleProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
-                    $suggestions_typeResolver = $triggerModuleProcessor->getTriggerRelationalTypeResolver($trigger_layout);
+                    $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);
+                    $suggestions_typeResolver = $triggerComponentProcessor->getTriggerRelationalTypeResolver($trigger_layout);
 
                     // Extend the dataload ids
                     return array(
@@ -158,6 +158,6 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
             }
         }
 
-        return parent::getModelSupplementaryDBObjectData($module, $props);
+        return parent::getModelSupplementaryDBObjectData($component, $props);
     }
 }

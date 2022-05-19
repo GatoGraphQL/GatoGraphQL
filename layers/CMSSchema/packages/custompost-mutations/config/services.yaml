@@ -7,8 +7,8 @@ services:
     PoPCMSSchema\CustomPostMutations\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPCMSSchema\CustomPostMutations\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\CustomPostMutations\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

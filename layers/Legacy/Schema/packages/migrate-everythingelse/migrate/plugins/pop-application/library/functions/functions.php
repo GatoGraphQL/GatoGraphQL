@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\Constants;
+use PoP\ComponentModel\ComponentProcessors\Constants;
 
 \PoP\Root\App::addFilter(
 	Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS, 

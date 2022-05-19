@@ -6,27 +6,27 @@ class PoPTheme_Wassup_EM_SidebarHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
-            $this->getSidebarSubmodules(...),
+            $this->getSidebarSubcomponents(...),
             0,
             4
         );
     }
 
-    public function getSidebarSubmodules($modules, $screengroup, $screen, array $module)
+    public function getSidebarSubcomponents($components, $screengroup, $screen, array $component)
     {
 
         // Add the Events Calendar to all Groups in the Sideinfo
         $includeScreengroups = \PoP\Root\App::applyFilters(
-            'PoPTheme_Wassup_EM_SidebarHooks:sidebar_modules:includeScreengroups',
+            'PoPTheme_Wassup_EM_SidebarHooks:sidebar_components:includeScreengroups',
             array(
                 POP_SCREENGROUP_CONTENTREAD,
             )
         );
         if (in_array($screengroup, $includeScreengroups)/* && !in_array($screen, $exclude_screens)*/) {
-            $modules[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS];
+            $components[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS];
         }
 
-        return $modules;
+        return $components;
     }
 }
 

@@ -11,13 +11,13 @@ class PoP_EventsCreation_Bootstrap_Module_MainPageSectionComponentRoutingProcess
     {
         $ret = array();
 
-        $routemodules = array(
-            POP_EVENTSCREATION_ROUTE_MYEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYEVENTS],
-            POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYPASTEVENTS],
+        $routeComponents = array(
+            POP_EVENTSCREATION_ROUTE_MYEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYEVENTS],
+            POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYPASTEVENTS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

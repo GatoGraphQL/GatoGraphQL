@@ -3,7 +3,7 @@
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
@@ -20,9 +20,9 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_ResourceLoaderProcessorUtils {
 
-    public static function isLoadingSite($modulefilter) {
+    public static function isLoadingSite($componentFilter) {
 
-        return is_null($modulefilter);
+        return is_null($componentFilter);
     }
 
     public static function deleteEntries($delete_current_mapping) {
@@ -105,8 +105,8 @@ class PoP_ResourceLoaderProcessorUtils {
         $route_formats = array();
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        $componentroutingprocessors = $pop_module_componentroutingprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $componentroutingprocessors = $pop_component_componentroutingprocessor_manager->getProcessors(POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         foreach ($componentroutingprocessors as $componentroutingprocessor) {
             foreach ($componentroutingprocessor->getStatePropertiesToSelectComponentByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
@@ -139,7 +139,7 @@ class PoP_ResourceLoaderProcessorUtils {
         return $route_formats;
     }
 
-    public static function addResourcesFromSettingsprocessors($modulefilter, &$resources, $nature, $ids = array(), $merge = false, $options = array()) {
+    public static function addResourcesFromSettingsprocessors($componentFilter, &$resources, $nature, $ids = array(), $merge = false, $options = array()) {
 
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
         $vars = &ApplicationState::$vars;
@@ -178,7 +178,7 @@ class PoP_ResourceLoaderProcessorUtils {
                             $item_options['is-default-route'] = true;
                         }
                     }
-                    self::addResourcesFromCurrentVars($modulefilter, $resources, $nature, $ids, $merge, $components, $item_options);
+                    self::addResourcesFromCurrentVars($componentFilter, $resources, $nature, $ids, $merge, $components, $item_options);
 
                     // Restore the original $vars['layouts']
                     if ($original_layouts) {
@@ -190,7 +190,7 @@ class PoP_ResourceLoaderProcessorUtils {
         }
     }
 
-    public static function calculateResources($modulefilter, $template_resources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options = array()) {
+    public static function calculateResources($componentFilter, $template_resources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options = array()) {
 
         global $pop_jsresourceloaderprocessor_manager;
 
@@ -208,7 +208,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $critical_resources = $noncritical_resources = array();
 
         // Add the initial resources only when doing "loading-site". When doing "fetching-json" no need, since those assets will have been already loaded by then
-        $loadingSite = self::isLoadingSite($modulefilter);
+        $loadingSite = self::isLoadingSite($componentFilter);
         $pop_jsresourceloaderprocessor_manager->addResourcesFromJsmethods($critical_resources, $critical_methods, $template_resources, $loadingSite);
 
         // Add the dependencies for the template resources also
@@ -258,7 +258,7 @@ class PoP_ResourceLoaderProcessorUtils {
         }
     }
 
-    public static function addResourcesFromCurrentVars($modulefilter, &$resources, $nature, $ids = array(), $merge = false, $components = array(), $options = array()) {
+    public static function addResourcesFromCurrentVars($componentFilter, &$resources, $nature, $ids = array(), $merge = false, $components = array(), $options = array()) {
 
         // Keep the original values in the $vars, since they'll need to be changed
         // to pretend we are in a different $request
@@ -274,7 +274,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // or we will not be able to get back the specific bundle(group)s for the currently visited request
         // (this is the case when doing
         // PoP_ResourceLoader_ServerUtils::getEnqueuefileType() == 'bundle' or 'bundlegroup')
-        $loadingSite = self::isLoadingSite($modulefilter);
+        $loadingSite = self::isLoadingSite($componentFilter);
         if ($loadingSite) {
             $merge = false;
         }
@@ -289,7 +289,7 @@ class PoP_ResourceLoaderProcessorUtils {
             array(
                 'nature',
                 'output',
-                'modulefilter',
+                'componentFilter',
                 // Variables over which the composition of different blocks depends
                 'loading-site',
                 'fetching-site',
@@ -359,20 +359,20 @@ class PoP_ResourceLoaderProcessorUtils {
         // resources when first loading the website
         if ($loadingSite) {
             $vars['output'] = \PoP\ComponentModel\Constants\Outputs::HTML;
-            $vars['modulefilter'] = null;
+            $vars['componentFilter'] = null;
             $vars['loading-site'] = true;
             $vars['fetching-site'] = true;
         } else {
             $vars['output'] = \PoP\ComponentModel\Constants\Outputs::JSON;
-            $vars['modulefilter'] = $modulefilter;
+            $vars['componentFilter'] = $componentFilter;
             $vars['loading-site'] = false;
             $vars['fetching-site'] = false;
         }
         $vars['nature'] = $nature;
         $vars['dataoutputitems'] = array(
             \PoP\ComponentModel\Constants\DataOutputItems::META,
-            \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
-            \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+            \PoP\ConfigurationComponentModel\Constants\DataOutputItems::COMPONENTSETTINGS,
+            \PoP\ComponentModel\Constants\DataOutputItems::COMPONENT_DATA,
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );
@@ -410,10 +410,10 @@ class PoP_ResourceLoaderProcessorUtils {
                 $paths[] = $path;
 
                 // Calculate and save the resources
-                $resources[$path][$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
+                $resources[$path][$key] = self::getResourcesFromCurrentVars($componentFilter, $options);
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_component_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == RequestNature::GENERIC) {
 
@@ -441,12 +441,12 @@ class PoP_ResourceLoaderProcessorUtils {
                 $paths[] = $path;
 
                 // Calculate and save the resources
-                $resources[$path][$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
+                $resources[$path][$key] = self::getResourcesFromCurrentVars($componentFilter, $options);
 
                 $vars['route'] = $current_route;
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_component_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == CustomPostRequestNature::CUSTOMPOST) {
 
@@ -472,12 +472,12 @@ class PoP_ResourceLoaderProcessorUtils {
                 $path = GeneralUtils::maybeAddTrailingSlash(\PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true));
                 $paths[] = $path;
 
-                self::addResourcesFromCurrentLoop($modulefilter, $resources[$path], $key, $merge, $options);
+                self::addResourcesFromCurrentLoop($componentFilter, $resources[$path], $key, $merge, $options);
 
                 // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromAppState() doesn't have all the information needed
                 // // Eg: because the categories are not in $vars, it can't tell the difference between past and future events,
                 // // or from 2 posts with different category
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_component_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == UserRequestNature::USER) {
 
@@ -498,10 +498,10 @@ class PoP_ResourceLoaderProcessorUtils {
                     $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
                 }
 
-                self::addResourcesFromCurrentLoop($modulefilter, $resources, $key, $merge, $options);
+                self::addResourcesFromCurrentLoop($componentFilter, $resources, $key, $merge, $options);
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_component_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == TagRequestNature::TAG) {
 
@@ -524,10 +524,10 @@ class PoP_ResourceLoaderProcessorUtils {
                     $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
                 }
 
-                self::addResourcesFromCurrentLoop($modulefilter, $resources, $key, $merge, $options);
+                self::addResourcesFromCurrentLoop($componentFilter, $resources, $key, $merge, $options);
 
                 // // Reset the cache
-                // $pop_module_processor_runtimecache->deleteCache();
+                // $pop_component_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == RequestNature::HOME) {
 
@@ -542,10 +542,10 @@ class PoP_ResourceLoaderProcessorUtils {
             }
 
             // Calculate and save the resources
-            $resources[$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
+            $resources[$key] = self::getResourcesFromCurrentVars($componentFilter, $options);
 
             // // Reset the cache
-            // $pop_module_processor_runtimecache->deleteCache();
+            // $pop_component_processor_runtimecache->deleteCache();
         } elseif ($nature == RequestNature::NOTFOUND) {
 
             $vars['routing'] = [];
@@ -559,10 +559,10 @@ class PoP_ResourceLoaderProcessorUtils {
             }
 
             // Calculate and save the resources
-            $resources[$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
+            $resources[$key] = self::getResourcesFromCurrentVars($componentFilter, $options);
 
             // // Reset the cache
-            // $pop_module_processor_runtimecache->deleteCache();
+            // $pop_component_processor_runtimecache->deleteCache();
         }
 
         // If doing JSON, then we may need to duplicate entries.
@@ -661,13 +661,13 @@ class PoP_ResourceLoaderProcessorUtils {
         ApplicationState::augmentVarsProperties();
 
         // // Set the runtimecache once again to operate with $request
-        // $pop_module_processor_runtimecache->setUseVarsIdentifier(false);
+        // $pop_component_processor_runtimecache->setUseVarsIdentifier(false);
     }
 
-    protected static function addResourcesFromCurrentLoop($modulefilter, &$resources, $key, $merge = false, $options = array()) {
+    protected static function addResourcesFromCurrentLoop($componentFilter, &$resources, $key, $merge = false, $options = array()) {
 
         // Calculate and save the resources
-        $item_resources = self::getResourcesFromCurrentVars($modulefilter, $options);
+        $item_resources = self::getResourcesFromCurrentVars($componentFilter, $options);
         if ($merge) {
 
             $resources[$key] = $resources[$key] ?? array();
@@ -685,10 +685,10 @@ class PoP_ResourceLoaderProcessorUtils {
         }
     }
 
-    public static function getResourcesFromCurrentVars($modulefilter, $options = array()) {
+    public static function getResourcesFromCurrentVars($componentFilter, $options = array()) {
 
         global $pop_resourcemoduledecoratorprocessor_manager;
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Get the current model_instance_id where to store $noncritical_resources
         $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
@@ -704,20 +704,20 @@ class PoP_ResourceLoaderProcessorUtils {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,
             // and then visiting the 2nd post will not have its needed resource loaded
-            $entry_model_props = $engine->getModelPropsModuletree($entryComponent);
+            $entry_model_props = $engine->getModelPropsComponentTree($entryComponent);
         }
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
         $methods = array();
-        $entry_processor = $moduleprocessor_manager->getProcessor($entryComponent);
+        $entry_processor = $componentprocessor_manager->getProcessor($entryComponent);
         $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
-        $templateResources = $entry_processor->getTemplateResourcesMergedmoduletree($entryComponent, $entry_model_props);
+        $templateResources = $entry_processor->getTemplateResourcesMergedComponentTree($entryComponent, $entry_model_props);
 
         // We also need to get the dynamic-templates and save it on the vars cache.
         // It will be needed from there when doing `function isDefer(array $resource, $model_instance_id)`
-        if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedmoduletree($entryComponent, $entry_model_props)) {
+        if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedComponentTree($entryComponent, $entry_model_props)) {
             $memorymanager = TransientCacheManagerFacade::getInstance();
             $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources);
         }
@@ -726,25 +726,25 @@ class PoP_ResourceLoaderProcessorUtils {
         // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed
         // Comment Leo 21/11/2017: when switching from all methods to critical/noncritical ones, I dropped the array_values() out from $methods,
         // and added it when calculating $(non)critical_methods
-        $loadingSite = self::isLoadingSite($modulefilter);
-        $methods = self::getJsmethodsFromModule($loadingSite, $entryComponent, $entry_model_props);
+        $loadingSite = self::isLoadingSite($componentFilter);
+        $methods = self::getJsmethodsFromComponent($loadingSite, $entryComponent, $entry_model_props);
         $critical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_CRITICAL]);
         $noncritical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_NONCRITICAL]);
 
         // Get all the resources the module is dependent on. Eg: inline CSS styles
         // $modules_resources = array_values(array_unique(arrayFlatten(array_values($entry_processorresourcedecorator->getModulesResources($entryComponent, $entry_model_props)))));
-        $modules_resources = $entry_processorresourcedecorator->getResourcesMergedmoduletree($entryComponent, $entry_model_props);
+        $modules_resources = $entry_processorresourcedecorator->getResourcesMergedComponentTree($entryComponent, $entry_model_props);
 
         // Finally, merge all the template and JS resources together
-        return self::calculateResources($modulefilter, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
+        return self::calculateResources($componentFilter, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
     }
 
-    public static function getJsmethodsFromModule($addInitial, $entryComponent, $entry_model_props) {
+    public static function getJsmethodsFromComponent($addInitial, $entryComponent, $entry_model_props) {
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($entryComponent);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $processor = $componentprocessor_manager->getProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
-        $blockJSMethods = $processor->getJsmethodsModuletree($entryComponent, $entry_model_props);
+        $blockJSMethods = $processor->getJsmethodsComponentTree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);
     }
 
@@ -771,7 +771,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Add all the block methods
         if ($blockJSMethods) {
             foreach ($blockJSMethods as $pageSection => $blockModuleMethods) {
-                foreach ($blockModuleMethods as $module => $moduleMethods) {
+                foreach ($blockModuleMethods as $component => $moduleMethods) {
                     self::addBlockJsmethods($critical_js_methods, $moduleMethods, POP_PROGRESSIVEBOOTING_CRITICAL);
                     self::addBlockJsmethods($noncritical_js_methods, $moduleMethods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
                 }
@@ -795,7 +795,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function addPagesectionJsmethods(&$js_methods, $moduleMethods, $priority) {
 
-        foreach ($moduleMethods as $module => $priorityGroupMethods) {
+        foreach ($moduleMethods as $component => $priorityGroupMethods) {
             if ($groupMethods = $priorityGroupMethods[$priority] ?? null) {
                 foreach ($groupMethods as $group => $methods) {
                     foreach ($methods as $method) {

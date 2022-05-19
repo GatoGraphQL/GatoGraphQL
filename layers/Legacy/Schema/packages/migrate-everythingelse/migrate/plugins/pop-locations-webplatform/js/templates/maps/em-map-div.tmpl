@@ -1,1 +1,1 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="pop-map {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>{{#each submoduleoutputnames.inners}}{{#withModule ../. this}}{{enterModule ../../.}}{{/withModule}}{{/each}}</div>
+<div {{#generateId}}{{id}}{{/generateId}} class="pop-map {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>{{#each subcomponentoutputnames.inners}}{{#withModule ../. this}}{{enterModule ../../.}}{{/withModule}}{{/each}}</div>

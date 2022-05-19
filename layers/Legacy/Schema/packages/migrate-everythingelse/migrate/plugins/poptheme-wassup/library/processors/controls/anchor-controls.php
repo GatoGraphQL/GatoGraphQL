@@ -1,170 +1,170 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO = 'anchorcontrol-togglequickviewinfo';
-    public final const MODULE_ANCHORCONTROL_TOGGLESIDEINFO = 'anchorcontrol-togglesideinfo';
-    public final const MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS = 'anchorcontrol-togglesideinfoxs';
-    public final const MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK = 'anchorcontrol-togglesideinfoxs-back';
-    public final const MODULE_ANCHORCONTROL_TOGGLETABS = 'anchorcontrol-toggletabs';
-    public final const MODULE_ANCHORCONTROL_TOGGLETABSXS = 'anchorcontrol-toggletabsxs';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO = 'anchorcontrol-togglequickviewinfo';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO = 'anchorcontrol-togglesideinfo';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS = 'anchorcontrol-togglesideinfoxs';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK = 'anchorcontrol-togglesideinfoxs-back';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLETABS = 'anchorcontrol-toggletabs';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLETABSXS = 'anchorcontrol-toggletabsxs';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABS],
-            [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABSXS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS],
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
                 return TranslationAPIFacade::getInstance()->__('Toggle sidebar', 'pop-coreprocessors');
 
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return TranslationAPIFacade::getInstance()->__('Go back', 'pop-coreprocessors');
 
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 return TranslationAPIFacade::getInstance()->__('Toggle tabs', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($component, $props);
     }
-    public function getIcon(array $module)
+    public function getIcon(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
                 return 'glyphicon-arrow-right';
 
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return 'glyphicon-arrow-left';
 
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 return 'glyphicon-time';
         }
 
-        return parent::getIcon($module);
+        return parent::getIcon($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
                 $this->mergeProp(
-                    $module,
+                    $component,
                     $props,
                     'params',
                     array(
                         'data-toggle' => 'offcanvas-toggle',
-                        'data-target' => '#'.POP_MODULEID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO,
+                        'data-target' => '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_QUICKVIEWSIDEINFO,
                     )
                 );
                 break;
 
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 $mode = '';
                 $classs = '';
                 $xs = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS],
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
                 );
                 $tablet = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO],
                 );
-                if (in_array($module, $xs)) {
+                if (in_array($component, $xs)) {
                     $mode = 'xs';
                     $classs = 'hidden-sm hidden-md hidden-lg';
-                } elseif (in_array($module, $tablet)) {
+                } elseif (in_array($component, $tablet)) {
                     $classs = 'hidden-xs';
                 }
 
                 $back = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
                 );
-                if (in_array($module, $back)) {
+                if (in_array($component, $back)) {
                     $classs .= ' btn btn-lg btn-link';
                 }
 
-                $this->appendProp($module, $props, 'class', $classs);
+                $this->appendProp($component, $props, 'class', $classs);
                 $this->mergeProp(
-                    $module,
+                    $component,
                     $props,
                     'params',
                     array(
                         'data-toggle' => 'offcanvas-toggle',
-                        'data-target' => '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYSIDEINFO,
+                        'data-target' => '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYSIDEINFO,
                         'data-mode' => $mode,
                     )
                 );
                 break;
 
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 $xs = array(
-                    [self::class, self::MODULE_ANCHORCONTROL_TOGGLETABSXS],
+                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS],
                 );
-                if (in_array($module, $xs)) {
+                if (in_array($component, $xs)) {
                     $mode = 'xs';
                     $classs = 'hidden-sm hidden-md hidden-lg';
                 } else {
                     $mode = '';
                     $classs = 'hidden-xs';
                 }
-                $this->appendProp($module, $props, 'class', $classs);
+                $this->appendProp($component, $props, 'class', $classs);
                 $this->mergeProp(
-                    $module,
+                    $component,
                     $props,
                     'params',
                     array(
                         'data-toggle' => 'offcanvas-toggle',
-                        'data-target' => '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS,
+                        'data-target' => '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYTABS,
                         'data-mode' => $mode,
                     )
                 );
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
-            case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABS:
-            case self::MODULE_ANCHORCONTROL_TOGGLETABSXS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
+            case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 $this->addJsmethod($ret, 'offcanvasToggle');
                 break;
         }

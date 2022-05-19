@@ -8,65 +8,65 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_CUSTOMANCHORCONTROL_CALENDAR = 'custombuttoncontrol-calendar';
-    public final const MODULE_CUSTOMANCHORCONTROL_PASTEVENTS = 'custombuttoncontrol-pastevents';
-    public final const MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
-    public final const MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_CALENDAR = 'custombuttoncontrol-calendar';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS = 'custombuttoncontrol-pastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_CALENDAR],
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS],
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS],
-            [self::class, self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS],
+            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS],
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
+        switch ($component[1]) {
+            case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Calendar', 'poptheme-wassup');
 
-            case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('Past Events', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
+        switch ($component[1]) {
+            case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
                 return getRouteIcon(POP_EVENTS_ROUTE_EVENTSCALENDAR, false);
 
-            case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
                 return getRouteIcon(POP_EVENTS_ROUTE_PASTEVENTS, false);
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
-            case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
+        switch ($component[1]) {
+            case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
                 $routes = array(
-                    self::MODULE_CUSTOMANCHORCONTROL_CALENDAR => POP_EVENTS_ROUTE_EVENTSCALENDAR,
-                    self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
+                    self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR => POP_EVENTS_ROUTE_EVENTSCALENDAR,
+                    self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
                 );
-                $route = $routes[$module[1]];
+                $route = $routes[$component[1]];
 
                 return RouteUtils::getRouteURL($route);
 
-            case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 // Allow URE to add the ContentSource
@@ -76,27 +76,27 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                     $author
                 );
 
-            case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
                 $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($component, $props);
     }
 
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
-            case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
-            case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $this->appendProp($module, $props, 'class', 'btn btn-link btn-compact');
+        switch ($component[1]) {
+            case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+            case self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
+                $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

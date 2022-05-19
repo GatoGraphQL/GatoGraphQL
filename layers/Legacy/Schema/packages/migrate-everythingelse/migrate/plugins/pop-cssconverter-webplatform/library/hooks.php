@@ -4,26 +4,26 @@ class PoP_WebPlatform_CSSConverter_Hooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-immutable-configuration',
             $this->getImmutableConfiguration(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-mutableonrequest-configuration',
             $this->getMutableonrequestConfiguration(...),
             10,
             4
         );
     }
 
-    public function getImmutableConfiguration($configuration, array $module, array $props, $processor)
+    public function getImmutableConfiguration($configuration, array $component, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
-        if ($processor->getProp($module, $props, 'convert-classes-to-styles')) {
-            $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
+        if ($processor->getProp($component, $props, 'convert-classes-to-styles')) {
+            $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration[GD_JS_CLASS]))) {
@@ -53,12 +53,12 @@ class PoP_WebPlatform_CSSConverter_Hooks
         return $configuration;
     }
 
-    public function getMutableonrequestConfiguration($configuration, array $module, array $props, $processor)
+    public function getMutableonrequestConfiguration($configuration, array $component, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
-        if ($processor->getProp($module, $props, 'convert-classes-to-styles')) {
+        if ($processor->getProp($component, $props, 'convert-classes-to-styles')) {
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration['runtime-class']))) {
                 $styles = PoP_CSSConverter_ConversionUtils::getStylesFromClasses($allclasses);

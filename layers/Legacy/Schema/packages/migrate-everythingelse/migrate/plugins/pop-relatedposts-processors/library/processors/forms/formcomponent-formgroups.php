@@ -3,35 +3,35 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES = 'formcomponentgroup-selectabletypeahead-references';
-    public final const MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponentgroup-selectabletypeahead-references';
+    public final const COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES = 'formcomponentgroup-selectabletypeahead-references';
+    public final const COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponentgroup-selectabletypeahead-references';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES],
-            [self::class, self::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES],
+            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES],
+            [self::class, self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES],
         );
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $component)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 $ret .= ' col-sm-2';
                 break;
         }
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $component)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 $ret .= ' col-sm-10';
                 break;
         }
@@ -39,44 +39,44 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
         return $ret;
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
-            self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
-            self::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
+            self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
+            self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 $placeholders = array(
-                    self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => TranslationAPIFacade::getInstance()->__('Type post title...', 'pop-coreprocessors'),
+                    self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => TranslationAPIFacade::getInstance()->__('Type post title...', 'pop-coreprocessors'),
                 );
-                $placeholder = $placeholders[$module[1]];
-                $component = $this->getComponentSubmodule($module);
+                $placeholder = $placeholders[$component[1]];
+                $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', $placeholder);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Please select all related content, so the reader can easily access this inter-related information.', 'pop-coreprocessors');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($component, $props);
     }
 }
 

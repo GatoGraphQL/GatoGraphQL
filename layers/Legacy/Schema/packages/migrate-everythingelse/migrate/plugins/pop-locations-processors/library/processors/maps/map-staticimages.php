@@ -2,40 +2,40 @@
 
 class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStaticImagesBase
 {
-    public final const MODULE_MAP_STATICIMAGE = 'em-map-staticimage';
-    public final const MODULE_MAP_STATICIMAGE_USERORPOST = 'em-map-staticimage-userorpost';
+    public final const COMPONENT_MAP_STATICIMAGE = 'em-map-staticimage';
+    public final const COMPONENT_MAP_STATICIMAGE_USERORPOST = 'em-map-staticimage-userorpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_STATICIMAGE],
-            [self::class, self::MODULE_MAP_STATICIMAGE_USERORPOST],
+            [self::class, self::COMPONENT_MAP_STATICIMAGE],
+            [self::class, self::COMPONENT_MAP_STATICIMAGE_USERORPOST],
         );
     }
 
-    public function getUrlparamSubmodule(array $module)
+    public function getUrlparamSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_MAP_STATICIMAGE:
-                return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::MODULE_MAP_STATICIMAGE_URLPARAM];
+        switch ($component[1]) {
+            case self::COMPONENT_MAP_STATICIMAGE:
+                return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::COMPONENT_MAP_STATICIMAGE_URLPARAM];
 
-            case self::MODULE_MAP_STATICIMAGE_USERORPOST:
-                return [PoP_Module_Processor_MapStaticImageLocations::class, PoP_Module_Processor_MapStaticImageLocations::MODULE_MAP_STATICIMAGE_LOCATIONS];
+            case self::COMPONENT_MAP_STATICIMAGE_USERORPOST:
+                return [PoP_Module_Processor_MapStaticImageLocations::class, PoP_Module_Processor_MapStaticImageLocations::COMPONENT_MAP_STATICIMAGE_LOCATIONS];
         }
 
-        return parent::getUrlparamSubmodule($module);
+        return parent::getUrlparamSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_MAP_STATICIMAGE:
-            case self::MODULE_MAP_STATICIMAGE_USERORPOST:
-                $this->appendProp($module, $props, 'class', 'img-responsive');
+        switch ($component[1]) {
+            case self::COMPONENT_MAP_STATICIMAGE:
+            case self::COMPONENT_MAP_STATICIMAGE_USERORPOST:
+                $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

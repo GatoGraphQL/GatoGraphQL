@@ -1,14 +1,14 @@
 <?php
-use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ConfigurationComponentModel\ComponentProcessors\AbstractComponentProcessor;
 
-class PoP_ConfigurationComponentModel_Module_Processor_Elements extends AbstractModuleProcessor
+class PoP_ConfigurationComponentModel_Module_Processor_Elements extends AbstractComponentProcessor
 {
-    public final const MODULE_EMPTY = 'empty';
+    public final const COMPONENT_EMPTY = 'empty';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EMPTY],
+            [self::class, self::COMPONENT_EMPTY],
         );
     }
 }

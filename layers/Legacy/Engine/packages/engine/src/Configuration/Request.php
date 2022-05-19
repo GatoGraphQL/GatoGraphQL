@@ -9,8 +9,8 @@ use PoP\Engine\Constants\Params;
 
 class Request
 {
-    public static function getHeadModule(): ?string
+    public static function getHeadComponent(): ?string
     {
-        return App::query(Params::HEADMODULE);
+        return App::query(Params::HEADCOMPONENT);
     }
 }

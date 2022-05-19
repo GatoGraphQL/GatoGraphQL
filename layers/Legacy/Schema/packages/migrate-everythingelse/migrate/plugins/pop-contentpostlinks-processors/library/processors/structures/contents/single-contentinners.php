@@ -2,22 +2,22 @@
 
 class PoP_ContentPostLinks_Module_Processor_SingleContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public final const MODULE_CONTENTINNER_LINKSINGLE = 'contentinner-linksingle';
+    public final const COMPONENT_CONTENTINNER_LINKSINGLE = 'contentinner-linksingle';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENTINNER_LINKSINGLE],
+            [self::class, self::COMPONENT_CONTENTINNER_LINKSINGLE],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_CONTENTINNER_LINKSINGLE:
-                $ret[] = [PoP_ContentPostLinks_Module_Processor_LinkContentLayouts::class, PoP_ContentPostLinks_Module_Processor_LinkContentLayouts::MODULE_LAYOUT_CONTENT_LINK];
+        switch ($component[1]) {
+            case self::COMPONENT_CONTENTINNER_LINKSINGLE:
+                $ret[] = [PoP_ContentPostLinks_Module_Processor_LinkContentLayouts::class, PoP_ContentPostLinks_Module_Processor_LinkContentLayouts::COMPONENT_LAYOUT_CONTENT_LINK];
                 break;
         }
 

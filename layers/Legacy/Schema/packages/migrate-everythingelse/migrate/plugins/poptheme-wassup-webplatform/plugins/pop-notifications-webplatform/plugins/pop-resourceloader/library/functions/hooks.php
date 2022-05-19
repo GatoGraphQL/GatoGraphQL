@@ -5,14 +5,14 @@ class PopThemeWassup_AAL_ResourceLoaderProcessor_Hooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
-            $this->getModuleCssResources(...),
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
+            $this->getComponentCSSResources(...),
             10,
             6
         );
     }
 
-    public function getModuleCssResources($resources, array $module, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
         switch ($template) {
             case POP_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION:

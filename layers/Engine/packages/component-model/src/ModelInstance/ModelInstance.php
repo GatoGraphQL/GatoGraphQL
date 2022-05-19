@@ -61,7 +61,7 @@ class ModelInstance implements ModelInstanceInterface
 
         // Add the ones from package Definitions
 
-        // Comment Leo 05/04/2017: Also add the module-definition type, for 2 reasons:
+        // Comment Leo 05/04/2017: Also add the component-definition type, for 2 reasons:
         // 1. It allows to create the 2 versions (DEV/PROD) of the configuration files, to compare/debug them side by side
         // 2. It allows to switch from DEV/PROD without having to delete the pop-cache
         if ($definitionResolvers = $this->getDefinitionManager()->getDefinitionResolvers()) {
@@ -95,8 +95,8 @@ class ModelInstance implements ModelInstanceInterface
         if ($actions = App::getState('actions')) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
-        if ($modulefilter = App::getState('modulefilter')) {
-            $components[] = $this->__('module filter:', 'component-model') . $modulefilter;
+        if ($componentFilter = App::getState('componentFilter')) {
+            $components[] = $this->__('component filter:', 'component-model') . $componentFilter;
         }
 
         // Can the configuration change when doing a POST or GET?

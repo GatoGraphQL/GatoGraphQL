@@ -2,28 +2,28 @@
 
 class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_TAGLEFT = 'sidebarmulticomponent-tagleft';
-    public final const MODULE_SIDEBARMULTICOMPONENT_TAGRIGHT = 'sidebarmulticomponent-tagright';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT = 'sidebarmulticomponent-tagleft';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_TAGRIGHT = 'sidebarmulticomponent-tagright';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_TAGLEFT],
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_TAGRIGHT],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_TAGRIGHT],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_SIDEBARMULTICOMPONENT_TAGLEFT:
-                $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_TAGSOCIALMEDIA];
+        switch ($component[1]) {
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT:
+                $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_TAGSOCIALMEDIA];
                 break;
 
-            case self::MODULE_SIDEBARMULTICOMPONENT_TAGRIGHT:
-                $ret[] = [GD_Custom_Module_Processor_TagWidgets::class, GD_Custom_Module_Processor_TagWidgets::MODULE_WIDGETCOMPACT_TAGINFO];
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_TAGRIGHT:
+                $ret[] = [GD_Custom_Module_Processor_TagWidgets::class, GD_Custom_Module_Processor_TagWidgets::COMPONENT_WIDGETCOMPACT_TAGINFO];
                 break;
         }
 

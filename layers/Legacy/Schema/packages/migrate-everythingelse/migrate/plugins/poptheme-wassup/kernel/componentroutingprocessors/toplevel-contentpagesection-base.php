@@ -7,6 +7,6 @@ abstract class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessorBas
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+        return array(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
     }
 }

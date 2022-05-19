@@ -2,12 +2,12 @@
 
 class GD_URE_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Processor_MemberTagsLayoutsBase
 {
-    public final const MODULE_URE_LAYOUTUSER_MEMBERTAGS = 'ure-layoutuser-membertags-nodesc';
+    public final const COMPONENT_URE_LAYOUTUSER_MEMBERTAGS = 'ure-layoutuser-membertags-nodesc';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_LAYOUTUSER_MEMBERTAGS],
+            [self::class, self::COMPONENT_URE_LAYOUTUSER_MEMBERTAGS],
         );
     }
 }

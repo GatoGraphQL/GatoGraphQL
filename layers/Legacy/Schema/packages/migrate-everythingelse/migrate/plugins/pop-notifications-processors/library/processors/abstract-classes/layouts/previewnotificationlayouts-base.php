@@ -1,54 +1,54 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
-abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_AAL_Processors_TemplateResourceLoaderProcessor::class, PoP_AAL_Processors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PREVIEWNOTIFICATION];
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
-        return [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION];
+        return [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION];
     }
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
-        return [PoP_Module_Processor_MultipleComponentLayouts::class, PoP_Module_Processor_MultipleComponentLayouts::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM];
+        return [PoP_Module_Processor_MultipleComponentLayouts::class, PoP_Module_Processor_MultipleComponentLayouts::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM];
     }
-    public function getLinkSubmodule(array $module)
+    public function getLinkSubcomponent(array $component)
     {
-        return [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK];
+        return [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK];
     }
 
-    // function addUrl(array $module, array &$props) {
+    // function addUrl(array $component, array &$props) {
 
     //     return true;
     // }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($link = $this->getLinkSubmodule($module)) {
+        if ($link = $this->getLinkSubcomponent($component)) {
             $ret[] = $link;
         }
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($module)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[] = $quicklinkgroup_top;
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($module)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[] = $quicklinkgroup_bottom;
         }
-        if ($bottom_submodules = $this->getBottomSubmodules($module)) {
+        if ($bottom_subcomponents = $this->getBottomSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $bottom_submodules
+                $bottom_subcomponents
             );
         }
-        if ($post_thumb = $this->getPostThumbSubmodule($module)) {
+        if ($post_thumb = $this->getPostThumbSubcomponent($component)) {
             $ret[] = $post_thumb;
         }
 
@@ -58,30 +58,30 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($module);
+        $ret = parent::getRelationalSubcomponents($component);
 
-        $modules = array();
+        $components = array();
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
-        if (!$this->getPostThumbSubmodule($module) && PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($user_avatar = $this->getUserAvatarModule($module)) {
-                $modules[] = $user_avatar;
+        if (!$this->getPostThumbSubcomponent($component) && PoP_Application_ConfigurationUtils::useUseravatar()) {
+            if ($user_avatar = $this->getUserAvatarComponent($component)) {
+                $components[] = $user_avatar;
             }
         }
 
-        if ($modules) {
+        if ($components) {
             $ret[] = new RelationalModuleField(
                 'userID',
-                $modules
+                $components
             );
         }
 
         return $ret;
     }
 
-    public function addUrlLink(array $module, array &$props)
+    public function addUrlLink(array $component, array &$props)
     {
         return false;
     }
@@ -91,9 +91,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
         // From the combination of object_type and action, we obtain the layout to use for the notification
         // $ret[] = 'objectType';
@@ -103,7 +103,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         $ret[] = 'status';
         $ret[] = 'message';
 
-        if ($this->addUrlLink($module, $props)) {
+        if ($this->addUrlLink($component, $props)) {
             $ret[] = 'url';
             $ret[] = 'target';
         }
@@ -111,14 +111,14 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubcomponent(array $component)
     {
         return null;
     }
-    public function getUserAvatarModule(array $module)
+    public function getUserAvatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR];
+            return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR];
         }
 
         return null;
@@ -127,20 +127,20 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $module): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($module);
+        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
 
         return array_merge(
             $ret,
-            $this->getConditionalBottomSubmodules($module)
+            $this->getConditionalBottomSubcomponents($component)
         );
     }
 
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalBottomSubmodules(array $module): array
+    public function getConditionalBottomSubcomponents(array $component): array
     {
         $ret = [];
         // Only fetch data if doing loadingLatest and is a comment notification
@@ -158,114 +158,114 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         $ret[] = new ConditionalLeafModuleField(
             $field,
             [
-                [PoP_Module_Processor_NotificationSubcomponentLayouts::class, PoP_Module_Processor_NotificationSubcomponentLayouts::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT],
+                [PoP_Module_Processor_NotificationSubcomponentLayouts::class, PoP_Module_Processor_NotificationSubcomponentLayouts::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT],
             ]
         );
 
         return \PoP\Root\App::applyFilters(
-            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
+            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubcomponents',
             $ret,
-            $module
+            $component
         );
     }
 
-    public function getBottomSubmodules(array $module)
+    public function getBottomSubcomponents(array $component)
     {
         return array(
-            [PoP_Module_Processor_NotificationActionIconLayouts::class, PoP_Module_Processor_NotificationActionIconLayouts::MODULE_LAYOUT_NOTIFICATIONICON],
-            [PoP_Module_Processor_NotificationTimeLayouts::class, PoP_Module_Processor_NotificationTimeLayouts::MODULE_LAYOUT_NOTIFICATIONTIME],
+            [PoP_Module_Processor_NotificationActionIconLayouts::class, PoP_Module_Processor_NotificationActionIconLayouts::COMPONENT_LAYOUT_NOTIFICATIONICON],
+            [PoP_Module_Processor_NotificationTimeLayouts::class, PoP_Module_Processor_NotificationTimeLayouts::COMPONENT_LAYOUT_NOTIFICATIONTIME],
         );
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $component)
     {
         return true;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        // if ($this->addUrl($module, $props)) {
+        // if ($this->addUrl($component, $props)) {
 
         //     $ret['add-url'] = true;
         // }
-        if ($this->addUrlLink($module, $props)) {
+        if ($this->addUrlLink($component, $props)) {
             $ret['add-url-link'] = true;
         }
         // Classes
         $ret[GD_JS_CLASSES] = array();
-        if ($this->horizontalMediaLayout($module)) {
+        if ($this->horizontalMediaLayout($component)) {
             $ret[GD_JS_CLASSES]['wrapper'] = 'media';// ' overflow-visible';
             $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'media-left';
             $ret[GD_JS_CLASSES]['content-body'] = 'media-body clearfix';
         }
 
-        if ($link = $this->getLinkSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($link);
+        if ($link = $this->getLinkSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($link);
         }
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup_top);
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup_bottom);
         }
-        if ($this->getBottomSubmodules($module)) {
+        if ($this->getBottomSubcomponents($component)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $this->getBottomSubmodules($module)
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_map(
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
+                $this->getBottomSubcomponents($component)
             );
-            foreach ($this->getConditionalBottomSubmodules($module) as $conditionalLeafModuleField) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_merge(
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
+            foreach ($this->getConditionalBottomSubcomponents($component) as $conditionalLeafModuleField) {
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_merge(
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'],
                     array_map(
-                        [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                        $conditionalLeafModuleField->getConditionalNestedModules()
+                        [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
+                        $conditionalLeafModuleField->getConditionalNestedComponents()
                     )
                 );
             }
         }
 
-        if ($post_thumb = $this->getPostThumbSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
+        if ($post_thumb = $this->getPostThumbSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($post_thumb);
         } elseif (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($user_avatar = $this->getUserAvatarModule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['user-avatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
+            if ($user_avatar = $this->getUserAvatarComponent($component)) {
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['user-avatar'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($user_avatar);
             }
         }
 
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $module, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
         if (in_array(
-            [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION],
-            $this->getSubmodules($module)
+            [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION],
+            $this->getSubcomponents($component)
         )) {
             //-----------------------------------
             // Whenever clicking on the link on the notification, also "click" on the `Mark as read` button
             //-----------------------------------
-            if ($link = $this->getLinkSubmodule($module)) {
+            if ($link = $this->getLinkSubcomponent($component)) {
                 $this->mergeProp(
-                    [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD],
+                    [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                     $props,
-                    'previousmodules-ids',
+                    'previouscomponents-ids',
                     array(
                         'data-triggertarget' => $link
                     )
                 );
-                $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD], $props, array('onActionThenClick'));
+                $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD], $props, array('onActionThenClick'));
             }
 
             //-----------------------------------
             // Add class "read" to the notification layout to make it appear as read or not when clicking on the corresponding button
             //-----------------------------------
             $this->mergeProp(
-                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD],
+                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                 $props,
                 'params',
                 array(
@@ -274,20 +274,20 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 )
             );
             $this->mergeProp(
-                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD],
+                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                 $props,
-                'previousmodules-ids',
+                'previouscomponents-ids',
                 array(
-                    'data-target' => $module,
+                    'data-target' => $component,
                 )
             );
-            $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD], $props, array('switchTargetClass'));
+            $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD], $props, array('switchTargetClass'));
 
             //-----------------------------------
             // Remove class "read" to the notification layout to make it appear as read or not when clicking on the corresponding button
             //-----------------------------------
             $this->mergeProp(
-                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
+                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
                 $props,
                 'params',
                 array(
@@ -296,16 +296,16 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 )
             );
             $this->mergeProp(
-                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
+                [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
                 $props,
-                'previousmodules-ids',
+                'previouscomponents-ids',
                 array(
-                    'data-target' => $module,
+                    'data-target' => $component,
                 )
             );
-            $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD], $props, array('switchTargetClass'));
+            $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD], $props, array('switchTargetClass'));
         }
 
-        parent::initWebPlatformModelProps($module, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }

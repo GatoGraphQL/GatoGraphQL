@@ -1,15 +1,15 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
-abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_COMMENTPOST];
     }
 
-    public function getHeaderSubmodule(array $module): ?array
+    public function getHeaderSubcomponent(array $component): ?array
     {
         return null;
     }
@@ -17,9 +17,9 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        if ($header = $this->getHeaderSubmodule($module)) {
+        if ($header = $this->getHeaderSubcomponent($component)) {
             return [
                 new RelationalModuleField(
                     'customPost',
@@ -30,27 +30,27 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
             ];
         }
 
-        return parent::getRelationalSubmodules($module);
+        return parent::getRelationalSubcomponents($component);
     }
 
-    public function headerShowUrl(array $module, array &$props)
+    public function headerShowUrl(array $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Add the URL in the header? Sometimes yes (eg: Addon) sometimes not (eg: modal)
-        if ($this->headerShowUrl($module, $props)) {
+        if ($this->headerShowUrl($component, $props)) {
             $ret['header-show-url'] = true;
         }
 
-        if ($header = $this->getHeaderSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header-post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header);
+        if ($header = $this->getHeaderSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header-post'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($header);
         }
 
         return $ret;

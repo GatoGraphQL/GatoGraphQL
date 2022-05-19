@@ -2,35 +2,35 @@
 
 class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_LATESTCOUNTS = 'multiple-latestcounts';
+    public final const COMPONENT_MULTIPLE_LATESTCOUNTS = 'multiple-latestcounts';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_LATESTCOUNTS],
+            [self::class, self::COMPONENT_MULTIPLE_LATESTCOUNTS],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        $inner_modules = array(
-            self::MODULE_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTCOUNTS],
+        $inner_components = array(
+            self::COMPONENT_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTCOUNTS],
         );
-        if ($inner = $inner_modules[$module[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_MULTIPLE_LATESTCOUNTS:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTIPLE_LATESTCOUNTS:
                 // Fetch latest notifications every 30 seconds
                 $this->addJsmethod($ret, 'timeoutLoadLatestBlock');
 

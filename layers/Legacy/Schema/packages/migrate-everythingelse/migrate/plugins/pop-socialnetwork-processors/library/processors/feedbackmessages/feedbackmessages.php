@@ -2,26 +2,26 @@
 
 class PoP_SocialNetwork_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_CONTACTUSER = 'feedbackmessage-contactuser';
+    public final const COMPONENT_FEEDBACKMESSAGE_CONTACTUSER = 'feedbackmessage-contactuser';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_CONTACTUSER],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CONTACTUSER],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageInners::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER],
+            self::COMPONENT_FEEDBACKMESSAGE_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageInners::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUSER],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

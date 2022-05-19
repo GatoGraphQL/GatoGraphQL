@@ -3,33 +3,33 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_FORM_EVENTDETAILS = 'widget-form-event-details';
+    public final const COMPONENT_WIDGET_FORM_EVENTDETAILS = 'widget-form-event-details';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGET_FORM_EVENTDETAILS],
+            [self::class, self::COMPONENT_WIDGET_FORM_EVENTDETAILS],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_WIDGET_FORM_EVENTDETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_CATEGORIES];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_APPLIESTO];
+                    $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_APPLIESTO];
                 }
-                $ret[] = [GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::class, GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER];
-                $ret[] = [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP];
+                $ret[] = [GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::class, GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER];
+                $ret[] = [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP];
 
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-                    $ret[] = [PoPTheme_Wassup_Module_Processor_FormGroups::class, PoPTheme_Wassup_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT];
+                    $ret[] = [PoPTheme_Wassup_Module_Processor_FormGroups::class, PoPTheme_Wassup_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT];
                 }
                 break;
         }
@@ -37,60 +37,60 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGET_FORM_EVENTDETAILS => TranslationAPIFacade::getInstance()->__('Event details', 'poptheme-wassup'),
+            self::COMPONENT_WIDGET_FORM_EVENTDETAILS => TranslationAPIFacade::getInstance()->__('Event details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
 
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGET_FORM_EVENTDETAILS:
-                if ($class = $this->getProp($module, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
+                if ($class = $this->getProp($component, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
                 }
 
                 return 'panel panel-info';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($component, $props);
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGET_FORM_EVENTDETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
                 return 'panel-body';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGET_FORM_EVENTDETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
                 return '';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGET_FORM_EVENTDETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
                 // Typeahead map: make it small
-                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'wrapper-class', '');
-                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'map-class', 'spacing-bottom-md');
-                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'typeahead-class', '');
+                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'wrapper-class', '');
+                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'map-class', 'spacing-bottom-md');
+                $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'typeahead-class', '');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -3,74 +3,74 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
-    public final const MODULE_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
+    public final const COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
-            self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP],
+        $inner_components = array(
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function showFetchmore(array $module)
+    protected function showFetchmore(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return false;
         }
 
-        return parent::showFetchmore($module);
+        return parent::showFetchmore($component);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
         );
-        if (in_array($module, $maps)) {
+        if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($component);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getDatasource(array $module, array &$props): string
+    public function getDatasource(array $component, array &$props): string
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
         }
 
-        return parent::getDatasource($module, $props);
+        return parent::getDatasource($component, $props);
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return getWhoweareCoreUserIds();
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 }
 

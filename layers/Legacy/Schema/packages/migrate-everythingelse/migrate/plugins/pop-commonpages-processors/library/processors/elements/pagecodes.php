@@ -2,28 +2,28 @@
 
 class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTMLPageCodesBase
 {
-    public final const MODULE_PAGECODE_ADDCONTENTFAQ = 'pagecode-addcontentfaq';
-    public final const MODULE_PAGECODE_ACCOUNTFAQ = 'pagecode-accountfaq';
+    public final const COMPONENT_PAGECODE_ADDCONTENTFAQ = 'pagecode-addcontentfaq';
+    public final const COMPONENT_PAGECODE_ACCOUNTFAQ = 'pagecode-accountfaq';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_PAGECODE_ADDCONTENTFAQ],
-            [self::class, self::MODULE_PAGECODE_ACCOUNTFAQ],
+            [self::class, self::COMPONENT_PAGECODE_ADDCONTENTFAQ],
+            [self::class, self::COMPONENT_PAGECODE_ACCOUNTFAQ],
         );
     }
 
-    public function getPageId(array $module)
+    public function getPageId(array $component)
     {
         $page_ids = array(
-            self::MODULE_PAGECODE_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
-            self::MODULE_PAGECODE_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
+            self::COMPONENT_PAGECODE_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
+            self::COMPONENT_PAGECODE_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
         );
-        if ($page_id = $page_ids[$module[1]] ?? null) {
+        if ($page_id = $page_ids[$component[1]] ?? null) {
             return $page_id;
         }
 
-        return parent::getPageId($module);
+        return parent::getPageId($component);
     }
 }
 

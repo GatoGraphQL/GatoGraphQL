@@ -15,7 +15,7 @@ class PoP_CommonUserRolesProcessors_UserCommunities_CreateUpdateProfileHooks
         return array_merge(
             $inputs,
             array(
-                'is_community' => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY],
+                'is_community' => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY],
             )
         );
     }

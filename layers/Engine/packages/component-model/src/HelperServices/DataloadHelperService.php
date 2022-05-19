@@ -9,9 +9,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -24,7 +22,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     use BasicServiceTrait;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -34,13 +32,13 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
-        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->componentProcessorManager = $componentProcessorManager;
     }
-    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
     /**
@@ -95,21 +93,5 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             return null;
         }
         return $subcomponentFieldTypeResolver;
-    }
-
-    /**
-     * @param array<array<string, mixed>> $moduleValues
-     */
-    public function addFilterParams(string $url, array $moduleValues = []): string
-    {
-        $args = [];
-        foreach ($moduleValues as $moduleValue) {
-            $module = $moduleValue['module'];
-            $value = $moduleValue['value'];
-            /** @var FilterInputModuleProcessorInterface */
-            $moduleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-            $args[$moduleProcessor->getName($module)] = $value;
-        }
-        return GeneralUtils::addQueryArgs($args, $url);
     }
 }

@@ -2,24 +2,24 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_LINK = 'sidebarmulticomponent-link';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_LINK = 'sidebarmulticomponent-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIDEBARMULTICOMPONENT_LINK],
+            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_LINK],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_SIDEBARMULTICOMPONENT_LINK:
-                $ret[] = [PoP_ContentPostLinks_Module_Processor_CustomPostWidgets::class, PoP_ContentPostLinks_Module_Processor_CustomPostWidgets::MODULE_WIDGETCOMPACT_LINKINFO];
-                $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES];
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGETCOMPACT_POST_AUTHORS];
+        switch ($component[1]) {
+            case self::COMPONENT_SIDEBARMULTICOMPONENT_LINK:
+                $ret[] = [PoP_ContentPostLinks_Module_Processor_CustomPostWidgets::class, PoP_ContentPostLinks_Module_Processor_CustomPostWidgets::COMPONENT_WIDGETCOMPACT_LINKINFO];
+                $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES];
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGETCOMPACT_POST_AUTHORS];
                 break;
         }
 

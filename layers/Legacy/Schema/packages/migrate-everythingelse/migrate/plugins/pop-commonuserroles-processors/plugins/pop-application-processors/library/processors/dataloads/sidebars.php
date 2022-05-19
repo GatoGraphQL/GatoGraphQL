@@ -1,78 +1,78 @@
 <?php
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
-    public final const MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
+    public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
+    public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION],
-            [self::class, self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION],
+            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $orientation = \PoP\Root\App::applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
-            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION => $vertical ?
-                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION] :
-                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
-            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL => $vertical ?
-                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL] :
-                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
+            self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION => $vertical ?
+                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION] :
+                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
+            self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL => $vertical ?
+                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL] :
+                [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
         );
 
-        if ($block_inner = $block_inners[$module[1]] ?? null) {
+        if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
-    //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
+    //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
     //             return UserRequestNature::USER;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($component);
     // }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
+                return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
-            case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
+            case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 }
 

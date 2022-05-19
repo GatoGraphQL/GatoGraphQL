@@ -34,9 +34,9 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         );
     }
 
-    public static function getResources($modulefilter, $options = array()) {
+    public static function getResources($componentFilter, $options = array()) {
 
-        $key = json_encode(self::getResourcemappingOptions($options)).$modulefilter;
+        $key = json_encode(self::getResourcemappingOptions($options)).$componentFilter;
         if (!is_null(self::$resources[$key])) {
             return self::$resources[$key];
         }
@@ -57,7 +57,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         if ($options['from-current-vars'] ?? null) {
             // Re-use the already-generated $props
             $options['use-engine-entrycomponent-props'] = true;
-            $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
+            $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($componentFilter, $options);
 
             $nature = \PoP\Root\App::getState('nature');
 
@@ -88,23 +88,23 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             // Get all the resources, for the different natures
             $natureresources_manager = PoP_ResourceLoader_NatureResourcesManagerFactory::getInstance();
             $flat_resources = array(
-                'home' => $natureresources_manager->getHomeResources($modulefilter, $options),
-                'author' => $natureresources_manager->getAuthorResources($modulefilter, $options),
-                'tag' => $natureresources_manager->getTagResources($modulefilter, $options),
+                'home' => $natureresources_manager->getHomeResources($componentFilter, $options),
+                'author' => $natureresources_manager->getAuthorResources($componentFilter, $options),
+                'tag' => $natureresources_manager->getTagResources($componentFilter, $options),
             );
 
             // 404: it only makes sense to compute it for "loading-site".
             // For "fetching-json", it will never be linked to
-            $loadingSite = PoP_ResourceLoaderProcessorUtils::isLoadingSite($modulefilter);
+            $loadingSite = PoP_ResourceLoaderProcessorUtils::isLoadingSite($componentFilter);
             if ($loadingSite) {
 
-                $flat_resources['404'] = $natureresources_manager->get404Resources($modulefilter, $options);
+                $flat_resources['404'] = $natureresources_manager->get404Resources($componentFilter, $options);
             }
 
             $path_resources = array(
-                'single' => $natureresources_manager->getSingleResources($modulefilter, $options),
-                'page' => $natureresources_manager->getPageResources($modulefilter, $options),
-                'generic' => $natureresources_manager->getGenericNatureResources($modulefilter, $options),
+                'single' => $natureresources_manager->getSingleResources($componentFilter, $options),
+                'page' => $natureresources_manager->getPageResources($componentFilter, $options),
+                'generic' => $natureresources_manager->getGenericNatureResources($componentFilter, $options),
             );
         }
 
@@ -139,11 +139,11 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         return self::$resources[$key];
     }
 
-    public static function getResourceMapping($modulefilter, $options = array()) {
+    public static function getResourceMapping($componentFilter, $options = array()) {
 
         global $pop_resourceloaderprocessor_manager;
 
-        $encoded = json_encode(self::getResourcemappingOptions($options)).$modulefilter;
+        $encoded = json_encode(self::getResourcemappingOptions($options)).$componentFilter;
         if (!is_null(self::$resource_mapping[$encoded])) {
             return self::$resource_mapping[$encoded];
         }
@@ -153,13 +153,13 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         $matchFormat = $options['match-format'] ?? null;
 
         // Get all the resources, for the different natures
-        $app_resources = self::getResources($modulefilter, $options);
+        $app_resources = self::getResources($componentFilter, $options);
         $flat_resources = $app_resources['flat'];
         $path_resources = $app_resources['path'];
 
         // If fetching-json, then no need to add the random bit to the bundle(group) ID
         // This works fine as long as we don't copy bundle-resourceloader-mapping.json, etc files from STAGING to PROD,
-        $loadingSite = PoP_ResourceLoaderProcessorUtils::isLoadingSite($modulefilter);
+        $loadingSite = PoP_ResourceLoaderProcessorUtils::isLoadingSite($componentFilter);
         $addRandom = $loadingSite;
 
         // Because the items in the natures will be duplicated, we create a normalized DB from all the values,

@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_UserMapScriptCustomizations extends PoP_Module_Processor_UserMapScriptCustomizationsBase
 {
-    public final const MODULE_MAP_SCRIPTCUSTOMIZATION_USER = 'em-map-scriptcustomization-user';
+    public final const COMPONENT_MAP_SCRIPTCUSTOMIZATION_USER = 'em-map-scriptcustomization-user';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAP_SCRIPTCUSTOMIZATION_USER],
+            [self::class, self::COMPONENT_MAP_SCRIPTCUSTOMIZATION_USER],
         );
     }
 }

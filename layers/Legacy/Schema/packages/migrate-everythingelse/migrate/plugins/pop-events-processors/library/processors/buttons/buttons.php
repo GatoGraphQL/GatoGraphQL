@@ -3,65 +3,65 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_EM_BUTTON_GOOGLECALENDAR = 'em-button-googlecalendar';
-    public final const MODULE_EM_BUTTON_ICAL = 'em-button-ical';
+    public final const COMPONENT_EM_BUTTON_GOOGLECALENDAR = 'em-button-googlecalendar';
+    public final const COMPONENT_EM_BUTTON_ICAL = 'em-button-ical';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_BUTTON_GOOGLECALENDAR],
-            [self::class, self::MODULE_EM_BUTTON_ICAL],
+            [self::class, self::COMPONENT_EM_BUTTON_GOOGLECALENDAR],
+            [self::class, self::COMPONENT_EM_BUTTON_ICAL],
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
-                return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::MODULE_EM_BUTTONINNER_GOOGLECALENDAR];
+        switch ($component[1]) {
+            case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
+                return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR];
 
-            case self::MODULE_EM_BUTTON_ICAL:
-                return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::MODULE_EM_BUTTONINNER_ICAL];
+            case self::COMPONENT_EM_BUTTON_ICAL:
+                return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::COMPONENT_EM_BUTTONINNER_ICAL];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
                 return 'googleCalendarURL';
 
-            case self::MODULE_EM_BUTTON_ICAL:
+            case self::COMPONENT_EM_BUTTON_ICAL:
                 return 'icalURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
-            case self::MODULE_EM_BUTTON_ICAL:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
+            case self::COMPONENT_EM_BUTTON_ICAL:
                 return '_blank';
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Google Calendar', 'em-popprocessors');
 
-            case self::MODULE_EM_BUTTON_ICAL:
+            case self::COMPONENT_EM_BUTTON_ICAL:
                 return TranslationAPIFacade::getInstance()->__('iCal', 'em-popprocessors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 }
 

@@ -2,24 +2,24 @@
 
 class PoP_Module_Processor_SegmentedButtonMenus extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_SEGMENTEDBUTTONMENU = 'segmentedbuttonmenu';
-    public final const MODULE_NAVIGATORSEGMENTEDBUTTONMENU = 'navigatorsegmentedbuttonmenu';
-    public function getModulesToProcess(): array
+    public final const COMPONENT_SEGMENTEDBUTTONMENU = 'segmentedbuttonmenu';
+    public final const COMPONENT_NAVIGATORSEGMENTEDBUTTONMENU = 'navigatorsegmentedbuttonmenu';
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SEGMENTEDBUTTONMENU],
-            [self::class, self::MODULE_NAVIGATORSEGMENTEDBUTTONMENU],
+            [self::class, self::COMPONENT_SEGMENTEDBUTTONMENU],
+            [self::class, self::COMPONENT_NAVIGATORSEGMENTEDBUTTONMENU],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_SEGMENTEDBUTTONMENU:
-                return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::MODULE_CONTENTINNER_MENU_SEGMENTEDBUTTON];
+        switch ($component[1]) {
+            case self::COMPONENT_SEGMENTEDBUTTONMENU:
+                return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::COMPONENT_CONTENTINNER_MENU_SEGMENTEDBUTTON];
 
-            case self::MODULE_NAVIGATORSEGMENTEDBUTTONMENU:
-                return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::MODULE_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON];
+            case self::COMPONENT_NAVIGATORSEGMENTEDBUTTONMENU:
+                return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::COMPONENT_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON];
         }
     }
 }

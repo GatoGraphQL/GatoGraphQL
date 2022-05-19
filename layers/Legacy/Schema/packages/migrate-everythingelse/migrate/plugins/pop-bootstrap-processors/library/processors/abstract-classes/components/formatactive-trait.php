@@ -1,41 +1,41 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait
 {
-    public function isSubmoduleActivePanel(array $module, $submodule)
+    public function isSubcomponentActivePanel(array $component, $subComponent)
     {
-        return \PoP\Root\App::getState('format') == $this->getSubmoduleFormat($module, $submodule);
+        return \PoP\Root\App::getState('format') == $this->getSubcomponentFormat($component, $subComponent);
     }
 
-    protected function getSubmoduleFormat(array $module, $submodule)
+    protected function getSubcomponentFormat(array $component, $subComponent)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($submodule);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $processor = $componentprocessor_manager->getProcessor($subComponent);
         if ($processor instanceof FormattableModuleInterface) {
-            return $processor->getFormat($submodule);
+            return $processor->getFormat($subComponent);
         }
     
         return null;
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $component)
     {
         return null;
     }
 
-    public function getDefaultActivepanelSubmodule(array $module)
+    public function getDefaultActivepanelSubcomponent(array $component)
     {
-        if ($default_format = $this->getDefaultActivepanelFormat($module)) {
-            foreach ($this->getSubmodules($module) as $submodule) {
-                if ($default_format == $this->getSubmoduleFormat($module, $submodule)) {
-                    return $submodule;
+        if ($default_format = $this->getDefaultActivepanelFormat($component)) {
+            foreach ($this->getSubcomponents($component) as $subComponent) {
+                if ($default_format == $this->getSubcomponentFormat($component, $subComponent)) {
+                    return $subComponent;
                 }
             }
         }
 
-        return parent::getDefaultActivepanelSubmodule($module);
+        return parent::getDefaultActivepanelSubcomponent($component);
     }
 }

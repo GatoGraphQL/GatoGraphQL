@@ -2,33 +2,33 @@
 
 class PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents extends PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponentsBase
 {
-    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES = 'formcomponent-selectabletypeaheadalert-references';
+    public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES = 'formcomponent-selectabletypeaheadalert-references';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
+            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
         );
     }
     
-    public function getHiddeninputModule(array $module)
+    public function getHiddenInputComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
-                return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
+                return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES];
         }
 
-        return parent::getHiddeninputModule($module);
+        return parent::getHiddenInputComponent($component);
     }
 
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
                 return true;
         }
 
-        return parent::isMultiple($module);
+        return parent::isMultiple($component);
     }
 }
 

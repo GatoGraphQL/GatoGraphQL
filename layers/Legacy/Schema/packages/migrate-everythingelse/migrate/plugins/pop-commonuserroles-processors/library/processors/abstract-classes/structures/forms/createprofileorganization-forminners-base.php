@@ -3,26 +3,26 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_CreateProfileOrganizationFormInnersBase extends PoP_Module_Processor_CreateProfileFormInnersBase
 {
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
         // Add common Create/Update components
-        PoP_Module_Processor_CreatProfileFormsUtils::getFormSubmodules($module, $ret, $this);
-        PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubmodules($module, $ret, $this);
+        PoP_Module_Processor_CreatProfileFormsUtils::getFormSubcomponents($component, $ret, $this);
+        PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubcomponents($component, $ret, $this);
 
         if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
             // Add extra components
             array_splice(
                 $ret,
                 array_search(
-                    [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_DESCRIPTION],
+                    [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_DESCRIPTION],
                     $ret
                 )+1,
                 0,
                 [
-                    [PoP_Module_Processor_Dividers::class, PoP_Module_Processor_Dividers::MODULE_COLLAPSIBLEDIVIDER],
-                    [GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups::class, GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],
+                    [PoP_Module_Processor_Dividers::class, PoP_Module_Processor_Dividers::COMPONENT_COLLAPSIBLEDIVIDER],
+                    [GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups::class, GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups::COMPONENT_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],
                 ]
             );
         }
@@ -30,16 +30,16 @@ abstract class GD_URE_Module_Processor_CreateProfileOrganizationFormInnersBase e
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Change the label
-        $this->setProp([PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_FIRSTNAME], $props, 'label', TranslationAPIFacade::getInstance()->__('Organization Name*', 'ure-popprocessors'));
-        $this->setProp([PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_EMAIL], $props, 'label', TranslationAPIFacade::getInstance()->__('Organization Email*', 'ure-popprocessors'));
+        $this->setProp([PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_FIRSTNAME], $props, 'label', TranslationAPIFacade::getInstance()->__('Organization Name*', 'ure-popprocessors'));
+        $this->setProp([PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_EMAIL], $props, 'label', TranslationAPIFacade::getInstance()->__('Organization Email*', 'ure-popprocessors'));
 
         // Make it a Community by default
-        $this->setProp([GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY], $props, 'default-value', true);
+        $this->setProp([GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY], $props, 'default-value', true);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

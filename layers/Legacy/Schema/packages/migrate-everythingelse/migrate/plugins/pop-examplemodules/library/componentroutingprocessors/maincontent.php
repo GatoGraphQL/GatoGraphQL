@@ -16,32 +16,32 @@ class MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMain
         return array(
             RequestNature::HOME => [
                 [
-                    'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_HOME],
+                    'component' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::COMPONENT_EXAMPLE_HOME],
                 ],
             ],
             RequestNature::NOTFOUND => [
                 [
-                    'module' => [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_404],
+                    'component' => [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_404],
                 ],
             ],
             TagRequestNature::TAG => [
                 [
-                    'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_TAG],
+                    'component' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::COMPONENT_EXAMPLE_TAG],
                 ],
             ],
             UserRequestNature::USER => [
                 [
-                    'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
+                    'component' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::COMPONENT_EXAMPLE_AUTHOR],
                 ],
             ],
             CustomPostRequestNature::CUSTOMPOST => [
                 [
-                    'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
+                    'component' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_SINGLE],
                 ],
             ],
             PageRequestNature::PAGE => [
                 [
-                    'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
+                    'component' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::COMPONENT_EXAMPLE_PAGE],
                 ],
             ],
         );

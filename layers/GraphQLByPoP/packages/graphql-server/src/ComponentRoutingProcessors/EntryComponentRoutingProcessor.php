@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
-use GraphQLByPoP\GraphQLServer\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
+use GraphQLByPoP\GraphQLServer\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -33,8 +33,8 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
 
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => [
-                RootRelationalFieldDataloadModuleProcessor::class,
-                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT
+                RootRelationalFieldDataloadComponentProcessor::class,
+                RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
@@ -44,8 +44,8 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         ];
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => [
-                RootRelationalFieldDataloadModuleProcessor::class,
-                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
+                RootRelationalFieldDataloadComponentProcessor::class,
+                RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,

@@ -32,9 +32,9 @@
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}
-				{{#if ../submoduleoutputnames.bottom}}
+				{{#if ../subcomponentoutputnames.bottom}}
 					<div class="extra {{../classes.bottom}}" style="{{../styles.bottom}}">
-						{{#each ../submoduleoutputnames.bottom}}
+						{{#each ../subcomponentoutputnames.bottom}}
 							<div class="extra-inner {{../../classes.bottom-inner}}" style="{{../../styles.bottom-inner}}">
 								{{#withModule ../../. this}}
 									{{enterModule ../../../.}}

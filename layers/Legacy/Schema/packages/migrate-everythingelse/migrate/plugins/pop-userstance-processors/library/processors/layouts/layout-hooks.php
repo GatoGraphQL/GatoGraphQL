@@ -6,12 +6,12 @@ class PoPTheme_UserStance_LayoutHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_modules',
-            $this->getFeedBottomSubmodules(...)
+            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_components',
+            $this->getFeedBottomSubcomponents(...)
         );
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_modules',
-            $this->getFeedBottomSubmodules(...)
+            'PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_components',
+            $this->getFeedBottomSubcomponents(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimage:modules',
@@ -35,7 +35,7 @@ class PoPTheme_UserStance_LayoutHooks
         if (!\PoP\Root\App::getState(['routing', 'is-custompost'])) {
             array_unshift(
                 $layouts,
-                [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE]
+                [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE]
             );
         }
         return $layouts;
@@ -45,17 +45,17 @@ class PoPTheme_UserStance_LayoutHooks
     {
 
         // Add the poststance at the end
-        $layouts[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT];
+        $layouts[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT];
         return $layouts;
     }
 
-    public function getFeedBottomSubmodules($layouts)
+    public function getFeedBottomSubcomponents($layouts)
     {
 
         // Add the poststance at the beginning
         array_unshift(
             $layouts,
-            [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT]
+            [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT]
         );
         return $layouts;
     }

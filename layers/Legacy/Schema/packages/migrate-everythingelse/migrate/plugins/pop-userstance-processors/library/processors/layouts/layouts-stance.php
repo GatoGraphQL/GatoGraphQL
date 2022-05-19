@@ -2,12 +2,12 @@
 
 class UserStance_Module_Processor_Layouts extends UserStance_Module_Processor_StanceLayoutsBase
 {
-    public final const MODULE_LAYOUTSTANCE = 'layout-stance';
+    public final const COMPONENT_LAYOUTSTANCE = 'layout-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTSTANCE],
+            [self::class, self::COMPONENT_LAYOUTSTANCE],
         );
     }
 }

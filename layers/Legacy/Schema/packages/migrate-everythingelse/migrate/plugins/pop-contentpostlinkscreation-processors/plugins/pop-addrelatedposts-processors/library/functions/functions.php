@@ -9,7 +9,7 @@ function popContentpostlinkscreationAddrelatedpostButtons($buttons)
 {
     if (defined('POP_CONTENTPOSTLINKSCREATIONPROCESSORS_INITIALIZED')) {
         if (defined('POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK') && POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK) {
-            $buttons[] = [PoP_ContentPostLinksCreation_Module_Processor_PostButtons::class, PoP_ContentPostLinksCreation_Module_Processor_PostButtons::MODULE_BUTTON_CONTENTPOSTLINK_CREATE];
+            $buttons[] = [PoP_ContentPostLinksCreation_Module_Processor_PostButtons::class, PoP_ContentPostLinksCreation_Module_Processor_PostButtons::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE];
         }
     }
     

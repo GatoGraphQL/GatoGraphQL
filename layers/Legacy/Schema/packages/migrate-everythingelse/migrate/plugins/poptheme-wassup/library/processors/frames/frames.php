@@ -6,72 +6,72 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleProcessorBase
+class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public final const MODULE_FRAME_TOP = 'frame-top';
-    public final const MODULE_FRAME_SIDE = 'frame-side';
-    public final const MODULE_FRAME_BACKGROUND = 'frame-background';
-    public final const MODULE_FRAME_TOPSIMPLE = 'frame-topsimple';
-    public final const MODULE_FRAME_TOPEMBED = 'frame-topembed';
+    public final const COMPONENT_FRAME_TOP = 'frame-top';
+    public final const COMPONENT_FRAME_SIDE = 'frame-side';
+    public final const COMPONENT_FRAME_BACKGROUND = 'frame-background';
+    public final const COMPONENT_FRAME_TOPSIMPLE = 'frame-topsimple';
+    public final const COMPONENT_FRAME_TOPEMBED = 'frame-topembed';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FRAME_TOP],
-            [self::class, self::MODULE_FRAME_SIDE],
-            [self::class, self::MODULE_FRAME_BACKGROUND],
-            [self::class, self::MODULE_FRAME_TOPSIMPLE],
-            [self::class, self::MODULE_FRAME_TOPEMBED],
+            [self::class, self::COMPONENT_FRAME_TOP],
+            [self::class, self::COMPONENT_FRAME_SIDE],
+            [self::class, self::COMPONENT_FRAME_BACKGROUND],
+            [self::class, self::COMPONENT_FRAME_TOPSIMPLE],
+            [self::class, self::COMPONENT_FRAME_TOPEMBED],
         );
     }
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
                 return [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_FRAME_TOP];
 
-            case self::MODULE_FRAME_SIDE:
+            case self::COMPONENT_FRAME_SIDE:
                 return [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_FRAME_SIDE];
 
-            case self::MODULE_FRAME_BACKGROUND:
+            case self::COMPONENT_FRAME_BACKGROUND:
                 return [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_FRAME_BACKGROUND];
 
-            case self::MODULE_FRAME_TOPSIMPLE:
-            case self::MODULE_FRAME_TOPEMBED:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+            case self::COMPONENT_FRAME_TOPEMBED:
                 return [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_FRAME_TOPSIMPLE];
         }
 
         return null;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
-            case self::MODULE_FRAME_SIDE:
-            case self::MODULE_FRAME_TOPSIMPLE:
-            case self::MODULE_FRAME_TOPEMBED:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
+            case self::COMPONENT_FRAME_SIDE:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+            case self::COMPONENT_FRAME_TOPEMBED:
                 // $this->addJsmethod($ret, 'offcanvasToggle', 'togglenav');
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglenavigator');
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglepagetabs');
                 break;
         }
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
-            case self::MODULE_FRAME_SIDE:
-            case self::MODULE_FRAME_TOPSIMPLE:
-                // Comment Leo 24/10/2016: This is the only difference between self::MODULE_FRAME_TOPSIMPLE and self::MODULE_FRAME_TOPEMBED:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
+            case self::COMPONENT_FRAME_SIDE:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+                // Comment Leo 24/10/2016: This is the only difference between self::COMPONENT_FRAME_TOPSIMPLE and self::COMPONENT_FRAME_TOPEMBED:
                 // the Embed does not use the Side, as such do not execute this JS below which will add class "active-side" and so create a bug
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglenav');
                 break;
         }
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
-            case self::MODULE_FRAME_TOPSIMPLE:
-            case self::MODULE_FRAME_TOPEMBED:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+            case self::COMPONENT_FRAME_TOPEMBED:
                 $this->addJsmethod($ret, 'doNothing', 'void-link');
                 $this->addJsmethod($ret, 'tooltip', 'logo');
                 $this->addJsmethod($ret, 'tooltip', 'togglenav');
@@ -85,23 +85,23 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 if (\PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPageSections:jsmethods:toggleside',
                     true,
-                    $module
+                    $component
                 )
                 ) {
                     $this->addJsmethod($ret, 'cookieToggleClass', 'togglenav');
                 }
                 break;
         }
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
                 $this->addJsmethod($ret, 'switchTargetClass', 'togglesearch-xs');
                 $this->addJsmethod($ret, 'scrollbarVertical', 'notifications');
                 $this->addJsmethod($ret, 'clearDatasetCount', 'notification-link');
                 $this->addJsmethod($ret, 'clearDatasetCountOnUserLoggedOut', 'notification-link');
                 break;
 
-            case self::MODULE_FRAME_TOPSIMPLE:
-            case self::MODULE_FRAME_TOPEMBED:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+            case self::COMPONENT_FRAME_TOPEMBED:
                 $this->addJsmethod($ret, 'fullscreen', 'fullscreen');
                 $this->addJsmethod($ret, 'fullscreen', 'fullscreen-xs');
                 $this->addJsmethod($ret, 'newWindow', 'new-window');
@@ -110,9 +110,9 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 $this->addJsmethod($ret, 'tooltip', 'new-window');
                 break;
         }
-        switch ($module[1]) {
-            case self::MODULE_FRAME_SIDE:
-            case self::MODULE_FRAME_BACKGROUND:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_SIDE:
+            case self::COMPONENT_FRAME_BACKGROUND:
                 $this->addJsmethod($ret, 'scrollbarVertical');
                 break;
         }
@@ -120,49 +120,49 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
-                $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST], $props, 'set-datasetcount', true);
-                $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST], $props, 'lazy-load', true);
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
+                $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST], $props, 'set-datasetcount', true);
+                $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST], $props, 'lazy-load', true);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOP_ADDNEW],
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN],
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN],
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT],
-                        [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOP_ADDNEW],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOPNAV_ABOUT],
+                        [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::COMPONENT_FORM_EVERYTHINGQUICKLINKS],
                     )
                 );
                 if (defined('POP_CLUSTERCOMMONPAGES_INITIALIZED')) {
-                    $ret[] = [GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_OURSPONSORS_TOPNAV_SCROLL];
+                    $ret[] = [GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_OURSPONSORS_TOPNAV_SCROLL];
                 }
                 if (defined('POP_NOTIFICATIONSPROCESSORS_INITIALIZED')) {
-                    $ret[] = [AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST];
+                    $ret[] = [AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST];
                 }
                 break;
 
-            case self::MODULE_FRAME_SIDE:
-                $ret[] = [PoP_Module_Processor_SideGroups::class, PoP_Module_Processor_SideGroups::MODULE_GROUP_SIDE];
+            case self::COMPONENT_FRAME_SIDE:
+                $ret[] = [PoP_Module_Processor_SideGroups::class, PoP_Module_Processor_SideGroups::COMPONENT_GROUP_SIDE];
                 break;
 
-            case self::MODULE_FRAME_BACKGROUND:
+            case self::COMPONENT_FRAME_BACKGROUND:
                 if (PoP_ApplicationProcessors_Utils::addBackgroundMenu()) {
-                    $ret[] = [self::class, self::MODULE_GROUP_BACKGROUNDMENU];
+                    $ret[] = [self::class, self::COMPONENT_GROUP_BACKGROUNDMENU];
                 }
                 break;
         }
@@ -170,29 +170,29 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $togglenav = TranslationAPIFacade::getInstance()->__('Toggle Navigation', 'poptheme-wassup');
         $togglehistory = TranslationAPIFacade::getInstance()->__('Toggle Browsing Tabs', 'poptheme-wassup');
 
-        switch ($module[1]) {
-         // Comment Leo 24/10/2016: This is the only difference between self::MODULE_FRAME_TOPSIMPLE and self::MODULE_FRAME_TOPEMBED:
+        switch ($component[1]) {
+         // Comment Leo 24/10/2016: This is the only difference between self::COMPONENT_FRAME_TOPSIMPLE and self::COMPONENT_FRAME_TOPEMBED:
          // the Embed does not use the Side, as such do not execute this JS below which will add class "active-side" and so create a bug
-            case self::MODULE_FRAME_TOP:
-            case self::MODULE_FRAME_TOPSIMPLE:
-                $ret['offcanvas-sidenav-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_SIDE;
-                $ret['offcanvas-navigator-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
+            case self::COMPONENT_FRAME_TOP:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+                $ret['offcanvas-sidenav-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_SIDE;
+                $ret['offcanvas-navigator-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_NAVIGATOR;
 
                 // Save the state of the main navigation (open or close) with a cookie
                 $ret['togglenav-params'] = array(
                     'data-cookieid' => 'togglenav',
-                    'data-cookietarget' => '#'.POP_MODULEID_PAGESECTIONGROUP_ID,
+                    'data-cookietarget' => '#'.POP_COMPONENTID_PAGESECTIONGROUP_ID,
                     'data-cookieclass' => 'active-side',
                     'data-togglecookiebtn' => 'self',
 
@@ -205,8 +205,8 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOP:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOP:
                 $title = $cmsapplicationapi->getSiteName();
 
                 // Generate the small and large logos
@@ -224,15 +224,15 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     );
                 }
 
-                $ret['offcanvas-pagetabs-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
-                // $ret['offcanvas-sidenav-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_SIDE;
-                // $ret['offcanvas-navigator-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
-                $ret['togglesearch-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_TOP;
+                $ret['offcanvas-pagetabs-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYTABS;
+                // $ret['offcanvas-sidenav-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_SIDE;
+                // $ret['offcanvas-navigator-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_NAVIGATOR;
+                $ret['togglesearch-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_TOP;
 
                 // // Save the state of the main navigation (open or close) with a cookie
                 // $ret['togglenav-params'] = array(
                 //     'data-cookieid' => 'togglenav',
-                //     'data-cookietarget' => '#'.POP_MODULEID_PAGESECTIONGROUP_ID,
+                //     'data-cookietarget' => '#'.POP_COMPONENTID_PAGESECTIONGROUP_ID,
                 //     'data-cookieclass' => 'active-side',
                 //     'data-togglecookiebtn' => 'self',
                 // );
@@ -240,7 +240,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 // If class AAL_PoPProcessors is not initialized, then the class below does not exist, and will raise an exception
                 if (defined('POP_NOTIFICATIONSPROCESSORS_INITIALIZED')) {
                     $ret['ids'] = array(
-                        'notifications-count' => AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//[self::class, self::MODULE_ID_NOTIFICATIONSCOUNT],
+                        'notifications-count' => AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//[self::class, self::COMPONENT_ID_NOTIFICATIONSCOUNT],
                     );
                     $ret['params'] = array(
                         'notifications-link' => array(
@@ -333,21 +333,21 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 $ret[GD_JS_CLASSES]['notifications'] = 'notifications pop-waypoints-context scrollable perfect-scrollbar vertical';
                 $ret[GD_JS_CLASSES]['notifications-count'] = 'badge';
 
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-addnew'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOP_ADDNEW]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-userloggedin'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-usernotloggedin'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-about'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['search'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS]);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu-addnew'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOP_ADDNEW]);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu-userloggedin'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN]);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu-usernotloggedin'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN]);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu-about'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_TOPNAV_ABOUT]);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['search'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::COMPONENT_FORM_EVERYTHINGQUICKLINKS]);
                 if (defined('POP_CLUSTERCOMMONPAGES_INITIALIZED')) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-oursponsors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_OURSPONSORS_TOPNAV_SCROLL]);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['block-oursponsors'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_OURSPONSORS_TOPNAV_SCROLL]);
                 }
                 if (defined('POP_NOTIFICATIONSPROCESSORS_INITIALIZED')) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-notifications'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST]);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['block-notifications'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST]);
                 }
                 break;
 
-            case self::MODULE_FRAME_TOPSIMPLE:
-            case self::MODULE_FRAME_TOPEMBED:
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+            case self::COMPONENT_FRAME_TOPEMBED:
                 // Generate the small logo
                 $logo_sizes = array(
                     'small',
@@ -361,7 +361,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     );
                 }
 
-                $ret['offcanvas-pagetabs-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
+                $ret['offcanvas-pagetabs-target'] = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODYTABS;
 
                 $ret['targets'] = array(
                     'home' => '_blank',
@@ -385,7 +385,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 );
                 break;
 
-            case self::MODULE_FRAME_SIDE:
+            case self::COMPONENT_FRAME_SIDE:
                 $title = $cmsapplicationapi->getSiteName();
 
                 // Allow the ThemeStyle to override the logo size
@@ -407,11 +407,11 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     'togglenavigation' => $togglenav,
                 );
 
-                $side = [PoP_Module_Processor_SideGroups::class, PoP_Module_Processor_SideGroups::MODULE_GROUP_SIDE];
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['side'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($side);
+                $side = [PoP_Module_Processor_SideGroups::class, PoP_Module_Processor_SideGroups::COMPONENT_GROUP_SIDE];
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['side'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($side);
                 break;
 
-            case self::MODULE_FRAME_BACKGROUND:
+            case self::COMPONENT_FRAME_BACKGROUND:
                 $ret[GD_JS_TITLES]['title'] = PoP_ApplicationProcessors_Utils::getWelcomeTitle(true);
                 $ret[GD_JS_TITLES]['description'] = gdGetWebsiteDescription();
                 if ($img = gdImagesBackground()) {
@@ -421,7 +421,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 }
 
                 if (PoP_ApplicationProcessors_Utils::addBackgroundMenu()) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([self::class, self::MODULE_GROUP_BACKGROUNDMENU]);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([self::class, self::COMPONENT_GROUP_BACKGROUNDMENU]);
                 }
                 break;
         }
@@ -429,14 +429,14 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($component, $props);
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_FRAME_TOPSIMPLE:
-            case self::MODULE_FRAME_TOPEMBED:
+        switch ($component[1]) {
+            case self::COMPONENT_FRAME_TOPSIMPLE:
+            case self::COMPONENT_FRAME_TOPEMBED:
                 $ret[GD_JS_TITLES]['document'] = \PoP\Root\App::applyFilters(
                     'GD_DataLoad_QueryInputOutputHandler_FrameTopSimplePageSection:document_title',
                     $cmsapplicationapi->getDocumentTitle()

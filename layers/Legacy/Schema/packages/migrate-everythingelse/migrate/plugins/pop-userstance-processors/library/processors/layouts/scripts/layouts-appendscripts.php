@@ -2,35 +2,35 @@
 
 class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_AppendScriptsLayoutsBase
 {
-    public final const MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON = 'script-createorupdatestancebutton';
+    public final const COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON = 'script-createorupdatestancebutton';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON],
+            [self::class, self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON],
         );
     }
 
-    public function getOperation(array $module, array &$props)
+    public function getOperation(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON:
+        switch ($component[1]) {
+            case self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON:
                 return 'replace';
         }
 
-        return parent::getOperation($module, $props);
+        return parent::getOperation($component, $props);
     }
     
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON:
+        switch ($component[1]) {
+            case self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON:
                 $classes = array(
-                    self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON => 'createorupdatestance',
+                    self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON => 'createorupdatestance',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$module[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
                 break;
         }
         

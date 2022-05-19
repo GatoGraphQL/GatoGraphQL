@@ -7,6 +7,6 @@ abstract class PoP_Module_TabContentPageSectionComponentRoutingProcessorBase ext
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_PAGESECTION_TAB);
+        return array(POP_PAGECOMPONENTGROUP_PAGESECTION_TAB);
     }
 }

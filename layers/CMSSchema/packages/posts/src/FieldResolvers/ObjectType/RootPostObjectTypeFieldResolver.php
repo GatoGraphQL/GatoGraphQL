@@ -13,8 +13,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
-use PoPCMSSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
-use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\CommonCustomPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -57,14 +57,14 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'post' => [
-                CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS
+                CommonCustomPostFilterInputContainerComponentProcessor::class,
+                CommonCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS
             ],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            default => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
         };
     }
 
@@ -91,8 +91,8 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
             case 'post':
                 if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
-                        FilterInputModuleProcessor::class,
-                        FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS
+                        FilterInputComponentProcessor::class,
+                        FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS
                     ]);
                     $adminFieldArgNames[] = $customPostStatusFilterInputName;
                 }

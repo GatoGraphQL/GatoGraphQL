@@ -2,22 +2,22 @@
 
 class PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE = 'quicklinkbuttongroup-usersendmessage';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE = 'quicklinkbuttongroup-usersendmessage';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE],
+            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE:
-                $ret[] = [PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::class, PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW];
+        switch ($component[1]) {
+            case self::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE:
+                $ret[] = [PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::class, PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW];
                 break;
         }
         

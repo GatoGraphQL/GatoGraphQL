@@ -2,32 +2,32 @@
 
 class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY = 'filterinputwrapper-communities';
+    public final const COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY = 'filterinputwrapper-communities';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY],
+            [self::class, self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
-                $ret[] = [PoP_UserCommunities_Module_Processor_CheckboxFormInputs::class, PoP_UserCommunities_Module_Processor_CheckboxFormInputs::MODULE_FILTERINPUT_FILTERBYCOMMUNITY];
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
+                $ret[] = [PoP_UserCommunities_Module_Processor_CheckboxFormInputs::class, PoP_UserCommunities_Module_Processor_CheckboxFormInputs::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY];
                 break;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
                 return 'isCommunity';
         }
 

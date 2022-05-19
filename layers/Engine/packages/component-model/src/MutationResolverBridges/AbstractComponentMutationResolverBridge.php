@@ -9,8 +9,8 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Root\Exception\AbstractClientException;
@@ -20,15 +20,15 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 {
     use BasicServiceTrait;
 
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
-    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
-        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->componentProcessorManager = $componentProcessorManager;
     }
-    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
     public function getSuccessString(string | int $resultID): ?string
@@ -127,7 +127,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 
         $this->modifyDataProperties($data_properties, $resultID);
 
-        // Save the result for some module to incorporate it into the query args
+        // Save the result for some component to incorporate it into the query args
         App::getMutationResolutionStore()->setResult($this, $resultID);
 
         $return[ResponseConstants::SUCCESS] = true;

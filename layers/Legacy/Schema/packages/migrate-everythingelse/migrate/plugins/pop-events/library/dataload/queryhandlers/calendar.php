@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\AbstractQueryInputOutputHandler;
 
 class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOutputHandler

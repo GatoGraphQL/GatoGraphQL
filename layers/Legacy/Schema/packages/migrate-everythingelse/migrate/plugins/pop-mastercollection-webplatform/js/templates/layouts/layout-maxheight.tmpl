@@ -1,7 +1,7 @@
 {{#with dbObject}}
 	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="js-dynamic-height {{../class}}" style="{{../style}}" data-maxheight="{{../maxheight}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
 		<div class="inner dynamic-height-wrap">
-			{{#each ../submoduleoutputnames.inners}}
+			{{#each ../subcomponentoutputnames.inners}}
 				{{#withModule ../../. this}}
 					{{enterModule ../../../.}}
 				{{/withModule}}

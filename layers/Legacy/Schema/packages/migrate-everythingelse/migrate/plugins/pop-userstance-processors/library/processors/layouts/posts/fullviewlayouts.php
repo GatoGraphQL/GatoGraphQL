@@ -1,55 +1,55 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLVIEW_STANCE = 'layout-fullview-stance';
+    public final const COMPONENT_LAYOUT_FULLVIEW_STANCE = 'layout-fullview-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLVIEW_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_STANCE],
         );
     }
 
-    public function getFooterSubmodules(array $module)
+    public function getFooterSubcomponents(array $component)
     {
-        $ret = parent::getFooterSubmodules($module);
+        $ret = parent::getFooterSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FULLVIEW_STANCE:
-                $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::MODULE_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL];
-                $ret[] = [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION];
-                $ret[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER];
-                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
+                $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL];
+                $ret[] = [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION];
+                $ret[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER];
+                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS];
                 break;
         }
 
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FULLVIEW_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
                 $sidebars = array(
-                    self::MODULE_LAYOUT_FULLVIEW_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE],
+                    self::COMPONENT_LAYOUT_FULLVIEW_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubcomponent($component);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FULLVIEW_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
                 $ret[GD_JS_CLASSES]['content'] = 'alert alert-stance';
                 $ret[GD_JS_CLASSES]['content-inner'] = 'readable';
                 break;
@@ -58,13 +58,13 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($module);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FULLVIEW_STANCE:
-                $ret[] = [UserStance_Module_Processor_Layouts::class, UserStance_Module_Processor_Layouts::MODULE_LAYOUTSTANCE];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
+                $ret[] = [UserStance_Module_Processor_Layouts::class, UserStance_Module_Processor_Layouts::COMPONENT_LAYOUTSTANCE];
                 break;
         }
 

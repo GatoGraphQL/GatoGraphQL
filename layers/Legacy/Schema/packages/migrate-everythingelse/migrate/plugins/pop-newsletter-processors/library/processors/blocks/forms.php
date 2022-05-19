@@ -3,71 +3,71 @@ use PoP\Engine\Route\RouteUtils;
 
 class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksBase
 {
-    public final const MODULE_BLOCK_NEWSLETTER = 'block-newsletter';
-    public final const MODULE_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
-    public final const MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
+    public final const COMPONENT_BLOCK_NEWSLETTER = 'block-newsletter';
+    public final const COMPONENT_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
+    public final const COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_NEWSLETTER],
-            [self::class, self::MODULE_BLOCKCODE_NEWSLETTER],
-            [self::class, self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION],
+            [self::class, self::COMPONENT_BLOCK_NEWSLETTER],
+            [self::class, self::COMPONENT_BLOCKCODE_NEWSLETTER],
+            [self::class, self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
-            self::MODULE_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
-            self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
+            self::COMPONENT_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
+            self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_NEWSLETTER:
                 return '';
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
-                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTER];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_NEWSLETTER:
+                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTER];
                 break;
 
-            case self::MODULE_BLOCKCODE_NEWSLETTER:
-                $ret[] = [GenericForms_Module_Processor_PageCodes::class, GenericForms_Module_Processor_PageCodes::MODULE_PAGECODE_NEWSLETTER];
-                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTER];
+            case self::COMPONENT_BLOCKCODE_NEWSLETTER:
+                $ret[] = [GenericForms_Module_Processor_PageCodes::class, GenericForms_Module_Processor_PageCodes::COMPONENT_PAGECODE_NEWSLETTER];
+                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTER];
                 break;
 
-            case self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
-                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION];
+            case self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION:
+                $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $newsletter_description = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_GFBlocks:newsletter:description',
             ''
         );
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
-                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'class', 'form-inline');
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_NEWSLETTER:
+                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'class', 'form-inline');
                 if ($newsletter_description) {
                     $title_tag = \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_GFBlocks:newsletter:titletag',
@@ -78,7 +78,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                         $title_tag,
                         $newsletter_description
                     );
-                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description', $description);
+                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'description', $description);
                 }
 
                 if ($description_bottom = \PoP\Root\App::applyFilters(
@@ -92,31 +92,31 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                         $description_bottom
                     );
 
-                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description-bottom', $description_bottom);
+                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'description-bottom', $description_bottom);
                 }
                 break;
 
-            case self::MODULE_BLOCKCODE_NEWSLETTER:
-                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'class', 'alert alert-info');
+            case self::COMPONENT_BLOCKCODE_NEWSLETTER:
+                $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'class', 'alert alert-info');
 
                 if ($newsletter_description) {
                     $description = sprintf(
                         '<p>%s</p>',
                         $newsletter_description
                     );
-                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description', $description);
+                    $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'description', $description);
                 }
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_NEWSLETTER:
-            case self::MODULE_BLOCKCODE_NEWSLETTER:
-                $this->appendProp($module, $props, 'class', 'block-newsletter');
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_NEWSLETTER:
+            case self::COMPONENT_BLOCKCODE_NEWSLETTER:
+                $this->appendProp($component, $props, 'class', 'block-newsletter');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

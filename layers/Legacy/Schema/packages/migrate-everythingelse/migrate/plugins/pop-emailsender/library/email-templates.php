@@ -25,7 +25,7 @@ class PoP_EmailSender_Templates
         return '';
     }
 
-    public function getModuleFolders()
+    public function getTemplateFolders()
     {
         if (!$this->template_folders) {
             $this->template_folders = \PoP\Root\App::applyFilters(

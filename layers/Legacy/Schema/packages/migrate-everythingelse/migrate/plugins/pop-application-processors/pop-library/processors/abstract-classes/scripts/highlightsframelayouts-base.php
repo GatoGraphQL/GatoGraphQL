@@ -2,15 +2,15 @@
 
 abstract class PoP_Module_Processor_HighlightReferencesScriptFrameLayoutsBase extends PoP_Module_Processor_ScriptFrameLayoutsBase
 {
-    public function doAppend(array $module)
+    public function doAppend(array $component)
     {
         return true;
     }
 
-    public function getScriptSubmodule(array $module)
+    public function getScriptSubcomponent(array $component)
     {
-        return $this->doAppend($module) ? 
-        	[Wassup_Module_Processor_ScriptsLayouts::class, Wassup_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_HIGHLIGHTS] : 
-        	[Wassup_Module_Processor_ScriptsLayouts::class, Wassup_Module_Processor_ScriptsLayouts::MODULE_SCRIPT_HIGHLIGHTSEMPTY];
+        return $this->doAppend($component) ? 
+        	[Wassup_Module_Processor_ScriptsLayouts::class, Wassup_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_HIGHLIGHTS] : 
+        	[Wassup_Module_Processor_ScriptsLayouts::class, Wassup_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY];
     }
 }

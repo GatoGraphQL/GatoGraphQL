@@ -2,58 +2,58 @@
 
 class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
-    public final const MODULE_CAROUSEL_USERS = 'carousel-users';
+    public final const COMPONENT_CAROUSEL_USERS = 'carousel-users';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSEL_USERS],
+            [self::class, self::COMPONENT_CAROUSEL_USERS],
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_USERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_USERS:
 
-                $this->appendProp($module, $props, 'class', 'slide');
-                $this->appendProp($module, $props, 'class', 'widget widget-info');
+                $this->appendProp($component, $props, 'class', 'slide');
+                $this->appendProp($component, $props, 'class', 'widget widget-info');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_USERS:
-                return [PoP_Module_Processor_CustomCarouselInners::class, PoP_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_USERS];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_USERS:
+                return [PoP_Module_Processor_CustomCarouselInners::class, PoP_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_USERS];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $module, array &$props)
+    public function getMode(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_USERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_USERS:
 
                 return 'static';
         }
 
-        return parent::getMode($module, $props);
+        return parent::getMode($component, $props);
     }
 
 
-    public function getControlsTopSubmodule(array $module)
+    public function getControlsTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_USERS:
-                return [PoP_Module_Processor_CustomCarouselControls::class, PoP_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_USERS];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_USERS:
+                return [PoP_Module_Processor_CustomCarouselControls::class, PoP_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_USERS];
         }
 
-        return parent::getControlsTopSubmodule($module);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

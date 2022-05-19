@@ -5,83 +5,83 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_LOGIN = 'block-login';
-    public final const MODULE_BLOCK_LOSTPWD = 'block-lostpwd';
-    public final const MODULE_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
-    public final const MODULE_BLOCK_LOGOUT = 'block-logout';
+    public final const COMPONENT_BLOCK_LOGIN = 'block-login';
+    public final const COMPONENT_BLOCK_LOSTPWD = 'block-lostpwd';
+    public final const COMPONENT_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
+    public final const COMPONENT_BLOCK_LOGOUT = 'block-logout';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_LOGIN],
-            [self::class, self::MODULE_BLOCK_LOSTPWD],
-            [self::class, self::MODULE_BLOCK_LOSTPWDRESET],
-            [self::class, self::MODULE_BLOCK_LOGOUT],
+            [self::class, self::COMPONENT_BLOCK_LOGIN],
+            [self::class, self::COMPONENT_BLOCK_LOSTPWD],
+            [self::class, self::COMPONENT_BLOCK_LOSTPWDRESET],
+            [self::class, self::COMPONENT_BLOCK_LOGOUT],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
-            self::MODULE_BLOCK_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
-            self::MODULE_BLOCK_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
-            self::MODULE_BLOCK_LOGIN => POP_USERLOGIN_ROUTE_LOGIN,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
+            self::COMPONENT_BLOCK_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
+            self::COMPONENT_BLOCK_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
+            self::COMPONENT_BLOCK_LOGIN => POP_USERLOGIN_ROUTE_LOGIN,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getSubmenuSubmodule(array $module)
+    public function getSubmenuSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_LOGIN:
-            case self::MODULE_BLOCK_LOSTPWD:
-            case self::MODULE_BLOCK_LOSTPWDRESET:
-                return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::MODULE_SUBMENU_ACCOUNT];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_LOGIN:
+            case self::COMPONENT_BLOCK_LOSTPWD:
+            case self::COMPONENT_BLOCK_LOSTPWDRESET:
+                return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::COMPONENT_SUBMENU_ACCOUNT];
         }
 
-        return parent::getSubmenuSubmodule($module);
+        return parent::getSubmenuSubcomponent($component);
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_LOGIN:
-            case self::MODULE_BLOCK_LOSTPWD:
-            case self::MODULE_BLOCK_LOSTPWDRESET:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_ACCOUNT];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_LOGIN:
+            case self::COMPONENT_BLOCK_LOSTPWD:
+            case self::COMPONENT_BLOCK_LOSTPWDRESET:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_ACCOUNT];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        $inner_modules = array(
-            self::MODULE_BLOCK_LOGIN => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOGIN],
-            self::MODULE_BLOCK_LOSTPWD => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOSTPWD],
-            self::MODULE_BLOCK_LOSTPWDRESET => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOSTPWDRESET],
-            self::MODULE_BLOCK_LOGOUT => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOGOUT],
+        $inner_components = array(
+            self::COMPONENT_BLOCK_LOGIN => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::COMPONENT_DATALOAD_LOGIN],
+            self::COMPONENT_BLOCK_LOSTPWD => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::COMPONENT_DATALOAD_LOSTPWD],
+            self::COMPONENT_BLOCK_LOSTPWDRESET => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::COMPONENT_DATALOAD_LOSTPWDRESET],
+            self::COMPONENT_BLOCK_LOGOUT => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::COMPONENT_DATALOAD_LOGOUT],
         );
 
-        if ($inner = $inner_modules[$module[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
-        if ($module == [self::class, self::MODULE_BLOCK_LOGIN]) {
-            $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINWELCOME];
+        if ($component == [self::class, self::COMPONENT_BLOCK_LOGIN]) {
+            $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME];
         }
 
         return $ret;
     }
 
-    protected function getDescription(array $module, array &$props)
+    protected function getDescription(array $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_LOGOUT:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_LOGOUT:
                 // Notice that it works for the domain from wherever this block is being fetched from!
                 return sprintf(
                     '<p class="visible-notloggedin-%s"><em>%s</em></p>',
@@ -90,18 +90,18 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
                 );
         }
 
-        return parent::getDescription($module, $props);
+        return parent::getDescription($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_LOGIN:
-                $this->appendProp([[PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINWELCOME]], $props, 'class', 'well');
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_LOGIN:
+                $this->appendProp([[PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME]], $props, 'class', 'well');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

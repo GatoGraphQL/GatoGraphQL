@@ -2,29 +2,29 @@
 
 class GD_EM_Module_Processor_Maps extends GD_EM_Module_Processor_MapsBase
 {
-    public final const MODULE_EM_MAP_POST = 'em-map-post';
-    public final const MODULE_EM_MAP_USER = 'em-map-user';
+    public final const COMPONENT_EM_MAP_POST = 'em-map-post';
+    public final const COMPONENT_EM_MAP_USER = 'em-map-user';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_MAP_POST],
-            [self::class, self::MODULE_EM_MAP_USER],
+            [self::class, self::COMPONENT_EM_MAP_POST],
+            [self::class, self::COMPONENT_EM_MAP_USER],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_EM_MAP_POST => [GD_EM_Module_Processor_MapInners::class, GD_EM_Module_Processor_MapInners::MODULE_EM_MAPINNER_POST],
-            self::MODULE_EM_MAP_USER => [GD_EM_Module_Processor_MapInners::class, GD_EM_Module_Processor_MapInners::MODULE_EM_MAPINNER_USER],
+            self::COMPONENT_EM_MAP_POST => [GD_EM_Module_Processor_MapInners::class, GD_EM_Module_Processor_MapInners::COMPONENT_EM_MAPINNER_POST],
+            self::COMPONENT_EM_MAP_USER => [GD_EM_Module_Processor_MapInners::class, GD_EM_Module_Processor_MapInners::COMPONENT_EM_MAPINNER_USER],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

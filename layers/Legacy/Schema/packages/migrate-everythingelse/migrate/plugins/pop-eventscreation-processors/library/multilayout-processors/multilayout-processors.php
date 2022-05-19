@@ -8,7 +8,7 @@ use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
@@ -19,13 +19,13 @@ class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayo
             switch ($handle) {
                 case POP_MULTILAYOUT_HANDLE_POSTCONTENT:
                     $pasts = array(
-                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
+                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
                     );
                     $defaults = array( // <= Future and Current Events
-                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT],
+                        POP_FORMAT_TABLE => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT],
                     );
 
-                    // TODO: Split past/non-past on a level below, using the conditionalOnDataFieldSubmodule
+                    // TODO: Split past/non-past on a level below, using the conditionalOnDataFieldSubcomponent
                     // Temporarily commented (code `$event_post_type.'-'.Scopes::PAST` belongs to the old way of doing things, doesn't work anymore)
                     // if ($layout = $pasts[$format] ?? null) {
                     //     $layouts[$event_post_type.'-'.Scopes::PAST] = $layout;

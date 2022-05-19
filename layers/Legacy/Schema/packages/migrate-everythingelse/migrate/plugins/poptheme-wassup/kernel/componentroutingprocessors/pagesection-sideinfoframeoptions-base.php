@@ -7,6 +7,6 @@ abstract class PoP_Module_SideInfoFrameOptionsPageSectionComponentRoutingProcess
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOFRAMEOPTIONS);
+        return array(POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEINFOFRAMEOPTIONS);
     }
 }

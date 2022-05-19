@@ -1,69 +1,69 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_COLLAPSESEGMENTEDBUTTON];
     }
 
-    public function getSegmentedbuttonSubmodules(array $module)
+    public function getSegmentedbuttonSubcomponents(array $component)
     {
         return array();
     }
-    public function getDropdownsegmentedbuttonSubmodules(array $module)
+    public function getDropdownsegmentedbuttonSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
         $ret = array_merge(
             $ret,
-            $this->getSegmentedbuttonSubmodules($module),
-            $this->getDropdownsegmentedbuttonSubmodules($module)
+            $this->getSegmentedbuttonSubcomponents($component),
+            $this->getDropdownsegmentedbuttonSubcomponents($component)
         );
 
         return $ret;
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
         return 'btn btn-default';
     }
-    public function getCollapseClass(array $module)
+    public function getCollapseClass(array $component)
     {
         return 'pop-showactive';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        // Add the submoduleoutputnames of all blocks
-        if (!$ret[GD_JS_SUBMODULEOUTPUTNAMES]) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES] = array();
+        // Add the subcomponentoutputnames of all blocks
+        if (!$ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES] = array();
         }
 
         $ret[GD_JS_TITLES]['toggle'] = TranslationAPIFacade::getInstance()->__('Toggle menu', 'pop-coreprocessors');
-        $ret[GD_JS_CLASSES]['btn'] = $this->getBtnClass($module, $props);
-        $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($module);
+        $ret[GD_JS_CLASSES]['btn'] = $this->getBtnClass($component, $props);
+        $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($component);
 
-        $segmentedbuttons = $this->getSegmentedbuttonSubmodules($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['segmentedbuttons'] = array_map(
-            [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
+        $segmentedbuttons = $this->getSegmentedbuttonSubcomponents($component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['segmentedbuttons'] = array_map(
+            [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'], 
             $segmentedbuttons
         );
 
-        $segmentedbuttons = $this->getDropdownsegmentedbuttonSubmodules($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
-            [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
+        $segmentedbuttons = $this->getDropdownsegmentedbuttonSubcomponents($component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
+            [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'], 
             $segmentedbuttons
         );
 

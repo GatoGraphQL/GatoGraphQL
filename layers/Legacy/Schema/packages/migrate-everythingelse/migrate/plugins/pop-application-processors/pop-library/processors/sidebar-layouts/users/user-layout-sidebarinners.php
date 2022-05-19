@@ -2,35 +2,35 @@
 
 class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL = 'layout-usersidebarinner-vertical';
-    public final const MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL = 'layout-usersidebarinner-horizontal';
-    public final const MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL = 'layout-usersidebarinner-compacthorizontal';
-    public function getModulesToProcess(): array
+    public final const COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL = 'layout-usersidebarinner-vertical';
+    public final const COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL = 'layout-usersidebarinner-horizontal';
+    public final const COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL = 'layout-usersidebarinner-compacthorizontal';
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
                     $ret,
-                    FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)
+                    FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_GENERICUSER)
                 );
                 break;
 
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 $ret = array_merge(
                     $ret,
-                    FullUserSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_GENERICUSER)
+                    FullUserSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_GENERICUSER)
                 );
                 break;
         }
@@ -38,28 +38,28 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
                 return 'col-xsm-4';
 
-            case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($component);
     }
 }
 

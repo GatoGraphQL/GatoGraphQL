@@ -2,37 +2,37 @@
 
 class PoP_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public final const MODULE_VERTICALSIDEBAR_AUTHOR_GENERIC = 'vertical-sidebar-author-generic';
+    public final const COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC = 'vertical-sidebar-author-generic';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBAR_AUTHOR_GENERIC],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_VERTICALSIDEBAR_AUTHOR_GENERIC => [PoP_Module_Processor_CustomVerticalAuthorSidebarInners::class, PoP_Module_Processor_CustomVerticalAuthorSidebarInners::MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
+            self::COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC => [PoP_Module_Processor_CustomVerticalAuthorSidebarInners::class, PoP_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_VERTICALSIDEBAR_AUTHOR_GENERIC:
-                $this->appendProp($module, $props, 'class', 'vertical');
+        switch ($component[1]) {
+            case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC:
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

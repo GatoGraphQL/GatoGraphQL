@@ -3,23 +3,23 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMessagesBase
 {
-    public final const MODULE_MESSAGE_NOCATEGORIES = 'message-nocategories';
+    public final const COMPONENT_MESSAGE_NOCATEGORIES = 'message-nocategories';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MESSAGE_NOCATEGORIES],
+            [self::class, self::COMPONENT_MESSAGE_NOCATEGORIES],
         );
     }
 
-    public function getMessage(array $module)
+    public function getMessage(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_MESSAGE_NOCATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_MESSAGE_NOCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('No Categories', 'poptheme-wassup');
         }
 
-        return parent::getMessage($module);
+        return parent::getMessage($component);
     }
 }
 

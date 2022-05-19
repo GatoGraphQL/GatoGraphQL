@@ -1,8 +1,8 @@
 <?php
 
-abstract class PoP_Module_Processor_PostAdditionalLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_PostAdditionalLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL];
     }
@@ -12,14 +12,14 @@ abstract class PoP_Module_Processor_PostAdditionalLayoutsBase extends PoPEngine_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return array('multilayoutKeys');
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'pop-multilayout-label');
-        parent::initModelProps($module, $props);
+        $this->appendProp($component, $props, 'class', 'pop-multilayout-label');
+        parent::initModelProps($component, $props);
     }
 }

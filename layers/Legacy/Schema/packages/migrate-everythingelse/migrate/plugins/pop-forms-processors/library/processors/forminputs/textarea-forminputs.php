@@ -3,74 +3,74 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public final const MODULE_FORMINPUT_TEXTAREAEDITOR = 'forminput-textarea-editor';
-    public final const MODULE_FORMINPUT_EMAILS = 'forminput-emails';
-    public final const MODULE_FORMINPUT_ADDITIONALMESSAGE = 'forminput-additionalmessage';
+    public final const COMPONENT_FORMINPUT_TEXTAREAEDITOR = 'forminput-textarea-editor';
+    public final const COMPONENT_FORMINPUT_EMAILS = 'forminput-emails';
+    public final const COMPONENT_FORMINPUT_ADDITIONALMESSAGE = 'forminput-additionalmessage';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TEXTAREAEDITOR],
-            [self::class, self::MODULE_FORMINPUT_EMAILS],
-            [self::class, self::MODULE_FORMINPUT_ADDITIONALMESSAGE],
+            [self::class, self::COMPONENT_FORMINPUT_TEXTAREAEDITOR],
+            [self::class, self::COMPONENT_FORMINPUT_EMAILS],
+            [self::class, self::COMPONENT_FORMINPUT_ADDITIONALMESSAGE],
         );
     }
 
-    public function getRows(array $module, array &$props)
+    public function getRows(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
                 return 5;
         }
 
-        return parent::getRows($module, $props);
+        return parent::getRows($component, $props);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Content', 'pop-coreprocessors');
                 
-            case self::MODULE_FORMINPUT_EMAILS:
+            case self::COMPONENT_FORMINPUT_EMAILS:
                 return TranslationAPIFacade::getInstance()->__('Email(s)', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_ADDITIONALMESSAGE:
+            case self::COMPONENT_FORMINPUT_ADDITIONALMESSAGE:
                 return TranslationAPIFacade::getInstance()->__('Additional message', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
-            case self::MODULE_FORMINPUT_EMAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
+            case self::COMPONENT_FORMINPUT_EMAILS:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
                 return 'contentEdit';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 
-    public function clearInput(array $module, array &$props)
+    public function clearInput(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_EMAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_EMAILS:
                 return true;
         }
 
-        return parent::clearInput($module, $props);
+        return parent::clearInput($component, $props);
     }
 }
 

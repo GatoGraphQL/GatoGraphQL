@@ -12,12 +12,12 @@ class PoPTheme_Wassup_Volunteering_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $module, $props_in_array, $processor)
+    public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
-            case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
-                $processor->setProp([PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::MODULE_BLOCK_VOLUNTEER], $props, 'title', '');
+        switch ($component[1]) {
+            case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
+                $processor->setProp([PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::COMPONENT_BLOCK_VOLUNTEER], $props, 'title', '');
                 break;
         }
     }

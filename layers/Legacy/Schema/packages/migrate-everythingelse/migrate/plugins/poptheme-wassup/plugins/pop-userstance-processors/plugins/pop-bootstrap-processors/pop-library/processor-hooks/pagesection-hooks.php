@@ -12,17 +12,17 @@ class PoPTheme_UserStance_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $module, $props_in_array, $processor)
+    public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
-            case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
-                $submodules = array(
-                    [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_STANCE_CREATE],
-                    [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_STANCE_UPDATE],
+        switch ($component[1]) {
+            case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
+                $subComponents = array(
+                    [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_CREATE],
+                    [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_UPDATE],
                 );
-                foreach ($submodules as $submodule) {
-                    $processor->setProp($submodule, $props, 'title', '');
+                foreach ($subComponents as $subComponent) {
+                    $processor->setProp($subComponent, $props, 'title', '');
                 }
                 break;
         }

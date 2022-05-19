@@ -2,76 +2,76 @@
 
 class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
-    public final const MODULE_CAROUSEL_EVENTS = 'carousel-events';
-    public final const MODULE_CAROUSEL_AUTHOREVENTS = 'carousel-authorevents';
-    public final const MODULE_CAROUSEL_TAGEVENTS = 'carousel-tagevents';
+    public final const COMPONENT_CAROUSEL_EVENTS = 'carousel-events';
+    public final const COMPONENT_CAROUSEL_AUTHOREVENTS = 'carousel-authorevents';
+    public final const COMPONENT_CAROUSEL_TAGEVENTS = 'carousel-tagevents';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSEL_EVENTS],
-            [self::class, self::MODULE_CAROUSEL_AUTHOREVENTS],
-            [self::class, self::MODULE_CAROUSEL_TAGEVENTS],
+            [self::class, self::COMPONENT_CAROUSEL_EVENTS],
+            [self::class, self::COMPONENT_CAROUSEL_AUTHOREVENTS],
+            [self::class, self::COMPONENT_CAROUSEL_TAGEVENTS],
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_EVENTS:
-            case self::MODULE_CAROUSEL_AUTHOREVENTS:
-            case self::MODULE_CAROUSEL_TAGEVENTS:
-                $this->appendProp($module, $props, 'class', 'slide');
-                $this->appendProp($module, $props, 'class', 'widget widget-info');
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_EVENTS:
+            case self::COMPONENT_CAROUSEL_AUTHOREVENTS:
+            case self::COMPONENT_CAROUSEL_TAGEVENTS:
+                $this->appendProp($component, $props, 'class', 'slide');
+                $this->appendProp($component, $props, 'class', 'widget widget-info');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_EVENTS:
-                return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_EVENTS];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_EVENTS:
+                return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_EVENTS];
 
-            case self::MODULE_CAROUSEL_AUTHOREVENTS:
-                return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_AUTHOREVENTS];
+            case self::COMPONENT_CAROUSEL_AUTHOREVENTS:
+                return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_AUTHOREVENTS];
 
-            case self::MODULE_CAROUSEL_TAGEVENTS:
-                return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_TAGEVENTS];
+            case self::COMPONENT_CAROUSEL_TAGEVENTS:
+                return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_TAGEVENTS];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $module, array &$props)
+    public function getMode(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_EVENTS:
-            case self::MODULE_CAROUSEL_AUTHOREVENTS:
-            case self::MODULE_CAROUSEL_TAGEVENTS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_EVENTS:
+            case self::COMPONENT_CAROUSEL_AUTHOREVENTS:
+            case self::COMPONENT_CAROUSEL_TAGEVENTS:
                 return 'static';
         }
 
-        return parent::getMode($module, $props);
+        return parent::getMode($component, $props);
     }
 
 
-    public function getControlsTopSubmodule(array $module)
+    public function getControlsTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_EVENTS:
-                return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_EVENTS];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_EVENTS:
+                return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_EVENTS];
 
-            case self::MODULE_CAROUSEL_AUTHOREVENTS:
-                return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_AUTHOREVENTS];
+            case self::COMPONENT_CAROUSEL_AUTHOREVENTS:
+                return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS];
 
-            case self::MODULE_CAROUSEL_TAGEVENTS:
-                return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_TAGEVENTS];
+            case self::COMPONENT_CAROUSEL_TAGEVENTS:
+                return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_TAGEVENTS];
         }
 
-        return parent::getControlsTopSubmodule($module);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

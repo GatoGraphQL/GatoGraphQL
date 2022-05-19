@@ -2,50 +2,50 @@
 
 abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Module_Processor_PreviewPostLayoutsBase
 {
-    protected function getDetailsfeedBottomSubmodules(array $module)
+    protected function getDetailsfeedBottomSubcomponents(array $component)
     {
         $layouts = array();
 
         // Add the highlights and the referencedby. Lazy or not lazy?
         if (PoP_ApplicationProcessors_Utils::feedDetailsLazyload()) {
-            $layouts[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER];
-            $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS];
-            $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY];
+            $layouts[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER];
+            $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS];
+            $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY];
         } else {
-            $layouts[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS];
-            $layouts[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS];
+            $layouts[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS];
+            $layouts[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_DETAILS];
         }
 
         // Allow to override. Eg: TPP Debate website adds the Stance Counter
-        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_modules', $layouts, $module);
+        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_components', $layouts, $component);
 
         return $layouts;
     }
 
-    public function horizontalLayout(array $module)
+    public function horizontalLayout(array $component)
     {
         return false;
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $component)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->getQuicklinkgroupTopSubmodule($module)) {
+        if ($this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup-top'] = 'icon-only pull-right';
         }
 
         $ret[GD_JS_CLASSES]['title'] = 'media-heading';
-        if ($this->horizontalLayout($module)) {
+        if ($this->horizontalLayout($component)) {
             $ret[GD_JS_CLASSES]['wrapper'] = 'row';
             $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'col-xsm-4';
             $ret[GD_JS_CLASSES]['content-body'] = 'col-xsm-8';
-        } elseif ($this->horizontalMediaLayout($module)) {
+        } elseif ($this->horizontalMediaLayout($component)) {
             $ret[GD_JS_CLASSES]['wrapper'] = 'media'; //' overflow-visible';
             $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'media-left';
             $ret[GD_JS_CLASSES]['content-body'] = 'media-body';
@@ -54,16 +54,16 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Make the thumb image responsive if it is not the media layout
-        if (!$this->horizontalMediaLayout($module)) {
-            if ($thumb = $this->getPostThumbSubmodule($module)) {
+        if (!$this->horizontalMediaLayout($component)) {
+            if ($thumb = $this->getPostThumbSubcomponent($component)) {
                 $this->appendProp($thumb, $props, 'img-class', 'img-responsive');
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

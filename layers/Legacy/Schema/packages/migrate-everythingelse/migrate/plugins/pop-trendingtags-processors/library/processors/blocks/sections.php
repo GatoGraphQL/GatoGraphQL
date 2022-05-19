@@ -2,45 +2,45 @@
 
 class PoP_TrendingTags_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public final const MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS = 'block-trendingtags-scroll-details';
-    public final const MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST = 'block-trendingtags-scroll-list';
+    public final const COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS = 'block-trendingtags-scroll-details';
+    public final const COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST = 'block-trendingtags-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
-            self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
+            self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
-            self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS => [PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS],
-            self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST => [PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST],
+        $inner_components = array(
+            self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS => [PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST => [PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST:
-                return [PoP_TrendingTags_Module_Processor_CustomControlGroups::class, PoP_TrendingTags_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_TRENDINGTAGLIST];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST:
+                return [PoP_TrendingTags_Module_Processor_CustomControlGroups::class, PoP_TrendingTags_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_TRENDINGTAGLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

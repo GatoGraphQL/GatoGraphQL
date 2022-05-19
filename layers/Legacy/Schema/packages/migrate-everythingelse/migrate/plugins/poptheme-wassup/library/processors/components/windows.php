@@ -1,58 +1,58 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
 {
-    public final const MODULE_WINDOW_ADDONS = 'window-addons';
+    public final const COMPONENT_WINDOW_ADDONS = 'window-addons';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WINDOW_ADDONS],
+            [self::class, self::COMPONENT_WINDOW_ADDONS],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
         return array_merge(
-            parent::getSubmodules($module),
-            $this->getInnerSubmodules($module)
+            parent::getSubcomponents($component),
+            $this->getInnerSubcomponents($component)
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_WINDOW_ADDONS:
-                $load_module = true;
+        switch ($component[1]) {
+            case self::COMPONENT_WINDOW_ADDONS:
+                $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_module = $module == $pop_module_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $addons_module = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS];
-                $addontabs_module = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_ADDONTABS];
-                if ($load_module) {
+                $addons_component = [PoP_Module_Processor_TabPanes::class, PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS];
+                $addontabs_component = [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_ADDONTABS];
+                if ($load_component) {
                     return array(
-                        $addons_module,
-                        $addontabs_module,
+                        $addons_component,
+                        $addontabs_component,
                     );
                 }
 
                 // Tell the pageSections to have no pages inside
-                $moduleAtts = array('empty' => true);
+                $componentAtts = array('empty' => true);
                 return array(
                     [
-                        $addons_module[0],
-                        $addons_module[1],
-                        $moduleAtts
+                        $addons_component[0],
+                        $addons_component[1],
+                        $componentAtts
                     ],
                     [
-                        $addontabs_module[0],
-                        $addontabs_module[1],
-                        $moduleAtts
+                        $addontabs_component[0],
+                        $addontabs_component[1],
+                        $componentAtts
                     ],
                 );
         }
@@ -60,40 +60,40 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         return null;
     }
 
-    protected function getModuleClasses(array $module, array &$props)
+    protected function getComponentClasses(array $component, array &$props)
     {
-        $ret = parent::getModuleClasses($module, $props);
+        $ret = parent::getComponentClasses($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_WINDOW_ADDONS:
-                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($module);
-                $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
-                $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
-                $ret[$addonsSubmoduleOutputName] = 'container-fluid offcanvas pop-waypoints-context scrollable addons perfect-scrollbar vertical';
-                $ret[$addontabsSubmoduleOutputName] = 'offcanvas pop-waypoints-context scrollable addontabs perfect-scrollbar horizontal navbar navbar-main navbar-addons';
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        switch ($component[1]) {
+            case self::COMPONENT_WINDOW_ADDONS:
+                list($addons_subcomponent, $addontabs_subcomponent) = $this->getInnerSubcomponents($component);
+                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($addons_subcomponent);
+                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($addontabs_subcomponent);
+                $ret[$addonsSubcomponentOutputName] = 'container-fluid offcanvas pop-waypoints-context scrollable addons perfect-scrollbar vertical';
+                $ret[$addontabsSubcomponentOutputName] = 'offcanvas pop-waypoints-context scrollable addontabs perfect-scrollbar horizontal navbar navbar-main navbar-addons';
                 break;
         }
 
         return $ret;
     }
 
-    protected function getModuleParams(array $module, array &$props)
+    protected function getComponentParams(array $component, array &$props)
     {
-        $ret = parent::getModuleParams($module, $props);
+        $ret = parent::getComponentParams($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_WINDOW_ADDONS:
-                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($module);
-                $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
-                $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
-                $ret[$addonsSubmoduleOutputName] = array(
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        switch ($component[1]) {
+            case self::COMPONENT_WINDOW_ADDONS:
+                list($addons_subcomponent, $addontabs_subcomponent) = $this->getInnerSubcomponents($component);
+                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($addons_subcomponent);
+                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($addontabs_subcomponent);
+                $ret[$addonsSubcomponentOutputName] = array(
                     'data-frametarget' => POP_TARGET_ADDONS,
                     'data-clickframetarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                     'data-offcanvas' => 'addons',
                 );
-                $ret[$addontabsSubmoduleOutputName] = array(
+                $ret[$addontabsSubcomponentOutputName] = array(
                     'data-frametarget' => POP_TARGET_ADDONS,
                     'data-offcanvas' => 'addontabs',
                 );

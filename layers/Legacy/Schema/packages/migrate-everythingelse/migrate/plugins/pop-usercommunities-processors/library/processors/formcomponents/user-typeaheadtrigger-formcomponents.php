@@ -2,41 +2,41 @@
 
 class GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase
 {
-    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES = 'formcomponent-selectabletypeaheadtrigger-usercommunities';
-    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES = 'filtercomponent-selectabletypeaheadtrigger-communities';
+    public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES = 'formcomponent-selectabletypeaheadtrigger-usercommunities';
+    public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES = 'filtercomponent-selectabletypeaheadtrigger-communities';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES],
-            [self::class, self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES],
+            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES],
+            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES],
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES:
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES:
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES:
                 $layouts = array(
-                    self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES => [GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES],
-                    self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES => [GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITIES],
+                    self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES => [GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES],
+                    self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES => [GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITIES],
                 );
-                return $layouts[$module[1]];
+                return $layouts[$component[1]];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES:
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES:
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES:
                 return 'communities';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\SPA\ModuleFilters\Page;
+use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPAWebPlatform_ConfigurationUtils
 {
@@ -13,14 +13,14 @@ class PoP_SPAWebPlatform_ConfigurationUtils
         foreach (PoP_SPA_ConfigurationUtils::getBackgroundloadRouteConfigurations() as $route => $configuration) {
             $url = RouteUtils::getRouteURL($route);
 
-            // If preloading (eg: INITIALFRAMES) then add the action=preload and modulefilter=page URL parameters
+            // If preloading (eg: INITIALFRAMES) then add the action=preload and componentFilter=page URL parameters
             if ($configuration['preload'] ?? null) {
                 $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var Page */
                 $page = $instanceManager->getInstance(Page::class);
 
                 $url = GeneralUtils::addQueryArgs([
-                    Params::MODULEFILTER => $page->getName(),
+                    Params::COMPONENTFILTER => $page->getName(),
                     Params::ACTIONS . '[]' => GD_URLPARAM_ACTION_PRELOAD,
                 ], $url);
             }

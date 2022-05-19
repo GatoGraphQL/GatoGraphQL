@@ -1,105 +1,105 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMGROUP];
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
         $this->addJsmethod($ret, 'tooltip', 'tooltip');
 
         return $ret;
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
         return '';
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $component)
     {
         return 'control-label';
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $component)
     {
         return '';
     }
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $component, array &$props)
     {
         return '';
     }
-    public function getDescription(array $module, array &$props)
+    public function getDescription(array $component, array &$props)
     {
         return '';
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
-        $ret[] = $this->getComponentSubmodule($module);
+        $ret = parent::getSubcomponents($component);
+        $ret[] = $this->getComponentSubcomponent($component);
         return $ret;
     }
 
-    public function getComponentName(array $module)
+    public function getComponentName(array $component)
     {
 
         // This property is needed for the inheriting class FormComponentGroupsBase, to print the name of the formcomponent
         // We initialize it here as the inner module, however at this stage, FormGroupsBase, it is not really needed
-        return $this->getComponentSubmodule($module);
+        return $this->getComponentSubcomponent($component);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $component = $this->getComponentSubmodule($module);
-        $component_processor = $moduleprocessor_manager->getProcessor($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
+        $component = $this->getComponentSubcomponent($component);
+        $component_processor = $componentprocessor_manager->getProcessor($component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // Re-use the label from the component
-        if ($label = $this->getProp($module, $props, 'label')) {
+        if ($label = $this->getProp($component, $props, 'label')) {
             $ret['label'] = $label;
         }
-        if ($label_class = $this->getLabelClass($module)) {
+        if ($label_class = $this->getLabelClass($component)) {
             $ret[GD_JS_CLASSES]['label'] = $label_class;
         }
-        if ($formcontrol_class = $this->getFormcontrolClass($module)) {
+        if ($formcontrol_class = $this->getFormcontrolClass($component)) {
             $ret[GD_JS_CLASSES]['formcontrol'] = $formcontrol_class;
         }
-        if ($info = $this->getInfo($module, $props)) {
+        if ($info = $this->getInfo($component, $props)) {
             $ret['info'] = $info;
         }
-        if ($description = $this->getDescription($module, $props)) {
+        if ($description = $this->getDescription($component, $props)) {
             $ret[GD_JS_DESCRIPTION] = $description;
         }
 
         // This property is needed for the inheriting class FormComponentGroupsBase, to print the name of the formcomponent
-        $ret['component-name'] = $this->getComponentName($module);
+        $ret['component-name'] = $this->getComponentName($component);
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // No need for the input to have a label or a placeholder (for the text inputs) anymore
-        $label = $this->getLabel($module, $props);
-        $this->setProp($module, $props, 'label', $label);
+        $label = $this->getLabel($component, $props);
+        $this->setProp($component, $props, 'label', $label);
 
-        $this->appendProp($module, $props, 'class', 'form-group');
-        parent::initModelProps($module, $props);
+        $this->appendProp($component, $props, 'class', 'form-group');
+        parent::initModelProps($component, $props);
     }
 }

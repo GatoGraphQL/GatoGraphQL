@@ -2,36 +2,36 @@
 
 class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Processor_MaxHeightLayoutsBase
 {
-    public final const MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS = 'maxheight-subcomponent-postcomments';
+    public final const COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS = 'maxheight-subcomponent-postcomments';
     
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS],
+            [self::class, self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS],
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
-                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
+        switch ($component[1]) {
+            case self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
+                $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
                 break;
         }
 
         return $ret;
     }
 
-    public function getMaxheight(array $module, array &$props)
+    public function getMaxheight(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
+        switch ($component[1]) {
+            case self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:
                 return '300';
         }
 
-        return parent::getMaxheight($module, $props);
+        return parent::getMaxheight($component, $props);
     }
 }
 

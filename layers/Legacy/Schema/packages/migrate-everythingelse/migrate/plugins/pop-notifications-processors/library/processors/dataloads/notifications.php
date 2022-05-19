@@ -1,26 +1,26 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 
 class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_LATESTNOTIFICATIONS = 'dataload-notifications-latestnotifications';
+    public final const COMPONENT_DATALOAD_LATESTNOTIFICATIONS = 'dataload-notifications-latestnotifications';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_LATESTNOTIFICATIONS],
+            [self::class, self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS],
         );
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $module, $props);
+        parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 // If the user is not logged in, then do not load the data
                 if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
@@ -29,34 +29,34 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         }
     }
 
-    protected function getStatusSubmodule(array $module)
+    protected function getStatusSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return null;
         }
 
-        return parent::getStatusSubmodule($module);
+        return parent::getStatusSubcomponent($component);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
         
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class);
         }
         
-        return parent::getQueryInputOutputHandler($module);
+        return parent::getQueryInputOutputHandler($component);
     }
 }
 

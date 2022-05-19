@@ -1,14 +1,14 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-// Override ModuleProcessorClass
+// Override ComponentProcessorClass
 if (!\PoP\Application\Environment::disableCustomCMSCode()) {
-    $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    $moduleprocessor_manager->overrideProcessorClass(
+    $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    $componentprocessor_manager->overrideProcessorClass(
         UserStance_Module_Processor_CustomSectionDataloads::class,
         UserStance_WP_Module_Processor_CustomSectionDataloads::class,
         [
-            UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL,
+            UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_CAROUSEL,
         ]
     );
 }

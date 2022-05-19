@@ -2,60 +2,60 @@
 
 class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public final const MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION = 'layout-usersidebar-vertical-organization';
-    public final const MODULE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL = 'layout-usersidebar-vertical-individual';
-    public final const MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION = 'layout-usersidebar-horizontal-organization';
-    public final const MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL = 'layout-usersidebar-horizontal-individual';
-    public final const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebar-compacthorizontal-organization';
-    public final const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebar-compacthorizontal-individual';
+    public final const COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION = 'layout-usersidebar-vertical-organization';
+    public final const COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL = 'layout-usersidebar-vertical-individual';
+    public final const COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION = 'layout-usersidebar-horizontal-organization';
+    public final const COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL = 'layout-usersidebar-horizontal-individual';
+    public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebar-compacthorizontal-organization';
+    public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebar-compacthorizontal-individual';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION],
-            [self::class, self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION],
+            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION],
-            self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL_INDIVIDUAL],
-            self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION],
-            self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL],
-            self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION],
-            self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL_INDIVIDUAL],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION:
-            case self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL:
-                $this->appendProp($module, $props, 'class', 'vertical');
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION:
+            case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL:
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
-            case self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION:
-            case self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL:
-            case self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION:
-            case self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL:
-                $this->appendProp($module, $props, 'class', 'horizontal');
+            case self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION:
+            case self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL:
+            case self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION:
+            case self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL:
+                $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

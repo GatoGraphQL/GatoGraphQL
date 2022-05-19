@@ -2,23 +2,23 @@
 
 class GD_EM_Module_Processor_CreateLocationForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_CREATELOCATION = 'em-form-createlocation';
+    public final const COMPONENT_FORM_CREATELOCATION = 'em-form-createlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_CREATELOCATION],
+            [self::class, self::COMPONENT_FORM_CREATELOCATION],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_CREATELOCATION:
-                return [GD_EM_Module_Processor_CreateLocationFormInners::class, GD_EM_Module_Processor_CreateLocationFormInners::MODULE_FORMINNER_CREATELOCATION];
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_CREATELOCATION:
+                return [GD_EM_Module_Processor_CreateLocationFormInners::class, GD_EM_Module_Processor_CreateLocationFormInners::COMPONENT_FORMINNER_CREATELOCATION];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

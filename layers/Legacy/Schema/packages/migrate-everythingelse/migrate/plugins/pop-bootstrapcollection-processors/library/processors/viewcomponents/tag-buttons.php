@@ -1,64 +1,64 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_TagViewComponentButtonsBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA = 'viewcomponent-tagbutton-embed-socialmedia';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-embed-previewdropdown';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA = 'viewcomponent-tagbutton-api-socialmedia';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-api-previewdropdown';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA = 'viewcomponent-tagbutton-embed-socialmedia';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-embed-previewdropdown';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA = 'viewcomponent-tagbutton-api-socialmedia';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-api-previewdropdown';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA],
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA],
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN],
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
-            self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
-            self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
-            self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
-            self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN:
+        switch ($component[1]) {
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
 
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('API Data', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
+        switch ($component[1]) {
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-embed';
                 break;
 
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-api';
                 break;
         }
@@ -66,15 +66,15 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN:
+        switch ($component[1]) {
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN:
                 $this->mergeProp(
-                    $module,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -84,42 +84,42 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
-            case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
-                // Artificial property added to identify the template when adding module-resources
-                $this->setProp($module, $props, 'resourceloader', 'socialmedia');
+        switch ($component[1]) {
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
+            case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
+                // Artificial property added to identify the template when adding component-resources
+                $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getUrl(array $module, array &$props)
+    public function getUrl(array $component, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            switch ($module[1]) {
-                case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
-                case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN:
-                case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
-                case self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN:
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            switch ($component[1]) {
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA:
+                case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN:
                     $modals = array(
-                        self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED],
-                        self::MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED],
-                        self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_API],
-                        self::MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_API],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_EMBED],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_EMBED],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_API],
+                        self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_API],
                     );
 
-                    $modal = $modals[$module[1]];
-                    $modal_id = $moduleprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
+                    $modal = $modals[$component[1]];
+                    $modal_id = $componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
                     return '#'.PoP_Bootstrap_Utils::getFrontendId($modal_id, 'modal');
             }
         }
 
-        return parent::getUrl($module, $props);
+        return parent::getUrl($component, $props);
     }
 }
 

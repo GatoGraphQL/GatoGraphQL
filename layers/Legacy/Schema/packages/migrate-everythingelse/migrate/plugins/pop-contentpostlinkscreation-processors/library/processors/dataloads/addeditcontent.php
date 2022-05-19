@@ -5,97 +5,97 @@ use PoPSitesWassup\PostLinkMutations\MutationResolverBridges\UpdatePostLinkMutat
 
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public final const MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE = 'dataload-postlink-update';
-    public final const MODULE_DATALOAD_CONTENTPOSTLINK_CREATE = 'dataload-postlink-create';
+    public final const COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE = 'dataload-postlink-update';
+    public final const COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE = 'dataload-postlink-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE],
-            [self::class, self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE],
+            [self::class, self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
-            self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
+            self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($module, $props);
+        return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $block_inners = array(
-            self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::MODULE_FORM_CONTENTPOSTLINK],
-            self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::MODULE_FORM_CONTENTPOSTLINK],
+            self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_CONTENTPOSTLINK],
+            self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_CONTENTPOSTLINK],
         );
-        if ($block_inner = $block_inners[$module[1]] ?? null) {
+        if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    protected function isCreate(array $module)
+    protected function isCreate(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 return true;
         }
 
-        return parent::isCreate($module);
+        return parent::isCreate($component);
     }
-    protected function isUpdate(array $module)
+    protected function isUpdate(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE:
                 return true;
         }
 
-        return parent::isUpdate($module);
+        return parent::isUpdate($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE:
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 $name = TranslationAPIFacade::getInstance()->__('Link', 'pop-userplatform-processors');
-                if ($this->isUpdate($module)) {
-                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
-                } elseif ($this->isCreate($module)) {
-                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
+                if ($this->isUpdate($component)) {
+                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
+                } elseif ($this->isCreate($component)) {
+                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 return $this->instanceManager->getInstance(CreatePostLinkMutationResolverBridge::class);
-            case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:
+            case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE:
                 return $this->instanceManager->getInstance(UpdatePostLinkMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 }
 

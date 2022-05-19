@@ -5,32 +5,32 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW = 'buttonwrapper-highlightview';
+    public final const COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW = 'buttonwrapper-highlightview';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW:
-                $ret[] = [PoP_AddHighlights_Module_Processor_Buttons::class, PoP_AddHighlights_Module_Processor_Buttons::MODULE_BUTTON_HIGHLIGHTVIEW];
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW:
+                $ret[] = [PoP_AddHighlights_Module_Processor_Buttons::class, PoP_AddHighlights_Module_Processor_Buttons::COMPONENT_BUTTON_HIGHLIGHTVIEW];
                 break;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 

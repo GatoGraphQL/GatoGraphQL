@@ -7,5 +7,5 @@ services:
     PoPCMSSchema\PostCategories\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPCMSSchema\PostCategories\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\PostCategories\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'

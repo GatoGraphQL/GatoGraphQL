@@ -2,47 +2,47 @@
 
 class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS = 'block-mylocationposts-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS = 'block-mylocationposts-tabpanel';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYLOCATIONPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYLOCATIONPOSTS],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $module)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS:
-                return [CommonPages_EM_Module_Processor_ControlGroups::class, CommonPages_EM_Module_Processor_ControlGroups::MODULE_CONTROLGROUP_MYLOCATIONPOSTLIST];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS:
+                return [CommonPages_EM_Module_Processor_ControlGroups::class, CommonPages_EM_Module_Processor_ControlGroups::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($module);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS:
-                return [GD_Custom_EM_Module_Processor_CustomFilters::class, GD_Custom_EM_Module_Processor_CustomFilters::MODULE_FILTER_MYLOCATIONPOSTS];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS:
+                return [GD_Custom_EM_Module_Processor_CustomFilters::class, GD_Custom_EM_Module_Processor_CustomFilters::COMPONENT_FILTER_MYLOCATIONPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

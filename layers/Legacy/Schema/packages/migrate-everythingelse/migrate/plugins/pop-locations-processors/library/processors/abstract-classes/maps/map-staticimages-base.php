@@ -1,52 +1,52 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_STATICIMAGE];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($urlparam = $this->getUrlparamSubmodule($module)) {
+        if ($urlparam = $this->getUrlparamSubcomponent($component)) {
             $ret[] = $urlparam;
         }
 
         return $ret;
     }
 
-    public function getUrlparamSubmodule(array $module)
+    public function getUrlparamSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret['url'] = $this->getStaticmapUrl($module, $props);
+        $ret['url'] = $this->getStaticmapUrl($component, $props);
 
-        if ($urlparam = $this->getUrlparamSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
+        if ($urlparam = $this->getUrlparamSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($urlparam);
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->setProp($module, $props, 'staticmap-size', $this->getStaticmapSize($module, $props));
-        parent::initModelProps($module, $props);
+        $this->setProp($component, $props, 'staticmap-size', $this->getStaticmapSize($component, $props));
+        parent::initModelProps($component, $props);
     }
 
-    protected function getStaticmapSize(array $module, array &$props)
+    protected function getStaticmapSize(array $component, array &$props)
     {
         return '640x400';
     }
@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
         return null;
     }
 
-    protected function getStaticmapUrl(array $module, array &$props)
+    protected function getStaticmapUrl(array $component, array &$props)
     {
         $url = 'https://maps.googleapis.com/maps/api/staticmap';
         if (POP_COREPROCESSORS_APIKEY_GOOGLEMAPS) {
@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
         }
 
         $args = [];
-        if ($size = $this->getProp($module, $props, 'staticmap-size')) {
+        if ($size = $this->getProp($component, $props, 'staticmap-size')) {
             $args['size'] = $size;
         }
 

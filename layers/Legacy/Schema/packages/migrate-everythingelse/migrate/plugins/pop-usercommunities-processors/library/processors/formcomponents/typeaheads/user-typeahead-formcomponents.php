@@ -3,65 +3,65 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase
 {
-    public final const MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES = 'forminput-selectabletypeahead-ure-communities';
+    public final const COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES = 'forminput-selectabletypeahead-ure-communities';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES],
+            [self::class, self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES],
         );
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return 'communities';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return TranslationAPIFacade::getInstance()->__('Are you member of any community? Select them here.', 'ure-popprocessors');
         }
         
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getInputSubmodule(array $module)
+    public function getInputSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
-                return [GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::class, GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
+                return [GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::class, GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES];
         }
 
-        return parent::getInputSubmodule($module);
+        return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubmodules(array $module)
+    public function getComponentSubcomponents(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return array(
-                    [GD_URE_Module_Processor_UserTypeaheadComponentFormInputs::class, GD_URE_Module_Processor_UserTypeaheadComponentFormInputs::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY],
+                    [GD_URE_Module_Processor_UserTypeaheadComponentFormInputs::class, GD_URE_Module_Processor_UserTypeaheadComponentFormInputs::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY],
                 );
         }
 
-        return parent::getComponentSubmodules($module);
+        return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $module)
+    public function getTriggerLayoutSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
-                return [GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
+                return [GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES];
         }
 
-        return parent::getTriggerLayoutSubmodule($module);
+        return parent::getTriggerLayoutSubcomponent($component);
     }
 }
 

@@ -2,19 +2,19 @@
 
 class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_CarouselInnersBase
 {
-    public final const MODULE_CAROUSELINNER_AUTHORMEMBERS = 'carouselinner-authormembers';
+    public final const COMPONENT_CAROUSELINNER_AUTHORMEMBERS = 'carouselinner-authormembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELINNER_AUTHORMEMBERS],
+            [self::class, self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS],
         );
     }
 
-    public function getLayoutGrid(array $module, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELINNER_AUTHORMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS:
                 return array(
                     'row-items' => 12,
                     // Allow ThemeStyle Expansive to change the class
@@ -23,16 +23,16 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
                 );
         }
 
-        return parent::getLayoutGrid($module, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELINNER_AUTHORMEMBERS:
-                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_USER_AVATAR];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS:
+                $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_USER_AVATAR];
                 break;
         }
 

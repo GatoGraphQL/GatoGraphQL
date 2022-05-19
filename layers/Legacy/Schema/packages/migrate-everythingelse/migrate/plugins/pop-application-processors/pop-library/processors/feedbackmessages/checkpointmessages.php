@@ -2,26 +2,26 @@
 
 class PoP_Application_Module_Processor_UserCheckpointMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_CHECKPOINTMESSAGE_DOMAIN = 'checkpointmessage-domain';
+    public final const COMPONENT_CHECKPOINTMESSAGE_DOMAIN = 'checkpointmessage-domain';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CHECKPOINTMESSAGE_DOMAIN],
+            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_DOMAIN],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_CHECKPOINTMESSAGE_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageInners::class, PoP_Application_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_DOMAIN],
+            self::COMPONENT_CHECKPOINTMESSAGE_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageInners::class, PoP_Application_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_DOMAIN],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

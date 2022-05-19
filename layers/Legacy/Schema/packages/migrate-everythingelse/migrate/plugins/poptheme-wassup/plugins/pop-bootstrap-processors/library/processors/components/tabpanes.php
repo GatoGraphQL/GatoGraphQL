@@ -6,27 +6,27 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
  */
 class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelComponentsBase
 {
-    public final const MODULE_PAGESECTION_ADDONS = 'pagesection-addons';
+    public final const COMPONENT_PAGESECTION_ADDONS = 'pagesection-addons';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_PAGESECTION_ADDONS],
+            [self::class, self::COMPONENT_PAGESECTION_ADDONS],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        $pop_module_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_PAGESECTION_ADDONS:
-                // If not told to be empty, then add the page submodule
-                $moduleAtts = count($module) >= 3 ? $module[2] : null;
-                if (!($moduleAtts && $moduleAtts['empty'])) {
-                    $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::MODULE_PAGE_ADDONS];
+        switch ($component[1]) {
+            case self::COMPONENT_PAGESECTION_ADDONS:
+                // If not told to be empty, then add the page subcomponent
+                $componentAtts = count($component) >= 3 ? $component[2] : null;
+                if (!($componentAtts && $componentAtts['empty'])) {
+                    $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_ADDONS];
                 }
                 break;
         }
@@ -34,12 +34,12 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_PAGESECTION_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_PAGESECTION_ADDONS:
                 $this->addJsmethod($ret, 'scrollbarVertical');
                 break;
         }
@@ -47,12 +47,12 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    protected function getContentClass(array $module, array &$props)
+    protected function getContentClass(array $component, array &$props)
     {
-        $ret = parent::getContentClass($module, $props);
+        $ret = parent::getContentClass($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_PAGESECTION_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_PAGESECTION_ADDONS:
                 $ret .= ' perfect-scrollbar-offsetreference';
                 break;
         }
@@ -60,22 +60,22 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getID(array $module, array &$props): string
+    public function getID(array $component, array &$props): string
     {
-        switch ($module[1]) {
-            case self::MODULE_PAGESECTION_ADDONS:
-                return POP_MODULEID_PAGESECTIONCONTAINERID_ADDONS;
+        switch ($component[1]) {
+            case self::COMPONENT_PAGESECTION_ADDONS:
+                return POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONS;
         }
 
-        return parent::getID($module, $props);
+        return parent::getID($component, $props);
     }
 
-    public function getModelPropsForDescendantModules(array $module, array &$props): array
+    public function getModelPropsForDescendantComponents(array $component, array &$props): array
     {
-        $ret = parent::getModelPropsForDescendantModules($module, $props);
+        $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_PAGESECTION_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_PAGESECTION_ADDONS:
                 // Override the style of all the form submit buttons
                 $ret['btn-submit-class'] = 'btn btn-warning btn-block';
 
@@ -101,15 +101,15 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-        $module_props = array(
-            $moduleFullName => &$props[$moduleFullName],
+        // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $component_props = array(
+            $componentFullName => &$props[$componentFullName],
         );
-        switch ($module[1]) {
-            case self::MODULE_PAGESECTION_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_PAGESECTION_ADDONS:
                 // // Override the style of all the form submit buttons
                 // $this->add_general_prop($ret, 'btn-submit-class', 'btn btn-warning btn-block');
 
@@ -132,14 +132,14 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
 
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
-                    $module,
-                    array(&$module_props),
+                    $component,
+                    array(&$component_props),
                     $this
                 );
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

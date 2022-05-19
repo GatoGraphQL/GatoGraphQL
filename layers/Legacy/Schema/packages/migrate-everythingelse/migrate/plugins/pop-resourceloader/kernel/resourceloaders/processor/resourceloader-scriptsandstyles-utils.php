@@ -5,12 +5,12 @@ use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
     protected static $calculated_resources = array();
-    protected static $dynamic_module_resources;
+    protected static $dynamic_component_resources;
 
     public static function getResourcesPack($type, $model_instance_id = null)
     {
@@ -495,16 +495,16 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
         // Add all the pageSection methods
         $data = $engineState->data;
-        $pageSectionJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['pagesection'];
-        $blockJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['block'];
+        $pageSectionJSMethods = $data['componentsettings']['combinedstate']['jsmethods']['pagesection'];
+        $blockJSMethods = $data['componentsettings']['combinedstate']['jsmethods']['block'];
 
         $methods = PoP_ResourceLoaderProcessorUtils::getJsmethods($pageSectionJSMethods, $blockJSMethods, true);
         $critical_methods = $methods[POP_PROGRESSIVEBOOTING_CRITICAL];
         $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
 
         // Get all the resources the template is dependent on. Eg: inline CSS styles
-        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['modulesettings']['combinedstate']['module-resources'] ?? array()))));
-        $modules_resources = $engineState->helperCalculations['module-resources'];
+        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['componentsettings']['combinedstate']['component-resources'] ?? array()))));
+        $modules_resources = $engineState->helperCalculations['component-resources'];
 
         // Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
         self::$calculated_resources[$key] = PoP_ResourceLoaderProcessorUtils::calculateResources(true, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
@@ -571,7 +571,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                 if (PoP_ResourceLoader_ServerUtils::includeResourcesInBody()) {
 
                     // Lazy load the object
-                    if (is_null(self::$dynamic_module_resources)) {
+                    if (is_null(self::$dynamic_component_resources)) {
 
                         $cachemanager = null;
                         if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
@@ -580,25 +580,25 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
                         // Check if results are already on the cache
                         if ($useCache) {
-                            self::$dynamic_module_resources = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES);
+                            self::$dynamic_component_resources = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICCOMPONENTRESOURCES);
                         }
-                        if (!self::$dynamic_module_resources) {
+                        if (!self::$dynamic_component_resources) {
 
                             // If not, calculate the values now...
                             $engine = EngineFacade::getInstance();
                             $entryComponent = $engine->getEntryComponent();
 
-                            // self::$dynamic_module_resources = $processorresourcedecorator->getDynamicModulesResources($entryComponent, $props);
+                            // self::$dynamic_component_resources = $processorresourcedecorator->getDynamicModulesResources($entryComponent, $props);
                             global $pop_resourcemoduledecoratorprocessor_manager;
-                            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                            $processor = $moduleprocessor_manager->getProcessor($entryComponent);
+                            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                            $processor = $componentprocessor_manager->getProcessor($entryComponent);
                             $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
                             // @todo Check where $props comes from. Temporarily replaced with [] to avoid IDE error
-                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryComponent, []/*$props*/);
+                            self::$dynamic_component_resources = $processorresourcedecorator->getDynamicResourcesMergedComponentTree($entryComponent, []/*$props*/);
 
                             // And store them on the cache
                             if ($useCache) {
-                                $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES, self::$dynamic_module_resources);
+                                $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICCOMPONENTRESOURCES, self::$dynamic_component_resources);
                             }
                         }
                     }
@@ -608,24 +608,24 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
         // Comment Leo 11/12/2017: get the dynamic templates resources, and print already their source and type, since
         // this information will be needed if including those resources in the body when initializing a lazy-load block
-        if (self::$dynamic_module_resources) {
+        if (self::$dynamic_component_resources) {
 
             global $pop_resourceloaderprocessor_manager;
-            $dynamic_module_resourcesources = $dynamic_module_resourcetypes = array();
-            foreach (self::$dynamic_module_resources as $resource) {
+            $dynamic_component_resourcesources = $dynamic_component_resourcetypes = array();
+            foreach (self::$dynamic_component_resources as $resource) {
 
                 // Source
                 $resourceOutputName = ResourceUtils::getResourceOutputName($resource);
-                $dynamic_module_resourcesources[$resourceOutputName] = $pop_resourceloaderprocessor_manager->getFileUrl($resource, true);
+                $dynamic_component_resourcesources[$resourceOutputName] = $pop_resourceloaderprocessor_manager->getFileUrl($resource, true);
 
                 // Type
                 $resourcetype = $pop_resourceloaderprocessor_manager->getProcessor($resource)->getType($resource);
-                $dynamic_module_resourcetypes[$resourcetype][] = $resourceOutputName;
+                $dynamic_component_resourcetypes[$resourcetype][] = $resourceOutputName;
             }
 
             return array(
-                'sources' => $dynamic_module_resourcesources,
-                'types' => $dynamic_module_resourcetypes,
+                'sources' => $dynamic_component_resourcesources,
+                'types' => $dynamic_component_resourcetypes,
             );
         }
 

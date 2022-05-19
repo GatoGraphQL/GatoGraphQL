@@ -5,85 +5,85 @@ define('POP_COREPROCESSORS_CAROUSELMODE_AUTOMATIC', 'automatic');
 
 abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_CAROUSEL];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($controls_bottom = $this->getControlsBottomSubmodule($module)) {
+        if ($controls_bottom = $this->getControlsBottomSubcomponent($component)) {
             $ret[] = $controls_bottom;
         }
-        if ($controls_top = $this->getControlsTopSubmodule($module)) {
+        if ($controls_top = $this->getControlsTopSubcomponent($component)) {
             $ret[] = $controls_top;
         }
 
         // Slideshow with indicators?
-        if ($indicators = $this->getLayoutIndicatorSubmodules($module)) {
+        if ($indicators = $this->getLayoutIndicatorSubcomponents($component)) {
             $ret[] = $indicators;
         }
 
         return $ret;
     }
 
-    public function getLayoutIndicatorSubmodules(array $module)
+    public function getLayoutIndicatorSubcomponents(array $component)
     {
         return null;
     }
-    public function getMode(array $module, array &$props)
+    public function getMode(array $component, array &$props)
     {
         return POP_COREPROCESSORS_CAROUSELMODE_STATIC;
     }
-    // function showControls(array $module, array &$props) {
+    // function showControls(array $component, array &$props) {
 
     //     return false;
     // }
-    public function getControlsBottomSubmodule(array $module)
+    public function getControlsBottomSubcomponent(array $component)
     {
         return null;
     }
-    public function getControlsTopSubmodule(array $module)
+    public function getControlsTopSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->getMode($module, $props) == POP_COREPROCESSORS_CAROUSELMODE_STATIC) {
+        if ($this->getMode($component, $props) == POP_COREPROCESSORS_CAROUSELMODE_STATIC) {
             $this->addJsmethod($ret, 'carouselStatic');
-        } elseif ($this->getMode($module, $props) == POP_COREPROCESSORS_CAROUSELMODE_AUTOMATIC) {
+        } elseif ($this->getMode($component, $props) == POP_COREPROCESSORS_CAROUSELMODE_AUTOMATIC) {
             $this->addJsmethod($ret, 'carouselAutomatic');
         }
 
         return $ret;
     }
 
-    public function getIndicatorsClass(array $module, array &$props)
+    public function getIndicatorsClass(array $component, array &$props)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['mode'] = $this->getMode($module, $props);
+        $ret['mode'] = $this->getMode($component, $props);
 
-        if ($controls_bottom = $this->getControlsBottomSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controls-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controls_bottom);
+        if ($controls_bottom = $this->getControlsBottomSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controls-bottom'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($controls_bottom);
         }
-        if ($controls_top = $this->getControlsTopSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controls-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controls_top);
+        if ($controls_top = $this->getControlsTopSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controls-top'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($controls_top);
         }
 
-        if ($indicators = $this->getLayoutIndicatorSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['carousel-indicators'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($indicators);
-            if ($indicators_class = $this->getIndicatorsClass($module, $props)) {
+        if ($indicators = $this->getLayoutIndicatorSubcomponents($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['carousel-indicators'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($indicators);
+            if ($indicators_class = $this->getIndicatorsClass($component, $props)) {
                 $ret[GD_JS_CLASSES]['indicators'] = $indicators_class;
             }
         }
@@ -91,18 +91,18 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($controls_bottom = $this->getControlsBottomSubmodule($module)) {
-            $this->setProp($controls_bottom, $props, 'carousel-module', $module);
+        if ($controls_bottom = $this->getControlsBottomSubcomponent($component)) {
+            $this->setProp($controls_bottom, $props, 'carousel-component', $component);
         }
-        if ($controls_top = $this->getControlsTopSubmodule($module)) {
-            $this->setProp($controls_top, $props, 'carousel-module', $module);
+        if ($controls_top = $this->getControlsTopSubcomponent($component)) {
+            $this->setProp($controls_top, $props, 'carousel-component', $component);
         }
-        if ($indicators = $this->getLayoutIndicatorSubmodules($module)) {
-            $this->setProp($indicators, $props, 'carousel-module', $module);
+        if ($indicators = $this->getLayoutIndicatorSubcomponents($component)) {
+            $this->setProp($indicators, $props, 'carousel-component', $component);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

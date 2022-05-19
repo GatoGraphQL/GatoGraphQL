@@ -8,82 +8,82 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_USERAVATAR_UPDATE = 'dataload-useravatar-update';
+    public final const COMPONENT_DATALOAD_USERAVATAR_UPDATE = 'dataload-useravatar-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_USERAVATAR_UPDATE],
+            [self::class, self::COMPONENT_DATALOAD_USERAVATAR_UPDATE],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_USERAVATAR_UPDATE => POP_USERAVATAR_ROUTE_EDITAVATAR,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_USERAVATAR_UPDATE => POP_USERAVATAR_ROUTE_EDITAVATAR,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return \PoP\Root\App::getState('current-user-id');
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackMessageComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                return [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_USERAVATAR_UPDATE];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                return [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE];
         }
 
-        return parent::getFeedbackmessageModule($module);
+        return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointmessageModule(array $module)
+    protected function getCheckpointMessageComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_LOGGEDIN];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
         }
 
-        return parent::getCheckpointmessageModule($module);
+        return parent::getCheckpointMessageComponent($component);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                $ret[] = [PoP_UserAvatarProcessors_Module_Processor_UserForms::class, PoP_UserAvatarProcessors_Module_Processor_UserForms::MODULE_FORM_USERAVATAR_UPDATE];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                $ret[] = [PoP_UserAvatarProcessors_Module_Processor_UserForms::class, PoP_UserAvatarProcessors_Module_Processor_UserForms::COMPONENT_FORM_USERAVATAR_UPDATE];
                 break;
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedIn');
                 break;
@@ -92,64 +92,64 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getDataloadSource(array $module, array &$props): string
+    public function getDataloadSource(array $component, array &$props): string
     {
-        // Replace the routes in the "modulepaths" and "actionpath" parameters:
+        // Replace the routes in the "componentPaths" and "actionpath" parameters:
         // point to the "execute" block instead
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                // We also must add ?action=execute to tell the componentroutingprocessor to fetch the module with the "execute" moduleAtts
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                // We also must add ?action=execute to tell the componentroutingprocessor to fetch the module with the "execute" componentAtts
                 return GeneralUtils::addQueryArgs([
                     \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
-                ], parent::getDataloadSource($module, $props));
+                ], parent::getDataloadSource($component, $props));
         }
 
-        return parent::getDataloadSource($module, $props);
+        return parent::getDataloadSource($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                // Two different actions, handled through $moduleAtts:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                // Two different actions, handled through $componentAtts:
                 // 1. Upload the image to the S3 repository, when first accessing the page
                 // 2. Update the avatar, on the POST operation
-                $moduleAtts = (count($module) >= 3) ? $module[2] : null;
-                if ($moduleAtts && $moduleAtts['executeupdate']) {
+                $componentAtts = (count($component) >= 3) ? $component[2] : null;
+                if ($componentAtts && $componentAtts['executeupdate']) {
                     return $this->instanceManager->getInstance(UpdateUserAvatarMutationResolverBridge::class);
                 }
 
                 return $this->instanceManager->getInstance(FileUploadPictureMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function shouldExecuteMutation(array $module, array &$props): bool
+    public function shouldExecuteMutation(array $component, array &$props): bool
     {
         // Always execute this action
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                $moduleAtts = (count($module) >= 3) ? $module[2] : null;
-                if (!$moduleAtts || !$moduleAtts['executeupdate']) {
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                $componentAtts = (count($component) >= 3) ? $component[2] : null;
+                if (!$componentAtts || !$componentAtts['executeupdate']) {
                     return true;
                 }
                 break;
         }
 
-        return parent::shouldExecuteMutation($module, $props);
+        return parent::shouldExecuteMutation($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('update your picture', 'pop-useravatar-processors'));
-                $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Saving...', 'pop-useravatar-processors'));
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
+                $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('update your picture', 'pop-useravatar-processors'));
+                $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Saving...', 'pop-useravatar-processors'));
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

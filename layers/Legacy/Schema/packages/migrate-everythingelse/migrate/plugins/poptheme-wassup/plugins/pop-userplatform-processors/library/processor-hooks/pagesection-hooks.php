@@ -17,12 +17,12 @@ class PoPTheme_Wassup_PoPCore_PageSectionHooks
         );
     }
 
-    public function initModelProps(array $module, $props_in_array, $processor)
+    public function initModelProps(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
-            case PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS:
-                $processor->setProp([PoP_UserPlatform_Module_Processor_Blocks::class, PoP_UserPlatform_Module_Processor_Blocks::MODULE_BLOCK_INVITENEWUSERS], $props, 'title', '');
+        switch ($component[1]) {
+            case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
+                $processor->setProp([PoP_UserPlatform_Module_Processor_Blocks::class, PoP_UserPlatform_Module_Processor_Blocks::COMPONENT_BLOCK_INVITENEWUSERS], $props, 'title', '');
                 break;
         }
     }
@@ -32,7 +32,7 @@ class PoPTheme_Wassup_PoPCore_PageSectionHooks
     //     return array_merge(
     //         $headerTitles,
     //         array(
-    //             PoP_UserPlatform_Module_Processor_Blocks::MODULE_BLOCK_INVITENEWUSERS => RouteUtils::getRouteTitle(POP_USERPLATFORM_ROUTE_INVITENEWUSERS),
+    //             PoP_UserPlatform_Module_Processor_Blocks::COMPONENT_BLOCK_INVITENEWUSERS => RouteUtils::getRouteTitle(POP_USERPLATFORM_ROUTE_INVITENEWUSERS),
     //         )
     //     );
     // }

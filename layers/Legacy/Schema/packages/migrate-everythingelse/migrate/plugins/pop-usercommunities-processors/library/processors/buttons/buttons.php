@@ -3,61 +3,61 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_URE_BUTTON_EDITMEMBERSHIP = 'ure-button-editmembership';
+    public final const COMPONENT_URE_BUTTON_EDITMEMBERSHIP = 'ure-button-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_BUTTON_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP],
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
-                return [GD_URE_Module_Processor_ButtonInners::class, GD_URE_Module_Processor_ButtonInners::MODULE_URE_BUTTONINNER_EDITMEMBERSHIP];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
+                return [GD_URE_Module_Processor_ButtonInners::class, GD_URE_Module_Processor_ButtonInners::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return 'editMembershipURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'ure-popprocessors');
         }
         
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 $ret .= ' btn btn-xs btn-default';
                 break;
         }

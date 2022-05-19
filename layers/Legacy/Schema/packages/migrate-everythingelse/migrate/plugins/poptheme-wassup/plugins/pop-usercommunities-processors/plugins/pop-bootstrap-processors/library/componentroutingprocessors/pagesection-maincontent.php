@@ -12,13 +12,13 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
     {
         $ret = array();
 
-        $routemodules = array(
-            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ModuleProcessor_SectionBlocks::class, PoP_UserCommunities_ModuleProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_COMMUNITIES],
-            POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ModuleProcessor_SectionBlocks::class, PoP_UserCommunities_ModuleProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_MYMEMBERS],
+        $routeComponents = array(
+            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionBlocks::class, PoP_UserCommunities_ComponentProcessor_SectionBlocks::COMPONENT_BLOCK_TABPANEL_COMMUNITIES],
+            POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionBlocks::class, PoP_UserCommunities_ComponentProcessor_SectionBlocks::COMPONENT_BLOCK_TABPANEL_MYMEMBERS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -26,12 +26,12 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
         }
 
         // Author route modules
-        $routemodules = array(
-            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks::class, PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+        $routeComponents = array(
+            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
-        foreach ($routemodules as $route => $module) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

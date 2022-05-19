@@ -6,58 +6,58 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutomatedEmails_Module_Processor_SectionBlocksBase
 {
-    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS = 'block-automatedemails-latestcontent-scroll-details';
-    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW = 'block-automatedemails-latestcontent-scroll-simpleview';
-    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW = 'block-automatedemails-latestcontent-scroll-fullview';
-    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'block-automatedemails-latestcontent-scroll-thumbnail';
-    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'block-automatedemails-latestcontent-scroll-list';
+    public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS = 'block-automatedemails-latestcontent-scroll-details';
+    public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW = 'block-automatedemails-latestcontent-scroll-simpleview';
+    public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW = 'block-automatedemails-latestcontent-scroll-fullview';
+    public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'block-automatedemails-latestcontent-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'block-automatedemails-latestcontent-scroll-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],
-            [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
+            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],
+            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW],
+            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL],
+            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $module)
+    protected function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
+        $inner_components = array(
 
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW],
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW],
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL],
-            self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS],
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
                 // Important: this text can only be in the title, and not in the description, because the description is saved in pop-cache/,
                 // while the title is set on runtime, so only then we can have the date on the title!
                 return sprintf(
@@ -67,18 +67,18 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
                 );
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getDescriptionAbovetitle(array $module, array &$props)
+    protected function getDescriptionAbovetitle(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
                 return sprintf(
                     '<p>%s</p>',
                     sprintf(
@@ -89,18 +89,18 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
                 );
         }
 
-        return parent::getDescriptionAbovetitle($module, $props);
+        return parent::getDescriptionAbovetitle($component, $props);
     }
 
-    protected function getDescriptionBottom(array $module, array &$props)
+    protected function getDescriptionBottom(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
-            case self::MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
+            case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
                 return sprintf(
                     '<p>&nbsp;</p><p>%s</p>',
                     sprintf(
@@ -114,7 +114,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
                 );
         }
 
-        return parent::getDescriptionBottom($module, $props);
+        return parent::getDescriptionBottom($component, $props);
     }
 }
 

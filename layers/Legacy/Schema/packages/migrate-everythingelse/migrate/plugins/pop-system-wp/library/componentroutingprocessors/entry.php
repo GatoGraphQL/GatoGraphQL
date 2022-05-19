@@ -11,11 +11,11 @@ class PoPSystem_WP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentR
     {
         $ret = array();
 
-        $routemodules = array(
-            POP_SYSTEMWP_ROUTE_SYSTEM_ACTIVATEPLUGINS => [PoP_SystemWP_WP_Module_Processor_SystemActions::class, PoP_SystemWP_WP_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
+        $routeComponents = array(
+            POP_SYSTEMWP_ROUTE_SYSTEM_ACTIVATEPLUGINS => [PoP_SystemWP_WP_Module_Processor_SystemActions::class, PoP_SystemWP_WP_Module_Processor_SystemActions::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
         );
-        foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        foreach ($routeComponents as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

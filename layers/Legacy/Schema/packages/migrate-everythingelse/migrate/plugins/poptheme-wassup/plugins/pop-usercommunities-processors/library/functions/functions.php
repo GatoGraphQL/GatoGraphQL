@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('pop_module:sidebar_author:components', 'gdUreAuthorsidebarsComponents', 10, 2);
+\PoP\Root\App::addFilter('pop_component:sidebar_author:components', 'gdUreAuthorsidebarsComponents', 10, 2);
 function gdUreAuthorsidebarsComponents($components, $section)
 {
     if (PoP_ApplicationProcessors_Utils::addAuthorWidgetDetails()) {
@@ -8,12 +8,12 @@ function gdUreAuthorsidebarsComponents($components, $section)
         array_splice(
         	$components, 
         	array_search(
-        		[PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT], 
+        		[PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT], 
         		$components)
         	, 
         	0, 
         	[
-	        	[GD_URE_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Module_Processor_SidebarComponentsWrappers::MODULE_URE_WIDGETWRAPPER_COMMUNITIES],
+	        	[GD_URE_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES],
 	        ]
         );
     }

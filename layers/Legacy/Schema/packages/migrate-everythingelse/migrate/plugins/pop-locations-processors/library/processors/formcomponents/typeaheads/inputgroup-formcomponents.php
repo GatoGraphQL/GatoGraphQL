@@ -2,38 +2,38 @@
 
 class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Processor_InputGroupFormComponentsBase
 {
-    public final const MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION = 'formcomponent-inputgroup-typeaheadaddlocation';
+    public final const COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION = 'formcomponent-inputgroup-typeaheadaddlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION],
+            [self::class, self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION],
         );
     }
 
-    public function getInputSubmodule(array $module)
+    public function getInputSubcomponent(array $component)
     {
-        $ret = parent::getInputSubmodule($module);
+        $ret = parent::getInputSubcomponent($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
-                return [GD_EM_Module_Processor_TextFormInputs::class, GD_EM_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
+                return [GD_EM_Module_Processor_TextFormInputs::class, GD_EM_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION];
         }
 
         return $ret;
     }
 
-    public function getControlSubmodules(array $module)
+    public function getControlSubcomponents(array $component)
     {
-        $ret = parent::getControlSubmodules($module);
+        $ret = parent::getControlSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
                 // Allow PoP Add Locations Processors to inject the "+" button
                 if ($control = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_InputGroupFormComponents:control-layout',
                     null,
-                    $module
+                    $component
                 )
                 ) {
                     $ret[] = $control;

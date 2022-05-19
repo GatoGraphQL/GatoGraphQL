@@ -1,18 +1,18 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_DIV];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($inners = $this->getInnerSubmodules($module)) {
+        if ($inners = $this->getInnerSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -22,20 +22,20 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
         return $ret;
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubcomponents(array $component): array
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($inners = $this->getInnerSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
+        if ($inners = $this->getInnerSubcomponents($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $inners
             );
         }
@@ -43,28 +43,28 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
         return $ret;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
         $this->addJsmethod($ret, 'map');
 
         return $ret;
     }
 
-    public function openOnemarkerInfowindow(array $module, array &$props)
+    public function openOnemarkerInfowindow(array $component, array &$props)
     {
         return true;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Open the infoWindow automatically when the map has only 1 marker?
-        $this->setProp($module, $props, 'open-onemarker-infowindow', $this->openOnemarkerInfowindow($module, $props));
-        if ($this->getProp($module, $props, 'open-onemarker-infowindow')) {
+        $this->setProp($component, $props, 'open-onemarker-infowindow', $this->openOnemarkerInfowindow($component, $props));
+        if ($this->getProp($component, $props, 'open-onemarker-infowindow')) {
             $this->mergeProp(
-                $module,
+                $component,
                 $props,
                 'params',
                 array(
@@ -73,6 +73,6 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
             );
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

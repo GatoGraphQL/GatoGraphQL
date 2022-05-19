@@ -2,76 +2,76 @@
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS = 'scroll-automatedemails-events-details';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW = 'scroll-automatedemails-events-simpleview';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW = 'scroll-automatedemails-events-fullview';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scroll-automatedemails-events-thumbnail';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST = 'scroll-automatedemails-events-list';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS = 'scroll-automatedemails-events-details';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW = 'scroll-automatedemails-events-simpleview';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW = 'scroll-automatedemails-events-fullview';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scroll-automatedemails-events-thumbnail';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST = 'scroll-automatedemails-events-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS],
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST],
         );
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS],
-            self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
-            self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW],
-            self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],
-            self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],
         );
         $lists = array(
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST],
         );
         $details = array(
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS],
         );
         $simpleviews = array(
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW],
         );
 
         $extra_class = '';
-        if (in_array($module, $simpleviews)) {
+        if (in_array($component, $simpleviews)) {
             $extra_class = 'simpleview';
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($module, $details)) {
+        } elseif (in_array($component, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $extra_class = 'thumb';
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -1,38 +1,38 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPCMSSchema\Posts\ConditionalOnModule\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserPostFieldDataloads;
-use PoPCMSSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
-use PoPCMSSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPCMSSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPCMSSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoPCMSSchema\Posts\ConditionalOnModule\Users\ComponentProcessors\FieldDataloadComponentProcessor as UserPostFieldDataloads;
+use PoPCMSSchema\Posts\ComponentProcessors\FieldDataloadComponentProcessor as PostFieldDataloads;
+use PoPCMSSchema\PostTags\ComponentProcessors\PostTagFieldDataloadComponentProcessor;
+use PoPCMSSchema\PostTags\ComponentProcessors\TagPostFieldDataloadComponentProcessor;
+use PoPCMSSchema\Users\ComponentProcessors\FieldDataloadComponentProcessor as UserFieldDataloads;
 
-$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-$moduleprocessor_manager->overrideProcessorClass(
+$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+$componentprocessor_manager->overrideProcessorClass(
     PostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+        PostFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
     ]
 );
-$moduleprocessor_manager->overrideProcessorClass(
+$componentprocessor_manager->overrideProcessorClass(
     UserFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        UserFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
+        UserFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
     ]
 );
-$moduleprocessor_manager->overrideProcessorClass(
+$componentprocessor_manager->overrideProcessorClass(
     UserPostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        UserPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+        UserPostFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
     ]
 );
-$moduleprocessor_manager->overrideProcessorClass(
-    FieldDataloadModuleProcessor::class,
+$componentprocessor_manager->overrideProcessorClass(
+    FieldDataloadComponentProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
-        TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+        PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );

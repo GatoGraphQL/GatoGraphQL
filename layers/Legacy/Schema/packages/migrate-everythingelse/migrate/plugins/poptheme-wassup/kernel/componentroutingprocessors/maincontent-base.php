@@ -7,6 +7,6 @@ abstract class PoP_Module_OnlyMainContentComponentRoutingProcessorBase extends \
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_MAINCONTENT);
+        return array(POP_PAGECOMPONENTGROUP_MAINCONTENT);
     }
 }

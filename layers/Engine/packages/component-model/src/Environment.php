@@ -49,7 +49,7 @@ class Environment
     }
 
     /**
-     * Use 'modules' or 'm' in the JS context. Used to compress the file size in PROD
+     * Use 'components' or 'm' in the JS context. Used to compress the file size in PROD
      */
     public static function compactResponseJsonKeys(): bool
     {

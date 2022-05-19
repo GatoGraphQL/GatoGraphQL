@@ -2,23 +2,23 @@
 
 class PoP_AddHighlights_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CONTROLGROUP_MYHIGHLIGHTLIST = 'controlgroup-myhighlightlist';
+    public final const COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST = 'controlgroup-myhighlightlist';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLGROUP_MYHIGHLIGHTLIST],
+            [self::class, self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_CONTROLGROUP_MYHIGHLIGHTLIST:
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
-                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
+        switch ($component[1]) {
+            case self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST:
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
+                $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;
         }
 

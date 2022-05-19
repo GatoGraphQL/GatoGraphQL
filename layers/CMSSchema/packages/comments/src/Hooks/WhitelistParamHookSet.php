@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Comments\Hooks;
 
 use PoP\Root\App;
-use PoP\ComponentModel\ModuleProcessors\Constants;
+use PoP\ComponentModel\ComponentProcessors\Constants;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Comments\Constants\Params;
 

@@ -10,13 +10,13 @@ class PoP_SocialNetworkProcessors_Hooks_MyPreferences
         );
     }
 
-    public function getEmailnotificationsForminputgroups($modules)
+    public function getEmailnotificationsForminputgroups($components)
     {
         return array_merge(
-            $modules,
+            $components,
             array(
-                [PoP_SocialNetwork_Module_Processor_UserMultipleComponents::class, PoP_SocialNetwork_Module_Processor_UserMultipleComponents::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK],
-                [PoP_SocialNetwork_Module_Processor_UserMultipleComponents::class, PoP_SocialNetwork_Module_Processor_UserMultipleComponents::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC],
+                [PoP_SocialNetwork_Module_Processor_UserMultipleComponents::class, PoP_SocialNetwork_Module_Processor_UserMultipleComponents::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK],
+                [PoP_SocialNetwork_Module_Processor_UserMultipleComponents::class, PoP_SocialNetwork_Module_Processor_UserMultipleComponents::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC],
             )
         );
     }

@@ -1,13 +1,13 @@
 <?php
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-// Override ModuleProcessorClass
-$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-$moduleprocessor_manager->overrideProcessorClass(
+// Override ComponentProcessorClass
+$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+$componentprocessor_manager->overrideProcessorClass(
     PoP_Posts_Module_Processor_TextFilterInputs::class,
     PoP_Module_Processor_TextFilterInputs::class,
     [
-        PoP_Posts_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH,
+        PoP_Posts_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH,
     ]
 );

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\State;
 
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleHelpersInterface;
+use PoP\ComponentModel\ComponentFilters\ComponentPaths;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\Engine\Configuration\Request;
-use PoP\Engine\ModuleFilters\HeadModule;
-use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\Engine\ComponentFilters\HeadComponent;
+use PoP\Engine\ComponentFilters\MainContentComponent;
 use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
@@ -18,65 +18,65 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?HeadModule $headModule = null;
-    private ?ModulePaths $modulePaths = null;
-    private ?MainContentModule $mainContentModule = null;
-    private ?ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager = null;
-    private ?ModulePathHelpersInterface $modulePathHelpers = null;
-    private ?ModuleHelpersInterface $moduleHelpers = null;
+    private ?HeadComponent $headComponent = null;
+    private ?ComponentPaths $componentPaths = null;
+    private ?MainContentComponent $mainContentComponent = null;
+    private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
+    private ?ComponentPathHelpersInterface $componentPathHelpers = null;
+    private ?ComponentHelpersInterface $componentHelpers = null;
 
-    final public function setHeadModule(HeadModule $headModule): void
+    final public function setHeadComponent(HeadComponent $headComponent): void
     {
-        $this->headModule = $headModule;
+        $this->headComponent = $headComponent;
     }
-    final protected function getHeadModule(): HeadModule
+    final protected function getHeadComponent(): HeadComponent
     {
-        return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
+        return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
     }    
-    final public function setModulePaths(ModulePaths $modulePaths): void
+    final public function setComponentPaths(ComponentPaths $componentPaths): void
     {
-        $this->modulePaths = $modulePaths;
+        $this->componentPaths = $componentPaths;
     }
-    final protected function getModulePaths(): ModulePaths
+    final protected function getComponentPaths(): ComponentPaths
     {
-        return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
+        return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
-    final public function setMainContentModule(MainContentModule $mainContentModule): void
+    final public function setMainContentComponent(MainContentComponent $mainContentComponent): void
     {
-        $this->mainContentModule = $mainContentModule;
+        $this->mainContentComponent = $mainContentComponent;
     }
-    final protected function getMainContentModule(): MainContentModule
+    final protected function getMainContentComponent(): MainContentComponent
     {
-        return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
+        return $this->mainContentComponent ??= $this->instanceManager->getInstance(MainContentComponent::class);
     }
-    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
     {
-        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
+        $this->routeComponentProcessorManager = $routeComponentProcessorManager;
     }
     final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+        return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
-        $this->modulePathHelpers = $modulePathHelpers;
+        $this->componentPathHelpers = $componentPathHelpers;
     }
-    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
-        $this->moduleHelpers = $moduleHelpers;
+        $this->componentHelpers = $componentHelpers;
     }
-    final protected function getModuleHelpers(): ModuleHelpersInterface
+    final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     public function augment(array &$state): void
     {
-        if ($state['modulefilter'] === null) {
+        if ($state['componentFilter'] === null) {
             return;
         }
 
@@ -84,23 +84,23 @@ class AppStateProvider extends AbstractAppStateProvider
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         $enablePassingStateViaRequest = $rootModuleConfiguration->enablePassingStateViaRequest();
 
-        if ($state['modulefilter'] === $this->headModule->getName()) {
+        if ($state['componentFilter'] === $this->headComponent->getName()) {
             if ($enablePassingStateViaRequest) {
-                if ($headmodule = Request::getHeadModule()) {
-                    $state['headmodule'] = $this->getModuleHelpers()->getModuleFromOutputName($headmodule);
+                if ($headComponent = Request::getHeadComponent()) {
+                    $state['headComponent'] = $this->getComponentHelpers()->getComponentFromOutputName($headComponent);
                 }
             }
         }
-        if ($state['modulefilter'] === $this->modulePaths->getName()) {
+        if ($state['componentFilter'] === $this->componentPaths->getName()) {
             if ($enablePassingStateViaRequest) {
-                $state['modulepaths'] = $this->getModulePathHelpers()->getModulePaths();
+                $state['componentPaths'] = $this->getComponentPathHelpers()->getComponentPaths();
             }
         }
         // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
-        // If filtering module by "maincontent", then calculate which is the main content module
-        if ($state['modulefilter'] === $this->mainContentModule->getName()) {
-            $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        // If filtering component by "maincontent", then calculate which is the main content component
+        if ($state['componentFilter'] === $this->mainContentComponent->getName()) {
+            $state['mainContentComponent'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         }
     }
 }

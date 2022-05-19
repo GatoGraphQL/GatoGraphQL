@@ -3,53 +3,53 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT = 'filterinputgroup-authorrole-multiselect';
+    public final const COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT = 'filterinputgroup-authorrole-multiselect';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT],
+            [self::class, self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
-                return [UserStance_URE_Module_Processor_MultiSelectFilterInputs::class, UserStance_URE_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT];
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
+                return [UserStance_URE_Module_Processor_MultiSelectFilterInputs::class, UserStance_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT];
         }
         
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('By who:', 'pop-userstance-processors');
         }
         
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getLabelClass(array $module)
+    public function getLabelClass(array $component)
     {
-        $ret = parent::getLabelClass($module);
+        $ret = parent::getLabelClass($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 $ret .= ' col-sm-2';
                 break;
         }
 
         return $ret;
     }
-    public function getFormcontrolClass(array $module)
+    public function getFormcontrolClass(array $component)
     {
-        $ret = parent::getFormcontrolClass($module);
+        $ret = parent::getFormcontrolClass($component);
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 $ret .= ' col-sm-10';
                 break;
         }

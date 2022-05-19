@@ -2,33 +2,33 @@
 
 class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_CONTENT_COMMENTSINGLE = 'content-commentsingle';
+    public final const COMPONENT_CONTENT_COMMENTSINGLE = 'content-commentsingle';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENT_COMMENTSINGLE],
+            [self::class, self::COMPONENT_CONTENT_COMMENTSINGLE],
         );
     }
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CONTENT_COMMENTSINGLE:
-                return [PoP_Module_Processor_CommentContentInners::class, PoP_Module_Processor_CommentContentInners::MODULE_CONTENTINNER_COMMENTSINGLE];
+        switch ($component[1]) {
+            case self::COMPONENT_CONTENT_COMMENTSINGLE:
+                return [PoP_Module_Processor_CommentContentInners::class, PoP_Module_Processor_CommentContentInners::COMPONENT_CONTENTINNER_COMMENTSINGLE];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CONTENT_COMMENTSINGLE:
-                $this->appendProp($module, $props, 'class', 'well well-sm');
+        switch ($component[1]) {
+            case self::COMPONENT_CONTENT_COMMENTSINGLE:
+                $this->appendProp($component, $props, 'class', 'well well-sm');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

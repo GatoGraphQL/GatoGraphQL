@@ -1,65 +1,65 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_UserAvatarWebPlatform_TemplateResourceLoaderProcessor::class, PoP_UserAvatarWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_FILEUPLOAD_PICTURE];
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
         return array(
-            $this->getDownloadpictureSubmodule($module),
-            $this->getUploadpictureSubmodule($module),
+            $this->getDownloadpictureSubcomponent($component),
+            $this->getUploadpictureSubcomponent($component),
         );
     }
 
-    public function getDownloadpictureSubmodule(array $module)
+    public function getDownloadpictureSubcomponent(array $component)
     {
-        return [PoP_Module_Processor_DownloadPictureFileUpload::class, PoP_Module_Processor_DownloadPictureFileUpload::MODULE_FILEUPLOAD_PICTURE_DOWNLOAD];
+        return [PoP_Module_Processor_DownloadPictureFileUpload::class, PoP_Module_Processor_DownloadPictureFileUpload::COMPONENT_FILEUPLOAD_PICTURE_DOWNLOAD];
     }
 
-    public function getUploadpictureSubmodule(array $module)
+    public function getUploadpictureSubcomponent(array $component)
     {
-        return [PoP_Module_Processor_UploadPictureFileUpload::class, PoP_Module_Processor_UploadPictureFileUpload::MODULE_FILEUPLOAD_PICTURE_UPLOAD];
+        return [PoP_Module_Processor_UploadPictureFileUpload::class, PoP_Module_Processor_UploadPictureFileUpload::COMPONENT_FILEUPLOAD_PICTURE_UPLOAD];
     }
 
-    public function getDefaultAvatarUserId(array $module, array &$props)
+    public function getDefaultAvatarUserId(array $component, array &$props)
     {
         return POP_AVATAR_GENERICAVATARUSER;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'fileUpload');
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // // The downloadpicture module will need to be rendered dynamically on runtime
-        // $downloadpicture_module = $this->getDownloadpictureSubmodule($module);
-        // $this->setProp($downloadpicture_module, $props, 'module-path', true);
-        $this->setProp($downloadpicture_module, $props, 'dynamic-module', true);
+        // $downloadpicture_component = $this->getDownloadpictureSubcomponent($component);
+        // $this->setProp($downloadpicture_component, $props, 'module-path', true);
+        $this->setProp($downloadpicture_component, $props, 'dynamic-component', true);
 
-        $this->appendProp($module, $props, 'class', 'pop-fileupload');
+        $this->appendProp($component, $props, 'class', 'pop-fileupload');
 
         // Load the picture immediately
-        $this->appendProp($module, $props, 'class', 'pop-fileupload-loadfromserver');
+        $this->appendProp($component, $props, 'class', 'pop-fileupload-loadfromserver');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['module-download'] = $this->getDownloadpictureSubmodule($module);
-        $ret['module-upload'] = $this->getUploadpictureSubmodule($module);
+        $ret['module-download'] = $this->getDownloadpictureSubcomponent($component);
+        $ret['module-upload'] = $this->getUploadpictureSubcomponent($component);
 
         $ret[GD_JS_TITLES] = array(
             'avatar' => TranslationAPIFacade::getInstance()->__('Avatar', 'pop-useravatar-processors'),
@@ -67,7 +67,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
             'upload' => TranslationAPIFacade::getInstance()->__('Upload photo', 'pop-useravatar-processors')
         );
 
-        $default_avatar_user_id = $this->getDefaultAvatarUserId($module, $props);
+        $default_avatar_user_id = $this->getDefaultAvatarUserId($component, $props);
 
         // Add the default Avatar, when no picture was yet uploaded
         $pluginapi = PoP_Avatar_FunctionsAPIFactory::getInstance();
@@ -97,7 +97,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return array(
             'fileUploadPictureURL',

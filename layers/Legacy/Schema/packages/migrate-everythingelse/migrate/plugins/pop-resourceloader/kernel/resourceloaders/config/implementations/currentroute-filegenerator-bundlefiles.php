@@ -7,7 +7,7 @@ class PoP_ResourceLoader_CurrentRouteFileGenerator_BundleFiles extends PoP_Resou
         $options = array(
 	        'from-current-vars' => true,
 	    );
-	    // modulefilter is null => loadingSite
+	    // componentFilter is null => loadingSite
         return PoP_ResourceLoader_FileReproduction_Utils::getResourceMapping(null, $options);
     }
 }

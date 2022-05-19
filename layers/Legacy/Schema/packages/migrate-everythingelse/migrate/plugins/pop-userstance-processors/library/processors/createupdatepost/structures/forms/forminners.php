@@ -2,78 +2,78 @@
 
 class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public final const MODULE_FORMINNER_STANCE = 'forminner-stance';
+    public final const COMPONENT_FORMINNER_STANCE = 'forminner-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINNER_STANCE],
+            [self::class, self::COMPONENT_FORMINNER_STANCE],
         );
     }
 
-    protected function getFeaturedimageInput(array $module)
+    protected function getFeaturedimageInput(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
-        return parent::getFeaturedimageInput($module);
+        return parent::getFeaturedimageInput($component);
     }
-    protected function getCoauthorsInput(array $module)
+    protected function getCoauthorsInput(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
-        return parent::getCoauthorsInput($module);
+        return parent::getCoauthorsInput($component);
     }
-    protected function getTitleInput(array $module)
+    protected function getTitleInput(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
-        return parent::getTitleInput($module);
+        return parent::getTitleInput($component);
     }
-    protected function getEditorInput(array $module)
+    protected function getEditorInput(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_STANCE:
-                return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_STANCE:
+                return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
         }
 
-        return parent::getEditorInput($module);
+        return parent::getEditorInput($component);
     }
-    protected function getStatusInput(array $module)
+    protected function getStatusInput(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_STANCE:
                 // Stances are always published immediately, independently of value of GD_CONF_CREATEUPDATEPOST_MODERATE
-                return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT];
+                return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT];
         }
 
-        return parent::getStatusInput($module);
+        return parent::getStatusInput($component);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
         
-        switch ($module[1]) {
-            case self::MODULE_FORMINNER_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINNER_STANCE:
                 return array_merge(
                     $ret,
                     array(
-                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
-                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
+                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
+                        [UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
                     )
                 );
         }
 
-        return parent::getComponentSubmodules($module, $props);
+        return parent::getComponentSubcomponents($component, $props);
     }
 }
 

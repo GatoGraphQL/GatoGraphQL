@@ -1,91 +1,91 @@
 <?php
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
 
 class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR = 'dataload-single-event-sidebar';
-    public final const MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR = 'dataload-single-pastevent-sidebar';
+    public final const COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR = 'dataload-single-event-sidebar';
+    public final const COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR = 'dataload-single-pastevent-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR],
-            [self::class, self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $orientation = \PoP\Root\App::applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
         $inners = array(
-            self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR => $vertical ?
-                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_EVENT] :
-                [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT],
-            self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR => $vertical ?
-                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT] :
-                [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
+            self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR => $vertical ?
+                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::COMPONENT_VERTICALSIDEBAR_SINGLE_EVENT] :
+                [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT],
+            self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR => $vertical ?
+                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::COMPONENT_VERTICALSIDEBAR_SINGLE_PASTEVENT] :
+                [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
-            case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
+                return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
-    //         case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR:
+    //         case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($component);
     // }
 
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
-            case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 $daterange_class = 'daterange-past opens-left';
                 break;
         }
         if ($daterange_class) {
-            $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
+            $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

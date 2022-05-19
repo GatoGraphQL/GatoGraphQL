@@ -32,7 +32,7 @@ class EngineState
         /**
          * @var array<string, mixed>
          */
-        public ?array $moduledata = null,
+        public ?array $componentdata = null,
         /**
          * @var array<string, array>
          */

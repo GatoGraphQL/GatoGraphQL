@@ -2,51 +2,51 @@
 
 class PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase
 {
-    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS = 'formcomponent-selectabletypeaheadtrigger-authors';
-    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS = 'formcomponent-selectabletypeaheadtrigger-coauthors';
-    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES = 'filtercomponent-selectableprofiles';
-    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS = 'filtercomponent-communityusers';
+    public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS = 'formcomponent-selectabletypeaheadtrigger-authors';
+    public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS = 'formcomponent-selectabletypeaheadtrigger-coauthors';
+    public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES = 'filtercomponent-selectableprofiles';
+    public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS = 'filtercomponent-communityusers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS],
-            [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS],
-            [self::class, self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES],
-            [self::class, self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS],
+            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS],
+            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS],
+            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES],
+            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS],
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS:
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS:
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES:
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS:
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS:
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES:
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS:
                 $layouts = array(
-                    self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS],
-                    self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS],
-                    self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES],
-                    self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS],
+                    self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS],
+                    self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS],
+                    self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES],
+                    self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS => [PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS],
                 );
-                return $layouts[$module[1]];
+                return $layouts[$component[1]];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS:
                 return 'authors';
 
-            case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS:
+            case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS:
                 return 'coauthors';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

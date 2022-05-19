@@ -2,23 +2,23 @@
 
 class PoP_Module_Processor_CalendarControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_CALENDARCONTROLBUTTONGROUP_CALENDAR = 'calendarcontrolbuttongroup-calendar';
+    public final const COMPONENT_CALENDARCONTROLBUTTONGROUP_CALENDAR = 'calendarcontrolbuttongroup-calendar';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CALENDARCONTROLBUTTONGROUP_CALENDAR],
+            [self::class, self::COMPONENT_CALENDARCONTROLBUTTONGROUP_CALENDAR],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_CALENDARCONTROLBUTTONGROUP_CALENDAR:
-                $ret[] = [PoP_Module_Processor_CalendarButtonControls::class, PoP_Module_Processor_CalendarButtonControls::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV];
-                $ret[] = [PoP_Module_Processor_CalendarButtonControls::class, PoP_Module_Processor_CalendarButtonControls::MODULE_CALENDARBUTTONCONTROL_CALENDARNEXT];
+        switch ($component[1]) {
+            case self::COMPONENT_CALENDARCONTROLBUTTONGROUP_CALENDAR:
+                $ret[] = [PoP_Module_Processor_CalendarButtonControls::class, PoP_Module_Processor_CalendarButtonControls::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV];
+                $ret[] = [PoP_Module_Processor_CalendarButtonControls::class, PoP_Module_Processor_CalendarButtonControls::COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT];
                 break;
         }
         

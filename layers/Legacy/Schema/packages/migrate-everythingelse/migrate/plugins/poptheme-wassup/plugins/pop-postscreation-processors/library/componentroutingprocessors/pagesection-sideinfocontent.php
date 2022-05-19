@@ -11,11 +11,11 @@ class PoPTheme_Wassup_PostsCreation_Module_SideInfoContentPageSectionComponentRo
     {
         $ret = array();
 
-        $modules = array(
-            POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYPOSTS_SIDEBAR],
+        $components = array(
+            POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_MYPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

@@ -2,51 +2,51 @@
 
 class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
-    public final const MODULE_LATESTCOUNT_LOCATIONPOSTS = 'latestcount-locationposts';
-    public final const MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS = 'latestcount-author-locationposts';
-    public final const MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS = 'latestcount-tag-locationposts';
+    public final const COMPONENT_LATESTCOUNT_LOCATIONPOSTS = 'latestcount-locationposts';
+    public final const COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS = 'latestcount-author-locationposts';
+    public final const COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS = 'latestcount-tag-locationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LATESTCOUNT_LOCATIONPOSTS],
-            [self::class, self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS],
-            [self::class, self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS],
+            [self::class, self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS],
         );
     }
 
-    public function getObjectName(array $module, array &$props)
+    public function getObjectName(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LATESTCOUNT_LOCATIONPOSTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
-            case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
+        switch ($component[1]) {
+            case self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return PoP_LocationPosts_PostNameUtils::getNameLc();
         }
     
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $module, array &$props)
+    public function getObjectNames(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LATESTCOUNT_LOCATIONPOSTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
-            case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
+        switch ($component[1]) {
+            case self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return PoP_LocationPosts_PostNameUtils::getNamesLc();
         }
     
-        return parent::getObjectNames($module, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getSectionClasses(array $module, array &$props)
+    public function getSectionClasses(array $component, array &$props)
     {
-        $ret = parent::getSectionClasses($module, $props);
+        $ret = parent::getSectionClasses($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_LATESTCOUNT_LOCATIONPOSTS:
-            case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
-            case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
+        switch ($component[1]) {
+            case self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS:
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
+            case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 $ret[] = POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST.'-'.POP_LOCATIONPOSTS_CAT_ALL;
                 break;
         }
@@ -55,31 +55,31 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
         $ret = \PoP\Root\App::applyFilters(
             'latestcounts:locationposts:classes',
             $ret,
-            $module,
+            $component,
             $props
         );
     
         return $ret;
     }
 
-    public function isAuthor(array $module, array &$props)
+    public function isAuthor(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
+        switch ($component[1]) {
+            case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
                 return true;
         }
     
-        return parent::isAuthor($module, $props);
+        return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $module, array &$props)
+    public function isTag(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS:
+        switch ($component[1]) {
+            case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return true;
         }
     
-        return parent::isTag($module, $props);
+        return parent::isTag($component, $props);
     }
 }
 

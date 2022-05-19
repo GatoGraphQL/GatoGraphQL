@@ -2,46 +2,46 @@
 
 class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN = 'em-quicklinkbuttongroup-downloadlinksdropdown';
-    public final const MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS = 'em-quicklinkbuttongroup-downloadlinks';
+    public final const COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN = 'em-quicklinkbuttongroup-downloadlinksdropdown';
+    public final const COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS = 'em-quicklinkbuttongroup-downloadlinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN],
-            [self::class, self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS],
+            [self::class, self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN],
+            [self::class, self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
-                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
-                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_ICAL];
+        switch ($component[1]) {
+            case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
+                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_GOOGLECALENDAR];
+                $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_ICAL];
                 break;
 
-            case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN:
-                $ret[] = [GD_EM_Module_Processor_DropdownButtonQuicklinks::class, GD_EM_Module_Processor_DropdownButtonQuicklinks::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS];
+            case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN:
+                $ret[] = [GD_EM_Module_Processor_DropdownButtonQuicklinks::class, GD_EM_Module_Processor_DropdownButtonQuicklinks::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
-                foreach ($this->getSubmodules($module) as $submodule) {
-                    $this->appendProp([$submodule], $props, 'class', 'btn btn-link btn-compact');
+        switch ($component[1]) {
+            case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
+                foreach ($this->getSubcomponents($component) as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'btn btn-link btn-compact');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

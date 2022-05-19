@@ -4,92 +4,92 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolv
 
 class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_MYLINKS_TABLE_EDIT = 'dataload-mylinks-table-edit';
-    public final const MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mylinks-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW = 'dataload-mylinks-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT = 'dataload-mylinks-table-edit';
+    public final const COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mylinks-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW = 'dataload-mylinks-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW => POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS,
-            self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW => POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS,
-            self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT => POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW => POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS,
+            self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW => POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS,
+            self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT => POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
+        $inner_components = array(
 
         /*********************************************
          * My Content Tables
          *********************************************/
-            self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT => [PoP_ContentPostLinksCreation_Module_Processor_Tables::class, PoP_ContentPostLinksCreation_Module_Processor_Tables::MODULE_TABLE_MYLINKS],
+            self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT => [PoP_ContentPostLinksCreation_Module_Processor_Tables::class, PoP_ContentPostLinksCreation_Module_Processor_Tables::COMPONENT_TABLE_MYLINKS],
 
         /*********************************************
          * My Content Full Post Previews
          *********************************************/
-            self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
-            self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
-                return [PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::class, PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::MODULE_FILTER_MYLINKS];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
+                return [PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::class, PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::COMPONENT_FILTER_MYLINKS];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
         $tables = array(
-            [self::class, self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT],
         );
         $simpleviews = array(
-            [self::class, self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
         );
         $fullviews = array(
-            [self::class, self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($module, $tables)) {
+        if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($module, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS];
                 break;
         }
@@ -97,29 +97,29 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
                 return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('links', 'poptheme-wassup'));
-                $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('access your links', 'poptheme-wassup'));
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('links', 'poptheme-wassup'));
+                $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('access your links', 'poptheme-wassup'));
                 break;
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

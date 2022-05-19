@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_Dividers extends PoP_Module_Processor_DividersBase
 {
-    public final const MODULE_DIVIDER = 'divider';
-    public final const MODULE_COLLAPSIBLEDIVIDER = 'collapsible-divider';
+    public final const COMPONENT_DIVIDER = 'divider';
+    public final const COMPONENT_COLLAPSIBLEDIVIDER = 'collapsible-divider';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DIVIDER],
-            [self::class, self::MODULE_COLLAPSIBLEDIVIDER],
+            [self::class, self::COMPONENT_DIVIDER],
+            [self::class, self::COMPONENT_COLLAPSIBLEDIVIDER],
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_COLLAPSIBLEDIVIDER:
-                $this->setProp($module, $props, 'class', 'collapse');
+        switch ($component[1]) {
+            case self::COMPONENT_COLLAPSIBLEDIVIDER:
+                $this->setProp($component, $props, 'class', 'collapse');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

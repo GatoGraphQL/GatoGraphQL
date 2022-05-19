@@ -7,87 +7,87 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processor_UpdateProfileDataloadsBase
 {
-    public final const MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE = 'dataload-profileorganization-update';
-    public final const MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE = 'dataload-profileindividual-update';
+    public final const COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE = 'dataload-profileorganization-update';
+    public final const COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE = 'dataload-profileindividual-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE],
-            [self::class, self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE],
+            [self::class, self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE],
+            [self::class, self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL,
-            self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL,
+            self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
                 }
                 return $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolverBridge::class);
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class);
                 }
                 return $this->instanceManager->getInstance(CreateUpdateIndividualProfileMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:
-                $ret[] = [GD_URE_Module_Processor_UpdateProfileForms::class, GD_URE_Module_Processor_UpdateProfileForms::MODULE_FORM_PROFILEORGANIZATION_UPDATE];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
+                $ret[] = [GD_URE_Module_Processor_UpdateProfileForms::class, GD_URE_Module_Processor_UpdateProfileForms::COMPONENT_FORM_PROFILEORGANIZATION_UPDATE];
                 break;
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
-                $ret[] = [GD_URE_Module_Processor_UpdateProfileForms::class, GD_URE_Module_Processor_UpdateProfileForms::MODULE_FORM_PROFILEINDIVIDUAL_UPDATE];
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
+                $ret[] = [GD_URE_Module_Processor_UpdateProfileForms::class, GD_URE_Module_Processor_UpdateProfileForms::COMPONENT_FORM_PROFILEINDIVIDUAL_UPDATE];
                 break;
         }
 
         return $ret;
     }
 
-    protected function getCheckpointmessageModule(array $module)
+    protected function getCheckpointMessageComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:
-                return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_PROFILEORGANIZATION];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
+                return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION];
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
-                return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL];
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
+                return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL];
         }
 
-        return parent::getCheckpointmessageModule($module);
+        return parent::getCheckpointMessageComponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:
-                $this->setProp([PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION], $props, 'action', TranslationAPIFacade::getInstance()->__('edit your user account', 'poptheme-wassup'));
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
+                $this->setProp([PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION], $props, 'action', TranslationAPIFacade::getInstance()->__('edit your user account', 'poptheme-wassup'));
                 break;
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
-                $this->setProp([PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL], $props, 'action', TranslationAPIFacade::getInstance()->__('edit your user account', 'poptheme-wassup'));
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
+                $this->setProp([PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL], $props, 'action', TranslationAPIFacade::getInstance()->__('edit your user account', 'poptheme-wassup'));
                 break;
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

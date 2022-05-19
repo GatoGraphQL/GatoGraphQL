@@ -8,6 +8,6 @@ use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
 
 interface EngineInterface extends UpstreamEngineInterface
 {
-    public function getModuleSettings(array $module, $model_props, array &$props);
+    public function getComponentSettings(array $component, $model_props, array &$props);
     public function maybeRedirectAndExit(): void;
 }

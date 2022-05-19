@@ -2,24 +2,24 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_VERTICALSIDEBARINNER_SINGLE_LINK = 'vertical-sidebarinner-single-link';
+    public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK = 'vertical-sidebarinner-single-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBARINNER_SINGLE_LINK],
+            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_VERTICALSIDEBARINNER_SINGLE_LINK:
+        switch ($component[1]) {
+            case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK:
                 $ret = array_merge(
                     $ret,
-                    PoP_ContentPostLinks_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POSTLINK)
+                    PoP_ContentPostLinks_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_POSTLINK)
                 );
                 break;
         }

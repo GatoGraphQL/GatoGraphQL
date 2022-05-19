@@ -1,5 +1,5 @@
 {{#unless feedback.do-not-render}}
-	<div class="{{class}} {{runtime-class}} {{feedback.class}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-moduleoutputname="{{moduleoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="{{class}} {{runtime-class}} {{feedback.class}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-componentoutputname="{{componentoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 
 		{{#withModule . "controlgroup-top"}}
 			<div class="blocksection-controls {{../classes.controlgroup-top}}" style="{{../styles.controlgroup-top}}">
@@ -46,14 +46,14 @@
 		{{{description}}}
 
 		{{!This will be empty for BlockGroup}}
-		{{#if submoduleoutputnames.block-inners}}
+		{{#if subcomponentoutputnames.block-inners}}
 			<div class="blocksection-inners clearfix {{classes.blocksection-inners}}" style="{{styles.blocksection-inners}}">
 				{{#if show-disabled-layer}}
 					<div class="pop-disabledlayer {{#unless feedback.checkpoint-failed}}hidden{{/unless}}">
 						<div class="layer"></div>
 					</div>
 				{{/if}}
-				{{#each submoduleoutputnames.block-inners}}
+				{{#each subcomponentoutputnames.block-inners}}
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
 					{{/withModule}}

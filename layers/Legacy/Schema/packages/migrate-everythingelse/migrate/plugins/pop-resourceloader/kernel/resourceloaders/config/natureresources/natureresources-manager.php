@@ -15,78 +15,78 @@ class PoP_ResourceLoader_NatureResourcesManager {
         $this->processors[] = $processor;     
     }
 
-    function getHomeResources($modulefilter, $options) {
+    function getHomeResources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addHomeResources($resources, $modulefilter, $options);
+            $processor->addHomeResources($resources, $componentFilter, $options);
         }
 
         return $resources;
     }
     
-    function getAuthorResources($modulefilter, $options) {
+    function getAuthorResources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addAuthorResources($resources, $modulefilter, $options);
+            $processor->addAuthorResources($resources, $componentFilter, $options);
         }
 
         return $resources;
     }
     
-    function getTagResources($modulefilter, $options) {
+    function getTagResources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addTagResources($resources, $modulefilter, $options);
+            $processor->addTagResources($resources, $componentFilter, $options);
         }
 
         return $resources;
     }       
     
-    function get404Resources($modulefilter, $options) {
+    function get404Resources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->add404Resources($resources, $modulefilter, $options);
+            $processor->add404Resources($resources, $componentFilter, $options);
         }
 
         return $resources;
     }
 
-    function getSingleResources($modulefilter, $options) {
+    function getSingleResources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addSingleResources($resources, $modulefilter, $options);
+            $processor->addSingleResources($resources, $componentFilter, $options);
         }
 
         return $resources;
     }
     
-    function getPageResources($modulefilter, $options) {
+    function getPageResources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addPageResources($resources, $modulefilter, $options);
+            $processor->addPageResources($resources, $componentFilter, $options);
         }
 
         return $resources;
     }
     
-    function getGenericNatureResources($modulefilter, $options) {
+    function getGenericNatureResources($componentFilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addGenericNatureResources($resources, $modulefilter, $options);
+            $processor->addGenericNatureResources($resources, $componentFilter, $options);
         }
 
         return $resources;

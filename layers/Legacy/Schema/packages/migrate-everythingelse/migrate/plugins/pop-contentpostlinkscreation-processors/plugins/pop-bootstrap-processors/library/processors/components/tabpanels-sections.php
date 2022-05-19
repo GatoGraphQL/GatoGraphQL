@@ -2,37 +2,37 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_MYLINKS = 'tabpanel-mylinks';
+    public final const COMPONENT_TABPANEL_MYLINKS = 'tabpanel-mylinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_MYLINKS],
+            [self::class, self::COMPONENT_TABPANEL_MYLINKS],
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_MYLINKS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_MYLINKS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubcomponents(array $component)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_MYLINKS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_MYLINKS:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_TABLE_EDIT],
-                        [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
-                        [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW],
+                        [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_TABLE_EDIT],
+                        [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
+                        [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW],
                     )
                 );
                 break;
@@ -41,26 +41,26 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_MYLINKS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_MYLINKS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_TABLE_EDIT],
+                        'header-subcomponent' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
-                        'subheader-submodules' =>  array(
-                            [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
-                            [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW],
+                        'header-subcomponent' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
+                        'subheader-subcomponents' =>  array(
+                            [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
+                            [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW],
                         ),
                     ],
                 );
                 break;
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

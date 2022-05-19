@@ -2,70 +2,70 @@
 
 class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public final const MODULE_BLOCK_HIGHLIGHT_UPDATE = 'block-highlight-update';
-    public final const MODULE_BLOCK_HIGHLIGHT_CREATE = 'block-highlight-create';
+    public final const COMPONENT_BLOCK_HIGHLIGHT_UPDATE = 'block-highlight-update';
+    public final const COMPONENT_BLOCK_HIGHLIGHT_CREATE = 'block-highlight-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_HIGHLIGHT_UPDATE],
-            [self::class, self::MODULE_BLOCK_HIGHLIGHT_CREATE],
+            [self::class, self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_HIGHLIGHT_CREATE],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
-            self::MODULE_BLOCK_HIGHLIGHT_UPDATE => POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
+            self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE => POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $block_inners = array(
-            self::MODULE_BLOCK_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_HIGHLIGHT_UPDATE],
-            self::MODULE_BLOCK_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_HIGHLIGHT_CREATE],
+            self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE],
+            self::COMPONENT_BLOCK_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_HIGHLIGHT_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]] ?? null) {
+        if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    protected function isCreate(array $module)
+    protected function isCreate(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_HIGHLIGHT_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_HIGHLIGHT_CREATE:
                 return true;
         }
 
-        return parent::isCreate($module);
+        return parent::isCreate($component);
     }
-    protected function isUpdate(array $module)
+    protected function isUpdate(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_HIGHLIGHT_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE:
                 return true;
         }
 
-        return parent::isUpdate($module);
+        return parent::isUpdate($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_HIGHLIGHT_UPDATE:
-            case self::MODULE_BLOCK_HIGHLIGHT_CREATE:
-                $this->appendProp($module, $props, 'class', 'addons-nocontrols');
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE:
+            case self::COMPONENT_BLOCK_HIGHLIGHT_CREATE:
+                $this->appendProp($component, $props, 'class', 'addons-nocontrols');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

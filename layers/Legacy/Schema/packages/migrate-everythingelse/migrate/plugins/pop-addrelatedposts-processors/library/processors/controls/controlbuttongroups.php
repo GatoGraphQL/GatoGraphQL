@@ -2,22 +2,22 @@
 
 class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST = 'controlbuttongroup-addrelatedpost';
+    public final const COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST = 'controlbuttongroup-addrelatedpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_ADDRELATEDPOST:
-                $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
+        switch ($component[1]) {
+            case self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST:
+                $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
                 break;
         }
         

@@ -2,29 +2,29 @@
 
 class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_COMMENTS = 'feedbackmessage-comments';
-    public final const MODULE_FEEDBACKMESSAGE_ADDCOMMENT = 'feedbackmessage-addcomment';
+    public final const COMPONENT_FEEDBACKMESSAGE_COMMENTS = 'feedbackmessage-comments';
+    public final const COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT = 'feedbackmessage-addcomment';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_COMMENTS],
-            [self::class, self::MODULE_FEEDBACKMESSAGE_ADDCOMMENT],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_COMMENTS],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_COMMENTS => [PoP_Module_Processor_ListCommentsFeedbackMessageInners::class, PoP_Module_Processor_ListCommentsFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_COMMENTS],
-            self::MODULE_FEEDBACKMESSAGE_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageInners::class, PoP_Module_Processor_CommentsFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_ADDCOMMENT],
+            self::COMPONENT_FEEDBACKMESSAGE_COMMENTS => [PoP_Module_Processor_ListCommentsFeedbackMessageInners::class, PoP_Module_Processor_ListCommentsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_COMMENTS],
+            self::COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageInners::class, PoP_Module_Processor_CommentsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_ADDCOMMENT],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

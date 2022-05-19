@@ -2,23 +2,23 @@
 
 class PoP_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor_CustomFullUserLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLUSER = 'layout-fulluser';
+    public final const COMPONENT_LAYOUT_FULLUSER = 'layout-fulluser';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLUSER],
+            [self::class, self::COMPONENT_LAYOUT_FULLUSER],
         );
     }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FULLUSER:
-                return [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FULLUSER:
+                return [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubcomponent($component);
     }
 }
 

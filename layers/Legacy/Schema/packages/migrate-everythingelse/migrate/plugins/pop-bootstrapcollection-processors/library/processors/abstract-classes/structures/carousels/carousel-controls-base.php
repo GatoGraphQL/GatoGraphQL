@@ -1,75 +1,75 @@
 <?php
 
-abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_CAROUSEL_CONTROLS];
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
         $this->addJsmethod($ret, 'carouselControls');
 
         return $ret;
     }
 
-    public function getControlClass(array $module)
+    public function getControlClass(array $component)
     {
         return 'carousel-control';
     }
-    public function getControlPrevClass(array $module)
+    public function getControlPrevClass(array $component)
     {
         return '';
     }
-    public function getControlNextClass(array $module)
+    public function getControlNextClass(array $component)
     {
         return '';
     }
-    public function getTitleClass(array $module)
+    public function getTitleClass(array $component)
     {
         return '';
     }
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         return '';
     }
-    protected function getTitleLink(array $module, array &$props)
+    protected function getTitleLink(array $component, array &$props)
     {
         return null;
     }
-    protected function getTarget(array $module, array &$props)
+    protected function getTarget(array $component, array &$props)
     {
         return null;
     }
-    protected function getHtmlTag(array $module, array &$props)
+    protected function getHtmlTag(array $component, array &$props)
     {
         return 'h4';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['carousel-module'] = $this->getProp($module, $props, 'carousel-module');
-        $ret['html-tag'] = $this->getProp($module, $props, 'html-tag');
+        $ret['carousel-component'] = $this->getProp($component, $props, 'carousel-component');
+        $ret['html-tag'] = $this->getProp($component, $props, 'html-tag');
 
-        if ($control_class = $this->getControlClass($module)) {
+        if ($control_class = $this->getControlClass($component)) {
             $ret[GD_JS_CLASSES]['control'] = $control_class;
         }
-        if ($control_prev_class = $this->getControlPrevClass($module)) {
+        if ($control_prev_class = $this->getControlPrevClass($component)) {
             $ret[GD_JS_CLASSES]['control-prev'] = $control_prev_class;
         }
-        if ($control_next_class = $this->getControlNextClass($module)) {
+        if ($control_next_class = $this->getControlNextClass($component)) {
             $ret[GD_JS_CLASSES]['control-next'] = $control_next_class;
         }
-        if ($title = $this->getTitle($module, $props)) {
-            if ($title_class = $this->getProp($module, $props, 'title-class')) {
+        if ($title = $this->getTitle($component, $props)) {
+            if ($title_class = $this->getProp($component, $props, 'title-class')) {
                 $ret[GD_JS_CLASSES]['title'] = $title_class;
             }
-            if ($target = $this->getTarget($module, $props)) {
+            if ($target = $this->getTarget($component, $props)) {
                 $ret['target'] = $target;
             }
         }
@@ -77,20 +77,20 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($component, $props);
 
         // Adding in the runtime configuration, because the title/link can change. Eg:
         // the "Latest Thoughts about TPP" in the user profile says "By {{name of org}}"
-        if ($title = $this->getTitle($module, $props)) {
+        if ($title = $this->getTitle($component, $props)) {
             $ret['title'] = $title;
 
             // Check if the title_link has been overwritten. If so, use that one. It works
             // only for setting general value, eg: '', and not runtime-specific ones, since
             // it will be cached in pop-cache props
-            $title_link = $this->getProp($module, $props, 'title-link');
-            $title_link = isset($title_link) ? $title_link : $this->getTitleLink($module, $props);
+            $title_link = $this->getProp($component, $props, 'title-link');
+            $title_link = isset($title_link) ? $title_link : $this->getTitleLink($component, $props);
             if ($title_link) {
                 $ret['title-link'] = $title_link;
             }
@@ -99,10 +99,10 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->setProp($module, $props, 'title-class', $this->getTitleClass($module));
-        $this->setProp($module, $props, 'html-tag', $this->getHtmlTag($module, $props));
-        parent::initModelProps($module, $props);
+        $this->setProp($component, $props, 'title-class', $this->getTitleClass($component));
+        $this->setProp($component, $props, 'html-tag', $this->getHtmlTag($component, $props));
+        parent::initModelProps($component, $props);
     }
 }

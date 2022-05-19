@@ -3,45 +3,45 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_USER_CHANGEPASSWORD = 'block-user-changepwd';
-    public final const MODULE_BLOCK_MYPREFERENCES = 'block-mypreferences';
-    public final const MODULE_BLOCK_INVITENEWUSERS = 'block-inviteusers';
+    public final const COMPONENT_BLOCK_USER_CHANGEPASSWORD = 'block-user-changepwd';
+    public final const COMPONENT_BLOCK_MYPREFERENCES = 'block-mypreferences';
+    public final const COMPONENT_BLOCK_INVITENEWUSERS = 'block-inviteusers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_USER_CHANGEPASSWORD],
-            [self::class, self::MODULE_BLOCK_MYPREFERENCES],
-            [self::class, self::MODULE_BLOCK_INVITENEWUSERS],
+            [self::class, self::COMPONENT_BLOCK_USER_CHANGEPASSWORD],
+            [self::class, self::COMPONENT_BLOCK_MYPREFERENCES],
+            [self::class, self::COMPONENT_BLOCK_INVITENEWUSERS],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
-            self::MODULE_BLOCK_MYPREFERENCES => POP_USERPLATFORM_ROUTE_MYPREFERENCES,
-            self::MODULE_BLOCK_USER_CHANGEPASSWORD => POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
+            self::COMPONENT_BLOCK_MYPREFERENCES => POP_USERPLATFORM_ROUTE_MYPREFERENCES,
+            self::COMPONENT_BLOCK_USER_CHANGEPASSWORD => POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $module, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_MYPREFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_MYPREFERENCES:
                 return true;
         }
 
-        return parent::showDisabledLayerIfCheckpointFailed($module, $props);
+        return parent::showDisabledLayerIfCheckpointFailed($component, $props);
         ;
     }
 
-    protected function getDescription(array $module, array &$props)
+    protected function getDescription(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_INVITENEWUSERS:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_INVITENEWUSERS:
                 // Allow Organik Fundraising to override it, changing the title to "Share by email"
                 return \PoP\Root\App::applyFilters(
                     'GD_Core_Module_Processor_Blocks:inviteusers:description',
@@ -55,20 +55,20 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
                 );
         }
 
-        return parent::getDescription($module, $props);
+        return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        $inner_modules = array(
-            self::MODULE_BLOCK_USER_CHANGEPASSWORD => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_USER_CHANGEPASSWORD],
-            self::MODULE_BLOCK_MYPREFERENCES => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_MYPREFERENCES],
-            self::MODULE_BLOCK_INVITENEWUSERS => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_INVITENEWUSERS],
+        $inner_components = array(
+            self::COMPONENT_BLOCK_USER_CHANGEPASSWORD => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::COMPONENT_DATALOAD_USER_CHANGEPASSWORD],
+            self::COMPONENT_BLOCK_MYPREFERENCES => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::COMPONENT_DATALOAD_MYPREFERENCES],
+            self::COMPONENT_BLOCK_INVITENEWUSERS => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::COMPONENT_DATALOAD_INVITENEWUSERS],
         );
 
-        if ($inner = $inner_modules[$module[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 

@@ -14,32 +14,32 @@ class PoPTheme_Wassup_LocationPosts_Module_SideInfoContentPageSectionComponentRo
     {
         $ret = array();
 
-        $modules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR],
+        $components = array(
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[UserRequestNature::USER][$route][] = ['component' => $component];
         }
 
-        $modules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
+        $components = array(
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
         }
 
-        $modules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
+        $components = array(
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
         }
 
-        $modules = array(
-            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR],
+        $components = array(
+            POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;
@@ -53,7 +53,7 @@ class PoPTheme_Wassup_LocationPosts_Module_SideInfoContentPageSectionComponentRo
         $ret = array();
 
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'module' => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR],
+            'component' => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST,

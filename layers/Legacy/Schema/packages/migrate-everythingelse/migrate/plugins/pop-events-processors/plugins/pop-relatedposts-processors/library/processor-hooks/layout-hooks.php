@@ -6,14 +6,14 @@ class PoP_Events_RelatedPosts_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
-            $this->getFooterSubmodules(...),
+            $this->getFooterSubcomponents(...),
             5
         );
     }
 
-    public function getFooterSubmodules($layouts)
+    public function getFooterSubcomponents($layouts)
     {
-        $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY];
+        $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY];
         return $layouts;
     }
 }

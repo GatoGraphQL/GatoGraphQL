@@ -6,18 +6,18 @@ class PoP_SocialNetowrkProcessors_LoginProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
-            $this->getLoginModules(...)
+            $this->getLoginComponents(...)
         );
     }
 
-    public function getLoginModules($modules)
+    public function getLoginComponents($components)
     {
-        $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_FOLLOWSUSERS];
-        $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_RECOMMENDSPOSTS];
-        $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_SUBSCRIBESTOTAGS];
-        $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_UPVOTESPOSTS];
-        $modules[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_DOWNVOTESPOSTS];
-        return $modules;
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_FOLLOWSUSERS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_RECOMMENDSPOSTS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_UPVOTESPOSTS];
+        $components[] = [PoP_Module_Processor_FunctionsDataloads::class, PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_DOWNVOTESPOSTS];
+        return $components;
     }
 }
 

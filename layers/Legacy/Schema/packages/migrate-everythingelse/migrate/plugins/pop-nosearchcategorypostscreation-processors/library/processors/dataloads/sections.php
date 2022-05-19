@@ -4,484 +4,484 @@ use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT = 'dataload-mynosearchcategoryposts00-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT = 'dataload-mynosearchcategoryposts01-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT = 'dataload-mynosearchcategoryposts02-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT = 'dataload-mynosearchcategoryposts03-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT = 'dataload-mynosearchcategoryposts04-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT = 'dataload-mynosearchcategoryposts05-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT = 'dataload-mynosearchcategoryposts06-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT = 'dataload-mynosearchcategoryposts07-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT = 'dataload-mynosearchcategoryposts08-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT = 'dataload-mynosearchcategoryposts09-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT = 'dataload-mynosearchcategoryposts10-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT = 'dataload-mynosearchcategoryposts11-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT = 'dataload-mynosearchcategoryposts12-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT = 'dataload-mynosearchcategoryposts13-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT = 'dataload-mynosearchcategoryposts14-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT = 'dataload-mynosearchcategoryposts15-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT = 'dataload-mynosearchcategoryposts16-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT = 'dataload-mynosearchcategoryposts17-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT = 'dataload-mynosearchcategoryposts18-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT = 'dataload-mynosearchcategoryposts19-table-edit';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts00-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts01-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts02-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts03-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts04-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts05-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts06-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts07-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts08-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts09-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts10-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts11-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts12-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts13-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts14-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts15-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts16-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts17-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts18-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts19-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts00-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts01-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts02-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts03-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts04-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts05-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts06-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts07-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts08-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts09-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts10-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts11-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts12-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts13-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts14-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts15-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts16-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts17-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts18-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts19-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT = 'dataload-mynosearchcategoryposts00-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT = 'dataload-mynosearchcategoryposts01-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT = 'dataload-mynosearchcategoryposts02-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT = 'dataload-mynosearchcategoryposts03-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT = 'dataload-mynosearchcategoryposts04-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT = 'dataload-mynosearchcategoryposts05-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT = 'dataload-mynosearchcategoryposts06-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT = 'dataload-mynosearchcategoryposts07-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT = 'dataload-mynosearchcategoryposts08-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT = 'dataload-mynosearchcategoryposts09-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT = 'dataload-mynosearchcategoryposts10-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT = 'dataload-mynosearchcategoryposts11-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT = 'dataload-mynosearchcategoryposts12-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT = 'dataload-mynosearchcategoryposts13-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT = 'dataload-mynosearchcategoryposts14-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT = 'dataload-mynosearchcategoryposts15-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT = 'dataload-mynosearchcategoryposts16-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT = 'dataload-mynosearchcategoryposts17-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT = 'dataload-mynosearchcategoryposts18-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT = 'dataload-mynosearchcategoryposts19-table-edit';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts00-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts01-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts02-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts03-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts04-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts05-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts06-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts07-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts08-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts09-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts10-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts11-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts12-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts13-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts14-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts15-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts16-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts17-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts18-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mynosearchcategoryposts19-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts00-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts01-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts02-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts03-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts04-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts05-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts06-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts07-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts08-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts09-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts10-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts11-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts12-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts13-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts14-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts15-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts16-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts17-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts18-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts19-scroll-fullviewpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT],
 
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
 
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
+        $inner_components = array(
 
             /*********************************************
          * My Content Tables
          *********************************************/
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
 
             /*********************************************
          * My Content Full Post Previews
          *********************************************/
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
 
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCATEGORYPOSTS];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_MYCATEGORYPOSTS];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
         $tables = array(
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT],
         );
         $simpleviews = array(
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
         );
         $fullviews = array(
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($module, $tables)) {
+        if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($module, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($module, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_FULLVIEWPREVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS00];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS10];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS01];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS11];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS02];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS12];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS03];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS13];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS04];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS14];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS05];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS15];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS06];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS16];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS07];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS17];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS08];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS09];
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19];
                 break;
         }
@@ -489,131 +489,131 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS00;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS10;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS01;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS11;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS02;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS12;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS03;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS13;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS04;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS14;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS05;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS15;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS06;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS16;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS07;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS17;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS08;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS09;
                 break;
 
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW:
-            case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_TABLE_EDIT:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW:
+            case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW:
                 $cat = POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19;
                 break;
         }
@@ -621,9 +621,9 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         if ($cat) {
             $names = gdGetCategoryname($cat, 'plural-lc');
 
-            $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', $names);
+            $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', $names);
             $this->setProp(
-                [GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN],
+                [GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN],
                 $props,
                 'action',
                 sprintf(
@@ -633,7 +633,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
             );
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

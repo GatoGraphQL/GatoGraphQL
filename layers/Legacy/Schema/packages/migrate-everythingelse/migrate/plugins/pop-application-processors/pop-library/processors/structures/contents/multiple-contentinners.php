@@ -2,23 +2,23 @@
 
 class PoP_Module_Processor_MultipleContentInners extends PoP_Module_Processor_ContentMultipleInnersBase
 {
-    public final const MODULE_CONTENTINNER_PAGECONTENT = 'contentinner-getpop-pagecontent';
+    public final const COMPONENT_CONTENTINNER_PAGECONTENT = 'contentinner-getpop-pagecontent';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENTINNER_PAGECONTENT],
+            [self::class, self::COMPONENT_CONTENTINNER_PAGECONTENT],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
-            self::MODULE_CONTENTINNER_PAGECONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_PAGE],
+            self::COMPONENT_CONTENTINNER_PAGECONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_PAGE],
         );
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

@@ -10,28 +10,28 @@ class GD_EM_CreateUpdate_Profile_Hooks
         \PoP\Root\App::addFilter('PoP_Location_UserPlatform_ProfileHooks:form-input', $this->getLocationsForminputInput(...));
 
         // Processor Hooks
-        \PoP\Root\App::addFilter('pop_module:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
-        \PoP\Root\App::addFilter('pop_module:updateprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_component:updateprofile:components', $this->getComponentSubcomponents(...), 10, 3);
     }
 
     public function getLocationsForminputInput()
     {
-        return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP];
+        return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
     }
 
-    public function getComponentSubmodules($components, array $module, $processor)
+    public function getComponentSubcomponents($components, array $component, $processor)
     {
 
         // Add before the Captcha
         array_splice(
             $components, 
             array_search(
-                [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_DESCRIPTION], 
+                [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_DESCRIPTION], 
                 $components
             )+1, 
             0, 
             array(
-                [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP],
+                [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP],
             )
         );
         

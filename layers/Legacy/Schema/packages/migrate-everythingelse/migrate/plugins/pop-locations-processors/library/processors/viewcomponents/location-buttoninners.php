@@ -3,33 +3,33 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_Processor_LocationViewComponentButtonInnersBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS = 'viewcomponent-buttoninner-locations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS = 'viewcomponent-buttoninner-locations';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],        );
+            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],        );
     }
 
-    public function getBtnTitle(array $module)
+    public function getBtnTitle(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
 
                 return TranslationAPIFacade::getInstance()->__('Locations', 'em-popprocessors');
         }
         
-        return parent::getBtnTitle($module);
+        return parent::getBtnTitle($component);
     }
 
-    public function getLocationModule(array $module)
+    public function getLocationComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
-                return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::MODULE_EM_LAYOUT_LOCATIONNAME];
+        switch ($component[1]) {
+            case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
+                return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONNAME];
         }
         
-        return parent::getLocationModule($module);
+        return parent::getLocationComponent($component);
     }
 }
 

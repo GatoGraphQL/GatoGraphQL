@@ -17,7 +17,7 @@ window.pop.EventReactions = {
 			// Delete the textarea / fields if the form was successful
 			var block = $(this);
 			var bsId = pop.Manager.getSettingsId(block);				
-			var blockFeedback = response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+			var blockFeedback = response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 
 			// result = true means it was successful
 			if (blockFeedback.result === true) {
@@ -39,7 +39,7 @@ window.pop.EventReactions = {
 			// Delete the textarea / fields if the form was successful
 			var block = $(this);
 			var bsId = pop.Manager.getSettingsId(block);				
-			var blockFeedback = response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+			var blockFeedback = response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 			var target = pop.Manager.getFrameTarget(pageSection);
 
 			// result = true means it was successful
@@ -79,7 +79,7 @@ window.pop.EventReactions = {
 			// Delete the textarea / fields if the form was successful
 			var block = $(this);
 			var bsId = pop.Manager.getSettingsId(block);				
-			var blockFeedback = response.statefuldata.feedback.block[pop.c.MODULESETTINGS_ENTRYMODULE][pssId][bsId];
+			var blockFeedback = response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 
 			// result = true means it was successful
 			if (blockFeedback.result === true) {

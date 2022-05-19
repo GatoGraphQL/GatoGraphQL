@@ -3,7 +3,7 @@
 {{/withModule}}
 
 {{#each dbObjectIDs}}
-	{{#each ../submoduleoutputnames.layouts}}
+	{{#each ../subcomponentoutputnames.layouts}}
 		{{#withModule ../../. this}}
 			{{enterModule ../../../. dbKey=../../../dbKey objectID=../../.}}
 		{{/withModule}}

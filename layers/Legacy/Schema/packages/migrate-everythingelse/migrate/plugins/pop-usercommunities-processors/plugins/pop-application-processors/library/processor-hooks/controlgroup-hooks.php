@@ -7,11 +7,11 @@ class UREPoP_RoleProcessors_ControlGroup_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:blockauthorpostlist:layouts',
-            $this->getLayoutSubmodules(...)
+            $this->getLayoutSubcomponents(...)
         );
     }
 
-    public function getLayoutSubmodules($layouts)
+    public function getLayoutSubcomponents($layouts)
     {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
@@ -19,7 +19,7 @@ class UREPoP_RoleProcessors_ControlGroup_Hooks
         if (gdUreIsCommunity($author)) {
             array_unshift(
                 $layouts, 
-                [GD_URE_Module_Processor_ControlButtonGroups::class, GD_URE_Module_Processor_ControlButtonGroups::MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE]
+                [GD_URE_Module_Processor_ControlButtonGroups::class, GD_URE_Module_Processor_ControlButtonGroups::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE]
             );
         }
 

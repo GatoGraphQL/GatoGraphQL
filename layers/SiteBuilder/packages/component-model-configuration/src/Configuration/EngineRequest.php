@@ -17,7 +17,7 @@ class EngineRequest extends UpstreamEngineRequest
         return array_merge(
             parent::getAllDataOutputItems(),
             [
-                DataOutputItems::MODULESETTINGS,
+                DataOutputItems::COMPONENTSETTINGS,
             ]
         );
     }
@@ -32,12 +32,12 @@ class EngineRequest extends UpstreamEngineRequest
         array_splice(
             $defaultDataOutputItems,
             array_search(
-                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_COMPONENT_SETTINGS,
                 $defaultDataOutputItems
             ),
             1,
             [
-                DataOutputItems::MODULESETTINGS,
+                DataOutputItems::COMPONENTSETTINGS,
             ]
         );
         return $defaultDataOutputItems;

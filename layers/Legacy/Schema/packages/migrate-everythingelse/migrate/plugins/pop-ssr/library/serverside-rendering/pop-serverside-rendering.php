@@ -144,9 +144,9 @@ class PoP_ServerSideRendering
             $requestHelperService = RequestHelperServiceFacade::getInstance();
             throw new GenericSystemException(
                 sprintf(
-                    'No path registered for $template \'%s\', for $module \'%s\' (%s)',
+                    'No path registered for $template \'%s\', for $component \'%s\' (%s)',
                     $template,
-                    $module,
+                    $component,
                     $requestHelperService->getRequestedFullURL()
                 )
             );
@@ -167,17 +167,17 @@ class PoP_ServerSideRendering
         return $renderer($configuration);
     }
 
-    public function renderModule(array $module, $configuration)
+    public function renderModule(array $component, $configuration)
     {
         if (!$this->enabled) {
             return '';
         }
 
-        if (!$module) {
+        if (!$component) {
             $requestHelperService = RequestHelperServiceFacade::getInstance();
             throw new GenericSystemException(
                 sprintf(
-                    '$module cannot be null (%s)',
+                    '$component cannot be null (%s)',
                     $requestHelperService->getRequestedFullURL()
                 )
             );
@@ -186,7 +186,7 @@ class PoP_ServerSideRendering
         $templates = $this->getJsonTemplates();
 
         // If a template source is not defined, then it is the template itself (eg: the pageSection templates)
-        $template = $templates[$module[1]] ?? $module;
+        $template = $templates[$component[1]] ?? $component;
 
         // Render and return the html
         return $this->renderTemplate($template, $configuration);
@@ -231,7 +231,7 @@ class PoP_ServerSideRendering
         // Expand the JS Keys first, since the template key may be the compacted one
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $popManager->expandJSKeys($pagesection_configuration);
-        if (!$pagesection_module = $pagesection_configuration[GD_JS_MODULE]) {
+        if (!$pagesection_component = $pagesection_configuration[GD_JS_COMPONENT]) {
             throw new GenericSystemException(
                 sprintf(
                     'No template defined in context (%s)',
@@ -242,11 +242,11 @@ class PoP_ServerSideRendering
 
         // We can render a block instead of the pageSection
         // Needed for producing the html for the automated emails
-        $renderModule = $pagesection_module;
+        $renderModule = $pagesection_component;
         $render_context = $pagesection_configuration;
         if ($block) {
-            $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-submodules')][$block];
-            $renderModule = $render_context[GD_JS_MODULE];
+            $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$block];
+            $renderModule = $render_context[GD_JS_COMPONENT];
         }
 
         return $this->renderModule($renderModule, $render_context);

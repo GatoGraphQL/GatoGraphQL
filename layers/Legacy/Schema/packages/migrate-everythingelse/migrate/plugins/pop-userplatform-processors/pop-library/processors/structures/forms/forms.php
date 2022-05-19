@@ -2,40 +2,40 @@
 
 class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_INVITENEWUSERS = 'form-inviteusers';
-    public final const MODULE_FORM_MYPREFERENCES = 'form-mypreferences';
+    public final const COMPONENT_FORM_INVITENEWUSERS = 'form-inviteusers';
+    public final const COMPONENT_FORM_MYPREFERENCES = 'form-mypreferences';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_INVITENEWUSERS],
-            [self::class, self::MODULE_FORM_MYPREFERENCES],
+            [self::class, self::COMPONENT_FORM_INVITENEWUSERS],
+            [self::class, self::COMPONENT_FORM_MYPREFERENCES],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_INVITENEWUSERS:
-                return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::MODULE_FORMINNER_INVITENEWUSERS];
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_INVITENEWUSERS:
+                return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::COMPONENT_FORMINNER_INVITENEWUSERS];
 
-            case self::MODULE_FORM_MYPREFERENCES:
-                return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::MODULE_FORMINNER_MYPREFERENCES];
+            case self::COMPONENT_FORM_MYPREFERENCES:
+                return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::COMPONENT_FORMINNER_MYPREFERENCES];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_MYPREFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_MYPREFERENCES:
                 // For security reasons: delete passwords (more since introducing Login block in offcanvas, so that it will stay there forever and other users could re-login using the exisiting filled-in info)
-                $this->appendProp($module, $props, 'class', 'form-mypreferences');
+                $this->appendProp($component, $props, 'class', 'form-mypreferences');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

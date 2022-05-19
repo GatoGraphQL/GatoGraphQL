@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_CreateLocationFeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION = 'layout-feedbackmessagealert-createlocation';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION = 'layout-feedbackmessagealert-createlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION],
         );
     }
 
-    public function getLayoutSubmodule(array $module)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
-            self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION => [PoP_Module_Processor_CreateLocationFeedbackMessageLayouts::class, PoP_Module_Processor_CreateLocationFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATELOCATION => [PoP_Module_Processor_CreateLocationFeedbackMessageLayouts::class, PoP_Module_Processor_CreateLocationFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATELOCATION],
         );
 
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($module);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

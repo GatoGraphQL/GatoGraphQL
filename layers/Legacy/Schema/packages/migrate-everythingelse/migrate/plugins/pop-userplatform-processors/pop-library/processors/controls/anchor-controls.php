@@ -4,73 +4,73 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_INVITENEWUSERS = 'anchorcontrol-invitenewusers';
-    public final const MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS = 'anchorcontrol-share-invitenewusers';
+    public final const COMPONENT_ANCHORCONTROL_INVITENEWUSERS = 'anchorcontrol-invitenewusers';
+    public final const COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS = 'anchorcontrol-share-invitenewusers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_INVITENEWUSERS],
-            [self::class, self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS],
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return TranslationAPIFacade::getInstance()->__('Email', 'pop-coreprocessors');
 
-            case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
                 return TranslationAPIFacade::getInstance()->__('Invite your friends to join!', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return 'fa-envelope';
 
-            case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
                 return 'fa-user-plus';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
-            case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
+            case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return RouteUtils::getRouteURL(POP_USERPLATFORM_ROUTE_INVITENEWUSERS);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($component, $props);
     }
 
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
-            case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
+            case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return POP_TARGET_MODALS;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
-                $this->appendProp($module, $props, 'class', 'btn btn-default btn-block btn-invitenewusers');
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
+                $this->appendProp($component, $props, 'class', 'btn btn-default btn-block btn-invitenewusers');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

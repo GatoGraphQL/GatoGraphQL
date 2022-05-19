@@ -2,23 +2,23 @@
 
 class GD_URE_Module_Processor_CustomContents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_URE_CONTENT_MEMBER = 'ure-content-member';
+    public final const COMPONENT_URE_CONTENT_MEMBER = 'ure-content-member';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_CONTENT_MEMBER],
+            [self::class, self::COMPONENT_URE_CONTENT_MEMBER],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_CONTENT_MEMBER:
-                return [GD_URE_Module_Processor_CustomContentInners::class, GD_URE_Module_Processor_CustomContentInners::MODULE_URE_CONTENTINNER_MEMBER];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_CONTENT_MEMBER:
+                return [GD_URE_Module_Processor_CustomContentInners::class, GD_URE_Module_Processor_CustomContentInners::COMPONENT_URE_CONTENTINNER_MEMBER];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

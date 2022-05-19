@@ -3,54 +3,54 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Module_Processor_MultiSelectFormInputsBase
 {
-    public final const MODULE_FORMINPUT_APPLIESTO = 'forminput-appliesto';
-    public final const MODULE_FORMINPUT_CATEGORIES = 'forminput-categories';
+    public final const COMPONENT_FORMINPUT_APPLIESTO = 'forminput-appliesto';
+    public final const COMPONENT_FORMINPUT_CATEGORIES = 'forminput-categories';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_APPLIESTO],
-            [self::class, self::MODULE_FORMINPUT_CATEGORIES],
+            [self::class, self::COMPONENT_FORMINPUT_APPLIESTO],
+            [self::class, self::COMPONENT_FORMINPUT_CATEGORIES],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
 
-            case self::MODULE_FORMINPUT_APPLIESTO:
+            case self::COMPONENT_FORMINPUT_APPLIESTO:
                 return TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
-            case self::MODULE_FORMINPUT_APPLIESTO:
+            case self::COMPONENT_FORMINPUT_APPLIESTO:
                 return GD_FormInput_AppliesTo::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return 'topics';
 
-            case self::MODULE_FORMINPUT_APPLIESTO:
+            case self::COMPONENT_FORMINPUT_APPLIESTO:
                 return 'appliesto';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

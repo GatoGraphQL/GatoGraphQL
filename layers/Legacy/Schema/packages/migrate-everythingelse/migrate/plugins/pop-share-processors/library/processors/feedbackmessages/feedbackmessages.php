@@ -2,26 +2,26 @@
 
 class PoP_Share_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL = 'feedbackmessage-sharebyemail';
+    public final const COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL = 'feedbackmessage-sharebyemail';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL],
+            [self::class, self::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageInners::class, PoP_Share_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_SHAREBYEMAIL],
+            self::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageInners::class, PoP_Share_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_SHAREBYEMAIL],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

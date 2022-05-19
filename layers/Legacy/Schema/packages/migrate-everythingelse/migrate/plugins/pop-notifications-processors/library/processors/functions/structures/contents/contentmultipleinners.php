@@ -2,30 +2,30 @@
 
 class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Processor_ContentMultipleInnersBase
 {
-    public final const MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD = 'contentinner-marknotificationasread';
-    public final const MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD = 'contentinner-marknotificationasunread';
+    public final const COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD = 'contentinner-marknotificationasread';
+    public final const COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD = 'contentinner-marknotificationasunread';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD],
-            [self::class, self::MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD],
+            [self::class, self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD],
+            [self::class, self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD:
-                $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
+        switch ($component[1]) {
+            case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:
+                $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
 
                 // Allow to add extra styles, such as changing background color, etc
                 if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasread:layouts',
                     array(),
-                    $module
+                    $component
                 )
                 ) {
                     $ret = array_merge(
@@ -35,14 +35,14 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 }
                 break;
 
-            case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
-                $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES];
+            case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
+                $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES];
 
                 // Allow to add extra styles, such as changing background color, etc
                 if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasunread:layouts',
                     array(),
-                    $module
+                    $component
                 )
                 ) {
                     $ret = array_merge(
@@ -61,13 +61,13 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD:
-            case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
+        switch ($component[1]) {
+            case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:
+            case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
                 // In addition, bring the new status (read/unread) of the notification to update the database/userstatedatabase in the webplatform, for consistency
                 $ret[] = 'status';
                 break;

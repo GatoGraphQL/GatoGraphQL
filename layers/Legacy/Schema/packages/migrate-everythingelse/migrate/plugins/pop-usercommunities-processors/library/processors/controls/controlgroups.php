@@ -1,26 +1,26 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_URE_CONTROLGROUP_CONTENTSOURCE = 'ure-controlgroup-contentsource';
+    public final const COMPONENT_URE_CONTROLGROUP_CONTENTSOURCE = 'ure-controlgroup-contentsource';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_CONTROLGROUP_CONTENTSOURCE],
+            [self::class, self::COMPONENT_URE_CONTROLGROUP_CONTENTSOURCE],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_URE_CONTROLGROUP_CONTENTSOURCE:
-                $ret[] = [GD_URE_Module_Processor_ControlButtonGroups::class, GD_URE_Module_Processor_ControlButtonGroups::MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_CONTROLGROUP_CONTENTSOURCE:
+                $ret[] = [GD_URE_Module_Processor_ControlButtonGroups::class, GD_URE_Module_Processor_ControlButtonGroups::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE];
                 break;
         }
 

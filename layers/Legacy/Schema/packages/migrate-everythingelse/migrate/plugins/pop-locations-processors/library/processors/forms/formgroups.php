@@ -1,67 +1,67 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP = 'formcomponentgroup-locationsmap';
-    public final const MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP = 'formcomponentgroup-singlelocationlocationsmap';
+    public final const COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP = 'formcomponentgroup-locationsmap';
+    public final const COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP = 'formcomponentgroup-singlelocationlocationsmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP],
-            [self::class, self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP],
+            [self::class, self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP],
+            [self::class, self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
-            self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP],
-            self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
+            self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP],
+            self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $module, array &$props)
+    public function getInfo(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
-            case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('If you can\'t find the location in the input below, click on the "+" button to add a new one.', 'em-popprocessors');
         }
 
-        return parent::getInfo($module, $props);
+        return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
-            case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
+            case self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 // Make it mandatory?
                 if (\PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_FormGroups:locations:mandatory',
                     false,
-                    $module,
+                    $component,
                     $props
                 )
                 ) {
-                    $component = $this->getComponentSubmodule($module);
+                    $component = $this->getComponentSubcomponent($component);
                     $this->setProp($component, $props, 'mandatory', true);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -1,60 +1,60 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Engine\Route\RouteUtils;
 
 class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_CREATELOCATION = 'anchorcontrol-createlocation';
+    public final const COMPONENT_ANCHORCONTROL_CREATELOCATION = 'anchorcontrol-createlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_CREATELOCATION],
+            [self::class, self::COMPONENT_ANCHORCONTROL_CREATELOCATION],
         );
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 return 'fa-plus';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $component, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 return POP_TARGET_MODALS;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($component, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $component, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
                 return RouteUtils::getRouteURL(POP_ADDLOCATIONS_ROUTE_ADDLOCATION);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($component, $props);
     }
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_CREATELOCATION:
-                $this->appendProp($module, $props, 'class', 'btn btn-primary pop-createlocation-btn');
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
+                $this->appendProp($component, $props, 'class', 'btn btn-primary pop-createlocation-btn');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

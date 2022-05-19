@@ -1,21 +1,21 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends PoP_Module_Processor_TypeaheadFormComponentsBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         // Hack: re-use multiple.tmpl
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_MULTIPLE];
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'fetchlinkTypeahead');
         return $ret;
     }
-    public function getTypeaheadJsmethod(array $module, array &$props)
+    public function getTypeaheadJsmethod(array $component, array &$props)
     {
         return 'fetchlinkTypeahead';
     }
@@ -25,9 +25,9 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
         // Add the 'URL' since that's where it will go upon selection of the typeahead value
         $ret[] = 'url';
@@ -35,16 +35,16 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
         return $ret;
     }
     
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         // Hack: re-use multiple.tmpl
-        $input = $this->getInputSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = [
-            \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input),
+        $input = $this->getInputSubcomponent($component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = [
+            \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($input),
         ];
 
         return $ret;

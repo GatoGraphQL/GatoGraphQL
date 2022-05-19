@@ -3,34 +3,34 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_MYCOMMUNITIES_UPDATE = 'block-mycommunities-update';
-    public final const MODULE_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
-    public final const MODULE_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
+    public final const COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE = 'block-mycommunities-update';
+    public final const COMPONENT_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
+    public final const COMPONENT_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE],
-            [self::class, self::MODULE_BLOCK_INVITENEWMEMBERS],
-            [self::class, self::MODULE_BLOCK_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE],
+            [self::class, self::COMPONENT_BLOCK_INVITENEWMEMBERS],
+            [self::class, self::COMPONENT_BLOCK_EDITMEMBERSHIP],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
-            self::MODULE_BLOCK_INVITENEWMEMBERS => POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS,
-            self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE => POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
+            self::COMPONENT_BLOCK_INVITENEWMEMBERS => POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS,
+            self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE => POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getDescription(array $module, array &$props)
+    protected function getDescription(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_INVITENEWMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_INVITENEWMEMBERS:
                 return sprintf(
                     '<div class="alert alert-info"><p>%s</p><ul><li>%s</li><li>%s</li></ul></div>',
                     sprintf(
@@ -42,34 +42,34 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
                 );
         }
 
-        return parent::getDescription($module, $props);
+        return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
-            self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE],
-            self::MODULE_BLOCK_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_INVITENEWMEMBERS],
-            self::MODULE_BLOCK_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_EDITMEMBERSHIP],
+            self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE],
+            self::COMPONENT_BLOCK_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_INVITENEWMEMBERS],
+            self::COMPONENT_BLOCK_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_EDITMEMBERSHIP],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $module, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE:
-            case self::MODULE_BLOCK_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE:
+            case self::COMPONENT_BLOCK_EDITMEMBERSHIP:
                 return true;
         }
 
-        return parent::showDisabledLayerIfCheckpointFailed($module, $props);
+        return parent::showDisabledLayerIfCheckpointFailed($component, $props);
         ;
     }
 }

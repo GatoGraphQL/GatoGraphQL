@@ -11,12 +11,12 @@ class PoPTheme_Wassup_LocationPosts_AddHighlights_Module_SideInfoContentPageSect
     {
         $ret = array();
 
-        $modules = array(
-            POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR],
+        $components = array(
+            POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_LocationPosts_AddHighlights_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_HIGHLIGHTSSIDEBAR],
         );
-        foreach ($modules as $route => $module) {
+        foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST,

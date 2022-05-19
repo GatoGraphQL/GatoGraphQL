@@ -16,13 +16,13 @@ interface EngineInterface
     public function listExtraRouteVars(): array;
     public function generateDataAndPrepareResponse(): void;
     public function calculateOutputData(): void;
-    public function getModelPropsModuletree(array $module): array;
-    public function addRequestPropsModuletree(array $module, array $props): array;
-    public function getModuleDatasetSettings(array $module, $model_props, array &$props): array;
+    public function getModelPropsComponentTree(array $component): array;
+    public function addRequestPropsComponentTree(array $component, array $props): array;
+    public function getComponentDatasetSettings(array $component, $model_props, array &$props): array;
     public function getRequestMeta(): array;
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution;
-    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array;
+    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array;
     public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

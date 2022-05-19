@@ -2,29 +2,29 @@
 
 class PoP_Module_Processor_ReferencesLayouts extends PoP_Module_Processor_ReferencesLayoutsBase
 {
-    public final const MODULE_LAYOUT_REFERENCES_LINE = 'layout-references-line';
-    public final const MODULE_LAYOUT_REFERENCES_RELATED = 'layout-references-related';
-    public final const MODULE_LAYOUT_REFERENCES_ADDONS = 'layout-references-addons';
+    public final const COMPONENT_LAYOUT_REFERENCES_LINE = 'layout-references-line';
+    public final const COMPONENT_LAYOUT_REFERENCES_RELATED = 'layout-references-related';
+    public final const COMPONENT_LAYOUT_REFERENCES_ADDONS = 'layout-references-addons';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_REFERENCES_LINE],
-            [self::class, self::MODULE_LAYOUT_REFERENCES_RELATED],
-            [self::class, self::MODULE_LAYOUT_REFERENCES_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_REFERENCES_LINE],
+            [self::class, self::COMPONENT_LAYOUT_REFERENCES_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_REFERENCES_ADDONS],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
-            self::MODULE_LAYOUT_REFERENCES_LINE => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_LINE],
-            self::MODULE_LAYOUT_REFERENCES_RELATED => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_RELATED],
-            self::MODULE_LAYOUT_REFERENCES_ADDONS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_ADDONS],
+            self::COMPONENT_LAYOUT_REFERENCES_LINE => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_LINE],
+            self::COMPONENT_LAYOUT_REFERENCES_RELATED => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_RELATED],
+            self::COMPONENT_LAYOUT_REFERENCES_ADDONS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS],
         );
-        if ($layout = $layouts[$module[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

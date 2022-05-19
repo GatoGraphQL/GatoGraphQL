@@ -4,97 +4,97 @@ use PoPSitesWassup\HighlightMutations\MutationResolverBridges\CreateHighlightMut
 use PoPSitesWassup\HighlightMutations\MutationResolverBridges\UpdateHighlightMutationResolverBridge;
 class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public final const MODULE_DATALOAD_HIGHLIGHT_UPDATE = 'dataload-highlight-update';
-    public final const MODULE_DATALOAD_HIGHLIGHT_CREATE = 'dataload-highlight-create';
+    public final const COMPONENT_DATALOAD_HIGHLIGHT_UPDATE = 'dataload-highlight-update';
+    public final const COMPONENT_DATALOAD_HIGHLIGHT_CREATE = 'dataload-highlight-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_HIGHLIGHT_UPDATE],
-            [self::class, self::MODULE_DATALOAD_HIGHLIGHT_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE],
+            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
-            self::MODULE_DATALOAD_HIGHLIGHT_UPDATE => POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
+            self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE => POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($module, $props);
+        return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $block_inners = array(
-            self::MODULE_DATALOAD_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::MODULE_FORM_HIGHLIGHT],
-            self::MODULE_DATALOAD_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::MODULE_FORM_HIGHLIGHT],
+            self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_HIGHLIGHT],
+            self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_HIGHLIGHT],
         );
-        if ($block_inner = $block_inners[$module[1]] ?? null) {
+        if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    protected function isCreate(array $module)
+    protected function isCreate(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 return true;
         }
 
-        return parent::isCreate($module);
+        return parent::isCreate($component);
     }
-    protected function isUpdate(array $module)
+    protected function isUpdate(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_HIGHLIGHT_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE:
                 return true;
         }
 
-        return parent::isUpdate($module);
+        return parent::isUpdate($component);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 return $this->instanceManager->getInstance(CreateHighlightMutationResolverBridge::class);
-            case self::MODULE_DATALOAD_HIGHLIGHT_UPDATE:
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE:
                 return $this->instanceManager->getInstance(UpdateHighlightMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_HIGHLIGHT_UPDATE:
-            case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE:
+            case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 $name = TranslationAPIFacade::getInstance()->__('Highlight', 'pop-addhighlights-processors');
-                if ($this->isUpdate($module)) {
-                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
-                } elseif ($this->isCreate($module)) {
-                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
+                if ($this->isUpdate($component)) {
+                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
+                } elseif ($this->isCreate($component)) {
+                    $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

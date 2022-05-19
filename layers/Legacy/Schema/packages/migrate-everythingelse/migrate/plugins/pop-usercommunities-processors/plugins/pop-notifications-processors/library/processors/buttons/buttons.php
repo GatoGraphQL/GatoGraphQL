@@ -3,73 +3,73 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
-    public final const MODULE_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
+    public final const COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
+    public final const COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP],
-            [self::class, self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS],
+            [self::class, self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS],
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
-                return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP];
+        switch ($component[1]) {
+            case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
+                return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP];
 
-            case self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS:
-                return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_UREAAL_BUTTONINNER_VIEWALLMEMBERS];
+            case self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS:
+                return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_UREAAL_BUTTONINNER_VIEWALLMEMBERS];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return 'editUserMembershipURL';
         
-            case self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS:
+            case self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS:
                 return 'communityMembersURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($component);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'poptheme-wassup');
         
-            case self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS:
+            case self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS:
                 return TranslationAPIFacade::getInstance()->__('View all members', 'poptheme-wassup');
         }
         
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
+        switch ($component[1]) {
+            case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return POP_TARGET_ADDONS;
         }
         
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
-            case self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
+            case self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS:
                 $ret .= ' btn btn-xs btn-link';
                 break;
         }

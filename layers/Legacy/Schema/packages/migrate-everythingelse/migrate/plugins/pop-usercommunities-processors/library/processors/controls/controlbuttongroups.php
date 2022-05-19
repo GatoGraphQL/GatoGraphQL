@@ -2,23 +2,23 @@
 
 class GD_URE_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE = 'ure-controlbuttongroup-contentsource';
+    public final const COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE = 'ure-controlbuttongroup-contentsource';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE],
+            [self::class, self::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE:
-                $ret[] = [GD_URE_Module_Processor_AnchorControls::class, GD_URE_Module_Processor_AnchorControls::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY];
-                $ret[] = [GD_URE_Module_Processor_AnchorControls::class, GD_URE_Module_Processor_AnchorControls::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE:
+                $ret[] = [GD_URE_Module_Processor_AnchorControls::class, GD_URE_Module_Processor_AnchorControls::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY];
+                $ret[] = [GD_URE_Module_Processor_AnchorControls::class, GD_URE_Module_Processor_AnchorControls::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER];
                 break;
         }
         

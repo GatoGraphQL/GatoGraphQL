@@ -3,41 +3,41 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBase
 {
-    public final const MODULE_CALENDAR_EVENTS_NAVIGATOR = 'calendar-events-navigator';
-    public final const MODULE_CALENDAR_EVENTS_ADDONS = 'calendar-events-addons';
-    public final const MODULE_CALENDAR_EVENTS_MAIN = 'calendar-events-main';
+    public final const COMPONENT_CALENDAR_EVENTS_NAVIGATOR = 'calendar-events-navigator';
+    public final const COMPONENT_CALENDAR_EVENTS_ADDONS = 'calendar-events-addons';
+    public final const COMPONENT_CALENDAR_EVENTS_MAIN = 'calendar-events-main';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CALENDAR_EVENTS_NAVIGATOR],
-            [self::class, self::MODULE_CALENDAR_EVENTS_ADDONS],
-            [self::class, self::MODULE_CALENDAR_EVENTS_MAIN],
+            [self::class, self::COMPONENT_CALENDAR_EVENTS_NAVIGATOR],
+            [self::class, self::COMPONENT_CALENDAR_EVENTS_ADDONS],
+            [self::class, self::COMPONENT_CALENDAR_EVENTS_MAIN],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_CALENDAR_EVENTS_NAVIGATOR => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTS_NAVIGATOR],
-            self::MODULE_CALENDAR_EVENTS_ADDONS => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTS_ADDONS],
-            self::MODULE_CALENDAR_EVENTS_MAIN => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTS_MAIN],
+            self::COMPONENT_CALENDAR_EVENTS_NAVIGATOR => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::COMPONENT_CALENDARINNER_EVENTS_NAVIGATOR],
+            self::COMPONENT_CALENDAR_EVENTS_ADDONS => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::COMPONENT_CALENDARINNER_EVENTS_ADDONS],
+            self::COMPONENT_CALENDAR_EVENTS_MAIN => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::COMPONENT_CALENDARINNER_EVENTS_MAIN],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function getOptions(array $module, array &$props)
+    public function getOptions(array $component, array &$props)
     {
-        $ret = parent::getOptions($module, $props);
+        $ret = parent::getOptions($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_CALENDAR_EVENTS_NAVIGATOR:
-            case self::MODULE_CALENDAR_EVENTS_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_CALENDAR_EVENTS_NAVIGATOR:
+            case self::COMPONENT_CALENDAR_EVENTS_ADDONS:
                 // Comment Leo 12/08/2016: if adding directly the first letter, then it can't be translated, so use the full name and get the first letter for each day
                 // $ret['dayNamesShort'] = array('S', 'M', 'T', 'W', 'T', 'F', 'S');
 
@@ -58,24 +58,24 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CALENDAR_EVENTS_NAVIGATOR:
-            case self::MODULE_CALENDAR_EVENTS_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_CALENDAR_EVENTS_NAVIGATOR:
+            case self::COMPONENT_CALENDAR_EVENTS_ADDONS:
                 // Do not show the Title in the Calendar Navigator, no space
-                $this->setProp([PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::MODULE_LAYOUTCALENDAR_CONTENT_POPOVER], $props, 'show-title', false);
+                $this->setProp([PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::COMPONENT_LAYOUTCALENDAR_CONTENT_POPOVER], $props, 'show-title', false);
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_CALENDAR_EVENTS_MAIN:
+        switch ($component[1]) {
+            case self::COMPONENT_CALENDAR_EVENTS_MAIN:
                 // Make it activeItem: highlight on viewing the corresponding fullview
-                $this->appendProp([GD_EM_Module_Processor_CustomPopoverLayouts::class, GD_EM_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_EVENT], $props, 'class', 'pop-openmapmarkers');
+                $this->appendProp([GD_EM_Module_Processor_CustomPopoverLayouts::class, GD_EM_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_EVENT], $props, 'class', 'pop-openmapmarkers');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

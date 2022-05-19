@@ -2,57 +2,57 @@
 
 class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase
 {
-    public final const MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY = 'buttonwrapper-userpostactivity';
+    public final const COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY = 'buttonwrapper-userpostactivity';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
-                $ret[] = [PoP_Module_Processor_FeedButtons::class, PoP_Module_Processor_FeedButtons::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY];
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
+                $ret[] = [PoP_Module_Processor_FeedButtons::class, PoP_Module_Processor_FeedButtons::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY];
                 break;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
                 return 'hasUserpostactivity';
         }
 
         return null;
     }
 
-    public function getTextfieldModule(array $module, array &$props)
+    public function getTextfieldComponent(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
-                return [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY];
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
+                return [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY];
         }
 
-        return parent::getTextfieldModule($module, $props);
+        return parent::getTextfieldComponent($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
-                $this->appendProp($module, $props, 'class', 'pop-collapse-btn');
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
+                $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

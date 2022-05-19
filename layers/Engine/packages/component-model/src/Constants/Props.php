@@ -8,5 +8,5 @@ class Props
 {
     public final const DESCENDANT_ATTRIBUTES = 'descendantattributes';
     public final const ATTRIBUTES = 'attributes';
-    public final const SUBMODULES = 'submodules';
+    public final const SUBCOMPONENTS = 'subcomponents';
 }

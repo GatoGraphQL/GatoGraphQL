@@ -3,87 +3,87 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_NEWSLETTERNAME = 'forminput-newslettername';
-    public final const MODULE_FORMINPUT_NEWSLETTEREMAIL = 'forminput-newsletteremail';
-    public final const MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminput-newsletteremailverificationemail';
-    public final const MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE = 'forminput-newsletteremailverificationcode';
+    public final const COMPONENT_FORMINPUT_NEWSLETTERNAME = 'forminput-newslettername';
+    public final const COMPONENT_FORMINPUT_NEWSLETTEREMAIL = 'forminput-newsletteremail';
+    public final const COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminput-newsletteremailverificationemail';
+    public final const COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE = 'forminput-newsletteremailverificationcode';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTERNAME],
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTEREMAIL],
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
-            [self::class, self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTERNAME],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
+            [self::class, self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTERNAME:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_NEWSLETTERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
             
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
                 return TranslationAPIFacade::getInstance()->__('Your Email', 'pop-genericforms');
 
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return TranslationAPIFacade::getInstance()->__('Verification code', 'pop-genericforms');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    public function isHidden(array $module, array &$props)
+    public function isHidden(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
         
-        return parent::isHidden($module, $props);
+        return parent::isHidden($component, $props);
     }
 
-    // function getName(array $module) {
+    // function getName(array $component) {
     
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
         
-    //         case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+    //         case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
             
     //             return 'email';
         
-    //         case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+    //         case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
             
     //             return 'code';
     //     }
         
-    //     return parent::getName($module);
+    //     return parent::getName($component);
     // }
 
-    public function clearInput(array $module, array &$props)
+    public function clearInput(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_NEWSLETTERNAME:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
-            case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_NEWSLETTERNAME:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
+            case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
 
-        return parent::clearInput($module, $props);
+        return parent::clearInput($component, $props);
     }
 }
 

@@ -2,36 +2,36 @@
 
 class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_DropdownButtonControlsBase
 {
-    public final const MODULE_DROPDOWNBUTTONCONTROL_SHARE = 'dropdownbuttoncontrol-share';
-    public final const MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE = 'dropdownbuttoncontrol-resultsshare';
+    public final const COMPONENT_DROPDOWNBUTTONCONTROL_SHARE = 'dropdownbuttoncontrol-share';
+    public final const COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE = 'dropdownbuttoncontrol-resultsshare';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_SHARE],
-            [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE],
+            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
-                $modules = array();
-                $modules[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_PRINT];
+        switch ($component[1]) {
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
+                $components = array();
+                $components[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_PRINT];
 
                 // Allow PoP Generic Forms Processors to add modules
-                $modules = \PoP\Root\App::applyFilters(
-                    'PoP_Module_Processor_DropdownButtonControls:modules:share',
-                    $modules,
-                    $module
+                $components = \PoP\Root\App::applyFilters(
+                    'PoP_Module_Processor_DropdownButtonControls:components:share',
+                    $components,
+                    $component
                 );
                 $ret = array_merge(
                     $ret,
-                    $modules
+                    $components
                 );
                 break;
         }
@@ -39,26 +39,26 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         return $ret;
     }
 
-    public function getBtnClass(array $module)
+    public function getBtnClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
+        switch ($component[1]) {
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'btn btn-compact btn-link';
         }
         
-        return parent::getBtnClass($module);
+        return parent::getBtnClass($component);
     }
 
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_DROPDOWNBUTTONCONTROL_SHARE:
-            case self::MODULE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
+        switch ($component[1]) {
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
+            case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'fa-share';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($component, $props);
     }
 }
 

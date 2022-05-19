@@ -2,72 +2,72 @@
 
 class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL = 'layout-postconclusionsidebarinner-horizontal';
-    public final const MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL = 'layout-subjugatedpostconclusionsidebarinner-horizontal';
+    public final const COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL = 'layout-postconclusionsidebarinner-horizontal';
+    public final const COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL = 'layout-subjugatedpostconclusionsidebarinner-horizontal';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL],
-            [self::class, self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL],
+            [self::class, self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL],
+            [self::class, self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT];
-                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT];
+                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
                 break;
 
-            case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT];
-                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
+            case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT];
+                $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
                 break;
         }
 
         return $ret;
     }
 
-    // function getWrapperClass(array $module) {
+    // function getWrapperClass(array $component) {
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-    //         case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+    //         case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+    //         case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
 
     //             return 'row';
     //     }
 
-    //     return parent::getWrapperClass($module);
+    //     return parent::getWrapperClass($component);
     // }
 
-    // function getWidgetwrapperClass(array $module) {
+    // function getWidgetwrapperClass(array $component) {
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-    //         case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+    //         case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+    //         case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
 
     //             return 'col-xsm-6';
     //     }
 
-    //     return parent::getWidgetwrapperClass($module);
+    //     return parent::getWidgetwrapperClass($component);
     // }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-            case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-                $this->appendProp([PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT], $props, 'class', 'pull-right');
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+            case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
+                $this->appendProp([PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT], $props, 'class', 'pull-right');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

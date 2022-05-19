@@ -2,23 +2,23 @@
 
 class PoP_Module_Processor_CommentHiddenInputAlertFormComponents extends PoP_Module_Processor_CommentHiddenInputAlertFormComponentsBase
 {
-    public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT = 'formcomponent-hiddeninputalert-layoutcomment';
+    public final const COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT = 'formcomponent-hiddeninputalert-layoutcomment';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT],
+            [self::class, self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT],
         );
     }
     
-    public function getHiddeninputModule(array $module)
+    public function getHiddenInputComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT:
-                return [PoP_Module_Processor_HiddenInputFormInputs::class, PoP_Module_Processor_HiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT:
+                return [PoP_Module_Processor_HiddenInputFormInputs::class, PoP_Module_Processor_HiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT];
         }
 
-        return parent::getHiddeninputModule($module);
+        return parent::getHiddenInputComponent($component);
     }
 }
 

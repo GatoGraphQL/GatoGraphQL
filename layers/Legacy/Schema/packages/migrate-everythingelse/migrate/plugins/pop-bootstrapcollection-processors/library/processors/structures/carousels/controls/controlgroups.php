@@ -2,41 +2,41 @@
 
 class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CAROUSELCONTROLGROUP_CAROUSEL = 'carouselcontrolgroup-carousel';
+    public final const COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL = 'carouselcontrolgroup-carousel';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL],
+            [self::class, self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
-                $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL:
+                $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
-                if ($target = $this->getProp($module, $props, 'carousel-target')) {
-                    foreach ($this->getSubmodules($module) as $submodule) {
-                        $this->setProp([$submodule], $props, 'carousel-target', $target);
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL:
+                if ($target = $this->getProp($component, $props, 'carousel-target')) {
+                    foreach ($this->getSubcomponents($component) as $subComponent) {
+                        $this->setProp([$subComponent], $props, 'carousel-target', $target);
                     }
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

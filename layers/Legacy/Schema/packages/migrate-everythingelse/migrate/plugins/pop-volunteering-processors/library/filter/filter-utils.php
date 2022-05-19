@@ -2,33 +2,33 @@
 
 class PoP_VolunteeringProcessors_FilterUtils
 {
-    private static $volunteer_modules;
+    private static $volunteer_components;
 
-    public static function getVolunteerModules()
+    public static function getVolunteerComponents()
     {
-        if (is_null(self::$volunteer_modules)) {
-            $volunteer_modules = \PoP\Root\App::applyFilters(
+        if (is_null(self::$volunteer_components)) {
+            $volunteer_components = \PoP\Root\App::applyFilters(
                 'PoP_VolunteeringProcessors_FilterUtils:volunteer-modules',
                 array()
             );
-            self::$volunteer_modules = [];
-            foreach ($volunteer_modules as $volunteer_module) {
-                $module = $volunteer_module['module'];
-                $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-                self::$volunteer_modules[$moduleFullName] = $volunteer_module['volunteerModule'];
+            self::$volunteer_components = [];
+            foreach ($volunteer_components as $volunteer_component) {
+                $component = $volunteer_component['component'];
+                $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+                self::$volunteer_components[$componentFullName] = $volunteer_component['volunteerModule'];
             }
         }
 
-        return self::$volunteer_modules;
+        return self::$volunteer_components;
     }
 
-    public static function maybeAddVolunteerFilterinput($filterinputs, array $module)
+    public static function maybeAddVolunteerFilterinput($filterinputs, array $component)
     {
         if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-            $volunteer_modules = self::getVolunteerModules();
-            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-            if ($volunteer_module = $volunteer_modules[$moduleFullName] ?? null) {
-                $filterinputs[] = $volunteer_module;
+            $volunteer_components = self::getVolunteerComponents();
+            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+            if ($volunteer_component = $volunteer_components[$componentFullName] ?? null) {
+                $filterinputs[] = $volunteer_component;
             }
         }
 

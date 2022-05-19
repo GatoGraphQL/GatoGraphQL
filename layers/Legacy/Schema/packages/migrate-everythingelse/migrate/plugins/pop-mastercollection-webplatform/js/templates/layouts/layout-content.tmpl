@@ -1,8 +1,8 @@
 {{#with dbObject}}
 	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" style="{{../style}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
-		{{#if ../submoduleoutputnames.abovecontent}}
+		{{#if ../subcomponentoutputnames.abovecontent}}
 			<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
-				{{#each ../submoduleoutputnames.abovecontent}}
+				{{#each ../subcomponentoutputnames.abovecontent}}
 					{{#withModule ../../. this}}
 						{{enterModule ../../../.}}
 					{{/withModule}}

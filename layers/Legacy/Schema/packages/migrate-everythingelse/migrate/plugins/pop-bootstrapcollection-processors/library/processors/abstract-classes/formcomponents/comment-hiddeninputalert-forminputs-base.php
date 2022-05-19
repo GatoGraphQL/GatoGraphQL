@@ -2,8 +2,8 @@
 
 abstract class PoP_Module_Processor_CommentHiddenInputAlertFormComponentsBase extends PoP_Module_Processor_HiddenInputAlertFormComponentsBase
 {
-    public function getSelectedModule(array $module)
+    public function getSelectedComponent(array $component)
     {
-        return [PoP_Module_Processor_CommentCardLayouts::class, PoP_Module_Processor_CommentCardLayouts::MODULE_LAYOUTCOMMENT_CARD];
+        return [PoP_Module_Processor_CommentCardLayouts::class, PoP_Module_Processor_CommentCardLayouts::COMPONENT_LAYOUTCOMMENT_CARD];
     }
 }

@@ -2,50 +2,50 @@
 
 class PoP_LocationPosts_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR = 'multiple-single-locationpost-recommendedbysidebar';
+    public final const COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR = 'multiple-single-locationpost-recommendedbysidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR],
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR:
                 $filters = array(
-                    self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
+                    self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$module[1]];
-                $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
+                $ret[] = $filters[$component[1]];
+                $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
                 break;
         }
 
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR:
                 return POP_SCREEN_SINGLEUSERS;
         }
         
-        return parent::getScreen($module);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RECOMMENDEDBYSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
         
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($component);
     }
 }
 

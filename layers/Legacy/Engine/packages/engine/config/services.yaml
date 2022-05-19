@@ -7,8 +7,8 @@ services:
     PoP\Engine\State\:
         resource: '../src/State/*'
 
-    PoP\Engine\ModuleFilters\:
-        resource: '../src/ModuleFilters/*'
+    PoP\Engine\ComponentFilters\:
+        resource: '../src/ComponentFilters/*'
 
     PoP\Engine\HelperServices\FormInputHelperServiceInterface:
         class: \PoP\Engine\HelperServices\FormInputHelperService

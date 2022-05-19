@@ -1,40 +1,40 @@
 <?php
-use PoPCMSSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as PostFilterInners;
+use PoPCMSSchema\Posts\ComponentProcessors\FilterInnerComponentProcessor as PostFilterInners;
 
 class PoPThemeWassup_DataLoad_FilterHooks
 {
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'Blog:FilterInnerModuleProcessor:inputmodules',
+            'Blog:FilterInnerComponentProcessor:inputComponents',
             $this->modifyPostFilterInputs(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
-            'Blog:SimpleFilterInners:inputmodules',
+            'Blog:SimpleFilterInners:inputComponents',
             $this->modifyPostSimpleFilterInputs(...),
             10,
             2
         );
     }
 
-    public function modifyPostFilterInputs($filterinputs, array $module)
+    public function modifyPostFilterInputs($filterinputs, array $component)
     {
-        $is_post = in_array($module, [
-            [PostFilterInners::class, PostFilterInners::MODULE_FILTERINPUTCONTAINER_POSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
+        $is_post = in_array($component, [
+            [PostFilterInners::class, PostFilterInners::COMPONENT_FILTERINPUTCONTAINER_POSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
         ]);
-        $is_content = in_array($module, [
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_CONTENT],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGCONTENT],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCONTENT],
+        $is_content = in_array($component, [
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_CONTENT],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORCONTENT],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGCONTENT],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYCONTENT],
         ]);
         if ($is_content) {
 
@@ -44,7 +44,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
                     $pos+1,
                     0,
                     array(
-                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_CONTENTSECTIONS],
+                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_CONTENTSECTIONS],
                     )
                 );
             }
@@ -52,14 +52,14 @@ class PoPThemeWassup_DataLoad_FilterHooks
         if ($is_post || $is_content) {
             // filter-tagallcontent doesn't have the hashtags, so use search there
             $pos = in_array(
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_HASHTAGS],
                 $filterinputs
             ) ? array_search(
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_HASHTAGS],
                 $filterinputs
             ) :
             array_search(
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
                 $filterinputs
             );
 
@@ -70,7 +70,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
                     $pos+1,
                     0,
                     array(
-                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_APPLIESTO],
+                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_APPLIESTO],
                     )
                 );
             }
@@ -80,7 +80,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
                     $pos+1,
                     0,
                     array(
-                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_CATEGORIES],
+                        [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_CATEGORIES],
                     )
                 );
             }
@@ -89,22 +89,22 @@ class PoPThemeWassup_DataLoad_FilterHooks
         return $filterinputs;
     }
 
-    public function modifyPostSimpleFilterInputs($filterinputs, array $module)
+    public function modifyPostSimpleFilterInputs($filterinputs, array $component)
     {
-        $is_post = in_array($module, [
-            [PostFilterInners::class, PostFilterInners::MODULE_FILTERINPUTCONTAINER_POSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
+        $is_post = in_array($component, [
+            [PostFilterInners::class, PostFilterInners::COMPONENT_FILTERINPUTCONTAINER_POSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
         ]);
-        $is_content = in_array($module, [
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_CONTENT],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGCONTENT],
-            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCONTENT],
+        $is_content = in_array($component, [
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_CONTENT],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORCONTENT],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGCONTENT],
+            [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYCONTENT],
         ]);
         if ($is_content) {
 
@@ -114,7 +114,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
                     $pos+1,
                     0,
                     array(
-                        [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_CONTENTSECTIONS],
+                        [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_CONTENTSECTIONS],
                     )
                 );
             }
@@ -122,13 +122,13 @@ class PoPThemeWassup_DataLoad_FilterHooks
         if ($is_post || $is_content) {
             // filter-tagallcontent doesn't have the hashtags, so use search there
             $pos = in_array(
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_HASHTAGS],
                 $filterinputs
             ) ? array_search(
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_HASHTAGS],
                 $filterinputs
             ) : array_search(
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
                 $filterinputs
             );
 
@@ -139,7 +139,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
                     $pos+1,
                     0,
                     array(
-                        [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_APPLIESTO],
+                        [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_APPLIESTO],
                     )
                 );
             }
@@ -149,7 +149,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
                     $pos+1,
                     0,
                     array(
-                        [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_CATEGORIES],
+                        [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_CATEGORIES],
                     )
                 );
             }

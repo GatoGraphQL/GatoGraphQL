@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPThemeWassup_Utils
@@ -11,13 +11,13 @@ class PoPThemeWassup_Utils
     {
         if (is_null(self::$checkLoadingPagesectionModule)) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var ModulePaths */
-            $modulePaths = $instanceManager->getInstance(ModulePaths::class);
+            /** @var ComponentPaths */
+            $componentPaths = $instanceManager->getInstance(ComponentPaths::class);
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
             self::$checkLoadingPagesectionModule = \PoP\Root\App::applyFilters(
                 'PoPThemeWassup_Utils:checkLoadingPagesectionModule',
-                \PoP\Root\App::getState('modulefilter') !== $modulePaths->getName()
+                \PoP\Root\App::getState('componentFilter') !== $componentPaths->getName()
             );
         }
 
@@ -40,22 +40,22 @@ class PoPThemeWassup_Utils
             if (!PoP_SSR_ServerUtils::disableServerSideRendering()) {
                 $engineState = App::getEngineState();
                 $data = $engineState->data;
-                $configuration = $data['modulesettings']['combinedstate']['configuration'];
+                $configuration = $data['componentsettings']['combinedstate']['configuration'];
                 // Because the pageSection names may be mangled (so that "body" will be "x3" or something like that),
                 // repeat the name of the pageSection/class below
                 $possiblyOpenPageSections = array(
-                    PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODY => 'body',
-                    PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO => 'sideinfo',
-                    PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER => 'hover',
+                    PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY => 'body',
+                    PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO => 'sideinfo',
+                    PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_HOVER => 'hover',
                 );
                 foreach ($possiblyOpenPageSections as $possiblyOpenPageSection => $class) {
-                    $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBMODULEOUTPUTNAMES] ?? []));
+                    $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBCOMPONENTOUTPUTNAMES] ?? []));
                     if ($pageSectionBlocks) {
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
-                        if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO) {
-                            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                            $emptysideinfoModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]);
-                            if (in_array($emptysideinfoModuleOutputName, $pageSectionBlocks)) {
+                        if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO) {
+                            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+                            $emptysideinfoComponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTYSIDEINFO]);
+                            if (in_array($emptysideinfoComponentOutputName, $pageSectionBlocks)) {
                                 continue;
                             }
                         }

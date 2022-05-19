@@ -2,28 +2,28 @@
 
 class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
 {
-    public final const MODULE_BUTTONGROUP_HIGHLIGHTS = 'buttongroup-highlights';
-    public final const MODULE_BUTTONGROUP_MYHIGHLIGHTS = 'buttongroup-myhighlights';
+    public final const COMPONENT_BUTTONGROUP_HIGHLIGHTS = 'buttongroup-highlights';
+    public final const COMPONENT_BUTTONGROUP_MYHIGHLIGHTS = 'buttongroup-myhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONGROUP_HIGHLIGHTS],
-            [self::class, self::MODULE_BUTTONGROUP_MYHIGHLIGHTS],
+            [self::class, self::COMPONENT_BUTTONGROUP_HIGHLIGHTS],
+            [self::class, self::COMPONENT_BUTTONGROUP_MYHIGHLIGHTS],
         );
     }
 
-    protected function getHeadersdataScreen(array $module, array &$props)
+    protected function getHeadersdataScreen(array $component, array &$props)
     {
         $screens = array(
-            self::MODULE_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
-            self::MODULE_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
+            self::COMPONENT_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
+            self::COMPONENT_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
         );
-        if ($screen = $screens[$module[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($module, $props);
+        return parent::getHeadersdataScreen($component, $props);
     }
 }
 

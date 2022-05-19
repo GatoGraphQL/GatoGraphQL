@@ -4,41 +4,41 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_BUTTONWRAPPER_POSTVIEW = 'buttonwrapper-postview';
-    public final const MODULE_BUTTONWRAPPER_POSTPREVIEW = 'buttonwrapper-postpreview';
+    public final const COMPONENT_BUTTONWRAPPER_POSTVIEW = 'buttonwrapper-postview';
+    public final const COMPONENT_BUTTONWRAPPER_POSTPREVIEW = 'buttonwrapper-postpreview';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTONWRAPPER_POSTVIEW],
-            [self::class, self::MODULE_BUTTONWRAPPER_POSTPREVIEW],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTVIEW],
+            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_POSTVIEW:
-                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTVIEW];
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
+                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTVIEW];
                 break;
 
-            case self::MODULE_BUTTONWRAPPER_POSTPREVIEW:
-                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTPREVIEW];
+            case self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW:
+                $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTPREVIEW];
                 break;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTONWRAPPER_POSTVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
 
-            case self::MODULE_BUTTONWRAPPER_POSTPREVIEW:
+            case self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('not', ['field' => FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED])], 'not-published');
         }
 

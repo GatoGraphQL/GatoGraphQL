@@ -1,9 +1,9 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class PoP_Module_Processor_TagInfoLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_TagInfoLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_TAGINFO];
     }
@@ -13,14 +13,14 @@ abstract class PoP_Module_Processor_TagInfoLayoutsBase extends PoPEngine_QueryDa
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return array('count');
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
     
         $ret[GD_JS_TITLES] = array(
             'count' => TranslationAPIFacade::getInstance()->__('Count', 'pop-coreprocessors'),

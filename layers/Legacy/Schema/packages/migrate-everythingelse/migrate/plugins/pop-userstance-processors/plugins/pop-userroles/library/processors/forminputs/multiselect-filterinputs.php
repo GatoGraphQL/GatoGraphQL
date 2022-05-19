@@ -1,17 +1,17 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
+    public final const COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -24,82 +24,82 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT],
+            [self::class, self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT],
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::class, PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::FILTERINPUT_AUTHORROLE_MULTISELECT],
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::class, PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor::FILTERINPUT_AUTHORROLE_MULTISELECT],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Author Role', 'pop-userstance-processors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return GD_URE_FormInput_MultiAuthorRole::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return 'role';
         }
 
-        return parent::getName($module);
+        return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => $this->stringScalarTypeResolver,
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => $translationAPI->__('', ''),
+        return match ($component[1]) {
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $translationAPI->__('', ''),
             default => null,
         };
     }

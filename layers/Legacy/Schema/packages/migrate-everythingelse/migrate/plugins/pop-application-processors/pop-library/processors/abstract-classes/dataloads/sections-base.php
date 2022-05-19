@@ -1,17 +1,17 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getDataloadSource(array $module, array &$props): string
+    public function getDataloadSource(array $component, array &$props): string
     {
-        $ret = parent::getDataloadSource($module, $props);
+        $ret = parent::getDataloadSource($component, $props);
 
-        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($component)) {
         if (\PoP\Root\App::getState('nature') == UserRequestNature::USER) {
             // Allow URE to add the Organization/Community content source attribute
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -22,14 +22,14 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($module, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         // Allow to override the limit by $props (eg: for the Website Features, Filter section)
-        if ($limit = $this->getProp($module, $props, 'limit')) {
+        if ($limit = $this->getProp($component, $props, 'limit')) {
             $ret['limit'] = $limit;
-        } elseif ($format = $this->getFormat($module)) {
+        } elseif ($format = $this->getFormat($component)) {
             $limits = array(
                 POP_FORMAT_SIMPLEVIEW => 6,
                 POP_FORMAT_FULLVIEW => 6,
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         }
 
         // Allow to override the include by $props (eg: for GetPoP Organization Membes demonstration)
-        if ($include = $this->getProp($module, $props, 'include')) {
+        if ($include = $this->getProp($component, $props, 'include')) {
             $ret['include'] = $include;
         }
 
@@ -55,45 +55,45 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function getFeedbackmessageModule(array $module)
+    protected function getFeedbackMessageComponent(array $component)
     {
-        return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::MODULE_FEEDBACKMESSAGE_ITEMLIST];
+        return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_ITEMLIST];
     }
 
-    protected function getFeedbackmessagesPosition(array $module)
+    protected function getFeedbackmessagesPosition(array $component)
     {
         return 'bottom';
     }
 
-    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        if ($inner_module = $this->getInnerSubmodule($module)) {
-            $ret[] = $inner_module;
+        if ($inner_component = $this->getInnerSubcomponent($component)) {
+            $ret[] = $inner_component;
         }
 
         return $ret;
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         return null;
     }
 
-    // public function getModelPropsForDescendantModules(array $module, array &$props): array
+    // public function getModelPropsForDescendantComponents(array $component, array &$props): array
     // {
-    //     $ret = parent::getModelPropsForDescendantModules($module, $props);
+    //     $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
-    //     if ($filter_module = $this->getFilterSubmodule($module)) {
-    //         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    //         $ret['filter-module'] = $filter_module;
-    //         // $ret['filter'] = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+    //     if ($filter_component = $this->getFilterSubcomponent($component)) {
+    //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //         $ret['filter-component'] = $filter_component;
+    //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);
     //     }
 
     //     return $ret;

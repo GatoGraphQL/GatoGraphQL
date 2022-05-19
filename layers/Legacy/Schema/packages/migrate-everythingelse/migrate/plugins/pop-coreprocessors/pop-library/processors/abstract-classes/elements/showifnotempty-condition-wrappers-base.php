@@ -2,33 +2,33 @@
 
 abstract class PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getConditionfailedLayoutSubmodules(array $module)
+    public function getConditionfailedLayoutSubcomponents(array $component)
     {
         // The layouts and condition failed layouts are the same, the only difference is adding class "hidden" between the 2 states
-        return $this->getLayoutSubmodules($module);
+        return $this->getLayoutSubcomponents($component);
     }
 
-    public function getConditionfailedClass(array $module, array &$props)
+    public function getConditionfailedClass(array $component, array &$props)
     {
-        $classs = parent::getConditionfailedClass($module, $props);
+        $classs = parent::getConditionfailedClass($component, $props);
         $classs .= ' hidden';
 
         return $classs;
     }
 
-    public function getTextfieldModule(array $module, array &$props)
+    public function getTextfieldComponent(array $component, array &$props)
     {
         return null;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'pop-show-notempty');
-        if ($textfield_module = $this->getTextfieldModule($module, $props)) {
+        $this->appendProp($component, $props, 'class', 'pop-show-notempty');
+        if ($textfield_component = $this->getTextfieldComponent($component, $props)) {
             // Watch out! Class attribute here is called 'textfield-class', so any module implementing the textfield functionality
             // will need to add this class in the span surrounding the data to be refreshed (eg: buttoninner.tmpl)
-            $this->appendProp($textfield_module, $props, 'textfield-class', 'pop-show-notempty');
+            $this->appendProp($textfield_component, $props, 'textfield-class', 'pop-show-notempty');
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

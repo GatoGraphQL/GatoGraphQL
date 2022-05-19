@@ -2,51 +2,51 @@
 
 class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_NAME = 'gf-forminputgroup-field-name';
-    public final const MODULE_FORMINPUTGROUP_EMAIL = 'gf-forminputgroup-field-email';
+    public final const COMPONENT_FORMINPUTGROUP_NAME = 'gf-forminputgroup-field-name';
+    public final const COMPONENT_FORMINPUTGROUP_EMAIL = 'gf-forminputgroup-field-email';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_NAME],
-            [self::class, self::MODULE_FORMINPUTGROUP_EMAIL],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_NAME],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAIL],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_NAME => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME],
-            self::MODULE_FORMINPUTGROUP_EMAIL => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL],
+            self::COMPONENT_FORMINPUTGROUP_NAME => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NAME],
+            self::COMPONENT_FORMINPUTGROUP_EMAIL => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_EMAIL],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUTGROUP_NAME:
-            case self::MODULE_FORMINPUTGROUP_EMAIL:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUTGROUP_NAME:
+            case self::COMPONENT_FORMINPUTGROUP_EMAIL:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUTGROUP_NAME:
-            case self::MODULE_FORMINPUTGROUP_EMAIL:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUTGROUP_NAME:
+            case self::COMPONENT_FORMINPUTGROUP_EMAIL:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
@@ -55,21 +55,21 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUTGROUP_NAME:
-            case self::MODULE_FORMINPUTGROUP_EMAIL:
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUTGROUP_NAME:
+            case self::COMPONENT_FORMINPUTGROUP_EMAIL:
+                $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always
                 if (!PoP_FormUtils::useLoggedinuserData()) {
-                    $this->appendProp($module, $props, 'class', 'visible-always');
+                    $this->appendProp($component, $props, 'class', 'visible-always');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

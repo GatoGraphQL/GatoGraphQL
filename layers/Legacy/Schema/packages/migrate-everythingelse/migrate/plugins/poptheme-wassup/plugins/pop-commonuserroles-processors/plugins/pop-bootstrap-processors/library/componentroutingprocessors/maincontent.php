@@ -11,13 +11,13 @@ class PoP_CommonUserRolesProcessors_Bootstrap_Module_MainContentComponentRouting
     {
         $ret = array();
 
-        $modules = array(
-            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_ORGANIZATIONS],
-            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_INDIVIDUALS],
+        $components = array(
+            POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_ORGANIZATIONS],
+            POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_INDIVIDUALS],
         );
-        foreach ($modules as $route => $module) {
+        foreach ($components as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

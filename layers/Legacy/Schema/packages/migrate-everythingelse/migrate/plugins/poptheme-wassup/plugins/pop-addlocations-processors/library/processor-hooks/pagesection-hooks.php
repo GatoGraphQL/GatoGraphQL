@@ -26,7 +26,7 @@ class PoP_AddLocations_PageSectionHooks
     //     return array_merge(
     //         $headerTitles,
     //         array(
-    //             GD_EM_Module_Processor_CreateLocationBlocks::MODULE_BLOCK_CREATELOCATION => sprintf(
+    //             GD_EM_Module_Processor_CreateLocationBlocks::COMPONENT_BLOCK_CREATELOCATION => sprintf(
     //                 '<i class="fa fa-fw fa-map-marker"></i>%s',
     //                 TranslationAPIFacade::getInstance()->__('Add location', 'poptheme-wassup')
     //             ),
@@ -39,17 +39,17 @@ class PoP_AddLocations_PageSectionHooks
     //     return array_merge(
     //         $classes,
     //         array(
-    //             GD_EM_Module_Processor_CreateLocationBlocks::MODULE_BLOCK_CREATELOCATION => 'modal-lg',
+    //             GD_EM_Module_Processor_CreateLocationBlocks::COMPONENT_BLOCK_CREATELOCATION => 'modal-lg',
     //         )
     //     );
     // }
 
-    public function initModelProps(array $module, $props_in_array, $processor)
+    public function initModelProps(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
-            case PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS:
-                $processor->setProp([GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::MODULE_BLOCK_CREATELOCATION], $props, 'title', '');
+        switch ($component[1]) {
+            case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
+                $processor->setProp([GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::COMPONENT_BLOCK_CREATELOCATION], $props, 'title', '');
                 break;
         }
     }

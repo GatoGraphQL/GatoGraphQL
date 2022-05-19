@@ -1,9 +1,9 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PREVIEWUSER];
     }
@@ -13,46 +13,46 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         $ret = array_merge(
-            parent::getDataFields($module, $props),
+            parent::getDataFields($component, $props),
             array('displayName', 'isProfile')
         );
 
-        if ($this->showTitle($module)) {
+        if ($this->showTitle($component)) {
             $ret[] = 'title';
         }
-        if ($this->showShortDescription($module)) {
+        if ($this->showShortDescription($component)) {
             $ret[] = 'shortDescriptionFormatted';
         }
 
         return $ret;
     }
 
-    public function showShortDescription(array $module)
+    public function showShortDescription(array $component)
     {
         return true;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($belowavatar_modules = $this->getBelowavatarLayoutSubmodules($module)) {
+        if ($belowavatar_components = $this->getBelowavatarLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $belowavatar_modules
+                $belowavatar_components
             );
         }
-        if ($belowexcerpt_templates = $this->getBelowexcerptLayoutSubmodules($module)) {
+        if ($belowexcerpt_templates = $this->getBelowexcerptLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $belowexcerpt_templates
             );
         }
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($useravatar = $this->getUseravatarSubmodule($module)) {
+            if ($useravatar = $this->getUseravatarSubcomponent($component)) {
                 $ret[] = $useravatar;
             }
         }
@@ -60,54 +60,54 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    protected function showTitle(array $module)
+    protected function showTitle(array $component)
     {
         return false;
     }
 
-    public function getUseravatarSubmodule(array $module)
+    public function getUseravatarSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getBelowavatarLayoutSubmodules(array $module)
+    public function getBelowavatarLayoutSubcomponents(array $component)
     {
         return array();
     }
-    public function getBelowexcerptLayoutSubmodules(array $module)
+    public function getBelowexcerptLayoutSubcomponents(array $component)
     {
         return array();
     }
-    // function getExtraClass(array $module) {
+    // function getExtraClass(array $component) {
 
     //     return '';
     // }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($belowavatar_modules = $this->getBelowavatarLayoutSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowavatar'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $belowavatar_modules
+        if ($belowavatar_components = $this->getBelowavatarLayoutSubcomponents($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['belowavatar'] = array_map(
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'], 
+                $belowavatar_components
             );
         }
-        if ($belowexcerpt_modules = $this->getBelowexcerptLayoutSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowexcerpt'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $belowexcerpt_modules
+        if ($belowexcerpt_components = $this->getBelowexcerptLayoutSubcomponents($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['belowexcerpt'] = array_map(
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'], 
+                $belowexcerpt_components
             );
         }
-        if ($this->showShortDescription($module)) {
+        if ($this->showShortDescription($component)) {
             $ret['show-short-description'] = true;
         }
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($useravatar = $this->getUseravatarSubmodule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($useravatar);
+            if ($useravatar = $this->getUseravatarSubcomponent($component)) {
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($useravatar);
             }
         }
 

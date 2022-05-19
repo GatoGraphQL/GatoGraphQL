@@ -2,33 +2,33 @@
 
 class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues extends PoP_Module_Processor_CommentTriggerLayoutFormComponentValuesBase
 {
-    public final const MODULE_FORMCOMPONENT_CARD_COMMENT = 'forminput-comment-card';
+    public final const COMPONENT_FORMCOMPONENT_CARD_COMMENT = 'forminput-comment-card';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENT],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_COMMENT],
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
-                return [PoP_Module_Processor_CommentHiddenInputAlertFormComponents::class, PoP_Module_Processor_CommentHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENT:
+                return [PoP_Module_Processor_CommentHiddenInputAlertFormComponents::class, PoP_Module_Processor_CommentHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENT:
                 return 'self';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

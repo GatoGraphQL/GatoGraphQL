@@ -12,31 +12,31 @@ class PoP_Share_Module_Processor_GFFormInnerHooks
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_GFFormInners:layouts',
-            $this->getLayoutSubmodules(...),
+            $this->getLayoutSubcomponents(...),
             10,
             2
         );
     }
 
-    public function getLayoutSubmodules($layouts, array $module)
+    public function getLayoutSubcomponents($layouts, array $component)
     {
-        switch ($module[1]) {
-            case PoP_Share_Module_Processor_GFFormInners::MODULE_FORMINNER_SHAREBYEMAIL:
-                $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID];
+        switch ($component[1]) {
+            case PoP_Share_Module_Processor_GFFormInners::COMPONENT_FORMINNER_SHAREBYEMAIL:
+                $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID];
                 break;
         }
 
         return $layouts;
     }
 
-    public function initModelProps(array $module, $props_in_array, $processor)
+    public function initModelProps(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
-            case PoP_Share_Module_Processor_GFFormInners::MODULE_FORMINNER_SHAREBYEMAIL:
+        switch ($component[1]) {
+            case PoP_Share_Module_Processor_GFFormInners::COMPONENT_FORMINNER_SHAREBYEMAIL:
                 // Form ID
                 $form_id = PoP_Share_GFHelpers::getSharebyemailFormId();
-                $processor->setProp([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID], $props, 'default-value'/*'selected-value'*/, $form_id);
+                $processor->setProp([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID], $props, 'default-value'/*'selected-value'*/, $form_id);
                 break;
         }
     }

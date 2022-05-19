@@ -4,8 +4,8 @@
 	'CommonPages_EM_Module_Processor_ControlButtonGroups:modules', 
 	'popLocationpostlinkscreationAddlocationpostButtons'
 );
-function popLocationpostlinkscreationAddlocationpostButtons($modules)
+function popLocationpostlinkscreationAddlocationpostButtons($components)
 {
-    $modules[] = [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK];
-    return $modules;
+    $components[] = [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK];
+    return $components;
 }

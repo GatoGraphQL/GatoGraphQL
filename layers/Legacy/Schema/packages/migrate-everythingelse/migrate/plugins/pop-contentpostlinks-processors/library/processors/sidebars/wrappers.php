@@ -2,32 +2,32 @@
 
 class PoP_ContentPostLinks_Module_Processor_WidgetWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_LAYOUTWRAPPER_LINK_CATEGORIES = 'layoutwrapper-link-categories';
+    public final const COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES = 'layoutwrapper-link-categories';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTWRAPPER_LINK_CATEGORIES],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUTWRAPPER_LINK_CATEGORIES:
-                $ret[] = [PoP_ContentPostLinks_Module_Processor_CategoriesLayouts::class, PoP_ContentPostLinks_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_LINK_CATEGORIES];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES:
+                $ret[] = [PoP_ContentPostLinks_Module_Processor_CategoriesLayouts::class, PoP_ContentPostLinks_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_LINK_CATEGORIES];
                 break;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUTWRAPPER_LINK_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES:
                 return 'hasLinkCategories';
         }
 

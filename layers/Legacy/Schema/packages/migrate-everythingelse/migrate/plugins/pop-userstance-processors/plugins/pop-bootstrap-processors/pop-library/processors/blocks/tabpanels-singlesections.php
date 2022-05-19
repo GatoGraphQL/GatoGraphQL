@@ -5,82 +5,82 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT = 'block-tabpanel-singlerelatedstancecontent';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO = 'block-tabpanel-singlerelatedstancecontent-pro';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT = 'block-tabpanel-singlerelatedstancecontent';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO = 'block-tabpanel-singlerelatedstancecontent-pro';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
-            [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT],
-            self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
-            self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
-            self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupBottomSubmodule(array $module)
+    protected function getControlgroupBottomSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
-                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUPOSTLIST];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
+                return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST];
         }
 
-        return parent::getControlgroupBottomSubmodule($module);
+        return parent::getControlgroupBottomSubcomponent($component);
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
-                    $this->setProp($module, $props, 'show-controls-bottom', false);
+                    $this->setProp($component, $props, 'show-controls-bottom', false);
                 }
                 break;
         }
 
-        parent::initRequestProps($module, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
-                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
+                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES];
 
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
-            case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
-                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_STANCE];
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
+            case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
+                return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

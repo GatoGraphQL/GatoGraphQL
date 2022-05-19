@@ -2,39 +2,39 @@
 
 class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScriptsLayoutsBase
 {
-    public final const MODULE_SCRIPT_STANCES = 'script-stances';
-    public final const MODULE_SCRIPT_STANCESEMPTY = 'script-stancesempty';
+    public final const COMPONENT_SCRIPT_STANCES = 'script-stances';
+    public final const COMPONENT_SCRIPT_STANCESEMPTY = 'script-stancesempty';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCRIPT_STANCES],
-            [self::class, self::MODULE_SCRIPT_STANCESEMPTY],
+            [self::class, self::COMPONENT_SCRIPT_STANCES],
+            [self::class, self::COMPONENT_SCRIPT_STANCESEMPTY],
         );
     }
     
-    public function doAppend(array $module)
+    public function doAppend(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_SCRIPT_STANCESEMPTY:
+        switch ($component[1]) {
+            case self::COMPONENT_SCRIPT_STANCESEMPTY:
                 return false;
         }
         
-        return parent::doAppend($module);
+        return parent::doAppend($component);
     }
     
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_SCRIPT_STANCES:
-            case self::MODULE_SCRIPT_STANCESEMPTY:
+        switch ($component[1]) {
+            case self::COMPONENT_SCRIPT_STANCES:
+            case self::COMPONENT_SCRIPT_STANCESEMPTY:
                 $classes = array(
-                    self::MODULE_SCRIPT_STANCES => GD_CLASS_STANCES,
-                    self::MODULE_SCRIPT_STANCESEMPTY => GD_CLASS_STANCES,
+                    self::COMPONENT_SCRIPT_STANCES => GD_CLASS_STANCES,
+                    self::COMPONENT_SCRIPT_STANCESEMPTY => GD_CLASS_STANCES,
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$module[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
                 break;
         }
         

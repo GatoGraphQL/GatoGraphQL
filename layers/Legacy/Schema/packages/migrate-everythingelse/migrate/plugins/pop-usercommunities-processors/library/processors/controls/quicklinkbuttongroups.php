@@ -2,22 +2,22 @@
 
 class GD_URE_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP = 'ure-quicklinkbuttongroup-user-editmembership';
+    public final const COMPONENT_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP = 'ure-quicklinkbuttongroup-user-editmembership';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP],
+            [self::class, self::COMPONENT_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP:
-                $ret[] = [GD_URE_Module_Processor_Buttons::class, GD_URE_Module_Processor_Buttons::MODULE_URE_BUTTON_EDITMEMBERSHIP];
+        switch ($component[1]) {
+            case self::COMPONENT_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP:
+                $ret[] = [GD_URE_Module_Processor_Buttons::class, GD_URE_Module_Processor_Buttons::COMPONENT_URE_BUTTON_EDITMEMBERSHIP];
                 break;
         }
         

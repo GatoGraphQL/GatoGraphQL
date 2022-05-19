@@ -2,47 +2,47 @@
 
 class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR = 'multiple-section-mylocationposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR = 'multiple-section-mylocationposts-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR],
+            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR],
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $blocks = array(
-            self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR => [PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR => [PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]] ?? null) {
+        if ($block = $blocks[$component[1]] ?? null) {
             $ret[] = $block;
         }
 
         return $ret;
     }
 
-    public function getScreen(array $module)
+    public function getScreen(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREEN_MYCONTENT;
         }
 
-        return parent::getScreen($module);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $module)
+    public function getScreengroup(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
-        return parent::getScreengroup($module);
+        return parent::getScreengroup($component);
     }
 }
 

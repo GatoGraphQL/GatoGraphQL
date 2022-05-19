@@ -21,7 +21,7 @@ class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
             'setDefinitionResolver',
             [
                 $this->createReference('emoji_definition_resolver'),
-                DefinitionGroups::MODULES
+                DefinitionGroups::COMPONENTS
             ]
         );
     }

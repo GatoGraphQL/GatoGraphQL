@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\Comments\ConditionalOnModule\Users\ModuleProcessors\:
-        resource: '../../../src/ConditionalOnModule/Users/ModuleProcessors/*'
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\ComponentProcessors\:
+        resource: '../../../src/ConditionalOnModule/Users/ComponentProcessors/*'
 
     PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors\:
         resource: '../../../src/ConditionalOnModule/Users/FilterInputProcessors/*'

@@ -5,52 +5,52 @@ use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
-    public final const MODULE_CAROUSELCONTROLS_USERS = 'carouselcontrols-users';
+    public final const COMPONENT_CAROUSELCONTROLS_USERS = 'carouselcontrols-users';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSELCONTROLS_USERS],
+            [self::class, self::COMPONENT_CAROUSELCONTROLS_USERS],
         );
     }
 
-    public function getControlClass(array $module)
+    public function getControlClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELCONTROLS_USERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getControlClass($module);
+        return parent::getControlClass($component);
     }
 
-    public function getTitleClass(array $module)
+    public function getTitleClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELCONTROLS_USERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getTitleClass($module);
+        return parent::getTitleClass($component);
     }
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELCONTROLS_USERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users', 'poptheme-wassup');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $module, array &$props)
+    protected function getTitleLink(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_CAROUSELCONTROLS_USERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 
-        return parent::getTitleLink($module, $props);
+        return parent::getTitleLink($component, $props);
     }
 }
 

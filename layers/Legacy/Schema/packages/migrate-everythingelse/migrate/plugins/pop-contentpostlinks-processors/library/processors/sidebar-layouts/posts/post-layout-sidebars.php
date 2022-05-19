@@ -2,48 +2,48 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public final const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LINK = 'layout-postsidebar-vertical-link';
-    public final const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK = 'layout-postsidebar-horizontal-link';
-    public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK = 'layout-postsidebarcompact-horizontal-link';
+    public final const COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LINK = 'layout-postsidebar-vertical-link';
+    public final const COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK = 'layout-postsidebar-horizontal-link';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK = 'layout-postsidebarcompact-horizontal-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LINK],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LINK],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
-            self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
-            self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK],
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LINK:
-                $this->appendProp($module, $props, 'class', 'vertical');
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LINK:
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
-            case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK:
-            case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK:
-                $this->appendProp($module, $props, 'class', 'horizontal');
+            case self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK:
+                $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

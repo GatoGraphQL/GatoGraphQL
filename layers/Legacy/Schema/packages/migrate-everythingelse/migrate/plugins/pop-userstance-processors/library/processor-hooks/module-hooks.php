@@ -7,12 +7,12 @@ class PoPTheme_UserStance_ModuleHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_MainGroups:modules:single',
-            $this->getSingleSubmodules(...)
+            'PoP_Module_Processor_MainGroups:components:single',
+            $this->getSingleSubcomponents(...)
         );
     }
 
-    public function getSingleSubmodules($modules)
+    public function getSingleSubcomponents($components)
     {
 
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
@@ -28,18 +28,18 @@ class PoPTheme_UserStance_ModuleHooks
         if ($add) {
             // Add the "What do you think about TPP" Create Block
             array_splice(
-                $modules,
+                $components,
                 array_search(
-                    [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
-                    $modules
+                    [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_SINGLE_CONTENT],
+                    $components
                 )+1,
                 0,
                 array(
-                    [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE]
+                    [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE]
                 )
             );
         }
-        return $modules;
+        return $components;
     }
 }
 

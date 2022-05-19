@@ -2,49 +2,49 @@
 
 class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT = 'postconclusion-sidebarmulticomponent-left';
-    public final const MODULE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT = 'subjugatedpostconclusion-sidebarmulticomponent-left';
-    public final const MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT = 'postconclusion-sidebarmulticomponent-right';
+    public final const COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT = 'postconclusion-sidebarmulticomponent-left';
+    public final const COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT = 'subjugatedpostconclusion-sidebarmulticomponent-left';
+    public final const COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT = 'postconclusion-sidebarmulticomponent-right';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
-            [self::class, self::MODULE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
-            [self::class, self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT],
+            [self::class, self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
+            [self::class, self::COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
+            [self::class, self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
-                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
+        switch ($component[1]) {
+            case self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
+                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER];
                 break;
 
-            case self::MODULE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
-                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER];
+            case self::COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
+                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER];
                 break;
 
-            case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
-                $ret[] = [PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::MODULE_LAYOUT_SIMPLEPOSTAUTHORS];
+            case self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
+                $ret[] = [PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
-                $this->appendProp([PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::MODULE_LAYOUT_SIMPLEPOSTAUTHORS], $props, 'class', 'pull-right');
+        switch ($component[1]) {
+            case self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
+                $this->appendProp([PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS], $props, 'class', 'pull-right');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

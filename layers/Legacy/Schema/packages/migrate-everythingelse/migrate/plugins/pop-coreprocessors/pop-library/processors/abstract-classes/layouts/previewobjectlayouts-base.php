@@ -1,45 +1,45 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function showExcerpt(array $module)
+    public function showExcerpt(array $component)
     {
         return false;
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
         return 'url';
     }
 
-    public function getTitleHtmlmarkup(array $module, array &$props)
+    public function getTitleHtmlmarkup(array $component, array &$props)
     {
         return 'h4';
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
         return '';
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         return null;
     }
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($module)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[] = $quicklinkgroup_top;
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($module)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[] = $quicklinkgroup_bottom;
         }
 
@@ -52,50 +52,50 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        $ret[] = $this->getUrlField($module);
-        if ($this->showExcerpt($module)) {
+        $ret[] = $this->getUrlField($component);
+        if ($this->showExcerpt($component)) {
             $ret[] = 'excerpt';
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES] = array();
-        $ret['title-htmlmarkup'] = $this->getTitleHtmlmarkup($module, $props);
-        $ret['url-field'] = $this->getUrlField($module);
-        if ($this->showExcerpt($module)) {
+        $ret['title-htmlmarkup'] = $this->getTitleHtmlmarkup($component, $props);
+        $ret['url-field'] = $this->getUrlField($component);
+        if ($this->showExcerpt($component)) {
             $ret['show-excerpt'] = true;
         }
-        if ($target = $this->getLinktarget($module, $props)) {
+        if ($target = $this->getLinktarget($component, $props)) {
             $ret['link-target'] = $target;
         }
 
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup_top);
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup_bottom);
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
-        // Artificial property added to identify the module when adding module-resources
-        $this->setProp($module, $props, 'resourceloader', 'layout');
+        // Artificial property added to identify the module when adding component-resources
+        $this->setProp($component, $props, 'resourceloader', 'layout');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

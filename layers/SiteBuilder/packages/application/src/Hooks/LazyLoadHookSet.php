@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\Application\Hooks;
 
 use PoP\Application\Constants\Actions;
-use PoP\Application\ModuleFilters\Lazy;
-use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\Application\ComponentFilters\Lazy;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -41,32 +41,32 @@ class LazyLoadHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:start',
+            '\PoP\ComponentModel\Engine:getComponentData:start',
             $this->start(...),
             10,
             4
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
-            $this->calculateDataloadingModuleData(...),
+            '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+            $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:end',
+            '\PoP\ComponentModel\Engine:getComponentData:end',
             $this->end(...),
             10,
             5
         );
     }
 
-    public function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
+    public function start($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
+    public function calculateDataloadingComponentData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 
@@ -76,7 +76,7 @@ class LazyLoadHookSet extends AbstractHookSet
         }
     }
 
-    public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
+    public function end($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 
@@ -86,10 +86,10 @@ class LazyLoadHookSet extends AbstractHookSet
                 [
                     Params::DATA_OUTPUT_ITEMS => [
                         DataOutputItems::META,
-                        DataOutputItems::MODULE_DATA,
+                        DataOutputItems::COMPONENT_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    Params::MODULEFILTER => $this->getLazy()->getName(),
+                    Params::COMPONENTFILTER => $this->getLazy()->getName(),
                     Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
                 $this->getRequestHelperService()->getCurrentURL()

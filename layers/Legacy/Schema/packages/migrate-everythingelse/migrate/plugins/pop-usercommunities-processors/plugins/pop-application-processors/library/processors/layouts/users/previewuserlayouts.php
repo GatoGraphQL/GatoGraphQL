@@ -2,55 +2,55 @@
 
 class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module_Processor_CustomPreviewUserLayoutsBase
 {
-    public final const MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS = 'layout-previewuser-editmembers';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS = 'layout-previewuser-editmembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS],
         );
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER_EDITMEMBERS];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getUseravatarSubmodule(array $module)
+    public function getUseravatarSubcomponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($module[1]) {
-                case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
-                    return [PoP_Module_Processor_UserAvatarLayouts::class, PoP_Module_Processor_UserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE];
+            switch ($component[1]) {
+                case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+                    return [PoP_Module_Processor_UserAvatarLayouts::class, PoP_Module_Processor_UserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE];
             }
         }
 
-        return parent::getUseravatarSubmodule($module);
+        return parent::getUseravatarSubcomponent($component);
     }
 
-    public function showShortDescription(array $module)
+    public function showShortDescription(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return false;
         }
 
-        return parent::showShortDescription($module);
+        return parent::showShortDescription($component);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($component);
     }
 }
 

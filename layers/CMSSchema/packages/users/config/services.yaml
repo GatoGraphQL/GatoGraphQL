@@ -13,5 +13,5 @@ services:
     PoPCMSSchema\Users\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
 
-    PoPCMSSchema\Users\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\Users\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'

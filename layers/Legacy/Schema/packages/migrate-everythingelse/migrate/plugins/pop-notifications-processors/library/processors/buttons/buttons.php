@@ -3,120 +3,120 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK = 'notifications-button-notificationpreviewlink';
-    public final const MODULE_AAL_BUTTON_USERVIEW = 'notifications-button-userview';
-    public final const MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD = 'notifications-button-notification-markasread';
-    public final const MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD = 'notifications-button-notification-markasunread';
+    public final const COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK = 'notifications-button-notificationpreviewlink';
+    public final const COMPONENT_AAL_BUTTON_USERVIEW = 'notifications-button-userview';
+    public final const COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD = 'notifications-button-notification-markasread';
+    public final const COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD = 'notifications-button-notification-markasunread';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK],
-            [self::class, self::MODULE_AAL_BUTTON_USERVIEW],
-            [self::class, self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD],
-            [self::class, self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
+            [self::class, self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK],
+            [self::class, self::COMPONENT_AAL_BUTTON_USERVIEW],
+            [self::class, self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
+            [self::class, self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
-                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK];
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
+                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK];
 
-            case self::MODULE_AAL_BUTTON_USERVIEW:
-                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_AAL_BUTTONINNER_USERVIEW];
+            case self::COMPONENT_AAL_BUTTON_USERVIEW:
+                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_AAL_BUTTONINNER_USERVIEW];
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
-                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD];
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD];
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
-                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD];
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+                return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD];
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubcomponent($component);
     }
-    public function getLinktargetField(array $module)
+    public function getLinktargetField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return 'target';
         }
 
-        return parent::getLinktargetField($module);
+        return parent::getLinktargetField($component);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return 'url';
 
-            case self::MODULE_AAL_BUTTON_USERVIEW:
+            case self::COMPONENT_AAL_BUTTON_USERVIEW:
                 return 'websiteURL';
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
                 return 'markAsReadURL';
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 return 'markAsUnreadURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($component);
     }
 
-    public function showTooltip(array $module, array &$props)
+    public function showTooltip(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 return true;
         }
 
-        return parent::showTooltip($module, $props);
+        return parent::showTooltip($component, $props);
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_USERVIEW:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_USERVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-notifications-processors');
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
                 return TranslationAPIFacade::getInstance()->__('Mark as read', 'pop-notifications-processors');
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 return TranslationAPIFacade::getInstance()->__('Mark as unread', 'pop-notifications-processors');
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 $ret .= ' url';
                 break;
 
-            case self::MODULE_AAL_BUTTON_USERVIEW:
+            case self::COMPONENT_AAL_BUTTON_USERVIEW:
                 $ret .= ' btn btn-xs btn-default';
                 break;
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 $ret .= ' btn btn-xs btn-link';
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
                 $ret .= ' pop-functional '.AAL_CLASS_NOTIFICATION_MARKASREAD;
                 break;
 
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 $ret .= ' pop-functional '.AAL_CLASS_NOTIFICATION_MARKASUNREAD;
                 break;
         }
@@ -124,14 +124,14 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
-            case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
+            case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 // Tell the Search engines to not follow the link
                 $this->mergeProp(
-                    $module,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -141,7 +141,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

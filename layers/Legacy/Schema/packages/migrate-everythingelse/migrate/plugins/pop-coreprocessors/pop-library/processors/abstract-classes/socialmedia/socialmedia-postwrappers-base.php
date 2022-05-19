@@ -4,28 +4,28 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getSocialmediaModule(array $module)
+    public function getSocialmediaComponent(array $component)
     {
         return null;
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        $ret[] = $this->getSocialmediaModule($module);
+        $ret[] = $this->getSocialmediaComponent($component);
 
         return $ret;
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
         return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'pop-hidden-print');
-        parent::initModelProps($module, $props);
+        $this->appendProp($component, $props, 'class', 'pop-hidden-print');
+        parent::initModelProps($component, $props);
     }
 }

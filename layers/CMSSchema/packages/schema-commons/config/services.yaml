@@ -10,8 +10,8 @@ services:
     PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
         class: \PoPCMSSchema\SchemaCommons\Formatters\DateFormatter
 
-    PoPCMSSchema\SchemaCommons\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\SchemaCommons\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPCMSSchema\SchemaCommons\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

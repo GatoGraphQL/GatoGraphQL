@@ -2,30 +2,30 @@
 
 class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Processor_FullViewTitleLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLVIEWTITLE = 'layout-fullviewtitle';
-    public final const MODULE_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
-    public final const MODULE_LAYOUT_POSTTITLE = 'layout-posttitle';
+    public final const COMPONENT_LAYOUT_FULLVIEWTITLE = 'layout-fullviewtitle';
+    public final const COMPONENT_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
+    public final const COMPONENT_LAYOUT_POSTTITLE = 'layout-posttitle';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLVIEWTITLE],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOSTTITLE],
-            [self::class, self::MODULE_LAYOUT_POSTTITLE],
+            [self::class, self::COMPONENT_LAYOUT_FULLVIEWTITLE],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE],
+            [self::class, self::COMPONENT_LAYOUT_POSTTITLE],
         );
     }
 
-    public function getHtmlmarkup(array $module, array &$props)
+    public function getHtmlmarkup(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOSTTITLE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE:
                 return 'h4';
 
-            case self::MODULE_LAYOUT_POSTTITLE:
+            case self::COMPONENT_LAYOUT_POSTTITLE:
                 return 'span';
         }
         
-        return parent::getHtmlmarkup($module, $props);
+        return parent::getHtmlmarkup($component, $props);
     }
 }
 

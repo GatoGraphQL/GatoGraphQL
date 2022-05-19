@@ -2,66 +2,66 @@
 
 class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
-    public final const MODULE_SUBCOMPONENT_STANCES = 'subcomponent-stances';
-    public final const MODULE_LAZYSUBCOMPONENT_STANCES = 'lazysubcomponent-stances';
+    public final const COMPONENT_SUBCOMPONENT_STANCES = 'subcomponent-stances';
+    public final const COMPONENT_LAZYSUBCOMPONENT_STANCES = 'lazysubcomponent-stances';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SUBCOMPONENT_STANCES],
-            [self::class, self::MODULE_LAZYSUBCOMPONENT_STANCES],
+            [self::class, self::COMPONENT_SUBCOMPONENT_STANCES],
+            [self::class, self::COMPONENT_LAZYSUBCOMPONENT_STANCES],
         );
     }
 
-    public function getSubcomponentField(array $module)
+    public function getSubcomponentField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
+        switch ($component[1]) {
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
                 return 'stances';
 
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 return 'stancesLazy';
         }
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES];
+        switch ($component[1]) {
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
+                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_STANCES];
                 break;
 
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE];
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
+                $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE];
                 break;
         }
 
         return $ret;
     }
 
-    public function isIndividual(array $module, array &$props)
+    public function isIndividual(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
+        switch ($component[1]) {
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 return false;
         }
 
-        return parent::isIndividual($module, $props);
+        return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                $this->appendProp($module, $props, 'class', 'referencedby clearfix');
+        switch ($component[1]) {
+            case self::COMPONENT_SUBCOMPONENT_STANCES:
+            case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
+                $this->appendProp($component, $props, 'class', 'referencedby clearfix');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

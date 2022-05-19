@@ -8,7 +8,7 @@
 		{{/withSublevel}}
 		<div class="media-body">
 			<h4 class="media-heading"><a href="{{url}}">{{{display-name}}}</a></h4>
-			{{#each ../submoduleoutputnames.extras}}
+			{{#each ../subcomponentoutputnames.extras}}
 				{{#withModule ../../. this}}
 					{{enterModule ../../../.}}
 				{{/withModule}}

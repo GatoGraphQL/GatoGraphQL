@@ -2,19 +2,19 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
-abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_BUTTONGROUP];
     }
 
-    public function getHeaderType(array $module, array &$props)
+    public function getHeaderType(array $component, array &$props)
     {
         return 'btn-group';
     }
 
-    public function getHeadersData(array $module, array &$props)
+    public function getHeadersData(array $component, array &$props)
     {
 
         // The following items must be provided in the array
@@ -27,28 +27,28 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         );
     }
 
-    public function getItemClass(array $module, array &$props)
+    public function getItemClass(array $component, array &$props)
     {
         return 'btn btn-xs btn-default';
     }
-    public function getItemdropdownClass(array $module, array &$props)
+    public function getItemdropdownClass(array $component, array &$props)
     {
         return 'btn-default btn-dropdown';
     }
 
-    public function getDropdownTitle(array $module, array &$props)
+    public function getDropdownTitle(array $component, array &$props)
     {
         return '';
     }
 
-    public function getMutableonrequestConfiguration(array $module, array &$props): array
+    public function getMutableonrequestConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($module, $props);
+        $ret = parent::getMutableonrequestConfiguration($component, $props);
 
         
         // Using runtimeconfiguration, because the URL can vary for Single, it must not be cached in the configuration
-        if ($header_type = $this->getHeaderType($module, $props)) {
-            if ($headers_data = $this->getHeadersData($module, $props)) {
+        if ($header_type = $this->getHeaderType($component, $props)) {
+            if ($headers_data = $this->getHeadersData($component, $props)) {
                 $headers = array();
                 $url = (string)$headers_data['url'];
                 $default_active_format = PoP_Application_Utils::getDefaultformatByScreen($headers_data['screen']);
@@ -92,23 +92,23 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         // Fill in all the properties
-        if ($header_type = $this->getHeaderType($module, $props)) {
+        if ($header_type = $this->getHeaderType($component, $props)) {
             $ret['type'] = $header_type;
 
-            if ($item_class = $this->getItemClass($module, $props)) {
+            if ($item_class = $this->getItemClass($component, $props)) {
                 $ret[GD_JS_CLASSES]['item'] = $item_class;
             }
-            if ($itemdropdown_class = $this->getItemdropdownClass($module, $props)) {
+            if ($itemdropdown_class = $this->getItemdropdownClass($component, $props)) {
                 $ret[GD_JS_CLASSES]['item-dropdown'] = $itemdropdown_class;
             }
 
             if ($header_type == 'dropdown') {
-                if ($dropdown_title = $this->getDropdownTitle($module, $props)) {
+                if ($dropdown_title = $this->getDropdownTitle($component, $props)) {
                     $ret[GD_JS_TITLES] = array(
                         'dropdown' => $dropdown_title
                     );
@@ -119,13 +119,13 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($header_type = $this->getHeaderType($module, $props)) {
+        if ($header_type = $this->getHeaderType($component, $props)) {
             // header type 'btn-group' needs that same class
-            $this->appendProp($module, $props, 'class', $header_type);
+            $this->appendProp($component, $props, 'class', $header_type);
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

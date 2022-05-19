@@ -1,73 +1,73 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 trait FormComponentModuleDelegatorTrait
 {
-    public function getFormcomponentModule(array $module)
+    public function getFormcomponentComponent(array $component)
     {
         return null;
     }
-    public function getValue(array $module, ?array $source = null): mixed
+    public function getValue(array $component, ?array $source = null): mixed
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getValue($formcomponent_module, $source);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $formcomponent_component = $this->getFormcomponentComponent($component);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->getValue($formcomponent_component, $source);
     }
-    public function getDefaultValue(array $module, array &$props): mixed
+    public function getDefaultValue(array $component, array &$props): mixed
     {
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $formcomponent_component = $this->getFormcomponentComponent($component);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->getDefaultValue($formcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
     }
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getName($formcomponent_module);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $formcomponent_component = $this->getFormcomponentComponent($component);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->getName($formcomponent_component);
     }
-    public function getInputName(array $module): string
+    public function getInputName(array $component): string
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getInputName($formcomponent_module);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $formcomponent_component = $this->getFormcomponentComponent($component);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->getInputName($formcomponent_component);
     }
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $component): bool
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->isMultiple($formcomponent_module);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $formcomponent_component = $this->getFormcomponentComponent($component);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->isMultiple($formcomponent_component);
     }
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $formcomponent_module = $this->getFormcomponentModule($module);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $formcomponent_component = $this->getFormcomponentComponent($component);
 
-        // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
+        // Because getLabel is used on initModelProps, the structure in $props for the subcomponent may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
-        $submodule_props = [];
-        if ($props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]) {
-            $submodule_props = &$props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
+        $subcomponent_props = [];
+        if ($props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]) {
+            $subcomponent_props = &$props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS];
         }
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getLabel($formcomponent_module, $submodule_props);
+        return $componentprocessor_manager->getProcessor($formcomponent_component)->getLabel($formcomponent_component, $subcomponent_props);
     }
 
-    public function metaFormcomponentInitModuleRequestProps(array $module, array &$props)
+    public function metaFormcomponentInitModuleRequestProps(array $component, array &$props)
     {
-        $formcomponent_module = $this->getFormcomponentModule($module);
+        $formcomponent_component = $this->getFormcomponentComponent($component);
 
         // // Transfer the selected-value
-        // $selected_value = $this->getProp($module, $props, 'selected-value');
+        // $selected_value = $this->getProp($component, $props, 'selected-value');
         // if (!is_null($selected_value)) {
 
-        //     $this->setProp($formcomponent_module, $props, 'selected-value', $selected_value);
+        //     $this->setProp($formcomponent_component, $props, 'selected-value', $selected_value);
         // }
 
         // Transfer the default-value
-        $default_value = $this->getProp($module, $props, 'default-value');
+        $default_value = $this->getProp($component, $props, 'default-value');
         if (!is_null($default_value)) {
-            $this->setProp($formcomponent_module, $props, 'default-value', $default_value);
+            $this->setProp($formcomponent_component, $props, 'default-value', $default_value);
         }
     }
 }

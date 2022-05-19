@@ -12,18 +12,18 @@ class PoP_EventLinksCreation_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $module, $props_in_array, $processor)
+    public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($module[1]) {
-            case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
+        switch ($component[1]) {
+            case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $submodules = array(
-                        [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENTLINK_CREATE],
-                        [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENTLINK_UPDATE],
+                    $subComponents = array(
+                        [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_EVENTLINK_CREATE],
+                        [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_EVENTLINK_UPDATE],
                     );
-                    foreach ($submodules as $submodule) {
-                        $processor->setProp($submodule, $props, 'title', '');
+                    foreach ($subComponents as $subComponent) {
+                        $processor->setProp($subComponent, $props, 'title', '');
                     }
                 }
                 break;

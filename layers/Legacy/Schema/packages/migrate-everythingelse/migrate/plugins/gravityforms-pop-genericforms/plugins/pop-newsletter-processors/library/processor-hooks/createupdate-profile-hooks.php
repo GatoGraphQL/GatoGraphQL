@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
@@ -7,7 +7,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
     public function __construct()
     {
         \PoP\Root\App::addFilter('gd_createupdate_profile:form_data', $this->getFormData(...), 10);
-        \PoP\Root\App::addFilter('pop_module:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
         \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionals(...), 10, 1);
     }
 
@@ -27,12 +27,12 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
             return $form_data;
         }
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $form_data['newsletter'] = $moduleprocessor_manager->getProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER]);
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $form_data['newsletter'] = $componentprocessor_manager->getProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]);
         return $form_data;
     }
 
-    public function getComponentSubmodules($components, array $module, $processor)
+    public function getComponentSubcomponents($components, array $component, $processor)
     {
         if (!$this->enabled()) {
             return $components;
@@ -42,12 +42,12 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         array_splice(
             $components, 
             array_search(
-                [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL], 
+                [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_USERWEBSITEURL], 
                 $components
             )+2, 
             0, 
             array(
-                [PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::class, PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::MODULE_FORMINPUTGROUP_CUP_NEWSLETTER],
+                [PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::class, PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER],
             )
         );
         

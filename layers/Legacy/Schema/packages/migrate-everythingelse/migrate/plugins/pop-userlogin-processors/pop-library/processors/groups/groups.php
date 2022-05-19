@@ -2,25 +2,25 @@
 
 class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_LOGIN = 'group-login';
+    public final const COMPONENT_GROUP_LOGIN = 'group-login';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_LOGIN],
+            [self::class, self::COMPONENT_GROUP_LOGIN],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_GROUP_LOGIN:
-                $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN];
+        switch ($component[1]) {
+            case self::COMPONENT_GROUP_LOGIN:
+                $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::COMPONENT_BLOCK_LOGIN];
                 $ret = array_merge(
                     $ret,
-                    PoP_Module_Processor_UserAccountUtils::getLoginModules()
+                    PoP_Module_Processor_UserAccountUtils::getLoginComponents()
                 );
                 break;
         }
@@ -28,15 +28,15 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_GROUP_LOGIN:
-                $this->appendProp($module, $props, 'class', 'blockgroup-login');
+        switch ($component[1]) {
+            case self::COMPONENT_GROUP_LOGIN:
+                $this->appendProp($component, $props, 'class', 'blockgroup-login');
 
                 // Make the Login Block and others show the submenu
-                foreach ($this->getSubmodules($module) as $submodule) {
-                    $this->setProp([$submodule], $props, 'show-submenu', true);
+                foreach ($this->getSubcomponents($component) as $subComponent) {
+                    $this->setProp([$subComponent], $props, 'show-submenu', true);
 
                     // Allow to set $props for the extra blocks. Eg: WSL setting the loginBlock for setting the disabled layer
                     $hooks = \PoP\Root\App::applyFilters(
@@ -44,13 +44,13 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
                         array()
                     );
                     foreach ($hooks as $hook) {
-                        $hook->setModelProps($module, $props, $this);
+                        $hook->setModelProps($component, $props, $this);
                     }
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

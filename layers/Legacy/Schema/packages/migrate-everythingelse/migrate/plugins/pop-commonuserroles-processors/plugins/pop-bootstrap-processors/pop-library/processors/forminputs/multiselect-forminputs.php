@@ -3,33 +3,33 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor_MultiSelectFormInputsBase
 {
-    public final const MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS = 'forminput-individualinterests';
-    public final const MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES = 'forminput-organizationcategories';
-    public final const MODULE_URE_FORMINPUT_ORGANIZATIONTYPES = 'forminput-organizationtypes';
+    public final const COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS = 'forminput-individualinterests';
+    public final const COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES = 'forminput-organizationcategories';
+    public final const COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES = 'forminput-organizationtypes';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS],
-            [self::class, self::MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES],
+            [self::class, self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS],
+            [self::class, self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
+            [self::class, self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
                 
-            case self::MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES:
                 // Allow AgendaUrbana to Override
                 return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:categories',
                     TranslationAPIFacade::getInstance()->__('Organization Categories', 'poptheme-wassup')
                 );
                 
-            case self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES:
                 // Allow AgendaUrbana to Override
                 return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:types',
@@ -37,39 +37,39 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 );
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
                 
-            case self::MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES:
                 return GD_FormInput_OrganizationCategories::class;
                 
-            case self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES:
+            case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES:
                 return GD_FormInput_OrganizationTypes::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES:
                 return 'organizationtypes';
 
-            case self::MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES:
+            case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES:
                 return 'organizationcategories';
 
-            case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
+            case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return 'individualinterests';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

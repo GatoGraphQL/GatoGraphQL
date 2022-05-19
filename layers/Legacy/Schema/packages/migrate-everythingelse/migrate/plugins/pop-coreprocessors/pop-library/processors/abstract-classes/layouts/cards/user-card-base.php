@@ -1,25 +1,25 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
-abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_CARD];
     }
 
-    public function getAdditionalSubmodules(array $module)
+    public function getAdditionalSubcomponents(array $component)
     {
 
         // Allow URE to override adding their own templates to include Community members in the filter
-        return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', array(), $module);
+        return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubcomponents', array(), $component);
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
-        if ($extra_templates = $this->getAdditionalSubmodules($module)) {
+        $ret = parent::getSubcomponents($component);
+        if ($extra_templates = $this->getAdditionalSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $extra_templates
@@ -33,18 +33,18 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
         // Important: the TYPEAHEAD_COMPONENT should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
-        // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetmoduletreeSectionFlattenedDataFields
-        // To fix this, in self::MODULE_FORMINPUT_TYPEAHEAD data_properties we stop spreading down, so it never reaches below there to get further data-fields
+        // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetcomponentTreeSectionFlattenedDataFields
+        // To fix this, in self::COMPONENT_FORMINPUT_TYPEAHEAD data_properties we stop spreading down, so it never reaches below there to get further data-fields
 
         // Important: for Component the size is fixed! It can't be changed from 'avatar-40', because it is hardcoded
         // in layoutuser-typeahead-component.tmpl
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            $avatar_size = $this->getAvatarSize($module, $props);
+            $avatar_size = $this->getAvatarSize($component, $props);
             $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
         }
 
@@ -57,33 +57,33 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
         );
     }
     
-    public function getAvatarSize(array $module, array &$props)
+    public function getAvatarSize(array $component, array &$props)
     {
         return GD_AVATAR_SIZE_40;
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            $avatar_size = $this->getAvatarSize($module, $props);
+            $avatar_size = $this->getAvatarSize($component, $props);
             $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
 
             $ret['avatar'] = array(
                 'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                    $this->getProp($module, $props, 'succeeding-typeResolver'),
+                    $this->getProp($component, $props, 'succeeding-typeResolver'),
                     $avatar_field
                 ),
                 'size' => $avatar_size
             );
         }
 
-        if ($extras = $this->getAdditionalSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['extras'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
+        if ($extras = $this->getAdditionalSubcomponents($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['extras'] = array_map(
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'], 
                 $extras
             );
         }

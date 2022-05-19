@@ -2,43 +2,43 @@
 
 class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP_Module_Processor_StylesLayoutsBase
 {
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES = 'layout-marknotificationasread-bgcolorstyles';
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES = 'layout-marknotificationasunread-bgcolorstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES = 'layout-marknotificationasread-bgcolorstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES = 'layout-marknotificationasunread-bgcolorstyles';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES],
-            [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES],
+            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES],
         );
     }
 
-    public function getElemTarget(array $module, array &$props)
+    public function getElemTarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return '.preview.notification-layout';
         }
 
-        return parent::getElemTarget($module, $props);
+        return parent::getElemTarget($component, $props);
     }
     
-    public function getElemStyles(array $module, array &$props)
+    public function getElemStyles(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
-            case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
+            case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return array(
                     'background-color' => \PoP\Root\App::applyFilters(
                         'PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor',
                         'transparent',
-                        $module
+                        $component
                     )
                 );
         }
 
-        return parent::getElemStyles($module, $props);
+        return parent::getElemStyles($component, $props);
     }
 }
 

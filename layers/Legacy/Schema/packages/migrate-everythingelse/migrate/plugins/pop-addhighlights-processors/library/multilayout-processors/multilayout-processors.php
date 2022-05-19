@@ -7,7 +7,7 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutModules(&$layouts, $handle, $format = '')
+    public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
         // Only if this post type is shown in All Content
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
@@ -26,7 +26,7 @@ class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayou
                             'type' => $highlightTypeResolver->getTypeName(),
                         ]
                     );
-                    $layouts[$field] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];
+                    $layouts[$field] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];
                     break;
             }
         }

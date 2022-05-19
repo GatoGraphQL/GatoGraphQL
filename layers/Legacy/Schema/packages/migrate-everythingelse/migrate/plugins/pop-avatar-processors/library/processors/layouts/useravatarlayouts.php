@@ -2,37 +2,37 @@
 
 class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAvatarLayoutsBase
 {
-    public final const MODULE_LAYOUT_USERAVATAR_60 = 'layout-useravatar-60';
-    public final const MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE = 'layout-useravatar-60-responsive';
+    public final const COMPONENT_LAYOUT_USERAVATAR_60 = 'layout-useravatar-60';
+    public final const COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE = 'layout-useravatar-60-responsive';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_60],
-            [self::class, self::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_60],
+            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE],
         );
     }
 
-    public function getAvatarSize(array $module)
+    public function getAvatarSize(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_USERAVATAR_60:
-            case self::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_USERAVATAR_60:
+            case self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE:
                 return GD_AVATAR_SIZE_60;
         }
 
-        return parent::getAvatarSize($module);
+        return parent::getAvatarSize($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE:
-                $this->appendProp($module, $props, 'class', 'img-responsive');
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE:
+                $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

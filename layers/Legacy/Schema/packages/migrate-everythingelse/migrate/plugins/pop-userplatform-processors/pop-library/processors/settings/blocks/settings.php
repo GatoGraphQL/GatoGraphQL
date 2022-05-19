@@ -2,30 +2,30 @@
 
 class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_SETTINGS = 'block-settings';
+    public final const COMPONENT_BLOCK_SETTINGS = 'block-settings';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_SETTINGS],
+            [self::class, self::COMPONENT_BLOCK_SETTINGS],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_SETTINGS:
-                $ret[] = [PoP_Module_Processor_CustomSettingsDataloads::class, PoP_Module_Processor_CustomSettingsDataloads::MODULE_DATALOAD_SETTINGS];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_SETTINGS:
+                $ret[] = [PoP_Module_Processor_CustomSettingsDataloads::class, PoP_Module_Processor_CustomSettingsDataloads::COMPONENT_DATALOAD_SETTINGS];
                 break;
         }
 

@@ -3,55 +3,55 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_CUP_TITLE = 'forminput-cup-title';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK = 'forminput-link';
+    public final const COMPONENT_FORMINPUT_CUP_TITLE = 'forminput-cup-title';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK = 'forminput-link';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_CUP_TITLE],
-            [self::class, self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_TITLE],
+            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_TITLE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_TITLE:
                 return TranslationAPIFacade::getInstance()->__('Title', 'poptheme-wassup');
 
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK:
                 return TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_TITLE:
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_TITLE:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_TITLE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_TITLE:
                 return 'titleEdit';
 
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK:
                 return 'contentEdit';
 
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return 'linkaccess';
         }
         
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

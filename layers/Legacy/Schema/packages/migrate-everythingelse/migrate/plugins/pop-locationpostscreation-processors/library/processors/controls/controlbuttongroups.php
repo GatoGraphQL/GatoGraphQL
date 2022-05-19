@@ -2,26 +2,26 @@
 
 class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_CONTROLBUTTONGROUP_ADDLOCATIONPOST = 'customcontrolbuttongroup-addlocationpost';
+    public final const COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST = 'customcontrolbuttongroup-addlocationpost';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDLOCATIONPOST],
+            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
     
-        switch ($module[1]) {
-            case self::MODULE_CONTROLBUTTONGROUP_ADDLOCATIONPOST:
-                $ret[] = [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST];
+        switch ($component[1]) {
+            case self::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST:
+                $ret[] = [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST];
                 $ret = \PoP\Root\App::applyFilters(
                     'CommonPages_EM_Module_Processor_ControlButtonGroups:modules',
                     $ret,
-                    $module,
+                    $component,
                     $props
                 );
                 break;

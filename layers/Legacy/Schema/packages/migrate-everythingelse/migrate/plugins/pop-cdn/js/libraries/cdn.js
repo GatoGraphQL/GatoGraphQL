@@ -249,7 +249,7 @@ window.pop.CDN = {
 		var that = this;
 
 		// Update the thumbprint values from the response's topLevelFeedback
-		that.updateThumbprintValues(response.statefuldata.feedback.toplevel[pop.c.MODULESETTINGS_ENTRYMODULE][pop.c.CDN_THUMBPRINTVALUES]);
+		that.updateThumbprintValues(response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.CDN_THUMBPRINTVALUES]);
 	},
 
 	updateThumbprintValues : function(newValues) {

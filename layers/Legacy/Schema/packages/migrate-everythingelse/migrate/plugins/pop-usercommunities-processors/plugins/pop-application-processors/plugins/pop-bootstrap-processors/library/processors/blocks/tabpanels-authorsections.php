@@ -1,38 +1,38 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
+class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'block-tabpanel-authorcommunitymembers';
+    public final const COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'block-tabpanel-authorcommunitymembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
     }
 
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS => [PoP_UserCommunities_ModuleProcessor_AuthorSectionTabPanelComponents::class, PoP_UserCommunities_ModuleProcessor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCOMMUNITYMEMBERS];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

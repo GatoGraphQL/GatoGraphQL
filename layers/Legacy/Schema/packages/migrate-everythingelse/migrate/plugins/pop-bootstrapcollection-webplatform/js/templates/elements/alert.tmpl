@@ -3,7 +3,7 @@
 	{{#if show-close-btn}}
 		<button type="button" class="{{classes.close-btn}}" title="{{titles.closebtn-title}}" data-dismiss="alert" aria-hidden="true">{{titles.closebtn-text}}</button>
 	{{/if}}
-	{{#each submoduleoutputnames.layouts}}
+	{{#each subcomponentoutputnames.layouts}}
 		{{#withModule ../. this}}
 			{{enterModule ../../.}}
 		{{/withModule}}

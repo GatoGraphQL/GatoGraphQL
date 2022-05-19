@@ -3,48 +3,48 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor_DateRangeFormInputsBase
 {
-    public final const MODULE_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
-    public final const MODULE_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
+    public final const COMPONENT_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
+    public final const COMPONENT_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_DATERANGEPICKER],
-            [self::class, self::MODULE_FORMINPUT_DATERANGETIMEPICKER],
+            [self::class, self::COMPONENT_FORMINPUT_DATERANGEPICKER],
+            [self::class, self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER],
         );
     }
 
-    public function useTime(array $module)
+    public function useTime(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
 
-        return parent::useTime($module);
+        return parent::useTime($component);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_DATERANGEPICKER:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_DATERANGEPICKER:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
 
-            case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
+            case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return TranslationAPIFacade::getInstance()->__('Date/Time', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
         
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($component, $props);
     }
 }
 

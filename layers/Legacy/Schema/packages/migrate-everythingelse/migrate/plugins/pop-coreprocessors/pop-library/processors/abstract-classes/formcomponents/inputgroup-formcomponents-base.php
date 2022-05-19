@@ -1,76 +1,76 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 
-abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENT_INPUTGROUP];
     }
 
-    public function getFormcomponentModule(array $module)
+    public function getFormcomponentComponent(array $component)
     {
-        return $this->getInputSubmodule($module);
+        return $this->getInputSubcomponent($component);
     }
 
-    public function getControlSubmodules(array $module)
+    public function getControlSubcomponents(array $component)
     {
         return array();
     }
-    public function getInputSubmodule(array $module)
+    public function getInputSubcomponent(array $component)
     {
         return null;
     }
-    public function getInputgroupbtnClass(array $module)
+    public function getInputgroupbtnClass(array $component)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret[GD_JS_CLASSES]['input-group-btn'] = $this->getInputgroupbtnClass($module);
+        $ret[GD_JS_CLASSES]['input-group-btn'] = $this->getInputgroupbtnClass($component);
 
         $counter = 0;
         $keys = array();
-        foreach ($this->getControlSubmodules($module) as $control) {
+        foreach ($this->getControlSubcomponents($component) as $control) {
             $key = 'a'.$counter++;
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES][$key] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($control);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES][$key] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($control);
             $keys[] = $key;
         }
         $ret['settings-keys']['controls'] = $keys;
 
-        if ($input = $this->getInputSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
+        if ($input = $this->getInputSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($input);
         }
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($input = $this->getInputSubmodule($module)) {
+        if ($input = $this->getInputSubcomponent($component)) {
             $ret[] = $input;
         }
 
         $ret = array_merge(
             $ret,
-            $this->getControlSubmodules($module)
+            $this->getControlSubcomponents($component)
         );
 
         return $ret;
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($module, $props);
-        parent::initRequestProps($module, $props);
+        $this->metaFormcomponentInitModuleRequestProps($component, $props);
+        parent::initRequestProps($component, $props);
     }
 }

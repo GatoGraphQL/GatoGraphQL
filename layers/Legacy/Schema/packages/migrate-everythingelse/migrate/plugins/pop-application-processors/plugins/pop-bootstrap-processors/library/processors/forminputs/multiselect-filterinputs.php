@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -8,14 +8,14 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
-    public final const MODULE_FILTERINPUT_CATEGORIES = 'filterinput-categories';
-    public final const MODULE_FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
-    public final const MODULE_FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
+    public final const COMPONENT_FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
+    public final const COMPONENT_FILTERINPUT_CATEGORIES = 'filterinput-categories';
+    public final const COMPONENT_FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
+    public final const COMPONENT_FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -37,122 +37,122 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_APPLIESTO],
-            [self::class, self::MODULE_FILTERINPUT_CATEGORIES],
-            [self::class, self::MODULE_FILTERINPUT_CONTENTSECTIONS],
-            [self::class, self::MODULE_FILTERINPUT_POSTSECTIONS],
+            [self::class, self::COMPONENT_FILTERINPUT_APPLIESTO],
+            [self::class, self::COMPONENT_FILTERINPUT_CATEGORIES],
+            [self::class, self::COMPONENT_FILTERINPUT_CONTENTSECTIONS],
+            [self::class, self::COMPONENT_FILTERINPUT_POSTSECTIONS],
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_POSTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_POSTSECTIONS],
-            self::MODULE_FILTERINPUT_CATEGORIES => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_CATEGORIES],
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_CONTENTSECTIONS],
-            self::MODULE_FILTERINPUT_APPLIESTO => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_APPLIESTO],
+            self::COMPONENT_FILTERINPUT_POSTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_POSTSECTIONS],
+            self::COMPONENT_FILTERINPUT_CATEGORIES => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_CATEGORIES],
+            self::COMPONENT_FILTERINPUT_CONTENTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_CONTENTSECTIONS],
+            self::COMPONENT_FILTERINPUT_APPLIESTO => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_APPLIESTO],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_FILTERINPUT_CATEGORIES:
-    //         case self::MODULE_FILTERINPUT_CONTENTSECTIONS:
-    //         case self::MODULE_FILTERINPUT_POSTSECTIONS:
-    //         case self::MODULE_FILTERINPUT_APPLIESTO:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_FILTERINPUT_CATEGORIES:
+    //         case self::COMPONENT_FILTERINPUT_CONTENTSECTIONS:
+    //         case self::COMPONENT_FILTERINPUT_POSTSECTIONS:
+    //         case self::COMPONENT_FILTERINPUT_APPLIESTO:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_CONTENTSECTIONS:
-            case self::MODULE_FILTERINPUT_POSTSECTIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_CONTENTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_POSTSECTIONS:
                 return TranslationAPIFacade::getInstance()->__('Sections', 'poptheme-wassup');
 
-            case self::MODULE_FILTERINPUT_APPLIESTO:
+            case self::COMPONENT_FILTERINPUT_APPLIESTO:
                 return TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
-            case self::MODULE_FILTERINPUT_CONTENTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_CONTENTSECTIONS:
                 return GD_FormInput_ContentSections::class;
 
-            case self::MODULE_FILTERINPUT_POSTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_POSTSECTIONS:
                 return GD_FormInput_PostSections::class;
 
-            case self::MODULE_FILTERINPUT_APPLIESTO:
+            case self::COMPONENT_FILTERINPUT_APPLIESTO:
                 return GD_FormInput_AppliesTo::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_CATEGORIES:
                 return 'appliesto';
 
-            case self::MODULE_FILTERINPUT_CONTENTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_CONTENTSECTIONS:
                 return 'categories';
 
-            case self::MODULE_FILTERINPUT_POSTSECTIONS:
-            case self::MODULE_FILTERINPUT_APPLIESTO:
+            case self::COMPONENT_FILTERINPUT_POSTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_APPLIESTO:
                 return 'sections';
         }
 
-        return parent::getName($module);
+        return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_CATEGORIES => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_POSTSECTIONS => $this->idScalarTypeResolver,
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_APPLIESTO => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_CATEGORIES => $this->idScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_CONTENTSECTIONS => $this->idScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_POSTSECTIONS => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO,
-            self::MODULE_FILTERINPUT_CATEGORIES,
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS,
-            self::MODULE_FILTERINPUT_POSTSECTIONS
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_APPLIESTO,
+            self::COMPONENT_FILTERINPUT_CATEGORIES,
+            self::COMPONENT_FILTERINPUT_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUT_POSTSECTIONS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_CATEGORIES => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_POSTSECTIONS => $translationAPI->__('', ''),
+        return match ($component[1]) {
+            self::COMPONENT_FILTERINPUT_APPLIESTO => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_CATEGORIES => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_CONTENTSECTIONS => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_POSTSECTIONS => $translationAPI->__('', ''),
             default => null,
         };
     }

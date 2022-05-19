@@ -2,26 +2,26 @@
 
 class GD_UserPlatform_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_SETTINGSFORMAT = 'forminputgroup-settingsformat';
+    public final const COMPONENT_FORMINPUTGROUP_SETTINGSFORMAT = 'forminputgroup-settingsformat';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_SETTINGSFORMAT],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_SETTINGSFORMAT],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_SETTINGSFORMAT => [GD_UserPlatform_Module_Processor_SelectFormInputs::class, GD_UserPlatform_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_SETTINGSFORMAT],
+            self::COMPONENT_FORMINPUTGROUP_SETTINGSFORMAT => [GD_UserPlatform_Module_Processor_SelectFormInputs::class, GD_UserPlatform_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_SETTINGSFORMAT],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

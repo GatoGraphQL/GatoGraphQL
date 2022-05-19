@@ -18,7 +18,7 @@ class ModuleInfo extends AbstractModuleInfo
             'rand' => rand(),
             'time' => time(),
             // This value will be used in the response. If compact, make sure each JS Key is unique
-            'submodules-output-property' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
+            'subcomponents-output-property' => Environment::compactResponseJsonKeys() ? 'sc' : 'subcomponents',
         ];
     }
 
@@ -37,8 +37,8 @@ class ModuleInfo extends AbstractModuleInfo
         return $this->values['time'];
     }
 
-    public function getSubmodulesOutputProperty(): string
+    public function getSubcomponentsOutputProperty(): string
     {
-        return $this->values['submodules-output-property'];
+        return $this->values['subcomponents-output-property'];
     }
 }

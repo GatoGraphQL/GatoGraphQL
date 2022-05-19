@@ -51,8 +51,8 @@ services:
     PoP\ComponentModel\Info\ApplicationInfoInterface:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
-    PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
-        class: \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager
+    PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface:
+        class: \PoP\ComponentModel\ComponentFiltering\ComponentFilterManager
 
     PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\DataloadHelperService
@@ -75,11 +75,11 @@ services:
     PoP\ComponentModel\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
 
-    PoP\ComponentModel\ModuleFilters\:
-        resource: '../src/ModuleFilters/*'
+    PoP\ComponentModel\ComponentFilters\:
+        resource: '../src/ComponentFilters/*'
 
-    PoP\ComponentModel\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoP\ComponentModel\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoP\ComponentModel\ComponentRoutingProcessors\:
         resource: '../src/ComponentRoutingProcessors/*'
@@ -93,11 +93,11 @@ services:
     PoP\ComponentModel\Error\ErrorProviderInterface:
         class: \PoP\ComponentModel\Error\ErrorProvider
 
-    PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
-        class: \PoP\ComponentModel\ModulePath\ModulePathManager
+    PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface:
+        class: \PoP\ComponentModel\ComponentPath\ComponentPathManager
 
-    PoP\ComponentModel\Modules\ModuleHelpersInterface:
-        class: \PoP\ComponentModel\Modules\ModuleHelpers
+    PoP\ComponentModel\Modules\ComponentHelpersInterface:
+        class: \PoP\ComponentModel\Modules\ComponentHelpers
 
     default_data_structure_formatter:
         class: PoP\ComponentModel\DataStructure\DefaultDataStructureFormatter
@@ -108,11 +108,11 @@ services:
         arguments:
             PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface: '@default_data_structure_formatter'
 
-    PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
-        class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
+    PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface:
+        class: \PoP\ComponentModel\ComponentPath\ComponentPathHelpers
 
-    PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface:
-        class: \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManager
+    PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface:
+        class: \PoP\ComponentModel\ComponentProcessors\ComponentProcessorManager
 
     PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
         class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager

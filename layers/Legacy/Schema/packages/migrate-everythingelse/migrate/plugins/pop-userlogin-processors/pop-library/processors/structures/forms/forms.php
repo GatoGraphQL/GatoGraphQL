@@ -5,69 +5,69 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_LOGIN = 'form-login';
-    public final const MODULE_FORM_LOSTPWD = 'form-lostpwd';
-    public final const MODULE_FORM_LOSTPWDRESET = 'form-lostpwdreset';
-    public final const MODULE_FORM_LOGOUT = 'form-logout';
-    public final const MODULE_FORM_USER_CHANGEPASSWORD = 'form-user-changepwd';
+    public final const COMPONENT_FORM_LOGIN = 'form-login';
+    public final const COMPONENT_FORM_LOSTPWD = 'form-lostpwd';
+    public final const COMPONENT_FORM_LOSTPWDRESET = 'form-lostpwdreset';
+    public final const COMPONENT_FORM_LOGOUT = 'form-logout';
+    public final const COMPONENT_FORM_USER_CHANGEPASSWORD = 'form-user-changepwd';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_LOGIN],
-            [self::class, self::MODULE_FORM_LOSTPWD],
-            [self::class, self::MODULE_FORM_LOSTPWDRESET],
-            [self::class, self::MODULE_FORM_LOGOUT],
-            [self::class, self::MODULE_FORM_USER_CHANGEPASSWORD],
+            [self::class, self::COMPONENT_FORM_LOGIN],
+            [self::class, self::COMPONENT_FORM_LOSTPWD],
+            [self::class, self::COMPONENT_FORM_LOSTPWDRESET],
+            [self::class, self::COMPONENT_FORM_LOGOUT],
+            [self::class, self::COMPONENT_FORM_USER_CHANGEPASSWORD],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_LOGIN:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOGIN];
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_LOGIN:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOGIN];
 
-            case self::MODULE_FORM_LOSTPWD:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOSTPWD];
+            case self::COMPONENT_FORM_LOSTPWD:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOSTPWD];
 
-            case self::MODULE_FORM_LOSTPWDRESET:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOSTPWDRESET];
+            case self::COMPONENT_FORM_LOSTPWDRESET:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOSTPWDRESET];
 
-            case self::MODULE_FORM_LOGOUT:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOGOUT];
+            case self::COMPONENT_FORM_LOGOUT:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOGOUT];
 
-            case self::MODULE_FORM_USER_CHANGEPASSWORD:
-                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_USER_CHANGEPASSWORD];
+            case self::COMPONENT_FORM_USER_CHANGEPASSWORD:
+                return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_USER_CHANGEPASSWORD];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_FORM_LOGIN:
-            case self::MODULE_FORM_LOGOUT:
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_LOGIN:
+            case self::COMPONENT_FORM_LOGOUT:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $module, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($module, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_FORM_LOGIN:
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_LOGIN:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
 
-            case self::MODULE_FORM_LOGOUT:
+            case self::COMPONENT_FORM_LOGOUT:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
                 break;
@@ -76,23 +76,23 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_FORM_LOGIN:
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_LOGIN:
                 $description = sprintf(
                     '<div class="pull-right"><p><em><a href="%s">%s</a></em></p></div>',
                     RouteUtils::getRouteURL(POP_USERLOGIN_ROUTE_LOSTPWD),
                     RouteUtils::getRouteTitle(POP_USERLOGIN_ROUTE_LOSTPWD)
                 );
-                $this->setProp($module, $props, 'description-bottom', $description);
+                $this->setProp($component, $props, 'description-bottom', $description);
 
                 // Do not show if user already logged in
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($component, $props, 'class', 'visible-notloggedin');
                 break;
 
-            case self::MODULE_FORM_LOSTPWD:
+            case self::COMPONENT_FORM_LOSTPWD:
                 $description = sprintf(
                     '<p class="bg-info text-info"><em>%s</em></p>',
                     TranslationAPIFacade::getInstance()->__('Please type in your account username or email:', 'pop-coreprocessors')
@@ -102,11 +102,11 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                     RouteUtils::getRouteURL(POP_USERLOGIN_ROUTE_LOGIN),
                     RouteUtils::getRouteTitle(POP_USERLOGIN_ROUTE_LOGIN)
                 );
-                $this->setProp($module, $props, 'description', $description);
-                $this->setProp($module, $props, 'description-bottom', $description_bottom);
+                $this->setProp($component, $props, 'description', $description);
+                $this->setProp($component, $props, 'description-bottom', $description_bottom);
                 break;
 
-            case self::MODULE_FORM_LOSTPWDRESET:
+            case self::COMPONENT_FORM_LOSTPWDRESET:
                 // There are 2 ways of reaching this form:
                 // 1. After the user clicks on reset password, will be redirected
                 // 2. After the user clicks on the link on the sent email
@@ -124,22 +124,22 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                     '<p class="bg-info text-info">%s</p>',
                     $body
                 );
-                $this->setProp($module, $props, 'description', $description);
+                $this->setProp($component, $props, 'description', $description);
                 break;
 
-            case self::MODULE_FORM_LOGOUT:
-                $this->appendProp($module, $props, 'class', 'visible-loggedin');
+            case self::COMPONENT_FORM_LOGOUT:
+                $this->appendProp($component, $props, 'class', 'visible-loggedin');
 
                 // Add the description
                 $description = sprintf(
                     '<p><em>%s</em></p>',
                     TranslationAPIFacade::getInstance()->__('Are you sure you want to log out?', 'pop-coreprocessors')
                 );
-                $this->setProp($module, $props, 'description', $description);
+                $this->setProp($component, $props, 'description', $description);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -2,34 +2,34 @@
 
 class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_PROFILEORGANIZATION_UPDATE = 'form-profileorganization-update';
-    public final const MODULE_FORM_PROFILEINDIVIDUAL_UPDATE = 'form-profileindividual-update';
+    public final const COMPONENT_FORM_PROFILEORGANIZATION_UPDATE = 'form-profileorganization-update';
+    public final const COMPONENT_FORM_PROFILEINDIVIDUAL_UPDATE = 'form-profileindividual-update';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_PROFILEORGANIZATION_UPDATE],
-            [self::class, self::MODULE_FORM_PROFILEINDIVIDUAL_UPDATE],
+            [self::class, self::COMPONENT_FORM_PROFILEORGANIZATION_UPDATE],
+            [self::class, self::COMPONENT_FORM_PROFILEINDIVIDUAL_UPDATE],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_PROFILEORGANIZATION_UPDATE:
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_PROFILEORGANIZATION_UPDATE:
                 return \PoP\Root\App::applyFilters(
-                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubmodule:profileorganization', 
-                    [GD_URE_Module_Processor_UpdateProfileOrganizationFormInners::class, GD_URE_Module_Processor_UpdateProfileOrganizationFormInners::MODULE_FORMINNER_PROFILEORGANIZATION_UPDATE]
+                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubcomponent:profileorganization', 
+                    [GD_URE_Module_Processor_UpdateProfileOrganizationFormInners::class, GD_URE_Module_Processor_UpdateProfileOrganizationFormInners::COMPONENT_FORMINNER_PROFILEORGANIZATION_UPDATE]
                 );
 
-            case self::MODULE_FORM_PROFILEINDIVIDUAL_UPDATE:
+            case self::COMPONENT_FORM_PROFILEINDIVIDUAL_UPDATE:
                 return \PoP\Root\App::applyFilters(
-                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubmodule:profileindividual', 
-                    [GD_URE_Module_Processor_UpdateProfileIndividualFormInners::class, GD_URE_Module_Processor_UpdateProfileIndividualFormInners::MODULE_FORMINNER_PROFILEINDIVIDUAL_UPDATE]
+                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubcomponent:profileindividual', 
+                    [GD_URE_Module_Processor_UpdateProfileIndividualFormInners::class, GD_URE_Module_Processor_UpdateProfileIndividualFormInners::COMPONENT_FORMINNER_PROFILEINDIVIDUAL_UPDATE]
                 );
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

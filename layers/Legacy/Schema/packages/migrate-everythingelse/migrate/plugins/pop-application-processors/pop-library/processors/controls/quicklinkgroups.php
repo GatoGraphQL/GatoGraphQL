@@ -2,174 +2,174 @@
 
 class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_QUICKLINKGROUP_POST = 'quicklinkgroup-post';
-    public final const MODULE_QUICKLINKGROUP_POSTBOTTOM = 'quicklinkgroup-postbottom';
-    public final const MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER = 'quicklinkgroup-postbottomvolunteer';
-    public final const MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED = 'quicklinkgroup-postbottom-extended';
-    public final const MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER = 'quicklinkgroup-postbottom-extendedvolunteer';
-    public final const MODULE_QUICKLINKGROUP_POSTEDIT = 'quicklinkgroup-postedit';
-    public final const MODULE_QUICKLINKGROUP_ADDONSPOSTEDIT = 'quicklinkgroup-addonspostedit';
-    public final const MODULE_QUICKLINKGROUP_USERCOMPACT = 'quicklinkgroup-usercompact';
-    public final const MODULE_QUICKLINKGROUP_USER = 'quicklinkgroup-user';
-    public final const MODULE_QUICKLINKGROUP_USERBOTTOM = 'quicklinkgroup-userbottom';
-    public final const MODULE_QUICKLINKGROUP_USER_EDITMEMBERS = 'quicklinkgroup-user-editmembers';
-    public final const MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
-    public final const MODULE_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
+    public final const COMPONENT_QUICKLINKGROUP_POST = 'quicklinkgroup-post';
+    public final const COMPONENT_QUICKLINKGROUP_POSTBOTTOM = 'quicklinkgroup-postbottom';
+    public final const COMPONENT_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER = 'quicklinkgroup-postbottomvolunteer';
+    public final const COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED = 'quicklinkgroup-postbottom-extended';
+    public final const COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER = 'quicklinkgroup-postbottom-extendedvolunteer';
+    public final const COMPONENT_QUICKLINKGROUP_POSTEDIT = 'quicklinkgroup-postedit';
+    public final const COMPONENT_QUICKLINKGROUP_ADDONSPOSTEDIT = 'quicklinkgroup-addonspostedit';
+    public final const COMPONENT_QUICKLINKGROUP_USERCOMPACT = 'quicklinkgroup-usercompact';
+    public final const COMPONENT_QUICKLINKGROUP_USER = 'quicklinkgroup-user';
+    public final const COMPONENT_QUICKLINKGROUP_USERBOTTOM = 'quicklinkgroup-userbottom';
+    public final const COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS = 'quicklinkgroup-user-editmembers';
+    public final const COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
+    public final const COMPONENT_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKGROUP_POST],
-            [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOM],
-            [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER],
-            [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED],
-            [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER],
-            [self::class, self::MODULE_QUICKLINKGROUP_POSTEDIT],
-            [self::class, self::MODULE_QUICKLINKGROUP_ADDONSPOSTEDIT],
-            [self::class, self::MODULE_QUICKLINKGROUP_USER],
-            [self::class, self::MODULE_QUICKLINKGROUP_USERBOTTOM],
-            [self::class, self::MODULE_QUICKLINKGROUP_USERCOMPACT],
-            [self::class, self::MODULE_QUICKLINKGROUP_USER_EDITMEMBERS],
-            [self::class, self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST],
-            [self::class, self::MODULE_QUICKLINKGROUP_TAG],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_POST],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOM],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTEDIT],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_ADDONSPOSTEDIT],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_USER],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_USERBOTTOM],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_USERCOMPACT],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_TAG],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_QUICKLINKGROUP_POST:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE];
+        switch ($component[1]) {
+            case self::COMPONENT_QUICKLINKGROUP_POST:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE];
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_POSTBOTTOM:
-            case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED:
+            case self::COMPONENT_QUICKLINKGROUP_POSTBOTTOM:
+            case self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED:
                 // Allow TPP Debate website to remove the Comments from the post list
-                $submodules = array();
-                $submodules[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
-                $submodules[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
-                if ($module == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
-                    $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
+                $subComponents = array();
+                $subComponents[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
+                $subComponents[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS];
+                if ($component == [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
+                    $subComponents[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $submodules = \PoP\Root\App::applyFilters(
+                $subComponents = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
-                    $submodules,
-                    $module
+                    $subComponents,
+                    $component
                 );
                 $ret = array_merge(
                     $ret,
-                    $submodules
+                    $subComponents
                 );
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER:
-            case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER:
+            case self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER:
+            case self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER:
                 // Allow TPP Debate website to remove the Comments from the post list
-                $submodules = array();
-                $submodules[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
-                $submodules[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
+                $subComponents = array();
+                $subComponents[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
+                $subComponents[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS];
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-                    $submodules[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
+                    $subComponents[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
                 }
-                if ($module == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
-                    $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
+                if ($component == [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
+                    $subComponents[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $submodules = \PoP\Root\App::applyFilters(
+                $subComponents = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
-                    $submodules,
-                    $module
+                    $subComponents,
+                    $component
                 );
                 $ret = array_merge(
                     $ret,
-                    $submodules
+                    $subComponents
                 );
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_POSTEDIT:
-                $ret[] = [Wassup_Module_Processor_QuicklinkButtonGroups::class, Wassup_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_ADDONSORMAINPOSTEDIT];
-                $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVIEW];
+            case self::COMPONENT_QUICKLINKGROUP_POSTEDIT:
+                $ret[] = [Wassup_Module_Processor_QuicklinkButtonGroups::class, Wassup_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_ADDONSORMAINPOSTEDIT];
+                $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW];
                 if (defined('PPP_POP_INITIALIZED')) {
-                    $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTPREVIEW];
+                    $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW];
                 }
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_ADDONSPOSTEDIT:
-                $ret[] = [Wassup_Module_Processor_QuicklinkButtonGroups::class, Wassup_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT];
-                $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVIEW];
+            case self::COMPONENT_QUICKLINKGROUP_ADDONSPOSTEDIT:
+                $ret[] = [Wassup_Module_Processor_QuicklinkButtonGroups::class, Wassup_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT];
+                $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW];
                 if (defined('PPP_POP_INITIALIZED')) {
-                    $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTPREVIEW];
+                    $ret[] = [GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::class, GD_ContentCreation_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW];
                 }
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
+            case self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Allow to not show the "Important?" label, since it's too bulky
                 if (\PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:updownvotepost:addlabel',
                     false
                 )) {
-                    $ret[] = [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL];
+                    $ret[] = [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL];
                 }
-                $ret[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE];
-                $ret[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE];
+                $ret[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE];
+                $ret[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE];
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_USER:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERSHARE];
+            case self::COMPONENT_QUICKLINKGROUP_USER:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE];
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_USERBOTTOM:
+            case self::COMPONENT_QUICKLINKGROUP_USERBOTTOM:
                 if (defined('POP_SOCIALNETWORKPROCESSORS_INITIALIZED')) {
-                    $ret[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER];
+                    $ret[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER];
                 }
-                if (defined('PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE')) {
-                    $ret[] = [PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE];
+                if (defined('PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE')) {
+                    $ret[] = [PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE];
                 }
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERCONTACTINFO];
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO];
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_USERCOMPACT:
-                if (defined('PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE')) {
-                    $ret[] = [PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE];
+            case self::COMPONENT_QUICKLINKGROUP_USERCOMPACT:
+                if (defined('PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE')) {
+                    $ret[] = [PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE];
                 }
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERCONTACTINFO];
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_USERSHARE];
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO];
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE];
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_USER_EDITMEMBERS:
-                $ret[] = [GD_URE_Module_Processor_QuicklinkButtonGroups::class, GD_URE_Module_Processor_QuicklinkButtonGroups::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP];
+            case self::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS:
+                $ret[] = [GD_URE_Module_Processor_QuicklinkButtonGroups::class, GD_URE_Module_Processor_QuicklinkButtonGroups::COMPONENT_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP];
                 break;
 
-            case self::MODULE_QUICKLINKGROUP_TAG:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_TAGSHARE];
+            case self::COMPONENT_QUICKLINKGROUP_TAG:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
-                $this->appendProp($module, $props, 'class', 'pop-functiongroup');
+        switch ($component[1]) {
+            case self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
+                $this->appendProp($component, $props, 'class', 'pop-functiongroup');
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
+        switch ($component[1]) {
+            case self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
-                    self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST => [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
+                    self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST => [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
                 );
-                // $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group bg-warning');
-                $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group');
+                // $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group bg-warning');
+                $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

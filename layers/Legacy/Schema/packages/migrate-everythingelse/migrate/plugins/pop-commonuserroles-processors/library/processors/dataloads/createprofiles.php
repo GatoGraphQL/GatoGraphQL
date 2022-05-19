@@ -7,67 +7,67 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processor_CreateProfileDataloadsBase
 {
-    public final const MODULE_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
-    public final const MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE = 'dataload-profileindividual-create';
+    public final const COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
+    public final const COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE = 'dataload-profileindividual-create';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE],
-            [self::class, self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE],
+            [self::class, self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
-            self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
+            self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($module, $props);
+        return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
                 }
                 return $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolverBridge::class);
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class);
                 }
                 return $this->instanceManager->getInstance(CreateUpdateIndividualProfileMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
-                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::MODULE_FORM_PROFILEORGANIZATION_CREATE];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
+                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::COMPONENT_FORM_PROFILEORGANIZATION_CREATE];
                 break;
 
-            case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
-                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::MODULE_FORM_PROFILEINDIVIDUAL_CREATE];
+            case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
+                $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE];
                 break;
         }
 

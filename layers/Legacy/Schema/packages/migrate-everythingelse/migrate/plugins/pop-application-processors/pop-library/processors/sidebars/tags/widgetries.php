@@ -4,72 +4,72 @@ use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
 
 class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGETCOMPACT_TAGINFO = 'widgetcompact-taginfo';
+    public final const COMPONENT_WIDGETCOMPACT_TAGINFO = 'widgetcompact-taginfo';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETCOMPACT_TAGINFO],
+            [self::class, self::COMPONENT_WIDGETCOMPACT_TAGINFO],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_WIDGETCOMPACT_TAGINFO:
-                $ret[] = [PoP_Module_Processor_TagInfoLayouts::class, PoP_Module_Processor_TagInfoLayouts::MODULE_LAYOUT_TAGINFO];
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
+                $ret[] = [PoP_Module_Processor_TagInfoLayouts::class, PoP_Module_Processor_TagInfoLayouts::COMPONENT_LAYOUT_TAGINFO];
                 break;
         }
 
         return $ret;
     }
 
-    public function getMenuTitle(array $module, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
-            self::MODULE_WIDGETCOMPACT_TAGINFO => TranslationAPIFacade::getInstance()->__('Tag/topic', 'poptheme-wassup'),
+            self::COMPONENT_WIDGETCOMPACT_TAGINFO => TranslationAPIFacade::getInstance()->__('Tag/topic', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_TAGINFO => getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), false),
+            self::COMPONENT_WIDGETCOMPACT_TAGINFO => getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), false),
         );
 
-        return $fontawesomes[$module[1]] ?? null;
+        return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $module, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGETCOMPACT_TAGINFO:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 return 'list-group list-group-sm';
         }
 
-        return parent::getBodyClass($module, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $module, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGETCOMPACT_TAGINFO:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
-        return parent::getItemWrapper($module, $props);
+        return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $module, array &$props)
+    public function getWidgetClass(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGETCOMPACT_TAGINFO:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 // return 'panel panel-info panel-sm';
                 return 'panel panel-default panel-sm';
         }
 
-        return parent::getWidgetClass($module, $props);
+        return parent::getWidgetClass($component, $props);
     }
 }
 

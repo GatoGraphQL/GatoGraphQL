@@ -19,8 +19,8 @@ services:
     GraphQLByPoP\GraphQLServer\Hooks\:
         resource: '../src/Hooks/*'
 
-    GraphQLByPoP\GraphQLServer\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    GraphQLByPoP\GraphQLServer\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors\:
         resource: '../src/ComponentRoutingProcessors/*'

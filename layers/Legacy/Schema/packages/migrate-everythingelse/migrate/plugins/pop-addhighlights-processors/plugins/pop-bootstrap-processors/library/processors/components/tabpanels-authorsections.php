@@ -2,38 +2,38 @@
 
 class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORHIGHLIGHTS = 'tabpanel-authorhighlights';
+    public final const COMPONENT_TABPANEL_AUTHORHIGHLIGHTS = 'tabpanel-authorhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_AUTHORHIGHLIGHTS],
+            [self::class, self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS],
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_AUTHORHIGHLIGHTS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubcomponents(array $component)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_AUTHORHIGHLIGHTS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
-                        // [self::class, self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_DETAILS],
-                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
+                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
+                        // [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_DETAILS],
+                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
+                        [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
                     )
                 );
                 break;
@@ -42,26 +42,26 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_AUTHORHIGHLIGHTS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-                        'subheader-submodules' =>  array(
-                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
+                        'header-subcomponent' => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
+                        'subheader-subcomponents' =>  array(
+                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
+                            [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
                         ),
                     ],
                 );
                 break;
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

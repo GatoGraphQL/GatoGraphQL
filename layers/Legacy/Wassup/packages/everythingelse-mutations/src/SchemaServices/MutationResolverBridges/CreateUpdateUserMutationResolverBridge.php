@@ -56,17 +56,17 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,
-            'username' => $cmseditusershelpers->sanitizeUsername($this->getModuleProcessorManager()->getProcessor($inputs['username'])->getValue($inputs['username'])),
-            'password' => $this->getModuleProcessorManager()->getProcessor($inputs['password'])->getValue($inputs['password']),
-            'repeat_password' => $this->getModuleProcessorManager()->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
-            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
-            'user_email' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
-            'description' => trim($this->getModuleProcessorManager()->getProcessor($inputs['description'])->getValue($inputs['description'])),
-            'user_url' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
+            'username' => $cmseditusershelpers->sanitizeUsername($this->getComponentProcessorManager()->getProcessor($inputs['username'])->getValue($inputs['username'])),
+            'password' => $this->getComponentProcessorManager()->getProcessor($inputs['password'])->getValue($inputs['password']),
+            'repeat_password' => $this->getComponentProcessorManager()->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
+            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
+            'user_email' => trim($this->getComponentProcessorManager()->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
+            'description' => trim($this->getComponentProcessorManager()->getProcessor($inputs['description'])->getValue($inputs['description'])),
+            'user_url' => trim($this->getComponentProcessorManager()->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $form_data['captcha'] = $this->getModuleProcessorManager()->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
+            $form_data['captcha'] = $this->getComponentProcessorManager()->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
         // Allow to add extra inputs

@@ -11,56 +11,56 @@ class PoPTheme_Wassup_ContentCreation_Module_MainContentComponentRoutingProcesso
     {
         $ret = array();
 
-        $routemodules = array(
-            POP_CONTENTCREATION_ROUTE_FLAG => [PoP_ContentCreation_Module_Processor_Blocks::class, PoP_ContentCreation_Module_Processor_Blocks::MODULE_BLOCK_FLAG],
-            POP_CONTENTCREATION_ROUTE_ADDCONTENT => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
+        $routeComponents = array(
+            POP_CONTENTCREATION_ROUTE_FLAG => [PoP_ContentCreation_Module_Processor_Blocks::class, PoP_ContentCreation_Module_Processor_Blocks::COMPONENT_BLOCK_FLAG],
+            POP_CONTENTCREATION_ROUTE_ADDCONTENT => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_BODY_ADDCONTENT],
         );
-        foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        foreach ($routeComponents as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
 
-        $routemodules_mycontent = array(
-            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_ContentCreation_Module_Processor_MySectionBlocks::class, PoP_ContentCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCONTENT_TABLE_EDIT],
+        $routeComponents_mycontent = array(
+            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_ContentCreation_Module_Processor_MySectionBlocks::class, PoP_ContentCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT],
         );
-        foreach ($routemodules_mycontent as $route => $module) {
+        foreach ($routeComponents_mycontent as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_simpleviewpreviews = array(
-            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_ContentCreation_Module_Processor_MySectionBlocks::class, PoP_ContentCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW],
+        $routeComponents_mycontent_simpleviewpreviews = array(
+            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_ContentCreation_Module_Processor_MySectionBlocks::class, PoP_ContentCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
+        foreach ($routeComponents_mycontent_simpleviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_fullviewpreviews = array(
-            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_ContentCreation_Module_Processor_MySectionBlocks::class, PoP_ContentCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
+        $routeComponents_mycontent_fullviewpreviews = array(
+            POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_ContentCreation_Module_Processor_MySectionBlocks::class, PoP_ContentCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
+        foreach ($routeComponents_mycontent_fullviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
 

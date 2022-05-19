@@ -2,37 +2,37 @@
 
 class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_LOCATIONMAP = 'multicomponent-locationmap';
+    public final const COMPONENT_MULTICOMPONENT_LOCATIONMAP = 'multicomponent-locationmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_LOCATIONMAP],
+            [self::class, self::COMPONENT_MULTICOMPONENT_LOCATIONMAP],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
-                $ret[] = [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST];
+        switch ($component[1]) {
+            case self::COMPONENT_MULTICOMPONENT_LOCATIONMAP:
+                $ret[] = [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE_USERORPOST];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
-                $this->setProp([PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST], $props, 'staticmap-size', '480x150');
+        switch ($component[1]) {
+            case self::COMPONENT_MULTICOMPONENT_LOCATIONMAP:
+                $this->setProp([PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE_USERORPOST], $props, 'staticmap-size', '480x150');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

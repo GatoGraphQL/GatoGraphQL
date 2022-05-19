@@ -2,36 +2,36 @@
 
 class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE = 'layout-postsidebarinner-vertical-stance';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE = 'layout-postsidebarinner-horizontal-stance';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE = 'layout-postsidebarinner-compacthorizontal-stance';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE = 'layout-postsidebarinner-vertical-stance';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE = 'layout-postsidebarinner-horizontal-stance';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE = 'layout-postsidebarinner-compacthorizontal-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
-            [self::class, self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
+            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE:
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 $ret = array_merge(
                     $ret,
-                    UserStance_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_STANCE)
+                    UserStance_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_STANCE)
                 );
                 break;
 
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
                 $ret = array_merge(
                     $ret,
-                    UserStance_FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_STANCE)
+                    UserStance_FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_STANCE)
                 );
                 break;
         }
@@ -39,28 +39,28 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 return 'col-xsm-4';
             
-            case self::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
+            case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($component);
     }
 }
 

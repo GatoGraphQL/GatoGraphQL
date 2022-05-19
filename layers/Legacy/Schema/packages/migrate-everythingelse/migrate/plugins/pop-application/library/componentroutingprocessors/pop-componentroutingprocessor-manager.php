@@ -5,7 +5,7 @@ class ComponentRoutingProcessorManager extends \PoP\ComponentModel\ComponentRout
 {
     public function getDefaultGroup(): string
     {
-        return POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE;
+        return POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT;
     }
 }
 

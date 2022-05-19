@@ -2,24 +2,24 @@
 
 class PoP_Module_Processor_VolunteerTagLayouts extends PoP_Module_Processor_VolunteerTagLayoutsBase
 {
-    public final const MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER = 'layout-postadditional-volunteer';
+    public final const COMPONENT_LAYOUT_POSTADDITIONAL_VOLUNTEER = 'layout-postadditional-volunteer';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER],
+            [self::class, self::COMPONENT_LAYOUT_POSTADDITIONAL_VOLUNTEER],
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_POSTADDITIONAL_VOLUNTEER:
-                $this->appendProp($module, $props, 'class', 'label label-warning');
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_POSTADDITIONAL_VOLUNTEER:
+                $this->appendProp($component, $props, 'class', 'label label-warning');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

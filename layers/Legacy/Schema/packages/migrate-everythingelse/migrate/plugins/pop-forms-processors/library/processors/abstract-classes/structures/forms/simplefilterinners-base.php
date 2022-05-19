@@ -7,8 +7,8 @@ abstract class PoP_Module_Processor_SimpleFilterInnersBase extends PoP_Module_Pr
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function getSubmitbtnModule(array $module)
+    public function getSubmitbtnComponent(array $component)
     {
-        return [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SEARCH];
+        return [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SEARCH];
     }
 }

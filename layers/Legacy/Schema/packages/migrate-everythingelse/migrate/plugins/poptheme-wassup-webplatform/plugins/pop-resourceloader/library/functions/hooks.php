@@ -15,35 +15,35 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
         );
 
         \PoP\Root\App::addFilter(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
-            $this->getModuleCssResources(...),
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
+            $this->getComponentCSSResources(...),
             10,
             6
         );
     }
 
-    public function getModuleCssResources($resources, array $module, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
-        switch ($module[1]) {
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_WELCOME:
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_COMPACTWELCOME:
-            case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_DESCRIPTION:
+        switch ($component[1]) {
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_WELCOME:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_COMPACTWELCOME:
+            case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_DESCRIPTION:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_GROUPHOMEWELCOME];
                 break;
 
-            case PoP_Module_ProcessorTagMultipleComponents::MODULE_LAYOUT_TAG_DETAILS:
+            case PoP_Module_ProcessorTagMultipleComponents::COMPONENT_LAYOUT_TAG_DETAILS:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_QUICKLINKGROUPS];
                 break;
 
-            case PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHOR:
+            case PoP_Module_Processor_MainBlocks::COMPONENT_BLOCK_AUTHOR:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_GROUPAUTHOR];
                 break;
 
-            case PoP_Module_Processor_UserForms::MODULE_FORM_MYPREFERENCES:
+            case PoP_Module_Processor_UserForms::COMPONENT_FORM_MYPREFERENCES:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_FORMMYPREFERENCES];
                 break;
 
-            case PoP_Module_Processor_CommentsBlocks::MODULE_BLOCK_COMMENTS_SCROLL:
+            case PoP_Module_Processor_CommentsBlocks::COMPONENT_BLOCK_COMMENTS_SCROLL:
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_BLOCKCOMMENTS];
                 break;
         }
@@ -93,12 +93,12 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
                 break;
         }
 
-        if ($processor->getProp($module, $props, 'use-skeletonscreen')) {
+        if ($processor->getProp($component, $props, 'use-skeletonscreen')) {
             $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_SKELETONSCREEN];
         }
 
-        // Artificial property added to identify the template when adding module-resources
-        if ($resourceloader_att = $processor->getProp($module, $props, 'resourceloader')) {
+        // Artificial property added to identify the template when adding component-resources
+        if ($resourceloader_att = $processor->getProp($component, $props, 'resourceloader')) {
             if ($resourceloader_att == 'block-carousel') {
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_BLOCKCAROUSEL];
             } elseif ($resourceloader_att == 'blockgroup-authorsections') {
@@ -128,8 +128,8 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
             }
         }
 
-        // Allow to inject the $module here for several cases
-        if ($module == \PoP\Root\App::applyFilters(
+        // Allow to inject the $component here for several cases
+        if ($component == \PoP\Root\App::applyFilters(
             'PoPTheme_Wassup_ResourceLoaderProcessor_Hooks:css-resources:collapse-hometop',
             null
         )) {

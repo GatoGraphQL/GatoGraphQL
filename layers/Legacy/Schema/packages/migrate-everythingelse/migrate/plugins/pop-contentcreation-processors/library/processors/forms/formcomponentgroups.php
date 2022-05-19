@@ -1,37 +1,37 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMCOMPONENTGROUP_CARD_FLAG = 'formcomponentgroup-card-flag';
+    public final const COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG = 'formcomponentgroup-card-flag';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG],
+            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG:
-                return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
+                return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST];
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG:
-                $component = $this->getComponentSubmodule($module);
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
+                $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $moduleprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Flag as inappropriate:', 'pop-application-processors')
@@ -40,17 +40,17 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
                 return '';
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
 }
 

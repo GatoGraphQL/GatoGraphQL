@@ -3,73 +3,73 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public final const MODULE_FORMINPUT_CUP_STATUS = 'forminput-cup-status';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS = 'forminput-linkaccess';
+    public final const COMPONENT_FORMINPUT_CUP_STATUS = 'forminput-cup-status';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS = 'forminput-linkaccess';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_CUP_STATUS],
-            [self::class, self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS],
+            [self::class, self::COMPONENT_FORMINPUT_CUP_STATUS],
+            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_STATUS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 return TranslationAPIFacade::getInstance()->__('Publishing status', 'poptheme-wassup');
 
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_STATUS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 return GD_FormInput_ModeratedStatusDescription::class;
 
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return GD_FormInput_LinkAccessDescription::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_STATUS:
-                $this->appendProp($module, $props, 'class', 'form-input-status');
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_STATUS:
+                $this->appendProp($component, $props, 'class', 'form-input-status');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_STATUS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 return 'status';
 
-            case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
+            case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return 'linkaccess';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_CUP_STATUS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 $this->addJsmethod($ret, 'manageStatus');
                 break;
         }

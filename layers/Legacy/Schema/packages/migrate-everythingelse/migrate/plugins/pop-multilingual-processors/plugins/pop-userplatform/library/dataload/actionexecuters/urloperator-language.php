@@ -5,7 +5,7 @@ class GD_QT_Settings_UrlOperator_Language extends GD_Settings_UrlOperator
     public function getUrl($url, $field, $value)
     {
         switch ($field) {
-            case self::MODULE_QT_FORMINPUT_LANGUAGE:
+            case self::COMPONENT_QT_FORMINPUT_LANGUAGE:
                 $language = $value;
 
                 $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();

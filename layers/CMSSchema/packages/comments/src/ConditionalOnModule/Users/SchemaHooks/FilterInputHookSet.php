@@ -6,53 +6,53 @@ namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Comments\ConditionalOnModule\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor as UserFilterInputModuleProcessor;
-use PoPCMSSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\ComponentProcessors\FormInputs\FilterInputComponentProcessor as UserFilterInputComponentProcessor;
+use PoPCMSSchema\Comments\ComponentProcessors\CommentFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addFilter(
-            CommentFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
-            $this->getFilterInputModules(...)
+            CommentFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
+            $this->getFilterInputComponents(...)
         );
     }
 
-    public function getFilterInputModules(array $filterInputModules): array
+    public function getFilterInputComponents(array $filterInputComponents): array
     {
         return [
-            ...$filterInputModules,
-            ...$this->getAuthorFilterInputModules(),
-            ...$this->getCustomPostAuthorFilterInputModules(),
+            ...$filterInputComponents,
+            ...$this->getAuthorFilterInputComponents(),
+            ...$this->getCustomPostAuthorFilterInputComponents(),
         ];
     }
 
-    public function getAuthorFilterInputModules(): array
+    public function getAuthorFilterInputComponents(): array
     {
         return [
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_AUTHOR_IDS
             ],
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS
             ],
         ];
     }
 
-    public function getCustomPostAuthorFilterInputModules(): array
+    public function getCustomPostAuthorFilterInputComponents(): array
     {
         return [
             [
-                UserFilterInputModuleProcessor::class,
-                UserFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
+                UserFilterInputComponentProcessor::class,
+                UserFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
             ],
             [
-                UserFilterInputModuleProcessor::class,
-                UserFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
+                UserFilterInputComponentProcessor::class,
+                UserFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
             ],
         ];
     }

@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\Facades\ComponentFiltering\ComponentFilterManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
 
 class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {
@@ -12,18 +12,18 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     protected function getModuledecoratorprocessorManager()
     {
-        global $pop_module_processordynamicdatadecorator_manager;
-        return $pop_module_processordynamicdatadecorator_manager;
+        global $pop_component_processordynamicdatadecorator_manager;
+        return $pop_component_processordynamicdatadecorator_manager;
     }
 
     //-------------------------------------------------
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function needsDynamicData(array $module, array &$props)
+    public function needsDynamicData(array $component, array &$props)
     {
-        $processor = $this->getDecoratedmoduleProcessor($module);
-        $needsDynamicData = $processor->getProp($module, $props, 'needs-dynamic-data');
+        $processor = $this->getDecoratedcomponentProcessor($component);
+        $needsDynamicData = $processor->getProp($component, $props, 'needs-dynamic-data');
         if (!is_null($needsDynamicData)) {
             return $needsDynamicData;
         }
@@ -31,22 +31,22 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         return false;
     }
 
-    public function getDynamicDataFieldsDatasetmoduletree(array $module, array &$props)
+    public function getDynamicDataFieldsDatasetcomponentTree(array $component, array &$props)
     {
 
         // The data-properties start on a dataloading module, and finish on the next dataloding module down the line
         // This way, we can collect all the data-fields that the module will need to load for its dbobjects
-        return $this->executeOnSelfAndPropagateToModules('getDynamicDataFieldsDatasetmoduletreeFullsection', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndPropagateToComponents('getDynamicDataFieldsDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props);
     }
 
-    public function getDynamicDataFieldsDatasetmoduletreeFullsection(array $module, array &$props)
+    public function getDynamicDataFieldsDatasetcomponentTreeFullsection(array $component, array &$props)
     {
         $ret = array();
 
         // Only if this module loads data
-        $processor = $this->getDecoratedmoduleProcessor($module);
-        if ($relationalTypeResolver = $processor->getRelationalTypeResolver($module)) {
-            if ($properties = $this->getDynamicDatasetmoduletreeSectionFlattenedDataFields($module, $props)) {
+        $processor = $this->getDecoratedcomponentProcessor($component);
+        if ($relationalTypeResolver = $processor->getRelationalTypeResolver($component)) {
+            if ($properties = $this->getDynamicDatasetcomponentTreeSectionFlattenedDataFields($component, $props)) {
                 $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
                     $relationalTypeResolver->getTypeOutputDBKey() => [
                         'resolver' => $relationalTypeResolver,
@@ -59,43 +59,43 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         return $ret;
     }
 
-    public function getDynamicDatasetmoduletreeSectionFlattenedDataFields(array $module, array &$props)
+    public function getDynamicDatasetcomponentTreeSectionFlattenedDataFields(array $component, array &$props)
     {
 
         // If it needs dynamic data then that's it, simply return the data properties
-        if ($this->needsDynamicData($module, $props)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            return $moduleprocessor_manager->getProcessor($module)->getDatasetmoduletreeSectionFlattenedDataFields($module, $props);
+        if ($this->needsDynamicData($component, $props)) {
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+            return $componentprocessor_manager->getProcessor($component)->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props);
         }
 
-        // Otherwise, propagate to the modules and submodules
+        // Otherwise, propagate to the modules and subcomponents
         $ret = array();
 
         // Propagate down to the components
-        $this->flattenDatasetmoduletreeDataProperties(__FUNCTION__, $ret, $module, $props);
+        $this->flattenDatasetcomponentTreeDataProperties(__FUNCTION__, $ret, $component, $props);
 
         // Propagate down to the subcomponent modules
-        $this->flattenRelationaldbobjectDataProperties(__FUNCTION__, $ret, $module, $props);
+        $this->flattenRelationaldbobjectDataProperties(__FUNCTION__, $ret, $component, $props);
 
         return $ret;
     }
 
-    // function getMutableonrequestDynamicDataPropertiesDatasetmoduletree(array $module, array &$props) {
+    // function getMutableonrequestDynamicDataPropertiesDatasetcomponentTree(array $component, array &$props) {
 
     //     // The data-properties start on a dataloading module, and finish on the next dataloding module down the line
     //     // This way, we can collect all the data-fields that the module will need to load for its dbobjects
-    //     return $this->executeOnSelfAndPropagateToModules('getMutableonrequestDynamicDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $module, $props);
+    //     return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestDynamicDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props);
     // }
 
-    // function getMutableonrequestDynamicDataPropertiesDatasetmoduletreeFullsection(array $module, array &$props) {
+    // function getMutableonrequestDynamicDataPropertiesDatasetcomponentTreeFullsection(array $component, array &$props) {
 
     //     $ret = array();
 
     //     // Only if this module has a typeResolver
-    //     $processor = $this->getDecoratedmoduleProcessor($module);
-    //     if ($relationalTypeResolver = $processor->getRelationalTypeResolver($module)) {
+    //     $processor = $this->getDecoratedcomponentProcessor($component);
+    //     if ($relationalTypeResolver = $processor->getRelationalTypeResolver($component)) {
 
-    //         if ($properties = $this->getMutableonrequestDynamicDataPropertiesDatasetmoduletreeSection($module, $props)) {
+    //         if ($properties = $this->getMutableonrequestDynamicDataPropertiesDatasetcomponentTreeSection($component, $props)) {
     //             $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
     //                 $typeResolver->getTypeOutputDBKey() => $properties,
     //             );
@@ -105,48 +105,48 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //     return $ret;
     // }
 
-    // function getMutableonrequestDynamicDataPropertiesDatasetmoduletreeSection(array $module, array &$props) {
+    // function getMutableonrequestDynamicDataPropertiesDatasetcomponentTreeSection(array $component, array &$props) {
 
     //     // If it needs dynamic data then that's it, simply return the data properties
-    //     if ($this->needsDynamicData($module, $props)) {
+    //     if ($this->needsDynamicData($component, $props)) {
 
-    //         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    //         return $moduleprocessor_manager->getProcessor($module)->get_mutableonrequest_data_properties_datasetmoduletree_section($module, $props);
+    //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+    //         return $componentprocessor_manager->getProcessor($component)->get_mutableonrequest_data_properties_datasetcomponentTree_section($component, $props);
     //     }
 
-    //     // Otherwise, propagate to the modules and submodules
+    //     // Otherwise, propagate to the modules and subcomponents
     //     $ret = array();
 
     //     // Propagate down to the components
-    //     $this->flattenDatasetmoduletreeDataProperties(__FUNCTION__, $ret, $module, $props);
+    //     $this->flattenDatasetcomponentTreeDataProperties(__FUNCTION__, $ret, $component, $props);
 
     //     // Propagate down to the subcomponent modules
-    //     $this->flattenRelationaldbobjectDataProperties(__FUNCTION__, $ret, $module, $props);
+    //     $this->flattenRelationaldbobjectDataProperties(__FUNCTION__, $ret, $component, $props);
 
     //     return $ret;
     // }
 
-    protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props)
+    protected function flattenDatasetcomponentTreeDataProperties($propagate_fn, &$ret, array $component, array &$props)
     {
-        global $pop_module_processordynamicdatadecorator_manager;
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
+        global $pop_component_processordynamicdatadecorator_manager;
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
 
         // Exclude the subcomponent modules here
-        $processor = $this->getDecoratedmoduleProcessor($module);
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter_manager->prepareForPropagation($module, $props);
-        if ($submodules = $processor->getModulesToPropagateDataProperties($module)) {
-            foreach ($submodules as $submodule) {
-                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+        $processor = $this->getDecoratedcomponentProcessor($component);
+        $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
+        $modulefilter_manager->prepareForPropagation($component, $props);
+        if ($subComponents = $processor->getComponentsToPropagateDataProperties($component)) {
+            foreach ($subComponents as $subComponent) {
+                $subcomponent_processor = $componentprocessor_manager->getProcessor($subComponent);
 
-                // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
-                if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
-                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($submodule))->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                // Propagate only if the subcomponent start a new dataloading section. If it does, this is the end of the data line
+                if (!$subcomponent_processor->startDataloadingSection($subComponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
+                    if ($subcomponent_ret = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subComponent))->$propagate_fn($subComponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
-                            $submodule_ret
+                            $subcomponent_ret
                         );
                     }
                 }
@@ -157,56 +157,56 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
             }
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $modulefilter_manager->restoreFromPropagation($component, $props);
     }
 
-    protected function flattenRelationaldbobjectDataProperties($propagate_fn, &$ret, array $module, array &$props)
+    protected function flattenRelationaldbobjectDataProperties($propagate_fn, &$ret, array $component, array &$props)
     {
-        global $pop_module_processordynamicdatadecorator_manager;
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
+        global $pop_component_processordynamicdatadecorator_manager;
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
-        $processor = $this->getDecoratedmoduleProcessor($module);
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter_manager->prepareForPropagation($module, $props);
-        foreach ($processor->getRelationalSubmodules($module) as $relationalModuleField) {
+        $processor = $this->getDecoratedcomponentProcessor($component);
+        $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
+        $modulefilter_manager->prepareForPropagation($component, $props);
+        foreach ($processor->getRelationalSubcomponents($component) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first
             $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
-            $subcomponent_modules_data_properties = array(
+            $subcomponent_components_data_properties = array(
                 'data-fields' => array(),
                 'subcomponents' => array()
             );
-            foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
-                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
-                    $subcomponent_modules_data_properties = array_merge_recursive(
-                        $subcomponent_modules_data_properties,
-                        $subcomponent_module_data_properties
+            foreach ($relationalModuleField->getNestedComponents() as $subcomponent_component) {
+                if ($subcomponent_component_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_component))->$propagate_fn($subcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
+                    $subcomponent_components_data_properties = array_merge_recursive(
+                        $subcomponent_components_data_properties,
+                        $subcomponent_component_data_properties
                     );
                 }
             }
 
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_modules_data_properties['data-fields'] ?? null) {
-                $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
+            if ($subcomponent_components_data_properties['data-fields'] ?? null) {
+                $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
 
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = array_unique(
                     array_merge(
                         $ret['subcomponents'][$subcomponent_data_field]['data-fields'],
-                        $subcomponent_modules_data_properties['data-fields']
+                        $subcomponent_components_data_properties['data-fields']
                     )
                 );
             }
-            if ($subcomponent_modules_data_properties['subcomponents'] ?? null) {
+            if ($subcomponent_components_data_properties['subcomponents'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
                     $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
-                    $subcomponent_modules_data_properties['subcomponents']
+                    $subcomponent_components_data_properties['subcomponents']
                 );
             }
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $modulefilter_manager->restoreFromPropagation($component, $props);
     }
 
     // protected function removeEmptyEntries(&$ret) {
@@ -245,6 +245,6 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 /**
  * Settings Initialization
  */
-global $pop_module_processordynamicdatadecorator_manager;
-$pop_module_processordynamicdatadecorator_manager->add(PoP_WebPlatformQueryDataModuleProcessorBase::class, PoP_DynamicDataModuleDecoratorProcessor::class);
-// $pop_module_processordynamicdatadecorator_manager->add(PoP_Module_ProcessorBaseWrapper::class, PoP_DynamicDataModuleDecoratorProcessor::class);
+global $pop_component_processordynamicdatadecorator_manager;
+$pop_component_processordynamicdatadecorator_manager->add(PoP_WebPlatformQueryDataComponentProcessorBase::class, PoP_DynamicDataModuleDecoratorProcessor::class);
+// $pop_component_processordynamicdatadecorator_manager->add(PoP_Module_ProcessorBaseWrapper::class, PoP_DynamicDataModuleDecoratorProcessor::class);

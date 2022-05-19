@@ -2,23 +2,23 @@
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_QUICKLINKGROUP_EVENTBOTTOM = 'quicklinkgroup-automatedemails-eventbottom';
+    public final const COMPONENT_QUICKLINKGROUP_EVENTBOTTOM = 'quicklinkgroup-automatedemails-eventbottom';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_QUICKLINKGROUP_EVENTBOTTOM],
+            [self::class, self::COMPONENT_QUICKLINKGROUP_EVENTBOTTOM],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_QUICKLINKGROUP_EVENTBOTTOM:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
-                $ret[] = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS];
+        switch ($component[1]) {
+            case self::COMPONENT_QUICKLINKGROUP_EVENTBOTTOM:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+                $ret[] = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS];
                 break;
         }
 

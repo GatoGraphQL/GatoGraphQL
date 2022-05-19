@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Application\ModuleFilters\:
-        resource: '../src/ModuleFilters/*'
+    PoP\Application\ComponentFilters\:
+        resource: '../src/ComponentFilters/*'
 
     PoP\Application\Hooks\:
         resource: '../src/Hooks/*'

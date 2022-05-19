@@ -3,33 +3,33 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public final const MODULE_FORMINPUT_TOPIC = 'gf-field-topic';
+    public final const COMPONENT_FORMINPUT_TOPIC = 'gf-field-topic';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TOPIC],
+            [self::class, self::COMPONENT_FORMINPUT_TOPIC],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TOPIC:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TOPIC:
                 return TranslationAPIFacade::getInstance()->__('Topic', 'pop-genericforms');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TOPIC:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TOPIC:
                 return GD_FormInput_ContactUs_Topics::class;
         }
         
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 }
 

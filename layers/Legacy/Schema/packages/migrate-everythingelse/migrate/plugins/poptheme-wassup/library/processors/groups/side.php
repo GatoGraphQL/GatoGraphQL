@@ -2,35 +2,35 @@
 
 class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_SIDE = 'group-side';
+    public final const COMPONENT_GROUP_SIDE = 'group-side';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GROUP_SIDE],
+            [self::class, self::COMPONENT_GROUP_SIDE],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_GROUP_SIDE:
+        switch ($component[1]) {
+            case self::COMPONENT_GROUP_SIDE:
                 // Allow GetPoP to only keep the Sections menu
-                if ($modules = \PoP\Root\App::applyFilters(
+                if ($components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_SideGroups:modules',
                     array(
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_SIDE_ADDNEW],
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET],
-                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_SIDE_MYSECTIONS],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_SIDE_ADDNEW],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET],
+                        [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::COMPONENT_MULTIPLE_MENU_SIDE_MYSECTIONS],
                     ),
-                    $module
+                    $component
                 )
                 ) {
                     $ret = array_merge(
                         $ret,
-                        $modules
+                        $components
                     );
                 }
                 break;

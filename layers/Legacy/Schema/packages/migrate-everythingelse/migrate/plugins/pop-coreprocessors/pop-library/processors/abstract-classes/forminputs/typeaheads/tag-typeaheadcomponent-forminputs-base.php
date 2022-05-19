@@ -8,47 +8,47 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
-    protected function getValueKey(array $module, array &$props)
+    protected function getValueKey(array $component, array &$props)
     {
         return 'symbolnamedescription';
     }
-    protected function getComponentTemplateResource(array $module)
+    protected function getComponentTemplateResource(array $component)
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTTAG_TYPEAHEAD_COMPONENT];
     }
-    protected function getTokenizerKeys(array $module, array &$props)
+    protected function getTokenizerKeys(array $component, array &$props)
     {
         return array('symbolnamedescription');
     }
 
-    // protected function getSourceFilter(array $module, array &$props)
+    // protected function getSourceFilter(array $component, array &$props)
     // {
     //     return POP_FILTER_TAGS;
     // }
 
-    protected function getSourceFilterParams(array $module, array &$props)
+    protected function getSourceFilterParams(array $component, array &$props)
     {
-        $ret = parent::getSourceFilterParams($module, $props);
+        $ret = parent::getSourceFilterParams($component, $props);
 
         // bring the tags ordering by tag count
         $ret[] = [
-            'module' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERTAG],
+            'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::COMPONENT_FILTERINPUT_ORDERTAG],
             'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:tags:count').'|DESC',
         ];
 
         return $ret;
     }
-    protected function getRemoteUrl(array $module, array &$props)
+    protected function getRemoteUrl(array $component, array &$props)
     {
-        $url = parent::getRemoteUrl($module, $props);
+        $url = parent::getRemoteUrl($component, $props);
 
         // Add the query from typeahead.js to filter (http://twitter.github.io/typeahead.js/examples/)
         return GeneralUtils::addQueryArgs([
-            PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH => GD_JSPLACEHOLDER_QUERY,
+            PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH => GD_JSPLACEHOLDER_QUERY,
         ], $url);
     }
 
-    protected function getThumbprintQuery(array $module, array &$props)
+    protected function getThumbprintQuery(array $component, array &$props)
     {
         return array(
             // 'fields' => 'ids',
@@ -63,11 +63,11 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
         return $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
-    protected function getPendingMsg(array $module)
+    protected function getPendingMsg(array $component)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Tags', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $module)
+    protected function getNotfoundMsg(array $component)
     {
         return TranslationAPIFacade::getInstance()->__('No Tags found', 'pop-coreprocessors');
     }

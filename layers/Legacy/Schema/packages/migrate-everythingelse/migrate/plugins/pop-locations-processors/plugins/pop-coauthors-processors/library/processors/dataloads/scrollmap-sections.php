@@ -5,70 +5,70 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
-    public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP = 'dataload-singleauthors-scrollmap';
+    public final const COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP = 'dataload-singleauthors-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
-            self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP],
+        $inner_components = array(
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $module): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
-                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+                return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
-        return parent::getFilterSubmodule($module);
+        return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $module): ?string
+    public function getFormat(array $component): ?string
     {
         $maps = array(
-            [self::class, self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
-        if (in_array($module, $maps)) {
+        if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
         }
 
-        return $format ?? parent::getFormat($module);
+        return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($component);
     // }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsSingleauthors($ret);
                 break;
         }
@@ -76,24 +76,24 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
-                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
+                $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
                 break;
         }
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

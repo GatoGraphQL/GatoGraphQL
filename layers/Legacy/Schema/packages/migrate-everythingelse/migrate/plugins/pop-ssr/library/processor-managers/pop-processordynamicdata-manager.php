@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleDecoratorProcessors\ModuleDecoratorProcessorManagerTrait;
+use PoP\ConfigurationComponentModel\ModuleDecoratorProcessors\ModuleDecoratorProcessorManagerTrait;
 
 class PoP_DynamicDataModuleDecoratorProcessorManager
 {
@@ -9,5 +9,5 @@ class PoP_DynamicDataModuleDecoratorProcessorManager
 /**
  * Initialization
  */
-global $pop_module_processordynamicdatadecorator_manager;
-$pop_module_processordynamicdatadecorator_manager = new PoP_DynamicDataModuleDecoratorProcessorManager();
+global $pop_component_processordynamicdatadecorator_manager;
+$pop_component_processordynamicdatadecorator_manager = new PoP_DynamicDataModuleDecoratorProcessorManager();

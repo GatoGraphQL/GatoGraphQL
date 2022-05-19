@@ -3,33 +3,33 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public final const MODULE_EM_SUBMITBUTTON_ADDLOCATION = 'em-submitbutton-addlocation';
+    public final const COMPONENT_EM_SUBMITBUTTON_ADDLOCATION = 'em-submitbutton-addlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EM_SUBMITBUTTON_ADDLOCATION],
+            [self::class, self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION],
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_SUBMITBUTTON_ADDLOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Add Location', 'em-popprocessors');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getLoadingText(array $module, array &$props)
+    public function getLoadingText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_EM_SUBMITBUTTON_ADDLOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Adding Location...', 'pop-coreprocessors');
         }
         
-        return parent::getLoadingText($module, $props);
+        return parent::getLoadingText($component, $props);
     }
 }
 

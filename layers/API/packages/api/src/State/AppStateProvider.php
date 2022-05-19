@@ -59,10 +59,10 @@ class AppStateProvider extends AbstractAppStateProvider
         // For the API, the response is always JSON
         $state['output'] = Outputs::JSON;
 
-        // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
+        // Fetch datasetcomponentsettings: needed to obtain the dbKeyPath to know where to find the database entries
         $state['dataoutputitems'] = [
-            DataOutputItems::DATASET_MODULE_SETTINGS,
-            DataOutputItems::MODULE_DATA,
+            DataOutputItems::DATASET_COMPONENT_SETTINGS,
+            DataOutputItems::COMPONENT_DATA,
             DataOutputItems::DATABASES,
         ];
 
@@ -73,7 +73,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
         $state['dboutputmode'] = DatabasesOutputModes::COMBINED;
 
-        // Do not print the entry module
+        // Do not print the entry component
         $state['actions'][] = Actions::REMOVE_ENTRYCOMPONENT_FROM_OUTPUT;
 
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)

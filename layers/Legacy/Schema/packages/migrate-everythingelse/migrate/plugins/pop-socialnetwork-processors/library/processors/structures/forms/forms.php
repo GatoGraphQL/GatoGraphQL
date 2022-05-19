@@ -2,26 +2,26 @@
 
 class PoP_SocialNetwork_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_CONTACTUSER = 'form-contactuser';
+    public final const COMPONENT_FORM_CONTACTUSER = 'form-contactuser';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_CONTACTUSER],
+            [self::class, self::COMPONENT_FORM_CONTACTUSER],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FORM_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_GFFormInners::class, PoP_SocialNetwork_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUSER],
+            self::COMPONENT_FORM_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_GFFormInners::class, PoP_SocialNetwork_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUSER],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

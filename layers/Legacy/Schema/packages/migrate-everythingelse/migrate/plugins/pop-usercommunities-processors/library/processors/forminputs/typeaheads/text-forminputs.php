@@ -3,23 +3,23 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES = 'forminput-text-typeaheadcommunities';
+    public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES = 'forminput-text-typeaheadcommunities';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES:
                 return TranslationAPIFacade::getInstance()->__('Community', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 }
 

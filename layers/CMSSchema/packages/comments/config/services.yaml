@@ -10,8 +10,8 @@ services:
     PoPCMSSchema\Comments\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPCMSSchema\Comments\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\Comments\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPCMSSchema\Comments\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

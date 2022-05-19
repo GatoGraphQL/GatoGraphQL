@@ -2,24 +2,24 @@
 namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 
-class ModuleProcessor_Layouts extends AbstractModuleProcessor
+class ComponentProcessor_Layouts extends AbstractComponentProcessor
 {
-    public final const MODULE_EXAMPLE_404 = 'example-404';
-    public final const MODULE_EXAMPLE_HOMEWELCOME = 'example-homewelcome';
-    public final const MODULE_EXAMPLE_COMMENT = 'example-comment';
-    public final const MODULE_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
-    public final const MODULE_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
+    public final const COMPONENT_EXAMPLE_404 = 'example-404';
+    public final const COMPONENT_EXAMPLE_HOMEWELCOME = 'example-homewelcome';
+    public final const COMPONENT_EXAMPLE_COMMENT = 'example-comment';
+    public final const COMPONENT_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
+    public final const COMPONENT_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_EXAMPLE_404],
-            [self::class, self::MODULE_EXAMPLE_HOMEWELCOME],
-            [self::class, self::MODULE_EXAMPLE_COMMENT],
-            [self::class, self::MODULE_EXAMPLE_AUTHORPROPERTIES],
-            [self::class, self::MODULE_EXAMPLE_TAGPROPERTIES],
+            [self::class, self::COMPONENT_EXAMPLE_404],
+            [self::class, self::COMPONENT_EXAMPLE_HOMEWELCOME],
+            [self::class, self::COMPONENT_EXAMPLE_COMMENT],
+            [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
+            [self::class, self::COMPONENT_EXAMPLE_TAGPROPERTIES],
         );
     }
 
@@ -28,23 +28,23 @@ class ModuleProcessor_Layouts extends AbstractModuleProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($module, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_EXAMPLE_COMMENT:
+        switch ($component[1]) {
+            case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = 'content';
                 break;
 
-            case self::MODULE_EXAMPLE_AUTHORPROPERTIES:
+            case self::COMPONENT_EXAMPLE_AUTHORPROPERTIES:
                 $ret = array_merge(
                     $ret,
                     array('displayName', 'description', 'url')
                 );
                 break;
 
-            case self::MODULE_EXAMPLE_TAGPROPERTIES:
+            case self::COMPONENT_EXAMPLE_TAGPROPERTIES:
                 $ret = array_merge(
                     $ret,
                     array('name', 'slug', 'description', 'count')
@@ -58,16 +58,16 @@ class ModuleProcessor_Layouts extends AbstractModuleProcessor
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($module);
+        $ret = parent::getRelationalSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_EXAMPLE_COMMENT:
+        switch ($component[1]) {
+            case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = new RelationalModuleField(
                     'author',
                     [
-                        [self::class, self::MODULE_EXAMPLE_AUTHORPROPERTIES],
+                        [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
                     ]
                 );
                 break;

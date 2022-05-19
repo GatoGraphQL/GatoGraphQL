@@ -1,53 +1,53 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
+class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_COMMUNITIES = 'tabpanel-communities';
-    public final const MODULE_TABPANEL_MYMEMBERS = 'tabpanel-mymembers';
+    public final const COMPONENT_TABPANEL_COMMUNITIES = 'tabpanel-communities';
+    public final const COMPONENT_TABPANEL_MYMEMBERS = 'tabpanel-mymembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_TABPANEL_COMMUNITIES],
-            [self::class, self::MODULE_TABPANEL_MYMEMBERS],
+            [self::class, self::COMPONENT_TABPANEL_COMMUNITIES],
+            [self::class, self::COMPONENT_TABPANEL_MYMEMBERS],
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $module)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_COMMUNITIES:
-            case self::MODULE_TABPANEL_MYMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_COMMUNITIES:
+            case self::COMPONENT_TABPANEL_MYMEMBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         }
 
-        return parent::getDefaultActivepanelFormat($module);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $module)
+    public function getPanelSubcomponents(array $component)
     {
-        $ret = parent::getPanelSubmodules($module);
+        $ret = parent::getPanelSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_COMMUNITIES:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
-                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST],
-                        [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
+                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
+                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
+                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
+                        [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
+                        [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
                     )
                 );
                 break;
 
-            case self::MODULE_TABPANEL_MYMEMBERS:
+            case self::COMPONENT_TABPANEL_MYMEMBERS:
                 $ret = array_merge(
                     $ret,
                     array(
-                        [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT],
-                        [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
+                        [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT],
+                        [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
                     )
                 );
                 break;
@@ -56,28 +56,28 @@ class PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents extends PoP_
         return $ret;
     }
 
-    public function getPanelHeaders(array $module, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_TABPANEL_COMMUNITIES:
+        switch ($component[1]) {
+            case self::COMPONENT_TABPANEL_COMMUNITIES:
                 return array(
                     [
-                        'header-submodule' => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-                        'subheader-submodules' =>  array(
-                            [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-                            [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-                            [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
+                        'subheader-subcomponents' =>  array(
+                            [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
+                            [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
+                            [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
                         ),
                     ],
                     [
-                        'header-submodule' => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
+                        'header-subcomponent' => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
                     ],
                 );
         }
 
-        return parent::getPanelHeaders($module, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }

@@ -13,35 +13,35 @@ class PoP_Locations_CommonUserRoles_Module_MainContentComponentRoutingProcessor 
         $ret = array();
 
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
-        $routemodules_map = array(
-            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks::MODULE_BLOCK_COMMUNITIES_SCROLLMAP],
+        $routeComponents_map = array(
+            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_COMMUNITIES_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $module) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
 
         // Author route modules
         $default_format_authorusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
-        $routemodules_map = array(
-            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+        $routeComponents_map = array(
+            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $module) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
 

@@ -2,32 +2,32 @@
 
 class GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase
 {
-    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW = 'layout-previewpost-event-simpleview';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW = 'layout-previewpost-event-simpleview';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW],
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($module);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
-                $ret[] = [GD_EM_Module_Processor_EventMultipleComponents::class, GD_EM_Module_Processor_EventMultipleComponents::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
+                $ret[] = [GD_EM_Module_Processor_EventMultipleComponents::class, GD_EM_Module_Processor_EventMultipleComponents::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS];
                 break;
         }
 

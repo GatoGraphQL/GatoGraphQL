@@ -2,72 +2,72 @@
 
 class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW = 'scroll-mymembers-fullviewpreview';
-    public final const MODULE_SCROLL_COMMUNITIES_DETAILS = 'scroll-communities-details';
-    public final const MODULE_SCROLL_COMMUNITIES_FULLVIEW = 'scroll-communities-fullview';
-    public final const MODULE_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
-    public final const MODULE_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
+    public final const COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW = 'scroll-mymembers-fullviewpreview';
+    public final const COMPONENT_SCROLL_COMMUNITIES_DETAILS = 'scroll-communities-details';
+    public final const COMPONENT_SCROLL_COMMUNITIES_FULLVIEW = 'scroll-communities-fullview';
+    public final const COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
+    public final const COMPONENT_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_DETAILS],
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_FULLVIEW],
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_THUMBNAIL],
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_LIST],
+            [self::class, self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_LIST],
         );
     }
 
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
-            self::MODULE_SCROLL_COMMUNITIES_DETAILS => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_COMMUNITIES_DETAILS],
-            self::MODULE_SCROLL_COMMUNITIES_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_COMMUNITIES_FULLVIEW],
-            self::MODULE_SCROLL_COMMUNITIES_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_COMMUNITIES_THUMBNAIL],
-            self::MODULE_SCROLL_COMMUNITIES_LIST => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_COMMUNITIES_DETAILS => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS],
+            self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW],
+            self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL],
+            self::COMPONENT_SCROLL_COMMUNITIES_LIST => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_COMMUNITIES_LIST],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_THUMBNAIL],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
         );
         $lists = array(
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_LIST],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_LIST],
         );
         $details = array(
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_DETAILS],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
         );
         $fullviews = array(
-            [self::class, self::MODULE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::MODULE_SCROLL_COMMUNITIES_FULLVIEW],
+            [self::class, self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
+            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
         );
 
         $extra_class = '';
-        if (in_array($module, $fullviews)) {
+        if (in_array($component, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($module, $details)) {
+        } elseif (in_array($component, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($module, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $extra_class = 'thumb';
-        } elseif (in_array($module, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($module, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

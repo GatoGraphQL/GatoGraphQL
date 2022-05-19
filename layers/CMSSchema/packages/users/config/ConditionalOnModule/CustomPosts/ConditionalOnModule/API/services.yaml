@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ConditionalOnModule\API\ModuleProcessors\:
-        resource: '../../../../../src/ConditionalOnModule/CustomPosts/ConditionalOnModule/API/ModuleProcessors/*'
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ConditionalOnModule\API\ComponentProcessors\:
+        resource: '../../../../../src/ConditionalOnModule/CustomPosts/ConditionalOnModule/API/ComponentProcessors/*'

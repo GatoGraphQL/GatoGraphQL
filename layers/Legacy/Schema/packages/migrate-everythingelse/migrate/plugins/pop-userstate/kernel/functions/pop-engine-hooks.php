@@ -10,32 +10,32 @@ class PoP_UserState_EngineHooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:start',
+            '\PoP\ComponentModel\Engine:getComponentData:start',
             $this->start(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
-            $this->calculateDataloadingModuleData(...),
+            '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+            $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:end',
+            '\PoP\ComponentModel\Engine:getComponentData:end',
             $this->end(...),
             10,
             5
         );
     }
 
-    public function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
+    public function start($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-userstatedata-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
+    public function calculateDataloadingComponentData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
     {
         $data_properties = &$data_properties_in_array[0];
 
@@ -45,7 +45,7 @@ class PoP_UserState_EngineHooks
         }
     }
 
-    public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
+    public function end($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 
@@ -56,10 +56,10 @@ class PoP_UserState_EngineHooks
                 [
                     Params::DATA_OUTPUT_ITEMS => [
                         DataOutputItems::META,
-                        DataOutputItems::MODULE_DATA,
+                        DataOutputItems::COMPONENT_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    Params::MODULEFILTER => POP_MODULEFILTER_USERSTATE,
+                    Params::COMPONENTFILTER => POP_COMPONENTFILTER_USERSTATE,
                     Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
                 ],
                 $requestHelperService->getCurrentURL()

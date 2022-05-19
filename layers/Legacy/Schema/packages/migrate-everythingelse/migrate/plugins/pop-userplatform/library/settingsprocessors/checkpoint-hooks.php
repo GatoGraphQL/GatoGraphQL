@@ -6,7 +6,7 @@ class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'ModuleProcessor:checkpoints',
+            'ComponentProcessor:checkpoints',
             $this->overrideCheckpoints(...)
         );
     }

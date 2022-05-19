@@ -3,60 +3,60 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public final const MODULE_BUTTON_HIGHLIGHT_CREATE = 'postbutton-highlight-create';
-    public final const MODULE_BUTTON_HIGHLIGHT_CREATEBTN = 'postbutton-highlight-createbtn';
+    public final const COMPONENT_BUTTON_HIGHLIGHT_CREATE = 'postbutton-highlight-create';
+    public final const COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN = 'postbutton-highlight-createbtn';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BUTTON_HIGHLIGHT_CREATE],
-            [self::class, self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN],
+            [self::class, self::COMPONENT_BUTTON_HIGHLIGHT_CREATE],
+            [self::class, self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN],
         );
     }
 
-    public function getButtoninnerSubmodule(array $module)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::MODULE_BUTTONINNER_HIGHLIGHT_CREATE],
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN],
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE],
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN],
         );
-        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($module);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $module)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATE:
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN:
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 return array(
-                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                    [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                 );
         }
 
-        return parent::get_selectabletypeahead_template($module);
+        return parent::get_selectabletypeahead_template($component);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATE:
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN:
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $module, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($module, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN:
+        switch ($component[1]) {
+            case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 $ret .= 'btn btn-link';
                 break;
         }
@@ -64,31 +64,31 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => $extract,
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => $extract,
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => $extract,
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => $extract,
         );
-        if ($title = $titles[$module[1]] ?? null) {
+        if ($title = $titles[$component[1]] ?? null) {
             return $title;
         }
 
-        return parent::getTitle($module, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
         $fields = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
+            self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
         );
-        if ($field = $fields[$module[1]] ?? null) {
+        if ($field = $fields[$component[1]] ?? null) {
             return $field;
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($component);
     }
 }
 

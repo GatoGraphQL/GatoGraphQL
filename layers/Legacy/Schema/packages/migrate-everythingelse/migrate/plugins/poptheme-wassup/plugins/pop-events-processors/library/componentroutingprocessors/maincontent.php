@@ -17,240 +17,240 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_sectioncalendar = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTIONCALENDAR);
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
 
-        $routemodules_typeahead = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_EVENTS_TYPEAHEAD],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_PASTEVENTS_TYPEAHEAD],
+        $routeComponents_typeahead = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD],
         );
-        foreach ($routemodules_typeahead as $route => $module) {
+        foreach ($routeComponents_typeahead as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_details = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_DETAILS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_DETAILS],
+        $routeComponents_details = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_DETAILS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $module) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW],
+        $routeComponents_simpleview = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_SIMPLEVIEW],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $module) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_FULLVIEW],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW],
+        $routeComponents_fullview = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_FULLVIEW],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $module) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_THUMBNAIL],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL],
+        $routeComponents_thumbnail = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_THUMBNAIL],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $module) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_LIST],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_LIST],
+        $routeComponents_list = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_LIST],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $module) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_map = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_SCROLLMAP],
-            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLLMAP],
+        $routeComponents_map = array(
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLLMAP],
+            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $module) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_horizontalmap = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP],
+        $routeComponents_horizontalmap = array(
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP],
         );
-        foreach ($routemodules_horizontalmap as $route => $module) {
+        foreach ($routeComponents_horizontalmap as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_navigator = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_NAVIGATOR],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR],
+        $routeComponents_navigator = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_NAVIGATOR],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR],
         );
-        foreach ($routemodules_navigator as $route => $module) {
+        foreach ($routeComponents_navigator as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_NAVIGATOR,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_NAVIGATOR) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
 
             // Navigator special case: use the NAVIGATOR module when the target is the navigator
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'target' => POP_TARGET_NAVIGATOR,
                 ],
             ];
         }
-        $routemodules_addons = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_SCROLL_ADDONS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_PASTEVENTS_SCROLL_ADDONS],
+        $routeComponents_addons = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_PASTEVENTS_SCROLL_ADDONS],
         );
-        foreach ($routemodules_addons as $route => $module) {
+        foreach ($routeComponents_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_ADDONS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_carousels = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_CAROUSEL],
+        $routeComponents_carousels = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $module) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
 
-        $routemodules_calendar = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR],
+        $routeComponents_calendar = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR],
         );
-        foreach ($routemodules_calendar as $route => $module) {
+        foreach ($routeComponents_calendar as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_calendar_map = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDARMAP],
+        $routeComponents_calendar_map = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDARMAP],
         );
-        foreach ($routemodules_calendar_map as $route => $module) {
+        foreach ($routeComponents_calendar_map as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_navigator = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR],
+        $routeComponents_navigator = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR],
         );
-        foreach ($routemodules_navigator as $route => $module) {
+        foreach ($routeComponents_navigator as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_NAVIGATOR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_NAVIGATOR) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
 
             // Navigator special case: use the NAVIGATOR module when the target is the navigator
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'target' => POP_TARGET_NAVIGATOR,
                 ],
             ];
         }
-        $routemodules_addons = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS],
+        $routeComponents_addons = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS],
         );
-        foreach ($routemodules_addons as $route => $module) {
+        foreach ($routeComponents_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_ADDONS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
 
@@ -258,151 +258,151 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
         $default_format_authorsectioncalendar = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTIONCALENDAR);
 
-        $routemodules_details = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS],
+        $routeComponents_details = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_DETAILS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $module) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_DETAILS) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
+        $routeComponents_simpleview = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $module) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_SIMPLEVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
+        $routeComponents_fullview = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $module) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_FULLVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],
+        $routeComponents_thumbnail = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $module) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_THUMBNAIL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLL_LIST],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST],
+        $routeComponents_list = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_LIST],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $module) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_map = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLLMAP],
-            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP],
+        $routeComponents_map = array(
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP],
+            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $module) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_horizontalmap = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP],
+        $routeComponents_horizontalmap = array(
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP],
         );
-        foreach ($routemodules_horizontalmap as $route => $module) {
+        foreach ($routeComponents_horizontalmap as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_carousels = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_CAROUSEL],
+        $routeComponents_carousels = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $module) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_CAROUSEL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
 
-        $routemodules_calendar = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR],
+        $routeComponents_calendar = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR],
         );
-        foreach ($routemodules_calendar as $route => $module) {
+        foreach ($routeComponents_calendar as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_authorsectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_calendarmap = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP],
+        $routeComponents_calendarmap = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP],
         );
-        foreach ($routemodules_calendarmap as $route => $module) {
+        foreach ($routeComponents_calendarmap as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_authorsectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
 
@@ -410,152 +410,152 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
         $default_format_sectioncalendar = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTIONCALENDAR);
 
-        $routemodules_details = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_SCROLL_DETAILS],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS],
+        $routeComponents_details = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_SCROLL_DETAILS],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $module) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
+        $routeComponents_simpleview = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $module) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW],
+        $routeComponents_fullview = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_SCROLL_FULLVIEW],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $module) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL],
+        $routeComponents_thumbnail = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $module) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_SCROLL_LIST],
-            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_LIST],
+        $routeComponents_list = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_SCROLL_LIST],
+            POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $module) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_map = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_SCROLLMAP],
-            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP],
+        $routeComponents_map = array(
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_SCROLLMAP],
+            POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $module) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_horizontalmap = array(
-            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP],
+        $routeComponents_horizontalmap = array(
+            POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
-        foreach ($routemodules_horizontalmap as $route => $module) {
+        foreach ($routeComponents_horizontalmap as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
 
-        $routemodules_carousels = array(
-            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_CAROUSEL],
+        $routeComponents_carousels = array(
+            POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $module) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
 
-        $routemodules_calendar = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDAR],
+        $routeComponents_calendar = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTSCALENDAR_CALENDAR],
         );
-        foreach ($routemodules_calendar as $route => $module) {
+        foreach ($routeComponents_calendar as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_calendarmap = array(
-            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP],
+        $routeComponents_calendarmap = array(
+            POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP],
         );
-        foreach ($routemodules_calendarmap as $route => $module) {
+        foreach ($routeComponents_calendarmap as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
 

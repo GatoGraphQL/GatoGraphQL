@@ -2,23 +2,23 @@
 
 class PoP_Module_Processor_SettingsForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_SETTINGS = 'form-settings';
+    public final const COMPONENT_FORM_SETTINGS = 'form-settings';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORM_SETTINGS],
+            [self::class, self::COMPONENT_FORM_SETTINGS],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORM_SETTINGS:
-                return [PoP_Module_Processor_SettingsFormInners::class, PoP_Module_Processor_SettingsFormInners::MODULE_FORMINNER_SETTINGS];
+        switch ($component[1]) {
+            case self::COMPONENT_FORM_SETTINGS:
+                return [PoP_Module_Processor_SettingsFormInners::class, PoP_Module_Processor_SettingsFormInners::COMPONENT_FORMINNER_SETTINGS];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

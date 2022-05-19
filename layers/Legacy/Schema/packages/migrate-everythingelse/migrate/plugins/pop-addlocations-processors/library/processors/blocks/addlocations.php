@@ -1,61 +1,61 @@
 <?php
-use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
+use PoP\ComponentModel\Facades\ComponentPath\ComponentPathManagerFacade;
 class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_CREATELOCATION = 'block-createlocation';
+    public final const COMPONENT_BLOCK_CREATELOCATION = 'block-createlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_CREATELOCATION],
+            [self::class, self::COMPONENT_BLOCK_CREATELOCATION],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_BLOCK_CREATELOCATION => POP_ADDLOCATIONS_ROUTE_ADDLOCATION,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_BLOCK_CREATELOCATION => POP_ADDLOCATIONS_ROUTE_ADDLOCATION,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_CREATELOCATION:
-                $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::MODULE_DATALOAD_CREATELOCATION];
-                $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_CREATELOCATION:
+                $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_CREATELOCATION];
+                $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_CREATELOCATION:
-                // Add an extra modulepath to the dataload-source for the create-location block, saying to also load the data block
-                $module_path_manager = ModulePathManagerFacade::getInstance();
-                $submodule_propagation_path = $module_path_manager->getPropagationCurrentPath();
-                $submodule_propagation_path[] = $module;
-                $submodule_propagation_path[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_CREATELOCATION:
+                // Add an extra componentPath to the dataload-source for the create-location block, saying to also load the data block
+                $component_path_manager = ComponentPathManagerFacade::getInstance();
+                $subcomponent_propagation_path = $component_path_manager->getPropagationCurrentPath();
+                $subcomponent_propagation_path[] = $component;
+                $subcomponent_propagation_path[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
                 $this->mergeProp(
                     [
-                        [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::MODULE_DATALOAD_CREATELOCATION]
+                        [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_CREATELOCATION]
                     ],
                     $props,
-                    'dataload-source-add-modulepaths',
+                    'dataload-source-add-componentPaths',
                     array(
-                        $submodule_propagation_path,
+                        $subcomponent_propagation_path,
                     )
                 );
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

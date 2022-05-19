@@ -1,81 +1,81 @@
 <?php
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
 
 class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
-    public final const MODULE_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
+    public final const COMPONENT_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
+    public final const COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_TAG_SIDEBAR],
-            [self::class, self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_TAG_SIDEBAR],
+            [self::class, self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $orientation = \PoP\Root\App::applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
-            self::MODULE_DATALOAD_TAG_SIDEBAR => $vertical ?
-                [Wassup_Module_Processor_CustomVerticalTagSidebars::class, Wassup_Module_Processor_CustomVerticalTagSidebars::MODULE_VERTICALSIDEBAR_TAG] :
-                [PoP_Module_Processor_CustomTagLayoutSidebars::class, PoP_Module_Processor_CustomTagLayoutSidebars::MODULE_LAYOUT_TAGSIDEBAR_HORIZONTAL],
-            self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR => $vertical ?
-                [Wassup_Module_Processor_CustomVerticalSingleSidebars::class, Wassup_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_POST] :
-                [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
+            self::COMPONENT_DATALOAD_TAG_SIDEBAR => $vertical ?
+                [Wassup_Module_Processor_CustomVerticalTagSidebars::class, Wassup_Module_Processor_CustomVerticalTagSidebars::COMPONENT_VERTICALSIDEBAR_TAG] :
+                [PoP_Module_Processor_CustomTagLayoutSidebars::class, PoP_Module_Processor_CustomTagLayoutSidebars::COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL],
+            self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR => $vertical ?
+                [Wassup_Module_Processor_CustomVerticalSingleSidebars::class, Wassup_Module_Processor_CustomVerticalSingleSidebars::COMPONENT_VERTICALSIDEBAR_SINGLE_POST] :
+                [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
         );
 
-        if ($block_inner = $block_inners[$module[1]] ?? null) {
+        if ($block_inner = $block_inners[$component[1]] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    // public function getNature(array $module)
+    // public function getNature(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_DATALOAD_TAG_SIDEBAR:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
     //             return TagRequestNature::TAG;
 
-    //         case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
+    //         case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($module);
+    //     return parent::getNature($component);
     // }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
-            case self::MODULE_DATALOAD_TAG_SIDEBAR:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
+            case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
+                return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_TAG_SIDEBAR:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
-            case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
+            case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($module);
+        return parent::getRelationalTypeResolver($component);
     }
 }
 

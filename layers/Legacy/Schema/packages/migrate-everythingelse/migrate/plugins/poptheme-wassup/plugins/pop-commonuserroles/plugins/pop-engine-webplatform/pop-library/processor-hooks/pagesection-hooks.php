@@ -12,16 +12,16 @@ class PoPTheme_Wassup_URE_PageSectionHooks
         );
     }
 
-    public function initModelPropsHover(array $module, $props_in_array, $processor)
+    public function initModelPropsHover(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         
-        $submodules = array(
-            [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::MODULE_BLOCK_PROFILEORGANIZATION_CREATE],
-            [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE],
+        $subComponents = array(
+            [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE],
+            [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE],
         );
-        foreach ($submodules as $submodule) {
-            $processor->mergeJsmethodsProp($submodule, $props, array('resetOnSuccess'));
+        foreach ($subComponents as $subComponent) {
+            $processor->mergeJsmethodsProp($subComponent, $props, array('resetOnSuccess'));
         }
     }
 }

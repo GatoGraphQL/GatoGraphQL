@@ -1,20 +1,20 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_SelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_SelectFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_ORDERUSER = 'filterinput-order-user';
-    public final const MODULE_FILTERINPUT_ORDERPOST = 'filterinput-order-post';
-    public final const MODULE_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
-    public final const MODULE_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
+    public final const COMPONENT_FILTERINPUT_ORDERUSER = 'filterinput-order-user';
+    public final const COMPONENT_FILTERINPUT_ORDERPOST = 'filterinput-order-post';
+    public final const COMPONENT_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
+    public final const COMPONENT_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -27,104 +27,104 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_ORDERUSER],
-            [self::class, self::MODULE_FILTERINPUT_ORDERPOST],
-            [self::class, self::MODULE_FILTERINPUT_ORDERTAG],
-            [self::class, self::MODULE_FILTERINPUT_ORDERCOMMENT],
+            [self::class, self::COMPONENT_FILTERINPUT_ORDERUSER],
+            [self::class, self::COMPONENT_FILTERINPUT_ORDERPOST],
+            [self::class, self::COMPONENT_FILTERINPUT_ORDERTAG],
+            [self::class, self::COMPONENT_FILTERINPUT_ORDERCOMMENT],
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_ORDERUSER => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
-            self::MODULE_FILTERINPUT_ORDERPOST => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
-            self::MODULE_FILTERINPUT_ORDERTAG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
-            self::MODULE_FILTERINPUT_ORDERCOMMENT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
+            self::COMPONENT_FILTERINPUT_ORDERUSER => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
+            self::COMPONENT_FILTERINPUT_ORDERPOST => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
+            self::COMPONENT_FILTERINPUT_ORDERTAG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
+            self::COMPONENT_FILTERINPUT_ORDERCOMMENT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_FILTERINPUT_ORDERUSER:
-    //         case self::MODULE_FILTERINPUT_ORDERPOST:
-    //         case self::MODULE_FILTERINPUT_ORDERTAG:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_FILTERINPUT_ORDERUSER:
+    //         case self::COMPONENT_FILTERINPUT_ORDERPOST:
+    //         case self::COMPONENT_FILTERINPUT_ORDERTAG:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_ORDERUSER:
-            case self::MODULE_FILTERINPUT_ORDERPOST:
-            case self::MODULE_FILTERINPUT_ORDERTAG:
-            case self::MODULE_FILTERINPUT_ORDERCOMMENT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_ORDERUSER:
+            case self::COMPONENT_FILTERINPUT_ORDERPOST:
+            case self::COMPONENT_FILTERINPUT_ORDERTAG:
+            case self::COMPONENT_FILTERINPUT_ORDERCOMMENT:
                 return TranslationAPIFacade::getInstance()->__('Order by', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_ORDERUSER:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_ORDERUSER:
                 return GD_FormInput_OrderUser::class;
 
-            case self::MODULE_FILTERINPUT_ORDERPOST:
+            case self::COMPONENT_FILTERINPUT_ORDERPOST:
                 return GD_FormInput_OrderPost::class;
 
-            case self::MODULE_FILTERINPUT_ORDERTAG:
+            case self::COMPONENT_FILTERINPUT_ORDERTAG:
                 return GD_FormInput_OrderTag::class;
 
-            case self::MODULE_FILTERINPUT_ORDERCOMMENT:
+            case self::COMPONENT_FILTERINPUT_ORDERCOMMENT:
                 return GD_FormInput_OrderComment::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_ORDERUSER:
-            case self::MODULE_FILTERINPUT_ORDERPOST:
-            case self::MODULE_FILTERINPUT_ORDERTAG:
-            case self::MODULE_FILTERINPUT_ORDERCOMMENT:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_ORDERUSER:
+            case self::COMPONENT_FILTERINPUT_ORDERPOST:
+            case self::COMPONENT_FILTERINPUT_ORDERTAG:
+            case self::COMPONENT_FILTERINPUT_ORDERCOMMENT:
                 // Add a nice name, so that the URL params when filtering make sense
                 return 'order';
         }
 
-        return parent::getName($module);
+        return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_ORDERUSER => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_ORDERPOST => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_ORDERTAG => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_ORDERCOMMENT => $this->stringScalarTypeResolver,
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_ORDERUSER => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_ORDERPOST => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_ORDERTAG => $this->stringScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_ORDERCOMMENT => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_ORDERUSER => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_ORDERPOST => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_ORDERTAG => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_ORDERCOMMENT => $translationAPI->__('', ''),
+        return match ($component[1]) {
+            self::COMPONENT_FILTERINPUT_ORDERUSER => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_ORDERPOST => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_ORDERTAG => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_ORDERCOMMENT => $translationAPI->__('', ''),
             default => null,
         };
     }

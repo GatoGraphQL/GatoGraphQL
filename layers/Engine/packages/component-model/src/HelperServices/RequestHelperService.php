@@ -25,8 +25,8 @@ class RequestHelperService implements RequestHelperServiceInterface
             'RequestUtils:current_url:remove_params',
             [
                 Params::VERSION,
-                Params::MODULEFILTER,
-                Params::MODULEPATHS,
+                Params::COMPONENTFILTER,
+                Params::COMPONENTPATHS,
                 Params::ACTION_PATH,
                 Params::DATA_OUTPUT_ITEMS,
                 Params::DATA_SOURCE,

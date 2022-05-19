@@ -1,18 +1,18 @@
 <?php
 
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_Module_Processor_PostSelectableTypeaheadFormComponentsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_Module_Processor_PostSelectableTypeaheadFormComponentsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
+    public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
@@ -25,84 +25,84 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
+            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_ReferencesFilterInputProcessor::class, PoP_Module_Processor_ReferencesFilterInputProcessor::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_ReferencesFilterInputProcessor::class, PoP_Module_Processor_ReferencesFilterInputProcessor::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getInputSubmodule(array $module)
+    public function getInputSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
-                return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT];
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
+                return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT];
         }
 
-        return parent::getInputSubmodule($module);
+        return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubmodules(array $module)
+    public function getComponentSubcomponents(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return array(
-                    [PoP_Module_Processor_PostTypeaheadComponentFormInputs::class, PoP_Module_Processor_PostTypeaheadComponentFormInputs::MODULE_TYPEAHEAD_COMPONENT_CONTENT],
+                    [PoP_Module_Processor_PostTypeaheadComponentFormInputs::class, PoP_Module_Processor_PostTypeaheadComponentFormInputs::COMPONENT_TYPEAHEAD_COMPONENT_CONTENT],
                 );
         }
 
-        return parent::getComponentSubmodules($module);
+        return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $module)
+    public function getTriggerLayoutSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
-                return [PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES];
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
+                return [PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES];
         }
 
-        return parent::getTriggerLayoutSubmodule($module);
+        return parent::getTriggerLayoutSubcomponent($component);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($module[1]) {
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $this->idScalarTypeResolver,
+        return match($component[1]) {
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($module[1]) {
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => SchemaTypeModifiers::IS_ARRAY,
+        return match($component[1]) {
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $translationAPI->__('', ''),
+        return match ($component[1]) {
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $translationAPI->__('', ''),
             default => null,
         };
     }

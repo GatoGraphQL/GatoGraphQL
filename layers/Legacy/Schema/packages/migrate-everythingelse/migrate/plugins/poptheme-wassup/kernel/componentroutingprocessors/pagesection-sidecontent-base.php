@@ -7,6 +7,6 @@ abstract class PoP_Module_SideContentPageSectionComponentRoutingProcessorBase ex
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_PAGESECTION_SIDEFRAMECONTENT);
+        return array(POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEFRAMECONTENT);
     }
 }

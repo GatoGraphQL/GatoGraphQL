@@ -11,11 +11,11 @@ class PoPTheme_Wassup_LocationPostsCreation_Module_SideInfoContentPageSectionCom
     {
         $ret = array();
 
-        $modules = array(
-            POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_SidebarMultiples::class, PoPSPEM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR],
+        $components = array(
+            POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_SidebarMultiples::class, PoPSPEM_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR],
         );
-        foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

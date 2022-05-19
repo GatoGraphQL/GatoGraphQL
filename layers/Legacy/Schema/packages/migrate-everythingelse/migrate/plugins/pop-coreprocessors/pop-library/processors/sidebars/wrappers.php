@@ -2,79 +2,79 @@
 
 class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_WIDGETWRAPPER_REFERENCES = 'widgetwrapper-references';
-    public final const MODULE_WIDGETWRAPPER_REFERENCES_LINE = 'widgetwrapper-references-line';
-    public final const MODULE_WIDGETWRAPPER_AUTHOR_CONTACT = 'widgetwrapper-author-contact';
-    public final const MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT = 'layoutwrapper-comments-appendtoscript';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCES = 'widgetwrapper-references';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCES_LINE = 'widgetwrapper-references-line';
+    public final const COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT = 'widgetwrapper-author-contact';
+    public final const COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT = 'layoutwrapper-comments-appendtoscript';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCES],
-            [self::class, self::MODULE_WIDGETWRAPPER_REFERENCES_LINE],
-            [self::class, self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT],
-            [self::class, self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE],
+            [self::class, self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT],
+            [self::class, self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $module)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($module);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_WIDGETWRAPPER_REFERENCES:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_REFERENCES];
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCES];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_REFERENCES_LINE];
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCES_LINE];
                 break;
 
-            case self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT:
-                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_AUTHOR_CONTACT];
+            case self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT:
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_AUTHOR_CONTACT];
                 break;
 
-            case self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
-                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT];
+            case self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
+                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT];
                 break;
         }
 
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $module)
+    public function getConditionFailedSubcomponents(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($module);
+        $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
-                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
+                $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGETWRAPPER_REFERENCES:
-            case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
-                $this->appendProp($module, $props, 'class', 'references');
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
+                $this->appendProp($component, $props, 'class', 'references');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $module): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_WIDGETWRAPPER_REFERENCES:
-            case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
+        switch ($component[1]) {
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
+            case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
                 return 'hasReferences';
 
-            case self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT:
+            case self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT:
                 return 'hasContact';
         }
 

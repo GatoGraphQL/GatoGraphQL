@@ -2,42 +2,42 @@
 
 class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST = 'layout-automatedemails-fullview-post';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST = 'layout-automatedemails-fullview-post';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST],
         );
     }
 
-    // function getFooterSubmodules(array $module) {
+    // function getFooterSubcomponents(array $component) {
 
-    //     $ret = parent::getFooterSubmodules($module);
+    //     $ret = parent::getFooterSubcomponents($component);
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
+    //         case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
 
-    //             $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+    //             $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
     //             break;
     //     }
 
     //     return $ret;
     // }
 
-    public function getSidebarSubmodule(array $module)
+    public function getSidebarSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
                 $sidebars = array(
-                    self::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST => [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
+                    self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST => [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                 );
 
-                return $sidebars[$module[1]];
+                return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($module);
+        return parent::getSidebarSubcomponent($component);
     }
 }
 

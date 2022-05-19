@@ -10,8 +10,8 @@ services:
     PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Hooks\:
         resource: '../../../src/ConditionalOnModule/CustomPosts/Hooks/*'
 
-    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ModuleProcessors\:
-        resource: '../../../src/ConditionalOnModule/CustomPosts/ModuleProcessors/*'
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/ComponentProcessors/*'
 
     PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\:
         resource: '../../../src/ConditionalOnModule/CustomPosts/FilterInputProcessors/*'

@@ -4,30 +4,30 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafMod
 
 class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM = 'notifications-multicomponent-quicklinkgroup-bottom';
+    public final const COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM = 'notifications-multicomponent-quicklinkgroup-bottom';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM],
+            [self::class, self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM],
         );
     }
 
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $module): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($module);
+        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
+        switch ($component[1]) {
+            case self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge(
                     $ret,
                     \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_MultipleComponentLayouts:modules',
                         [],
-                        $module
+                        $component
                     )
                 );
                 break;

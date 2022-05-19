@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {
-    public function getTargetDynamicallyRenderedSubmodules(array $module)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         return array();
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalModuleField[]
      */
-    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $module)
+    public function getTargetDynamicallyRenderedSubcomponentSubcomponents(array $component)
     {
         return array();
     }
@@ -20,58 +20,58 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($module);
+        $ret = parent::getRelationalSubcomponents($component);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded
-        if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($module)) {
+        if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponentSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $dynamic_modules
+                $dynamic_components
             );
         }
 
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded
-        if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($module)) {
+        if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $dynamic_modules
+                $dynamic_components
             );
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
-            if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($module)) {
-                foreach ($dynamic_modules as $dynamic_module) {
-                    $this->setProp($dynamic_module, $props, 'needs-dynamic-data', true);
+            if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponents($component)) {
+                foreach ($dynamic_components as $dynamic_component) {
+                    $this->setProp($dynamic_component, $props, 'needs-dynamic-data', true);
                 }
             }
 
-            if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($module)) {
-                foreach ($subcomponent_dynamic_templates as $data_field => $modules) {
-                    foreach ($modules as $dynamic_module) {
-                        $this->setProp($dynamic_module, $props, 'needs-dynamic-data', true);
+            if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubcomponents($component)) {
+                foreach ($subcomponent_dynamic_templates as $data_field => $components) {
+                    foreach ($components as $dynamic_component) {
+                        $this->setProp($dynamic_component, $props, 'needs-dynamic-data', true);
                     }
                 }
             }
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

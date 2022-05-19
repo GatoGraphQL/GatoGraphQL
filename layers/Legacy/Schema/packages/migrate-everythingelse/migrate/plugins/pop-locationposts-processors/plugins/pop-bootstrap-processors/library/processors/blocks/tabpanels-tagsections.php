@@ -2,37 +2,37 @@
 
 class PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Processor_TagTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_TAGLOCATIONPOSTS = 'block-tabpanel-taglocationposts';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS = 'block-tabpanel-taglocationposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
+            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
         );
     }
 
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($module);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGLOCATIONPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGLOCATIONPOSTS],
         );
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $module)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_BLOCK_TABPANEL_TAGLOCATIONPOSTS:
-                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_TAGLOCATIONPOSTS];
+        switch ($component[1]) {
+            case self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS:
+                return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGLOCATIONPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($module);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

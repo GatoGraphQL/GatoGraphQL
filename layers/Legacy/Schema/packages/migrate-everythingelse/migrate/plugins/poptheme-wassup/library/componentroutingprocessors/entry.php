@@ -10,13 +10,13 @@ class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\Ab
         $ret = array();
 
         // Theme Modes
-        $thememode_modules = array(
-            GD_THEMEMODE_WASSUP_EMBED => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_EMBED],
-            GD_THEMEMODE_WASSUP_PRINT => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_PRINT],
+        $thememode_components = array(
+            GD_THEMEMODE_WASSUP_EMBED => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::COMPONENT_ENTRY_EMBED],
+            GD_THEMEMODE_WASSUP_PRINT => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::COMPONENT_ENTRY_PRINT],
         );
-        foreach ($thememode_modules as $thememode => $module) {
+        foreach ($thememode_components as $thememode => $component) {
             $ret[] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'thememode' => $thememode,
                 ],
@@ -25,7 +25,7 @@ class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\Ab
 
         // The TopLevel is the entry module by default
         $ret[] = [
-            'module' => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_DEFAULT],
+            'component' => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::COMPONENT_ENTRY_DEFAULT],
         ];
 
         return $ret;

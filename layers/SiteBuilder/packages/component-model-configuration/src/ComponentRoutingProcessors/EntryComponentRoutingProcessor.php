@@ -17,7 +17,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
 
         $ret[] = [
-            'component' => [PoP_ConfigurationComponentModel_Module_Processor_Elements::class, PoP_ConfigurationComponentModel_Module_Processor_Elements::MODULE_EMPTY],
+            'component' => [PoP_ConfigurationComponentModel_Module_Processor_Elements::class, PoP_ConfigurationComponentModel_Module_Processor_Elements::COMPONENT_EMPTY],
         ];
 
         return $ret;

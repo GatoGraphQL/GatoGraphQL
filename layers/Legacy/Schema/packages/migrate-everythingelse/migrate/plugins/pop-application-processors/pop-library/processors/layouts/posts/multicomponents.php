@@ -4,47 +4,47 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION = 'multicomponent-userhighlightpostinteraction';
-    public final const MODULE_MULTICOMPONENT_USERPOSTINTERACTION = 'multicomponent-userpostinteraction';
+    public final const COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION = 'multicomponent-userhighlightpostinteraction';
+    public final const COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION = 'multicomponent-userpostinteraction';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION],
+            [self::class, self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION],
+            [self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION],
         );
     }
 
-    protected function getUserpostinteractionLayoutSubmodules(array $module)
+    protected function getUserpostinteractionLayoutSubcomponents(array $component)
     {
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($module[1]) {
+        switch ($component[1]) {
          // Highlights: it has a different set-up
-            case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
+            case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
                 $layouts = array(
-                    [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
+                    [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
                 );
                 if ($loadingLazy) {
-                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
+                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
                 } else {
-                    $layouts[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER];
-                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS];
+                    $layouts[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER];
+                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS];
                 }
                 break;
 
-            case self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION:
+            case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $layouts = array(
-                    [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION],
+                    [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION],
                 );
                 if ($loadingLazy) {
-                    $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::MODULE_SUBCOMPONENT_HIGHLIGHTS];
-                    $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW];
-                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
+                    $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_SUBCOMPONENT_HIGHLIGHTS];
+                    $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW];
+                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
                 } else {
-                    $layouts[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER];
-                    $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS];
-                    $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY];
-                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS];
+                    $layouts[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER];
+                    $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS];
+                    $layouts[] = [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY];
+                    $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_LAZYSUBCOMPONENT_POSTCOMMENTS];
                 }
                 break;
         }
@@ -53,20 +53,20 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return \PoP\Root\App::applyFilters(
             'Wassup_Module_Processor_MultipleComponentLayouts:userpostinteraction_layouts',
             $layouts,
-            $module
+            $component
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
-            case self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION:
+        switch ($component[1]) {
+            case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
+            case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
-                    $this->getUserpostinteractionLayoutSubmodules($module)
+                    $this->getUserpostinteractionLayoutSubcomponents($component)
                 );
                 break;
         }
@@ -74,16 +74,16 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
-            case self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION:
-                $this->appendProp($module, $props, 'class', 'userpostinteraction-single');
+        switch ($component[1]) {
+            case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
+            case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
+                $this->appendProp($component, $props, 'class', 'userpostinteraction-single');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

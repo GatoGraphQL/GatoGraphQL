@@ -3,7 +3,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
@@ -19,19 +19,19 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
         if ($users = $this->getUsers()) {
             // All the variables needed to operate into the pop-engine.php getData function
             $userTypeAPI = UserTypeAPIFacade::getInstance();
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
-            $module = $engine->getEntryComponent();
-            $processor = $moduleprocessor_manager->getProcessor($module);
+            $component = $engine->getEntryComponent();
+            $processor = $componentprocessor_manager->getProcessor($component);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
 
             // In order to obtain the dbobjectids from the results, located under pssId and bsId
             $pagesection_settings_id = $this->getPagesectionSettingsid();
-            $block_module = $this->getBlockModule();
-            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_module);
+            $block_component = $this->getBlockComponent();
+            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($block_component);
 
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;
@@ -62,7 +62,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $request['hist_time'] = ($lastaccess && $lastaccess > $yesterday) ? $lastaccess : $yesterday;
 
                 // Regenerate the data
-                $data = $engine->getModuleData($module, $processor, $engineState->props, $formatter, $request);
+                $data = $engine->getComponentData($component, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
                 // Simply check if the dbobjectids for the user is empty, for the main block

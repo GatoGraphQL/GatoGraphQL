@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_UserTypeaheadComponentLayouts extends PoP_Module_Processor_UserTypeaheadComponentLayoutsBase
 {
-    public final const MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT = 'layoutuser-typeahead-component';
+    public final const COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT = 'layoutuser-typeahead-component';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT],
+            [self::class, self::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT],
         );
     }
 }

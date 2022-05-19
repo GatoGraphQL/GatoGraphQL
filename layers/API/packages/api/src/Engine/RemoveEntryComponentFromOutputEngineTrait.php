@@ -16,24 +16,24 @@ trait RemoveEntryComponentFromOutputEngineTrait
     {
         $data = parent::getEncodedDataObject($data);
 
-        // For the API: maybe remove the entry module from the output
+        // For the API: maybe remove the entry component from the output
         if (
             App::getModule(APIModule::class)->isEnabled() &&
             App::getState('scheme') === APISchemes::API &&
             in_array(Actions::REMOVE_ENTRYCOMPONENT_FROM_OUTPUT, App::getState('actions')) &&
             App::getState('dataoutputmode') == DataOutputModes::COMBINED
         ) {
-            if ($data['datasetmodulesettings'] ?? null) {
-                $data['datasetmodulesettings'] = $this->removeEntryComponentFromOutput($data['datasetmodulesettings']);
+            if ($data['datasetcomponentsettings'] ?? null) {
+                $data['datasetcomponentsettings'] = $this->removeEntryComponentFromOutput($data['datasetcomponentsettings']);
             }
-            if ($data['moduledata'] ?? null) {
-                $data['moduledata'] = $this->removeEntryComponentFromOutput($data['moduledata']);
+            if ($data['componentdata'] ?? null) {
+                $data['componentdata'] = $this->removeEntryComponentFromOutput($data['componentdata']);
             }
-            if ($data['datasetmoduledata'] ?? null) {
-                $data['datasetmoduledata'] = $this->removeEntryComponentFromOutput($data['datasetmoduledata']);
+            if ($data['datasetcomponentdata'] ?? null) {
+                $data['datasetcomponentdata'] = $this->removeEntryComponentFromOutput($data['datasetcomponentdata']);
             }
-            if ($data['modulesettings'] ?? null) {
-                $data['modulesettings'] = $this->removeEntryComponentFromOutput($data['modulesettings']);
+            if ($data['componentsettings'] ?? null) {
+                $data['componentsettings'] = $this->removeEntryComponentFromOutput($data['componentsettings']);
             }
         }
 

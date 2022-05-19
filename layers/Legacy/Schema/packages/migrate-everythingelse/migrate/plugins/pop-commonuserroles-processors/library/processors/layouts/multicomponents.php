@@ -2,41 +2,41 @@
 
 class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS = 'multicomponent-organizationdetails';
+    public final const COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS = 'multicomponent-organizationdetails';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS],
+            [self::class, self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS],
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
-                $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_ORGANIZATIONTYPES];
-                $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_ORGANIZATIONCATEGORIES];
+        switch ($component[1]) {
+            case self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS:
+                $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_ORGANIZATIONTYPES];
+                $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_ORGANIZATIONCATEGORIES];
                 break;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
-                $modules = $this->getSubmodules($module);
-                foreach ($modules as $submodule) {
-                    $this->appendProp([$submodule], $props, 'class', 'inline');
+        switch ($component[1]) {
+            case self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS:
+                $components = $this->getSubcomponents($component);
+                foreach ($components as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

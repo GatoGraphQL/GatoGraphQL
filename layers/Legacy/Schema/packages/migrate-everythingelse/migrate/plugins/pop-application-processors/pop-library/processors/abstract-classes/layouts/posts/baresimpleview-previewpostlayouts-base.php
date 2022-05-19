@@ -2,61 +2,61 @@
 
 abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public function showDate(array $module)
+    public function showDate(array $component)
     {
         return true;
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($module);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
-        $ret[] = [GD_Custom_Module_Processor_PostThumbLayoutWrappers::class, GD_Custom_Module_Processor_PostThumbLayoutWrappers::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER];
+        $ret[] = [GD_Custom_Module_Processor_PostThumbLayoutWrappers::class, GD_Custom_Module_Processor_PostThumbLayoutWrappers::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER];
 
         return $ret;
     }
 
-    public function getAuthorAvatarModule(array $module)
+    public function getAuthorAvatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR82];
+            return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR82];
         }
 
         return null;
     }
 
-    public function getContentSubmodule(array $module)
+    public function getContentSubcomponent(array $component)
     {
-        return [PoP_Module_Processor_MaxHeightLayoutMultipleComponents::class, PoP_Module_Processor_MaxHeightLayoutMultipleComponents::MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT];
+        return [PoP_Module_Processor_MaxHeightLayoutMultipleComponents::class, PoP_Module_Processor_MaxHeightLayoutMultipleComponents::COMPONENT_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT];
     }
     
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getTitleHtmlmarkup(array $module, array &$props)
+    public function getTitleHtmlmarkup(array $component, array &$props)
     {
         return 'h3';
     }
 
-    public function authorPositions(array $module)
+    public function authorPositions(array $component)
     {
         return array(
             GD_CONSTANT_AUTHORPOSITION_ABOVETITLE
         );
     }
 
-    public function horizontalLayout(array $module)
+    public function horizontalLayout(array $component)
     {
         return true;
     }
     
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $ret[GD_JS_CLASSES]['wrapper'] = 'row';
         $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'col-sm-2 avatar';

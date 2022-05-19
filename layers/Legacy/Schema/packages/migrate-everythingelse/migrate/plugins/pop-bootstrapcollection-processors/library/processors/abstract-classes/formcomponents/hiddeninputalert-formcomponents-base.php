@@ -1,51 +1,51 @@
 <?php
 
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 
-abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends PoP_Module_Processor_AlertsBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends PoP_Module_Processor_AlertsBase implements FormComponentComponentProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentModule(array $module)
+    public function getFormcomponentComponent(array $component)
     {
-        return $this->getHiddeninputModule($module);
+        return $this->getHiddenInputComponent($component);
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
         return array(
-            $this->getSelectedModule($module),
-            $this->getHiddeninputModule($module),
+            $this->getSelectedComponent($component),
+            $this->getHiddenInputComponent($component),
         );
     }
 
-    public function getSelectedModule(array $module)
+    public function getSelectedComponent(array $component)
     {
         return null;
     }
-    public function getHiddeninputModule(array $module)
+    public function getHiddenInputComponent(array $component)
     {
         return null;
     }
 
-    public function getAlertBaseClass(array $module, array &$props)
+    public function getAlertBaseClass(array $component, array &$props)
     {
-        return parent::getAlertBaseClass($module, $props).' hiddeninputalert';
+        return parent::getAlertBaseClass($component, $props).' hiddeninputalert';
     }
 
-    public function getAlertClass(array $module, array &$props)
+    public function getAlertClass(array $component, array &$props)
     {
         return 'alert-warning alert-sm';
     }
 
-    public function showCloseButton(array $module, array &$props)
+    public function showCloseButton(array $component, array &$props)
     {
         return false;
     }
 
-    public function initRequestProps(array $module, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($module, $props);
-        parent::initRequestProps($module, $props);
+        $this->metaFormcomponentInitModuleRequestProps($component, $props);
+        parent::initRequestProps($component, $props);
     }
 }

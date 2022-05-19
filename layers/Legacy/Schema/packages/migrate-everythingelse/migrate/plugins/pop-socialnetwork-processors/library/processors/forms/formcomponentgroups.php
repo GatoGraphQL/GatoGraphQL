@@ -1,37 +1,37 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER = 'formcomponentgroup-card-contactuser';
+    public final const COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER = 'formcomponentgroup-card-contactuser';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER],
+            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
-                return [PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_USER];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
+                return [PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_USER];
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
-                $component = $this->getComponentSubmodule($module);
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
+                $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $moduleprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Send message to:', 'pop-application-processors')
@@ -40,17 +40,17 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return '';
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
 }
 

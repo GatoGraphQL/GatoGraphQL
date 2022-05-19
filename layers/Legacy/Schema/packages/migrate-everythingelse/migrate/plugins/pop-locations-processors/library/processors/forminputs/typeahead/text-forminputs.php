@@ -3,35 +3,35 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION = 'forminput-text-typeaheadaddlocation';
+    public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION = 'forminput-text-typeaheadaddlocation';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION],
+            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION],
         );
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 // Use the label as placeholder
-                $this->setProp($module, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Name or Address', 'em-popprocessors'));
+                $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Name or Address', 'em-popprocessors'));
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

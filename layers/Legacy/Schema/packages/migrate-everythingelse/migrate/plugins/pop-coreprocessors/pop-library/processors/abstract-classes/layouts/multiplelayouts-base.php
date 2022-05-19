@@ -2,28 +2,28 @@
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
 
-abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MULTIPLE];
     }
 
-    public function getDefaultLayoutSubmodule(array $module)
+    public function getDefaultLayoutSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getMultipleLayoutSubmodules(array $module)
+    public function getMultipleLayoutSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($default = $this->getDefaultLayoutSubmodule($module)) {
+        if ($default = $this->getDefaultLayoutSubcomponent($component)) {
             $ret[] = $default;
         }
 
@@ -33,17 +33,17 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $module): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($module);
+        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
 
-        // The function below returns an array with value => $submodule.
-        // It must be converted to value => [$submodule]
-        foreach ($this->getMultipleLayoutSubmodules($module) as $conditionDataField => $conditionalSubmodule) {
+        // The function below returns an array with value => $subComponent.
+        // It must be converted to value => [$subComponent]
+        foreach ($this->getMultipleLayoutSubcomponents($component) as $conditionDataField => $conditionalSubcomponent) {
             $ret[] = new ConditionalLeafModuleField(
                 $conditionDataField,
                 [
-                    $conditionalSubmodule,
+                    $conditionalSubcomponent,
                 ]
             );
         }
@@ -51,22 +51,22 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($module, $props, 'class', 'pop-multilayout');
-        parent::initModelProps($module, $props);
+        $this->appendProp($component, $props, 'class', 'pop-multilayout');
+        parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($defaultLayout = $this->getDefaultLayoutSubmodule($module)) {
-            $ret['default-module'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
+        if ($defaultLayout = $this->getDefaultLayoutSubcomponent($component)) {
+            $ret['default-component'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($defaultLayout);
         }
-        $ret['condition-on-data-field-modules'] = array_map(
-            [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-            $this->getMultipleLayoutSubmodules($module)
+        $ret['condition-on-data-field-components'] = array_map(
+            [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
+            $this->getMultipleLayoutSubcomponents($component)
         );
 
         return $ret;

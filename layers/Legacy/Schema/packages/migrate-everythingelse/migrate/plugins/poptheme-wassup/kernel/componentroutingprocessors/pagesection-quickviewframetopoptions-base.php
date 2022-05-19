@@ -7,6 +7,6 @@ abstract class PoP_Module_QuickviewFrameTopOptionsPageSectionComponentRoutingPro
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS);
+        return array(POP_PAGECOMPONENTGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS);
     }
 }

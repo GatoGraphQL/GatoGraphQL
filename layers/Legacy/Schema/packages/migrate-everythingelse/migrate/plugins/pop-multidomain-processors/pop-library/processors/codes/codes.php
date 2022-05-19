@@ -2,29 +2,29 @@
 
 class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_CODE_EXTERNAL = 'code-external';
+    public final const COMPONENT_CODE_EXTERNAL = 'code-external';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CODE_EXTERNAL],
+            [self::class, self::COMPONENT_CODE_EXTERNAL],
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($module[1]) {
-            self::MODULE_CODE_EXTERNAL => POP_MULTIDOMAIN_ROUTE_EXTERNAL,
-            default => parent::getRelevantRoute($module, $props),
+        return match($component[1]) {
+            self::COMPONENT_CODE_EXTERNAL => POP_MULTIDOMAIN_ROUTE_EXTERNAL,
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_CODE_EXTERNAL:
+        switch ($component[1]) {
+            case self::COMPONENT_CODE_EXTERNAL:
                 // This is all this block does: load the external url defined in parameter "url"
                 $this->addJsmethod($ret, 'clickURLParam');
                 break;
@@ -33,16 +33,16 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CODE_EXTERNAL:
+        switch ($component[1]) {
+            case self::COMPONENT_CODE_EXTERNAL:
                 // Make it invisible, nothing to show
-                $this->appendProp($module, $props, 'class', 'hidden');
+                $this->appendProp($component, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

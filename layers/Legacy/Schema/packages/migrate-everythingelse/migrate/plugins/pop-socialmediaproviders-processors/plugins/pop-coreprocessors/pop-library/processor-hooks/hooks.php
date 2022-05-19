@@ -5,124 +5,124 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_DropdownButtonControls:modules:share',
-            $this->getShareSubmodules(...),
+            'PoP_Module_Processor_DropdownButtonControls:components:share',
+            $this->getShareSubcomponents(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            $this->getDropdownSubmodules(...),
+            $this->getDropdownSubcomponents(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            $this->getSocialmediaprovidersSubmodules(...),
+            $this->getSocialmediaprovidersSubcomponents(...),
             10,
             2
         );
     }
 
-    public function getShareSubmodules($submodules, array $module)
+    public function getShareSubcomponents($subComponents, array $component)
     {
         // Insert at the beginning
         array_splice(
-            $submodules, 
+            $subComponents, 
             0, 
             0, 
             array(
-                [GD_SocialMediaProviders_Module_Processor_AnchorControls::class, GD_SocialMediaProviders_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SHARE_FACEBOOK],
-                [GD_SocialMediaProviders_Module_Processor_AnchorControls::class, GD_SocialMediaProviders_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SHARE_TWITTER],
+                [GD_SocialMediaProviders_Module_Processor_AnchorControls::class, GD_SocialMediaProviders_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK],
+                [GD_SocialMediaProviders_Module_Processor_AnchorControls::class, GD_SocialMediaProviders_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_SHARE_TWITTER],
             )
         );
-        return $submodules;
+        return $subComponents;
     }
 
-    public function getDropdownSubmodules($submodules, array $module)
+    public function getDropdownSubcomponents($subComponents, array $component)
     {
-        switch ($module[1]) {
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
+        switch ($component[1]) {
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
-                    $submodules, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_POSTSOCIALMEDIA_FB_PREVIEW],
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW],
                     )
                 );
                 break;
 
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
                 array_splice(
-                    $submodules, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_USERSOCIALMEDIA_FB_PREVIEW],
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW],
                     )
                 );
                 break;
 
-            case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+            case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 array_splice(
-                    $submodules, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_TAGSOCIALMEDIA_FB_PREVIEW],
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW],
                     )
                 );
                 break;
         }
         
-        return $submodules;
+        return $subComponents;
     }
 
-    public function getSocialmediaprovidersSubmodules($submodules, array $module)
+    public function getSocialmediaprovidersSubcomponents($subComponents, array $component)
     {
-        switch ($module[1]) {
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
+        switch ($component[1]) {
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
                 array_splice(
-                    $submodules, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_POSTSOCIALMEDIA_FB],
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_POSTSOCIALMEDIA_TWITTER],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_POSTSOCIALMEDIA_FB],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_POSTSOCIALMEDIA_TWITTER],
                     )
                 );
                 break;
 
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
                 array_splice(
-                    $submodules, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_USERSOCIALMEDIA_FB],
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_USERSOCIALMEDIA_TWITTER],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_USERSOCIALMEDIA_FB],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_USERSOCIALMEDIA_TWITTER],
                     )
                 );
                 break;
 
-            case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
+            case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
                 array_splice(
-                    $submodules, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_TAGSOCIALMEDIA_FB],
-                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::MODULE_TAGSOCIALMEDIA_TWITTER],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_TAGSOCIALMEDIA_FB],
+                        [PoP_Module_Processor_SocialMediaItems::class, PoP_Module_Processor_SocialMediaItems::COMPONENT_TAGSOCIALMEDIA_TWITTER],
                     )
                 );
                 break;
         }
 
-        return $submodules;
+        return $subComponents;
     }
 }
 

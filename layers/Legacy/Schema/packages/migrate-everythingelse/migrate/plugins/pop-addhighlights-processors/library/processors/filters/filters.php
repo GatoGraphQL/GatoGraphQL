@@ -2,32 +2,32 @@
 
 class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_HIGHLIGHTS = 'filter-highlights';
-    public final const MODULE_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
-    public final const MODULE_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
+    public final const COMPONENT_FILTER_HIGHLIGHTS = 'filter-highlights';
+    public final const COMPONENT_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
+    public final const COMPONENT_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTER_HIGHLIGHTS],
-            [self::class, self::MODULE_FILTER_AUTHORHIGHLIGHTS],
-            [self::class, self::MODULE_FILTER_MYHIGHLIGHTS],
+            [self::class, self::COMPONENT_FILTER_HIGHLIGHTS],
+            [self::class, self::COMPONENT_FILTER_AUTHORHIGHLIGHTS],
+            [self::class, self::COMPONENT_FILTER_MYHIGHLIGHTS],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
-            self::MODULE_FILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_HIGHLIGHTS],
-            self::MODULE_FILTER_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
-            self::MODULE_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYHIGHLIGHTS],
+            self::COMPONENT_FILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_HIGHLIGHTS],
+            self::COMPONENT_FILTER_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
+            self::COMPONENT_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
-        if ($inner = $inners[$module[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

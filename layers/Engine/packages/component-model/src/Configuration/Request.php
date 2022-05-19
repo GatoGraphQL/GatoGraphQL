@@ -58,20 +58,20 @@ class Request
         return $extraRoutes;
     }
 
-    public static function getModuleFilter(): ?string
+    public static function getComponentFilter(): ?string
     {
-        return App::request(Params::MODULEFILTER) ?? App::query(Params::MODULEFILTER);
+        return App::request(Params::COMPONENTFILTER) ?? App::query(Params::COMPONENTFILTER);
     }
 
     /**
      * @return string[]
      */
-    public static function getModulePaths(): array
+    public static function getComponentPaths(): array
     {
-        $modulePaths = App::getRequest()->request->all()[Params::MODULEPATHS] ?? App::getRequest()->query->all()[Params::MODULEPATHS] ?? [];
-        if (!is_array($modulePaths)) {
-            return [$modulePaths];
+        $componentPaths = App::getRequest()->request->all()[Params::COMPONENTPATHS] ?? App::getRequest()->query->all()[Params::COMPONENTPATHS] ?? [];
+        if (!is_array($componentPaths)) {
+            return [$componentPaths];
         }
-        return $modulePaths;
+        return $componentPaths;
     }
 }

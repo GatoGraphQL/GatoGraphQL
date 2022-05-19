@@ -2,19 +2,19 @@
 
 trait AutomatedEmailsBlocksBaseTrait
 {
-    public function getTitle(array $module, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         return '';
     }
 
-    protected function showDisabledLayer(array $module, array &$props)
+    protected function showDisabledLayer(array $component, array &$props)
     {
         return false;
     }
 
-    public function getModelPropsForDescendantModules(array $module, array &$props): array
+    public function getModelPropsForDescendantComponents(array $component, array &$props): array
     {
-        $ret = parent::getModelPropsForDescendantModules($module, $props);
+        $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
         $ret['convert-classes-to-styles'] = true;
 

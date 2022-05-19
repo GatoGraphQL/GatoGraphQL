@@ -16,67 +16,67 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
 
         // Home modules
-        $format_modules = array(
-            POP_FORMAT_DETAILS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_DETAILS],
-            POP_FORMAT_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW],
-            POP_FORMAT_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_FULLVIEW],
-            POP_FORMAT_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL],
-            POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST],
+        $format_components = array(
+            POP_FORMAT_DETAILS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS],
+            POP_FORMAT_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW],
+            POP_FORMAT_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW],
+            POP_FORMAT_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL],
+            POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST],
         );
-        foreach ($format_modules as $format => $module) {
+        foreach ($format_components as $format => $component) {
             $ret[RequestNature::HOME][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[RequestNature::HOME][] = [
-                    'module' => $module,
+                    'component' => $component,
                 ];
             }
         }
 
         // Author route blocks
-        $format_modules = array(
-            POP_FORMAT_DETAILS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS],
-            POP_FORMAT_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-            POP_FORMAT_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW],
-            POP_FORMAT_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL],
-            POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST],
+        $format_components = array(
+            POP_FORMAT_DETAILS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS],
+            POP_FORMAT_SIMPLEVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
+            POP_FORMAT_FULLVIEW => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW],
+            POP_FORMAT_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL],
+            POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST],
         );
-        foreach ($format_modules as $format => $module) {
+        foreach ($format_components as $format => $component) {
             $ret[UserRequestNature::USER][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[UserRequestNature::USER][] = [
-                    'module' => $module,
+                    'component' => $component,
                 ];
             }
         }
 
         // Tag modules
-        $format_modules = array(
-            POP_FORMAT_DETAILS => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS],
-            POP_FORMAT_SIMPLEVIEW => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            POP_FORMAT_FULLVIEW => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW],
-            POP_FORMAT_THUMBNAIL => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
-            POP_FORMAT_LIST => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_LIST],
+        $format_components = array(
+            POP_FORMAT_DETAILS => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS],
+            POP_FORMAT_SIMPLEVIEW => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW],
+            POP_FORMAT_FULLVIEW => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW],
+            POP_FORMAT_THUMBNAIL => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
+            POP_FORMAT_LIST => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST],
         );
-        foreach ($format_modules as $format => $module) {
+        foreach ($format_components as $format => $component) {
             $ret[TagRequestNature::TAG][] = [
-                'module' => $module,
+                'component' => $component,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[TagRequestNature::TAG][] = [
-                    'module' => $module,
+                    'component' => $component,
                 ];
             }
         }

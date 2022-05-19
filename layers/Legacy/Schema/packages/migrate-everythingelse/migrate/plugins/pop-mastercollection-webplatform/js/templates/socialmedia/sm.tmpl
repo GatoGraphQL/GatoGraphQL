@@ -1,6 +1,6 @@
 {{#with dbObject}}
 	<div {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} class="pop-sm clearfix {{../class}}" style="{{../style}}">
-		{{#each ../submodules}}
+		{{#each ../subcomponents}}
 			{{enterModule ../../.}}
 		{{/each}}
 	</div>

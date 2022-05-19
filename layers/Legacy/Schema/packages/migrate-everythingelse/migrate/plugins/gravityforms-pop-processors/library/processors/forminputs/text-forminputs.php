@@ -2,34 +2,34 @@
 
 class GD_GF_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_GF_FORMINPUT_FORMID = 'forminput-formid';
+    public final const COMPONENT_GF_FORMINPUT_FORMID = 'forminput-formid';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GF_FORMINPUT_FORMID],
+            [self::class, self::COMPONENT_GF_FORMINPUT_FORMID],
         );
     }
 
-    public function isHidden(array $module, array &$props)
+    public function isHidden(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_GF_FORMINPUT_FORMID:
+        switch ($component[1]) {
+            case self::COMPONENT_GF_FORMINPUT_FORMID:
                 return true;
         }
         
-        return parent::isHidden($module, $props);
+        return parent::isHidden($component, $props);
     }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        switch ($module[1]) {
+        switch ($component[1]) {
             // Do not change the name of this input below!
-            case self::MODULE_GF_FORMINPUT_FORMID:
+            case self::COMPONENT_GF_FORMINPUT_FORMID:
                 return 'gform_submit';
         }
         
-        return parent::getName($module);
+        return parent::getName($component);
     }
 }
 

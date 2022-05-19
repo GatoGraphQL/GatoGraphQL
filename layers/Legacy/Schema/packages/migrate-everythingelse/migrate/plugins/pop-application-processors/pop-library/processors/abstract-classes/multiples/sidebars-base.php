@@ -2,51 +2,51 @@
 
 abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
-    protected function getInnerSubmodules(array $module): array
+    protected function getInnerSubcomponents(array $component): array
     {
         return array();
     }
 
-    protected function getScreen(array $module)
+    protected function getScreen(array $component)
     {
         return null;
     }
 
-    protected function getScreengroup(array $module)
+    protected function getScreengroup(array $component)
     {
         return null;
     }
 
-    protected function getPermanentSubmodules(array $module)
+    protected function getPermanentSubcomponents(array $component)
     {
 
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
             array(),
-            $this->getScreengroup($module),
-            $this->getScreen($module),
-            $module
+            $this->getScreengroup($component),
+            $this->getScreen($component),
+            $component
         );
     }
     
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
         // Add the corresponding blocks
-        if ($modules = $this->getInnerSubmodules($module)) {
+        if ($components = $this->getInnerSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $components
             );
         }
         
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
-        if ($modules = $this->getPermanentSubmodules($module)) {
+        if ($components = $this->getPermanentSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $components
             );
         }
 

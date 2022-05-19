@@ -1,39 +1,39 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\ActivatePluginsMutationResolverBridge;
 
-class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
+class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadComponentProcessor
 {
-    public final const MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS = 'dataloadaction-system-activateplugins';
+    public final const COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS = 'dataloadaction-system-activateplugins';
 
     // use PoP_SystemWP_WP_Module_Processor_SystemActionsTrait;
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
+            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
         );
     }
 
-    public function shouldExecuteMutation(array $module, array &$props): bool
+    public function shouldExecuteMutation(array $component, array &$props): bool
     {
 
         // The actionexecution is triggered directly
-        switch ($module[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return true;
         }
 
-        return parent::shouldExecuteMutation($module, $props);
+        return parent::shouldExecuteMutation($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($module[1]) {
-            case self::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
+        switch ($component[1]) {
+            case self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return $this->instanceManager->getInstance(ActivatePluginsMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($module);
+        return parent::getComponentMutationResolverBridge($component);
     }
 }
 

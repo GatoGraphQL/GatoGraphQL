@@ -1,31 +1,31 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 trait PoP_Engine_Module_Processor_InnerModules_Trait
 {
-    public function getInnerSubmodules(array $module): array
+    public function getInnerSubcomponents(array $component): array
     {
         return array();
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
         return array_merge(
-            parent::getSubmodules($module),
-            $this->getInnerSubmodules($module)
+            parent::getSubcomponents($component),
+            $this->getInnerSubcomponents($component)
         );
     }
     
-    public function getMutableonmodelConfiguration(array $module, array &$props): array
+    public function getMutableonmodelConfiguration(array $component, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getMutableonmodelConfiguration($module, $props);
+        $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($submodules = $this->getInnerSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $submodules
+        if ($subComponents = $this->getInnerSubcomponents($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
+                $subComponents
             );
         }
         

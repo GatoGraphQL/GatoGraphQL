@@ -1,34 +1,34 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPTCUSTOMIZATION_POST];
     }
 
-    public function getAuthorsModule(array $module)
+    public function getAuthorsComponent(array $component)
     {
-        return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
+        return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
     }
-    public function getAuthorsSeparator(array $module, array &$props)
+    public function getAuthorsSeparator(array $component, array &$props)
     {
         return GD_CONSTANT_AUTHORS_SEPARATOR;
     }
 
-    public function getLayoutExtraSubmodule(array $module)
+    public function getLayoutExtraSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        if ($layout_extra = $this->getLayoutExtraSubmodule($module)) {
+        if ($layout_extra = $this->getLayoutExtraSubcomponent($component)) {
             $ret[] = $layout_extra;
         }
 
@@ -38,42 +38,42 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $module): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        if ($authors_module = $this->getAuthorsModule($module)) {
+        if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
                 new RelationalModuleField(
                     'author',
                     [
-                        $authors_module,
+                        $authors_component,
                     ]
                 ),
             ];
         }
 
-        return parent::getRelationalSubmodules($module);
+        return parent::getRelationalSubcomponents($component);
     }
 
-    public function getThumbField(array $module, array &$props)
+    public function getThumbField(array $component, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
-            $this->getThumbFieldName($module, $props),
-            $this->getThumbFieldArgs($module, $props),
-            $this->getThumbFieldAlias($module, $props)
+            $this->getThumbFieldName($component, $props),
+            $this->getThumbFieldArgs($component, $props),
+            $this->getThumbFieldAlias($component, $props)
         );
     }
 
-    protected function getThumbFieldName(array $module, array &$props)
+    protected function getThumbFieldName(array $component, array &$props)
     {
         return 'thumb';
     }
 
-    protected function getThumbFieldArgs(array $module, array &$props)
+    protected function getThumbFieldArgs(array $component, array &$props)
     {
         return ['size' => 'thumb-sm'];
     }
 
-    protected function getThumbFieldAlias(array $module, array &$props)
+    protected function getThumbFieldAlias(array $component, array &$props)
     {
         return 'thumb';
     }
@@ -83,30 +83,30 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $module, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $thumb = $this->getThumbField($module, $props);
+        $thumb = $this->getThumbField($component, $props);
         return array('id', 'title', $thumb, 'url');
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                $this->getProp($module, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($module, $props)),
+                $this->getProp($component, $props, 'succeeding-typeResolver'),
+                $this->getThumbField($component, $props)),
         );
 
-        if ($authors_module = $this->getAuthorsModule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authors_module);
-            $ret['authors-sep'] = $this->getAuthorsSeparator($module, $props);
+        if ($authors_component = $this->getAuthorsComponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($authors_component);
+            $ret['authors-sep'] = $this->getAuthorsSeparator($component, $props);
         }
-        if ($layout_extra = $this->getLayoutExtraSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-extra'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_extra);
+        if ($layout_extra = $this->getLayoutExtraSubcomponent($component)) {
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-extra'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($layout_extra);
         }
 
         return $ret;

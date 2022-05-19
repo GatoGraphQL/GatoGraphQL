@@ -7,6 +7,6 @@ abstract class PoP_Module_BackgroundContentPageSectionComponentRoutingProcessorB
      */
     public function getGroups(): array
     {
-        return array(POP_PAGEMODULEGROUP_PAGESECTION_BACKGROUNDFRAMECONTENT);
+        return array(POP_PAGECOMPONENTGROUP_PAGESECTION_BACKGROUNDFRAMECONTENT);
     }
 }

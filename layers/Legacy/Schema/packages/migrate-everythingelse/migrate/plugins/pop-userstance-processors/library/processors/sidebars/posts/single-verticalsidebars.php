@@ -2,37 +2,37 @@
 
 class UserStance_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public final const MODULE_VERTICALSIDEBAR_SINGLE_STANCE = 'vertical-sidebar-single-stance';
+    public final const COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE = 'vertical-sidebar-single-stance';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE],
+            [self::class, self::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE],
         );
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
-            self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE => [UserStance_Module_Processor_CustomVerticalSingleSidebarInners::class, UserStance_Module_Processor_CustomVerticalSingleSidebarInners::MODULE_VERTICALSIDEBARINNER_SINGLE_STANCE],
+            self::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE => [UserStance_Module_Processor_CustomVerticalSingleSidebarInners::class, UserStance_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE],
         );
 
-        if ($inner = $sidebarinners[$module[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE:
-                $this->appendProp($module, $props, 'class', 'vertical');
+        switch ($component[1]) {
+            case self::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE:
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

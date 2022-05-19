@@ -2,68 +2,68 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public final const MODULE_FILTERINPUTCONTAINER_MYLINKS = 'filterinputcontainer-mylinks';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MYLINKS = 'filterinputcontainer-mylinks';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYLINKS],
+            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYLINKS],
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubcomponents(array $component)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubcomponents($component);
 
-        $inputmodules = [
-            self::MODULE_FILTERINPUTCONTAINER_MYLINKS => [
+        $inputComponents = [
+            self::COMPONENT_FILTERINPUTCONTAINER_MYLINKS => [
                 GD_CreateUpdate_Utils::moderate() ?
-                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
-                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
-                [GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::class, GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::MODULE_FILTERINPUTGROUP_POSTDATES],
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
+                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
+                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_HASHTAGS],
+                [GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::class, GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::COMPONENT_FILTERINPUTGROUP_POSTDATES],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
         // Add the link access filter
-        if (($inputmodules[$module[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputComponents[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
                 $ret,
                 array_search(
-                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
+                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FILTERINPUTGROUP_SEARCH],
                     $ret
                 ),
                 0,
                 [
-                    [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_LINKACCESS],
+                    [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FILTERINPUTGROUP_LINKACCESS],
                 ]
             );
         }
-        if ($modules = \PoP\Root\App::applyFilters(
-            'Links:FilterInnerModuleProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+        if ($components = \PoP\Root\App::applyFilters(
+            'Links:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,
+    //         self::COMPONENT_FILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($component);
     // }
 }
 

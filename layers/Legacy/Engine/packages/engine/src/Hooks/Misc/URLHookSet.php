@@ -19,7 +19,7 @@ class URLHookSet extends AbstractHookSet
     }
     public function getParamsToRemoveFromURL($params)
     {
-        $params[] = Params::HEADMODULE;
+        $params[] = Params::HEADCOMPONENT;
         return $params;
     }
 }

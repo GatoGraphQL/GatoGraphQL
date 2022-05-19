@@ -4,36 +4,36 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN = 'layout-feedbackmessage-login';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWD = 'layout-feedbackmessage-lostpwd';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET = 'layout-feedbackmessage-lostpwdreset';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOGOUT = 'layout-feedbackmessage-logout';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'layout-feedbackmessage-user-changepassword';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN = 'layout-feedbackmessage-login';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWD = 'layout-feedbackmessage-lostpwd';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET = 'layout-feedbackmessage-lostpwdreset';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT = 'layout-feedbackmessage-logout';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'layout-feedbackmessage-user-changepassword';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWD],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGOUT],
-            [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWD],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT],
+            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD],
         );
     }
 
-    public function getMessages(array $module, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($module, $props);
+        $ret = parent::getMessages($component, $props);
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Hurray, login successful!', 'pop-coreprocessors');
                 $addnew = '<i class="fa fa-fw fa-plus"></i>'.TranslationAPIFacade::getInstance()->__('Add', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('You can now add posts and comments, follow users, etc', 'pop-coreprocessors');
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWD:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWD:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Almost there...', 'pop-coreprocessors');
                 $ret['success'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('We sent you an email with a code. Please copy it and <a href="%s">paste it here</a>.', 'pop-coreprocessors'),
@@ -41,7 +41,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Modul
                 );
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Password reset successful', 'pop-coreprocessors');
                 $ret['success'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Please <a href="%s">click here to log in</a>.', 'pop-coreprocessors'),
@@ -59,12 +59,12 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Modul
                 );
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGOUT:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Logged out now', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('But please make sure to come back!', 'pop-coreprocessors');
                 break;
 
-            case self::MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD:
+            case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Password updated successfully.', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Yep, it\'s good to change it every now and then, with so many crooks around!', 'pop-coreprocessors');
                 break;

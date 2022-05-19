@@ -3,7 +3,7 @@
 		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row scroll-row {{../extend-class}} {{../tls.domain-id}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}} pop-structureinner" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
 	{{/if}}
 	<div class="pop-elem {{../class}} blockinner-elem {{!../layout-grid.class}}" style="{{../style}}">
-		{{#each ../submoduleoutputnames.layouts}}
+		{{#each ../subcomponentoutputnames.layouts}}
 			{{#withModule ../../. this}}
 				{{enterModule ../../../. dbKey=../../../dbKey objectID=../../.}}
 			{{/withModule}}

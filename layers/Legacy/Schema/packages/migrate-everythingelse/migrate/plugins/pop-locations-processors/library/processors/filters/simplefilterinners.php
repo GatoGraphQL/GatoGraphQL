@@ -2,47 +2,47 @@
 
 class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS = 'simplefilterinputcontainer-locations';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS = 'simplefilterinputcontainer-locations';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],
+            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],
         );
     }
 
-    protected function getInputSubmodules(array $module)
+    protected function getInputSubcomponents(array $component)
     {
-        $ret = parent::getInputSubmodules($module);
+        $ret = parent::getInputSubcomponents($component);
 
-        $inputmodules = [
-            self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => [
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+        $inputComponents = [
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => [
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::COMPONENT_FILTERINPUT_SEARCH],
             ],
         ];
-        if ($modules = \PoP\Root\App::applyFilters(
-            'Locations:FilterInnerModuleProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
+        if ($components = \PoP\Root\App::applyFilters(
+            'Locations:FilterInnerComponentProcessor:inputComponents',
+            $inputComponents[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $modules
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $module)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
-    //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
+    //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
     //     );
-    //     if ($filter = $filters[$module[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($module);
+    //     return parent::getFilter($component);
     // }
 }
 

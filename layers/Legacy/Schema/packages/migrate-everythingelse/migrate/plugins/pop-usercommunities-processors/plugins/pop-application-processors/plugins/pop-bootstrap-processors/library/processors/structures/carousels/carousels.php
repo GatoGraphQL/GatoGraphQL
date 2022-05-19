@@ -2,56 +2,56 @@
 
 class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
-    public final const MODULE_CAROUSEL_AUTHORMEMBERS = 'carousel-authormembers';
+    public final const COMPONENT_CAROUSEL_AUTHORMEMBERS = 'carousel-authormembers';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_CAROUSEL_AUTHORMEMBERS],
+            [self::class, self::COMPONENT_CAROUSEL_AUTHORMEMBERS],
         );
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
-                $this->appendProp($module, $props, 'class', 'slide');
-                $this->appendProp($module, $props, 'class', 'widget widget-info');
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
+                $this->appendProp($component, $props, 'class', 'slide');
+                $this->appendProp($component, $props, 'class', 'widget widget-info');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
-                return [PoP_UserCommunities_Module_Processor_CustomCarouselInners::class, PoP_UserCommunities_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_AUTHORMEMBERS];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
+                return [PoP_UserCommunities_Module_Processor_CustomCarouselInners::class, PoP_UserCommunities_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_AUTHORMEMBERS];
         }
 
-        return parent::getInnerSubmodule($module);
+        return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $module, array &$props)
+    public function getMode(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
                 return 'static';
         }
 
-        return parent::getMode($module, $props);
+        return parent::getMode($component, $props);
     }
 
 
-    public function getControlsTopSubmodule(array $module)
+    public function getControlsTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_CAROUSEL_AUTHORMEMBERS:
-                return [PoP_UserCommunities_Module_Processor_CustomCarouselControls::class, PoP_UserCommunities_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS];
+        switch ($component[1]) {
+            case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
+                return [PoP_UserCommunities_Module_Processor_CustomCarouselControls::class, PoP_UserCommunities_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS];
         }
 
-        return parent::getControlsTopSubmodule($module);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

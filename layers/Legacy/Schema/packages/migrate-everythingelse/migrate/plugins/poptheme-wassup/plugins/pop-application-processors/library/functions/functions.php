@@ -4,9 +4,9 @@
  * Uniqueblocks
  */
 \PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getDomainFramecomponentModules');
-function getDomainFramecomponentModules($modules)
+function getDomainFramecomponentComponents($components)
 {
-    $modules[] = [PoP_MultidomainProcessors_Module_Processor_Dataloads::class, PoP_MultidomainProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_INITIALIZEDOMAIN];
-    $modules[] = [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::MODULE_MODAL_SHAREBYEMAIL];
-    return $modules;
+    $components[] = [PoP_MultidomainProcessors_Module_Processor_Dataloads::class, PoP_MultidomainProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_INITIALIZEDOMAIN];
+    $components[] = [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::COMPONENT_MODAL_SHAREBYEMAIL];
+    return $components;
 }

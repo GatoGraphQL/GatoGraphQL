@@ -2,41 +2,41 @@
 
 class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues extends PoP_Module_Processor_PostTriggerLayoutFormComponentValuesBase
 {
-    public final const MODULE_FORMCOMPONENT_CARD_POST = 'forminput-post-card';
-    public final const MODULE_FORMCOMPONENT_CARD_COMMENTPOST = 'forminput-commentpost-card';
+    public final const COMPONENT_FORMCOMPONENT_CARD_POST = 'forminput-post-card';
+    public final const COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST = 'forminput-commentpost-card';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_POST],
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_POST],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST],
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_POST:
-                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_CARD_POST:
+                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST];
 
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
-                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST];
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST:
+                return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_POST:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_CARD_POST:
                 return 'self';
 
-            case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
+            case self::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST:
                 return 'customPost';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

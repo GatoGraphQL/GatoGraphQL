@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Root\Exception\GenericSystemException;
@@ -70,7 +70,7 @@ class PoP_ServerSideManager
     public function &getTemplates($domain)
     {
         $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
-        $templates =& $datastore->store[$domain]['modulesettings']['combinedstate']['templates'] ?? array();
+        $templates =& $datastore->store[$domain]['componentsettings']['combinedstate']['templates'] ?? array();
         return $templates;
     }
 
@@ -88,10 +88,10 @@ class PoP_ServerSideManager
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $url = $requestHelperService->getCurrentURL();
         $datastore->store[$domain]['mutableonrequestdata'] = array(
-            $url => $json['moduledata']['mutableonrequest'],
+            $url => $json['componentdata']['mutableonrequest'],
         );
         $datastore->store[$domain]['combinedstatedata'] = array(
-            $url => $json['moduledata']['combinedstate'],
+            $url => $json['componentdata']['combinedstate'],
         );
     }
 
@@ -115,8 +115,8 @@ class PoP_ServerSideManager
             //                     'pagesection' => array(),
             //                     'block' => array(),
             //                 ),
-            //                 'modules-cbs' => array(),
-            //                 'modules-paths' => array(),
+            //                 'components-cbs' => array(),
+            //                 'components-paths' => array(),
             //                 'db-keys' => array(),
             //             ),
             //         ),
@@ -159,7 +159,7 @@ class PoP_ServerSideManager
         foreach ($this->getCombinedStateData($domain, $url)['settings']['configuration'] as $pssId => &$psConfiguration) {
             $this->initPageSectionSettings($domain, $pssId, $psConfiguration); // Changed line in PHP, different in JS
             // Insert into the Runtime to generate the ID
-            $this->addPageSectionIds($domain, $pssId, $psConfiguration[GD_JS_MODULE]); // Changed line in PHP, different in JS
+            $this->addPageSectionIds($domain, $pssId, $psConfiguration[GD_JS_COMPONENT]); // Changed line in PHP, different in JS
         }
     }
 
@@ -176,27 +176,27 @@ class PoP_ServerSideManager
     public function expandJSKeys(&$context)
     {
 
-        // In order to save file size, context keys can be compressed, eg: 'modules' => 'ms', 'module' => 'm'. However they might be referenced with their full name
+        // In order to save file size, context keys can be compressed, eg: 'components' => 'ms', 'component' => 'm'. However they might be referenced with their full name
         // in .tmpl files, so reconstruct the full name in the context duplicating these entries
         if ($context && \PoP\ComponentModel\Environment::compactResponseJsonKeys()) {
-            // Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
-            if ($context[ComponentModelModuleInfo::get('response-prop-submodules')] ?? null) {
-                $context['modules'] = $context[ComponentModelModuleInfo::get('response-prop-submodules')];
+            // Hardcoding always 'components' allows us to reference this key, with certainty of its name, in the .tmpl files
+            if ($context[ComponentModelModuleInfo::get('response-prop-subcomponents')] ?? null) {
+                $context['components'] = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')];
             }
             if ($context['bs']['dbkeys'] ?? null) {
                 $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
             }
-            if ($context[GD_JS_MODULE] ?? null) {
-                $context['module'] = $context[GD_JS_MODULE];
+            if ($context[GD_JS_COMPONENT] ?? null) {
+                $context['component'] = $context[GD_JS_COMPONENT];
             }
             if ($context[GD_JS_TEMPLATE] ?? null) {
                 $context['template'] = $context[GD_JS_TEMPLATE];
             }
-            if ($context[GD_JS_MODULEOUTPUTNAME] ?? null) {
-                $context['moduleoutputname'] = $context[GD_JS_MODULEOUTPUTNAME];
+            if ($context[GD_JS_COMPONENTOUTPUTNAME] ?? null) {
+                $context['componentoutputname'] = $context[GD_JS_COMPONENTOUTPUTNAME];
             }
-            if ($context[GD_JS_SUBMODULEOUTPUTNAMES] ?? null) {
-                $context['submoduleoutputnames'] = $context[GD_JS_SUBMODULEOUTPUTNAMES];
+            if ($context[GD_JS_SUBCOMPONENTOUTPUTNAMES] ?? null) {
+                $context['subcomponentoutputnames'] = $context[GD_JS_SUBCOMPONENTOUTPUTNAMES];
             }
             if ($context[POP_JS_TEMPLATES] ?? null) {
                 $context['templates'] = $context[POP_JS_TEMPLATES];
@@ -212,8 +212,8 @@ class PoP_ServerSideManager
             if ($context[GD_JS_DBOBJECTPARAMS] ?? null) {
                 $context['dbobject-params'] = $context[GD_JS_DBOBJECTPARAMS];
             }
-            if ($context[GD_JS_PREVIOUSMODULESIDS] ?? null) {
-                $context['previousmodules-ids'] = $context[GD_JS_PREVIOUSMODULESIDS];
+            if ($context[GD_JS_PREVIOUSCOMPONENTSIDS] ?? null) {
+                $context['previouscomponents-ids'] = $context[GD_JS_PREVIOUSCOMPONENTSIDS];
             }
 
             // Appendable
@@ -221,7 +221,7 @@ class PoP_ServerSideManager
                 $context['appendable'] = $context[GD_JS_APPENDABLE];
             }
 
-            // Frequently used keys in many different modules
+            // Frequently used keys in many different components
             if ($context[GD_JS_CLASS] ?? null) {
                 $context['class'] = $context[GD_JS_CLASS];
             }
@@ -259,7 +259,7 @@ class PoP_ServerSideManager
         }
     }
 
-    public function addPageSectionIds($domain, $pageSection, $moduleName)
+    public function addPageSectionIds($domain, $pageSection, $componentName)
     {
         $pssId = $this->getSettingsId($pageSection);
 
@@ -267,18 +267,18 @@ class PoP_ServerSideManager
         // We need to provide the proper $props, however just to get the pageSection id it works without $props too, so just pass array()
         // (this is hacky, but well, it works)
         // $psId = pageSection.attr('id');
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $props = array();
-        $psId = $moduleprocessor_manager->getProcessor($moduleName)->getID($moduleName, $props);
+        $psId = $componentprocessor_manager->getProcessor($componentName)->getID($componentName, $props);
 
         // Insert into the Runtime to generate the ID
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();
-        $popJSRuntimeManager->addPageSectionId($domain, $domain, $pssId, $moduleName, $psId);
+        $popJSRuntimeManager->addPageSectionId($domain, $domain, $pssId, $componentName, $psId);
 
         $args = array(
             'domain' => $domain,
             'pageSection' => $pageSection,
-            'module' => $moduleName,
+            'component' => $componentName,
         );
 
         $popJSLibraryManager = PoP_ServerSide_LibrariesFactory::getJslibraryInstance();
@@ -295,7 +295,7 @@ class PoP_ServerSideManager
         // if ($.type(objectOrId) == 'object') {
 
         //     var object = objectOrId;
-        //     return object.attr('data-moduleoutputname');
+        //     return object.attr('data-componentoutputname');
         // }
         // ------------------------------------------------------
         // End Comment Leo: Impossible in PHP => Commented out
@@ -318,14 +318,14 @@ class PoP_ServerSideManager
         return $this->getCombinedStateData($domain, $url)['settings']['configuration'][$pssId];
     }
 
-    public function getTargetConfiguration($domain, $pageSection, $target, $moduleName)
+    public function getTargetConfiguration($domain, $pageSection, $target, $componentName)
     {
-        $modulePath = $this->getModulePath($domain, $pageSection, $target, $moduleName);
+        $componentPath = $this->getComponentPath($domain, $pageSection, $target, $componentName);
         $targetConfiguration = $this->getPageSectionConfiguration($domain, $pageSection);
 
-        // Go down all levels of the configuration, until finding the level for the module-cb
-        if ($modulePath) {
-            foreach ($modulePath as $pathLevel) {
+        // Go down all levels of the configuration, until finding the level for the component-cb
+        if ($componentPath) {
+            foreach ($componentPath as $pathLevel) {
                 $targetConfiguration = $targetConfiguration[$pathLevel];
             }
         }
@@ -334,12 +334,12 @@ class PoP_ServerSideManager
         return $targetConfiguration;
     }
 
-    public function getTemplate($domain, $moduleOrTemplateName)
+    public function getTemplate($domain, $componentOrTemplateName)
     {
 
-        // If empty, then the module is already the template
+        // If empty, then the component is already the template
         $templates = $this->getTemplates($domain);
-        return $templates[$moduleOrTemplateName] ?? $moduleOrTemplateName;
+        return $templates[$componentOrTemplateName] ?? $componentOrTemplateName;
     }
 
     public function initPageSectionSettings($domain, $pageSection, &$psConfiguration)
@@ -355,7 +355,7 @@ class PoP_ServerSideManager
         $pss['psId'] = $psId; // This line was added to the PHP, it's not there in the JS
         $psConfiguration['pss'] = $pss;
         // // In addition, the pageSection must merge with the runtimeConfiguration, which is otherwise done in function enterModule
-        // if ($psRuntimeConfiguration = $this->getRuntimeConfiguration($domain, $pssId, $pssId, $psConfiguration[GD_JS_MODULE])) {
+        // if ($psRuntimeConfiguration = $this->getRuntimeConfiguration($domain, $pssId, $pssId, $psConfiguration[GD_JS_COMPONENT])) {
         //     foreach ($psRuntimeConfiguration as $key => $value) {
         //         $psConfiguration[$key] = $value;
         //     }
@@ -365,16 +365,16 @@ class PoP_ServerSideManager
         $this->expandJSKeys($psConfiguration);
 
         // Fill each block configuration with its pssId/bsId/settings
-        if ($psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')]) {
-            foreach ($psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')] as $bsId => &$bConfiguration) {
+        if ($psConfiguration[ComponentModelModuleInfo::get('response-prop-subcomponents')]) {
+            foreach ($psConfiguration[ComponentModelModuleInfo::get('response-prop-subcomponents')] as $bsId => &$bConfiguration) {
                 $bId = $bConfiguration[GD_JS_FRONTENDID];
                 $bs = $this->getBlockSettings($domain, $domain, $pssId, $bsId, $psId, $bId);
-                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/['tls'] = $tls;
-                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/['pss'] = $pss;
-                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/['bs'] = $bs;
+                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-subcomponents')][$bsId]*/['tls'] = $tls;
+                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-subcomponents')][$bsId]*/['pss'] = $pss;
+                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-subcomponents')][$bsId]*/['bs'] = $bs;
 
                 // Expand the JS Keys for the configuration
-                $this->expandJSKeys($bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/);
+                $this->expandJSKeys($bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-subcomponents')][$bsId]*/);
             }
         }
     }
@@ -493,7 +493,7 @@ class PoP_ServerSideManager
         return $domain.'/destroy'.substr($url, strlen($domain));
     }
 
-    public function getModuleOrObjectSettingsId($el)
+    public function getComponentOrObjectSettingsId($el)
     {
 
         // ------------------------------------------------------
@@ -502,7 +502,7 @@ class PoP_ServerSideManager
         // // If it's an object, return an attribute
         // if ($.type(el) == 'object') {
 
-        //     return el.data('modulename');
+        //     return el.data('componentname');
         // }
         // ------------------------------------------------------
         // End Comment Leo: Impossible in PHP => Commented out
@@ -512,32 +512,32 @@ class PoP_ServerSideManager
         return $el;
     }
 
-    public function getModulePath($domain, $pageSection, $target, $moduleName)
+    public function getComponentPath($domain, $pageSection, $target, $componentName)
     {
-        $modulePaths = $this->getStatelessSettings($domain, $pageSection, $target, 'modules-paths');
-        return $modulePaths[$moduleName];
+        $componentPaths = $this->getStatelessSettings($domain, $pageSection, $target, 'components-paths');
+        return $componentPaths[$componentName];
     }
 
-    public function getExecutableTemplate($domain, $moduleOrTemplateName)
+    public function getExecutableTemplate($domain, $componentOrTemplateName)
     {
-        $template = $this->getTemplate($domain, $moduleOrTemplateName);
+        $template = $this->getTemplate($domain, $componentOrTemplateName);
         return PoP_ServerSideRenderingFactory::getInstance()->getTemplateRenderer($template);
     }
 
-    public function getHtml($domain, $moduleOrTemplateName, $context)
+    public function getHtml($domain, $componentOrTemplateName, $context)
     {
-        $executableTemplate = $this->getExecutableTemplate($domain, $moduleOrTemplateName);
+        $executableTemplate = $this->getExecutableTemplate($domain, $componentOrTemplateName);
         // Comment Leo 29/11/2014: some browser plug-ins will not allow the template to be created
         // Eg: AdBlock Plus. So when that happens (eg: when requesting template "socialmedia-source") template is undefined
         // So if this happens, then just return nothing
         if (!$executableTemplate) {
-            $error = 'No template for '.$moduleOrTemplateName;
+            $error = 'No template for '.$componentOrTemplateName;
         } else {
             try {
                 return $executableTemplate($context);
             } catch (Exception $e) {
                 // Do nothing
-                $error = 'Error in '.$moduleName.': '+$e->getMessage();
+                $error = 'Error in '.$componentOrTemplateName.': '+$e->getMessage();
             }
         }
 

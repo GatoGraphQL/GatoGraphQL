@@ -2,44 +2,44 @@
 
 class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelFormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST = 'forminputgroup-emailnotifications-general-newpost';
-    public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminputgroup-emaildigests-weeklylatestposts';
-    public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS = 'forminputgroup-emaildigests-specialposts';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST = 'forminputgroup-emailnotifications-general-newpost';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminputgroup-emaildigests-weeklylatestposts';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS = 'forminputgroup-emaildigests-specialposts';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
-            [self::class, self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS],
-            [self::class, self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
-            self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS],
-            self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS],
+            self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
+            self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS],
+            self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 
-    public function useModuleConfiguration(array $module)
+    public function useModuleConfiguration(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
-            case self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS:
-            case self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
+            case self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS:
+            case self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS:
                 return false;
         }
 
-        return parent::useModuleConfiguration($module);
+        return parent::useModuleConfiguration($component);
     }
 }
 

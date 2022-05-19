@@ -7,19 +7,19 @@ class PoP_LocationPosts_CommonUserRoles_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'PoPSP_URE_EM_Module_Processor_SidebarMultiples:inner-modules:author',
-            $this->getInnerSubmodules(...)
+            $this->getInnerSubcomponents(...)
         );
     }
 
-    public function getInnerSubmodules($modules)
+    public function getInnerSubcomponents($components)
     {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsOrganization($author)) {
-            $modules[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];
+            $components[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];
         } elseif (gdUreIsIndividual($author)) {
-            $modules[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL];
+            $components[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL];
         }
-        return $modules;
+        return $components;
     }
 }
 

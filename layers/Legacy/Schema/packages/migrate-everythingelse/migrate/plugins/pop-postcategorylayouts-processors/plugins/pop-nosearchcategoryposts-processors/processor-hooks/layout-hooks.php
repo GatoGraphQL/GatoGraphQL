@@ -15,7 +15,7 @@ class PoP_NoSearchPostCategoryLayouts_CategoryPosts_LayoutHooks
     public function getCategoryLayout($layout, $category)
     {
         if (in_array($category, POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE)) {
-            return [PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts::class, PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE];
+            return [PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts::class, PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE];
         }
 
         return $layout;

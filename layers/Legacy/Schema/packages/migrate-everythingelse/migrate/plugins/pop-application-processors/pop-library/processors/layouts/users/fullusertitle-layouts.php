@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_CustomFullUserTitleLayouts extends PoP_Module_Processor_FullUserTitleLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLUSERTITLE = 'singlelayout-fullusertitle';
+    public final const COMPONENT_LAYOUT_FULLUSERTITLE = 'singlelayout-fullusertitle';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_FULLUSERTITLE],
+            [self::class, self::COMPONENT_LAYOUT_FULLUSERTITLE],
         );
     }
 }

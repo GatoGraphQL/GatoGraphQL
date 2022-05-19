@@ -2,33 +2,33 @@
 
 class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues extends PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase
 {
-    public final const MODULE_FORMCOMPONENT_CARD_USER = 'forminput-user-card';
+    public final const COMPONENT_FORMCOMPONENT_CARD_USER = 'forminput-user-card';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMCOMPONENT_CARD_USER],
+            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_USER],
         );
     }
 
-    public function getTriggerSubmodule(array $module): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_USER:
-                return [PoP_Module_Processor_UserHiddenInputAlertFormComponents::class, PoP_Module_Processor_UserHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER];
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_CARD_USER:
+                return [PoP_Module_Processor_UserHiddenInputAlertFormComponents::class, PoP_Module_Processor_UserHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER];
         }
 
-        return parent::getTriggerSubmodule($module);
+        return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $module): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMCOMPONENT_CARD_USER:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMCOMPONENT_CARD_USER:
                 return 'self';
         }
 
-        return parent::getDbobjectField($module);
+        return parent::getDbobjectField($component);
     }
 }
 

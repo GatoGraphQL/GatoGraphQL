@@ -3,65 +3,65 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_EditorFormInputsBase
 {
-    public final const MODULE_FORMINPUT_COMMENTEDITOR = 'forminputcommenteditor'; // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
+    public final const COMPONENT_FORMINPUT_COMMENTEDITOR = 'forminputcommenteditor'; // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_COMMENTEDITOR],
+            [self::class, self::COMPONENT_FORMINPUT_COMMENTEDITOR],
         );
     }
 
-    // function getRows(array $module, array &$props) {
+    // function getRows(array $component, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
+    //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
     //             return 3;
     //     }
 
-    //     return parent::getRows($module, $props);
+    //     return parent::getRows($component, $props);
     // }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_COMMENTEDITOR:
-                $this->appendProp($module, $props, 'class', 'pop-editor-form-clear');
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
+                $this->appendProp($component, $props, 'class', 'pop-editor-form-clear');
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_COMMENTEDITOR:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Comment', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $module, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_COMMENTEDITOR:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
 
-        return parent::isMandatory($module, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    // function getJsmethods(array $module, array &$props) {
+    // function getJsmethods(array $component, array &$props) {
 
-    //     $ret = parent::getJsmethods($module, $props);
+    //     $ret = parent::getJsmethods($component, $props);
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
+    //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
     //             $this->addJsmethod($ret, 'editorFocus');
     //             break;
@@ -69,26 +69,26 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     //     return $ret;
     // }
 
-    public function autofocus(array $module, array &$props)
+    public function autofocus(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_COMMENTEDITOR:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
 
-        return parent::autofocus($module, $props);
+        return parent::autofocus($component, $props);
     }
 
-    // function getPlaceholder(array $module, array &$props) {
+    // function getPlaceholder(array $component, array &$props) {
 
-    //     switch ($module[1]) {
+    //     switch ($component[1]) {
 
-    //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
+    //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
     //             return TranslationAPIFacade::getInstance()->__('Type comment here...', 'pop-coreprocessors');
     //     }
 
-    //     return parent::getPlaceholder($module, $props);
+    //     return parent::getPlaceholder($component, $props);
     // }
 }
 

@@ -2,23 +2,23 @@
 
 class GD_Custom_EM_Module_Processor_Layouts extends PoP_Module_Processor_CategoriesLayoutsBase
 {
-    public final const MODULE_LAYOUT_LOCATIONPOST_CATEGORIES = 'layout-locationpost-categories';
+    public final const COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES = 'layout-locationpost-categories';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_LOCATIONPOST_CATEGORIES],
+            [self::class, self::COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES],
         );
     }
 
-    public function getCategoriesField(array $module, array &$props)
+    public function getCategoriesField(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_LOCATIONPOST_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES:
                 return 'locationpostcategories-byname';
         }
         
-        return parent::getCategoriesField($module, $props);
+        return parent::getCategoriesField($component, $props);
     }
 }
 

@@ -1,99 +1,99 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_INVITENEWMEMBERS = 'anchorcontrol-invitenewmembers';
-    public final const MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG = 'anchorcontrol-invitenewmembers-big';
+    public final const COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS = 'anchorcontrol-invitenewmembers';
+    public final const COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG = 'anchorcontrol-invitenewmembers-big';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS],
-            [self::class, self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG],
+            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS],
+            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG],
         );
     }
 
-    public function getLabel(array $module, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return TranslationAPIFacade::getInstance()->__('Invite new members', 'poptheme-wassup');
         }
 
-        return parent::getLabel($module, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getText(array $module, array &$props)
+    public function getText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
                 return null;
         }
 
-        return parent::getText($module, $props);
+        return parent::getText($component, $props);
     }
-    public function getFontawesome(array $module, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return 'fa-user-plus';
         }
 
-        return parent::getFontawesome($module, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $module, array &$props)
+    public function getHref(array $component, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS);
         }
 
-        return parent::getHref($module, $props);
+        return parent::getHref($component, $props);
     }
 
-    public function getTarget(array $module, array &$props)
+    public function getTarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return POP_TARGET_MODALS;
         }
 
-        return parent::getTarget($module, $props);
+        return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:
-                $this->appendProp($module, $props, 'class', 'btn btn-compact btn-link');
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
+                $this->appendProp($component, $props, 'class', 'btn btn-compact btn-link');
                 break;
 
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
-                $this->appendProp($module, $props, 'class', 'btn btn-success btn-important btn-block');
-                $this->setProp($module, $props, 'make-title', true);
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+                $this->appendProp($component, $props, 'class', 'btn btn-success btn-important btn-block');
+                $this->setProp($component, $props, 'make-title', true);
                 break;
         }
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getClasses(array $module)
+    public function getClasses(array $component)
     {
-        $ret = parent::getClasses($module);
+        $ret = parent::getClasses($component);
 
-        switch ($module[1]) {
-            case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
+        switch ($component[1]) {
+            case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 $ret[GD_JS_CLASSES]['text'] = '';
                 break;
         }

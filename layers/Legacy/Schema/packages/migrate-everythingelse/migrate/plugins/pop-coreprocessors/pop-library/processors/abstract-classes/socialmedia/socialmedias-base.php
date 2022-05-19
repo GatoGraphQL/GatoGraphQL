@@ -1,43 +1,43 @@
 <?php
 
-abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $module, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA];
     }
 
-    public function useCounter(array $module)
+    public function useCounter(array $component)
     {
         return false;
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->useCounter($module)) {
+        if ($this->useCounter($component)) {
             $this->addJsmethod($ret, 'socialmediaCounter');
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $title = $this->getProp($module, $props, 'title');
-        foreach ($this->getSubmodules($module) as $submodule) {
-            $this->setProp([$submodule], $props, 'title', $title);
+        $title = $this->getProp($component, $props, 'title');
+        foreach ($this->getSubcomponents($component) as $subComponent) {
+            $this->setProp([$subComponent], $props, 'title', $title);
         }
 
-        if ($this->useCounter($module)) {
-            foreach ($this->getSubmodules($module) as $submodule) {
-                $this->setProp([$submodule], $props, 'load-socialmedia-counter', true);
+        if ($this->useCounter($component)) {
+            foreach ($this->getSubcomponents($component) as $subComponent) {
+                $this->setProp([$subComponent], $props, 'load-socialmedia-counter', true);
             }
         }
 
-        $this->appendProp($module, $props, 'class', 'pop-hidden-print');
+        $this->appendProp($component, $props, 'class', 'pop-hidden-print');
 
-        parent::initModelProps($module, $props);
+        parent::initModelProps($component, $props);
     }
 }

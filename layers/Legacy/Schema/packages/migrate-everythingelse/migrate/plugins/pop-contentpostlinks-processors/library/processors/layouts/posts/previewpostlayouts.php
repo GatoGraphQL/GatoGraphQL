@@ -3,86 +3,86 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR = 'layout-previewpost-contentpostlink-navigator';
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS = 'layout-previewpost-contentpostlink-addons';
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS = 'layout-previewpost-contentpostlink-details';
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL = 'layout-previewpost-contentpostlink-thumbnail';
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST = 'layout-previewpost-contentpostlink-list';
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
-    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR = 'layout-previewpost-contentpostlink-navigator';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS = 'layout-previewpost-contentpostlink-addons';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS = 'layout-previewpost-contentpostlink-details';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL = 'layout-previewpost-contentpostlink-thumbnail';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST = 'layout-previewpost-contentpostlink-list';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED],
-            [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED],
+            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT],
         );
     }
 
-    public function getUrlField(array $module)
+    public function getUrlField(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 return 'editURL';
         }
 
-        return parent::getUrlField($module);
+        return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $module, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
                 }
                 break;
         }
 
-        return parent::getLinktarget($module, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $module)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
-                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
+                return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($module);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBottomSubmodules(array $module)
+    public function getBottomSubcomponents(array $component)
     {
-        $ret = parent::getBottomSubmodules($module);
+        $ret = parent::getBottomSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 $ret = array_merge(
                     $ret,
-                    $this->getDetailsfeedBottomSubmodules($module)
+                    $this->getDetailsfeedBottomSubcomponents($component)
                 );
                 break;
         }
@@ -90,20 +90,20 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubmodules(array $module)
+    public function getBelowthumbLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($module);
+        $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 }
                 if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_APPLIESTO];
+                    $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_APPLIESTO];
                 }
                 break;
         }
@@ -111,114 +111,114 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL];
             
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
         }
 
-        return parent::getPostThumbSubmodule($module);
+        return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $module)
+    public function showExcerpt(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 return true;
         }
 
-        return parent::showExcerpt($module);
+        return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $module, array &$props)
+    public function getTitleHtmlmarkup(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 return 'h3';
         }
 
-        return parent::getTitleHtmlmarkup($module, $props);
+        return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function authorPositions(array $module)
+    public function authorPositions(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT
                 );
 
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 return array();
         }
 
-        return parent::authorPositions($module);
+        return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $module)
+    public function horizontalLayout(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 return true;
         }
 
-        return parent::horizontalLayout($module);
+        return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
                 $ret[GD_JS_CLASSES]['authors'] = 'pull-right authors-bottom';
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }
@@ -226,21 +226,21 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getTitleBeforeauthors(array $module, array &$props)
+    public function getTitleBeforeauthors(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
-            case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
                 return array(
                     'belowcontent' => TranslationAPIFacade::getInstance()->__('posted by', 'poptheme-wassup')
                 );
         }
 
-        return parent::getTitleBeforeauthors($module, $props);
+        return parent::getTitleBeforeauthors($component, $props);
     }
 }
 

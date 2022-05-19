@@ -1,37 +1,37 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
+class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP = 'scrollmap-communities-scrollmap';
-    public final const MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'scrollmap-authormembers-scrollmap';
+    public final const COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP = 'scrollmap-communities-scrollmap';
+    public final const COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'scrollmap-authormembers-scrollmap';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP],
-            [self::class, self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            [self::class, self::COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP],
+            [self::class, self::COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
     }
 
-    protected function isUserMap(array $module)
+    protected function isUserMap(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP:
-            case self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
+        switch ($component[1]) {
+            case self::COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP:
+            case self::COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 return true;
         }
 
-        return parent::isUserMap($module);
+        return parent::isUserMap($component);
     }
 
-    public function getInnerSubmodule(array $module)
+    public function getInnerSubcomponent(array $component)
     {
-        $inner_modules = array(
-            self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_EM_ModuleProcessor_CustomScrollMaps::class, PoP_UserCommunities_EM_ModuleProcessor_CustomScrollMaps::MODULE_SCROLL_COMMUNITIES_MAP],
-            self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
+        $inner_components = array(
+            self::COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::class, PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::COMPONENT_SCROLL_COMMUNITIES_MAP],
+            self::COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_USERS_MAP],
         );
 
-        return $inner_modules[$module[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 }
 

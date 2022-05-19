@@ -2,24 +2,24 @@
 
 class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC = 'horizontal-sidebarinner-author-generic';
+    public final const COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC = 'horizontal-sidebarinner-author-generic';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC],
+            [self::class, self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC],
         );
     }
 
-    public function getLayoutSubmodules(array $module)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($module);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
+        switch ($component[1]) {
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 $ret = array_merge(
                     $ret,
-                    FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)
+                    FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_GENERICUSER)
                 );
                 break;
         }
@@ -27,24 +27,24 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
         return $ret;
     }
 
-    public function getWrapperClass(array $module)
+    public function getWrapperClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
+        switch ($component[1]) {
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 return 'row';
         }
     
-        return parent::getWrapperClass($module);
+        return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $module)
+    public function getWidgetwrapperClass(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
+        switch ($component[1]) {
+            case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 return 'col-xsm-4';
         }
     
-        return parent::getWidgetwrapperClass($module);
+        return parent::getWidgetwrapperClass($component);
     }
 }
 

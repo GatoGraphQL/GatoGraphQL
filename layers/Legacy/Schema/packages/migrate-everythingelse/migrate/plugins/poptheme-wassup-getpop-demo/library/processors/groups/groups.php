@@ -2,21 +2,21 @@
 
 class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GETPOPDEMO_GROUP_HOMETOP = 'group-getpopdemo-hometop';
+    public final const COMPONENT_GETPOPDEMO_GROUP_HOMETOP = 'group-getpopdemo-hometop';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_GETPOPDEMO_GROUP_HOMETOP],
+            [self::class, self::COMPONENT_GETPOPDEMO_GROUP_HOMETOP],
         );
     }
 
-    public function getJsmethods(array $module, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($module, $props);
+        $ret = parent::getJsmethods($component, $props);
     
-        switch ($module[1]) {
-            case self::MODULE_GETPOPDEMO_GROUP_HOMETOP:
+        switch ($component[1]) {
+            case self::COMPONENT_GETPOPDEMO_GROUP_HOMETOP:
                 // Needed to recalculate the waypoints for the sideinfo waypoints effect that shows the filter when reaching the top of the All Content block
                 $this->addJsmethod($ret, 'onBootstrapEventWindowResize');
 
@@ -28,15 +28,15 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         return $ret;
     }
 
-    public function getSubmodules(array $module): array
+    public function getSubcomponents(array $component): array
     {
-        $ret = parent::getSubmodules($module);
+        $ret = parent::getSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_GETPOPDEMO_GROUP_HOMETOP:
-                $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_COMPACTWELCOME];
+        switch ($component[1]) {
+            case self::COMPONENT_GETPOPDEMO_GROUP_HOMETOP:
+                $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_COMPACTWELCOME];
                 if (defined('POP_BOOTSTRAPPROCESSORS_INITIALIZED')) {
-                    $ret[] = [GetPoPDemo_Module_Processor_TopLevelCollapseComponents::class, GetPoPDemo_Module_Processor_TopLevelCollapseComponents::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP];
+                    $ret[] = [GetPoPDemo_Module_Processor_TopLevelCollapseComponents::class, GetPoPDemo_Module_Processor_TopLevelCollapseComponents::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP];
                 }
                 break;
         }

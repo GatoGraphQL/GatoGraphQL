@@ -2,172 +2,172 @@
 
 class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS = 'layout-automatedemails-previewpost-post-details';
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL = 'layout-automatedemails-previewpost-post-thumbnail';
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST = 'layout-automatedemails-previewpost-post-list';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS = 'layout-automatedemails-previewpost-post-details';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL = 'layout-automatedemails-previewpost-post-thumbnail';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST = 'layout-automatedemails-previewpost-post-list';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS],
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL],
-            [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL],
+            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST],
         );
     }
 
 
-    public function getAuthorModule(array $module)
+    public function getAuthorComponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
-        return parent::getAuthorModule($module);
+        return parent::getAuthorComponent($component);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $module)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-                return [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+                return [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($module);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowthumbLayoutSubmodules(array $module)
+    public function getBelowthumbLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($module);
+        $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
         }
 
         return $ret;
     }
 
-    public function getBottomSubmodules(array $module)
+    public function getBottomSubcomponents(array $component)
     {
-        $ret = parent::getBottomSubmodules($module);
+        $ret = parent::getBottomSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
                 break;
         }
 
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $module)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($module);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_PUBLISHED];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
         }
 
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $module)
+    public function getPostThumbSubcomponent(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL];
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL];
 
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+                return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
         }
 
-        return parent::getPostThumbSubmodule($module);
+        return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $module)
+    public function showExcerpt(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
 
-        return parent::showExcerpt($module);
+        return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $module, array &$props)
+    public function getTitleHtmlmarkup(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return 'h3';
         }
 
-        return parent::getTitleHtmlmarkup($module, $props);
+        return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function authorPositions(array $module)
+    public function authorPositions(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE,
                 );
         }
 
-        return parent::authorPositions($module);
+        return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $module)
+    public function horizontalLayout(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
 
-        return parent::horizontalLayout($module);
+        return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $module)
+    public function horizontalMediaLayout(array $component)
     {
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($module);
+        return parent::horizontalMediaLayout($component);
     }
     
 
-    public function getImmutableConfiguration(array $module, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($module, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 $ret[GD_JS_CLASSES]['excerpt'] = 'email-excerpt';
                 $ret[GD_JS_CLASSES]['authors-abovetitle'] = 'email-authors-abovetitle';
                 break;
 
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
 
-        switch ($module[1]) {
-            case self::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
+        switch ($component[1]) {
+            case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }

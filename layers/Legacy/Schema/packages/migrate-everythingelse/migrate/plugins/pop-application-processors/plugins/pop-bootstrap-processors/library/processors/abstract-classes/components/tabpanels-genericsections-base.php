@@ -1,13 +1,13 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends PoP_Module_Processor_FormatActiveTabPanelComponentsBase
 {
-    public function getPanelHeaderThumbs(array $module, array &$props)
+    public function getPanelHeaderThumbs(array $component, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $format_thumbs = array(
             POP_FORMAT_DETAILS => 'fa-th-list',
@@ -21,13 +21,13 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubmodules($module) as $submodule) {
-            $processor = $moduleprocessor_manager->getProcessor($submodule);
+        foreach ($this->getSubcomponents($component) as $subComponent) {
+            $processor = $componentprocessor_manager->getProcessor($subComponent);
             if ($processor instanceof FormattableModuleInterface) {
-                $format = $processor->getFormat($submodule);
+                $format = $processor->getFormat($subComponent);
                 if ($thumb = $format_thumbs[$format] ?? null) {
-                    $submoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($submodule);
-                    $ret[$submoduleFullName] = $thumb;
+                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subComponent);
+                    $ret[$subcomponentFullName] = $thumb;
                 }
             }
         }
@@ -36,11 +36,11 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             return $ret;
         }
 
-        return parent::getPanelHeaderThumbs($module, $props);
+        return parent::getPanelHeaderThumbs($component, $props);
     }
-    public function getPanelHeaderTitles(array $module, array &$props)
+    public function getPanelHeaderTitles(array $component, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $format_titles = array(
             POP_FORMAT_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
@@ -54,13 +54,13 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubmodules($module) as $submodule) {
-            $processor = $moduleprocessor_manager->getProcessor($submodule);
+        foreach ($this->getSubcomponents($component) as $subComponent) {
+            $processor = $componentprocessor_manager->getProcessor($subComponent);
             if ($processor instanceof FormattableModuleInterface) {
-                $format = $processor->getFormat($submodule);
+                $format = $processor->getFormat($subComponent);
                 if ($title = $format_titles[$format] ?? null) {
-                    $submoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($submodule);
-                    $ret[$submoduleFullName] = $title;
+                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subComponent);
+                    $ret[$subcomponentFullName] = $title;
                 }
             }
         }
@@ -69,10 +69,10 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             return $ret;
         }
 
-        return parent::getPanelHeaderTitles($module, $props);
+        return parent::getPanelHeaderTitles($component, $props);
     }
 
-    protected function lazyLoadInactivePanels(array $module, array &$props)
+    protected function lazyLoadInactivePanels(array $component, array &$props)
     {
         return true;
     }

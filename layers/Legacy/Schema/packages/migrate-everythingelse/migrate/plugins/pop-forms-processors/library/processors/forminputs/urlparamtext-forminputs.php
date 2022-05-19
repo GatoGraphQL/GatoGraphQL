@@ -2,35 +2,35 @@
 
 class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_UrlParamTextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_URLPARAMTEXT_POSTID = 'forminput-urlparamtext-pid';
-    public final const MODULE_FORMINPUT_URLPARAMTEXT_USERID = 'forminput-urlparamtext-uid';
-    public final const MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID = 'forminput-urlparamtext-cid';
+    public final const COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID = 'forminput-urlparamtext-pid';
+    public final const COMPONENT_FORMINPUT_URLPARAMTEXT_USERID = 'forminput-urlparamtext-uid';
+    public final const COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID = 'forminput-urlparamtext-cid';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID],
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_USERID],
-            [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID],
+            [self::class, self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID],
         );
     }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID:
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_USERID:
-            case self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID:
+        switch ($component[1]) {
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID:
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID:
+            case self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID:
                 $names = array(
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID => \PoPCMSSchema\Posts\Constants\InputNames::POST_ID,
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_USERID => \PoPCMSSchema\Users\Constants\InputNames::USER_ID,
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID,
+                    self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID => \PoPCMSSchema\Posts\Constants\InputNames::POST_ID,
+                    self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID => \PoPCMSSchema\Users\Constants\InputNames::USER_ID,
+                    self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID,
                 );
 
-                return $names[$module[1]];
+                return $names[$component[1]];
         }
 
-        return parent::getName($module);
+        return parent::getName($component);
     }
 }
 

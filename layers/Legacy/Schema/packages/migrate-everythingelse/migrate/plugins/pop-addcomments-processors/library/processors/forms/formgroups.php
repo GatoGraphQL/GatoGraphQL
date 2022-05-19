@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_COMMENTEDITOR = 'forminputgroupcommenteditor';
+    public final const COMPONENT_FORMINPUTGROUP_COMMENTEDITOR = 'forminputgroupcommenteditor';
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FORMINPUTGROUP_COMMENTEDITOR],
+            [self::class, self::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR],
         );
     }
 
-    public function getComponentSubmodule(array $module)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
-            self::MODULE_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR],
+            self::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR],
         );
 
-        if ($component = $components[$module[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($module);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

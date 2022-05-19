@@ -143,7 +143,7 @@ window.pop.PageSectionManager = {
 		if (offcanvas) {
 			return offcanvas.closest('.pop-pagesection-group');
 		}
-		return $('#'+pop.c.MODULEID_PAGESECTIONGROUP_ID);
+		return $('#'+pop.c.COMPONENTID_PAGESECTIONGROUP_ID);
 	},
 	theater : function(theater) {
 

@@ -16,13 +16,13 @@ class PoP_Notifications_LayoutHooks
 
     public function markasreadLayouts($layouts)
     {
-        $layouts[] = [Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::class, Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES];
+        $layouts[] = [Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::class, Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES];
         return $layouts;
     }
 
     public function markasunreadLayouts($layouts)
     {
-        $layouts[] = [Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::class, Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES];
+        $layouts[] = [Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::class, Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES];
         return $layouts;
     }
 }

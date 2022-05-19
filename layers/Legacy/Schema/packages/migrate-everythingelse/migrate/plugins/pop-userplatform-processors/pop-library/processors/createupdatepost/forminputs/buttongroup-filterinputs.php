@@ -1,20 +1,20 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_Module_Processor_ButtonGroupFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_Module_Processor_ButtonGroupFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES = 'filterinput-buttongroup-categories';
-    public final const MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS = 'filterinput-buttongroup-contentsections';
-    public final const MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS = 'filterinput-buttongroup-postsections';
+    public final const COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES = 'filterinput-buttongroup-categories';
+    public final const COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS = 'filterinput-buttongroup-contentsections';
+    public final const COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS = 'filterinput-buttongroup-postsections';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
@@ -27,115 +27,115 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES],
-            [self::class, self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
-            [self::class, self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
+            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES],
+            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
+            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => [PoP_Module_Processor_UserPlatformFilterInputProcessor::class, PoP_Module_Processor_UserPlatformFilterInputProcessor::FILTERINPUT_BUTTONGROUP_CATEGORIES],
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInputProcessor::class, PoP_Module_Processor_UserPlatformFilterInputProcessor::FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInputProcessor::class, PoP_Module_Processor_UserPlatformFilterInputProcessor::FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => [PoP_Module_Processor_UserPlatformFilterInputProcessor::class, PoP_Module_Processor_UserPlatformFilterInputProcessor::FILTERINPUT_BUTTONGROUP_CATEGORIES],
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInputProcessor::class, PoP_Module_Processor_UserPlatformFilterInputProcessor::FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInputProcessor::class, PoP_Module_Processor_UserPlatformFilterInputProcessor::FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:
-    //         case self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
-    //         case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
+    //         case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
+    //         case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
                 // Return the name of the other Categories input (the multiselect), so we can filter by this input using the DelegatorFilter pretending to be the other one
                 $inputs = array(
-                    self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_CATEGORIES],
-                    self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_CONTENTSECTIONS],
-                    self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_POSTSECTIONS],
+                    self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_CATEGORIES],
+                    self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_CONTENTSECTIONS],
+                    self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_POSTSECTIONS],
                 );
-                $input = $inputs[$module[1]];
-                return $moduleprocessor_manager->getProcessor($input)->getName($input);
+                $input = $inputs[$component[1]];
+                return $componentprocessor_manager->getProcessor($input)->getName($input);
         }
 
-        return parent::getName($module);
+        return parent::getName($component);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
                 return GD_FormInput_ContentSections::class;
 
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
                 return GD_FormInput_PostSections::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function isMultiple(array $module): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
-            case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
+        switch ($component[1]) {
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
+            case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
                 return true;
         }
 
-        return parent::isMultiple($module);
+        return parent::isMultiple($component);
     }
 
-    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $this->idScalarTypeResolver,
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => $this->idScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $this->idScalarTypeResolver,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($module[1]) {
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS
+        return match($component[1]) {
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $translationAPI->__('', ''),
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $translationAPI->__('', ''),
+        return match ($component[1]) {
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $translationAPI->__('', ''),
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $translationAPI->__('', ''),
             default => null,
         };
     }

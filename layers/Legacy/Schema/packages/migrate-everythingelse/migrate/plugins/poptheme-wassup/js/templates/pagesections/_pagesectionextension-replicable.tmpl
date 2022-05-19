@@ -1,8 +1,8 @@
 {{#each block-settings-ids.blockunits-replicable}}
 	{{#withBlock ../. this}}
-		<a class="pop-interceptor" {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group='replicate-interceptor'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-replicate-type="{{get ../../replicate-types module}}" {{#ifget ../../unique-urls module}}data-unique-url="true"{{/ifget}} data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../module}}{{/withSublevel}}" data-title="{{title}}" data-block-settingsid="{{../this}}"></a>
+		<a class="pop-interceptor" {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group='replicate-interceptor'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-replicate-type="{{get ../../replicate-types component}}" {{#ifget ../../unique-urls component}}data-unique-url="true"{{/ifget}} data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../component}}{{/withSublevel}}" data-title="{{title}}" data-block-settingsid="{{../this}}"></a>
 		<span class="pop-interceptor-blocksettingsids hidden">
-			{{#withSublevel ../../module context=../../replicate-blocksettingsids}}{{#withget . ../module}}{{#each .}}<span data-key="{{@key}}" data-value="{{this}}"></span>{{/each}}{{/withget}}{{/withSublevel}}
+			{{#withSublevel ../../component context=../../replicate-blocksettingsids}}{{#withget . ../component}}{{#each .}}<span data-key="{{@key}}" data-value="{{this}}"></span>{{/each}}{{/withget}}{{/withSublevel}}
 		</span>
 	{{/withBlock}}
 {{/each}}

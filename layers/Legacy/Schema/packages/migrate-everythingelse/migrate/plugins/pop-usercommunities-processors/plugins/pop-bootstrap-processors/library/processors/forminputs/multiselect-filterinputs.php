@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
@@ -8,13 +8,13 @@ use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
-    public final const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
-    public final const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
+    public final const COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
+    public final const COMPONENT_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
+    public final const COMPONENT_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
 
     private ?MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver = null;
     private ?MemberTagEnumTypeResolver $memberTagEnumTypeResolver = null;
@@ -45,114 +45,114 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return $this->memberStatusEnumTypeResolver ??= $this->instanceManager->getInstance(MemberStatusEnumTypeResolver::class);
     }
 
-    public function getModulesToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES],
-            [self::class, self::MODULE_URE_FILTERINPUT_MEMBERTAGS],
-            [self::class, self::MODULE_URE_FILTERINPUT_MEMBERSTATUS],
+            [self::class, self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES],
+            [self::class, self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS],
+            [self::class, self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS],
         );
     }
 
-    public function getFilterInput(array $module): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERINPUT_MEMBERPRIVILEGES],
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERINPUT_MEMBERTAGS],
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERINPUT_MEMBERSTATUS],
+            self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERINPUT_MEMBERPRIVILEGES],
+            self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERINPUT_MEMBERTAGS],
+            self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERINPUT_MEMBERSTATUS],
         ];
-        return $filterInputs[$module[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $module)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($module[1]) {
-    //         case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
-    //         case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
-    //         case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
+    //     switch ($component[1]) {
+    //         case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
+    //         case self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS:
+    //         case self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($module);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $module, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('Privileges', 'ure-popprocessors');
 
-            case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS:
                 return TranslationAPIFacade::getInstance()->__('Tags', 'ure-popprocessors');
 
-            case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status', 'ure-popprocessors');
         }
 
-        return parent::getLabelText($module, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $module): string
+    public function getInputClass(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
                 return GD_URE_FormInput_FilterMemberPrivileges::class;
 
-            case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS:
                 return GD_URE_FormInput_FilterMemberTags::class;
 
-            case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS:
                 return GD_URE_FormInput_MultiMemberStatus::class;
         }
 
-        return parent::getInputClass($module);
+        return parent::getInputClass($component);
     }
 
-    public function getName(array $module): string
+    public function getName(array $component): string
     {
-        switch ($module[1]) {
-            case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
+        switch ($component[1]) {
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
                 return 'privileges';
 
-            case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS:
                 return 'tags';
 
-            case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
+            case self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS:
                 return 'status';
         }
 
-        return parent::getName($module);
+        return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
-        return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => $this->memberPrivilegeEnumTypeResolver,
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => $this->memberTagEnumTypeResolver,
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => $this->memberStatusEnumTypeResolver,
+        return match($component[1]) {
+            self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES => $this->memberPrivilegeEnumTypeResolver,
+            self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS => $this->memberTagEnumTypeResolver,
+            self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS => $this->memberStatusEnumTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES,
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS,
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS
+        return match($component[1]) {
+            self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES,
+            self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS,
+            self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => $translationAPI->__('', ''),
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => $translationAPI->__('', ''),
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => $translationAPI->__('', ''),
+        return match ($component[1]) {
+            self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES => $translationAPI->__('', ''),
+            self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS => $translationAPI->__('', ''),
+            self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS => $translationAPI->__('', ''),
             default => null,
         };
     }

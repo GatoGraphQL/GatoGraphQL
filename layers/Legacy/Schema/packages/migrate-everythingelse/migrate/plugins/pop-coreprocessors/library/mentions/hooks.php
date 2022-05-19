@@ -6,16 +6,16 @@ class PoP_Mentions_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_EditorFormInputsBase:editor_layouts',
-            $this->addLayoutSubmodules(...)
+            $this->addLayoutSubcomponents(...)
         );
     }
 
-    public function addLayoutSubmodules($layouts)
+    public function addLayoutSubcomponents($layouts)
     {
 
         // Add the required layouts to the editor, so it's loaded and available when needed
-        $layouts[] = [PoP_Module_Processor_UserMentionComponentLayouts::class, PoP_Module_Processor_UserMentionComponentLayouts::MODULE_LAYOUTUSER_MENTION_COMPONENT];
-        $layouts[] = [PoP_Module_Processor_TagMentionComponentLayouts::class, PoP_Module_Processor_TagMentionComponentLayouts::MODULE_LAYOUTTAG_MENTION_COMPONENT];
+        $layouts[] = [PoP_Module_Processor_UserMentionComponentLayouts::class, PoP_Module_Processor_UserMentionComponentLayouts::COMPONENT_LAYOUTUSER_MENTION_COMPONENT];
+        $layouts[] = [PoP_Module_Processor_TagMentionComponentLayouts::class, PoP_Module_Processor_TagMentionComponentLayouts::COMPONENT_LAYOUTTAG_MENTION_COMPONENT];
         return $layouts;
     }
 }
