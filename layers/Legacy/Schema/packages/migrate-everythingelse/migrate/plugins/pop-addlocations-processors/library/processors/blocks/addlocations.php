@@ -38,8 +38,8 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CREATELOCATION:
                 // Add an extra componentPath to the dataload-source for the create-location block, saying to also load the data block
-                $module_path_manager = ComponentPathManagerFacade::getInstance();
-                $subcomponent_propagation_path = $module_path_manager->getPropagationCurrentPath();
+                $component_path_manager = ComponentPathManagerFacade::getInstance();
+                $subcomponent_propagation_path = $component_path_manager->getPropagationCurrentPath();
                 $subcomponent_propagation_path[] = $component;
                 $subcomponent_propagation_path[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
                 $this->mergeProp(

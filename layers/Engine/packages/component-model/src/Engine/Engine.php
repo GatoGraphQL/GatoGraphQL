@@ -902,7 +902,7 @@ class Engine implements EngineInterface
 
     private function addInterreferencedComponentFullPaths(
         array &$paths,
-        array $module_path,
+        array $component_path,
         array $component,
         array &$props
     ): void {
@@ -916,7 +916,7 @@ class Engine implements EngineInterface
                 $referenced_componentPath = $this->getComponentPathHelpers()->stringifyComponentPath($interreferenced_componentPath);
                 $paths[$referenced_componentPath] = $paths[$referenced_componentPath] ?? [];
                 $paths[$referenced_componentPath][] = array_merge(
-                    $module_path,
+                    $component_path,
                     array(
                         $component
                     )
@@ -925,7 +925,7 @@ class Engine implements EngineInterface
         }
 
         $subcomponent_path = array_merge(
-            $module_path,
+            $component_path,
             array(
                 $component,
             )
@@ -952,7 +952,7 @@ class Engine implements EngineInterface
 
     private function addDataloadingComponentFullPaths(
         array &$paths,
-        array $module_path,
+        array $component_path,
         array $component,
         array &$props
     ): void {
@@ -964,7 +964,7 @@ class Engine implements EngineInterface
             // If the current component loads data, then add its path to the list
             if ($processor->doesComponentLoadData($component)) {
                 $paths[] = array_merge(
-                    $module_path,
+                    $component_path,
                     array(
                         $component
                     )
@@ -973,7 +973,7 @@ class Engine implements EngineInterface
         }
 
         $subcomponent_path = array_merge(
-            $module_path,
+            $component_path,
             array(
                 $component,
             )
@@ -993,7 +993,7 @@ class Engine implements EngineInterface
 
     protected function assignValueForComponent(
         array &$array,
-        array $module_path,
+        array $component_path,
         array $component,
         string $key,
         mixed $value,
@@ -1002,7 +1002,7 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
-        foreach ($module_path as $subComponent) {
+        foreach ($component_path as $subComponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $componentOutputName
             $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
 
@@ -1032,10 +1032,10 @@ class Engine implements EngineInterface
         return null;
     }
 
-    protected function getComponentPathKey(array $module_path, array $component): string
+    protected function getComponentPathKey(array $component_path, array $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
-        return $componentFullName . '-' . implode('.', $module_path);
+        return $componentFullName . '-' . implode('.', $component_path);
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
@@ -1124,18 +1124,18 @@ class Engine implements EngineInterface
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
-        foreach ($module_fullpaths as $module_path) {
+        foreach ($module_fullpaths as $component_path) {
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
-            $component = array_pop($module_path);
+            $component = array_pop($component_path);
             $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
-            $this->getComponentPathManager()->setPropagationCurrentPath($module_path);
+            $this->getComponentPathManager()->setPropagationCurrentPath($component_path);
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
-            foreach ($module_path as $subComponent) {
+            foreach ($component_path as $subComponent) {
                 $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
@@ -1164,7 +1164,7 @@ class Engine implements EngineInterface
             // The $props is directly moving the array to the corresponding path
             $props = &$root_props;
             $model_props = &$root_model_props;
-            foreach ($module_path as $subComponent) {
+            foreach ($component_path as $subComponent) {
                 $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
                 $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
                 $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
@@ -1188,7 +1188,7 @@ class Engine implements EngineInterface
             $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
             // The component path key is used for storing temporary results for later retrieval
-            $module_path_key = $this->getComponentPathKey($module_path, $component);
+            $component_path_key = $this->getComponentPathKey($component_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
             $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
@@ -1248,9 +1248,9 @@ class Engine implements EngineInterface
                     $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
-                    $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputDBKey, $module_path_key);
-                    $engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
-                        $engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key]['ids'],
+                    $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputDBKey, $component_path_key);
+                    $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
+                        $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]['ids'],
                         $typeDBObjectIDs
                     );
 
@@ -1277,11 +1277,11 @@ class Engine implements EngineInterface
                         $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
-                        $this->initializeTypeResolverEntry($engineState->dbdata, $extendTypeOutputDBKey, $module_path_key);
+                        $this->initializeTypeResolverEntry($engineState->dbdata, $extendTypeOutputDBKey, $component_path_key);
                     }
 
                     // Keep iterating for its subcomponents
-                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $data_properties, $relationalTypeOutputDBKey, $module_path_key);
+                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $data_properties, $relationalTypeOutputDBKey, $component_path_key);
                 }
             }
 
@@ -1310,23 +1310,23 @@ class Engine implements EngineInterface
             // Integrate the dbobjectids into $datasetcomponentdata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous component when iterating down
             if ($datasetcomponentdata !== null) {
-                $this->assignValueForComponent($datasetcomponentdata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
+                $this->assignValueForComponent($datasetcomponentdata, $component_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
                 if (!is_null($datasetcomponentmeta)) {
                     if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
-                        $this->assignValueForComponent($datasetcomponentmeta, $module_path, $component, DataLoading::META, $dataset_meta);
+                        $this->assignValueForComponent($datasetcomponentmeta, $component_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
             }
 
             // Integrate the feedback into $componentdata
-            $this->processAndAddComponentData($module_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+            $this->processAndAddComponentData($component_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this component's data results
-            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($module_path, array($component)))] ?? null) {
+            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($component_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
 
@@ -1659,10 +1659,10 @@ class Engine implements EngineInterface
             // Important: query like this: obtain keys first instead of iterating directly on array,
             // because it will keep adding elements
             $typeResolver_dbdata = $engineState->dbdata[$relationalTypeOutputDBKey];
-            foreach (array_keys($typeResolver_dbdata) as $module_path_key) {
-                $typeResolver_data = &$engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key];
+            foreach (array_keys($typeResolver_dbdata) as $component_path_key) {
+                $typeResolver_data = &$engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key];
 
-                unset($engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key]);
+                unset($engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]);
 
                 // Check if it has subcomponents, and then bring this data
                 if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
@@ -1708,11 +1708,11 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
                     }
                 }
             }
@@ -2228,7 +2228,7 @@ class Engine implements EngineInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeResolverInterface $targetObjectTypeResolver,
         array $typeResolver_ids,
-        string $module_path_key,
+        string $component_path_key,
         array &$databases,
         array &$subcomponents_data_properties,
         array &$already_loaded_ids_data_fields,
@@ -2355,17 +2355,17 @@ class Engine implements EngineInterface
                         $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                         // }
                     }
-                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] ?? [],
+                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $component_path_key);
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
+                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] ?? [],
                         $field_ids
                     );
-                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $module_path_key);
+                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $component_path_key);
                 }
 
-                if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids']);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields']);
+                if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key] ?? null) {
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids']);
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['data-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['data-fields']);
                 }
             }
         }
@@ -2439,7 +2439,7 @@ class Engine implements EngineInterface
     }
 
     protected function processAndAddComponentData(
-        array $module_path,
+        array $component_path,
         array $component,
         array &$props,
         array $data_properties,
@@ -2462,7 +2462,7 @@ class Engine implements EngineInterface
                 $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
                 // Advance the position of the array into the current component
-                foreach ($module_path as $subComponent) {
+                foreach ($component_path as $subComponent) {
                     $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
                     $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
                     $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
@@ -2479,10 +2479,10 @@ class Engine implements EngineInterface
     private function initializeTypeResolverEntry(
         array &$dbdata,
         string $relationalTypeOutputDBKey,
-        string $module_path_key
+        string $component_path_key
     ): void {
-        if (!isset($dbdata[$relationalTypeOutputDBKey][$module_path_key])) {
-            $dbdata[$relationalTypeOutputDBKey][$module_path_key] = array(
+        if (!isset($dbdata[$relationalTypeOutputDBKey][$component_path_key])) {
+            $dbdata[$relationalTypeOutputDBKey][$component_path_key] = array(
                 'ids' => [],
                 'data-fields' => [],
                 'subcomponents' => [],
@@ -2494,14 +2494,14 @@ class Engine implements EngineInterface
         array &$dbdata,
         array $data_properties,
         string $relationalTypeOutputDBKey,
-        string $module_path_key
+        string $component_path_key
     ): void {
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
         if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
             // Merge them into the data
-            $dbdata[$relationalTypeOutputDBKey][$module_path_key]['subcomponents'] = array_merge_recursive(
-                $dbdata[$relationalTypeOutputDBKey][$module_path_key]['subcomponents'] ?? [],
+            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = array_merge_recursive(
+                $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ?? [],
                 $subcomponents_data_properties
             );
         }
