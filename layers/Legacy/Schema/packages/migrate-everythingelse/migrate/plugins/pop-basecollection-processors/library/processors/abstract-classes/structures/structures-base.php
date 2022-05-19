@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($inner = $this->getInnerSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($inner);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($inner);
         }
 
         return $ret;

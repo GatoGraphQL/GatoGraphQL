@@ -54,7 +54,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     public function getID(array $component, array &$props): string
     {
-        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
+        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($component);
         // if ($this->fixedId($component, $props)) {
         // 	$pagesection_settings_id = $props['pagesection-componentoutputname'];
         // 	$block_settings_id = $props['block-componentoutputname'];
@@ -196,7 +196,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-    // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
+    // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($component);
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
@@ -312,7 +312,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         if ($previousmodules_ids = $this->getProp($component, $props, 'previouscomponents-ids')) {
             // We receive entries of key => component, convert them to key => moduleOutputName
             $ret[GD_JS_PREVIOUSCOMPONENTSIDS] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $previousmodules_ids
             );
         }

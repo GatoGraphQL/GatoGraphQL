@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Modules;
 use PoP\ComponentModel\ItemProcessors\ProcessorItemUtils;
 use PoP\Root\Services\BasicServiceTrait;
 
-class ModuleHelpers implements ModuleHelpersInterface
+class ComponentHelpers implements ComponentHelpersInterface
 {
     use BasicServiceTrait;
 

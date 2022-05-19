@@ -104,7 +104,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                 if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
 
                     // Load the typeResolver from the trigger, for the suggestions
                     $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
@@ -140,7 +140,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'
-                    $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
+                    $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
                     $data_properties = $componentprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
                     $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);

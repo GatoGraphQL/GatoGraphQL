@@ -41,13 +41,13 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
         $keys = array();
         foreach ($this->getControlSubcomponents($component) as $control) {
             $key = 'a'.$counter++;
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES][$key] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($control);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES][$key] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($control);
             $keys[] = $key;
         }
         $ret['settings-keys']['controls'] = $keys;
 
         if ($input = $this->getInputSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($input);
         }
         return $ret;
     }

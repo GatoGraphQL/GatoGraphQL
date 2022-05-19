@@ -19,7 +19,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             if ($this->getProp($component, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($filter_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($filter_component);
         }
 
         return $ret;

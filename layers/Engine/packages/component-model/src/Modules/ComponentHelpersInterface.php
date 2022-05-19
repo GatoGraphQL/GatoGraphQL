@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Modules;
 
-interface ModuleHelpersInterface
+interface ComponentHelpersInterface
 {
     public function getModuleFullName(array $component): string;
     public function getModuleFromFullName(string $componentFullName): ?array;

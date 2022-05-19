@@ -96,8 +96,8 @@ services:
     PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface:
         class: \PoP\ComponentModel\ComponentPath\ComponentPathManager
 
-    PoP\ComponentModel\Modules\ModuleHelpersInterface:
-        class: \PoP\ComponentModel\Modules\ModuleHelpers
+    PoP\ComponentModel\Modules\ComponentHelpersInterface:
+        class: \PoP\ComponentModel\Modules\ComponentHelpers
 
     default_data_structure_formatter:
         class: PoP\ComponentModel\DataStructure\DefaultDataStructureFormatter

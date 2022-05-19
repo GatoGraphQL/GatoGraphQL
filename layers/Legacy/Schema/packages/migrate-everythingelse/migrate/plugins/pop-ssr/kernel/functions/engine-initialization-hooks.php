@@ -133,7 +133,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
         // Calculate the dynamic data settings
         $entryComponent = $engine->getEntryComponent();
-        $entryComponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($entryComponent);
+        $entryComponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($entryComponent);
 
         // Get the static data properties
         // First check if there's a cache stored

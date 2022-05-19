@@ -69,8 +69,8 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
         $locations_typeahead = $this->getLocationsTypeaheadSubcomponent($component);
         $map_component = $this->getMapSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['locations'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($locations_typeahead);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($map_component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['locations'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($locations_typeahead);
 
         $ret[GD_JS_CLASSES]['wrapper'] = $this->getProp($component, $props, 'wrapper-class');
         $ret[GD_JS_CLASSES]['map'] = $this->getProp($component, $props, 'map-class');

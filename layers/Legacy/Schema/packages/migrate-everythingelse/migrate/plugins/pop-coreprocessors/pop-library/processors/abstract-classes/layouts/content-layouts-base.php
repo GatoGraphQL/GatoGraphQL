@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
 
         if ($abovecontent_components = $this->getAbovecontentSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovecontent'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $abovecontent_components
             );
         }

@@ -68,8 +68,8 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         switch ($component[1]) {
             case self::COMPONENT_WINDOW_ADDONS:
                 list($addons_subcomponent, $addontabs_subcomponent) = $this->getInnerSubcomponents($component);
-                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_subcomponent);
-                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_subcomponent);
+                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($addons_subcomponent);
+                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($addontabs_subcomponent);
                 $ret[$addonsSubcomponentOutputName] = 'container-fluid offcanvas pop-waypoints-context scrollable addons perfect-scrollbar vertical';
                 $ret[$addontabsSubcomponentOutputName] = 'offcanvas pop-waypoints-context scrollable addontabs perfect-scrollbar horizontal navbar navbar-main navbar-addons';
                 break;
@@ -86,8 +86,8 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         switch ($component[1]) {
             case self::COMPONENT_WINDOW_ADDONS:
                 list($addons_subcomponent, $addontabs_subcomponent) = $this->getInnerSubcomponents($component);
-                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_subcomponent);
-                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_subcomponent);
+                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($addons_subcomponent);
+                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($addontabs_subcomponent);
                 $ret[$addonsSubcomponentOutputName] = array(
                     'data-frametarget' => POP_TARGET_ADDONS,
                     'data-clickframetarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

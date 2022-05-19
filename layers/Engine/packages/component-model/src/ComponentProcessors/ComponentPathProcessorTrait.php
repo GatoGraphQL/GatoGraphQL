@@ -9,14 +9,14 @@ use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\Modules\ModuleHelpersInterface;
+use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\Root\App;
 
 trait ComponentPathProcessorTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
     abstract protected function getComponentFilterManager(): ComponentFilterManagerInterface;
-    abstract protected function getModuleHelpers(): ModuleHelpersInterface;
+    abstract protected function getComponentHelpers(): ComponentHelpersInterface;
 
     protected function getComponentProcessor(array $component)
     {
@@ -26,8 +26,8 @@ trait ComponentPathProcessorTrait
     protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $ret = [];
-        $key = $this->getModuleHelpers()->getModuleOutputName($component);
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $key = $this->getComponentHelpers()->getModuleOutputName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -64,7 +64,7 @@ trait ComponentPathProcessorTrait
 
     protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -97,8 +97,8 @@ trait ComponentPathProcessorTrait
     protected function executeOnSelfAndPropagateToComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $use_component_output_name_as_key = true, $options = array())
     {
         $ret = [];
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
-        $key = $use_component_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($component) : $componentFullName;
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $key = $use_component_output_name_as_key ? $this->getComponentHelpers()->getModuleOutputName($component) : $componentFullName;
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -135,7 +135,7 @@ trait ComponentPathProcessorTrait
 
     protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $recursive = true)
     {
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {

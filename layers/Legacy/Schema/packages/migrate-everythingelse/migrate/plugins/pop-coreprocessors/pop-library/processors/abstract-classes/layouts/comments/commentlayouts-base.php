@@ -111,22 +111,22 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         $btnreply = $this->getBtnreplyModule($component);
         $authorname = $this->getAuthornameModule($component);
 
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['btn-replycomment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($btnreply);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authorname'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authorname);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['btn-replycomment'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($btnreply);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authorname'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($authorname);
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($authoravatar = $this->getAuthoravatarModule($component)) {
-                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authoravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authoravatar);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authoravatar'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($authoravatar);
             }
         }
 
         if ($content_component = $this->getContentSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($content_component);
         }
 
         if ($abovelayout_components = $this->getAbovelayoutLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovelayout'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovelayout_components
             );
         }

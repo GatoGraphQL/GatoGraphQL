@@ -53,8 +53,8 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         $mapdiv = $this->getMapdivSubcomponent($component);
         $form = $this->getFormSubcomponent($component);
 
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['form-createlocation'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($form);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['form-createlocation'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($form);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
 
         return $ret;
     }

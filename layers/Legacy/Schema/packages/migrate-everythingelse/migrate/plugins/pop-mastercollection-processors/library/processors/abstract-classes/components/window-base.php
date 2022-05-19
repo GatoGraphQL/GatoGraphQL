@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
         
         if ($subComponents = $this->getSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $subComponents
             );
         }

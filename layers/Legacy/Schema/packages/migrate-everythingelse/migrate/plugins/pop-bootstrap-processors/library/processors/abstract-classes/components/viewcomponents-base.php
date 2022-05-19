@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
 
         if ($inner_components = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $inner_components
             );
         }

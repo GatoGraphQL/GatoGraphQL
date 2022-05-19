@@ -75,14 +75,14 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
         $ret['mode'] = $this->getMode($component, $props);
 
         if ($controls_bottom = $this->getControlsBottomSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controls-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controls_bottom);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controls-bottom'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($controls_bottom);
         }
         if ($controls_top = $this->getControlsTopSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controls-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controls_top);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controls-top'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($controls_top);
         }
 
         if ($indicators = $this->getLayoutIndicatorSubcomponents($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['carousel-indicators'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($indicators);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['carousel-indicators'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($indicators);
             if ($indicators_class = $this->getIndicatorsClass($component, $props)) {
                 $ret[GD_JS_CLASSES]['indicators'] = $indicators_class;
             }

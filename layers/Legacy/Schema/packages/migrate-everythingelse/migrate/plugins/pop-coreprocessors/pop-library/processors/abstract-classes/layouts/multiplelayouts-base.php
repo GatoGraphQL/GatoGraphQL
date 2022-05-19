@@ -62,10 +62,10 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($defaultLayout = $this->getDefaultLayoutSubcomponent($component)) {
-            $ret['default-component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
+            $ret['default-component'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
         }
         $ret['condition-on-data-field-components'] = array_map(
-            [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
+            [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
             $this->getMultipleLayoutSubcomponents($component)
         );
 

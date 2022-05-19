@@ -130,8 +130,8 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         if ($this->initMarkers($component)) {
             $map_script = $this->getMapscriptSubcomponent($component);
             $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_script);
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($map_script);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);
         }
 
         $ret[GD_JS_TITLES]['locations'] = $this->getTitle($component, $props);
@@ -146,10 +146,10 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             $ret['complement-separator'] = $this->getComplementSeparator($component);
 
             if ($location_component = $this->getLocationModule($component)) {
-                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_component);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($location_component);
             }
             if ($location_complement = $this->getLocationComplementModule($component)) {
-                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-complement'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_complement);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-complement'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($location_complement);
             }
         }
 

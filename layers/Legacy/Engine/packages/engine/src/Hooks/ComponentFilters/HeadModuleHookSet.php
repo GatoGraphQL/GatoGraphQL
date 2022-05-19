@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Hooks\ComponentFilters;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Modules\ModuleHelpersInterface;
+use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\Engine\ComponentFilters\HeadModule;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -13,7 +13,7 @@ use PoP\Root\Hooks\AbstractHookSet;
 class HeadModuleHookSet extends AbstractHookSet
 {
     private ?HeadModule $headComponent = null;
-    private ?ModuleHelpersInterface $componentHelpers = null;
+    private ?ComponentHelpersInterface $componentHelpers = null;
     
     final public function setHeadModule(HeadModule $headComponent): void
     {
@@ -23,13 +23,13 @@ class HeadModuleHookSet extends AbstractHookSet
     {
         return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
         $this->componentHelpers = $componentHelpers;
     }
-    final protected function getModuleHelpers(): ModuleHelpersInterface
+    final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     protected function init(): void
@@ -44,7 +44,7 @@ class HeadModuleHookSet extends AbstractHookSet
     {
         if (App::getState('componentFilter') === $this->headComponent->getName()) {
             if ($headComponent = App::getState('headComponent')) {
-                $components[] = $this->getTranslationAPI()->__('head component:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headComponent);
+                $components[] = $this->getTranslationAPI()->__('head component:', 'engine') . $this->getComponentHelpers()->getModuleFullName($headComponent);
             }
         }
         return $components;

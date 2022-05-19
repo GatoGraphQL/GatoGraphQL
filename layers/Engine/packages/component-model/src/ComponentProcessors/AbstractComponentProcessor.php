@@ -17,7 +17,7 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleHelpersInterface;
+use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -50,7 +50,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ComponentPaths $componentPaths = null;
-    private ?ModuleHelpersInterface $componentHelpers = null;
+    private ?ComponentHelpersInterface $componentHelpers = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -116,13 +116,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
         $this->componentHelpers = $componentHelpers;
     }
-    final protected function getModuleHelpers(): ModuleHelpersInterface
+    final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     public function getSubcomponents(array $component): array
@@ -147,7 +147,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the component to its string representation to access it in the array
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // Initialize. If this component had been added props, then use them already
         // 1st element to merge: the general props for this component passed down the line
@@ -353,7 +353,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
             // If the component were we are adding the att, is this same component, then we are already at the path
             // If it is not, then go down one level to that component
-            return ($componentFullName !== $this->getModuleHelpers()->getModuleFullName($component_or_componentPath));
+            return ($componentFullName !== $this->getComponentHelpers()->getModuleFullName($component_or_componentPath));
         }
 
         return false;
@@ -378,7 +378,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $ret = array_merge(
                 $ret,
                 array_map(
-                    [$this->getModuleHelpers(), 'getModuleFullName'],
+                    [$this->getComponentHelpers(), 'getModuleFullName'],
                     $component_or_componentPath
                 )
             );
@@ -393,7 +393,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if ($starting_from_componentPath) {
             // Convert it to string
             $startingFromModulepathFullNames = array_map(
-                [$this->getModuleHelpers(), 'getModuleFullName'],
+                [$this->getComponentHelpers(), 'getModuleFullName'],
                 $starting_from_componentPath
             );
 
@@ -425,7 +425,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if ($this->isDescendantModule($component_or_componentPath, $props)) {
             // It is a child component
             $att_component = $component_or_componentPath;
-            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_component);
+            $attModuleFullName = $this->getComponentHelpers()->getModuleFullName($att_component);
 
             // From the root of the $props we obtain the current component
             $componentFullName = $this->getPathHeadModule($props);
@@ -502,11 +502,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         $component_props = &$props;
         foreach ($starting_from_componentPath as $pathlevelModule) {
-            $pathlevelModuleFullName = $this->getModuleHelpers()->getModuleFullName($pathlevelModule);
+            $pathlevelModuleFullName = $this->getComponentHelpers()->getModuleFullName($pathlevelModule);
             $component_props = &$component_props[$pathlevelModuleFullName][Props::SUBCOMPONENTS];
         }
 
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
         return $component_props[$componentFullName][$group] ?? array();
     }
     protected function addGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
@@ -637,7 +637,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // Propagate to all subcomponents which have no typeResolver
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
             $this->getComponentFilterManager()->prepareForPropagation($component, $props);
@@ -1110,7 +1110,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $component, array &$props): void
     {
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // Exclude the subcomponent components here
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
@@ -1218,7 +1218,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $component, array &$props): void
     {
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // Combine the direct and conditionalOnDataField components all together to iterate below
         $relationalSubcomponents = [];

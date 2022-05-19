@@ -31,7 +31,7 @@ abstract class PoP_Module_Processor_InitJSDelayLayoutsBase extends PoPEngine_Que
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($layout = $this->getLayoutSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         
         return $ret;

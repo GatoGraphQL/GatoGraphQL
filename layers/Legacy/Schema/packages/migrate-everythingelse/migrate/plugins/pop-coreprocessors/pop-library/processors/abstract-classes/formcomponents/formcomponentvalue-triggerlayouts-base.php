@@ -142,7 +142,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         }
 
         $trigger_component = $this->getTriggerSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($trigger_component);
 
         $this->addMetaFormcomponentModuleConfiguration($ret, $component, $props);
 
@@ -215,7 +215,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
-            $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
+            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
             $trigger_component = $this->getTriggerSubcomponent($component);
             $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_component)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
 

@@ -55,7 +55,7 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
     // load that same component (it just accesses directly its value), then it fails retrieving the value since it tries get it from a different field name
     public function getName(array $component): string
     {
-        return $this->getModuleHelpers()->getModuleOutputName($component);
+        return $this->getComponentHelpers()->getModuleOutputName($component);
     }
 
     public function getValue(array $component, ?array $source = null): mixed

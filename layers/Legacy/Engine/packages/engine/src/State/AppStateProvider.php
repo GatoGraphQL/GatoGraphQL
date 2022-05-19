@@ -6,7 +6,7 @@ namespace PoP\Engine\State;
 
 use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleHelpersInterface;
+use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ComponentFilters\HeadModule;
 use PoP\Engine\ComponentFilters\MainContentModule;
@@ -23,7 +23,7 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?MainContentModule $mainContentComponent = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
-    private ?ModuleHelpersInterface $componentHelpers = null;
+    private ?ComponentHelpersInterface $componentHelpers = null;
 
     final public function setHeadModule(HeadModule $headComponent): void
     {
@@ -65,13 +65,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
         $this->componentHelpers = $componentHelpers;
     }
-    final protected function getModuleHelpers(): ModuleHelpersInterface
+    final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     public function augment(array &$state): void
@@ -87,7 +87,7 @@ class AppStateProvider extends AbstractAppStateProvider
         if ($state['componentFilter'] === $this->headComponent->getName()) {
             if ($enablePassingStateViaRequest) {
                 if ($headComponent = Request::getHeadModule()) {
-                    $state['headComponent'] = $this->getModuleHelpers()->getModuleFromOutputName($headComponent);
+                    $state['headComponent'] = $this->getComponentHelpers()->getModuleFromOutputName($headComponent);
                 }
             }
         }

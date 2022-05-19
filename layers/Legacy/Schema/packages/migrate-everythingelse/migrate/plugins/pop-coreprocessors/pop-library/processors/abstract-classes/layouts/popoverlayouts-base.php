@@ -45,10 +45,10 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($layout = $this->getLayoutSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         if ($layout_content = $this->getLayoutContentSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_content);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-content'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($layout_content);
         }
         
         return $ret;

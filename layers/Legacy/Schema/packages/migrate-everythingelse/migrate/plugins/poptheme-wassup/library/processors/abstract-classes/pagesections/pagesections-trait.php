@@ -46,7 +46,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 
         if ($subComponents = $this->getFrameoptionsSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['frameoptions'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $subComponents
             );
         }

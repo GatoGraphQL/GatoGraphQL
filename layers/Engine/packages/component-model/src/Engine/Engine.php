@@ -43,7 +43,7 @@ use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
-use PoP\ComponentModel\Modules\ModuleHelpersInterface;
+use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -78,7 +78,7 @@ class Engine implements EngineInterface
     private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
-    private ?ModuleHelpersInterface $moduleHelpers = null;
+    private ?ComponentHelpersInterface $moduleHelpers = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -197,13 +197,13 @@ class Engine implements EngineInterface
     {
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
-    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    final public function setComponentHelpers(ComponentHelpersInterface $moduleHelpers): void
     {
         $this->moduleHelpers = $moduleHelpers;
     }
-    final protected function getModuleHelpers(): ModuleHelpersInterface
+    final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
     public function getOutputData(): array
@@ -717,7 +717,7 @@ class Engine implements EngineInterface
             $filteredsettings = [];
             foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
-                    [$this->getModuleHelpers(), 'getModuleOutputName'],
+                    [$this->getComponentHelpers(), 'getModuleOutputName'],
                     $components
                 );
             }
@@ -907,7 +907,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -957,7 +957,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -1004,7 +1004,7 @@ class Engine implements EngineInterface
         $array_pointer = &$array;
         foreach ($module_path as $subComponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $moduleOutputName
-            $subcomponentOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
+            $subcomponentOutputName = $this->getComponentHelpers()->getModuleOutputName($subComponent);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty])) {
@@ -1015,7 +1015,7 @@ class Engine implements EngineInterface
             $array_pointer = &$array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty];
         }
 
-        $moduleOutputName = $this->getModuleHelpers()->getModuleOutputName($component);
+        $moduleOutputName = $this->getComponentHelpers()->getModuleOutputName($component);
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
@@ -1034,7 +1034,7 @@ class Engine implements EngineInterface
 
     protected function getComponentPathKey(array $module_path, array $component): string
     {
-        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
         return $componentFullName . '-' . implode('.', $module_path);
     }
 
@@ -1128,7 +1128,7 @@ class Engine implements EngineInterface
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($module_path);
-            $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+            $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
             $this->getComponentPathManager()->setPropagationCurrentPath($module_path);
@@ -1136,7 +1136,7 @@ class Engine implements EngineInterface
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
             foreach ($module_path as $subComponent) {
-                $subcomponentFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
+                $subcomponentFullName = $this->getComponentHelpers()->getModuleFullName($subComponent);
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
@@ -1165,7 +1165,7 @@ class Engine implements EngineInterface
             $props = &$root_props;
             $model_props = &$root_model_props;
             foreach ($module_path as $subComponent) {
-                $subcomponentFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
+                $subcomponentFullName = $this->getComponentHelpers()->getModuleFullName($subComponent);
                 $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
                 $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
             }
@@ -1333,7 +1333,7 @@ class Engine implements EngineInterface
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_componentPath as $subComponent) {
-                        $subcomponentFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
+                        $subcomponentFullName = $this->getComponentHelpers()->getModuleFullName($subComponent);
                         $referencer_props = &$referencer_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                         $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
@@ -2463,7 +2463,7 @@ class Engine implements EngineInterface
 
                 // Advance the position of the array into the current component
                 foreach ($module_path as $subComponent) {
-                    $subcomponentOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
+                    $subcomponentOutputName = $this->getComponentHelpers()->getModuleOutputName($subComponent);
                     $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
                     $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
                 }

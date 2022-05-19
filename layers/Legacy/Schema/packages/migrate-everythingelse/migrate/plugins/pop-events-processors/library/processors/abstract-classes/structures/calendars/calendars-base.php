@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($controlgroup = $this->getControlgroupSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($controlgroup);
         }
 
         return $ret;
