@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataCom
         }
         if ($subComponents = $this->getSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $subComponents
             );
         }

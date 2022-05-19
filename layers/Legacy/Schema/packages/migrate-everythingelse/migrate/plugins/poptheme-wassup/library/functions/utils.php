@@ -54,8 +54,8 @@ class PoPThemeWassup_Utils
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
                         if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO) {
                             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                            $emptysideinfoModuleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTYSIDEINFO]);
-                            if (in_array($emptysideinfoModuleOutputName, $pageSectionBlocks)) {
+                            $emptysideinfoComponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_EMPTYSIDEINFO]);
+                            if (in_array($emptysideinfoComponentOutputName, $pageSectionBlocks)) {
                                 continue;
                             }
                         }

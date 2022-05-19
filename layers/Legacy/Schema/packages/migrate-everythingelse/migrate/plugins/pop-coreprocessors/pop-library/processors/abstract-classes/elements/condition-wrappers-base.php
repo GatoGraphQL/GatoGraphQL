@@ -146,14 +146,14 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
         if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $layouts
             );
         }
 
         if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['conditionfailed-layouts'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $conditionfailed_layouts
             );
         }

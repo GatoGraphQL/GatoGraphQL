@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
 
         if ($inners = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $inners
             );
         }

@@ -49,10 +49,10 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
         $map_div = $this->getMapdivSubcomponent($component);
         $drawmarkers = $this->getDrawmarkersSubcomponent($component);
         $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($map_script);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($map_div);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-drawmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($drawmarkers);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($map_script);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($map_div);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-drawmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($drawmarkers);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($resetmarkers);
 
         return $ret;
     }

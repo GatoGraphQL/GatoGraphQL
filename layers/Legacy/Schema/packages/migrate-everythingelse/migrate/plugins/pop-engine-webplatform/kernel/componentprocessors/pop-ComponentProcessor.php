@@ -231,7 +231,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
             return $ret;
         }
 
-        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // The Intercept URLs are runtime instead of static, since they contains information
         // given through the URL, which cannot not cached in the static file

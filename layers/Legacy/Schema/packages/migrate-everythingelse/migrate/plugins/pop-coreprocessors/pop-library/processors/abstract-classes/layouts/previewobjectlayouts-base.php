@@ -81,10 +81,10 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
         }
 
         if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup_top);
         }
         if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup_bottom);
         }
 
         return $ret;

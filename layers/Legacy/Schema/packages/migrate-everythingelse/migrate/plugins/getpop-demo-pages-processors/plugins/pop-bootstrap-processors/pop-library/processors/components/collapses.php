@@ -92,8 +92,8 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
                         TranslationAPIFacade::getInstance()->__('Events Map', 'getpopdemo-processors'),
                         TranslationAPIFacade::getInstance()->__('Or, if you prefer, you can browse the events by their location.', 'getpopdemo-processors')
                     );
-                    $ret[\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName([PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR])] = $events_title;
-                    $ret[\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName([GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP])] = $map_title;
+                    $ret[\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR])] = $events_title;
+                    $ret[\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP])] = $map_title;
                 }
 
                 return $ret;

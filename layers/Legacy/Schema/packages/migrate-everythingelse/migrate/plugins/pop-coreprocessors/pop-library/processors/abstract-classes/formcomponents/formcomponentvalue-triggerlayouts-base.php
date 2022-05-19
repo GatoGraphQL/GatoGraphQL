@@ -142,7 +142,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         }
 
         $trigger_component = $this->getTriggerSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($trigger_component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($trigger_component);
 
         $this->addMetaFormcomponentModuleConfiguration($ret, $component, $props);
 

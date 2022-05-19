@@ -19,7 +19,7 @@ class ComponentHelpers implements ComponentHelpersInterface
     {
         return ProcessorItemUtils::getItemFromFullName($componentFullName);
     }
-    public function getModuleOutputName(array $component): string
+    public function getComponentOutputName(array $component): string
     {
         return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::COMPONENTS);
     }

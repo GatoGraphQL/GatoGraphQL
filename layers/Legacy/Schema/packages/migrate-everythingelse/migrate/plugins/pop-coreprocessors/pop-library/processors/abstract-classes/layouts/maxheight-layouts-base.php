@@ -85,7 +85,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
 
         if ($inners = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $inners
             );
         }

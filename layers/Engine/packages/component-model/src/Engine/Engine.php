@@ -717,7 +717,7 @@ class Engine implements EngineInterface
             $filteredsettings = [];
             foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
-                    [$this->getComponentHelpers(), 'getModuleOutputName'],
+                    [$this->getComponentHelpers(), 'getComponentOutputName'],
                     $components
                 );
             }
@@ -1004,7 +1004,7 @@ class Engine implements EngineInterface
         $array_pointer = &$array;
         foreach ($module_path as $subComponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $moduleOutputName
-            $subcomponentOutputName = $this->getComponentHelpers()->getModuleOutputName($subComponent);
+            $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty])) {
@@ -1015,7 +1015,7 @@ class Engine implements EngineInterface
             $array_pointer = &$array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty];
         }
 
-        $moduleOutputName = $this->getComponentHelpers()->getModuleOutputName($component);
+        $moduleOutputName = $this->getComponentHelpers()->getComponentOutputName($component);
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
@@ -2463,7 +2463,7 @@ class Engine implements EngineInterface
 
                 // Advance the position of the array into the current component
                 foreach ($module_path as $subComponent) {
-                    $subcomponentOutputName = $this->getComponentHelpers()->getModuleOutputName($subComponent);
+                    $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
                     $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
                     $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
                 }

@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         }
 
         if ($header = $this->getHeaderSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header-post'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($header);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header-post'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($header);
         }
 
         return $ret;

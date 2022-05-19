@@ -31,7 +31,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             // In order to obtain the dbobjectids from the results, located under pssId and bsId
             $pagesection_settings_id = $this->getPagesectionSettingsid();
             $block_component = $this->getBlockModule();
-            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($block_component);
+            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($block_component);
 
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;

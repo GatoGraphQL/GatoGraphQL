@@ -23,7 +23,7 @@ class PoP_WebPlatform_CSSConverter_Hooks
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
         if ($processor->getProp($component, $props, 'convert-classes-to-styles')) {
-            $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($component);
+            $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration[GD_JS_CLASS]))) {

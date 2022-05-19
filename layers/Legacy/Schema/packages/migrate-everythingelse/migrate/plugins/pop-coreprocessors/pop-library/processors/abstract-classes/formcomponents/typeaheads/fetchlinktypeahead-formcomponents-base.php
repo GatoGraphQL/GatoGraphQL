@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
         // Hack: re-use multiple.tmpl
         $input = $this->getInputSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = [
-            \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($input),
+            \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($input),
         ];
 
         return $ret;

@@ -8,6 +8,6 @@ interface ComponentHelpersInterface
 {
     public function getModuleFullName(array $component): string;
     public function getModuleFromFullName(string $componentFullName): ?array;
-    public function getModuleOutputName(array $component): string;
+    public function getComponentOutputName(array $component): string;
     public function getModuleFromOutputName(string $moduleOutputName): ?array;
 }

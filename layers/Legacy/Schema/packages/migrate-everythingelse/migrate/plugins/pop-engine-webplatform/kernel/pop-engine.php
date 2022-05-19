@@ -208,7 +208,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
                 // Advance the position of the array into the current component
                 foreach ($component_path as $subComponent) {
-                    $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($subComponent);
+                    $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subComponent);
                     $componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')] = $componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')] ?? array();
                     $componentjsdata = &$componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')];
                 }

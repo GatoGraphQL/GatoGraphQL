@@ -26,7 +26,7 @@ trait ComponentPathProcessorTrait
     protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $ret = [];
-        $key = $this->getComponentHelpers()->getModuleOutputName($component);
+        $key = $this->getComponentHelpers()->getComponentOutputName($component);
         $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
@@ -98,7 +98,7 @@ trait ComponentPathProcessorTrait
     {
         $ret = [];
         $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
-        $key = $use_component_output_name_as_key ? $this->getComponentHelpers()->getModuleOutputName($component) : $componentFullName;
+        $key = $use_component_output_name_as_key ? $this->getComponentHelpers()->getComponentOutputName($component) : $componentFullName;
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {

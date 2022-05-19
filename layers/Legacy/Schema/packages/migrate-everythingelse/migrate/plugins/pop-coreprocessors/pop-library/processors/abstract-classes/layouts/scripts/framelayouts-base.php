@@ -37,8 +37,8 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
 
         $layout = $this->getLayoutSubcomponent($component);
         $script = $this->getScriptSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($layout);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['script'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleOutputName($script);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($layout);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['script'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($script);
 
         return $ret;
     }
