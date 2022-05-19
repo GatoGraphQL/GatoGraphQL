@@ -92,9 +92,13 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    // $use_component_output_name_as_key: For response structures (eg: configuration, feedback, etc) must be true
-    // for internal structures (eg: $props, $data_properties) no need
-    protected function executeOnSelfAndPropagateToComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $use_component_output_name_as_key = true, $options = array())
+    /**
+     * @param string $eval_self_fn Function name
+     * @param string $propagate_fn Function name
+     * @param boolean $use_component_output_name_as_key For response structures (eg: configuration, feedback, etc) must be `true`, for internal structures (eg: $props, $data_properties) no need
+     * @return mixed[]
+     */
+    protected function executeOnSelfAndPropagateToComponents(string $eval_self_fn, string $propagate_fn, array $component, array &$props, bool $use_component_output_name_as_key = true, array $options = array()): array
     {
         $ret = [];
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
