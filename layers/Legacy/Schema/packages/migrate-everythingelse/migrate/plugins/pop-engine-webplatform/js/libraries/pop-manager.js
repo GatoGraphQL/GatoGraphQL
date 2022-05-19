@@ -1279,7 +1279,7 @@ window.pop.Manager = {
 		var sessionIds = pop.JSRuntimeManager.getBlockSessionIds(domain, pageSection, block, session);
 		if (!sessionIds) return;
 		
-		var componentMethods = that.getModuleJSMethods(domain, pageSection, block, componentFrom);
+		var componentMethods = that.getComponentJSMethods(domain, pageSection, block, componentFrom);
 		that.runJSMethodsInner(domain, pageSection, block, componentMethods, sessionIds, [], priority, options);
 	},	
 	runJSMethodsInner : function(domain, pageSection, block, componentMethods, sessionIds, executedModules, priority, options) {
@@ -1334,7 +1334,7 @@ window.pop.Manager = {
 			})
 		}
 	},
-	getModuleJSMethods : function(domain, pageSection, block, componentFrom) {
+	getComponentJSMethods : function(domain, pageSection, block, componentFrom) {
 	
 		var that = this;
 
@@ -1349,9 +1349,9 @@ window.pop.Manager = {
 		
 		// Start searching for the componentFrom down the line componentMethods. 
 		// Once found, that's the componentMethods needed => map of componentFrom => methods to execute
-		return that.getModuleJSMethodsInner(pageSection, block, componentFrom, componentMethods);
+		return that.getComponentJSMethodsInner(pageSection, block, componentFrom, componentMethods);
 	},	
-	getModuleJSMethodsInner : function(pageSection, block, componentFrom, componentMethods) {
+	getComponentJSMethodsInner : function(pageSection, block, componentFrom, componentMethods) {
 	
 		var that = this;
 
@@ -1367,7 +1367,7 @@ window.pop.Manager = {
 		if (componentMethods[pop.c.JS_NEXT]) {
 			$.each(componentMethods[pop.c.JS_NEXT], function(index, next) {
 				
-				found = that.getModuleJSMethodsInner(pageSection, block, componentFrom, next);
+				found = that.getComponentJSMethodsInner(pageSection, block, componentFrom, next);
 				if (found) {
 					// found the result => exit the loop and immediately return this result
 					return false;
