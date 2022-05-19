@@ -158,7 +158,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props[$componentFullName] ?? array()
         );
 
-        // The component must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
+        // The component must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
         $component_props = array(
             $componentFullName => &$props[$componentFullName],
         );
@@ -328,7 +328,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // PRIVATE Functions: Atts
     //-------------------------------------------------
 
-    private function getPathHeadModule(array &$props): string
+    private function getPathHeadComponent(array &$props): string
     {
         // From the root of the $props we obtain the current component
         reset($props);
@@ -349,7 +349,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // If it is not an array of arrays, then this array is directly the component, or the descendant component on which to set the property
         if (!$this->isComponentPath($component_or_componentPath)) {
             // From the root of the $props we obtain the current component
-            $componentFullName = $this->getPathHeadModule($props);
+            $componentFullName = $this->getPathHeadComponent($props);
 
             // If the component were we are adding the att, is this same component, then we are already at the path
             // If it is not, then go down one level to that component
@@ -368,7 +368,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // From the root of the $props we obtain the current component
-        $componentFullName = $this->getPathHeadModule($props);
+        $componentFullName = $this->getPathHeadComponent($props);
 
         // Calculate the path to iterate down. It always starts with the current component
         $ret = array($componentFullName);
@@ -398,7 +398,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
 
             // Attach the current component, which is not included on "starting_from", to step down this level too
-            $componentFullName = $this->getPathHeadModule($props);
+            $componentFullName = $this->getPathHeadComponent($props);
             array_unshift($startingFromComponentPathFullNames, $componentFullName);
 
             // Descend into the path to find the component for which to add the att
@@ -428,7 +428,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $attComponentFullName = $this->getComponentHelpers()->getComponentFullName($att_component);
 
             // From the root of the $props we obtain the current component
-            $componentFullName = $this->getPathHeadModule($props);
+            $componentFullName = $this->getPathHeadComponent($props);
 
             // Set the child attributes under a different entry
             $props[$componentFullName][Props::DESCENDANT_ATTRIBUTES] = $props[$componentFullName][Props::DESCENDANT_ATTRIBUTES] ?? array();
