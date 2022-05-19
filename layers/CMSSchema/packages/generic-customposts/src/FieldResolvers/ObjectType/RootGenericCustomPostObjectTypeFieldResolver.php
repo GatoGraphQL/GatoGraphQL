@@ -150,14 +150,14 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'genericCustomPost' => [
                 CommonCustomPostFilterInputContainerComponentProcessor::class,
                 CommonCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE
             ],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            default => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
         };
     }
 

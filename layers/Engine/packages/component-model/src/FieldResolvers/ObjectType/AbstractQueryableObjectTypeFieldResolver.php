@@ -27,19 +27,19 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         /** @var QueryableObjectTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName);
         }
         return null;
     }
 
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             return $this->getFilterFieldArgNameTypeResolvers($filterDataloadingModule);
         }
         return parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
@@ -47,7 +47,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             return $this->getFilterFieldArgDescription($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
@@ -55,7 +55,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             return $this->getFilterFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
@@ -63,7 +63,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             return $this->getFilterFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
@@ -77,7 +77,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         // If there is a filter, and it has many filterInputs, then by default we'd rather not enable ordering
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             /** @var FilterInputContainerComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($filterDataloadingModule);
             if (count($filterDataComponentProcessor->getFilterInputComponents($filterDataloadingModule)) > 1) {
@@ -96,7 +96,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *
      * This function transforms between the 2 states:
      *
-     * - For each FilterInput defined via `getFieldFilterInputContainerModule`:
+     * - For each FilterInput defined via `getFieldFilterInputContainerComponent`:
      *   - Check if the entry with that name exists in fieldArgs, and if so:
      *     - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
      *       under the expected input name
@@ -107,7 +107,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $filteringQueryArgs = [];
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             /** @var FilterDataComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($filterDataloadingModule);
             $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);

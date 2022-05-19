@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 interface QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface extends InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
-    public function getFieldFilterInputContainerModule(string $fieldName): ?array;
+    public function getFieldFilterInputContainerComponent(string $fieldName): ?array;
 }
