@@ -943,14 +943,14 @@ class Engine implements EngineInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function getDataloadingModuleFullpaths(array $component, array &$props): array
+    protected function getDataloadingComponentFullPaths(array $component, array &$props): array
     {
         $paths = [];
-        $this->addDataloadingModuleFullpaths($paths, [], $component, $props);
+        $this->addDataloadingComponentFullPaths($paths, [], $component, $props);
         return $paths;
     }
 
-    private function addDataloadingModuleFullpaths(
+    private function addDataloadingComponentFullPaths(
         array &$paths,
         array $module_path,
         array $component,
@@ -986,7 +986,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addDataloadingModuleFullpaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+            $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -1116,7 +1116,7 @@ class Engine implements EngineInterface
         $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
         // Get the list of all modules which load data, as a list of the component path starting from the top element (the entry component)
-        $module_fullpaths = $this->getDataloadingModuleFullpaths($root_component, $root_props);
+        $module_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
