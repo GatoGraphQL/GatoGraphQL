@@ -11,9 +11,9 @@ class PoP_ContentCreation_Module_Processor_GFFormInners extends PoP_Module_Proce
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_FLAG:

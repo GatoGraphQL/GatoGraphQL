@@ -83,7 +83,7 @@ class ModulePaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubmodules(array $component, array $subComponents): array
+    public function removeExcludedSubcomponents(array $component, array $subComponents): array
     {
         if (is_null($this->paths)) {
             $this->init();

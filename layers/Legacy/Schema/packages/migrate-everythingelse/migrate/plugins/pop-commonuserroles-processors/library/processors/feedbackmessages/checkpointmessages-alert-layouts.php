@@ -13,7 +13,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageAlertLayouts ext
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_PROFILEORGANIZATION => [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION],
@@ -24,7 +24,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageAlertLayouts ext
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

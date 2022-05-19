@@ -19,7 +19,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
@@ -30,10 +30,10 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
                 return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER];
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 
-    public function getLayoutContentSubmodule(array $component)
+    public function getLayoutContentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
@@ -64,7 +64,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
             }
         }
 
-        return parent::getLayoutContentSubmodule($component);
+        return parent::getLayoutContentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

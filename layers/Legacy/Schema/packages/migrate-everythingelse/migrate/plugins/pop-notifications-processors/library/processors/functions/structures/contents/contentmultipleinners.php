@@ -13,9 +13,9 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:

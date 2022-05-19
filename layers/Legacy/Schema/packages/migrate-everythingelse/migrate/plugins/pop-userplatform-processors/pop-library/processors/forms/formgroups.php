@@ -45,7 +45,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CUP_SHORTDESCRIPTION => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION],
@@ -60,7 +60,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -76,7 +76,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => 'https://www.instagram.com/...',
         );
         if ($placeholder = $placeholders[$component[1]] ?? null) {
-            $component = $this->getComponentSubmodule($component);
+            $component = $this->getComponentSubcomponent($component);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
 

@@ -9,17 +9,17 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_CARD];
     }
 
-    public function getAdditionalSubmodules(array $component)
+    public function getAdditionalSubcomponents(array $component)
     {
 
         // Allow URE to override adding their own templates to include Community members in the filter
-        return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', array(), $component);
+        return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubcomponents', array(), $component);
     }
 
     public function getSubcomponents(array $component): array
     {
         $ret = parent::getSubcomponents($component);
-        if ($extra_templates = $this->getAdditionalSubmodules($component)) {
+        if ($extra_templates = $this->getAdditionalSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $extra_templates
@@ -81,7 +81,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
             );
         }
 
-        if ($extras = $this->getAdditionalSubmodules($component)) {
+        if ($extras = $this->getAdditionalSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['extras'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $extras

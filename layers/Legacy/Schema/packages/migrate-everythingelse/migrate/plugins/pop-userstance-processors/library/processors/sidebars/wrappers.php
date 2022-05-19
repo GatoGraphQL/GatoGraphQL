@@ -25,9 +25,9 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_STANCETARGET:
@@ -66,9 +66,9 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $component)
+    public function getConditionFailedSubcomponents(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($component);
+        $ret = parent::getConditionFailedSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE:

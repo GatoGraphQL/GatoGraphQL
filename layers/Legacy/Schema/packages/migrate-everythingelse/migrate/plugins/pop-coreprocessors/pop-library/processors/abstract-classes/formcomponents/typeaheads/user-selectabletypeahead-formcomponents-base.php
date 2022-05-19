@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
         return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
-    public function getTriggerSubmodule(array $component): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
         return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_CARD];
     }
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
     {
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             // Pass same information to its trigger
-            $trigger_layout = $this->getTriggerSubmodule($component);
+            $trigger_layout = $this->getTriggerSubcomponent($component);
             $avatar_size = $this->getAvatarSize($component, $props);
             $this->setProp($trigger_layout, $props, 'avatar-size', $avatar_size);
         }

@@ -11,9 +11,9 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks extends PoP_Mo
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGLOCATIONPOSTS],
@@ -25,14 +25,14 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks extends PoP_Mo
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS:
                 return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGLOCATIONPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

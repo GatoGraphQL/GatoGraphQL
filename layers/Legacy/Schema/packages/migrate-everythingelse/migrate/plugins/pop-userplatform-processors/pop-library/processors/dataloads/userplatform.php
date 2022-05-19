@@ -95,9 +95,9 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inner_components = array(
             self::COMPONENT_DATALOAD_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::COMPONENT_FORM_USER_CHANGEPASSWORD],

@@ -59,14 +59,14 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
                 return [PoP_Module_Processor_CommentFilters::class, PoP_Module_Processor_CommentFilters::COMPONENT_FILTER_COMMENTS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     protected function getFeedbackmessageModule(array $component)
@@ -92,9 +92,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getCheckpointmessageModule($component);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:

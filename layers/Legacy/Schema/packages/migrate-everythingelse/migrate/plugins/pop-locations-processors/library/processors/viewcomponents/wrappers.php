@@ -21,9 +21,9 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
@@ -69,9 +69,9 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return null;
     }
 
-    public function getConditionFailedSubmodules(array $component)
+    public function getConditionFailedSubcomponents(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($component);
+        $ret = parent::getConditionFailedSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:

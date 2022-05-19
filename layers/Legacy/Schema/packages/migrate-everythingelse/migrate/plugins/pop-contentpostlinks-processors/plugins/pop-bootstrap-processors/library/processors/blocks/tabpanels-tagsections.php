@@ -11,9 +11,9 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_TAGLINKS => [PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGLINKS],
@@ -25,14 +25,14 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGLINKS:
                 return [self::class, self::COMPONENT_FILTER_TAGLINKS];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

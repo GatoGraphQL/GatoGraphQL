@@ -22,7 +22,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_MYHIGHLIGHTS_TABLE_EDIT => [PoP_AddHighlights_Module_Processor_MySectionDataloads::class, PoP_AddHighlights_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT],
@@ -32,7 +32,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYHIGHLIGHTS_TABLE_EDIT:
@@ -40,7 +40,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
                 return [PoP_AddHighlights_Module_Processor_CustomControlGroups::class, PoP_AddHighlights_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

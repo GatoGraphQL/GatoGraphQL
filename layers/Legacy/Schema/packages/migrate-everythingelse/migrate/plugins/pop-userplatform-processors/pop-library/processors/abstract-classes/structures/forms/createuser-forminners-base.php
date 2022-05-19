@@ -2,10 +2,10 @@
 
 abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_Processor_FormInnersBase
 {
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
         $components =  array_merge(
-            parent::getLayoutSubmodules($component),
+            parent::getLayoutSubcomponents($component),
             array(
                 [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_USERNAME],
                 [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::COMPONENT_FORMINPUTGROUP_CUU_PASSWORD],
@@ -75,7 +75,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         // Make all formComponentGroups be collapsed if they are non-mandatory
         $collapsible = array_values(
             array_diff(
-                $this->getLayoutSubmodules($component),
+                $this->getLayoutSubcomponents($component),
                 $this->getMandatoryLayouts($component, $props)
             )
         );

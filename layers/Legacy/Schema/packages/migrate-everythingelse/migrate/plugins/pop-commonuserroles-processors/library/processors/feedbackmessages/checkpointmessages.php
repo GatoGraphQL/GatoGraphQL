@@ -13,7 +13,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Mo
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION => [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION],
@@ -24,7 +24,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Mo
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

@@ -12,13 +12,13 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_GFFormInners:layouts',
-            $this->getLayoutSubmodules(...),
+            $this->getLayoutSubcomponents(...),
             10,
             2
         );
     }
 
-    public function getLayoutSubmodules($layouts, array $component)
+    public function getLayoutSubcomponents($layouts, array $component)
     {
         switch ($component[1]) {
             case PoP_ContactUs_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUS:

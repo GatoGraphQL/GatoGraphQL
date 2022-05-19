@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return GD_CONSTANT_AUTHORS_SEPARATOR;
     }
 
-    public function getLayoutExtraSubmodule(array $component)
+    public function getLayoutExtraSubcomponent(array $component)
     {
         return null;
     }
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($layout_extra = $this->getLayoutExtraSubmodule($component)) {
+        if ($layout_extra = $this->getLayoutExtraSubcomponent($component)) {
             $ret[] = $layout_extra;
         }
 
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         if ($authors_component = $this->getAuthorsModule($component)) {
             return [
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
             ];
         }
 
-        return parent::getRelationalSubmodules($component);
+        return parent::getRelationalSubcomponents($component);
     }
 
     public function getThumbField(array $component, array &$props)
@@ -105,7 +105,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authors_component);
             $ret['authors-sep'] = $this->getAuthorsSeparator($component, $props);
         }
-        if ($layout_extra = $this->getLayoutExtraSubmodule($component)) {
+        if ($layout_extra = $this->getLayoutExtraSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-extra'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_extra);
         }
 

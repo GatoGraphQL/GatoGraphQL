@@ -97,9 +97,9 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function getFrametopoptionsSubmodules(array $component): array
+    public function getFrametopoptionsSubcomponents(array $component): array
     {
-        $ret = parent::getFrametopoptionsSubmodules($component);
+        $ret = parent::getFrametopoptionsSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
@@ -134,9 +134,9 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function getFramebottomoptionsSubmodules(array $component): array
+    public function getFramebottomoptionsSubcomponents(array $component): array
     {
-        $ret = parent::getFramebottomoptionsSubmodules($component);
+        $ret = parent::getFramebottomoptionsSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 

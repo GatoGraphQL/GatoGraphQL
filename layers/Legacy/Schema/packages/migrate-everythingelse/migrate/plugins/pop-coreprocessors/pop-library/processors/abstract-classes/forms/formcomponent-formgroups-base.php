@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getComponentSubmodule($component);
+        return $this->getComponentSubcomponent($component);
     }
 
     public function getComponentName(array $component)
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
 
     public function initModelProps(array $component, array &$props): void
     {
-        $component = $this->getComponentSubmodule($component);
+        $component = $this->getComponentSubcomponent($component);
 
         // Show the label in the FormComponentGroup, and not in the Input
         $this->setProp($component, $props, 'label', $this->getLabel($component, $props));

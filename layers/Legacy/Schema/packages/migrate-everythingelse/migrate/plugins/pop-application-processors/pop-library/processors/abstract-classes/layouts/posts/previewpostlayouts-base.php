@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Module_Processor_PreviewPostLayoutsBase
 {
-    protected function getDetailsfeedBottomSubmodules(array $component)
+    protected function getDetailsfeedBottomSubcomponents(array $component)
     {
         $layouts = array();
 
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->getQuicklinkgroupTopSubmodule($component)) {
+        if ($this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup-top'] = 'icon-only pull-right';
         }
 
@@ -59,7 +59,7 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
 
         // Make the thumb image responsive if it is not the media layout
         if (!$this->horizontalMediaLayout($component)) {
-            if ($thumb = $this->getPostThumbSubmodule($component)) {
+            if ($thumb = $this->getPostThumbSubcomponent($component)) {
                 $this->appendProp($thumb, $props, 'img-class', 'img-responsive');
             }
         }

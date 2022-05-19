@@ -11,9 +11,9 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:

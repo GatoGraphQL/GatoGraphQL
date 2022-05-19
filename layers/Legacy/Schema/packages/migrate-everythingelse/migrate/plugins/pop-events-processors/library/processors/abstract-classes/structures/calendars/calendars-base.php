@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($controlgroup = $this->getControlgroupSubmodule($component)) {
+        if ($controlgroup = $this->getControlgroupSubcomponent($component)) {
             $ret[] = $controlgroup;
         }
 
@@ -45,14 +45,14 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($controlgroup = $this->getControlgroupSubmodule($component)) {
+        if ($controlgroup = $this->getControlgroupSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup);
         }
 
         return $ret;
     }
 
-    public function getControlgroupSubmodule(array $component)
+    public function getControlgroupSubcomponent(array $component)
     {
         return [PoP_Module_Processor_CalendarControlGroups::class, PoP_Module_Processor_CalendarControlGroups::COMPONENT_CALENDARCONTROLGROUP_CALENDAR];
     }
@@ -68,8 +68,8 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $inner = $this->getInnerSubmodule($component);
-        $ret['calendar']['layouts'] = $componentprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
+        $inner = $this->getInnerSubcomponent($component);
+        $ret['calendar']['layouts'] = $componentprocessor_manager->getProcessor($inner)->getLayoutSubcomponents($inner);
 
         if ($options = $this->getOptions($component, $props)) {
             $ret['calendar']['options'] = $options;
@@ -85,8 +85,8 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         // The Calendar uses JS to be rendered, so we need the DB data to be always present in the webplatform
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
-            $inner = $this->getInnerSubmodule($component);
-            $layouts = $componentprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
+            $inner = $this->getInnerSubcomponent($component);
+            $layouts = $componentprocessor_manager->getProcessor($inner)->getLayoutSubcomponents($inner);
             foreach ($layouts as $layout) {
                 $this->setProp($layout, $props, 'needs-dynamic-data', true);
             }

@@ -11,7 +11,7 @@ class GD_QT_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompone
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_QT_FORMINPUTGROUP_LANGUAGE => [GD_QT_Module_Processor_SelectFormInputs::class, GD_QT_Module_Processor_SelectFormInputs::COMPONENT_QT_FORMINPUT_LANGUAGE],
@@ -21,7 +21,7 @@ class GD_QT_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompone
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

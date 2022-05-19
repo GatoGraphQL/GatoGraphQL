@@ -23,11 +23,11 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
         return '';
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         return null;
     }
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         return null;
     }
@@ -36,10 +36,10 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[] = $quicklinkgroup_top;
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[] = $quicklinkgroup_bottom;
         }
 
@@ -80,10 +80,10 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
             $ret['link-target'] = $target;
         }
 
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
         }
 

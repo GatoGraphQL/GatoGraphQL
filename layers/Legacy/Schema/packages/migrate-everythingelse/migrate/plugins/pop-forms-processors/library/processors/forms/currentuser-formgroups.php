@@ -13,7 +13,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_NAME => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NAME],
@@ -24,7 +24,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)

@@ -932,8 +932,8 @@ class Engine implements EngineInterface
         );
 
         // Propagate to its inner modules
-        $subComponents = $processor->getAllSubmodules($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
+        $subComponents = $processor->getAllSubcomponents($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
@@ -980,8 +980,8 @@ class Engine implements EngineInterface
         );
 
         // Propagate to its inner modules
-        $subComponents = $processor->getAllSubmodules($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
+        $subComponents = $processor->getAllSubcomponents($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
@@ -1000,7 +1000,7 @@ class Engine implements EngineInterface
     ): void {
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
-        $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
+        $submodulesOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $subComponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $moduleOutputName
@@ -1120,7 +1120,7 @@ class Engine implements EngineInterface
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
-        $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
+        $submodulesOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
@@ -2459,7 +2459,7 @@ class Engine implements EngineInterface
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 /** @var ModuleInfo */
                 $moduleInfo = App::getModule(Module::class)->getInfo();
-                $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
+                $submodulesOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
                 // Advance the position of the array into the current component
                 foreach ($module_path as $subComponent) {

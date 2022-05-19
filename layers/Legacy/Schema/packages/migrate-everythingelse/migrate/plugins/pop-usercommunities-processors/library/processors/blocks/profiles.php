@@ -45,9 +45,9 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE],

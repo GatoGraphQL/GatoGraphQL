@@ -36,7 +36,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
@@ -68,7 +68,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP:
@@ -89,10 +89,10 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubmodule(array $component)
+    public function getLatestcountSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLLMAP:
@@ -108,7 +108,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                 return [PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS];
         }
 
-        return parent::getLatestcountSubmodule($component);
+        return parent::getLatestcountSubcomponent($component);
     }
 
     protected function getModuleTogglemapanchorcontrolPath(array $component)

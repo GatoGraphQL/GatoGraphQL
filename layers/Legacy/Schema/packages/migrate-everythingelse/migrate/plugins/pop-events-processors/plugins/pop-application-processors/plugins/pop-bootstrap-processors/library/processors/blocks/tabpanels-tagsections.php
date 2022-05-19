@@ -15,9 +15,9 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_TAGEVENTS => [GD_EM_Module_Processor_TagSectionTabPanelComponents::class, GD_EM_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGEVENTS],
@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGEVENTS:
@@ -42,12 +42,12 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGEVENTSCALENDAR];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
     {
-        if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
+        if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future
             switch ($component[1]) {
                 case self::COMPONENT_BLOCK_TABPANEL_TAGPASTEVENTS:

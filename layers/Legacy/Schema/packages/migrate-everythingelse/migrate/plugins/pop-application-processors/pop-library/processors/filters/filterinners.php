@@ -39,9 +39,9 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
         );
     }
 
-    protected function getInputSubmodules(array $component)
+    protected function getInputSubcomponents(array $component)
     {
-        $ret = parent::getInputSubmodules($component);
+        $ret = parent::getInputSubcomponents($component);
 
         $inputComponents = [
             self::COMPONENT_FILTERINPUTCONTAINER_POSTS => [

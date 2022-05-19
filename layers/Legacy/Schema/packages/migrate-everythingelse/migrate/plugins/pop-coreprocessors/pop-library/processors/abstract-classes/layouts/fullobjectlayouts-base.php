@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSidebarSubmodule(array $component)
+    public function getSidebarSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getTitleSubmodule(array $component)
+    public function getTitleSubcomponent(array $component)
     {
         return null;
     }
@@ -26,40 +26,40 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         );
     }
 
-    public function getHeaderSubmodules(array $component)
+    public function getHeaderSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getFooterSubmodules(array $component)
+    public function getFooterSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getFullviewFooterSubmodules(array $component)
+    public function getFullviewFooterSubcomponents(array $component)
     {
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
-        return \PoP\Root\App::applyFilters('PoP_Module_Processor_FullObjectLayoutsBase:footer_components', $this->getFooterSubmodules($component), $component);
+        return \PoP\Root\App::applyFilters('PoP_Module_Processor_FullObjectLayoutsBase:footer_components', $this->getFooterSubcomponents($component), $component);
     }
 
     public function getSubcomponents(array $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($title = $this->getTitleSubmodule($component)) {
+        if ($title = $this->getTitleSubcomponent($component)) {
             $ret[] = $title;
         }
-        if ($sidebar = $this->getSidebarSubmodule($component)) {
+        if ($sidebar = $this->getSidebarSubcomponent($component)) {
             $ret[] = $sidebar;
         }
-        if ($headers = $this->getHeaderSubmodules($component)) {
+        if ($headers = $this->getHeaderSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $headers
             );
         }
-        if ($footers = $this->getFullviewFooterSubmodules($component)) {
+        if ($footers = $this->getFullviewFooterSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $footers
@@ -85,21 +85,21 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
 
         );
 
-        if ($title = $this->getTitleSubmodule($component)) {
+        if ($title = $this->getTitleSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['title'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($title);
         }
-        if ($sidebar = $this->getSidebarSubmodule($component)) {
+        if ($sidebar = $this->getSidebarSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['sidebar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($sidebar);
             $ret[GD_JS_CLASSES]['sidebar'] = 'col-xsm-3 col-xsm-push-9';
             $ret[GD_JS_CLASSES]['content-body'] = 'col-xsm-9 col-xsm-pull-3';
         }
-        if ($headers = $this->getHeaderSubmodules($component)) {
+        if ($headers = $this->getHeaderSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['headers'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $headers
             );
         }
-        if ($footers = $this->getFullviewFooterSubmodules($component)) {
+        if ($footers = $this->getFullviewFooterSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['footers'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $footers

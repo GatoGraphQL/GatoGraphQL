@@ -37,7 +37,7 @@ class ModuleInfo extends AbstractModuleInfo
         return $this->values['time'];
     }
 
-    public function getSubmodulesOutputProperty(): string
+    public function getSubcomponentsOutputProperty(): string
     {
         return $this->values['subcomponents-output-property'];
     }

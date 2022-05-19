@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         if (!$this->getProp($component, $props, 'unique-preselected')) {
-            $ret['selectableTypeahead']['trigger-layout'] = $this->getTriggerLayoutSubmodule($component);
+            $ret['selectableTypeahead']['trigger-layout'] = $this->getTriggerLayoutSubcomponent($component);
         }
 
         return $ret;
@@ -47,10 +47,10 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getTriggerLayoutSubmodule($component);
+        return $this->getTriggerLayoutSubcomponent($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $component)
+    public function getTriggerLayoutSubcomponent(array $component)
     {
         return null;
     }
@@ -59,14 +59,14 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
     {
         $ret = parent::getSubcomponents($component);
 
-        $ret[] = $this->getTriggerLayoutSubmodule($component);
+        $ret[] = $this->getTriggerLayoutSubcomponent($component);
 
         return $ret;
     }
 
     public function initModelProps(array $component, array &$props): void
     {
-        $trigger_layout = $this->getTriggerLayoutSubmodule($component);
+        $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
         $this->appendProp($trigger_layout, $props, 'class', GD_CLASS_TRIGGERLAYOUT);
 
         // If the input is not multiple, then it cannot have more than 1 option selected for sure
@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
             $this->setProp($component, $props, 'max-selected', 1);
         }
 
-        $input = $this->getInputSubmodule($component);
+        $input = $this->getInputSubcomponent($component);
         $this->appendProp($input, $props, 'class', 'max-selected-disable');
 
         // Sortable only if maxSelected is not only 1
@@ -90,7 +90,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
     {
         // Sortable only if maxSelected is not only 1
         if (!$this->upToOneSelection($component, $props)) {
-            $trigger_layout = $this->getTriggerLayoutSubmodule($component);
+            $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
             $this->mergeJsmethodsProp($trigger_layout, $props, array('sortable'));
         }
 
@@ -103,7 +103,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $trigger_layout = $this->getTriggerLayoutSubmodule($component);
+        $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_layout);
 
         if ($maxSelected = $this->getProp($component, $props, 'max-selected')) {
@@ -117,7 +117,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
     {
         $ret = parent::getModulesToPropagateDataProperties($component);
 
-        if ($trigger_layout = $this->getTriggerLayoutSubmodule($component)) {
+        if ($trigger_layout = $this->getTriggerLayoutSubcomponent($component)) {
             // Important: the trigger layout must not be included, since it doesn't apply to the same entity being iterated
             return array_values(
                 array_diff(

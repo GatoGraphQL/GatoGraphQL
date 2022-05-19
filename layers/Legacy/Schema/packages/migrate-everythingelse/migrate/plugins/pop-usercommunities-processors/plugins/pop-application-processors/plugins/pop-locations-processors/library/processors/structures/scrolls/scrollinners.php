@@ -24,9 +24,9 @@ class PoP_UserCommunities_EM_Module_Processor_CustomScrollInners extends PoP_Mod
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
             self::COMPONENT_SCROLLINNER_COMMUNITIES_MAP => [GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::class, GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS],

@@ -14,7 +14,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_HIGHLIGHTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT],
@@ -24,7 +24,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

@@ -19,7 +19,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
@@ -38,14 +38,14 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKUSERLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

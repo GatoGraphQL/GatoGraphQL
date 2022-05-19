@@ -11,7 +11,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
         );
     }
 
-    public function getTriggerSubmodule(array $component): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
@@ -21,7 +21,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
                 return $layouts[$component[1]];
         }
 
-        return parent::getTriggerSubmodule($component);
+        return parent::getTriggerSubcomponent($component);
     }
 
     public function getDbobjectField(array $component): ?string

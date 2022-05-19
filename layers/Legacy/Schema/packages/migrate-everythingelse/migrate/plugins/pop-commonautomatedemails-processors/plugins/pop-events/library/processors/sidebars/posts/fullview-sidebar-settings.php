@@ -4,7 +4,7 @@ define('GD_COMPACTSIDEBARSECTION_AUTOMATEDEMAILS_EVENT', 'compact-automatedemail
 
 class EM_AE_FullViewSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

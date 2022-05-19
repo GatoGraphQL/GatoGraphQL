@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($inners = $this->getInnerSubmodules($component)) {
+        if ($inners = $this->getInnerSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
         return array();
     }
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($inners = $this->getInnerSubmodules($component)) {
+        if ($inners = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $inners

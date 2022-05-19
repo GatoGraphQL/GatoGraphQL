@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_AddEditContentBlocksBase extends PoP_Module_
         return parent::showDisabledLayerIfCheckpointFailed($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         if ($this->isUpdate($component)) {
             return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_EDITPOST];
@@ -27,6 +27,6 @@ abstract class PoP_Module_Processor_AddEditContentBlocksBase extends PoP_Module_
             return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEPOST];
         }
         
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }

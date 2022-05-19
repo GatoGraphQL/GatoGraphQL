@@ -19,7 +19,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLL_COMMENTS_LIST:
@@ -35,7 +35,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                 return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function addFetchedData(array $component, array &$props)
@@ -72,7 +72,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
         parent::initModelProps($component, $props);
     }
 
-    public function getFetchmoreButtonSubmodule(array $component)
+    public function getFetchmoreButtonSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLL_COMMENTS_LIST:
@@ -80,7 +80,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                 return null;
         }
 
-        return parent::getFetchmoreButtonSubmodule($component);
+        return parent::getFetchmoreButtonSubcomponent($component);
     }
 }
 

@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_EVENTS:
@@ -42,7 +42,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
                 return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_TAGEVENTS];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getMode(array $component, array &$props)
@@ -58,7 +58,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
     }
 
 
-    public function getControlsTopSubmodule(array $component)
+    public function getControlsTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_EVENTS:
@@ -71,7 +71,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
                 return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_TAGEVENTS];
         }
 
-        return parent::getControlsTopSubmodule($component);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

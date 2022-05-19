@@ -16,7 +16,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
@@ -25,12 +25,12 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($component);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBelowthumbLayoutSubmodules(array $component)
+    public function getBelowthumbLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($component);
+        $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
@@ -47,9 +47,9 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getBottomSubmodules(array $component)
+    public function getBottomSubcomponents(array $component)
     {
-        $ret = parent::getBottomSubmodules($component);
+        $ret = parent::getBottomSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
@@ -61,7 +61,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $component)
+    public function getPostThumbSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
@@ -74,7 +74,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_XSMALL];
         }
 
-        return parent::getPostThumbSubmodule($component);
+        return parent::getPostThumbSubcomponent($component);
     }
 
     public function authorPositions(array $component)

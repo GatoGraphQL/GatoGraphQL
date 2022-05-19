@@ -40,7 +40,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -48,7 +48,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         // Why? because otherwise, if first loading an Edit Discussion (eg: http://m3l.localhost/edit-discussion/?_wpnonce=e88efa07c5&pid=17887)
         // being the user logged out and only then he log in, the refetchBlock doesn't work because it doesn't have the pid/_wpnonce values
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
@@ -61,7 +61,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
                 );
         }
 
-        return parent::getComponentSubmodules($component, $props);
+        return parent::getComponentSubcomponents($component, $props);
     }
 
     public function initModelProps(array $component, array &$props): void

@@ -50,7 +50,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW],
@@ -78,7 +78,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

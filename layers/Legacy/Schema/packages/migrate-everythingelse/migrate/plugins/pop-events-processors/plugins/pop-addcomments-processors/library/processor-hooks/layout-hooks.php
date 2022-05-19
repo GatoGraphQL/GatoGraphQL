@@ -6,11 +6,11 @@ class PoP_Events_AddComments_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
-            $this->getFooterSubmodules(...)
+            $this->getFooterSubcomponents(...)
         );
     }
 
-    public function getFooterSubmodules($layouts)
+    public function getFooterSubcomponents($layouts)
     {
         $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_LAZYSUBCOMPONENT_POSTCOMMENTS];
         return $layouts;

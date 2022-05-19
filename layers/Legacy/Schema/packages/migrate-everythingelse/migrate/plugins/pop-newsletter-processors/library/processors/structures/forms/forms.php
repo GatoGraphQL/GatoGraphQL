@@ -13,7 +13,7 @@ class PoP_Newsletter_Module_Processor_GFForms extends PoP_Module_Processor_Forms
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FORM_NEWSLETTER => [PoP_Newsletter_Module_Processor_GFFormInners::class, PoP_Newsletter_Module_Processor_GFFormInners::COMPONENT_FORMINNER_NEWSLETTER],
@@ -24,7 +24,7 @@ class PoP_Newsletter_Module_Processor_GFForms extends PoP_Module_Processor_Forms
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

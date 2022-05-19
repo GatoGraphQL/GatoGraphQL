@@ -28,7 +28,7 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW => [PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::class, PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
@@ -38,7 +38,7 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getTitle(array $component, array &$props)

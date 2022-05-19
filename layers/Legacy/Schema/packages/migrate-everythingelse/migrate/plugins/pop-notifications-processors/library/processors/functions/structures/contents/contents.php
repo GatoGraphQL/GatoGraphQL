@@ -13,7 +13,7 @@ class GD_AAL_Module_Processor_FunctionsContents extends PoP_Module_Processor_Con
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_MARKNOTIFICATIONASREAD => [GD_AAL_Module_Processor_FunctionsContentMultipleInners::class, GD_AAL_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD],
@@ -23,7 +23,7 @@ class GD_AAL_Module_Processor_FunctionsContents extends PoP_Module_Processor_Con
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

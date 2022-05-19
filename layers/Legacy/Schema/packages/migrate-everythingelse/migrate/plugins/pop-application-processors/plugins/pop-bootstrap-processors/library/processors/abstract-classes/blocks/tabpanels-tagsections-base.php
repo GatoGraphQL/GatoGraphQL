@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_TagTabPanelSectionBlocksBase extends PoP_Mod
     //     return TagRequestNature::TAG;
     // }
 
-    protected function getControlgroupBottomSubmodule(array $component)
+    protected function getControlgroupBottomSubcomponent(array $component)
     {
         return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST];
     }

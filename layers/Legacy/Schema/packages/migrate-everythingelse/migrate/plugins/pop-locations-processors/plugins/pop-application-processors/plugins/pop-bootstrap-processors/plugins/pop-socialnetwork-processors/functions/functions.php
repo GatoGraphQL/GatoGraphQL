@@ -3,8 +3,8 @@
 /**
  * Map format
  */
-\PoP\Root\App::addFilter('PoP_Module_Processor_AuthorSectionTabPanelComponents:modules', 'gdEmSocialnetworkAuthorsectiontabpanelSubmodules', 10, 2);
-function gdEmSocialnetworkAuthorsectiontabpanelSubmodules($subComponents, array $component)
+\PoP\Root\App::addFilter('PoP_Module_Processor_AuthorSectionTabPanelComponents:modules', 'gdEmSocialnetworkAuthorsectiontabpanelSubcomponents', 10, 2);
+function gdEmSocialnetworkAuthorsectiontabpanelSubcomponents($subComponents, array $component)
 {
     if ($component == [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORFOLLOWERS]) {
         $subComponents[] = [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP];
@@ -29,8 +29,8 @@ function gdEmSocialnetworkAuthorsectiontabpanelPanelheaders($panelheaders, array
 
     return $panelheaders;
 }
-\PoP\Root\App::addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSocialnetworkSinglesectiontabpanelSubmodules', 10, 2);
-function gdEmSocialnetworkSinglesectiontabpanelSubmodules($subComponents, array $component)
+\PoP\Root\App::addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSocialnetworkSinglesectiontabpanelSubcomponents', 10, 2);
+function gdEmSocialnetworkSinglesectiontabpanelSubcomponents($subComponents, array $component)
 {
     if ($component == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERECOMMENDEDBY]) {
         $subComponents[] = [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP];
@@ -63,8 +63,8 @@ function gdEmSocialnetworkSinglesectiontabpanelPanelheaders($panelheaders, array
     return $panelheaders;
 }
 
-\PoP\Root\App::addFilter('PoP_Module_Processor_TagSectionTabPanelComponents:modules', 'gdEmSocialnetworkTagsectiontabpanelSubmodules', 10, 2);
-function gdEmSocialnetworkTagsectiontabpanelSubmodules($subComponents, array $component)
+\PoP\Root\App::addFilter('PoP_Module_Processor_TagSectionTabPanelComponents:modules', 'gdEmSocialnetworkTagsectiontabpanelSubcomponents', 10, 2);
+function gdEmSocialnetworkTagsectiontabpanelSubcomponents($subComponents, array $component)
 {
     if ($component == [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGSUBSCRIBERS]) {
         $subComponents[] = [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP];

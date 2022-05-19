@@ -21,7 +21,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
         );
     }
 
-    public function getDefaultLayoutSubmodule(array $component)
+    public function getDefaultLayoutSubcomponent(array $component)
     {
         $defaults = array(
             self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS],
@@ -35,10 +35,10 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
             return $default;
         }
 
-        return parent::getDefaultLayoutSubmodule($component);
+        return parent::getDefaultLayoutSubcomponent($component);
     }
 
-    public function getMultipleLayoutSubmodules(array $component)
+    public function getMultipleLayoutSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS:
@@ -58,7 +58,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
                 return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$component[1]]);
         }
 
-        return parent::getMultipleLayoutSubmodules($component);
+        return parent::getMultipleLayoutSubcomponents($component);
     }
 }
 

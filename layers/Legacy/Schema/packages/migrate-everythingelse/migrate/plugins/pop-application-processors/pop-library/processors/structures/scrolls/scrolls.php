@@ -86,7 +86,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
     }
 
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_CONTENT_NAVIGATOR => [PoP_Module_Processor_CustomScrollInners::class, PoP_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR],
@@ -133,7 +133,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -230,7 +230,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
         $this->appendProp($component, $props, 'class', $extra_class);
 
 
-        $inner = $this->getInnerSubmodule($component);
+        $inner = $this->getInnerSubcomponent($component);
         if (in_array($component, $navigators)) {
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');

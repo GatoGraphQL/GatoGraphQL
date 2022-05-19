@@ -2,10 +2,10 @@
 
 abstract class PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getConditionfailedLayoutSubmodules(array $component)
+    public function getConditionfailedLayoutSubcomponents(array $component)
     {
         // The layouts and condition failed layouts are the same, the only difference is adding class "hidden" between the 2 states
-        return $this->getLayoutSubmodules($component);
+        return $this->getLayoutSubcomponents($component);
     }
 
     public function getConditionfailedClass(array $component, array &$props)

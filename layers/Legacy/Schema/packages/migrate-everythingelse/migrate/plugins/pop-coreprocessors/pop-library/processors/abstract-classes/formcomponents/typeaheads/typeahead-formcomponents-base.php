@@ -8,14 +8,14 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getInputSubmodule($component);
+        return $this->getInputSubcomponent($component);
     }
 
-    public function getComponentSubmodules(array $component)
+    public function getComponentSubcomponents(array $component)
     {
         return array();
     }
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
         return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEAD];
     }
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
     {
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $input = $this->getInputSubmodule($component);
+        $input = $this->getInputSubcomponent($component);
 
         // Because getLabel is used on initModelProps, the structure in $props for the subcomponent may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
         // Make the input hidden? This is needed when using the typeahead to pre-select a value,
         // but we don't want the user to keep selecting more. Eg: Add Highlight
-        $input = $this->getInputSubmodule($component);
+        $input = $this->getInputSubcomponent($component);
         $this->appendProp($input, $props, 'class', 'typeahead');
 
         // Transfer properties down the line
@@ -70,7 +70,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $input = $this->getInputSubmodule($component);
+        $input = $this->getInputSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
 
         return $ret;
@@ -82,9 +82,9 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
         return array_merge(
             $ret,
-            $this->getComponentSubmodules($component),
+            $this->getComponentSubcomponents($component),
             array(
-                $this->getInputSubmodule($component)
+                $this->getInputSubcomponent($component)
             )
         );
     }
@@ -102,7 +102,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         if ($typeahead_jsmethod = $this->getTypeaheadJsmethod($component, $props)) {
-            $ret[$typeahead_jsmethod]['dataset-components'] = $this->getComponentSubmodules($component);
+            $ret[$typeahead_jsmethod]['dataset-components'] = $this->getComponentSubcomponents($component);
         }
 
         return $ret;
@@ -117,7 +117,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return array_values(
             array_diff(
                 parent::getModulesToPropagateDataProperties($component),
-                $this->getComponentSubmodules($component)
+                $this->getComponentSubcomponents($component)
             )
         );
     }

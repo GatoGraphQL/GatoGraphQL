@@ -88,7 +88,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
@@ -101,6 +101,6 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
                 return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 }

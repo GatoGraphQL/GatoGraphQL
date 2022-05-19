@@ -12,14 +12,14 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:
                 return [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW];
         }
         
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getLabel(array $component, array &$props)

@@ -49,9 +49,9 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYCATEGORYPOSTS00],
@@ -82,7 +82,7 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00:
@@ -108,10 +108,10 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00:
@@ -137,7 +137,7 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_MYCATEGORYPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

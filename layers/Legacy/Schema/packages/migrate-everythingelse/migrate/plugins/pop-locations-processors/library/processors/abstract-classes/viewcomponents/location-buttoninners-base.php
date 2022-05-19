@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         if ($location_component = $this->getLocationModule($component)) {
             return [
@@ -54,6 +54,6 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
                 ),
             ];
         }
-        return parent::getRelationalSubmodules($component);
+        return parent::getRelationalSubcomponents($component);
     }
 }

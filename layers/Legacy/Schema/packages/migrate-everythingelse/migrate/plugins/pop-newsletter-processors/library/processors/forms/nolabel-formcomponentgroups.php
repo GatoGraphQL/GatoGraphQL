@@ -22,7 +22,7 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
         return parent::getInfo($component, $props);
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER => [GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER],
@@ -32,7 +32,7 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

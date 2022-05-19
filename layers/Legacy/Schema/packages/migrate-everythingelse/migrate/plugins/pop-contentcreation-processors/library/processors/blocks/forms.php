@@ -19,9 +19,9 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_FLAG:

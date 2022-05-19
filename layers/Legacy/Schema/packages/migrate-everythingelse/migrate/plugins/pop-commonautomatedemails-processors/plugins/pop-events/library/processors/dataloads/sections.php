@@ -33,7 +33,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -47,7 +47,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
@@ -58,7 +58,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_EVENTS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_LOCATIONBUTTON];
     }
 
-    public function getMapscriptSubmodule(array $component)
+    public function getMapscriptSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::COMPONENT_MAP_SCRIPT];
     }
@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
         if ($this->initMarkers($component)) {
             $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
-            $ret[] = $this->getMapscriptSubmodule($component);
+            $ret[] = $this->getMapscriptSubcomponent($component);
         }
 
         return $ret;
@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         if ($this->showEachLocation($component)) {
             $components = [];
@@ -70,7 +70,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             }
         }
 
-        return parent::getRelationalSubmodules($component);
+        return parent::getRelationalSubcomponents($component);
     }
 
     public function getUrlField(array $component)
@@ -128,7 +128,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
         // If we don't initialize the markers, simply do not send the componentoutputname for those modules, and they will not be drawn
         if ($this->initMarkers($component)) {
-            $map_script = $this->getMapscriptSubmodule($component);
+            $map_script = $this->getMapscriptSubcomponent($component);
             $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_script);
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);

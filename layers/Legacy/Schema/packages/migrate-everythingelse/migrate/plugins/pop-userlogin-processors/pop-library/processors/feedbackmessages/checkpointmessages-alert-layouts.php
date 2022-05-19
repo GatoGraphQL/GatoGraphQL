@@ -17,7 +17,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends Po
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN],
@@ -30,7 +30,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends Po
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

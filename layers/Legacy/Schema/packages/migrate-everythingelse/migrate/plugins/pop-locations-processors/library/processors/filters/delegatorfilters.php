@@ -11,7 +11,7 @@ class PoP_Locations_Module_Processor_CustomDelegatorFilters extends PoP_Module_P
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_LOCATIONS => [PoP_Locations_Module_Processor_CustomSimpleFilterInners::class, PoP_Locations_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],
@@ -21,7 +21,7 @@ class PoP_Locations_Module_Processor_CustomDelegatorFilters extends PoP_Module_P
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

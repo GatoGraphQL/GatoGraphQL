@@ -63,9 +63,9 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
         return parent::getFeedbackmessageModule($component);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SHAREBYEMAIL:

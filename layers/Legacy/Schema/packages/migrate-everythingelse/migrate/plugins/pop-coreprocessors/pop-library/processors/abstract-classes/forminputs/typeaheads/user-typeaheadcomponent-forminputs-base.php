@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     }
-    // protected function getLayoutSubmodule(array $component) {
+    // protected function getLayoutSubcomponent(array $component) {
 
     //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }

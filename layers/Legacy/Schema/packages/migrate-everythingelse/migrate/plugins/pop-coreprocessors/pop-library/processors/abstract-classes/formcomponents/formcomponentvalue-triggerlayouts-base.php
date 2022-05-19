@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getTriggerSubmodule($component);
+        return $this->getTriggerSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)
@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     {
         return null;
     }
-    public function getTriggerSubmodule(array $component): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
         return null;
     }
@@ -43,14 +43,14 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     {
         $ret = parent::getSubcomponents($component);
 
-        $ret[] = $this->getTriggerSubmodule($component);
+        $ret[] = $this->getTriggerSubcomponent($component);
 
         return $ret;
     }
 
     public function initWebPlatformModelProps(array $component, array &$props)
     {
-        $trigger_component = $this->getTriggerSubmodule($component);
+        $trigger_component = $this->getTriggerSubcomponent($component);
 
         // Add the class to be able to merge
         $this->appendProp($component, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($trigger_component));
@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         // Because the URL param and the field name are disassociated, instead of getting ->getValue (which gets the value for the fieldname),
         // we do $_GET instead
         if ($value = \PoP\Root\App::query($this->getUrlParam($component))) {
-            $trigger_component = $this->getTriggerSubmodule($component);
+            $trigger_component = $this->getTriggerSubcomponent($component);
             $this->setProp($trigger_component, $props, 'default-value', $value);
         }
 
@@ -82,7 +82,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
     public function initModelProps(array $component, array &$props): void
     {
-        $trigger_component = $this->getTriggerSubmodule($component);
+        $trigger_component = $this->getTriggerSubcomponent($component);
 
         // // Because the triggered layout will need to be rendered, it needs to have its template_path printed in the webplatform
         // $this->setProp($trigger_component, $props, 'module-path', true);
@@ -115,7 +115,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         // if ($this->getProp($component, $props, 'replicable')) {
-        $ret['renderDBObjectLayoutFromURLParam']['trigger-layout'] = $this->getTriggerSubmodule($component);
+        $ret['renderDBObjectLayoutFromURLParam']['trigger-layout'] = $this->getTriggerSubcomponent($component);
         // }
 
         return $ret;
@@ -141,7 +141,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             $ret['dbkey'] = $triggerTypeResolver->getTypeOutputDBKey();
         }
 
-        $trigger_component = $this->getTriggerSubmodule($component);
+        $trigger_component = $this->getTriggerSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_component);
 
         $this->addMetaFormcomponentModuleConfiguration($ret, $component, $props);
@@ -152,20 +152,20 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         if ($field = $this->getDbobjectField($component)) {
             return [
                 new RelationalModuleField(
                     $field,
                     [
-                        $this->getTriggerSubmodule($component),
+                        $this->getTriggerSubcomponent($component),
                     ]
                 ),
             ];
         }
 
-        return parent::getRelationalSubmodules($component);
+        return parent::getRelationalSubcomponents($component);
     }
 
     public function getMutableonrequestConfiguration(array $component, array &$props): array
@@ -216,7 +216,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
             $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
-            $trigger_component = $this->getTriggerSubmodule($component);
+            $trigger_component = $this->getTriggerSubcomponent($component);
             $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_component)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
 
             // Extend the dataload ids

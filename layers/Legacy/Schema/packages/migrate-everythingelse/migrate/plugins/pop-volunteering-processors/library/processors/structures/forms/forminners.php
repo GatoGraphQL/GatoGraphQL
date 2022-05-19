@@ -11,9 +11,9 @@ class PoP_Volunteering_Module_Processor_GFFormInners extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_VOLUNTEER:

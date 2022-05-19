@@ -16,9 +16,9 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
         );
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
          // Add also the filter block for the Single Related Content, etc

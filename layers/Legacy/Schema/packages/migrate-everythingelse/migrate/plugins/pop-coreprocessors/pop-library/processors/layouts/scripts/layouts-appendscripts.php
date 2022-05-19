@@ -30,14 +30,14 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCRIPT_SINGLECOMMENT:
                 return [PoP_Module_Processor_AppendCommentLayouts::class, PoP_Module_Processor_AppendCommentLayouts::COMPONENT_SCRIPT_APPENDCOMMENT];
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
     
     public function getImmutableConfiguration(array $component, array &$props): array

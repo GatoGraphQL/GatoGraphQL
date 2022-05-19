@@ -7,7 +7,7 @@ class UREPoP_RoleProcessors_EM_ControlGroup_Hooks
     {
         \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomControlGroups:blockauthoreventlist:layouts',
-            $this->getLayoutSubmodules(...)
+            $this->getLayoutSubcomponents(...)
         );
 
         // Also the Past Events link on the Author Events top controlgroup
@@ -19,7 +19,7 @@ class UREPoP_RoleProcessors_EM_ControlGroup_Hooks
         );
     }
 
-    public function getLayoutSubmodules($layouts)
+    public function getLayoutSubcomponents($layouts)
     {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 

@@ -8,12 +8,12 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_SCRIPTFRAME];
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getScriptSubmodule(array $component)
+    public function getScriptSubcomponent(array $component)
     {
         return null;
     }
@@ -23,8 +23,8 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
         return array_merge(
             parent::getSubcomponents($component),
             array(
-                $this->getLayoutSubmodule($component),
-                $this->getScriptSubmodule($component),
+                $this->getLayoutSubcomponent($component),
+                $this->getScriptSubcomponent($component),
             )
         );
     }
@@ -35,8 +35,8 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $layout = $this->getLayoutSubmodule($component);
-        $script = $this->getScriptSubmodule($component);
+        $layout = $this->getLayoutSubcomponent($component);
+        $script = $this->getScriptSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script);
 
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
 
     public function initModelProps(array $component, array &$props): void
     {
-        $script = $this->getScriptSubmodule($component);
+        $script = $this->getScriptSubcomponent($component);
         $this->setProp($script, $props, 'frame-component', $component);
         parent::initModelProps($component, $props);
     }

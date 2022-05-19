@@ -51,7 +51,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES => [GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES],
@@ -65,7 +65,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getInfo(array $component, array &$props)

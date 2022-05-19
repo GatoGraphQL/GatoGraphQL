@@ -6,25 +6,25 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonControls:components:share',
-            $this->getShareSubmodules(...),
+            $this->getShareSubcomponents(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            $this->getDropdownSubmodules(...),
+            $this->getDropdownSubcomponents(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            $this->getSocialmediaprovidersSubmodules(...),
+            $this->getSocialmediaprovidersSubcomponents(...),
             10,
             2
         );
     }
 
-    public function getShareSubmodules($subComponents, array $component)
+    public function getShareSubcomponents($subComponents, array $component)
     {
         // Insert at the beginning
         array_splice(
@@ -39,7 +39,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         return $subComponents;
     }
 
-    public function getDropdownSubmodules($subComponents, array $component)
+    public function getDropdownSubcomponents($subComponents, array $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -82,7 +82,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         return $subComponents;
     }
 
-    public function getSocialmediaprovidersSubmodules($subComponents, array $component)
+    public function getSocialmediaprovidersSubcomponents($subComponents, array $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:

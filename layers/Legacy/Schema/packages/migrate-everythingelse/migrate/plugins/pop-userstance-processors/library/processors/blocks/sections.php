@@ -228,7 +228,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_SCROLL_NAVIGATOR],
@@ -306,7 +306,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
@@ -387,10 +387,10 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 return [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubmodule(array $component)
+    public function getLatestcountSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
@@ -458,7 +458,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL];
         }
 
-        return parent::getLatestcountSubmodule($component);
+        return parent::getLatestcountSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

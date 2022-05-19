@@ -11,9 +11,9 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFormInners extends PoP_Modul
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
     
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_USERAVATAR_UPDATE:

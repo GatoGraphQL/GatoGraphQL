@@ -36,9 +36,9 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return null;
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:

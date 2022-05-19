@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
@@ -49,7 +49,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
-                $subComponent = $this->getInnerSubmodule($component);
+                $subComponent = $this->getInnerSubcomponent($component);
                 $this->setProp([$subComponent], $props, 'title-htmltag', 'h2');
                 break;
         }
@@ -65,7 +65,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
-                $subComponent = $this->getInnerSubmodule($component);
+                $subComponent = $this->getInnerSubcomponent($component);
 
                 // Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
                 $title = getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
@@ -86,7 +86,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
-                $ret[] = $this->getInnerSubmodule($component);
+                $ret[] = $this->getInnerSubcomponent($component);
                 break;
         }
 

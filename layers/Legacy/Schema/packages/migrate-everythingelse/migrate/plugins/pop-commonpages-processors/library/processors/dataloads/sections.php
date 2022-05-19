@@ -29,7 +29,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS => [GD_Custom_Module_Processor_CustomScrolls::class, GD_Custom_Module_Processor_CustomScrolls::COMPONENT_SCROLL_WHOWEARE_DETAILS],

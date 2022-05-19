@@ -6,14 +6,14 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
     public function getSubcomponents(array $component): array
     {
         $ret = parent::getSubcomponents($component);
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $layouts
             );
         }
 
-        if ($user_avatar = $this->getLoggedinUseravatarSubmodule($component)) {
+        if ($user_avatar = $this->getLoggedinUseravatarSubcomponent($component)) {
             $ret[] = $user_avatar;
         }
         return $ret;
@@ -24,12 +24,12 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_USERPOSTINTERACTION];
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getLoggedinUseravatarSubmodule()
+    public function getLoggedinUseravatarSubcomponent()
     {
         if (defined('POP_USERAVATARPROCESSORS_INITIALIZED')) {
             return [PoP_Module_Processor_LoggedInUserAvatars::class, PoP_Module_Processor_LoggedInUserAvatars::COMPONENT_LAYOUT_LOGGEDINUSERAVATAR];
@@ -56,14 +56,14 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
 
-        if ($user_avatar = $this->getLoggedinUseravatarSubmodule($component)) {
+        if ($user_avatar = $this->getLoggedinUseravatarSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
         }
 

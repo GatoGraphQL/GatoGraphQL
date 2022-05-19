@@ -11,9 +11,9 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
         );
     }
 
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
-        $ret = parent::getInputSubmodule($component);
+        $ret = parent::getInputSubcomponent($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
@@ -23,9 +23,9 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
         return $ret;
     }
 
-    public function getControlSubmodules(array $component)
+    public function getControlSubcomponents(array $component)
     {
-        $ret = parent::getControlSubmodules($component);
+        $ret = parent::getControlSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:

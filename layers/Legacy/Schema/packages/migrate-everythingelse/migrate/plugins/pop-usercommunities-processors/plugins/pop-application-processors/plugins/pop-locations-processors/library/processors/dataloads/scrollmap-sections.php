@@ -26,7 +26,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections::COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP],
@@ -36,7 +36,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP:
@@ -46,7 +46,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

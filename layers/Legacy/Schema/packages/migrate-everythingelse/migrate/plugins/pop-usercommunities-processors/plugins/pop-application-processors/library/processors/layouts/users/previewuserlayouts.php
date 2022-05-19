@@ -11,17 +11,17 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
         );
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($component);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getUseravatarSubmodule(array $component)
+    public function getUseravatarSubcomponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -30,7 +30,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
             }
         }
 
-        return parent::getUseravatarSubmodule($component);
+        return parent::getUseravatarSubcomponent($component);
     }
 
     public function showShortDescription(array $component)

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 trait PoP_Engine_Module_Processor_InnerModules_Trait
 {
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
         return array();
     }
@@ -12,7 +12,7 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
     {
         return array_merge(
             parent::getSubcomponents($component),
-            $this->getInnerSubmodules($component)
+            $this->getInnerSubcomponents($component)
         );
     }
     
@@ -22,7 +22,7 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
 
         $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($subComponents = $this->getInnerSubmodules($component)) {
+        if ($subComponents = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $subComponents

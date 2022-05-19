@@ -8,11 +8,11 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POPOVER];
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
-    public function getLayoutContentSubmodule(array $component)
+    public function getLayoutContentSubcomponent(array $component)
     {
         return null;
     }
@@ -21,10 +21,10 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($layout = $this->getLayoutSubmodule($component)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[] = $layout;
         }
-        if ($layout_content = $this->getLayoutContentSubmodule($component)) {
+        if ($layout_content = $this->getLayoutContentSubcomponent($component)) {
             $ret[] = $layout_content;
         }
 
@@ -44,10 +44,10 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($layout = $this->getLayoutSubmodule($component)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
-        if ($layout_content = $this->getLayoutContentSubmodule($component)) {
+        if ($layout_content = $this->getLayoutContentSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_content);
         }
         

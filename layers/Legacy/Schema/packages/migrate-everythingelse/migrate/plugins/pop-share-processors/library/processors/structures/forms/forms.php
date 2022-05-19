@@ -11,7 +11,7 @@ class PoP_Share_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FORM_SHAREBYEMAIL => [PoP_Share_Module_Processor_GFFormInners::class, PoP_Share_Module_Processor_GFFormInners::COMPONENT_FORMINNER_SHAREBYEMAIL],
@@ -21,7 +21,7 @@ class PoP_Share_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
 
     // function initModelProps(array $component, array &$props) {
 
-    //     $layout = $this->getLayoutSubmodule($component);
+    //     $layout = $this->getLayoutSubcomponent($component);
     //     $this->setProp($layout, $props, 'layout-inner', [self::class, self::COMPONENT_LAYOUTPOST_SPEECHBUBBLE]);
 
     //     parent::initModelProps($component, $props);

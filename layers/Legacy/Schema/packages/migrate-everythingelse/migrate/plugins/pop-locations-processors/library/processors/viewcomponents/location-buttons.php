@@ -92,7 +92,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         return parent::getComplementSeparator($component);
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
@@ -113,10 +113,10 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
                 return $buttoninners[$component[1]];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    // function getHeaderSubmodule(array $component) {
+    // function getHeaderSubcomponent(array $component) {
 
     //     switch ($component[1]) {
 
@@ -133,7 +133,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     //             return [PoP_Module_Processor_UserViewComponentHeaders::class, PoP_Module_Processor_UserViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_USER];
     //     }
 
-    //     return parent::getHeaderSubmodule($component);
+    //     return parent::getHeaderSubcomponent($component);
     // }
 }
 

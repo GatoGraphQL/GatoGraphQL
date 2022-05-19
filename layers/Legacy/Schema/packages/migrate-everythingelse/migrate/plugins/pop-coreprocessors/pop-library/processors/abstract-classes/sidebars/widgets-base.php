@@ -12,20 +12,20 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $layouts
             );
         }
-        if ($quicklinkgroup = $this->getQuicklinkgroupSubmodule($component)) {
+        if ($quicklinkgroup = $this->getQuicklinkgroupSubcomponent($component)) {
             $ret[] = $quicklinkgroup;
         }
 
         return $ret;
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
         return array();
     }
@@ -81,7 +81,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
     {
         return 'h4';
     }
-    public function getQuicklinkgroupSubmodule(array $component)
+    public function getQuicklinkgroupSubcomponent(array $component)
     {
         return null;
     }
@@ -153,7 +153,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
 
         // $sidebarcomponent_inner = $this->getSidebarcomponentInner($component);
         // $this->appendProp($sidebarcomponent_inner, $props, 'class', $this->getItemWrapper($component, $props));
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $itemwrapper_class = $this->getItemWrapper($component, $props);
             foreach ($layouts as $layout) {
                 $this->appendProp($layout, $props, 'class', $itemwrapper_class);
@@ -192,13 +192,13 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
             $ret[GD_JS_CLASSES]['collapse-link'] = $this->getProp($component, $props, 'collapselink-class');
         }
 
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
-        if ($quicklinkgroup = $this->getQuicklinkgroupSubmodule($component)) {
+        if ($quicklinkgroup = $this->getQuicklinkgroupSubcomponent($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup'] = 'sidebarwidget-quicklinkgroup pull-right';
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup);
         }

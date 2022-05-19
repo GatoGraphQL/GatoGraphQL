@@ -11,7 +11,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessages extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageInners::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUSER],
@@ -21,7 +21,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessages extends PoP_Module_Pro
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

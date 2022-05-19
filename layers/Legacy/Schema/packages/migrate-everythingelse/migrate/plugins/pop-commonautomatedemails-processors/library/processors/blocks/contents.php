@@ -41,9 +41,9 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
         return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:

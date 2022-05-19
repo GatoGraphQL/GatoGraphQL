@@ -33,14 +33,14 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
+        if ($abovecontent_components = $this->getAbovecontentSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $abovecontent_components
             );
         }
 
-        if ($content_components = $this->getContentSubmodules($component)) {
+        if ($content_components = $this->getContentSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $content_components
@@ -50,12 +50,12 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getContentSubmodules(array $component)
+    public function getContentSubcomponents(array $component)
     {
         return array(
             [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTFEED],
@@ -70,18 +70,18 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
 
         $ret[GD_JS_CLASSES]['title'] = '';
 
-        if ($this->getTitleSubmodule($component, $props)) {
+        if ($this->getTitleSubcomponent($component, $props)) {
             $ret['title-position'] = $this->titlePosition($component, $props);
         }
 
-        if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
+        if ($abovecontent_components = $this->getAbovecontentSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovecontent_components
             );
         }
 
-        if ($content_components = $this->getContentSubmodules($component)) {
+        if ($content_components = $this->getContentSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['content'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $content_components

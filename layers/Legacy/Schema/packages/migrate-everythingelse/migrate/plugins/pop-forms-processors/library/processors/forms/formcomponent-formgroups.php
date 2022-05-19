@@ -36,7 +36,7 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
@@ -46,7 +46,7 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

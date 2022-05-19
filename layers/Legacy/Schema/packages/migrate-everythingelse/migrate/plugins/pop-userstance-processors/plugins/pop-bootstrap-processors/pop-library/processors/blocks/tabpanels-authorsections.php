@@ -19,9 +19,9 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -50,7 +50,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES:
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORSTANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

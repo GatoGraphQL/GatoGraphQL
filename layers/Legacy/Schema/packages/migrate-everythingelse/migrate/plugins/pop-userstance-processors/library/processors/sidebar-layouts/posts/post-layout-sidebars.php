@@ -16,7 +16,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
@@ -28,7 +28,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

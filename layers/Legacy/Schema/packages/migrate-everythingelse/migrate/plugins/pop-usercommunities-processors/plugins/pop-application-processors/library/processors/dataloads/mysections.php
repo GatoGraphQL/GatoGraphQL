@@ -26,11 +26,11 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
@@ -62,7 +62,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
@@ -70,7 +70,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
                 return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_MYMEMBERS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

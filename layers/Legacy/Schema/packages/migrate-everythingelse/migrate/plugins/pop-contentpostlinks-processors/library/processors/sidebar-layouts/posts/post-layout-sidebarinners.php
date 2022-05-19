@@ -15,23 +15,23 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POSTLINK)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_POSTLINK)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_POSTLINK)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_POSTLINK)
                 );
                 break;
         }

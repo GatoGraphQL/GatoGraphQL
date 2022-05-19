@@ -7,9 +7,9 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
         return true;
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         $ret[] = [GD_Custom_Module_Processor_PostThumbLayoutWrappers::class, GD_Custom_Module_Processor_PostThumbLayoutWrappers::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER];
 
@@ -25,13 +25,13 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
         return null;
     }
 
-    public function getContentSubmodule(array $component)
+    public function getContentSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MaxHeightLayoutMultipleComponents::class, PoP_Module_Processor_MaxHeightLayoutMultipleComponents::COMPONENT_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT];
     }
     
 
-    public function getPostThumbSubmodule(array $component)
+    public function getPostThumbSubcomponent(array $component)
     {
         return null;
     }

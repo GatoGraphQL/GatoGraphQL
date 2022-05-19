@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomFilters extends PoP_Module_Processor_Filters
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_MYMEMBERS => [GD_URE_Module_Processor_CustomFilterInners::class, GD_URE_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS],
@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_CustomFilters extends PoP_Module_Processor_Filters
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

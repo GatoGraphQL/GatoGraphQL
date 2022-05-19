@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_COMMENTS => [PoP_Module_Processor_ListCommentsFeedbackMessageInners::class, PoP_Module_Processor_ListCommentsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_COMMENTS],
@@ -24,7 +24,7 @@ class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

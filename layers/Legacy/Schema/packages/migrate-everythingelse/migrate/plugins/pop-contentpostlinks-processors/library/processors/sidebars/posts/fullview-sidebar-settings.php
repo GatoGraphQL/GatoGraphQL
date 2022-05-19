@@ -5,7 +5,7 @@ define('GD_COMPACTSIDEBARSECTION_POSTLINK', 'compact-contentpostlink');
 
 class PoP_ContentPostLinks_FullViewSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

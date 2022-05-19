@@ -32,9 +32,9 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         );
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $blocks = array(
             self::COMPONENT_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR],

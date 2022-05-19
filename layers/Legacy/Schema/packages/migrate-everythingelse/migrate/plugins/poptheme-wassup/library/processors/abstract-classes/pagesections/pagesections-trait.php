@@ -12,20 +12,20 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
         return $ret;
     }
 
-    protected function getFrameoptionsSubmodules(array $component): array
+    protected function getFrameoptionsSubcomponents(array $component): array
     {
         return array_merge(
-            $this->getFrametopoptionsSubmodules($component),
-            $this->getFramebottomoptionsSubmodules($component)
+            $this->getFrametopoptionsSubcomponents($component),
+            $this->getFramebottomoptionsSubcomponents($component)
         );
     }
 
-    public function getFrametopoptionsSubmodules(array $component): array
+    public function getFrametopoptionsSubcomponents(array $component): array
     {
         return array();
     }
 
-    public function getFramebottomoptionsSubmodules(array $component): array
+    public function getFramebottomoptionsSubcomponents(array $component): array
     {
         return array();
     }
@@ -34,7 +34,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
     {
         return array_merge(
             parent::getSubcomponents($component),
-            $this->getFrameoptionsSubmodules($component)
+            $this->getFrameoptionsSubcomponents($component)
         );
     }
 
@@ -44,7 +44,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 
         $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($subComponents = $this->getFrameoptionsSubmodules($component)) {
+        if ($subComponents = $this->getFrameoptionsSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['frameoptions'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $subComponents
@@ -66,9 +66,9 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
             $this->appendProp([$subComponent], $props, 'class', 'pop-outerblock');
         }
 
-        $topframeoptions = $this->getFrametopoptionsSubmodules($component);
-        $bottomframeoptions = $this->getFramebottomoptionsSubmodules($component);
-        foreach ($this->getFrameoptionsSubmodules($component) as $subComponent) {
+        $topframeoptions = $this->getFrametopoptionsSubcomponents($component);
+        $bottomframeoptions = $this->getFramebottomoptionsSubcomponents($component);
+        foreach ($this->getFrameoptionsSubcomponents($component) as $subComponent) {
             $this->appendProp([$subComponent], $props, 'class', 'blocksection-controls pull-right');
 
             if (in_array($subComponent, $topframeoptions)) {

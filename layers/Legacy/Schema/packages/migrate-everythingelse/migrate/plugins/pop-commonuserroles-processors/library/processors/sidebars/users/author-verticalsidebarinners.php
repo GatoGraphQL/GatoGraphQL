@@ -13,22 +13,22 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION:
                 $ret = array_merge(
                     $ret,
-                    URE_FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_ORGANIZATION)
+                    URE_FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_ORGANIZATION)
                 );
                 break;
 
             case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL:
                 $ret = array_merge(
                     $ret,
-                    URE_FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_INDIVIDUAL)
+                    URE_FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_INDIVIDUAL)
                 );
                 break;
         }

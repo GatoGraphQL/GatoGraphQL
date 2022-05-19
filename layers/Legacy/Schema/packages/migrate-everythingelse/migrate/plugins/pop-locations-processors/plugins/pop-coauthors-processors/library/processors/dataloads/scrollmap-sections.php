@@ -22,7 +22,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP],
@@ -31,14 +31,14 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

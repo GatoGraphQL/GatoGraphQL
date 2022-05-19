@@ -11,7 +11,7 @@ class PoP_Module_Processor_CommentFilters extends PoP_Module_Processor_FiltersBa
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_COMMENTS => [PoP_Module_Processor_CommentFilterInners::class, PoP_Module_Processor_CommentFilterInners::COMPONENT_FILTERINPUTCONTAINER_COMMENTS],
@@ -21,7 +21,7 @@ class PoP_Module_Processor_CommentFilters extends PoP_Module_Processor_FiltersBa
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

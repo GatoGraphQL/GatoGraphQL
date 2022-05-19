@@ -13,7 +13,7 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
         );
     }
 
-    protected function getLayoutSubmodule(array $component)
+    protected function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
@@ -26,14 +26,14 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
         return null;
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::COMPONENT_CONTENTINNER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:
-                $ret[] = $this->getLayoutSubmodule($component);
+                $ret[] = $this->getLayoutSubcomponent($component);
                 break;
         }
 

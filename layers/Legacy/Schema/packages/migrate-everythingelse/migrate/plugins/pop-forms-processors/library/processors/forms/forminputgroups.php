@@ -71,7 +71,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EDITOR => [PoP_Module_Processor_EditorFormInputs::class, PoP_Module_Processor_EditorFormInputs::COMPONENT_FORMINPUT_EDITOR],
@@ -92,7 +92,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)
@@ -135,7 +135,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
             case self::COMPONENT_FORMINPUTGROUP_EMAILS:
                 $placeholder = TranslationAPIFacade::getInstance()->__('Type emails here, separated by space or comma (" " or ","), or 1 email per line', 'pop-coreprocessors');
-                $this->setProp($this->getComponentSubmodule($component), $props, 'placeholder', $placeholder);
+                $this->setProp($this->getComponentSubcomponent($component), $props, 'placeholder', $placeholder);
                 break;
         }
 

@@ -11,7 +11,7 @@ class PoP_EventsCreation_Module_Processor_CustomDelegatorFilters extends PoP_Mod
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_MYEVENTS => [PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners::class, PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYEVENTS],
@@ -21,7 +21,7 @@ class PoP_EventsCreation_Module_Processor_CustomDelegatorFilters extends PoP_Mod
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

@@ -21,16 +21,16 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
                 $ret = array_merge(
                     $ret,
-                    EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_EVENT)
+                    EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_EVENT)
                 );
                 break;
 
@@ -38,21 +38,21 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
                 $ret = array_merge(
                     $ret,
-                    EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_PASTEVENT)
+                    EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_PASTEVENT)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
                 $ret = array_merge(
                     $ret,
-                    EM_FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_EVENT)
+                    EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_EVENT)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT:
                 $ret = array_merge(
                     $ret,
-                    EM_FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_PASTEVENT)
+                    EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_PASTEVENT)
                 );
                 break;
         }

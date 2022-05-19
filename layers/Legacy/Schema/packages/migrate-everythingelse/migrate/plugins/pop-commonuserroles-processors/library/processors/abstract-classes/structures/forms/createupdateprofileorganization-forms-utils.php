@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils
 {
-    public static function getFormSubmodules(array $component, &$components, $processor)
+    public static function getFormSubcomponents(array $component, &$components, $processor)
     {
         // Add extra components
         array_splice(

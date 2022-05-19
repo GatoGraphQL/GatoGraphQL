@@ -11,7 +11,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_M
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_WHOWEARE_MAP],

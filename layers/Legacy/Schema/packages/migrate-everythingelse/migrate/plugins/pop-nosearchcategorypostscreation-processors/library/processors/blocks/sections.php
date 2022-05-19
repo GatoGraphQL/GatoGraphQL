@@ -131,7 +131,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
         );
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -202,7 +202,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
@@ -268,7 +268,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYBLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

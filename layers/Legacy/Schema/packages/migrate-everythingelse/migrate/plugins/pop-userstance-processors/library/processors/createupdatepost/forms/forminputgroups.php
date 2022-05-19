@@ -17,7 +17,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
@@ -30,7 +30,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
                 return [UserStance_Module_Processor_MultiSelectFilterInputs::class, UserStance_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_STANCE_MULTISELECT];
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -39,7 +39,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
-                $component = $this->getComponentSubmodule($component);
+                $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Write here...', 'pop-userstance-processors'));
                 break;
         }

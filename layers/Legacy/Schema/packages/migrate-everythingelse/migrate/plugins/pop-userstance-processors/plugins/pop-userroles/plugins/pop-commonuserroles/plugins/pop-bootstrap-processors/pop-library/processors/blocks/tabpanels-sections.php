@@ -22,9 +22,9 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS],
@@ -37,7 +37,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS:
@@ -45,10 +45,10 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS:
@@ -56,7 +56,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_AUTHORROLE];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

@@ -10,14 +10,14 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
             [self::class, self::COMPONENT_CONTENT_COMMENTSINGLE],
         );
     }
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENT_COMMENTSINGLE:
                 return [PoP_Module_Processor_CommentContentInners::class, PoP_Module_Processor_CommentContentInners::COMPONENT_CONTENTINNER_COMMENTSINGLE];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

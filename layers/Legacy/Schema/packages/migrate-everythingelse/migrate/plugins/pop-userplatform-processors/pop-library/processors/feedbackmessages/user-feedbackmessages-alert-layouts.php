@@ -11,7 +11,7 @@ class PoP_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_Module_Pr
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_MYPREFERENCES => [PoP_Module_Processor_UserFeedbackMessageLayouts::class, PoP_Module_Processor_UserFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES],
@@ -21,7 +21,7 @@ class PoP_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_Module_Pr
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

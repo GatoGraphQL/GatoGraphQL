@@ -2,15 +2,15 @@
 
 abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_Module_Processor_AlertsBase
 {
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
-        $ret[] = $this->getLayoutSubmodule($component);
+        $ret = parent::getLayoutSubcomponents($component);
+        $ret[] = $this->getLayoutSubcomponent($component);
         return $ret;
     }
 

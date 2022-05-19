@@ -12,9 +12,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO:

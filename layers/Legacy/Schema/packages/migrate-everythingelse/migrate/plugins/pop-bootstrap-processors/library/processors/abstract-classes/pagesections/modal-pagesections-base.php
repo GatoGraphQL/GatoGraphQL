@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
             $ret[GD_JS_CLASSES]['header'] = $header_class;
         }
         // Only send the classes/titles that are targetted to any of the subcomponents
-        $subComponents = array_flip($this->getInnerSubmodules($component));
+        $subComponents = array_flip($this->getInnerSubcomponents($component));
         if ($dialogs_class = array_intersect_key($this->getDialogClasses($component), $subComponents)) {
             $ret[GD_JS_CLASSES]['dialogs'] = $dialogs_class;
         }

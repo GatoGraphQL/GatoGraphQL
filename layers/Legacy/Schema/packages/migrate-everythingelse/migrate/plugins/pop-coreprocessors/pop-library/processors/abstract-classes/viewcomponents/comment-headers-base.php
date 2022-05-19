@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_COMMENTPOST];
     }
 
-    public function getHeaderSubmodule(array $component): ?array
+    public function getHeaderSubcomponent(array $component): ?array
     {
         return null;
     }
@@ -17,9 +17,9 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        if ($header = $this->getHeaderSubmodule($component)) {
+        if ($header = $this->getHeaderSubcomponent($component)) {
             return [
                 new RelationalModuleField(
                     'customPost',
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
             ];
         }
 
-        return parent::getRelationalSubmodules($component);
+        return parent::getRelationalSubcomponents($component);
     }
 
     public function headerShowUrl(array $component, array &$props)
@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
             $ret['header-show-url'] = true;
         }
 
-        if ($header = $this->getHeaderSubmodule($component)) {
+        if ($header = $this->getHeaderSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header-post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header);
         }
 

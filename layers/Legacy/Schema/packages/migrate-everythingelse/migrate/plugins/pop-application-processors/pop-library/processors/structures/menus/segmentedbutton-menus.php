@@ -12,7 +12,7 @@ class PoP_Module_Processor_SegmentedButtonMenus extends PoP_Module_Processor_Con
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SEGMENTEDBUTTONMENU:

@@ -11,7 +11,7 @@ const GD_COMPACTSIDEBARSECTION_POST = 'compact-post';
 
 class FullViewSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP],
@@ -73,7 +73,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
@@ -97,7 +97,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGEVENTS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string
@@ -235,7 +235,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
-                // if ($filter_component = $this->getFilterSubmodule($component)) {
+                // if ($filter_component = $this->getFilterSubcomponent($component)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 //     $filter = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);
                 // }

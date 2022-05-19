@@ -17,9 +17,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:

@@ -69,7 +69,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR],
@@ -94,7 +94,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
@@ -118,10 +118,10 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubmodule(array $component)
+    public function getLatestcountSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS:
@@ -143,7 +143,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
                 return [PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS];
         }
 
-        return parent::getLatestcountSubmodule($component);
+        return parent::getLatestcountSubcomponent($component);
     }
 }
 

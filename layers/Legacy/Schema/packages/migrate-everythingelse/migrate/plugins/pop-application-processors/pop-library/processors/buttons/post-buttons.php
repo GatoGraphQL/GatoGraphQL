@@ -12,7 +12,7 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_POST_CREATE => [Wassup_Module_Processor_ButtonInners::class, Wassup_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POST_CREATE],
@@ -21,10 +21,10 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POST_CREATE:

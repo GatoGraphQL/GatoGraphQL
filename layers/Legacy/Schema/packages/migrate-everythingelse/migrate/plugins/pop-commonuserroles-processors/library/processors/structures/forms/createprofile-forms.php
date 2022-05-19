@@ -13,24 +13,24 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:
                 // Allow the Custom implementation to override
                 return \PoP\Root\App::applyFilters(
-                    'GD_URE_Module_Processor_CreateProfileForms:getInnerSubmodule:profileorganization',
+                    'GD_URE_Module_Processor_CreateProfileForms:getInnerSubcomponent:profileorganization',
                     [GD_URE_Module_Processor_CreateProfileOrganizationFormInners::class, GD_URE_Module_Processor_CreateProfileOrganizationFormInners::COMPONENT_FORMINNER_PROFILEORGANIZATION_CREATE]
                 );
 
             case self::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE:
                 return \PoP\Root\App::applyFilters(
-                    'GD_URE_Module_Processor_CreateProfileForms:getInnerSubmodule:profileindividual',
+                    'GD_URE_Module_Processor_CreateProfileForms:getInnerSubcomponent:profileindividual',
                     [GD_URE_Module_Processor_CreateProfileIndividualFormInners::class, GD_URE_Module_Processor_CreateProfileIndividualFormInners::COMPONENT_FORMINNER_PROFILEINDIVIDUAL_CREATE]
                 );
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)

@@ -19,7 +19,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN => [GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN],
@@ -33,7 +33,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

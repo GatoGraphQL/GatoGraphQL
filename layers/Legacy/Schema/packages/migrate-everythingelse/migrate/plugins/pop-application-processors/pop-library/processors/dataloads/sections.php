@@ -31,7 +31,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_FULLVIEW],
@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     }
 
     // // Single Authors has no filter, because the authors are provided using 'include' which can't be filtered
-    // function getFilterSubmodule(array $component) {
+    // function getFilterSubcomponent(array $component) {
 
     //     switch ($component[1]) {
 
@@ -56,7 +56,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     //             return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
     //     }
 
-    //     return parent::getFilterSubmodule($component);
+    //     return parent::getFilterSubcomponent($component);
     // }
 
     public function getFormat(array $component): ?string

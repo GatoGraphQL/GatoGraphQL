@@ -12,7 +12,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_ButtonInners::class, PoP_EventLinksCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_EVENTLINK_CREATE],
@@ -21,10 +21,10 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_EVENTLINK_CREATE:
@@ -33,7 +33,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
                 );
         }
 
-        return parent::getTargetDynamicallyRenderedSubmodules($component);
+        return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
     public function getLinktarget(array $component, array &$props)

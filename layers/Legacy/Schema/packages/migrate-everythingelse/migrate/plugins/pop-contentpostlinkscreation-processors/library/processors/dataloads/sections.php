@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -46,7 +46,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT:
@@ -55,7 +55,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
                 return [PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::class, PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::COMPONENT_FILTER_MYLINKS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

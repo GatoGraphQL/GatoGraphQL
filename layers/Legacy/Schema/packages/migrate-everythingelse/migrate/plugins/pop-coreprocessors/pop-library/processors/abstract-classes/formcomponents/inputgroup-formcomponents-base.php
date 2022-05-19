@@ -13,14 +13,14 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getInputSubmodule($component);
+        return $this->getInputSubcomponent($component);
     }
 
-    public function getControlSubmodules(array $component)
+    public function getControlSubcomponents(array $component)
     {
         return array();
     }
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
         return null;
     }
@@ -39,14 +39,14 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
 
         $counter = 0;
         $keys = array();
-        foreach ($this->getControlSubmodules($component) as $control) {
+        foreach ($this->getControlSubcomponents($component) as $control) {
             $key = 'a'.$counter++;
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES][$key] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($control);
             $keys[] = $key;
         }
         $ret['settings-keys']['controls'] = $keys;
 
-        if ($input = $this->getInputSubmodule($component)) {
+        if ($input = $this->getInputSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
         }
         return $ret;
@@ -56,13 +56,13 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($input = $this->getInputSubmodule($component)) {
+        if ($input = $this->getInputSubcomponent($component)) {
             $ret[] = $input;
         }
 
         $ret = array_merge(
             $ret,
-            $this->getControlSubmodules($component)
+            $this->getControlSubcomponents($component)
         );
 
         return $ret;

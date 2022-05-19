@@ -14,7 +14,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         );
     }
 
-    public function getComponentSubmodules(array $component)
+    public function getComponentSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
@@ -24,9 +24,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
                 );
         }
 
-        return parent::getComponentSubmodules($component);
+        return parent::getComponentSubcomponents($component);
     }
-    public function getTriggerLayoutSubmodule(array $component)
+    public function getTriggerLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
@@ -36,7 +36,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
                 return [PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION];
         }
 
-        return parent::getTriggerLayoutSubmodule($component);
+        return parent::getTriggerLayoutSubcomponent($component);
     }
 
     public function isMultiple(array $component): bool

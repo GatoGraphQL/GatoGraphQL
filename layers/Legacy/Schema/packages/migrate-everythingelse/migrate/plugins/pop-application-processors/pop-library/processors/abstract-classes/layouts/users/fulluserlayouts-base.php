@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_CustomFullUserLayoutsBase extends PoP_Module_Processor_FullUserLayoutsBase
 {
-    public function getTitleSubmodule(array $component)
+    public function getTitleSubcomponent(array $component)
     {
 
         // Allow URE to Change it, to inject the (Organization / Organization+Members) links

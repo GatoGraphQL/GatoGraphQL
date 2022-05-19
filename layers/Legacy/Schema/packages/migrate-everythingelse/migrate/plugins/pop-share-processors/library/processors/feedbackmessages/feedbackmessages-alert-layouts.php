@@ -11,7 +11,7 @@ class PoP_Share_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageLayouts::class, PoP_Share_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL],
@@ -21,7 +21,7 @@ class PoP_Share_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

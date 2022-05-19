@@ -15,7 +15,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
@@ -25,7 +25,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 return [PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT];
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -33,7 +33,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
-                $component = $this->getComponentSubmodule($component);
+                $component = $this->getComponentSubcomponent($component);
 
                 $alert_classes = array(
                     self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST => 'alert-sm alert-warning',
@@ -41,7 +41,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 );
 
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
 
                 $descriptions = array(
                     self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST => TranslationAPIFacade::getInstance()->__('Add a comment for:', 'pop-application-processors'),

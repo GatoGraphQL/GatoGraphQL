@@ -23,14 +23,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
                 return [PoP_UserCommunities_Module_Processor_CustomCarouselInners::class, PoP_UserCommunities_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_AUTHORMEMBERS];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getMode(array $component, array &$props)
@@ -44,14 +44,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
     }
 
 
-    public function getControlsTopSubmodule(array $component)
+    public function getControlsTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_AUTHORMEMBERS:
                 return [PoP_UserCommunities_Module_Processor_CustomCarouselControls::class, PoP_UserCommunities_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS];
         }
 
-        return parent::getControlsTopSubmodule($component);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

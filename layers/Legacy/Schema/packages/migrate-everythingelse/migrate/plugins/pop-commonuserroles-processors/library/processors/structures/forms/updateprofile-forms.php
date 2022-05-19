@@ -13,23 +13,23 @@ class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_UPDATE:
                 return \PoP\Root\App::applyFilters(
-                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubmodule:profileorganization', 
+                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubcomponent:profileorganization', 
                     [GD_URE_Module_Processor_UpdateProfileOrganizationFormInners::class, GD_URE_Module_Processor_UpdateProfileOrganizationFormInners::COMPONENT_FORMINNER_PROFILEORGANIZATION_UPDATE]
                 );
 
             case self::COMPONENT_FORM_PROFILEINDIVIDUAL_UPDATE:
                 return \PoP\Root\App::applyFilters(
-                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubmodule:profileindividual', 
+                    'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubcomponent:profileindividual', 
                     [GD_URE_Module_Processor_UpdateProfileIndividualFormInners::class, GD_URE_Module_Processor_UpdateProfileIndividualFormInners::COMPONENT_FORMINNER_PROFILEINDIVIDUAL_UPDATE]
                 );
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

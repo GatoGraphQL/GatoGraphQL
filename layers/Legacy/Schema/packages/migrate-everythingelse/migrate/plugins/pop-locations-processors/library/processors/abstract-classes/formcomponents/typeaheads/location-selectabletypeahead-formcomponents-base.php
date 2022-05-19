@@ -5,12 +5,12 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
 {
     use SuggestionsSelectableTypeaheadFormComponentsTrait;
 
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
         return [GD_EM_Module_Processor_InputGroupFormComponents::class, GD_EM_Module_Processor_InputGroupFormComponents::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION];
     }
 
-    public function getSuggestionsLayoutSubmodule(array $component)
+    public function getSuggestionsLayoutSubcomponent(array $component)
     {
         return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONNAME];
     }
@@ -29,8 +29,8 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Set the typeahead id on all the controls from the input module
-        $input = $this->getInputSubmodule($component);
-        $controls = $componentprocessor_manager->getProcessor($input)->getControlSubmodules($input);
+        $input = $this->getInputSubcomponent($component);
+        $controls = $componentprocessor_manager->getProcessor($input)->getControlSubcomponents($input);
         foreach ($controls as $control) {
             $this->mergeProp(
                 $control,

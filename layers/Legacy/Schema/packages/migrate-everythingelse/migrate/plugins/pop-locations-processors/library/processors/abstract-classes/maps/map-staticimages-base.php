@@ -13,14 +13,14 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($urlparam = $this->getUrlparamSubmodule($component)) {
+        if ($urlparam = $this->getUrlparamSubcomponent($component)) {
             $ret[] = $urlparam;
         }
 
         return $ret;
     }
 
-    public function getUrlparamSubmodule(array $component)
+    public function getUrlparamSubcomponent(array $component)
     {
         return null;
     }
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
 
         $ret['url'] = $this->getStaticmapUrl($component, $props);
 
-        if ($urlparam = $this->getUrlparamSubmodule($component)) {
+        if ($urlparam = $this->getUrlparamSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
         }
 

@@ -31,7 +31,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         );
     }
 
-    protected function getControlgroupBottomSubmodule(array $component)
+    protected function getControlgroupBottomSubcomponent(array $component)
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
@@ -53,7 +53,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUSHARE];
         }
 
-        return parent::getControlgroupBottomSubmodule($component);
+        return parent::getControlgroupBottomSubcomponent($component);
     }
 
     protected function getBlocksectionsClasses(array $component)
@@ -89,10 +89,10 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         //     case self::COMPONENT_BLOCK_TAG:
 
         //         $blocktarget = $this->get_activeblock_selector($component, $props);
-        //         if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
+        //         if ($controlgroup_top = $this->getControlgroupTopSubcomponent($component)) {
         //             $this->setProp($controlgroup_top, $props, 'control-target', $blocktarget);
         //         }
-        //         if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($component)) {
+        //         if ($controlgroup_bottom = $this->getControlgroupBottomSubcomponent($component)) {
         //             $this->setProp($controlgroup_bottom, $props, 'control-target', $blocktarget);
         //         }
         //         break;
@@ -223,7 +223,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         parent::initRequestProps($component, $props);
     }
 
-    public function getSubmenuSubmodule(array $component)
+    public function getSubmenuSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SINGLEPOST:
@@ -240,7 +240,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::COMPONENT_SUBMENU_TAG];
         }
 
-        return parent::getSubmenuSubmodule($component);
+        return parent::getSubmenuSubcomponent($component);
     }
 
     protected function getDescription(array $component, array &$props)

@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($header = $this->getHeaderSubmodule($component)) {
+        if ($header = $this->getHeaderSubcomponent($component)) {
             $ret[] = $header;
         }
 
@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_BUTTON];
     }
 
-    public function getHeaderSubmodule(array $component): ?array
+    public function getHeaderSubcomponent(array $component): ?array
     {
         return null;
     }
@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
             $ret['url'] = $url;
         }
 
-        if ($header = $this->getHeaderSubmodule($component)) {
+        if ($header = $this->getHeaderSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header);
         }
 

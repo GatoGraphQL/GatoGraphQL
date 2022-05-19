@@ -15,7 +15,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
-    protected function getUserpostinteractionLayoutSubmodules(array $component)
+    protected function getUserpostinteractionLayoutSubcomponents(array $component)
     {
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
         switch ($component[1]) {
@@ -66,7 +66,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
             case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
-                    $this->getUserpostinteractionLayoutSubmodules($component)
+                    $this->getUserpostinteractionLayoutSubcomponents($component)
                 );
                 break;
         }

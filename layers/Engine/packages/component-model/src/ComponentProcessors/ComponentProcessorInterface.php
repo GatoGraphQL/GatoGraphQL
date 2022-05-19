@@ -16,7 +16,7 @@ interface ComponentProcessorInterface
 {
     public function getComponentsToProcess(): array;
     public function getSubcomponents(array $component): array;
-    public function getAllSubmodules(array $component): array;
+    public function getAllSubcomponents(array $component): array;
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getModelPropsForDescendantComponents(array $component, array &$props): array;
@@ -52,15 +52,15 @@ interface ComponentProcessorInterface
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array;
+    public function getRelationalSubcomponents(array $component): array;
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $component): array;
+    public function getConditionalOnDataFieldSubcomponents(array $component): array;
     /**
      * @return ConditionalRelationalModuleField[]
      */
-    public function getConditionalOnDataFieldRelationalSubmodules(array $component): array;
+    public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array;
     public function getImmutableDataPropertiesDatasetmoduletree(array $component, array &$props): array;
     public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
     public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array;

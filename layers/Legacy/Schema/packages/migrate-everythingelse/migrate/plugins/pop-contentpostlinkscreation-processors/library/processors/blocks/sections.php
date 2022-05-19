@@ -25,7 +25,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_MYLINKS_TABLE_EDIT => [PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYLINKS_TABLE_EDIT],
@@ -36,7 +36,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYLINKS_TABLE_EDIT:
@@ -45,7 +45,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

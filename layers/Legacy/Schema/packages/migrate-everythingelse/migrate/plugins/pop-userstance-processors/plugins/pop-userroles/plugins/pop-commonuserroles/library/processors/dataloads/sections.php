@@ -41,7 +41,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -67,7 +67,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
@@ -79,7 +79,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_AUTHORROLE];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

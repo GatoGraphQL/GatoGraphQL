@@ -3,13 +3,13 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_CreateProfileIndividualFormInnersBase extends PoP_Module_Processor_CreateProfileFormInnersBase
 {
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         // Add common Create/Update components
-        PoP_Module_Processor_CreatProfileFormsUtils::getFormSubmodules($component, $ret, $this);
-        PoP_Module_Processor_CreateUpdateProfileIndividualFormsUtils::getFormSubmodules($component, $ret, $this);
+        PoP_Module_Processor_CreatProfileFormsUtils::getFormSubcomponents($component, $ret, $this);
+        PoP_Module_Processor_CreateUpdateProfileIndividualFormsUtils::getFormSubcomponents($component, $ret, $this);
 
         return $ret;
     }

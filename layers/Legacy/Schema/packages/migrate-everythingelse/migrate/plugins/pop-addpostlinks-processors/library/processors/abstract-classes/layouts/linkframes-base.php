@@ -9,7 +9,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         return [PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor::class, PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_LINKFRAME];
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
@@ -18,7 +18,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($layout = $this->getLayoutSubmodule($component)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[] = $layout;
         }
 
@@ -84,7 +84,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         $ret[GD_JS_CLASSES]['opennewtab-btn'] = $this->getOpennewtabBtnClass($component, $props);
         $ret[GD_JS_TITLES]['opennewtab'] = TranslationAPIFacade::getInstance()->__('Open link in new tab', 'pop-addpostlinks-processors');
 
-        if ($layout = $this->getLayoutSubmodule($component)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         

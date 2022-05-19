@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase extends PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase
 {
-    protected function getSimpleviewfeedBottomSubmodules(array $component)
+    protected function getSimpleviewfeedBottomSubcomponents(array $component)
     {
         $layouts = array();
 
@@ -25,13 +25,13 @@ abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase exten
         return $layouts;
     }
 
-    public function getAftercontentSubmodules(array $component)
+    public function getAftercontentSubcomponents(array $component)
     {
-        $ret = parent::getAftercontentSubmodules($component);
+        $ret = parent::getAftercontentSubcomponents($component);
 
         return array_merge(
             $ret,
-            $this->getSimpleviewfeedBottomSubmodules($component)
+            $this->getSimpleviewfeedBottomSubcomponents($component)
         );
     }
 

@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($component)) {
+        if ($thumb_extras = $this->getExtraThumbLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $thumb_extras
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getExtraThumbLayoutSubmodules(array $component)
+    public function getExtraThumbLayoutSubcomponents(array $component)
     {
 
         // Add the MultiLayout item always, since the layouts will also be referenced by the MultLayout
@@ -110,7 +110,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
             $ret[GD_JS_CLASSES]['link'] = $link_class;
         }
 
-        if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($component)) {
+        if ($thumb_extras = $this->getExtraThumbLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['thumb-extras'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $thumb_extras

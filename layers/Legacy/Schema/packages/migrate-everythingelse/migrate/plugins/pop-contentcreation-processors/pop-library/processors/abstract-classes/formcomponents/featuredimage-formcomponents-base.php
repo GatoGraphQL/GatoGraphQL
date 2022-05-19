@@ -14,15 +14,15 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getFeaturedimageinnerSubmodule($component);
+        return $this->getFeaturedimageinnerSubcomponent($component);
     }
 
-    abstract public function getFeaturedimageinnerSubmodule(array $component): ?array;
+    abstract public function getFeaturedimageinnerSubcomponent(array $component): ?array;
 
     public function getSubcomponents(array $component): array
     {
         return array(
-            $this->getFeaturedimageinnerSubmodule($component),
+            $this->getFeaturedimageinnerSubcomponent($component),
         );
     }
 
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         $ret = parent::getImmutableConfiguration($component, $props);
 
         // Hack: re-use multiple.tmpl
-        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
+        $featuredimageinner = $this->getFeaturedimageinnerSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = [
             \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($featuredimageinner),
         ];
@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     public function initWebPlatformModelProps(array $component, array &$props)
     {
-        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
+        $featuredimageinner = $this->getFeaturedimageinnerSubcomponent($component);
 
         // Set the "pop-merge" class to be able to redraw the inner layout
         $this->appendProp($component, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($featuredimageinner));
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     public function initModelProps(array $component, array &$props): void
     {
-        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
+        $featuredimageinner = $this->getFeaturedimageinnerSubcomponent($component);
 
         // Needed for the JS function
         $this->appendProp($component, $props, 'class', 'pop-featuredimage');

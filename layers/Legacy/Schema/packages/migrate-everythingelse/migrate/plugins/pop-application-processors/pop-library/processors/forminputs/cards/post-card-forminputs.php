@@ -13,7 +13,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
         );
     }
 
-    public function getTriggerSubmodule(array $component): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_CARD_POST:
@@ -23,7 +23,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
                 return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST];
         }
 
-        return parent::getTriggerSubmodule($component);
+        return parent::getTriggerSubcomponent($component);
     }
 
     public function getDbobjectField(array $component): ?string

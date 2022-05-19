@@ -9,9 +9,9 @@ use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 
 abstract class AbstractRelationalFieldDataloadComponentProcessor extends AbstractDataloadComponentProcessor
 {
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
         // The fields to retrieve are passed through component atts, so simply transfer all component atts down the line
         $ret[] = [RelationalFieldQueryDataComponentProcessor::class, RelationalFieldQueryDataComponentProcessor::COMPONENT_LAYOUT_RELATIONALFIELDS, $component[2] ?? null];
         return $ret;

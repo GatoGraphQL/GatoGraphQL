@@ -8,7 +8,7 @@ define('GD_COMPACTSIDEBARSECTION_INDIVIDUAL', 'compact-individual');
 
 class URE_FullUserSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

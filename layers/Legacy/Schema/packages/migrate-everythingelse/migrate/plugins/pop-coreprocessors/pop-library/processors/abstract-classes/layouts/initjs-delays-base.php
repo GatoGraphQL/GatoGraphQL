@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_InitJSDelayLayoutsBase extends PoPEngine_Que
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_INITJSDELAY];
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_InitJSDelayLayoutsBase extends PoPEngine_Que
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($layout = $this->getLayoutSubmodule($component)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[] = $layout;
         }
 
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_InitJSDelayLayoutsBase extends PoPEngine_Que
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($layout = $this->getLayoutSubmodule($component)) {
+        if ($layout = $this->getLayoutSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         

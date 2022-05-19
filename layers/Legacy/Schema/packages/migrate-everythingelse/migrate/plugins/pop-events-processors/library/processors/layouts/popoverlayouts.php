@@ -11,24 +11,24 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
                 return [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER];
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 
-    public function getLayoutContentSubmodule(array $component)
+    public function getLayoutContentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
                 return [PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::COMPONENT_LAYOUTCALENDAR_CONTENT_POPOVER];
         }
 
-        return parent::getLayoutContentSubmodule($component);
+        return parent::getLayoutContentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

@@ -12,22 +12,22 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($post_component = $this->getPostSubmodule($component)) {
+        if ($post_component = $this->getPostSubcomponent($component)) {
             $ret[] = $post_component;
         }
-        if ($comment_component = $this->getCommentSubmodule($component)) {
+        if ($comment_component = $this->getCommentSubcomponent($component)) {
             $ret[] = $comment_component;
         }
 
         return $ret;
     }
 
-    public function getPostSubmodule(array $component)
+    public function getPostSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getCommentSubmodule(array $component)
+    public function getCommentSubcomponent(array $component)
     {
         return null;
     }
@@ -46,11 +46,11 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
 
         $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($component, $props);
 
-        if ($post_component = $this->getPostSubmodule($component)) {
+        if ($post_component = $this->getPostSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_component);
         }
 
-        if ($comment_component = $this->getCommentSubmodule($component)) {
+        if ($comment_component = $this->getCommentSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_component);
         }
 

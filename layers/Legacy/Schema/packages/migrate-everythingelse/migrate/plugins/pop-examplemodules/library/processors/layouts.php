@@ -58,9 +58,9 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($component);
+        $ret = parent::getRelationalSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_COMMENT:

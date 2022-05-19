@@ -18,9 +18,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_STANCETARGET:
@@ -122,7 +122,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubmodule(array $component)
+    public function getQuicklinkgroupSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_STANCES:
@@ -130,7 +130,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
                 return [UserStance_Module_Processor_PostButtons::class, UserStance_Module_Processor_PostButtons::COMPONENT_BUTTON_STANCE_CREATE];
         }
 
-        return parent::getQuicklinkgroupSubmodule($component);
+        return parent::getQuicklinkgroupSubcomponent($component);
     }
     public function collapsible(array $component, array &$props)
     {

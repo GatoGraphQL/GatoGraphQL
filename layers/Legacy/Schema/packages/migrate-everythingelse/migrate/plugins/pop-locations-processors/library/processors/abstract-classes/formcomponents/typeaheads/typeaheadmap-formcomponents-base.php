@@ -10,8 +10,8 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
     {
         $ret = parent::getSubcomponents($component);
 
-        $ret[] = $this->getLocationsTypeaheadSubmodule($component);
-        $ret[] = $this->getMapSubmodule($component);
+        $ret[] = $this->getLocationsTypeaheadSubcomponent($component);
+        $ret[] = $this->getMapSubcomponent($component);
         $ret[] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::COMPONENT_MAP_ADDMARKER];
 
         return $ret;
@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getLocationsTypeaheadSubmodule($component);
+        return $this->getLocationsTypeaheadSubcomponent($component);
     }
 
     public function getTemplateResource(array $component, array &$props): ?array
@@ -27,12 +27,12 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENT_TYPEAHEADMAP];
     }
 
-    public function getMapSubmodule(array $component)
+    public function getMapSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::COMPONENT_MAP_INDIVIDUAL];
     }
 
-    public function getLocationsTypeaheadSubmodule(array $component)
+    public function getLocationsTypeaheadSubcomponent(array $component)
     {
         return null;
     }
@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
         $this->appendProp($component, $props, 'class', 'pop-typeaheadmap');
 
-        $locations_typeahead = $this->getLocationsTypeaheadSubmodule($component);
+        $locations_typeahead = $this->getLocationsTypeaheadSubcomponent($component);
 
         // Classes to define its frame
         $this->setProp($component, $props, 'wrapper-class', 'row');
@@ -67,8 +67,8 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
         $ret['addmarker-component'] = [PoP_Module_Processor_MapAddMarkers::class, PoP_Module_Processor_MapAddMarkers::COMPONENT_MAP_ADDMARKER];
 
-        $locations_typeahead = $this->getLocationsTypeaheadSubmodule($component);
-        $map_component = $this->getMapSubmodule($component);
+        $locations_typeahead = $this->getLocationsTypeaheadSubcomponent($component);
+        $map_component = $this->getMapSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['locations'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($locations_typeahead);
 

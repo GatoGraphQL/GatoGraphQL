@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         return null;
     }
@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         $ret = parent::getSubcomponents($component);
 
         // Sometimes there's no inner. Eg: self::COMPONENT_CONTENT_ADDCONTENTFAQ
-        if ($inner = $this->getInnerSubmodule($component)) {
+        if ($inner = $this->getInnerSubcomponent($component)) {
             $ret[] = $inner;
         }
 
@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
 
     public function addWebPlatformModuleConfiguration(&$ret, array $component, array &$props)
     {
-        if ($inner = $this->getInnerSubmodule($component)) {
+        if ($inner = $this->getInnerSubcomponent($component)) {
             // Add 'pop-merge' + inside module classes, so the processBlock knows where to insert the new html code
             if ($this->addFetchedData($component, $props)) {
                 $ret['class-merge'] = PoP_WebPlatformEngine_Module_Utils::getMergeClass($inner);
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($inner = $this->getInnerSubmodule($component)) {
+        if ($inner = $this->getInnerSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($inner);
         }
 
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         // // Make the inner module callback updatable
         // if ($this->addFetchedData($component, $props)) {
 
-        //     if ($inner = $this->getInnerSubmodule($component)) {
+        //     if ($inner = $this->getInnerSubcomponent($component)) {
         //         $this->setProp($inner, $props, 'component-cb', true);
         //     }
         // }

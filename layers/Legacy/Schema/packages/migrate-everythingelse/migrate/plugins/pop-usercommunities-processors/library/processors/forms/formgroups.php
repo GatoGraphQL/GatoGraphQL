@@ -51,7 +51,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES],
@@ -66,7 +66,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getInfo(array $component, array &$props)

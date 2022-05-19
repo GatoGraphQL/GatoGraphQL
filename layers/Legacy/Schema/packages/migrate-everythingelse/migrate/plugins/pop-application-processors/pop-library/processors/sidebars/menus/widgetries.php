@@ -12,9 +12,9 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:

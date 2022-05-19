@@ -11,7 +11,7 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FORM_STANCE => [UserStance_Module_Processor_CreateUpdatePostFormInners::class, UserStance_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_STANCE],
@@ -21,7 +21,7 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

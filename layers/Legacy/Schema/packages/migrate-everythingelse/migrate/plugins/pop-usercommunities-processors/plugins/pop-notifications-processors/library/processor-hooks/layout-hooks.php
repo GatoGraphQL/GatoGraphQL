@@ -7,12 +7,12 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
-            $this->getConditionalBottomSubmodules(...)
+            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubcomponents',
+            $this->getConditionalBottomSubcomponents(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_MultipleComponentLayouts:modules',
-            $this->getQuicklinkgroupBottomSubmodule(...)
+            $this->getQuicklinkgroupBottomSubcomponent(...)
         );
     }
 
@@ -20,7 +20,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
      * @param ConditionalLeafModuleField[] $conditionalLeafModuleFields
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalBottomSubmodules(array $conditionalLeafModuleFields): array
+    public function getConditionalBottomSubcomponents(array $conditionalLeafModuleFields): array
     {
         // Add layout for action "updated_user_membership"
         $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
@@ -36,7 +36,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
      * @param ConditionalLeafModuleField[] $conditionalLeafModuleFields
      * @return ConditionalLeafModuleField[]
      */
-    public function getQuicklinkgroupBottomSubmodule(array $conditionalLeafModuleFields): array
+    public function getQuicklinkgroupBottomSubcomponent(array $conditionalLeafModuleFields): array
     {
         // Add layout for action "joined_community"
         $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(

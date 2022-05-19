@@ -28,7 +28,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         return parent::getAuthorModule($component);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
@@ -36,12 +36,12 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
                 return [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($component);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowthumbLayoutSubmodules(array $component)
+    public function getBelowthumbLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($component);
+        $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
@@ -52,9 +52,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         return $ret;
     }
 
-    public function getBottomSubmodules(array $component)
+    public function getBottomSubcomponents(array $component)
     {
-        $ret = parent::getBottomSubmodules($component);
+        $ret = parent::getBottomSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
@@ -65,9 +65,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
@@ -78,7 +78,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $component)
+    public function getPostThumbSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
@@ -89,7 +89,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
         }
 
-        return parent::getPostThumbSubmodule($component);
+        return parent::getPostThumbSubcomponent($component);
     }
 
     public function showExcerpt(array $component)

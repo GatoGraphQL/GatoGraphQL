@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_NoLabelFormComponentGroupsBase extends PoP_M
 {
     public function initModelProps(array $component, array &$props): void
     {
-        $component = $this->getComponentSubmodule($component);
+        $component = $this->getComponentSubcomponent($component);
 
         // Because the checkbox already has the label, then it can be shown already there
         $this->setProp($component, $props, 'label', '');

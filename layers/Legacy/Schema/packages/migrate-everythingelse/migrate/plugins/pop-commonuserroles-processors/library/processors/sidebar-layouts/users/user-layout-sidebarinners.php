@@ -20,16 +20,16 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION:
                 $ret = array_merge(
                     $ret,
-                    URE_FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_ORGANIZATION)
+                    URE_FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_ORGANIZATION)
                 );
                 break;
 
@@ -37,21 +37,21 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL_INDIVIDUAL:
                 $ret = array_merge(
                     $ret,
-                    URE_FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_INDIVIDUAL)
+                    URE_FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_INDIVIDUAL)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION:
                 $ret = array_merge(
                     $ret,
-                    URE_FullUserSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_ORGANIZATION)
+                    URE_FullUserSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_ORGANIZATION)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL:
                 $ret = array_merge(
                     $ret,
-                    URE_FullUserSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_INDIVIDUAL)
+                    URE_FullUserSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_INDIVIDUAL)
                 );
                 break;
         }

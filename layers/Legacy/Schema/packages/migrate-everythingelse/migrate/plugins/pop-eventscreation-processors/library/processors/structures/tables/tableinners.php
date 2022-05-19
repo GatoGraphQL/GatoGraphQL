@@ -13,9 +13,9 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
         switch ($component[1]) {

@@ -15,7 +15,7 @@ class PoP_ContactUs_Module_Processor_FormGroups extends PoP_Module_Processor_For
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_TOPIC => [GenericForms_Module_Processor_SelectFormInputs::class, GenericForms_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_TOPIC],
@@ -27,7 +27,7 @@ class PoP_ContactUs_Module_Processor_FormGroups extends PoP_Module_Processor_For
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

@@ -14,7 +14,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::COMPONENT_EM_BUTTONINNER_ICAL];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

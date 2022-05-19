@@ -17,7 +17,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
@@ -33,7 +33,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function addFetchedData(array $component, array &$props)

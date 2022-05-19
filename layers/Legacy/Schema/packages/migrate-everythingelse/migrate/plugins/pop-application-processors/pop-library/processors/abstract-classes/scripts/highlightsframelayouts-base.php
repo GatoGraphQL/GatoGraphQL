@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_HighlightReferencesScriptFrameLayoutsBase ex
         return true;
     }
 
-    public function getScriptSubmodule(array $component)
+    public function getScriptSubcomponent(array $component)
     {
         return $this->doAppend($component) ? 
         	[Wassup_Module_Processor_ScriptsLayouts::class, Wassup_Module_Processor_ScriptsLayouts::COMPONENT_SCRIPT_HIGHLIGHTS] : 

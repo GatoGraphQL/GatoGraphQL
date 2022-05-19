@@ -45,7 +45,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT:
@@ -59,7 +59,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return [UserStance_Module_Processor_CustomQuicklinkGroups::class, UserStance_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_STANCECONTENT];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($component);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
     public function showPosttitle(array $component)
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return parent::showPosttitle($component);
     }
 
-    public function getContentSubmodule(array $component)
+    public function getContentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
@@ -89,12 +89,12 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT];
         }
 
-        return parent::getContentSubmodule($component);
+        return parent::getContentSubcomponent($component);
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
@@ -123,9 +123,9 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return parent::getAuthorAvatarModule($component);
     }
 
-    public function getBottomSubmodules(array $component)
+    public function getBottomSubcomponents(array $component)
     {
-        $ret = parent::getBottomSubmodules($component);
+        $ret = parent::getBottomSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT:
@@ -136,9 +136,9 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getBelowcontentSubmodules(array $component)
+    public function getBelowcontentSubcomponents(array $component)
     {
-        $ret = parent::getBelowcontentSubmodules($component);
+        $ret = parent::getBelowcontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED:
@@ -155,7 +155,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $component)
+    public function getPostThumbSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:
@@ -167,7 +167,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
                 return null;
         }
 
-        return parent::getPostThumbSubmodule($component);
+        return parent::getPostThumbSubcomponent($component);
     }
 
     public function authorPositions(array $component)

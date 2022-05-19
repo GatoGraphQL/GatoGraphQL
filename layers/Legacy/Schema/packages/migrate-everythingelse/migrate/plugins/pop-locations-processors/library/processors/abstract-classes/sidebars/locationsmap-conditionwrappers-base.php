@@ -7,19 +7,19 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
         return null;
     }
 
-    public function getMapSubmodule(array $component)
+    public function getMapSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::COMPONENT_MAP_SIDEBARINDIVIDUAL];
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         if ($locationslinks = $this->getLocationlinksTemplate($component)) {
             $ret[] = $locationslinks;
         }
-        if ($map = $this->getMapSubmodule($component)) {
+        if ($map = $this->getMapSubcomponent($component)) {
             $ret[] = $map;
         }
 
@@ -31,9 +31,9 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
         return 'hasLocation';
     }
 
-    public function getConditionFailedSubmodules(array $component)
+    public function getConditionFailedSubcomponents(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($component);
+        $ret = parent::getConditionFailedSubcomponents($component);
 
         $ret[] = [GD_EM_Module_Processor_WidgetMessages::class, GD_EM_Module_Processor_WidgetMessages::COMPONENT_EM_MESSAGE_NOLOCATION];
 

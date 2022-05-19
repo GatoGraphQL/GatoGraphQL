@@ -12,14 +12,14 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return [GD_URE_Module_Processor_ButtonInners::class, GD_URE_Module_Processor_ButtonInners::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

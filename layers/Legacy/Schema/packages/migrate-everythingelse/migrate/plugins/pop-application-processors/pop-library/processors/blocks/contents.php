@@ -70,19 +70,19 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SHARE];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_AUTHOR_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_AUTHOR_CONTENT],
@@ -107,7 +107,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
             case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 $this->appendProp($component, $props, 'class', 'block-singleabout-content');
-                $inners = $this->getInnerSubmodules($component);
+                $inners = $this->getInnerSubcomponents($component);
                 foreach ($inners as $inner) {
                     $this->appendProp($inner, $props, 'class', 'col-xs-12');
                 }

@@ -21,9 +21,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SimpleViewPreviewPostLayouts extend
         return parent::getAuthorModule($component);
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_SIMPLEVIEW:
@@ -34,9 +34,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SimpleViewPreviewPostLayouts extend
         return $ret;
     }
 
-    public function getAftercontentSubmodules(array $component)
+    public function getAftercontentSubcomponents(array $component)
     {
-        $ret = parent::getAftercontentSubmodules($component);
+        $ret = parent::getAftercontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_SIMPLEVIEW:

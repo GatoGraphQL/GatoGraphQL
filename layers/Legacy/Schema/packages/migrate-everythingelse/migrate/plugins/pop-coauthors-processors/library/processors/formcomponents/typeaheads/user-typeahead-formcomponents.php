@@ -27,7 +27,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -35,10 +35,10 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 return [GD_CAP_Module_Processor_TypeaheadTextFormInputs::class, GD_CAP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS];
         }
 
-        return parent::getInputSubmodule($component);
+        return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubmodules(array $component)
+    public function getComponentSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -48,10 +48,10 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 );
         }
 
-        return parent::getComponentSubmodules($component);
+        return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $component)
+    public function getTriggerLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -61,7 +61,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS];
         }
 
-        return parent::getTriggerLayoutSubmodule($component);
+        return parent::getTriggerLayoutSubcomponent($component);
     }
 
     public function getDbobjectField(array $component): ?string

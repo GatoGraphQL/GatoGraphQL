@@ -190,9 +190,9 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         }
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $layouts = array(
             self::COMPONENT_DATALOADACTION_FOLLOWUSER => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_FOLLOWSUSERS],

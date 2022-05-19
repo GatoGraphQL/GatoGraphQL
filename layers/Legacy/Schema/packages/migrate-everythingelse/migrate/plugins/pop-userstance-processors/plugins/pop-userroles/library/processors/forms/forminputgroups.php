@@ -12,14 +12,14 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 return [UserStance_URE_Module_Processor_MultiSelectFilterInputs::class, UserStance_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT];
         }
         
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getLabel(array $component, array &$props)

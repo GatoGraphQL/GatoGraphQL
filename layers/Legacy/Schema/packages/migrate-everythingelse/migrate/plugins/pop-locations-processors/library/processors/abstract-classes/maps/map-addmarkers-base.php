@@ -11,17 +11,17 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
     public function getSubcomponents(array $component): array
     {
         return array(
-            $this->getMarkerscriptSubmodule($component),
-            $this->getResetmarkerscriptSubmodule($component)
+            $this->getMarkerscriptSubcomponent($component),
+            $this->getResetmarkerscriptSubcomponent($component)
         );
     }
 
-    public function getMarkerscriptSubmodule(array $component)
+    public function getMarkerscriptSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS];
     }
 
-    public function getResetmarkerscriptSubmodule(array $component)
+    public function getResetmarkerscriptSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
     }
@@ -43,8 +43,8 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $markers = $this->getMarkerscriptSubmodule($component);
-        $resetmarkers = $this->getResetmarkerscriptSubmodule($component);
+        $markers = $this->getMarkerscriptSubcomponent($component);
+        $resetmarkers = $this->getResetmarkerscriptSubcomponent($component);
 
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($markers);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);

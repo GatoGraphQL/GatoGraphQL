@@ -6,14 +6,14 @@ abstract class PoP_Module_Processor_TabPanelSectionBlocksBase extends PoP_Module
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
+        if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             $ret[] = $filter_component;
         }
 
         return $ret;
     }
 
-    protected function getDelegatorfilterSubmodule(array $component)
+    protected function getDelegatorfilterSubcomponent(array $component)
     {
         return null;
     }

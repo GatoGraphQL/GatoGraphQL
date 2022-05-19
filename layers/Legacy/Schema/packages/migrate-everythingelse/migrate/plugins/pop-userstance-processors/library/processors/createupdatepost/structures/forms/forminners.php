@@ -58,9 +58,9 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
         return parent::getStatusInput($component);
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
         
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_STANCE:
@@ -73,7 +73,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
                 );
         }
 
-        return parent::getComponentSubmodules($component, $props);
+        return parent::getComponentSubcomponents($component, $props);
     }
 }
 

@@ -6,12 +6,12 @@ class PoP_Events_AddHighlights_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
-            $this->getFooterSubmodules(...),
+            $this->getFooterSubcomponents(...),
             0
         );
     }
 
-    public function getFooterSubmodules($layouts)
+    public function getFooterSubcomponents($layouts)
     {
         $layouts[] = [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS];
         return $layouts;

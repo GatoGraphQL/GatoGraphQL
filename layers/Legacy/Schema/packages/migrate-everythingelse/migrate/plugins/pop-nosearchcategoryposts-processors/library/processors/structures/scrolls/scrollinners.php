@@ -81,9 +81,9 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         $categories = array(
             self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS00,

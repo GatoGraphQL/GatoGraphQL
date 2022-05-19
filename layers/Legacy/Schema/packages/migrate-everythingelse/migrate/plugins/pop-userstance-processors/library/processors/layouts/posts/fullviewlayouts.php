@@ -12,9 +12,9 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
         );
     }
 
-    public function getFooterSubmodules(array $component)
+    public function getFooterSubcomponents(array $component)
     {
-        $ret = parent::getFooterSubmodules($component);
+        $ret = parent::getFooterSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
@@ -28,7 +28,7 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $component)
+    public function getSidebarSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
@@ -39,7 +39,7 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
                 return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($component);
+        return parent::getSidebarSubcomponent($component);
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array
@@ -58,9 +58,9 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:

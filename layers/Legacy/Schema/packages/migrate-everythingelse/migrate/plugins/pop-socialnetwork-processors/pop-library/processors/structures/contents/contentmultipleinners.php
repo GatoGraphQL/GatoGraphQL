@@ -29,9 +29,9 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
          // When up-voting (and similar for down-voting), it must also do an undo down-vote had the post been down-voted

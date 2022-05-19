@@ -23,9 +23,9 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
@@ -42,7 +42,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
@@ -50,10 +50,10 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEACCOUNT];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getSubmenuSubmodule(array $component)
+    public function getSubmenuSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::COMPONENT_SUBMENU_ACCOUNT];
         }
 
-        return parent::getSubmenuSubmodule($component);
+        return parent::getSubmenuSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

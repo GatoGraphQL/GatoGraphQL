@@ -71,9 +71,9 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         return parent::getFeedbackmessageModule($component);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CREATELOCATION:
@@ -88,14 +88,14 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    protected function getStatusSubmodule(array $component)
+    protected function getStatusSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
                 return null;
         }
 
-        return parent::getStatusSubmodule($component);
+        return parent::getStatusSubcomponent($component);
     }
 
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface

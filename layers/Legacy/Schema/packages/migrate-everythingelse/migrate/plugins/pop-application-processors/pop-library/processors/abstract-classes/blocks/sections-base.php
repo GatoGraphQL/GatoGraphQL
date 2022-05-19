@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 {
     // public function getNature(array $component)
     // {
-    //     if ($inner = $this->getInnerSubmodule($component)) {
+    //     if ($inner = $this->getInnerSubcomponent($component)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $processor = $componentprocessor_manager->getProcessor($inner);
     //         return $processor->getNature($inner);
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     //     return parent::getNature($component);
     // }
 
-    public function getSubmenuSubmodule(array $component)
+    public function getSubmenuSubcomponent(array $component)
     {
 
         // Add only if the current nature is the one expected by the block
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         }
         // }
 
-        return parent::getSubmenuSubmodule($component);
+        return parent::getSubmenuSubcomponent($component);
     }
 
     public function getTitle(array $component, array &$props)
@@ -100,7 +100,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
     public function getFormat(array $component): ?string
     {
-        if ($inner = $this->getInnerSubmodule($component)) {
+        if ($inner = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof FormattableModuleInterface) {
@@ -114,7 +114,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     public function initModelProps(array $component, array &$props): void
     {
         // If the inner component is a DataloadingModule, then transfer dataloading properties to its contained component
-        if ($inner_component = $this->getInnerSubmodule($component)) {
+        if ($inner_component = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             if ($componentprocessor_manager->getProcessor($inner_component) instanceof DataloadingModuleInterface) {
 
@@ -175,15 +175,15 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         parent::initModelProps($component, $props);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         if ($sectionfilter_component = $this->getSectionfilterModule($component)) {
             $ret[] = $sectionfilter_component;
         }
 
-        if ($inner_component = $this->getInnerSubmodule($component)) {
+        if ($inner_component = $this->getInnerSubcomponent($component)) {
             $ret[] = $inner_component;
         }
 
@@ -195,7 +195,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return null;
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         return null;
     }
@@ -205,7 +205,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
         // If the inner component is a DataloadingModule, then calculate the datafeedback of this component
         // based on the results from the inner dataloading component. Then, can calculate "do-not-render-if-no-results"
-        if ($inner = $this->getInnerSubmodule($component)) {
+        if ($inner = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {

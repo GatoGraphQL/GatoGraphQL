@@ -27,7 +27,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
@@ -37,7 +37,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getBtnClass(array $component, array &$props)

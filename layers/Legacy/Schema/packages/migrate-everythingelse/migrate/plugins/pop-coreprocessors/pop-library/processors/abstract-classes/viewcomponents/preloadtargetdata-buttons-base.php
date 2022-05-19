@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {
-    public function getTargetDynamicallyRenderedSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         return array();
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalModuleField[]
      */
-    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponentSubcomponents(array $component)
     {
         return array();
     }
@@ -20,13 +20,13 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($component);
+        $ret = parent::getRelationalSubcomponents($component);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded
-        if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($component)) {
+        if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponentSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $dynamic_components
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded
-        if ($dynamic_components = $this->getTargetDynamicallyRenderedSubmodules($component)) {
+        if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $dynamic_components
@@ -57,13 +57,13 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
 
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
-            if ($dynamic_components = $this->getTargetDynamicallyRenderedSubmodules($component)) {
+            if ($dynamic_components = $this->getTargetDynamicallyRenderedSubcomponents($component)) {
                 foreach ($dynamic_components as $dynamic_component) {
                     $this->setProp($dynamic_component, $props, 'needs-dynamic-data', true);
                 }
             }
 
-            if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($component)) {
+            if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubcomponents($component)) {
                 foreach ($subcomponent_dynamic_templates as $data_field => $components) {
                     foreach ($components as $dynamic_component) {
                         $this->setProp($dynamic_component, $props, 'needs-dynamic-data', true);

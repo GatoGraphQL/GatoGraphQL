@@ -18,7 +18,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
@@ -34,7 +34,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
     public function getLinktargetField(array $component)
     {

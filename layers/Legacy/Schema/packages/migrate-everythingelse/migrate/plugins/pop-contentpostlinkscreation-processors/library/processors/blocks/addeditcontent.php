@@ -22,9 +22,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $block_inners = array(
             self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE],

@@ -20,9 +20,9 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT],
@@ -37,7 +37,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         return $ret;
     }
 
-    protected function getControlgroupBottomSubmodule(array $component)
+    protected function getControlgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
@@ -47,7 +47,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST];
         }
 
-        return parent::getControlgroupBottomSubmodule($component);
+        return parent::getControlgroupBottomSubcomponent($component);
     }
 
     public function initRequestProps(array $component, array &$props): void
@@ -68,7 +68,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         parent::initRequestProps($component, $props);
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
@@ -80,7 +80,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

@@ -106,9 +106,9 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getLinktarget($component, $props);
     }
 
-    public function getExtraThumbLayoutSubmodules(array $component)
+    public function getExtraThumbLayoutSubcomponents(array $component)
     {
-        $ret = parent::getExtraThumbLayoutSubmodules($component);
+        $ret = parent::getExtraThumbLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:

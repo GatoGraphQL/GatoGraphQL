@@ -22,7 +22,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
         return parent::getComponentSubname($component);
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CAPTCHA => [PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::COMPONENT_FORMINPUT_CAPTCHA],
@@ -32,7 +32,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)
@@ -73,7 +73,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
                 }
 
                 $placeholder = TranslationAPIFacade::getInstance()->__('Type captcha here...', 'pop-coreprocessors');
-                $this->setProp($this->getComponentSubmodule($component), $props, 'placeholder', $placeholder);
+                $this->setProp($this->getComponentSubcomponent($component), $props, 'placeholder', $placeholder);
                 break;
         }
 

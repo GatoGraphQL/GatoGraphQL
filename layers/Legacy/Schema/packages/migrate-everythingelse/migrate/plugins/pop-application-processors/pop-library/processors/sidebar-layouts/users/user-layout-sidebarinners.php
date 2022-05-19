@@ -14,23 +14,23 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
                     $ret,
-                    FullUserSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERICUSER)
+                    FullUserSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_GENERICUSER)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 $ret = array_merge(
                     $ret,
-                    FullUserSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_GENERICUSER)
+                    FullUserSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_GENERICUSER)
                 );
                 break;
         }

@@ -11,19 +11,19 @@ class GD_EM_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Modu
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($component);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getAbovecontentSubmodules(array $component)
+    public function getAbovecontentSubcomponents(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($component);
+        $ret = parent::getAbovecontentSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW:

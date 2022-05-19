@@ -20,9 +20,9 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         );
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
          // Add also the filter block for the Single Related Content, etc
@@ -92,7 +92,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
                 $subComponents = array_diff(
                     $this->getSubcomponents($component),
-                    $this->getPermanentSubmodules($component)
+                    $this->getPermanentSubcomponents($component)
                 );
                 foreach ($subComponents as $subComponent) {
                       // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"

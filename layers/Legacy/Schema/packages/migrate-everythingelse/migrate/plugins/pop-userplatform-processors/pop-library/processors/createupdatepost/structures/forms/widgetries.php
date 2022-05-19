@@ -18,9 +18,9 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:

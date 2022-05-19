@@ -43,7 +43,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CUU_USERNAME => [PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::COMPONENT_FORMINPUT_CUU_USERNAME],
@@ -62,7 +62,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getInfo(array $component, array &$props)
@@ -83,7 +83,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
             self::COMPONENT_FORMINPUTGROUP_CUU_USERWEBSITEURL => 'https://...',
         );
         if ($placeholder = $placeholders[$component[1]] ?? null) {
-            $component = $this->getComponentSubmodule($component);
+            $component = $this->getComponentSubcomponent($component);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
 

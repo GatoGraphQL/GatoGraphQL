@@ -11,9 +11,9 @@ class PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts extends PoP_Module_P
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTAUTHORS:

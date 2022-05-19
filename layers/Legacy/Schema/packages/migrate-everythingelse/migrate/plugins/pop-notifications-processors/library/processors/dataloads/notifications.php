@@ -29,14 +29,14 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         }
     }
 
-    protected function getStatusSubmodule(array $component)
+    protected function getStatusSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
                 return null;
         }
 
-        return parent::getStatusSubmodule($component);
+        return parent::getStatusSubcomponent($component);
     }
 
     public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface

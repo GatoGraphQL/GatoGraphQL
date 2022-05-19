@@ -24,7 +24,7 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
     }
 
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_USERS_MAP => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_USERS_MAP],
@@ -40,7 +40,7 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

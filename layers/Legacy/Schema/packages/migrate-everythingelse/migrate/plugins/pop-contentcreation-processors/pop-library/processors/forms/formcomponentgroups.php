@@ -11,7 +11,7 @@ class GD_ContentCreation_Module_Processor_FormInputGroups extends PoP_Module_Pro
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMCOMPONENTGROUP_FEATUREDIMAGE => [PoP_Module_Processor_FeaturedImageFormComponents::class, PoP_Module_Processor_FeaturedImageFormComponents::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE],
@@ -21,7 +21,7 @@ class GD_ContentCreation_Module_Processor_FormInputGroups extends PoP_Module_Pro
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

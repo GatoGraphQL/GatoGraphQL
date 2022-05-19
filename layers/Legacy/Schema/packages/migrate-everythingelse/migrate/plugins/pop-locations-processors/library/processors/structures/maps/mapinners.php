@@ -13,9 +13,9 @@ class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersB
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_EM_MAPINNER_POST:

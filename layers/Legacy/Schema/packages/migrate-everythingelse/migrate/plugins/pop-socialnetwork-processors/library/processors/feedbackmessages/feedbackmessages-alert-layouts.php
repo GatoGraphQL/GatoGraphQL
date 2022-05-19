@@ -11,7 +11,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts extends PoP
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER],
@@ -21,7 +21,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts extends PoP
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

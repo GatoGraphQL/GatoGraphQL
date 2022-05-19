@@ -13,7 +13,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Mod
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITY => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY],
@@ -24,7 +24,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Mod
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

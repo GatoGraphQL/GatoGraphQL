@@ -15,23 +15,23 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 $ret = array_merge(
                     $ret,
-                    UserStance_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_STANCE)
+                    UserStance_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_STANCE)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
                 $ret = array_merge(
                     $ret,
-                    UserStance_FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_STANCE)
+                    UserStance_FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_STANCE)
                 );
                 break;
         }

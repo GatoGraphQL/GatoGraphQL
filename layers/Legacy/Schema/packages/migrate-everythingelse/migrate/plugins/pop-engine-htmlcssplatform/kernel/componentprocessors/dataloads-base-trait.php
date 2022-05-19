@@ -15,7 +15,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             return $ret;
         }
 
-        if ($filter_component = $this->getFilterSubmodule($component)) {
+        if ($filter_component = $this->getFilterSubcomponent($component)) {
             if ($this->getProp($component, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
@@ -34,7 +34,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 
             $this->setProp($component, $props, 'show-filter', true);
 
-            if ($filter_component = $this->getFilterSubmodule($component)) {
+            if ($filter_component = $this->getFilterSubcomponent($component)) {
 
                 // Class needed for the proxyForm's selector when proxying this one block
                 $this->appendProp($component, $props, 'class', 'withfilter');
@@ -65,7 +65,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-            if ($filter_component = $this->getFilterSubmodule($component)) {
+            if ($filter_component = $this->getFilterSubcomponent($component)) {
 
                 // Filter visible: if explicitly defined, or if currently filtering with it
                 if ($show_filter = $this->getProp($component, $props, 'show-filter')) {

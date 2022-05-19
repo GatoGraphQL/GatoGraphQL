@@ -76,7 +76,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($component);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
     public function showPosttitle(array $component)
@@ -108,7 +108,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::showPosttitle($component);
     }
 
-    public function getContentSubmodule(array $component)
+    public function getContentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
@@ -116,10 +116,10 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
                 return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT];
         }
 
-        return parent::getContentSubmodule($component);
+        return parent::getContentSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
@@ -136,12 +136,12 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($component);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBottomSubmodules(array $component)
+    public function getBottomSubcomponents(array $component)
     {
-        $ret = parent::getBottomSubmodules($component);
+        $ret = parent::getBottomSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
@@ -171,7 +171,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 $ret = array_merge(
                     $ret,
-                    $this->getDetailsfeedBottomSubmodules($component)
+                    $this->getDetailsfeedBottomSubcomponents($component)
                 );
                 break;
         }
@@ -179,9 +179,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubmodules(array $component)
+    public function getBelowthumbLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($component);
+        $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
@@ -203,7 +203,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $component)
+    public function getPostThumbSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -235,7 +235,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
                 return null;
         }
 
-        return parent::getPostThumbSubmodule($component);
+        return parent::getPostThumbSubcomponent($component);
     }
 
     public function showExcerpt(array $component)

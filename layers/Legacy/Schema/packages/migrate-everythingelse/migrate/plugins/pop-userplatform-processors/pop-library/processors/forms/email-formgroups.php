@@ -15,7 +15,7 @@ class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelF
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
@@ -27,7 +27,7 @@ class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelF
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function useModuleConfiguration(array $component)

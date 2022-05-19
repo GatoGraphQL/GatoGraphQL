@@ -27,7 +27,7 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return false;
     }
 
-    public function removeExcludedSubmodules(array $component, array $subComponents): array
+    public function removeExcludedSubcomponents(array $component, array $subComponents): array
     {
         return $subComponents;
     }

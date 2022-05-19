@@ -22,9 +22,9 @@ class GD_URE_Module_Processor_UpdateProfileBlocks extends PoP_Module_Processor_U
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_UPDATE:

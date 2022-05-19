@@ -1561,7 +1561,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -2115,7 +2115,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
@@ -2445,10 +2445,10 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubmodule(array $component)
+    public function getLatestcountSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_DETAILS:
@@ -2932,7 +2932,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19];
         }
 
-        return parent::getLatestcountSubmodule($component);
+        return parent::getLatestcountSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

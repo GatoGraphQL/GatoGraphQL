@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_UpdateProfileOrganizationFormInnersBase extends PoP_Module_Processor_UpdateProfileFormInnersBase
 {
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         // Add common Create/Update components
-        PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubmodules($component, $ret, $this);
+        PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubcomponents($component, $ret, $this);
 
         if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
             // Add extra components

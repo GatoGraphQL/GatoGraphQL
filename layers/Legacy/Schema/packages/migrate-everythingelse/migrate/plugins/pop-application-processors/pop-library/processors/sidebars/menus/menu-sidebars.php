@@ -11,7 +11,7 @@ class PoP_Module_Processor_CustomMenuSidebars extends PoP_Module_Processor_Sideb
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
             self::COMPONENT_SIDEBAR_MENU_ABOUT => [PoP_Module_Processor_CustomMenuSidebarInners::class, PoP_Module_Processor_CustomMenuSidebarInners::COMPONENT_SIDEBARINNER_MENU_ABOUT],
@@ -21,7 +21,7 @@ class PoP_Module_Processor_CustomMenuSidebars extends PoP_Module_Processor_Sideb
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

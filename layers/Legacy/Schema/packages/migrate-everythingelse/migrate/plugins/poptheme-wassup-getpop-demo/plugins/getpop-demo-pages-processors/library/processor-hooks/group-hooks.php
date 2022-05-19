@@ -10,12 +10,12 @@ class GetPoPDemo_Processors_GroupHooks
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomGroups:components:author_widgetarea',
-            $this->getAuthortopWidgetSubmodules(...),
+            $this->getAuthortopWidgetSubcomponents(...),
             3
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomGroups:components:tag_widgetarea',
-            $this->getTagtopWidgetSubmodules(...),
+            $this->getTagtopWidgetSubcomponents(...),
             3
         );
         \PoP\Root\App::addAction(
@@ -63,7 +63,7 @@ class GetPoPDemo_Processors_GroupHooks
         );
     }
 
-    public function getAuthortopWidgetSubmodules($components)
+    public function getAuthortopWidgetSubcomponents($components)
     {
 
         // Add the Group which has the Featured widget
@@ -73,7 +73,7 @@ class GetPoPDemo_Processors_GroupHooks
         return $components;
     }
 
-    public function getTagtopWidgetSubmodules($components)
+    public function getTagtopWidgetSubcomponents($components)
     {
 
         // Add the Group which has the Featured widget

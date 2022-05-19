@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         return '';
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
         return array();
     }
@@ -22,12 +22,12 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         return [
             new RelationalModuleField(
                 $this->getSubcomponentField($component),
-                $this->getLayoutSubmodules($component)
+                $this->getLayoutSubcomponents($component)
             ),
         ];
     }
@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret['subcomponent-field'] = $this->getSubcomponentField($component);
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts

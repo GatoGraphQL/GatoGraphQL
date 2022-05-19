@@ -1561,7 +1561,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR],
@@ -2114,7 +2114,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
@@ -2444,10 +2444,10 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubmodule(array $component)
+    public function getLatestcountSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
@@ -2931,7 +2931,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
                 return [NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts::class, NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19];
         }
 
-        return parent::getLatestcountSubmodule($component);
+        return parent::getLatestcountSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

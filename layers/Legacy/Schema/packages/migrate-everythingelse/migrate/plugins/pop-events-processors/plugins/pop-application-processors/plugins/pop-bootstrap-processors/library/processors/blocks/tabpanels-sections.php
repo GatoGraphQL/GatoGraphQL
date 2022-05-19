@@ -15,9 +15,9 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_EVENTS => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_EVENTS],
@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_EVENTS:
@@ -42,10 +42,10 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_EVENTS:
@@ -56,12 +56,12 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_EVENTSCALENDAR];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
     {
-        if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
+        if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future
             switch ($component[1]) {
                 case self::COMPONENT_BLOCK_TABPANEL_PASTEVENTS:

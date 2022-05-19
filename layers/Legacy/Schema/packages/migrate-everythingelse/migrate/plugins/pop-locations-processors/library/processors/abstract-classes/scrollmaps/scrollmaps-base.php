@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_MultiplesBase
 {
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         return null;
     }
@@ -14,13 +14,13 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
 
         // if it's a map, add the Map block. Do it before adding the Scroll, because otherwise there's an error:
         // The map is not created yet, however the links in the elements are already trying to add the markers
-        $ret[] = $this->getMapSubmodule($component);
-        $ret[] = $this->getInnerSubmodule($component);
+        $ret[] = $this->getMapSubcomponent($component);
+        $ret[] = $this->getInnerSubcomponent($component);
 
         return $ret;
     }
 
-    public function getMapSubmodule(array $component)
+    public function getMapSubcomponent(array $component)
     {
         if ($this->isPostMap($component)) {
             return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::COMPONENT_EM_MAP_POST];
@@ -68,7 +68,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         $this->appendProp($component, $props, 'class', $direction);
 
         // Set the direction on the ScrollMap
-        $inner_component = $this->getInnerSubmodule($component);
+        $inner_component = $this->getInnerSubcomponent($component);
         $this->setProp($inner_component, $props, 'direction', $direction);
 
         parent::initModelProps($component, $props);

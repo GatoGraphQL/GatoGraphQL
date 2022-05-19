@@ -14,7 +14,7 @@ interface ComponentFilterManagerInterface
     public function getNotExcludedComponentSets(): ?array;
     public function setNeverExclude(bool $neverExclude): void;
     public function excludeModule(array $component, array &$props): bool;
-    public function removeExcludedSubmodules(array $component, array $subComponents): array;
+    public function removeExcludedSubcomponents(array $component, array $subComponents): array;
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */

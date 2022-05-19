@@ -13,9 +13,9 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:

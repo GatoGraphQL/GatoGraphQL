@@ -5,7 +5,7 @@ const GD_COMPACTSIDEBARSECTION_GENERICUSER = 'compact-genericuser';
 
 class FullUserSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

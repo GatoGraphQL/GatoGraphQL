@@ -1625,7 +1625,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -2223,7 +2223,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_TYPEAHEAD:
@@ -2613,7 +2613,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGCATEGORYPOSTS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

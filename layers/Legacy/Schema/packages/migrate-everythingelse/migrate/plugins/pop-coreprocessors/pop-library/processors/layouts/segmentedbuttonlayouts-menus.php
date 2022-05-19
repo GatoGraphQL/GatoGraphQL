@@ -43,9 +43,9 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         return parent::getDataFields($component, $props);
     }
 
-    public function getSegmentedbuttonSubmodules(array $component)
+    public function getSegmentedbuttonSubcomponents(array $component)
     {
-        $ret = parent::getSegmentedbuttonSubmodules($component);
+        $ret = parent::getSegmentedbuttonSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
@@ -55,9 +55,9 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
 
         return $ret;
     }
-    public function getDropdownsegmentedbuttonSubmodules(array $component)
+    public function getDropdownsegmentedbuttonSubcomponents(array $component)
     {
-        $ret = parent::getDropdownsegmentedbuttonSubmodules($component);
+        $ret = parent::getDropdownsegmentedbuttonSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:

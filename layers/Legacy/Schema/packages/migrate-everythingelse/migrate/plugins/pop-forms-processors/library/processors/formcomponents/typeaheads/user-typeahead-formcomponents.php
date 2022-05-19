@@ -59,17 +59,17 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES];
         }
 
-        return parent::getInputSubmodule($component);
+        return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubmodules(array $component)
+    public function getComponentSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
@@ -82,17 +82,17 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
                 );
         }
 
-        return parent::getComponentSubmodules($component);
+        return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $component)
+    public function getTriggerLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES];
         }
 
-        return parent::getTriggerLayoutSubmodule($component);
+        return parent::getTriggerLayoutSubcomponent($component);
     }
 
     public function getName(array $component): string

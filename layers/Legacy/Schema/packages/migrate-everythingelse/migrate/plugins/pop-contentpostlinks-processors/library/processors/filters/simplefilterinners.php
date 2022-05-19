@@ -15,9 +15,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
         );
     }
 
-    protected function getInputSubmodules(array $component)
+    protected function getInputSubcomponents(array $component)
     {
-        $ret = parent::getInputSubmodules($component);
+        $ret = parent::getInputSubcomponents($component);
 
         $inputComponents = [
             self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS => [

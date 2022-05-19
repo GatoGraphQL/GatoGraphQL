@@ -5,7 +5,7 @@ define('GD_COMPACTSIDEBARSECTION_TAG', 'compact-tag');
 
 class FullTagSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

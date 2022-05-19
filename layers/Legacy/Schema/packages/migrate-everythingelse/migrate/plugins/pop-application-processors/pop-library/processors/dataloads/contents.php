@@ -40,9 +40,9 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT:

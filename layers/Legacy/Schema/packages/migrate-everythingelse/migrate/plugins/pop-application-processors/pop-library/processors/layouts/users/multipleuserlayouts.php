@@ -33,7 +33,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getDefaultLayoutSubmodule(array $component)
+    public function getDefaultLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER:
@@ -64,10 +64,10 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                 return [PoP_Module_Processor_CustomFullUserLayouts::class, PoP_Module_Processor_CustomFullUserLayouts::COMPONENT_LAYOUT_FULLUSER];
         }
 
-        return parent::getDefaultLayoutSubmodule($component);
+        return parent::getDefaultLayoutSubcomponent($component);
     }
 
-    public function getMultipleLayoutSubmodules(array $component)
+    public function getMultipleLayoutSubcomponents(array $component)
     {
         $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
         switch ($component[1]) {
@@ -98,7 +98,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                 return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_USERCONTENT, $formats[$component[1]]);
         }
 
-        return parent::getMultipleLayoutSubmodules($component);
+        return parent::getMultipleLayoutSubcomponents($component);
     }
 }
 

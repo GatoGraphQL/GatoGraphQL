@@ -12,7 +12,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYSTANCES],
@@ -22,7 +22,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getHeaderTitles(array $component)

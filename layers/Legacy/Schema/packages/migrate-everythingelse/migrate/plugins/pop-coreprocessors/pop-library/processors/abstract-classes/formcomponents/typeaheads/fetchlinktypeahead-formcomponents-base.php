@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
         $ret = parent::getImmutableConfiguration($component, $props);
 
         // Hack: re-use multiple.tmpl
-        $input = $this->getInputSubmodule($component);
+        $input = $this->getInputSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = [
             \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input),
         ];

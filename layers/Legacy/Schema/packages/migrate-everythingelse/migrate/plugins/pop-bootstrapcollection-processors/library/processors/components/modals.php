@@ -15,9 +15,9 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
         );
     }
     
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_MODAL_EMBED:

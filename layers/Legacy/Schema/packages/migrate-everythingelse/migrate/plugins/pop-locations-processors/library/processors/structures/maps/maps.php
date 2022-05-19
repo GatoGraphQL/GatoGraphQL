@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_Maps extends GD_EM_Module_Processor_MapsBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_EM_MAP_POST => [GD_EM_Module_Processor_MapInners::class, GD_EM_Module_Processor_MapInners::COMPONENT_EM_MAPINNER_POST],
@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_Maps extends GD_EM_Module_Processor_MapsBase
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPT];
     }
 
-    public function getCustomizationSubmodule(array $component)
+    public function getCustomizationSubcomponent(array $component)
     {
         return null;
     }
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($script_customize = $this->getCustomizationSubmodule($component)) {
+        if ($script_customize = $this->getCustomizationSubcomponent($component)) {
             $ret[] = $script_customize;
         }
 
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         return [
             new RelationalModuleField(
@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($script_customize = $this->getCustomizationSubmodule($component)) {
+        if ($script_customize = $this->getCustomizationSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-customize'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script_customize);
         }
         $markers = [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS];

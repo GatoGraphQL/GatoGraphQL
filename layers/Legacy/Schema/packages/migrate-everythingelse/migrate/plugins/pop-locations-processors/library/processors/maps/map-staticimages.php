@@ -13,7 +13,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
         );
     }
 
-    public function getUrlparamSubmodule(array $component)
+    public function getUrlparamSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MAP_STATICIMAGE:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
                 return [PoP_Module_Processor_MapStaticImageLocations::class, PoP_Module_Processor_MapStaticImageLocations::COMPONENT_MAP_STATICIMAGE_LOCATIONS];
         }
 
-        return parent::getUrlparamSubmodule($component);
+        return parent::getUrlparamSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

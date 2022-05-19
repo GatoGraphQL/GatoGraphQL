@@ -22,7 +22,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_LOGIN:
@@ -41,7 +41,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_USER_CHANGEPASSWORD];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)

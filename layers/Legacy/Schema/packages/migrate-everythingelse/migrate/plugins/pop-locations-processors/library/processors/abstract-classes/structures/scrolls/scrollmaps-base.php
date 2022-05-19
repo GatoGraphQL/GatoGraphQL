@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_
         $this->appendProp($component, $props, 'class', 'mapdetails');
 
         // Make it activeItem: highlight on viewing the corresponding fullview
-        $inner = $this->getInnerSubmodule($component);
+        $inner = $this->getInnerSubcomponent($component);
         $this->appendProp($inner, $props, 'class', 'pop-openmapmarkers');
 
         // By default the scrollmap is vertical

@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_DATALOAD];
     }
 
-    protected function getStatusSubmodule(array $component)
+    protected function getStatusSubcomponent(array $component)
     {
         return [PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS];
     }
@@ -19,11 +19,11 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($this->getStatusSubmodule($component)) {
-            $ret[] = $this->getStatusSubmodule($component);
+        if ($this->getStatusSubcomponent($component)) {
+            $ret[] = $this->getStatusSubcomponent($component);
         }
 
-        if ($feedbackmessages = $this->getFeedbackmessageSubmodules($component)) {
+        if ($feedbackmessages = $this->getFeedbackmessageSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $feedbackmessages
@@ -39,18 +39,18 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($subComponents = $this->getInnerSubmodules($component)) {
+        if ($subComponents = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $subComponents
             );
         }
 
-        if ($status = $this->getStatusSubmodule($component)) {
+        if ($status = $this->getStatusSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['status'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($status);
         }
 
-        if ($feedbackmessages = $this->getFeedbackmessageSubmodules($component)) {
+        if ($feedbackmessages = $this->getFeedbackmessageSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['feedbackmessages'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $feedbackmessages
@@ -91,7 +91,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         parent::initModelProps($component, $props);
     }
 
-    protected function getFeedbackmessageSubmodules(array $component)
+    protected function getFeedbackmessageSubcomponents(array $component)
     {
         $ret = array();
         if ($feedbackmessage = $this->getFeedbackmessageModule($component)) {

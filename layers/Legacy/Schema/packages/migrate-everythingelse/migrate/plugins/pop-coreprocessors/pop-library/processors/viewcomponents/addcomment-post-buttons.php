@@ -14,7 +14,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         );
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
@@ -24,7 +24,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
                 );
         }
 
-        return parent::getTargetDynamicallyRenderedSubmodules($component);
+        return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
     // function headerShowUrl(array $component) {
@@ -40,7 +40,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT],
@@ -51,7 +51,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getBtnClass(array $component, array &$props)

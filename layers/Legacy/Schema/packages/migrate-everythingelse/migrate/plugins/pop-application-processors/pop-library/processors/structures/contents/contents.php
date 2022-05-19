@@ -18,7 +18,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             [self::class, self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT],
         );
     }
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_AUTHOR => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_AUTHOR],
@@ -44,7 +44,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_component', $inner, $component);
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)

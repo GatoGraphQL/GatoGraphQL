@@ -11,7 +11,7 @@ class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_P
         );
     }
 
-    public function getComponentSubmodules(array $component)
+    public function getComponentSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
@@ -23,17 +23,17 @@ class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_P
                 );
         }
 
-        return parent::getComponentSubmodules($component);
+        return parent::getComponentSubcomponents($component);
     }
 
-    public function getInputSubmodule(array $component)
+    public function getInputSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
                 return [PoP_Module_Processor_InputGroupFormComponents::class, PoP_Module_Processor_InputGroupFormComponents::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADSEARCH];
         }
 
-        return parent::getInputSubmodule($component);
+        return parent::getInputSubcomponent($component);
     }
 }
 

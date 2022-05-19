@@ -14,7 +14,7 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABLE_MYEVENTS:
@@ -27,7 +27,7 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                 return $inners[$component[1]];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getHeaderTitles(array $component)

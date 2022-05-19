@@ -14,7 +14,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
@@ -24,7 +24,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
                 return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_UREAAL_BUTTONINNER_VIEWALLMEMBERS];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

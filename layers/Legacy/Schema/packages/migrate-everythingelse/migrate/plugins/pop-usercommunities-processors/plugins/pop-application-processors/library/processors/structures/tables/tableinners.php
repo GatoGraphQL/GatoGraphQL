@@ -11,9 +11,9 @@ class PoP_UserCommunities_Module_Processor_TableInners extends PoP_Module_Proces
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
         switch ($component[1]) {

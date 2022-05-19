@@ -12,7 +12,7 @@ class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBa
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABLE_MYLOCATIONPOSTS:
@@ -23,7 +23,7 @@ class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBa
                 return $inners[$component[1]];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getHeaderTitles(array $component)

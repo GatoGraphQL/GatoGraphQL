@@ -37,9 +37,9 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_CATEGORIES:
@@ -102,9 +102,9 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $component)
+    public function getConditionFailedSubcomponents(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($component);
+        $ret = parent::getConditionFailedSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:

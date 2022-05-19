@@ -17,7 +17,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CHECKPOINTMESSAGE_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageInners::class, GD_UserLogin_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
@@ -30,7 +30,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

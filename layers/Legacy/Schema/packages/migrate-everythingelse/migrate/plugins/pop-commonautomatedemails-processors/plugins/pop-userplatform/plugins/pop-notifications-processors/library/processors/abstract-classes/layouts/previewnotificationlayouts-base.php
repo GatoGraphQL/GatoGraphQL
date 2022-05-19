@@ -2,11 +2,11 @@
 
 abstract class PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayoutsBase extends PoP_Module_Processor_PreviewNotificationLayoutsBase
 {
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         return null;
     }
-    public function getLinkSubmodule(array $component)
+    public function getLinkSubcomponent(array $component)
     {
         return null;
     }

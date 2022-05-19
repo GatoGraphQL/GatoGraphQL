@@ -12,19 +12,19 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $component): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($component);
+        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
 
         if ($conditionDataField = $this->getConditionField($component)) {
-            if ($layouts = $this->getConditionSucceededSubmodules($component)) {
+            if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
                 $ret[] = new ConditionalLeafModuleField(
                     $conditionDataField,
                     $layouts
                 );
             }
 
-            if ($conditionfailed_layouts = $this->getConditionFailedSubmodules($component)) {
+            if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
                 // Calculate the "not" data field for the conditionDataField
                 $notConditionDataField = $this->getNotConditionField($component);
                 $ret[] = new ConditionalLeafModuleField(
@@ -42,12 +42,12 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         return true;
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
         return array();
     }
 
-    public function getConditionFailedSubmodules(array $component)
+    public function getConditionFailedSubcomponents(array $component)
     {
         return array();
     }
@@ -63,7 +63,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         if ($conditionDataField = $this->getConditionField($component)) {
             $ret[] = $conditionDataField;
         }
-        if (!empty($this->getConditionFailedSubmodules($component))) {
+        if (!empty($this->getConditionFailedSubcomponents($component))) {
             $ret[] = $this->getNotConditionField($component);
         }
 
@@ -144,14 +144,14 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
             $ret[GD_JS_CLASSES]['failed'] = $classs;
         }
 
-        if ($layouts = $this->getConditionSucceededSubmodules($component)) {
+        if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
 
-        if ($conditionfailed_layouts = $this->getConditionFailedSubmodules($component)) {
+        if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['conditionfailed-layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $conditionfailed_layouts

@@ -13,7 +13,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
         );
     }
 
-    public function getPostSubmodule(array $component)
+    public function getPostSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
@@ -23,10 +23,10 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
                 return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL];
         }
         
-        return parent::getPostSubmodule($component);
+        return parent::getPostSubcomponent($component);
     }
 
-    public function getCommentSubmodule(array $component)
+    public function getCommentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
@@ -34,7 +34,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
                 return [PoP_Module_Processor_CommentClippedViewComponentHeaders::class, PoP_Module_Processor_CommentClippedViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED];
         }
         
-        return parent::getCommentSubmodule($component);
+        return parent::getCommentSubcomponent($component);
     }
 }
 

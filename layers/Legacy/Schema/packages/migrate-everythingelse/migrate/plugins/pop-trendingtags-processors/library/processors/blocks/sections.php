@@ -22,7 +22,7 @@ class PoP_TrendingTags_Module_Processor_SectionBlocks extends PoP_Module_Process
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS => [PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS],
@@ -32,7 +32,7 @@ class PoP_TrendingTags_Module_Processor_SectionBlocks extends PoP_Module_Process
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS:
@@ -40,7 +40,7 @@ class PoP_TrendingTags_Module_Processor_SectionBlocks extends PoP_Module_Process
                 return [PoP_TrendingTags_Module_Processor_CustomControlGroups::class, PoP_TrendingTags_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_TRENDINGTAGLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

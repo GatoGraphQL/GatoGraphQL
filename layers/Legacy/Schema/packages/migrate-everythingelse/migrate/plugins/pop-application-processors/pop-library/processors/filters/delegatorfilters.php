@@ -45,7 +45,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_TAGS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS],
@@ -72,7 +72,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getBlockTarget(array $component, array &$props)

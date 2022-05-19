@@ -23,7 +23,7 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT:
@@ -31,7 +31,7 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
                 return [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];
         }
         
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

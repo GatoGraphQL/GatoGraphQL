@@ -20,25 +20,25 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     // PUBLIC Overriding Functions
     //-------------------------------------------------
 
-    protected function getInputSubmodules(array $component)
+    protected function getInputSubcomponents(array $component)
     {
         return [];
     }
 
-    protected function getFilteredInputSubmodules(array $component)
+    protected function getFilteredInputSubcomponents(array $component)
     {
         return \PoP\Root\App::applyFilters(
             'FilterInnerComponentProcessor:inputComponents',
-            $this->getInputSubmodules($component),
+            $this->getInputSubcomponents($component),
             $component
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
-        if ($input_components = $this->getFilteredInputSubmodules($component)) {
+        if ($input_components = $this->getFilteredInputSubcomponents($component)) {
 
             $ret = array_merge(
                 $ret,

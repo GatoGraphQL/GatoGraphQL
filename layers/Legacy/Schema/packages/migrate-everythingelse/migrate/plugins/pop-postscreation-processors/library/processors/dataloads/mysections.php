@@ -27,7 +27,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
@@ -38,7 +38,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
@@ -47,7 +47,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_MYPOSTS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string

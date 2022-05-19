@@ -13,14 +13,14 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET];
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -31,9 +31,9 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 $this->appendProp($component, $props, 'class', 'pop-uniqueornone-selectabletypeahead-formgroup');
 
-                $component = $this->getComponentSubmodule($component);
+                $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('After reading...', 'pop-userstance-processors')

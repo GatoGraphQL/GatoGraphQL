@@ -13,14 +13,14 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
                 return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST];
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -29,9 +29,9 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
 
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
-                $component = $this->getComponentSubmodule($component);
+                $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
+                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Volunteer for:', 'pop-application-processors')

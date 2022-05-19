@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $urlparam = $this->getUrlparamSubmodule($component);
+        $urlparam = $this->getUrlparamSubcomponent($component);
         return [
             new RelationalModuleField(
                 'locations',
@@ -25,7 +25,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         ];
     }
 
-    public function getUrlparamSubmodule(array $component)
+    public function getUrlparamSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::COMPONENT_MAP_STATICIMAGE_URLPARAM];
     }
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $urlparam = $this->getUrlparamSubmodule($component);
+        $urlparam = $this->getUrlparamSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
 
         return $ret;

@@ -16,7 +16,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
             [self::class, self::COMPONENT_CONTENT_LATESTCOUNTS],
         );
     }
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL => [PoPCore_Module_Processor_SingleContentInners::class, PoPCore_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
@@ -28,7 +28,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

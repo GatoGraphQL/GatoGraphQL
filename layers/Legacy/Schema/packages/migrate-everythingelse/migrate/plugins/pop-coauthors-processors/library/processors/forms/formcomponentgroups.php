@@ -14,7 +14,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS => [GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS],
@@ -25,7 +25,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void
@@ -38,7 +38,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
                     self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS => TranslationAPIFacade::getInstance()->__('Type name...', 'pop-coreprocessors'),
                 );
                 $placeholder = $placeholders[$component[1]];
-                $component = $this->getComponentSubmodule($component);
+                $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', $placeholder);
                 break;
         }

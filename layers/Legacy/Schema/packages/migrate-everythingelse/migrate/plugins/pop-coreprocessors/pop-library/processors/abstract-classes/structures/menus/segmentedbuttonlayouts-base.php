@@ -9,11 +9,11 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_COLLAPSESEGMENTEDBUTTON];
     }
 
-    public function getSegmentedbuttonSubmodules(array $component)
+    public function getSegmentedbuttonSubcomponents(array $component)
     {
         return array();
     }
-    public function getDropdownsegmentedbuttonSubmodules(array $component)
+    public function getDropdownsegmentedbuttonSubcomponents(array $component)
     {
         return array();
     }
@@ -24,8 +24,8 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
 
         $ret = array_merge(
             $ret,
-            $this->getSegmentedbuttonSubmodules($component),
-            $this->getDropdownsegmentedbuttonSubmodules($component)
+            $this->getSegmentedbuttonSubcomponents($component),
+            $this->getDropdownsegmentedbuttonSubcomponents($component)
         );
 
         return $ret;
@@ -55,13 +55,13 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         $ret[GD_JS_CLASSES]['btn'] = $this->getBtnClass($component, $props);
         $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($component);
 
-        $segmentedbuttons = $this->getSegmentedbuttonSubmodules($component);
+        $segmentedbuttons = $this->getSegmentedbuttonSubcomponents($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['segmentedbuttons'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons
         );
 
-        $segmentedbuttons = $this->getDropdownsegmentedbuttonSubmodules($component);
+        $segmentedbuttons = $this->getDropdownsegmentedbuttonSubcomponents($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons

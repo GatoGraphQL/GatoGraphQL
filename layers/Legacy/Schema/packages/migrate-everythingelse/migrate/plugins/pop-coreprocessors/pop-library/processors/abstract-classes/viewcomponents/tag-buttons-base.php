@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_TagViewComponentButtonsBase extends PoP_Module_Processor_ViewComponentButtonsBase
 {
-    public function getHeaderSubmodule(array $component): ?array
+    public function getHeaderSubcomponent(array $component): ?array
     {
         if ($this->headerShowUrl($component)) {
             return [PoP_Module_Processor_TagViewComponentHeaders::class, PoP_Module_Processor_TagViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL];

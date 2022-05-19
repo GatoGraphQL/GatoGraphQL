@@ -50,7 +50,7 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
         return parent::getInfo($component, $props);
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
@@ -60,7 +60,7 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
                 return [GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT];
         }
         
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

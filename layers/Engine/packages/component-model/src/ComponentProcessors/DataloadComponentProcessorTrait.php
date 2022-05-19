@@ -14,11 +14,11 @@ trait DataloadComponentProcessorTrait
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($filter_component = $this->getFilterSubmodule($component)) {
+        if ($filter_component = $this->getFilterSubcomponent($component)) {
             $ret[] = $filter_component;
         }
 
-        if ($inners = $this->getInnerSubmodules($component)) {
+        if ($inners = $this->getInnerSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -28,12 +28,12 @@ trait DataloadComponentProcessorTrait
         return $ret;
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
         return array();
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         return null;
     }

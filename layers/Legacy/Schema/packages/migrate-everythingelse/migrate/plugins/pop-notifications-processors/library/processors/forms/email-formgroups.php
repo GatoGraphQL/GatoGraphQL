@@ -11,7 +11,7 @@ class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Proc
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS => [PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS],
@@ -21,7 +21,7 @@ class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Proc
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function useModuleConfiguration(array $component)

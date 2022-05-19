@@ -12,7 +12,7 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::COMPONENT_FORMINNER_FLAG],
@@ -22,7 +22,7 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

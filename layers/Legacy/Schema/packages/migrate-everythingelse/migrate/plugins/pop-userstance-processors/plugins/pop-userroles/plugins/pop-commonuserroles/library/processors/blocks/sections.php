@@ -42,7 +42,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
@@ -58,7 +58,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
@@ -79,7 +79,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
                 return [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

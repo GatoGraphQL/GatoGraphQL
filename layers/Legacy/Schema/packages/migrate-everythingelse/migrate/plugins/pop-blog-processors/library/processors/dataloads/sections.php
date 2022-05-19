@@ -223,7 +223,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         };
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
 
@@ -331,7 +331,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $component): ?array
+    public function getFilterSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD:
@@ -410,7 +410,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
-        return parent::getFilterSubmodule($component);
+        return parent::getFilterSubcomponent($component);
     }
 
     public function getFormat(array $component): ?string
@@ -810,7 +810,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_LIST:
                 // Search: don't bring anything unless we're filtering (no results initially)
-                // if ($filter_component = $this->getFilterSubmodule($component)) {
+                // if ($filter_component = $this->getFilterSubcomponent($component)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 //     $filter = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);
                 // }

@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FORM_EVENT => [GD_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_EVENT],
@@ -21,7 +21,7 @@ class GD_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

@@ -70,18 +70,18 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
-        if ($inner_component = $this->getInnerSubmodule($component)) {
+        if ($inner_component = $this->getInnerSubcomponent($component)) {
             $ret[] = $inner_component;
         }
 
         return $ret;
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         return null;
     }
@@ -90,7 +90,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     // {
     //     $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
-    //     if ($filter_component = $this->getFilterSubmodule($component)) {
+    //     if ($filter_component = $this->getFilterSubcomponent($component)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $ret['filter-component'] = $filter_component;
     //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);

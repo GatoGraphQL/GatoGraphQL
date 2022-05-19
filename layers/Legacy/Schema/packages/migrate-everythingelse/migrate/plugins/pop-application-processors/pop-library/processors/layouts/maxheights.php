@@ -11,9 +11,9 @@ class PoP_Module_Processor_MaxHeightLayouts extends PoP_Module_Processor_MaxHeig
         );
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
         switch ($component[1]) {

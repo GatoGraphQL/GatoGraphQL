@@ -13,22 +13,22 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modul
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT:
                 $ret = array_merge(
                     $ret,
-                    EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_EVENT)
+                    EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_EVENT)
                 );
                 break;
 
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT:
                 $ret = array_merge(
                     $ret,
-                    EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_PASTEVENT)
+                    EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_PASTEVENT)
                 );
                 break;
         }

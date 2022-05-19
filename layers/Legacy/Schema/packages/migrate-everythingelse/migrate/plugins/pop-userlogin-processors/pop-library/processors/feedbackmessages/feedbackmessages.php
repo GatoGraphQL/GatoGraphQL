@@ -19,7 +19,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessages extends PoP_Module_Proc
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_LOGIN => [GD_UserLogin_Module_Processor_UserFeedbackMessageInners::class, GD_UserLogin_Module_Processor_UserFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_LOGIN],
@@ -33,7 +33,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessages extends PoP_Module_Proc
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

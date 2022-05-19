@@ -13,7 +13,7 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_COMMENTFRAME_LIST:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_ADD];
         }
         
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

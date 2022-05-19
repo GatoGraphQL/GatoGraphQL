@@ -12,14 +12,14 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 return [PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK];
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getInfo(array $component, array &$props)
@@ -36,7 +36,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
-                $component = $this->getComponentSubmodule($component);
+                $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', 'https://...');
                 break;
         }

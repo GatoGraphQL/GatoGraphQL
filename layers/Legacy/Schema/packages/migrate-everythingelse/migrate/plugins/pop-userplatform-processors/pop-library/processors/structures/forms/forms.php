@@ -13,7 +13,7 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_INVITENEWUSERS:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
                 return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::COMPONENT_FORMINNER_MYPREFERENCES];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

@@ -385,7 +385,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CAROUSEL_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00],
@@ -513,7 +513,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getMode(array $component, array &$props)
@@ -650,7 +650,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
     }
 
 
-    public function getControlsTopSubmodule(array $component)
+    public function getControlsTopSubcomponent(array $component)
     {
         $controls = array(
             self::COMPONENT_CAROUSEL_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_NOSEARCHCATEGORYPOSTS00],
@@ -758,7 +758,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             return $control;
         }
 
-        return parent::getControlsTopSubmodule($component);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

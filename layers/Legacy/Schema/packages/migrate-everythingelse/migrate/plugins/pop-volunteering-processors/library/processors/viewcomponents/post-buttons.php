@@ -30,7 +30,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG],
@@ -41,7 +41,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getBtnClass(array $component, array &$props)

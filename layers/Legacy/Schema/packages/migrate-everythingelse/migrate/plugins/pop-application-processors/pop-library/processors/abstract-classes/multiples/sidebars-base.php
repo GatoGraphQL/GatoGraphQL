@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
         return array();
     }
@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
         return null;
     }
 
-    protected function getPermanentSubmodules(array $component)
+    protected function getPermanentSubcomponents(array $component)
     {
 
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
         $ret = parent::getSubcomponents($component);
 
         // Add the corresponding blocks
-        if ($components = $this->getInnerSubmodules($component)) {
+        if ($components = $this->getInnerSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $components
@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
         }
         
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
-        if ($components = $this->getPermanentSubmodules($component)) {
+        if ($components = $this->getPermanentSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $components

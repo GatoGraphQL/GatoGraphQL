@@ -11,7 +11,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Proce
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
             self::COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC => [PoP_Module_Processor_CustomVerticalAuthorSidebarInners::class, PoP_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
@@ -21,7 +21,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Proce
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

@@ -11,9 +11,9 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
         );
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:

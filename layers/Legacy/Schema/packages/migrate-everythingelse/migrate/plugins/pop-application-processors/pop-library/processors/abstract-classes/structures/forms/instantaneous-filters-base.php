@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_InstantaneousFiltersBase extends PoP_Module_
         $this->appendProp($component, $props, 'class', 'pop-filterform-instantaneous');
 
         // Add for the target for the onActionThenClick function
-        if ($inner = $this->getInnerSubmodule($component)) {
+        if ($inner = $this->getInnerSubcomponent($component)) {
             $this->setProp($inner, $props, 'trigger-component', $component);
         }
         parent::initModelProps($component, $props);

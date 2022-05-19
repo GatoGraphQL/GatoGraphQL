@@ -11,9 +11,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_TableInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
         switch ($component[1]) {

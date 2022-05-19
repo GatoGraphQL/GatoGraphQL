@@ -15,23 +15,23 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
                 $ret = array_merge(
                     $ret,
-                    Custom_EM_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_LOCATIONPOST)
+                    Custom_EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_LOCATIONPOST)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST:
                 $ret = array_merge(
                     $ret,
-                    Custom_EM_FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_LOCATIONPOST)
+                    Custom_EM_FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_LOCATIONPOST)
                 );
                 break;
         }

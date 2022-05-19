@@ -11,7 +11,7 @@ class PoP_ContentCreation_Module_Processor_FormGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_WHYFLAG => [PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, PoP_ContentCreation_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_WHYFLAG],
@@ -21,7 +21,7 @@ class PoP_ContentCreation_Module_Processor_FormGroups extends PoP_Module_Process
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

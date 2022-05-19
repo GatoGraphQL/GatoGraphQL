@@ -28,7 +28,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW],
@@ -40,7 +40,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
          // Single Authors has no filter, so show only the Share control
@@ -51,7 +51,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUSHARE];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

@@ -8,7 +8,7 @@ define('GD_COMPACTSIDEBARSECTION_PASTEVENT', 'compact-pastevent');
 
 class EM_FullViewSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

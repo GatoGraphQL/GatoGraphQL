@@ -11,7 +11,7 @@ class PoP_Share_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_DESTINATIONEMAIL => [PoP_Share_Module_Processor_TextFormInputs::class, PoP_Share_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_DESTINATIONEMAIL],
@@ -21,7 +21,7 @@ class PoP_Share_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

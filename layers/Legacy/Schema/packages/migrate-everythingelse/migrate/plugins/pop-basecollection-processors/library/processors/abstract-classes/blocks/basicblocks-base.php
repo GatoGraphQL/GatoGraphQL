@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BASICBLOCK];
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
         return array();
     }
@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($block_inners = $this->getInnerSubmodules($component)) {
+        if ($block_inners = $this->getInnerSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $block_inners
@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($subComponents = $this->getInnerSubmodules($component)) {
+        if ($subComponents = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['block-inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $subComponents

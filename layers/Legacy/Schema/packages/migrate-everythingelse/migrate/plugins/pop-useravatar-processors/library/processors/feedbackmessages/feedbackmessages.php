@@ -11,7 +11,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages extends PoP
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
@@ -21,7 +21,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages extends PoP
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

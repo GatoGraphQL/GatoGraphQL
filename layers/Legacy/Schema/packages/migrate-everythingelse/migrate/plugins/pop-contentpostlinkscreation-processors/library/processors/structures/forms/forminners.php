@@ -21,9 +21,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
         return parent::isLink($component);
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
@@ -36,7 +36,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
                 );
         }
 
-        return parent::getComponentSubmodules($component, $props);
+        return parent::getComponentSubcomponents($component, $props);
     }
 
     public function initModelProps(array $component, array &$props): void

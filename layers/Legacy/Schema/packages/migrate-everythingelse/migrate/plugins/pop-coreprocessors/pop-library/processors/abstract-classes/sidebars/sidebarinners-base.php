@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_SidebarInnersBase extends PoP_Module_Process
             $this->appendProp($component, $props, 'class', $wrapper_class);
         }
         if ($widgetwrapper_class = $this->getWidgetwrapperClass($component)) {
-            foreach ($this->getLayoutSubmodules($component) as $layout) {
+            foreach ($this->getLayoutSubcomponents($component) as $layout) {
                 $this->mergeProp(
                     $layout,
                     $props,

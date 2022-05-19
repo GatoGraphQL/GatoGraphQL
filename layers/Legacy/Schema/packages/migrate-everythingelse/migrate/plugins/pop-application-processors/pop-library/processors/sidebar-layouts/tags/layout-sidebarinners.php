@@ -15,23 +15,23 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
                     $ret,
-                    FullTagSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_TAG)
+                    FullTagSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_TAG)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL:
                 $ret = array_merge(
                     $ret,
-                    FullTagSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_TAG)
+                    FullTagSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_TAG)
                 );
                 break;
         }

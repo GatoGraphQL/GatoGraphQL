@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_INDIVIDUAL];
     }
 
-    public function getMapscriptSubmodule(array $component)
+    public function getMapscriptSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::COMPONENT_MAP_SCRIPT];
     }
@@ -17,13 +17,13 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
         return true;
     }
 
-    public function getMapdivSubmodule(array $component)
+    public function getMapdivSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
         // return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAPSTATICIMAGE_USERORPOST_DIV];
     }
 
-    public function getDrawmarkersSubmodule(array $component)
+    public function getDrawmarkersSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::COMPONENT_MAP_SCRIPT_DRAWMARKERS];
         // return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::COMPONENT_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS];
@@ -33,10 +33,10 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
     {
         $ret = parent::getSubcomponents($component);
 
-        $ret[] = $this->getMapscriptSubmodule($component);
-        $ret[] = $this->getMapdivSubmodule($component);
+        $ret[] = $this->getMapscriptSubcomponent($component);
+        $ret[] = $this->getMapdivSubcomponent($component);
         $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
-        $ret[] = $this->getDrawmarkersSubmodule($component);
+        $ret[] = $this->getDrawmarkersSubcomponent($component);
 
         return $ret;
     }
@@ -45,9 +45,9 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $map_script = $this->getMapscriptSubmodule($component);
-        $map_div = $this->getMapdivSubmodule($component);
-        $drawmarkers = $this->getDrawmarkersSubmodule($component);
+        $map_script = $this->getMapscriptSubcomponent($component);
+        $map_div = $this->getMapdivSubcomponent($component);
+        $drawmarkers = $this->getDrawmarkersSubcomponent($component);
         $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_script);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_div);
@@ -59,7 +59,7 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
 
     public function initModelProps(array $component, array &$props): void
     {
-        $map_div = $this->getMapdivSubmodule($component);
+        $map_div = $this->getMapdivSubcomponent($component);
         $this->setProp($map_div, $props, 'open-onemarker-infowindow', $this->openOnemarkerInfowindow($component));
         parent::initModelProps($component, $props);
     }

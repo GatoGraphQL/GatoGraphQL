@@ -11,7 +11,7 @@ class PoP_Module_Processor_AnnouncementSpeechBubbles extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
 
         // return [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_NOTHUMB_STICKY];

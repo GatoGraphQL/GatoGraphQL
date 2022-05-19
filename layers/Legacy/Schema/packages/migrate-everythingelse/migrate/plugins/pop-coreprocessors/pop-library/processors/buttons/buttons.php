@@ -20,7 +20,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
@@ -39,7 +39,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

@@ -21,7 +21,7 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME => [PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOGIN_USERNAME],
@@ -36,7 +36,7 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

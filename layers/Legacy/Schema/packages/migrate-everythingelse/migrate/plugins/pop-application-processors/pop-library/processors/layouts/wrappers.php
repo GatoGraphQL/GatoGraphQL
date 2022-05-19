@@ -18,9 +18,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
@@ -39,9 +39,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return $ret;
     }
 
-    // function getConditionFailedSubmodules(array $component) {
+    // function getConditionFailedSubcomponents(array $component) {
 
-    //     $ret = parent::getConditionFailedSubmodules($component);
+    //     $ret = parent::getConditionFailedSubcomponents($component);
 
     //     switch ($component[1]) {
 

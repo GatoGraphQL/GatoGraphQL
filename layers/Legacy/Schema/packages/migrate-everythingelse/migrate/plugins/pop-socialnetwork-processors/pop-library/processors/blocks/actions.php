@@ -46,9 +46,9 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         };
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $layouts = array(
             self::COMPONENT_BLOCK_FOLLOWUSER => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::COMPONENT_DATALOADACTION_FOLLOWUSER],

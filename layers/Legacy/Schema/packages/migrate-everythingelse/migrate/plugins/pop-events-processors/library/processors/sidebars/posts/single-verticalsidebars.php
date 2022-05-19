@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
             self::COMPONENT_VERTICALSIDEBAR_SINGLE_EVENT => [GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT],
@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pro
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

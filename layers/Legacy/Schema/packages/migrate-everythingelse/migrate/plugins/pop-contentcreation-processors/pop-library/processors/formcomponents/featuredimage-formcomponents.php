@@ -12,7 +12,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         );
     }
 
-    public function getFeaturedimageinnerSubmodule(array $component): ?array
+    public function getFeaturedimageinnerSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:

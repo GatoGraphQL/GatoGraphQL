@@ -204,7 +204,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -290,7 +290,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * Watch out! This function loads both leaf fields (eg: "date") and
      * relational fields (eg: "author").
      *
-     * Using `getConditionalOnDataFieldRelationalSubmodules` to
+     * Using `getConditionalOnDataFieldRelationalSubcomponents` to
      * load relational fields does not work, because the component to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
@@ -306,7 +306,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalOnDataFieldSubmodules(array $component): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -417,7 +417,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalLeafModuleField[]
     //  */
-    // public function getConditionalOnDataFieldSubmodules(array $component): array
+    // public function getConditionalOnDataFieldSubcomponents(array $component): array
     // {
     //     $componentAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($componentAtts)) {
@@ -479,7 +479,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalRelationalModuleField[]
     //  */
-    // public function getConditionalOnDataFieldRelationalSubmodules(array $component): array
+    // public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array
     // {
     //     $componentAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($componentAtts)) {

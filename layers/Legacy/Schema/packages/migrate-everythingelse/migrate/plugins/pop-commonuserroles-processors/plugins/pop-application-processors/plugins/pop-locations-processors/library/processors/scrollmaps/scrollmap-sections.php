@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proce
         return parent::isUserMap($component);
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_SCROLLMAP_ORGANIZATIONS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_USER_MAP],

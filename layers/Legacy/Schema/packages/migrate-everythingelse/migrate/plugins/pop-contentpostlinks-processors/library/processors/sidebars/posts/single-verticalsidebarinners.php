@@ -11,15 +11,15 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners ex
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK:
                 $ret = array_merge(
                     $ret,
-                    PoP_ContentPostLinks_FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POSTLINK)
+                    PoP_ContentPostLinks_FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_POSTLINK)
                 );
                 break;
         }

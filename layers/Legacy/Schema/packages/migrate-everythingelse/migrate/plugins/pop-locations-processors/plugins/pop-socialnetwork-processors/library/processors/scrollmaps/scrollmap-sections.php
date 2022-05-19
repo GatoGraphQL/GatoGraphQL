@@ -21,7 +21,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections exten
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_USERS_MAP],

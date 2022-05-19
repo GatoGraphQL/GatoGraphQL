@@ -46,9 +46,9 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
     //     return $routes[$component[1]] ?? parent::getRelevantRoute($component, $props);
     // }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_DATALOAD_MENU_SIDEBAR_ABOUT => [PoP_Module_Processor_CustomMenuSidebars::class, PoP_Module_Processor_CustomMenuSidebars::COMPONENT_SIDEBAR_MENU_ABOUT],

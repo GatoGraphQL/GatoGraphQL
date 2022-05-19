@@ -27,7 +27,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
@@ -40,7 +40,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($component);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
     public function getTitleHtmlmarkup(array $component, array &$props)
@@ -53,7 +53,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
@@ -67,12 +67,12 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERBOTTOM];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($component);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowexcerptLayoutSubmodules(array $component)
+    public function getBelowexcerptLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowexcerptLayoutSubmodules($component);
+        $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
@@ -91,9 +91,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return $ret;
     }
 
-    public function getBelowavatarLayoutSubmodules(array $component)
+    public function getBelowavatarLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowavatarLayoutSubmodules($component);
+        $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
@@ -104,7 +104,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return $ret;
     }
 
-    public function getUseravatarSubmodule(array $component)
+    public function getUseravatarSubcomponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -127,7 +127,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
             }
         }
 
-        return parent::getUseravatarSubmodule($component);
+        return parent::getUseravatarSubcomponent($component);
     }
 
 

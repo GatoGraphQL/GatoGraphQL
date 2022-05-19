@@ -139,7 +139,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return false;
     }
 
-    public function removeExcludedSubmodules(array $component, array $subComponents): array
+    public function removeExcludedSubcomponents(array $component, array $subComponents): array
     {
         if (!$this->initialized) {
             $this->init();
@@ -149,7 +149,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
                 return $subComponents;
             }
 
-            return $this->selected_filter->removeExcludedSubmodules($component, $subComponents);
+            return $this->selected_filter->removeExcludedSubcomponents($component, $subComponents);
         }
 
         return $subComponents;

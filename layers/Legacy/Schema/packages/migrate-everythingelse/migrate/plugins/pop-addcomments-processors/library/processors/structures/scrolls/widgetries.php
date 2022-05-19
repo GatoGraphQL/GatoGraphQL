@@ -14,9 +14,9 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -103,7 +103,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubmodule(array $component)
+    public function getQuicklinkgroupSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -112,7 +112,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
                 return [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
         }
 
-        return parent::getQuicklinkgroupSubmodule($component);
+        return parent::getQuicklinkgroupSubcomponent($component);
     }
 }
 

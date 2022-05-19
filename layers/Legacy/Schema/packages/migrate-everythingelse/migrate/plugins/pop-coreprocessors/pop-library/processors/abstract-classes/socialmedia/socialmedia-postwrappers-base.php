@@ -9,9 +9,9 @@ abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Modul
         return null;
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         $ret[] = $this->getSocialmediaModule($component);
 

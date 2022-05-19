@@ -12,14 +12,14 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_EVERYTHINGQUICKLINKS:
                 return [PoP_Core_Module_Processor_FormInners::class, PoP_Core_Module_Processor_FormInners::COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getMethod(array $component, array &$props)

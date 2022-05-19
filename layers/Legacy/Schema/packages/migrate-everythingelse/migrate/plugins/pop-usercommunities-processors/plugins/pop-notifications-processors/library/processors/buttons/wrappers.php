@@ -14,9 +14,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
@@ -31,9 +31,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $component)
+    public function getConditionFailedSubcomponents(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($component);
+        $ret = parent::getConditionFailedSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:

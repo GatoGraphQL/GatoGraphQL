@@ -30,9 +30,9 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         );
     }
 
-    public function getFooterSubmodules(array $component)
+    public function getFooterSubcomponents(array $component)
     {
-        $ret = parent::getFooterSubmodules($component);
+        $ret = parent::getFooterSubcomponents($component);
 
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
         switch ($component[1]) {
@@ -70,7 +70,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $component)
+    public function getSidebarSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLVIEW:
@@ -97,7 +97,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
                 return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($component);
+        return parent::getSidebarSubcomponent($component);
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array

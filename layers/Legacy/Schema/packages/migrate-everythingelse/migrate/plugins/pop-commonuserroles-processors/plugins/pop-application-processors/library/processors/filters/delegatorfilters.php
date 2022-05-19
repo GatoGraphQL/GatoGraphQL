@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processo
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_INDIVIDUALS => [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS],
@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processo
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

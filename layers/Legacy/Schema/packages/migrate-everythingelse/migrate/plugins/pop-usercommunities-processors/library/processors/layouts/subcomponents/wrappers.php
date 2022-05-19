@@ -11,9 +11,9 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         );
     }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:

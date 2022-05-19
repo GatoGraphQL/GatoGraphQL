@@ -11,17 +11,17 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
     public function getSubcomponents(array $component): array
     {
         return array(
-            $this->getDownloadpictureSubmodule($component),
-            $this->getUploadpictureSubmodule($component),
+            $this->getDownloadpictureSubcomponent($component),
+            $this->getUploadpictureSubcomponent($component),
         );
     }
 
-    public function getDownloadpictureSubmodule(array $component)
+    public function getDownloadpictureSubcomponent(array $component)
     {
         return [PoP_Module_Processor_DownloadPictureFileUpload::class, PoP_Module_Processor_DownloadPictureFileUpload::COMPONENT_FILEUPLOAD_PICTURE_DOWNLOAD];
     }
 
-    public function getUploadpictureSubmodule(array $component)
+    public function getUploadpictureSubcomponent(array $component)
     {
         return [PoP_Module_Processor_UploadPictureFileUpload::class, PoP_Module_Processor_UploadPictureFileUpload::COMPONENT_FILEUPLOAD_PICTURE_UPLOAD];
     }
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
     {
 
         // // The downloadpicture module will need to be rendered dynamically on runtime
-        // $downloadpicture_component = $this->getDownloadpictureSubmodule($component);
+        // $downloadpicture_component = $this->getDownloadpictureSubcomponent($component);
         // $this->setProp($downloadpicture_component, $props, 'module-path', true);
         $this->setProp($downloadpicture_component, $props, 'dynamic-component', true);
 
@@ -58,8 +58,8 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['module-download'] = $this->getDownloadpictureSubmodule($component);
-        $ret['module-upload'] = $this->getUploadpictureSubmodule($component);
+        $ret['module-download'] = $this->getDownloadpictureSubcomponent($component);
+        $ret['module-upload'] = $this->getUploadpictureSubcomponent($component);
 
         $ret[GD_JS_TITLES] = array(
             'avatar' => TranslationAPIFacade::getInstance()->__('Avatar', 'pop-useravatar-processors'),

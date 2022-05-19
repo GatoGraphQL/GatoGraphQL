@@ -8,11 +8,11 @@ class PoPTheme_UserStance_ModuleHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_MainGroups:components:single',
-            $this->getSingleSubmodules(...)
+            $this->getSingleSubcomponents(...)
         );
     }
 
-    public function getSingleSubmodules($components)
+    public function getSingleSubcomponents($components)
     {
 
         // Only for Links/Posts/Stories/Discussions/Announcements/Events

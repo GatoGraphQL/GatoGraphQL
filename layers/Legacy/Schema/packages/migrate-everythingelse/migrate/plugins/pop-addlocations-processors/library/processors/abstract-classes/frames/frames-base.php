@@ -26,20 +26,20 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         switch ($component[1]) {
             case self::COMPONENT_FRAME_CREATELOCATIONMAP:
                 return array(
-                    $this->getMapdivSubmodule($component),
-                    $this->getFormSubmodule($component)
+                    $this->getMapdivSubcomponent($component),
+                    $this->getFormSubcomponent($component)
                 );
         }
 
         return parent::getSubcomponents($component);
     }
 
-    public function getFormSubmodule(array $component)
+    public function getFormSubcomponent(array $component)
     {
         return [GD_EM_Module_Processor_CreateLocationForms::class, GD_EM_Module_Processor_CreateLocationForms::COMPONENT_FORM_CREATELOCATION];
     }
 
-    public function getMapdivSubmodule(array $component)
+    public function getMapdivSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
     }
@@ -50,8 +50,8 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $mapdiv = $this->getMapdivSubmodule($component);
-        $form = $this->getFormSubmodule($component);
+        $mapdiv = $this->getMapdivSubcomponent($component);
+        $form = $this->getFormSubcomponent($component);
 
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['form-createlocation'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($form);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);

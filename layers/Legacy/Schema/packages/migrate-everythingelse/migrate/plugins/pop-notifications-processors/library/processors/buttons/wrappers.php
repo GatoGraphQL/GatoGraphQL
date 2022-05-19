@@ -26,9 +26,9 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     //     return $ret;
     // }
 
-    public function getConditionSucceededSubmodules(array $component)
+    public function getConditionSucceededSubcomponents(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($component);
+        $ret = parent::getConditionSucceededSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:

@@ -27,15 +27,15 @@ abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_
         return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
-    protected function getContentSubmodule(array $component)
+    protected function getContentSubcomponent(array $component)
     {
         return [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_PAGECONTENT];
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
-        $ret[] = $this->getContentSubmodule($component);
+        $ret = parent::getInnerSubcomponents($component);
+        $ret[] = $this->getContentSubcomponent($component);
         return $ret;
     }
 }

@@ -16,7 +16,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POSTEDIT:
@@ -29,7 +29,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
                 return [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTPREVIEW];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getUrlField(array $component)

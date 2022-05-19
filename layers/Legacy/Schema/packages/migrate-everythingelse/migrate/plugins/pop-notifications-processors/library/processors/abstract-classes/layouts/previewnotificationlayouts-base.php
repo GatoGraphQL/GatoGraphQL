@@ -11,15 +11,15 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return [PoP_AAL_Processors_TemplateResourceLoaderProcessor::class, PoP_AAL_Processors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PREVIEWNOTIFICATION];
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         return [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION];
     }
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         return [PoP_Module_Processor_MultipleComponentLayouts::class, PoP_Module_Processor_MultipleComponentLayouts::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM];
     }
-    public function getLinkSubmodule(array $component)
+    public function getLinkSubcomponent(array $component)
     {
         return [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK];
     }
@@ -33,22 +33,22 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($link = $this->getLinkSubmodule($component)) {
+        if ($link = $this->getLinkSubcomponent($component)) {
             $ret[] = $link;
         }
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[] = $quicklinkgroup_top;
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[] = $quicklinkgroup_bottom;
         }
-        if ($bottom_submodules = $this->getBottomSubmodules($component)) {
+        if ($bottom_submodules = $this->getBottomSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $bottom_submodules
             );
         }
-        if ($post_thumb = $this->getPostThumbSubmodule($component)) {
+        if ($post_thumb = $this->getPostThumbSubcomponent($component)) {
             $ret[] = $post_thumb;
         }
 
@@ -58,14 +58,14 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($component);
+        $ret = parent::getRelationalSubcomponents($component);
 
         $components = array();
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
-        if (!$this->getPostThumbSubmodule($component) && PoP_Application_ConfigurationUtils::useUseravatar()) {
+        if (!$this->getPostThumbSubcomponent($component) && PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($user_avatar = $this->getUserAvatarModule($component)) {
                 $components[] = $user_avatar;
             }
@@ -111,7 +111,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $component)
+    public function getPostThumbSubcomponent(array $component)
     {
         return null;
     }
@@ -127,20 +127,20 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $component): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($component);
+        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
 
         return array_merge(
             $ret,
-            $this->getConditionalBottomSubmodules($component)
+            $this->getConditionalBottomSubcomponents($component)
         );
     }
 
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalBottomSubmodules(array $component): array
+    public function getConditionalBottomSubcomponents(array $component): array
     {
         $ret = [];
         // Only fetch data if doing loadingLatest and is a comment notification
@@ -163,13 +163,13 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         );
 
         return \PoP\Root\App::applyFilters(
-            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
+            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubcomponents',
             $ret,
             $component
         );
     }
 
-    public function getBottomSubmodules(array $component)
+    public function getBottomSubcomponents(array $component)
     {
         return array(
             [PoP_Module_Processor_NotificationActionIconLayouts::class, PoP_Module_Processor_NotificationActionIconLayouts::COMPONENT_LAYOUT_NOTIFICATIONICON],
@@ -203,22 +203,22 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             $ret[GD_JS_CLASSES]['content-body'] = 'media-body clearfix';
         }
 
-        if ($link = $this->getLinkSubmodule($component)) {
+        if ($link = $this->getLinkSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($link);
         }
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
         }
-        if ($this->getBottomSubmodules($component)) {
+        if ($this->getBottomSubcomponents($component)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $this->getBottomSubmodules($component)
+                $this->getBottomSubcomponents($component)
             );
-            foreach ($this->getConditionalBottomSubmodules($component) as $conditionalLeafModuleField) {
+            foreach ($this->getConditionalBottomSubcomponents($component) as $conditionalLeafModuleField) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'],
                     array_map(
@@ -229,7 +229,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             }
         }
 
-        if ($post_thumb = $this->getPostThumbSubmodule($component)) {
+        if ($post_thumb = $this->getPostThumbSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
         } elseif (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($user_avatar = $this->getUserAvatarModule($component)) {
@@ -249,7 +249,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             //-----------------------------------
             // Whenever clicking on the link on the notification, also "click" on the `Mark as read` button
             //-----------------------------------
-            if ($link = $this->getLinkSubmodule($component)) {
+            if ($link = $this->getLinkSubcomponent($component)) {
                 $this->mergeProp(
                     [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                     $props,

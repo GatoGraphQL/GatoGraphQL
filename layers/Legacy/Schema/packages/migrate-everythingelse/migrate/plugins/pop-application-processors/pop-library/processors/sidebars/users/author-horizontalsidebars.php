@@ -10,7 +10,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebars extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $sidebarinners = array(
             self::COMPONENT_HORIZONTALSIDEBAR_AUTHOR_GENERIC => [PoP_Module_Processor_CustomHorizontalAuthorSidebarInners::class, PoP_Module_Processor_CustomHorizontalAuthorSidebarInners::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC],
@@ -20,7 +20,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebars extends PoP_Module_Pro
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 }
 

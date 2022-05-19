@@ -12,7 +12,7 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABLE_MYMEMBERS:
@@ -23,7 +23,7 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
                 return $inners[$component[1]];
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getHeaderTitles(array $component)

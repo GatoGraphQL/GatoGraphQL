@@ -11,14 +11,14 @@ class PoP_Module_Processor_LocationViewComponentLinks extends PoP_Module_Process
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME:
                 return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONICONNAME];
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 
     public function getLinktarget(array $component, array &$props)

@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->getTitleSubmodule($component, $props)) {
+        if ($this->getTitleSubcomponent($component, $props)) {
             $ret['title-position'] = $this->titlePosition($component, $props);
         }
 

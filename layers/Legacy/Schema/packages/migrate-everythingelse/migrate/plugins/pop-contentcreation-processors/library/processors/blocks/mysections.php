@@ -25,7 +25,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         };
     }
 
-    protected function getInnerSubmodule(array $component)
+    protected function getInnerSubcomponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT => [PoP_ContentCreation_Module_Processor_MySectionDataloads::class, PoP_ContentCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCONTENT_TABLE_EDIT],
@@ -51,7 +51,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         return parent::getSectionfilterModule($component);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT:
@@ -60,7 +60,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 }
 

@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
     //     return true;
     // }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
         $ret = parent::getSubcomponents($component);
 
         if ($this->doAppend($component)) {
-            if ($layout = $this->getLayoutSubmodule($component)) {
+            if ($layout = $this->getLayoutSubcomponent($component)) {
                 $ret[] = $layout;
             }
         }
@@ -61,7 +61,7 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
             $ret['frame-component'] = $this->getProp($component, $props, 'frame-component');
             $ret['operation'] = $this->getOperation($component, $props);
 
-            if ($layout = $this->getLayoutSubmodule($component)) {
+            if ($layout = $this->getLayoutSubcomponent($component)) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
             }
         }

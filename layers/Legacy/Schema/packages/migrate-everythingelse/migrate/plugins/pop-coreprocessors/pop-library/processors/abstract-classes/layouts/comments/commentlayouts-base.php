@@ -9,24 +9,24 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         $ret = parent::getSubcomponents($component);
         $ret[] = $this->getBtnreplyModule($component);
 
-        if ($abovelayout_components = $this->getAbovelayoutLayoutSubmodules($component)) {
+        if ($abovelayout_components = $this->getAbovelayoutLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $abovelayout_components
             );
         }
-        if ($content_component = $this->getContentSubmodule($component)) {
+        if ($content_component = $this->getContentSubcomponent($component)) {
             $ret[] = $content_component;
         }
         return $ret;
     }
 
-    public function getContentSubmodule(array $component)
+    public function getContentSubcomponent(array $component)
     {
         return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_COMMENT];
     }
 
-    public function getAbovelayoutLayoutSubmodules(array $component)
+    public function getAbovelayoutLayoutSubcomponents(array $component)
     {
         return array();
     }
@@ -58,9 +58,9 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $component): array
+    public function getRelationalSubcomponents(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($component);
+        $ret = parent::getRelationalSubcomponents($component);
 
         $components = array(
             $this->getAuthornameModule($component),
@@ -120,11 +120,11 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
             }
         }
 
-        if ($content_component = $this->getContentSubmodule($component)) {
+        if ($content_component = $this->getContentSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_component);
         }
 
-        if ($abovelayout_components = $this->getAbovelayoutLayoutSubmodules($component)) {
+        if ($abovelayout_components = $this->getAbovelayoutLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovelayout'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovelayout_components

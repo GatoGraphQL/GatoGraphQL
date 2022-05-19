@@ -11,7 +11,7 @@ class GD_UserCommunities_Module_Processor_CustomFullUserLayouts extends PoP_Modu
         );
     }
 
-    public function getSidebarSubmodule(array $component)
+    public function getSidebarSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY:
@@ -22,7 +22,7 @@ class GD_UserCommunities_Module_Processor_CustomFullUserLayouts extends PoP_Modu
                 return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($component);
+        return parent::getSidebarSubcomponent($component);
     }
 }
 

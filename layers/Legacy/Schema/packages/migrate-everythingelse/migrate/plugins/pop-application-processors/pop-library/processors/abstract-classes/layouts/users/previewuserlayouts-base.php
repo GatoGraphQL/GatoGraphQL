@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_CustomPreviewUserLayoutsBase extends PoP_Mod
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->getQuicklinkgroupTopSubmodule($component)) {
+        if ($this->getQuicklinkgroupTopSubcomponent($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup-top'] = 'icon-only pull-right';
         }
 

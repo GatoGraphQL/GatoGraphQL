@@ -36,9 +36,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS:
@@ -218,7 +218,7 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubmodule(array $component)
+    public function getQuicklinkgroupSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
@@ -234,7 +234,7 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 return [PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::class, PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST];
         }
 
-        return parent::getQuicklinkgroupSubmodule($component);
+        return parent::getQuicklinkgroupSubcomponent($component);
     }
     public function collapsible(array $component, array &$props)
     {

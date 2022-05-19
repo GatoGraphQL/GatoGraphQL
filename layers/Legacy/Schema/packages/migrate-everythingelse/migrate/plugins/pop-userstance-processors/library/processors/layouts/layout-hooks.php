@@ -7,11 +7,11 @@ class PoPTheme_UserStance_LayoutHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_components',
-            $this->getFeedBottomSubmodules(...)
+            $this->getFeedBottomSubcomponents(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_components',
-            $this->getFeedBottomSubmodules(...)
+            $this->getFeedBottomSubcomponents(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimage:modules',
@@ -49,7 +49,7 @@ class PoPTheme_UserStance_LayoutHooks
         return $layouts;
     }
 
-    public function getFeedBottomSubmodules($layouts)
+    public function getFeedBottomSubcomponents($layouts)
     {
 
         // Add the poststance at the beginning

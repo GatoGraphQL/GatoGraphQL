@@ -16,9 +16,9 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         );
     }
 
-    public function getInnerSubmodules(array $component): array
+    public function getInnerSubcomponents(array $component): array
     {
-        $ret = parent::getInnerSubmodules($component);
+        $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCONTENT],
@@ -32,14 +32,14 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         return $ret;
     }
 
-    protected function getControlgroupBottomSubmodule(array $component)
+    protected function getControlgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST];
         }
 
-        return parent::getControlgroupBottomSubmodule($component);
+        return parent::getControlgroupBottomSubcomponent($component);
     }
 
     public function getTitle(array $component, array &$props)
@@ -52,17 +52,17 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($component);
+        return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $component)
+    public function getDelegatorfilterSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
@@ -75,7 +75,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_USERS];
         }
 
-        return parent::getDelegatorfilterSubmodule($component);
+        return parent::getDelegatorfilterSubcomponent($component);
     }
 }
 

@@ -12,7 +12,7 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
             [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED],
         );
     }
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE => [PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::class, PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
@@ -22,7 +22,7 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 
     public function printSource(array $component, array &$props)

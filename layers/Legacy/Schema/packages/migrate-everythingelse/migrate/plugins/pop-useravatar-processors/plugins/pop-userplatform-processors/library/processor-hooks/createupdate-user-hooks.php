@@ -6,13 +6,13 @@ class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
     {
         \PoP\Root\App::addFilter(
             'pop_component:createuser:components', 
-            $this->getComponentSubmodules(...), 
+            $this->getComponentSubcomponents(...), 
             10, 
             3
         );
     }
 
-    public function getComponentSubmodules($components, array $component, $processor)
+    public function getComponentSubcomponents($components, array $component, $processor)
     {
 
         // Add After the email

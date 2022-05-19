@@ -27,9 +27,9 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrollInners extends PoP_Module_Pro
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
             self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS => [PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts::class, PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS],

@@ -15,7 +15,7 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
         );
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONMENU_TOP:
@@ -28,7 +28,7 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
                 return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::COMPONENT_CONTENTINNER_MENU_MULTITARGETINDENT];
         }
 
-        return getInnerSubmodule($component);
+        return getInnerSubcomponent($component);
     }
 }
 

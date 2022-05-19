@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents exten
         );
     }
 
-    public function getTriggerSubmodule(array $component): ?array
+    public function getTriggerSubcomponent(array $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES:
@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents exten
                 return $layouts[$component[1]];
         }
 
-        return parent::getTriggerSubmodule($component);
+        return parent::getTriggerSubcomponent($component);
     }
 
     public function getDbobjectField(array $component): ?string

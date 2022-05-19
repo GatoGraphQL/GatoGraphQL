@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_ALERT];
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
         return array();
     }
@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
                 $layouts
@@ -82,7 +82,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($layouts = $this->getLayoutSubmodules($component)) {
+        if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts

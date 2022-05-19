@@ -3,8 +3,8 @@
 /**
  * Map format
  */
-\PoP\Root\App::addFilter('PoP_Module_Processor_SectionTabPanelComponents:modules', 'gdEmSectiontabpanelSubmodules', 10, 2);
-function gdEmSectiontabpanelSubmodules($subComponents, array $component)
+\PoP\Root\App::addFilter('PoP_Module_Processor_SectionTabPanelComponents:modules', 'gdEmSectiontabpanelSubcomponents', 10, 2);
+function gdEmSectiontabpanelSubcomponents($subComponents, array $component)
 {
     if ($component == [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_USERS]) {
         $subComponents[] = [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_USERS_SCROLLMAP];
@@ -29,8 +29,8 @@ function gdEmSectiontabpanelPanelheaders($panelheaders, array $component)
 
     return $panelheaders;
 }
-\PoP\Root\App::addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSinglesectiontabpanelSubmodules', 10, 2);
-function gdEmSinglesectiontabpanelSubmodules($subComponents, array $component)
+\PoP\Root\App::addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSinglesectiontabpanelSubcomponents', 10, 2);
+function gdEmSinglesectiontabpanelSubcomponents($subComponents, array $component)
 {
     if ($component == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLEAUTHORS]) {
         $subComponents[] = [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP];

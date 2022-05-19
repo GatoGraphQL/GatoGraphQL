@@ -12,7 +12,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         );
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::class, PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_CONTENTPOSTLINK_CREATE],
@@ -21,10 +21,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE:
@@ -33,7 +33,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
                 );
         }
 
-        return parent::getTargetDynamicallyRenderedSubmodules($component);
+        return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
     public function getLinktarget(array $component, array &$props)

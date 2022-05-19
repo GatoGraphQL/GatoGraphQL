@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
         return '';
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         return null;
     }
@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
     public function getSubcomponents(array $component): array
     {
         $ret = parent::getSubcomponents($component);
-        $ret[] = $this->getComponentSubmodule($component);
+        $ret[] = $this->getComponentSubcomponent($component);
         return $ret;
     }
 
@@ -56,7 +56,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
 
         // This property is needed for the inheriting class FormComponentGroupsBase, to print the name of the formcomponent
         // We initialize it here as the inner module, however at this stage, FormGroupsBase, it is not really needed
-        return $this->getComponentSubmodule($component);
+        return $this->getComponentSubcomponent($component);
     }
 
     public function getImmutableConfiguration(array $component, array &$props): array
@@ -65,7 +65,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $component = $this->getComponentSubmodule($component);
+        $component = $this->getComponentSubcomponent($component);
         $component_processor = $componentprocessor_manager->getProcessor($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
 

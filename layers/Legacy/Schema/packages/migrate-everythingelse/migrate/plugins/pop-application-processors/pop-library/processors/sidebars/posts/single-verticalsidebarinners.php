@@ -13,22 +13,22 @@ class Wassup_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_HIGHLIGHT)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_HIGHLIGHT)
                 );
                 break;
 
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_POST:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POST)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_POST)
                 );
                 break;
         }

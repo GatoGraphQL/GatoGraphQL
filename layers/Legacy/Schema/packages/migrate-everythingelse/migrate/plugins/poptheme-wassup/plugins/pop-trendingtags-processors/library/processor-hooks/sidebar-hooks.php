@@ -6,13 +6,13 @@ class PoP_TrendingTags_SidebarHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
-            $this->getSidebarSubmodules(...),
+            $this->getSidebarSubcomponents(...),
             0,
             4
         );
     }
 
-    public function getSidebarSubmodules($components, $screengroup, $screen, array $component)
+    public function getSidebarSubcomponents($components, $screengroup, $screen, array $component)
     {
 
         // Add the Trending Tags to all Groups in the Sideinfo

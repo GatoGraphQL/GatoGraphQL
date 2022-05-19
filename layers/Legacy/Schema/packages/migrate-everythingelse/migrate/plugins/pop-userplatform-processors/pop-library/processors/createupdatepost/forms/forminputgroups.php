@@ -92,7 +92,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_CUP_TITLE:
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
                 return [PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::class, PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS];
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 
     public function getInfo(array $component, array &$props)
@@ -178,7 +178,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
     public function initModelProps(array $component, array &$props): void
     {
-        $component = $this->getComponentSubmodule($component);
+        $component = $this->getComponentSubcomponent($component);
         switch ($component[1]) {
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK:
                 $this->setProp($component, $props, 'placeholder', 'https://...');

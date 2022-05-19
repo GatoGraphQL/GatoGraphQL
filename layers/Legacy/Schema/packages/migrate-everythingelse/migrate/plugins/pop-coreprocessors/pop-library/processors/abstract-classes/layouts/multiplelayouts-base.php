@@ -9,12 +9,12 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MULTIPLE];
     }
 
-    public function getDefaultLayoutSubmodule(array $component)
+    public function getDefaultLayoutSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getMultipleLayoutSubmodules(array $component)
+    public function getMultipleLayoutSubcomponents(array $component)
     {
         return array();
     }
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($default = $this->getDefaultLayoutSubmodule($component)) {
+        if ($default = $this->getDefaultLayoutSubcomponent($component)) {
             $ret[] = $default;
         }
 
@@ -33,17 +33,17 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $component): array
+    public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($component);
+        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
 
         // The function below returns an array with value => $subComponent.
         // It must be converted to value => [$subComponent]
-        foreach ($this->getMultipleLayoutSubmodules($component) as $conditionDataField => $conditionalSubmodule) {
+        foreach ($this->getMultipleLayoutSubcomponents($component) as $conditionDataField => $conditionalSubcomponent) {
             $ret[] = new ConditionalLeafModuleField(
                 $conditionDataField,
                 [
-                    $conditionalSubmodule,
+                    $conditionalSubcomponent,
                 ]
             );
         }
@@ -61,12 +61,12 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($defaultLayout = $this->getDefaultLayoutSubmodule($component)) {
+        if ($defaultLayout = $this->getDefaultLayoutSubcomponent($component)) {
             $ret['default-component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
         }
         $ret['condition-on-data-field-components'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-            $this->getMultipleLayoutSubmodules($component)
+            $this->getMultipleLayoutSubcomponents($component)
         );
 
         return $ret;

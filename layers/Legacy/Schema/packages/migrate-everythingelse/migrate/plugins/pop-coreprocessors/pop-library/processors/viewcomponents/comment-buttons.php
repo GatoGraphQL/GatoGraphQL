@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
         );
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
@@ -22,13 +22,13 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
                 );
         }
 
-        return parent::getTargetDynamicallyRenderedSubmodules($component);
+        return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
     /**
      * @return RelationalModuleField[]
      */
-    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $component)
+    public function getTargetDynamicallyRenderedSubcomponentSubcomponents(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
@@ -42,10 +42,10 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
                 ];
         }
 
-        return parent::getTargetDynamicallyRenderedSubcomponentSubmodules($component);
+        return parent::getTargetDynamicallyRenderedSubcomponentSubcomponents($component);
     }
 
-    public function getButtoninnerSubmodule(array $component)
+    public function getButtoninnerSubcomponent(array $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT]
@@ -56,7 +56,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
                 return $buttoninners[$component[1]];
         }
 
-        return parent::getButtoninnerSubmodule($component);
+        return parent::getButtoninnerSubcomponent($component);
     }
 
     public function getBtnClass(array $component, array &$props)

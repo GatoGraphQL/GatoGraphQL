@@ -17,11 +17,11 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
     {
         return array_merge(
             parent::getSubcomponents($component),
-            $this->getInnerSubmodules($component)
+            $this->getInnerSubcomponents($component)
         );
     }
 
-    protected function getInnerSubmodules(array $component): array
+    protected function getInnerSubcomponents(array $component): array
     {
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
@@ -67,11 +67,11 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($component[1]) {
             case self::COMPONENT_WINDOW_ADDONS:
-                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($component);
-                $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
-                $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
-                $ret[$addonsSubmoduleOutputName] = 'container-fluid offcanvas pop-waypoints-context scrollable addons perfect-scrollbar vertical';
-                $ret[$addontabsSubmoduleOutputName] = 'offcanvas pop-waypoints-context scrollable addontabs perfect-scrollbar horizontal navbar navbar-main navbar-addons';
+                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubcomponents($component);
+                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
+                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
+                $ret[$addonsSubcomponentOutputName] = 'container-fluid offcanvas pop-waypoints-context scrollable addons perfect-scrollbar vertical';
+                $ret[$addontabsSubcomponentOutputName] = 'offcanvas pop-waypoints-context scrollable addontabs perfect-scrollbar horizontal navbar navbar-main navbar-addons';
                 break;
         }
 
@@ -85,15 +85,15 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($component[1]) {
             case self::COMPONENT_WINDOW_ADDONS:
-                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubmodules($component);
-                $addonsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
-                $addontabsSubmoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
-                $ret[$addonsSubmoduleOutputName] = array(
+                list($addons_submodule, $addontabs_submodule) = $this->getInnerSubcomponents($component);
+                $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addons_submodule);
+                $addontabsSubcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($addontabs_submodule);
+                $ret[$addonsSubcomponentOutputName] = array(
                     'data-frametarget' => POP_TARGET_ADDONS,
                     'data-clickframetarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                     'data-offcanvas' => 'addons',
                 );
-                $ret[$addontabsSubmoduleOutputName] = array(
+                $ret[$addontabsSubcomponentOutputName] = array(
                     'data-frametarget' => POP_TARGET_ADDONS,
                     'data-offcanvas' => 'addontabs',
                 );

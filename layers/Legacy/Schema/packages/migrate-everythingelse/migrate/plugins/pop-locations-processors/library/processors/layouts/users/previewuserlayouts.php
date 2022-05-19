@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         );
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -21,10 +21,10 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERBOTTOM];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($component);
+        return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $component)
+    public function getQuicklinkgroupTopSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -32,12 +32,12 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($component);
+        return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBelowexcerptLayoutSubmodules(array $component)
+    public function getBelowexcerptLayoutSubcomponents(array $component)
     {
-        $ret = parent::getBelowexcerptLayoutSubmodules($component);
+        $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -49,7 +49,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getUseravatarSubmodule(array $component)
+    public function getUseravatarSubcomponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -59,7 +59,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_40];
         }
 
-        return parent::getUseravatarSubmodule($component);
+        return parent::getUseravatarSubcomponent($component);
     }
 
     public function horizontalMediaLayout(array $component)

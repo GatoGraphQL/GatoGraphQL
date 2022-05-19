@@ -27,16 +27,16 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
         );
     }
 
-    public function getLayoutSubmodules(array $component)
+    public function getLayoutSubcomponents(array $component)
     {
-        $ret = parent::getLayoutSubmodules($component);
+        $ret = parent::getLayoutSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_GENERIC)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_GENERIC)
                 );
                 break;
 
@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_HIGHLIGHT)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_HIGHLIGHT)
                 );
                 break;
 
@@ -52,28 +52,28 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_SIDEBARSECTION_POST)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_SIDEBARSECTION_POST)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_GENERIC)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_GENERIC)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_HIGHLIGHT)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_HIGHLIGHT)
                 );
                 break;
 
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST:
                 $ret = array_merge(
                     $ret,
-                    FullViewSidebarSettings::getSidebarSubmodules(GD_COMPACTSIDEBARSECTION_POST)
+                    FullViewSidebarSettings::getSidebarSubcomponents(GD_COMPACTSIDEBARSECTION_POST)
                 );
                 break;
         }

@@ -14,7 +14,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         $ret = parent::getJsmethods($component, $props);
 
         if ($this->enableSuggestions($component)) {
-            if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($component)) {
+            if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                 $this->addJsmethod($ret, 'renderDBObjectLayoutFromSuggestion', 'suggestions');
             }
         }
@@ -27,7 +27,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         if ($this->enableSuggestions($component)) {
-            if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($component)) {
+            if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                 $ret['renderDBObjectLayoutFromSuggestion']['trigger-layout'] = $suggestions_layout;
             }
         }
@@ -40,7 +40,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         $ret = parent::getExtraTemplateResources($component, $props);
 
         if ($this->enableSuggestions($component)) {
-            if ($this->getSuggestionsLayoutSubmodule($component)) {
+            if ($this->getSuggestionsLayoutSubcomponent($component)) {
                 $ret['extras'] = array(
                     [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_EXTENSIONTYPEAHEADSUGGESTIONS],
                 );
@@ -50,7 +50,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getSuggestionsLayoutSubmodule(array $component)
+    public function getSuggestionsLayoutSubcomponent(array $component)
     {
         return null;
     }
@@ -75,7 +75,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         $ret = parent::getSubcomponents($component);
 
         if ($this->enableSuggestions($component)) {
-            if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($component)) {
+            if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                 $ret[] = $suggestions_layout;
             }
         }
@@ -101,13 +101,13 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
             if ($suggestions = $this->getProp($component, $props, 'suggestions')) {
                 $ret['suggestions'] = $suggestions;
 
-                if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($component)) {
+                if ($suggestions_layout = $this->getSuggestionsLayoutSubcomponent($component)) {
                     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['suggestions-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($suggestions_layout);
 
                     // Load the typeResolver from the trigger, for the suggestions
-                    $trigger_layout = $this->getTriggerLayoutSubmodule($component);
+                    $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
                     $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);
                     $suggestions_typeResolver = $triggerComponentProcessor->getTriggerRelationalTypeResolver($trigger_layout);
@@ -136,7 +136,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         if ($this->enableSuggestions($component)) {
             // Pre-loaded suggestions, allowing the user to select the locations easily
             if ($suggestions = $this->getProp($component, $props, 'suggestions')) {
-                if ($trigger_layout = $this->getTriggerLayoutSubmodule($component)) {
+                if ($trigger_layout = $this->getTriggerLayoutSubcomponent($component)) {
                     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'

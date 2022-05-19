@@ -5,7 +5,7 @@ define('GD_COMPACTSIDEBARSECTION_LOCATIONPOST', 'compact-locationpost');
 
 class Custom_EM_FullViewSidebarSettings
 {
-    public static function getSidebarSubmodules($section)
+    public static function getSidebarSubcomponents($section)
     {
         $ret = array();
 

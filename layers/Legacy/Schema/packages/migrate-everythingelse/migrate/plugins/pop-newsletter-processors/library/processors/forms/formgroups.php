@@ -15,7 +15,7 @@ class PoP_Newsletter_Module_Processor_FormGroups extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getComponentSubmodule(array $component)
+    public function getComponentSubcomponent(array $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_NEWSLETTERNAME => [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NEWSLETTERNAME],
@@ -27,7 +27,7 @@ class PoP_Newsletter_Module_Processor_FormGroups extends PoP_Module_Processor_Fo
             return $component;
         }
 
-        return parent::getComponentSubmodule($component);
+        return parent::getComponentSubcomponent($component);
     }
 }
 

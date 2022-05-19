@@ -10,12 +10,12 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BLOCK];
     }
 
-    public function getSubmenuSubmodule(array $component)
+    public function getSubmenuSubcomponent(array $component)
     {
         return null;
     }
 
-    public function getLatestcountSubmodule(array $component)
+    public function getLatestcountSubcomponent(array $component)
     {
         return null;
     }
@@ -24,18 +24,18 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     {
         $ret = parent::getSubcomponents($component);
 
-        if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
+        if ($controlgroup_top = $this->getControlgroupTopSubcomponent($component)) {
             $ret[] = $controlgroup_top;
         }
-        if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($component)) {
+        if ($controlgroup_bottom = $this->getControlgroupBottomSubcomponent($component)) {
             $ret[] = $controlgroup_bottom;
         }
 
-        if ($submenu = $this->getSubmenuSubmodule($component)) {
+        if ($submenu = $this->getSubmenuSubcomponent($component)) {
             $ret[] = $submenu;
         }
 
-        if ($latestcount = $this->getLatestcountSubmodule($component)) {
+        if ($latestcount = $this->getLatestcountSubcomponent($component)) {
             $ret[] = $latestcount;
         }
 
@@ -53,12 +53,12 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         }
 
         if ($this->getProp($component, $props, 'show-controls-top')) {
-            if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
+            if ($controlgroup_top = $this->getControlgroupTopSubcomponent($component)) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup_top);
             }
         }
 
-        if ($latestcount = $this->getLatestcountSubmodule($component)) {
+        if ($latestcount = $this->getLatestcountSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['latestcount'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($latestcount);
         }
 
@@ -88,13 +88,13 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         // Only add the submenu if this is the main block! That way, both blockgroups and blocks can define the submenu, but only the main of them will show it
         // Also, only add submenu if single post is published, hence this goes under mutableonrequest
         if ($this->getProp($component, $props, 'show-submenu')) {
-            if ($submenu = $this->getSubmenuSubmodule($component)) {
+            if ($submenu = $this->getSubmenuSubcomponent($component)) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['submenu'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submenu);
             }
         }
 
         if ($this->getProp($component, $props, 'show-controls-bottom')) {
-            if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($component)) {
+            if ($controlgroup_bottom = $this->getControlgroupBottomSubcomponent($component)) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup_bottom);
             }
         }
@@ -138,7 +138,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($submenu = $this->getSubmenuSubmodule($component)) {
+        if ($submenu = $this->getSubmenuSubcomponent($component)) {
             $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
             $submenu_id = $componentprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
             $submenu_target = '#'.$submenu_id.'-xs';
@@ -178,10 +178,10 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         // whenever the page access the block directly (eg: opening Stance in the quickview) then here
         // $blocktarget = '#'.$props['block-id'];
         $blocktarget = '#'.$this->getFrontendId($component, $props);
-        if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
+        if ($controlgroup_top = $this->getControlgroupTopSubcomponent($component)) {
             $this->setProp($controlgroup_top, $props, 'control-target', $blocktarget);
         }
-        if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($component)) {
+        if ($controlgroup_bottom = $this->getControlgroupBottomSubcomponent($component)) {
             $this->setProp($controlgroup_bottom, $props, 'control-target', $blocktarget);
         }
 
@@ -218,11 +218,11 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         parent::initModelProps($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $component)
+    protected function getControlgroupTopSubcomponent(array $component)
     {
         return null;
     }
-    protected function getControlgroupBottomSubmodule(array $component)
+    protected function getControlgroupBottomSubcomponent(array $component)
     {
         return null;
     }

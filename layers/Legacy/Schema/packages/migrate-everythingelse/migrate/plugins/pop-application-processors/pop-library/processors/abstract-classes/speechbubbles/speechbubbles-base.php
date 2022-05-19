@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_SpeechBubblesBase extends PoPEngine_QueryDat
         return [PoP_ApplicationProcessors_TemplateResourceLoaderProcessor::class, PoP_ApplicationProcessors_TemplateResourceLoaderProcessor::RESOURCE_SPEECHBUBBLE];
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         return null;
     }
@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_SpeechBubblesBase extends PoPEngine_QueryDat
     {
         $ret = parent::getSubcomponents($component);
 
-        $ret[] = $this->getLayoutSubmodule($component);
+        $ret[] = $this->getLayoutSubcomponent($component);
         
         return $ret;
     }
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_SpeechBubblesBase extends PoPEngine_QueryDat
             'bubble' => 'speechbubble'
         );
         
-        $layout = $this->getLayoutSubmodule($component);
+        $layout = $this->getLayoutSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         
         return $ret;

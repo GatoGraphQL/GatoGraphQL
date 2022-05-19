@@ -13,7 +13,7 @@ class PoP_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Module
         );
     }
 
-    public function getLayoutSubmodule(array $component)
+    public function getLayoutSubcomponent(array $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATEPROFILE => [PoP_Module_Processor_CreateProfileFeedbackMessageLayouts::class, PoP_Module_Processor_CreateProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATEPROFILE],
@@ -24,7 +24,7 @@ class PoP_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Module
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($component);
+        return parent::getLayoutSubcomponent($component);
     }
 }
 

@@ -11,11 +11,11 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
     public function getSubcomponents(array $component): array
     {
         $ret = parent::getSubcomponents($component);
-        $ret[] = $this->getMapdivSubmodule($component);
+        $ret[] = $this->getMapdivSubcomponent($component);
         return $ret;
     }
 
-    public function getMapdivSubmodule(array $component)
+    public function getMapdivSubcomponent(array $component)
     {
     
         // return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
@@ -24,7 +24,7 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
     
     public function initWebPlatformModelProps(array $component, array &$props)
     {
-        $mapdiv = $this->getMapdivSubmodule($component);
+        $mapdiv = $this->getMapdivSubcomponent($component);
         $this->mergeJsmethodsProp($mapdiv, $props, array('mapStandalone'));
 
         parent::initWebPlatformModelProps($component, $props);
@@ -36,7 +36,7 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $mapdiv = $this->getMapdivSubmodule($component);
+        $mapdiv = $this->getMapdivSubcomponent($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
         
         return $ret;

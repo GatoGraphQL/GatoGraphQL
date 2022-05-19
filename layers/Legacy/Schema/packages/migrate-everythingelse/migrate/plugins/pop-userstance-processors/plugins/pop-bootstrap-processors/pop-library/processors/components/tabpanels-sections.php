@@ -53,9 +53,9 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $component)
+    public function getPanelSubcomponents(array $component)
     {
-        $ret = parent::getPanelSubmodules($component);
+        $ret = parent::getPanelSubcomponents($component);
 
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_STANCES:

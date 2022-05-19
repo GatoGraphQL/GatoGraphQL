@@ -385,7 +385,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $component)
+    public function getInnerSubcomponent(array $component)
     {
         $inners = array(
             self::COMPONENT_CAROUSEL_CATEGORYPOSTS00 => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00],
@@ -513,7 +513,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             return $inner;
         }
 
-        return parent::getInnerSubmodule($component);
+        return parent::getInnerSubcomponent($component);
     }
 
     public function getMode(array $component, array &$props)
@@ -650,7 +650,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
     }
 
 
-    public function getControlsTopSubmodule(array $component)
+    public function getControlsTopSubcomponent(array $component)
     {
         $controls = array(
             self::COMPONENT_CAROUSEL_CATEGORYPOSTS00 => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00],
@@ -778,7 +778,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             return $control;
         }
 
-        return parent::getControlsTopSubmodule($component);
+        return parent::getControlsTopSubcomponent($component);
     }
 }
 

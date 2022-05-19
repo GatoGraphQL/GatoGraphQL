@@ -7,12 +7,12 @@ class GetPoPDemo_URE_GroupHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomGroups:components:author_widgetarea',
-            $this->getAuthortopWidgetSubmodules(...),
+            $this->getAuthortopWidgetSubcomponents(...),
             0
         );
     }
 
-    public function getAuthortopWidgetSubmodules($components)
+    public function getAuthortopWidgetSubcomponents($components)
     {
 
         // Add the members only for communities
