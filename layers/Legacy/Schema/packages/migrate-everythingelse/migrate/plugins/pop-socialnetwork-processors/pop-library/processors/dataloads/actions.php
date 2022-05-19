@@ -128,7 +128,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::shouldExecuteMutation($component, $props);
     }
 
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
@@ -144,7 +144,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
         }
 
-        return parent::getCheckpointmessageModule($component);
+        return parent::getCheckpointMessageComponent($component);
     }
 
     protected function getFeedbackMessageComponent(array $component)

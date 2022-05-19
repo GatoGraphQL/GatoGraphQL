@@ -124,7 +124,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE:
@@ -137,7 +137,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
                 return [GD_UserCommunities_Module_Processor_UserCheckpointMessages::class, GD_UserCommunities_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP];
         }
 
-        return parent::getCheckpointmessageModule($component);
+        return parent::getCheckpointMessageComponent($component);
     }
 
     public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array

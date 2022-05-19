@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
     //-------------------------------------------------
     // PUBLIC Overriding Functions
     //-------------------------------------------------
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
     }

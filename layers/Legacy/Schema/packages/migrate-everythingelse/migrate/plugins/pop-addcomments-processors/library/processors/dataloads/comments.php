@@ -82,14 +82,14 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
         }
 
-        return parent::getCheckpointmessageModule($component);
+        return parent::getCheckpointMessageComponent($component);
     }
 
     protected function getInnerSubcomponents(array $component): array

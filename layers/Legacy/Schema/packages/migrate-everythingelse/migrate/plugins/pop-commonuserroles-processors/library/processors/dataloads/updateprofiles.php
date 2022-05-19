@@ -63,7 +63,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
@@ -73,7 +73,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
                 return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL];
         }
 
-        return parent::getCheckpointmessageModule($component);
+        return parent::getCheckpointMessageComponent($component);
     }
 
     public function initModelProps(array $component, array &$props): void

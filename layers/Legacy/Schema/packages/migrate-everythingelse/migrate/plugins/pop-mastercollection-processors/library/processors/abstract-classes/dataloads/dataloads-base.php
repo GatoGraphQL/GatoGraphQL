@@ -97,7 +97,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         if ($feedbackmessage = $this->getFeedbackMessageComponent($component)) {
             $ret[] = $feedbackmessage;
         }
-        if ($checkpointmessage = $this->getCheckpointmessageModule($component)) {
+        if ($checkpointmessage = $this->getCheckpointMessageComponent($component)) {
             $ret[] = $checkpointmessage;
         }
         return $ret;
@@ -106,7 +106,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     {
         return null;
     }
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         return null;
     }

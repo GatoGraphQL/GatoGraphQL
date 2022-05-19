@@ -13,14 +13,14 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         );
     }
 
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:
                 return [PoP_Application_Module_Processor_UserCheckpointMessages::class, PoP_Application_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_DOMAIN];
         }
 
-        return parent::getCheckpointmessageModule($component);
+        return parent::getCheckpointMessageComponent($component);
     }
 
     public function getRelevantRoute(array $component, array &$props): ?string

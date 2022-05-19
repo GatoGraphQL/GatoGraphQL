@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         }
     }
 
-    protected function getCheckpointmessageModule(array $component)
+    protected function getCheckpointMessageComponent(array $component)
     {
         if ($this->isCreate($component)) {
             return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
@@ -77,7 +77,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
             return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT];
         }
 
-        return parent::getCheckpointmessageModule($component);
+        return parent::getCheckpointMessageComponent($component);
     }
 
     protected function getFeedbackMessageComponent(array $component)
