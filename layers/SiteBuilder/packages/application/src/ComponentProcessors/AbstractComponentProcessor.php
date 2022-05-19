@@ -45,9 +45,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getModelPropsForDescendantDatasetmodules(array $component, array &$props): array
+    public function getModelPropsForDescendantDatasetComponents(array $component, array &$props): array
     {
-        $ret = parent::getModelPropsForDescendantDatasetmodules($component, $props);
+        $ret = parent::getModelPropsForDescendantDatasetComponents($component, $props);
 
         // If this component loads data, then add several properties
         if ($this->doesComponentLoadData($component)) {

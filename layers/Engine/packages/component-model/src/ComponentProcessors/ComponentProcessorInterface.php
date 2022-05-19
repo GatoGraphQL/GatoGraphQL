@@ -20,11 +20,11 @@ interface ComponentProcessorInterface
     public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsComponentTree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getModelPropsForDescendantComponents(array $component, array &$props): array;
-    public function getModelPropsForDescendantDatasetmodules(array $component, array &$props): array;
+    public function getModelPropsForDescendantDatasetComponents(array $component, array &$props): array;
     public function initModelProps(array $component, array &$props): void;
     public function initRequestPropsComponentTree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getRequestPropsForDescendantComponents(array $component, array &$props): array;
-    public function getRequestPropsForDescendantDatasetmodules(array $component, array &$props): array;
+    public function getRequestPropsForDescendantDatasetComponents(array $component, array &$props): array;
     public function initRequestProps(array $component, array &$props): void;
     public function setProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function appendGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;

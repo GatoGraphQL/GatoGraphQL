@@ -23,7 +23,7 @@ trait ComponentPathProcessorTrait
         return $this->getComponentProcessorManager()->getProcessor($component);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);
@@ -62,7 +62,7 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
