@@ -493,7 +493,7 @@ class PoP_ServerSideManager
         return $domain.'/destroy'.substr($url, strlen($domain));
     }
 
-    public function getModuleOrObjectSettingsId($el)
+    public function getComponentOrObjectSettingsId($el)
     {
 
         // ------------------------------------------------------

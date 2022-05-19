@@ -4233,7 +4233,7 @@ window.pop.Manager = {
 	// 	// When getting the block configuration, there's no need to pass el param
 	// 	el = el || target;
 		
-	// 	var elsId = that.getModuleOrObjectSettingsId(el);
+	// 	var elsId = that.getComponentOrObjectSettingsId(el);
 	// 	var configuration = that.getRuntimeSettings(domain, pageSection, target, 'configuration');
 
 	// 	return configuration[elsId] || {};
@@ -4307,7 +4307,7 @@ window.pop.Manager = {
 		return domain+'/destroy'+url.substr(domain.length);
 	},
 	
-	getModuleOrObjectSettingsId : function(el) {
+	getComponentOrObjectSettingsId : function(el) {
 
 		var that = this;
 		
@@ -4338,7 +4338,7 @@ window.pop.Manager = {
 		
 		var pssId = that.getSettingsId(pageSection);
 		var bsId = that.getSettingsId(block);
-		var jsSettingsId = that.getModuleOrObjectSettingsId(el);
+		var jsSettingsId = that.getComponentOrObjectSettingsId(el);
 
 		// Combine the JS settings and the runtime JS settings together
 		// var domain = that.getBlockTopLevelDomain(block);
