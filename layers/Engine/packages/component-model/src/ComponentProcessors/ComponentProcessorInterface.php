@@ -60,7 +60,7 @@ interface ComponentProcessorInterface
     /**
      * @return ConditionalRelationalComponentField[]
      */
-    public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array;
+    public function getConditionalRelationalComponentFields(array $component): array;
     public function getImmutableDataPropertiesDatasetcomponentTree(array $component, array &$props): array;
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(array $component, array &$props): array;
     public function getDatasetcomponentTreeSectionFlattenedDataFields(array $component, array &$props): array;

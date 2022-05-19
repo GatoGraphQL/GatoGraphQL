@@ -273,7 +273,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $this->setProp($conditionalSubcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
                 }
             }
-            foreach ($this->getConditionalOnDataFieldRelationalSubcomponents($component) as $conditionalRelationalComponentField) {
+            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                     if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
@@ -582,7 +582,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
                 }
             }
-            foreach ($this->getConditionalOnDataFieldRelationalSubcomponents($component) as $conditionalRelationalComponentField) {
+            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
@@ -658,7 +658,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
-            foreach ($this->getConditionalOnDataFieldRelationalSubcomponents($component) as $conditionalRelationalComponentField) {
+            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
@@ -763,7 +763,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return ConditionalRelationalComponentField[]
      */
-    public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array
+    public function getConditionalRelationalComponentFields(array $component): array
     {
         return [];
     }
@@ -820,7 +820,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $this->getLeafComponentFields($component, $props),
                     $this->getRelationalComponentFields($component),
                     $this->getConditionalLeafComponentFields($component),
-                    $this->getConditionalOnDataFieldRelationalSubcomponents($component),
+                    $this->getConditionalRelationalComponentFields($component),
                 )
             )
         ) {
@@ -1118,7 +1118,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-subcomponents must have their data-fields added under entry "conditional-data-fields"
             $conditionalLeafComponentFields = $this->getConditionalLeafComponentFields($component);
-            $conditionalRelationalComponentFields = $this->getConditionalOnDataFieldRelationalSubcomponents($component);
+            $conditionalRelationalComponentFields = $this->getConditionalRelationalComponentFields($component);
             if ($conditionalLeafComponentFields !== [] || $conditionalRelationalComponentFields !== []) {
                 $directSubcomponents = $this->getSubcomponents($component);
                 $conditionalComponentFields = [];
@@ -1227,7 +1227,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
             $relationalSubcomponents[$subcomponent_data_field] = $relationalComponentField->getNestedComponents();
         }
-        foreach ($this->getConditionalOnDataFieldRelationalSubcomponents($component) as $conditionalRelationalComponentField) {
+        foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
             foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                 $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                 $relationalSubcomponents[$conditionalDataField] = array_values(array_unique(array_merge(
@@ -1360,7 +1360,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $elements)) {
-            foreach ($this->getConditionalOnDataFieldRelationalSubcomponents($component) as $conditionalRelationalComponentField) {
+            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     $ret = array_values(
                         array_unique(

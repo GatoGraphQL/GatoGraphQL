@@ -290,7 +290,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * Watch out! This function loads both leaf fields (eg: "date") and
      * relational fields (eg: "author").
      *
-     * Using `getConditionalOnDataFieldRelationalSubcomponents` to
+     * Using `getConditionalRelationalComponentFields` to
      * load relational fields does not work, because the component to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
@@ -479,7 +479,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalRelationalComponentField[]
     //  */
-    // public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array
+    // public function getConditionalRelationalComponentFields(array $component): array
     // {
     //     $componentAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($componentAtts)) {
