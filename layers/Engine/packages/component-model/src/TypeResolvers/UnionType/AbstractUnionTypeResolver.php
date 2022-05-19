@@ -55,7 +55,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         // Each ID contains the type (added in function `getID`). Remove it
         return array_map(
-            [UnionTypeHelpers::class, 'extractDBObjectID'],
+            UnionTypeHelpers::extractDBObjectID(...),
             $ids
         );
     }
