@@ -235,7 +235,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         // The Intercept URLs are runtime instead of static, since they contains information
         // given through the URL, which cannot not cached in the static file
-        if ($intercept_urls = $this->getModuleInterceptUrls($component, $props)) {
+        if ($intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
             $ret[GD_JS_INTERCEPTURLS][$componentOutputName] = $intercept_urls;
         }
         if ($extra_intercept_urls = $this->getModuleExtraInterceptUrls($component, $props)) {
@@ -273,7 +273,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         /**
          * Interceptor
          */
-        if ($intercept_urls = $this->getModuleInterceptUrls($component, $props)) {
+        if ($intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
             $intercept_type = $this->getInterceptType($component, $props);
             $ret[GD_JS_INTERCEPT] = array(
                 GD_JS_TYPE => $intercept_type ? $intercept_type : 'fullurl'
@@ -318,13 +318,13 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getInterceptUrls(array $component, array &$props)
     {
-        if ($component_intercept_urls = $this->getModuleInterceptUrls($component, $props)) {
+        if ($component_intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
             return array_unique(array_values($component_intercept_urls));
         }
 
         return array();
     }
-    public function getModuleInterceptUrls(array $component, array &$props)
+    public function getComponentInterceptUrls(array $component, array &$props)
     {
         return array();
     }
