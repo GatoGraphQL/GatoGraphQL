@@ -67,14 +67,14 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         return parent::getLinktarget($component, $props);
     }
 
-    public function getAuthorModule(array $component)
+    public function getAuthorComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
-        return parent::getAuthorModule($component);
+        return parent::getAuthorComponent($component);
     }
 
     public function getQuicklinkgroupBottomSubcomponent(array $component)

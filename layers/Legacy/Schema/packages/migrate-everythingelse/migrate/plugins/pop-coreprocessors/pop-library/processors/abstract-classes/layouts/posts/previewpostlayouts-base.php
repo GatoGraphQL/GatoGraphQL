@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         $components = [];
 
         // Show author or not: if position defined
-        if ($author_component = $this->getAuthorModule($component)) {
+        if ($author_component = $this->getAuthorComponent($component)) {
             $components[] = $author_component;
         }
 
@@ -139,7 +139,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         return null;
     }
-    public function getAuthorModule(array $component)
+    public function getAuthorComponent(array $component)
     {
         return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR];
     }
@@ -255,7 +255,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
                 $aftercontent_components
             );
         }
-        if ($author_component = $this->getAuthorModule($component)) {
+        if ($author_component = $this->getAuthorComponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($author_component);
             $ret['authors-position'] = $this->authorPositions($component);
             $ret['authors-sep'] = $this->getAuthorsSeparator($component, $props);
@@ -293,7 +293,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
     public function initModelProps(array $component, array &$props): void
     {
-        if ($author_component = $this->getAuthorModule($component)) {
+        if ($author_component = $this->getAuthorComponent($component)) {
             $this->appendProp($author_component, $props, 'class', 'preview-author');
         }
 

@@ -11,14 +11,14 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SimpleViewPreviewPostLayouts extend
     }
 
 
-    public function getAuthorModule(array $component)
+    public function getAuthorComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_SIMPLEVIEW:
                 return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
-        return parent::getAuthorModule($component);
+        return parent::getAuthorComponent($component);
     }
 
     public function getAbovecontentSubcomponents(array $component)
