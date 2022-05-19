@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $ret = array();
         if ($text_field = $this->getTextField($component, $props)) {

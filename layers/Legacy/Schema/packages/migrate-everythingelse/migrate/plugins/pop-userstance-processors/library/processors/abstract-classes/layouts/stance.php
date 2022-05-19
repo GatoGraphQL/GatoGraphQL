@@ -13,7 +13,7 @@ abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_Q
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('catName');
     }

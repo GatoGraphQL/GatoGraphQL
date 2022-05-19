@@ -12,10 +12,10 @@ abstract class PoP_Module_Processor_LatestCountScriptsLayoutsBase extends PoPEng
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array_merge(
-            parent::getDataFields($component, $props),
+            parent::getLeafComponentFields($component, $props),
             array('latestcountsTriggerValues', 'authors', 'tags', 'references')
         );
     }

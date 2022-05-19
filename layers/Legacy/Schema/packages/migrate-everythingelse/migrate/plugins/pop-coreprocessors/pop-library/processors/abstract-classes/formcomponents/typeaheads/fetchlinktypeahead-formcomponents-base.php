@@ -25,9 +25,9 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($component, $props);
+        $ret = parent::getLeafComponentFields($component, $props);
 
         // Add the 'URL' since that's where it will go upon selection of the typeahead value
         $ret[] = 'url';

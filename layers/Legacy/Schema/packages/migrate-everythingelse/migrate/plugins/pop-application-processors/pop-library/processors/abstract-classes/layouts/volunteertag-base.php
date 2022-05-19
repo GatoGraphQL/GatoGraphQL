@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_VolunteerTagLayoutsBase extends PoPEngine_Qu
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('volunteersNeeded');
     }

@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array
+    public function getConditionalLeafComponentFields(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubcomponents($component);
+        $ret = parent::getConditionalLeafComponentFields($component);
 
         if ($conditionDataField = $this->getConditionField($component)) {
             if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $ret = [];
         if ($conditionDataField = $this->getConditionField($component)) {

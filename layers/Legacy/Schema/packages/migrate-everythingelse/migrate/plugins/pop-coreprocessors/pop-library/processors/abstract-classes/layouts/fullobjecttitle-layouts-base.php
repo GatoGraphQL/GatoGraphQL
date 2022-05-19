@@ -13,10 +13,10 @@ abstract class PoP_Module_Processor_FullObjectTitleLayoutsBase extends PoPEngine
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array_merge(
-            parent::getDataFields($component, $props),
+            parent::getLeafComponentFields($component, $props),
             array(
                 $this->getTitleConditionField($component, $props),
                 $this->getUrlField($component, $props),

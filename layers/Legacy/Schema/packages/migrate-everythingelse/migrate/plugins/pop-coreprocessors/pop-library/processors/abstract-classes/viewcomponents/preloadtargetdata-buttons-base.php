@@ -20,9 +20,9 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
-        $ret = parent::getRelationalSubcomponents($component);
+        $ret = parent::getRelationalComponentFields($component);
 
         // We need to load the data needed by the datum, so that when executing `triggerSelect` in function `renderDBObjectLayoutFromURLParam`
         // the data has already been preloaded

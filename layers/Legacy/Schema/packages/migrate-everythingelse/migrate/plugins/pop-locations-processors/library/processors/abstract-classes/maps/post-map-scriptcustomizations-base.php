@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
             ];
         }
 
-        return parent::getRelationalSubcomponents($component);
+        return parent::getRelationalComponentFields($component);
     }
 
     public function getThumbField(array $component, array &$props)
@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         return array('id', 'title', $thumb, 'url');

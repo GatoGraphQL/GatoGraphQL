@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_CommentCardLayoutsBase extends PoPEngine_Que
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('contentClipped');
     }

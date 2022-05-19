@@ -32,7 +32,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MENU_SEGMENTEDBUTTON:
@@ -40,7 +40,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
                 return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
         }
 
-        return parent::getDataFields($component, $props);
+        return parent::getLeafComponentFields($component, $props);
     }
 
     public function getSegmentedbuttonSubcomponents(array $component)

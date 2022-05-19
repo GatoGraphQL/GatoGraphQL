@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_TriggerLocationTypeaheadScriptLayoutsBase ex
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('id', 'name', 'address', 'coordinates');
     }

@@ -19,13 +19,13 @@ class ConditionalRelationalComponentField extends LeafField implements Component
      * When the value of the field is `true`, load the conditional
      * domain switching fields.
      *
-     * @param RelationalComponentField[] $conditionalRelationalComponentFields
+     * @param RelationalComponentField[] $relationalComponentFields
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
     public function __construct(
         string $name,
-        protected array $conditionalRelationalComponentFields,
+        protected array $relationalComponentFields,
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
@@ -43,8 +43,8 @@ class ConditionalRelationalComponentField extends LeafField implements Component
     /**
      * @return RelationalComponentField[]
      */
-    public function getConditionalRelationalComponentFields(): array
+    public function getRelationalComponentFields(): array
     {
-        return $this->conditionalRelationalComponentFields;
+        return $this->relationalComponentFields;
     }
 }

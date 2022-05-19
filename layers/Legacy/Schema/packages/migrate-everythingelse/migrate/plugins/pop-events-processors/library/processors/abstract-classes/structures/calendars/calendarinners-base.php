@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_CalendarInnersBase extends PoP_Module_Proces
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($component, $props);
+        $ret = parent::getLeafComponentFields($component, $props);
 
         $ret = array_merge(
             $ret,

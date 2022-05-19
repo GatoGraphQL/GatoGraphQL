@@ -114,9 +114,9 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
-        $ret = parent::getRelationalSubcomponents($component);
+        $ret = parent::getRelationalComponentFields($component);
 
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_SINGLE:
@@ -146,7 +146,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $data_fields = array(
             self::COMPONENT_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
@@ -157,7 +157,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             self::COMPONENT_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );
         return array_merge(
-            parent::getDataFields($component, $props),
+            parent::getLeafComponentFields($component, $props),
             $data_fields[$component[1]] ?? array()
         );
     }

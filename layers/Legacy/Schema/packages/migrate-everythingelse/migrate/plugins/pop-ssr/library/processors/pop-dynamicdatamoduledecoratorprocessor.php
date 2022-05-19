@@ -170,7 +170,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $processor = $this->getDecoratedcomponentProcessor($component);
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($component, $props);
-        foreach ($processor->getRelationalSubcomponents($component) as $relationalComponentField) {
+        foreach ($processor->getRelationalComponentFields($component) as $relationalComponentField) {
             // @todo Pass the ComponentField directly, do not convert to string first
             $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
             $subcomponent_components_data_properties = array(

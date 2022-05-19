@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends Po
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         return array('id', $thumb, 'title', 'url');

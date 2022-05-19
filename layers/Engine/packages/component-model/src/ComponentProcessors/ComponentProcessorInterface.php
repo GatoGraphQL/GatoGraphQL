@@ -48,19 +48,19 @@ interface ComponentProcessorInterface
     /**
      * @return LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array;
+    public function getLeafComponentFields(array $component, array &$props): array;
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array;
+    public function getRelationalComponentFields(array $component): array;
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalOnDataFieldSubcomponents(array $component): array;
+    public function getConditionalLeafComponentFields(array $component): array;
     /**
      * @return ConditionalRelationalComponentField[]
      */
-    public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array;
+    public function getConditionalRelationalComponentFields(array $component): array;
     public function getImmutableDataPropertiesDatasetcomponentTree(array $component, array &$props): array;
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(array $component, array &$props): array;
     public function getDatasetcomponentTreeSectionFlattenedDataFields(array $component, array &$props): array;
