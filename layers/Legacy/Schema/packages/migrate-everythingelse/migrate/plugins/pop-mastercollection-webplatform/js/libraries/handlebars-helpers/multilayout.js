@@ -10,10 +10,10 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, ob
 
 	// Fetch the layout for that particular configuration
 	var layout = '';
-	jQuery.each(conditionDataFieldModules, function(conditionField, moduleOutputName) {
+	jQuery.each(conditionDataFieldModules, function(conditionField, componentOutputName) {
 		// Check if the property evals to `true`. If so, use the corresponding module
 		if (dbObject[conditionField]) {
-			layout = moduleOutputName;
+			layout = componentOutputName;
 			return false;
 		}
 	});

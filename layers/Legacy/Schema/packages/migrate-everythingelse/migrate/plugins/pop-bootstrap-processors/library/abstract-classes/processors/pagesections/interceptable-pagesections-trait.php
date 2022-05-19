@@ -10,12 +10,12 @@ trait PoP_Module_Processor_InterceptablePageSectionsTrait
     {
         $ret = parent::getModuleInterceptUrls($component, $props);
 
-        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // Intercept current page
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $url = $requestHelperService->getCurrentURL();
-        $ret[$moduleOutputName] = $url;
+        $ret[$componentOutputName] = $url;
 
         return $ret;
     }

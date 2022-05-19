@@ -1003,7 +1003,7 @@ class Engine implements EngineInterface
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $subComponent) {
-            // Notice that when generating the array for the response, we don't use $component anymore, but $moduleOutputName
+            // Notice that when generating the array for the response, we don't use $component anymore, but $componentOutputName
             $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
 
             // If the path doesn't exist, create it
@@ -1015,8 +1015,8 @@ class Engine implements EngineInterface
             $array_pointer = &$array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty];
         }
 
-        $moduleOutputName = $this->getComponentHelpers()->getComponentOutputName($component);
-        $array_pointer[$moduleOutputName][$key] = $value;
+        $componentOutputName = $this->getComponentHelpers()->getComponentOutputName($component);
+        $array_pointer[$componentOutputName][$key] = $value;
     }
 
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution

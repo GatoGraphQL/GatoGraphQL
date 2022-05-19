@@ -54,14 +54,14 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     public function getID(array $component, array &$props): string
     {
-        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
         // if ($this->fixedId($component, $props)) {
         // 	$pagesection_settings_id = $props['pagesection-componentoutputname'];
         // 	$block_settings_id = $props['block-componentoutputname'];
-        // 	return $pagesection_settings_id.'_'.$block_settings_id.'_'.$moduleOutputName;
+        // 	return $pagesection_settings_id.'_'.$block_settings_id.'_'.$componentOutputName;
         // }
 
-        return $moduleOutputName;
+        return $componentOutputName;
     }
 
     public function getDbobjectParams(array $component): array
@@ -196,7 +196,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-    // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+    // 	$componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
@@ -205,7 +205,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	if ($module_path = $this->getComponentPath($component, $props)) {
 
     // 		// Key: component / Value: path to arrive to this component
-    // 		$ret[$component[1]] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $moduleOutputName);
+    // 		$ret[$component[1]] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $componentOutputName);
     // 	}
 
     // 	// Add the path from this component to its components
@@ -218,7 +218,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 			foreach ($subcomponent_ret as $subcomponent_component => $subcomponent_component_path) {
 
     // 				$ret[$subcomponent_component] = array_merge(
-    // 					array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $moduleOutputName),
+    // 					array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $componentOutputName),
     // 					$subcomponent_component_path
     // 				);
     // 			}
@@ -310,7 +310,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
             $ret[GD_JS_DBOBJECTPARAMS] = $dbobject_params;
         }
         if ($previousmodules_ids = $this->getProp($component, $props, 'previouscomponents-ids')) {
-            // We receive entries of key => component, convert them to key => moduleOutputName
+            // We receive entries of key => component, convert them to key => componentOutputName
             $ret[GD_JS_PREVIOUSCOMPONENTSIDS] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
                 $previousmodules_ids

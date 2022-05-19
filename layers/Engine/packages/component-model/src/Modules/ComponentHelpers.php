@@ -23,8 +23,8 @@ class ComponentHelpers implements ComponentHelpersInterface
     {
         return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::COMPONENTS);
     }
-    public function getModuleFromOutputName(string $moduleOutputName): ?array
+    public function getModuleFromOutputName(string $componentOutputName): ?array
     {
-        return ProcessorItemUtils::getItemFromOutputName($moduleOutputName, DefinitionGroups::COMPONENTS);
+        return ProcessorItemUtils::getItemFromOutputName($componentOutputName, DefinitionGroups::COMPONENTS);
     }
 }
