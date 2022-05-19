@@ -717,7 +717,7 @@ class Engine implements EngineInterface
             $filteredsettings = [];
             foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
-                    [$this->getComponentHelpers(), 'getComponentOutputName'],
+                    $this->getComponentHelpers()->getComponentOutputName(...),
                     $components
                 );
             }

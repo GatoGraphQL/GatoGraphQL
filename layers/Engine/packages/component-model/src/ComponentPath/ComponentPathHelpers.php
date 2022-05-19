@@ -49,7 +49,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
         return implode(
             ComponentPath::COMPONENT_SEPARATOR,
             array_map(
-                [$this->getComponentHelpers(), 'getComponentOutputName'],
+                $this->getComponentHelpers()->getComponentOutputName(...),
                 $componentPath
             )
         );
