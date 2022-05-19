@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngi
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         $data_fields = array('id', 'title', $thumb);

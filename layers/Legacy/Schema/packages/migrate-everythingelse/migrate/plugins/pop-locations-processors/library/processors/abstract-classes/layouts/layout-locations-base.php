@@ -12,7 +12,7 @@ abstract class GD_EM_Module_Processor_LocationLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('id', 'name', 'address', 'coordinates');
     }

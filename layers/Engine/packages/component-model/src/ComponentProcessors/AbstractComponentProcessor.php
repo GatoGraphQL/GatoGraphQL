@@ -702,7 +702,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function getDatasource(array $component, array &$props): string
     {
         // Each component can only return one piece of data, and it must be indicated if it static or mutableonrequest
-        // Retrieving only 1 piece is needed so that its children do not get confused what data their getDataFields applies to
+        // Retrieving only 1 piece is needed so that its children do not get confused what data their getLeafComponentFields applies to
         return DataSources::MUTABLEONREQUEST;
     }
 
@@ -739,7 +739,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return [];
     }
@@ -817,7 +817,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             /** @var ComponentFieldInterface[] */
             $astComponentFields = array_unique(
                 array_merge(
-                    $this->getDataFields($component, $props),
+                    $this->getLeafComponentFields($component, $props),
                     $this->getRelationalSubcomponents($component),
                     $this->getConditionalOnDataFieldSubcomponents($component),
                     $this->getConditionalOnDataFieldRelationalSubcomponents($component),

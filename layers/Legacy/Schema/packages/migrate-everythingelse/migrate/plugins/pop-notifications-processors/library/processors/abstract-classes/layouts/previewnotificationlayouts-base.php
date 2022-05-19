@@ -91,9 +91,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($component, $props);
+        $ret = parent::getLeafComponentFields($component, $props);
 
         // From the combination of object_type and action, we obtain the layout to use for the notification
         // $ret[] = 'objectType';

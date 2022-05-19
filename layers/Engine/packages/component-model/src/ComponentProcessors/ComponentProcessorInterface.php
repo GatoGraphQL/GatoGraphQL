@@ -48,7 +48,7 @@ interface ComponentProcessorInterface
     /**
      * @return LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array;
+    public function getLeafComponentFields(array $component, array &$props): array;
     /**
      * @return RelationalComponentField[]
      */

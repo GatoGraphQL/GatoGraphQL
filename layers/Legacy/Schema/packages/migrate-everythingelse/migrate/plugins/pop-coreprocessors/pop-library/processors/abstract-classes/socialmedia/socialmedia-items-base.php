@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $ret = array(
             $this->getShareurlField($component, $props),

@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $ret = array();
         if ($url = $this->getUrlField($component)) {

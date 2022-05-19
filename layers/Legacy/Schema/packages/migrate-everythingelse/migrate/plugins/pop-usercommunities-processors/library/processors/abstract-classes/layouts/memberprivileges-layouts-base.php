@@ -12,7 +12,7 @@ abstract class GD_URE_Module_Processor_MemberPrivilegesLayoutsBase extends PoPEn
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('memberPrivilegesByName');
     }

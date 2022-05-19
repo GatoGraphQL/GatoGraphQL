@@ -28,9 +28,9 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($component, $props);
+        $ret = parent::getLeafComponentFields($component, $props);
 
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_COMMENT:

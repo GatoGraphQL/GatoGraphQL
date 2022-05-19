@@ -126,9 +126,9 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($component, $props);
+        $ret = parent::getLeafComponentFields($component, $props);
         $this->addMetaFormcomponentDataFields($ret, $component, $props);
         return $ret;
     }

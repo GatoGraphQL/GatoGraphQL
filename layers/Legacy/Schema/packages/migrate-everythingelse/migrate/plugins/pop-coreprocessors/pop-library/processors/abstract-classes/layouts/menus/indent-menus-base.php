@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_IndentMenuLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
     }

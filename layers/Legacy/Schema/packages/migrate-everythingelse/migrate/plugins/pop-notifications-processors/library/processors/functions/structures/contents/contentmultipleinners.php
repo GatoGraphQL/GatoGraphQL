@@ -61,9 +61,9 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($component, $props);
+        $ret = parent::getLeafComponentFields($component, $props);
 
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:

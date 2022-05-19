@@ -1372,12 +1372,12 @@ Starting from a dataloading component, and including itself, any descendant comp
 
 ##### Defining the Data-Fields
 
-"Data fields", which are the properties to be required from the loaded database object, are defined through function `getDataFields`:
+"Data fields", which are the properties to be required from the loaded database object, are defined through function `getLeafComponentFields`:
 
 ```php
-function getDataFields($component, $props) 
+function getLeafComponentFields($component, $props) 
 {
-  $ret = parent::getDataFields($component, $props);
+  $ret = parent::getLeafComponentFields($component, $props);
 
   switch ($component[1]) {
     case self::COMPONENT_AUTHORARTICLES:

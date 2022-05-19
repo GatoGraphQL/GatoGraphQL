@@ -13,7 +13,7 @@ abstract class GD_URE_Custom_Module_Processor_ProfileOrganizationLayoutsBase ext
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         return array('organizationTypesByName', 'organizationCategoriesByName', 'contactPerson', 'contactNumber');
     }

@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getDataFields(array $component, array &$props): array
+    public function getLeafComponentFields(array $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         return array('id', 'title', $thumb, 'url');
