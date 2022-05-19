@@ -61,14 +61,14 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         }
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CREATELOCATION:
                 return [PoP_Module_Processor_CreateLocationFeedbackMessages::class, PoP_Module_Processor_CreateLocationFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATELOCATION];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getInnerSubcomponents(array $component): array

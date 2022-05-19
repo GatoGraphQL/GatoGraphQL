@@ -45,14 +45,14 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getCheckpointmessageModule(array $component)

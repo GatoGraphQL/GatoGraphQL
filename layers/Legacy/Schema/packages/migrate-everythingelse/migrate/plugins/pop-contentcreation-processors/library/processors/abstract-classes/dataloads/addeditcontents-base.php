@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return parent::getCheckpointmessageModule($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         if ($this->isCreate($component)) {
             return [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT];
@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
             return [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     public function getJsmethods(array $component, array &$props)

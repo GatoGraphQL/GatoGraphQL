@@ -147,7 +147,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getCheckpointmessageModule($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
@@ -163,7 +163,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_EMPTY];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void

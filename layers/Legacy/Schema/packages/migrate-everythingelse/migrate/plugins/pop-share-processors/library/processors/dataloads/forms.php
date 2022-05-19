@@ -53,14 +53,14 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SHAREBYEMAIL:
                 return [PoP_Share_Module_Processor_FeedbackMessages::class, PoP_Share_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getInnerSubcomponents(array $component): array

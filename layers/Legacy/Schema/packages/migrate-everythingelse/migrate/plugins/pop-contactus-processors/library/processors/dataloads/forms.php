@@ -53,14 +53,14 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CONTACTUS:
                 return [PoP_ContactUs_Module_Processor_FeedbackMessages::class, PoP_ContactUs_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CONTACTUS];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getInnerSubcomponents(array $component): array

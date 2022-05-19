@@ -51,7 +51,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         $feedbacks = array(
             self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             return $feedback;
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface

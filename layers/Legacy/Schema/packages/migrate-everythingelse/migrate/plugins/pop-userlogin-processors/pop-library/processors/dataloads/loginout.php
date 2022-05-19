@@ -83,7 +83,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LOGIN:
@@ -99,7 +99,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_LOGOUT];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getCheckpointmessageModule(array $component)

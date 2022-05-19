@@ -49,7 +49,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
@@ -59,7 +59,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
                 return [PoP_Newsletter_Module_Processor_FeedbackMessages::class, PoP_Newsletter_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getInnerSubcomponents(array $component): array

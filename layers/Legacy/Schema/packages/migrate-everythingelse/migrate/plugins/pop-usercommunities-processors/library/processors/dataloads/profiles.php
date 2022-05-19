@@ -108,7 +108,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return $ret;
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE:
@@ -121,7 +121,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
                 return [GD_URE_Module_Processor_ProfileFeedbackMessages::class, GD_URE_Module_Processor_ProfileFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_EDITMEMBERSHIP];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getCheckpointmessageModule(array $component)

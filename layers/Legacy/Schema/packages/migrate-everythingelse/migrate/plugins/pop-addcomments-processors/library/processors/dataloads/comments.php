@@ -69,7 +69,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getFilterSubcomponent($component);
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
@@ -79,7 +79,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
                 return [PoP_Module_Processor_CommentsFeedbackMessages::class, PoP_Module_Processor_CommentsFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_COMMENTS];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     protected function getCheckpointmessageModule(array $component)

@@ -94,7 +94,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     protected function getFeedbackmessageSubcomponents(array $component)
     {
         $ret = array();
-        if ($feedbackmessage = $this->getFeedbackmessageModule($component)) {
+        if ($feedbackmessage = $this->getFeedbackMessageComponent($component)) {
             $ret[] = $feedbackmessage;
         }
         if ($checkpointmessage = $this->getCheckpointmessageModule($component)) {
@@ -102,7 +102,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         }
         return $ret;
     }
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         return null;
     }

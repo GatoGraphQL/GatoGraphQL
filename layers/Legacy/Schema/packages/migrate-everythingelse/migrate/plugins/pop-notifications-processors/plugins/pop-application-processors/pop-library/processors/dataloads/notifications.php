@@ -104,7 +104,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $ret;
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
@@ -112,7 +112,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
                 return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_ITEMLIST];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 
     public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface

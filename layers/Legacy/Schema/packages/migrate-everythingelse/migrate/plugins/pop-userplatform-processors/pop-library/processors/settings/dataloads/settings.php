@@ -65,14 +65,14 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return $ret;
     }
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SETTINGS:
                 return [PoP_Module_Processor_SettingsFeedbackMessages::class, PoP_Module_Processor_SettingsFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_SETTINGS];
         }
 
-        return parent::getFeedbackmessageModule($component);
+        return parent::getFeedbackMessageComponent($component);
     }
 }
 

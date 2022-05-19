@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function getFeedbackmessageModule(array $component)
+    protected function getFeedbackMessageComponent(array $component)
     {
         return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_ITEMLIST];
     }
