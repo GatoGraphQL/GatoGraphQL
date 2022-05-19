@@ -215,7 +215,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
-            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
             $trigger_component = $this->getTriggerSubcomponent($component);
             $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_component)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
 

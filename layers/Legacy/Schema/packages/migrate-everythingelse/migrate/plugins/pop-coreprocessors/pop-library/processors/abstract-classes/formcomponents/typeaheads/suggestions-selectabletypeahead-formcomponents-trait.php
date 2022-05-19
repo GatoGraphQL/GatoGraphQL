@@ -140,7 +140,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'
-                    $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+                    $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
                     $data_properties = $componentprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
                     $triggerComponentProcessor = $componentprocessor_manager->getProcessor($trigger_layout);

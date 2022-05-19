@@ -139,7 +139,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($submenu = $this->getSubmenuSubcomponent($component)) {
-            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
             $submenu_id = $componentprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
             $submenu_target = '#'.$submenu_id.'-xs';
             $this->setProp([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS], $props, 'submenu-target', $submenu_target);

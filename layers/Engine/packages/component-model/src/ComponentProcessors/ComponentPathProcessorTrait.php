@@ -27,7 +27,7 @@ trait ComponentPathProcessorTrait
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -64,7 +64,7 @@ trait ComponentPathProcessorTrait
 
     protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -97,7 +97,7 @@ trait ComponentPathProcessorTrait
     protected function executeOnSelfAndPropagateToComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $use_component_output_name_as_key = true, $options = array())
     {
         $ret = [];
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
         $key = $use_component_output_name_as_key ? $this->getComponentHelpers()->getComponentOutputName($component) : $componentFullName;
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
@@ -135,7 +135,7 @@ trait ComponentPathProcessorTrait
 
     protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $recursive = true)
     {
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {

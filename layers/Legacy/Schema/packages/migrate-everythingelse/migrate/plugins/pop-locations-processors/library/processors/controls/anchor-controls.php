@@ -90,7 +90,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                     $props,
                     'params',
                     array(
-                        'data-cookieid' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component).'-togglemap',
+                        'data-cookieid' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component).'-togglemap',
                         'data-cookietarget' => $this->getProp($component, $props, 'target')/*'#'.$props['block-id'].' > .blocksection-inners .collapse.map'*/,
                         'data-cookiecollapse' => 'show',
                         'data-togglecookiebtn' => 'self',

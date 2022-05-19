@@ -223,7 +223,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
             foreach ($this->getPanelHeaders($component, $props) as $panelHeader) {
                 $header_subcomponent = $panelHeader['header-subcomponent'];
                 $subheader_subcomponents = $panelHeader['subheader-subcomponents'];
-                $headerSubcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($header_subcomponent);
+                $headerSubcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($header_subcomponent);
                 $header = array(
                     'componentoutputname' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($header_subcomponent)
                 );
@@ -240,7 +240,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                 if ($subheader_subcomponents) {
                     $subheaders = array();
                     foreach ($subheader_subcomponents as $subheader_subcomponent) {
-                        $subheaderSubcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($subheader_subcomponent);
+                        $subheaderSubcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subheader_subcomponent);
                         $subheader = array(
                             'componentoutputname' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subheader_subcomponent)
                         );

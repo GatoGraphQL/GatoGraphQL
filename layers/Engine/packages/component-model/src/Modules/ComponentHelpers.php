@@ -11,7 +11,7 @@ class ComponentHelpers implements ComponentHelpersInterface
 {
     use BasicServiceTrait;
 
-    public function getModuleFullName(array $component): string
+    public function getComponentFullName(array $component): string
     {
         return ProcessorItemUtils::getItemFullName($component);
     }

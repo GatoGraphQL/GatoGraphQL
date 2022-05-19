@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
     public function getLabel(array $component, array &$props)
     {
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $input = $this->getInputSubcomponent($component);
 

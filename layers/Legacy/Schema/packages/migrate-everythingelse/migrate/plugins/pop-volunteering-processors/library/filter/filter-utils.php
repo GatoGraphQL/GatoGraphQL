@@ -14,7 +14,7 @@ class PoP_VolunteeringProcessors_FilterUtils
             self::$volunteer_components = [];
             foreach ($volunteer_components as $volunteer_component) {
                 $component = $volunteer_component['component'];
-                $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+                $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
                 self::$volunteer_components[$componentFullName] = $volunteer_component['volunteerModule'];
             }
         }
@@ -26,7 +26,7 @@ class PoP_VolunteeringProcessors_FilterUtils
     {
         if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
             $volunteer_components = self::getVolunteerComponents();
-            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+            $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
             if ($volunteer_component = $volunteer_components[$componentFullName] ?? null) {
                 $filterinputs[] = $volunteer_component;
             }

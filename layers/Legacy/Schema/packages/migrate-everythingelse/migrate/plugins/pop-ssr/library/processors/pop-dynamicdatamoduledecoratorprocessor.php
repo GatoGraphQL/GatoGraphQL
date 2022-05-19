@@ -130,7 +130,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     {
         global $pop_component_processordynamicdatadecorator_manager;
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
 
         // Exclude the subcomponent modules here
         $processor = $this->getDecoratedcomponentProcessor($component);
@@ -164,7 +164,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     {
         global $pop_component_processordynamicdatadecorator_manager;
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getModuleFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
         $processor = $this->getDecoratedcomponentProcessor($component);

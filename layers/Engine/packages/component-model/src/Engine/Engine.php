@@ -907,7 +907,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -957,7 +957,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
@@ -1034,7 +1034,7 @@ class Engine implements EngineInterface
 
     protected function getComponentPathKey(array $module_path, array $component): string
     {
-        $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
         return $componentFullName . '-' . implode('.', $module_path);
     }
 
@@ -1128,7 +1128,7 @@ class Engine implements EngineInterface
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($module_path);
-            $componentFullName = $this->getComponentHelpers()->getModuleFullName($component);
+            $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
             $this->getComponentPathManager()->setPropagationCurrentPath($module_path);
@@ -1136,7 +1136,7 @@ class Engine implements EngineInterface
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
             foreach ($module_path as $subComponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getModuleFullName($subComponent);
+                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
@@ -1165,7 +1165,7 @@ class Engine implements EngineInterface
             $props = &$root_props;
             $model_props = &$root_model_props;
             foreach ($module_path as $subComponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getModuleFullName($subComponent);
+                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
                 $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
                 $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
             }
@@ -1333,7 +1333,7 @@ class Engine implements EngineInterface
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_componentPath as $subComponent) {
-                        $subcomponentFullName = $this->getComponentHelpers()->getModuleFullName($subComponent);
+                        $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
                         $referencer_props = &$referencer_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                         $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
