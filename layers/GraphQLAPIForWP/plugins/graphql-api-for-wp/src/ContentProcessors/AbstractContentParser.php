@@ -251,7 +251,7 @@ abstract class AbstractContentParser implements ContentParserInterface
             $headers = [];
             $panelContent = preg_replace_callback(
                 $regex,
-                function ($matches) use (&$headers) {
+                function (array $matches) use (&$headers): string {
                     $isFirstTab = empty($headers);
                     if (!$isFirstTab) {
                         $tabbedPanel = '</div>';
