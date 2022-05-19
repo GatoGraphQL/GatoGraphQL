@@ -73,9 +73,9 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
-        $ret = parent::getRelationalSubcomponents($component);
+        $ret = parent::getRelationalComponentFields($component);
 
         $components = [];
 

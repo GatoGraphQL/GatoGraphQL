@@ -114,9 +114,9 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
-        $ret = parent::getRelationalSubcomponents($component);
+        $ret = parent::getRelationalComponentFields($component);
 
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_SINGLE:

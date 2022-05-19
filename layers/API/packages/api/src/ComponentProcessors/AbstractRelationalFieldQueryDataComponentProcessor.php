@@ -204,7 +204,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];

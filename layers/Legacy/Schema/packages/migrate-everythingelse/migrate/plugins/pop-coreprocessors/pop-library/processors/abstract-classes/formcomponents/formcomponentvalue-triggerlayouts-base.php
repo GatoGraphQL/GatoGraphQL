@@ -152,7 +152,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         if ($field = $this->getDbobjectField($component)) {
             return [
@@ -165,7 +165,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             ];
         }
 
-        return parent::getRelationalSubcomponents($component);
+        return parent::getRelationalComponentFields($component);
     }
 
     public function getMutableonrequestConfiguration(array $component, array &$props): array

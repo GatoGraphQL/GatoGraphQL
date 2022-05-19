@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         $urlparam = $this->getUrlparamSubcomponent($component);
         return [

@@ -58,9 +58,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
-        $ret = parent::getRelationalSubcomponents($component);
+        $ret = parent::getRelationalComponentFields($component);
 
         $components = array();
 

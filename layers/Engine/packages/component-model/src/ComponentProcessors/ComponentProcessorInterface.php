@@ -52,7 +52,7 @@ interface ComponentProcessorInterface
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array;
+    public function getRelationalComponentFields(array $component): array;
     /**
      * @return ConditionalLeafComponentField[]
      */

@@ -58,9 +58,9 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
-        $ret = parent::getRelationalSubcomponents($component);
+        $ret = parent::getRelationalComponentFields($component);
 
         $components = array(
             $this->getAuthornameComponent($component),

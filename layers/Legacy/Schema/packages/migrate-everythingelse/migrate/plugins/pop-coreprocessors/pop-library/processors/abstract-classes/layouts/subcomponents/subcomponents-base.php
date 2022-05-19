@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         return [
             new RelationalComponentField(

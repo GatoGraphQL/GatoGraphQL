@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         if ($header = $this->getHeaderSubcomponent($component)) {
             return [
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
             ];
         }
 
-        return parent::getRelationalSubcomponents($component);
+        return parent::getRelationalComponentFields($component);
     }
 
     public function headerShowUrl(array $component, array &$props)

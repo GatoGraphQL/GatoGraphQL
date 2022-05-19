@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         return [
             new RelationalComponentField(

@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalSubcomponents(array $component): array
+    public function getRelationalComponentFields(array $component): array
     {
         if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
             ];
         }
 
-        return parent::getRelationalSubcomponents($component);
+        return parent::getRelationalComponentFields($component);
     }
 
     public function getThumbField(array $component, array &$props)
