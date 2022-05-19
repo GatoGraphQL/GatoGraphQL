@@ -359,7 +359,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return false;
     }
 
-    protected function getModulepath(array $component_or_componentPath, array &$props): array
+    protected function getComponentPath(array $component_or_componentPath, array &$props): array
     {
         // This function is used to get the path to the current component, or to a component path
         // It is not used for getting the path to a single component which is not the current one (since we do not know its path)
@@ -392,18 +392,18 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Iterate down to the subcomponent, which must be an array of components
         if ($starting_from_componentPath) {
             // Convert it to string
-            $startingFromModulepathFullNames = array_map(
+            $startingFromComponentPathFullNames = array_map(
                 [$this->getComponentHelpers(), 'getComponentFullName'],
                 $starting_from_componentPath
             );
 
             // Attach the current component, which is not included on "starting_from", to step down this level too
             $componentFullName = $this->getPathHeadModule($props);
-            array_unshift($startingFromModulepathFullNames, $componentFullName);
+            array_unshift($startingFromComponentPathFullNames, $componentFullName);
 
             // Descend into the path to find the component for which to add the att
             $component_props = &$props;
-            foreach ($startingFromModulepathFullNames as $pathlevelComponentFullName) {
+            foreach ($startingFromComponentPathFullNames as $pathlevelComponentFullName) {
                 $last_component_props = &$component_props;
                 $lastComponentFullName = $pathlevelComponentFullName;
 
@@ -435,7 +435,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $component_props = &$props[$componentFullName][Props::DESCENDANT_ATTRIBUTES];
         } else {
             // Calculate the path to iterate down
-            $componentPath = $this->getModulepath($component_or_componentPath, $props);
+            $componentPath = $this->getComponentPath($component_or_componentPath, $props);
 
             // Extract the lastlevel, that's the component to with to add the att
             $attComponentFullName = array_pop($componentPath);
