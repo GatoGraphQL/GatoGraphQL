@@ -175,7 +175,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $ret;
     }
 
-    protected function getModuleMutableonrequestSupplementaryDbobjectdataValues(array $component, array &$props)
+    protected function getComponentMutableonrequestSupplementaryDbobjectdataValues(array $component, array &$props)
     {
 
         // Load all the potential values for the Typeahead Trigger:
@@ -211,7 +211,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
     public function getMutableonrequestSupplementaryDbobjectdata(array $component, array &$props): array
     {
-        if ($value = $this->getModuleMutableonrequestSupplementaryDbobjectdataValues($component, $props)) {
+        if ($value = $this->getComponentMutableonrequestSupplementaryDbobjectdataValues($component, $props)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
