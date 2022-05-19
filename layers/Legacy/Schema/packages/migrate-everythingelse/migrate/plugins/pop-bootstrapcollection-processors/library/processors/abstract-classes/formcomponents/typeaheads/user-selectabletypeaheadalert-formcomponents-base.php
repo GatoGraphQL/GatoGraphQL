@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponentsBa
         return $ret;
     }
 
-    public function getSelectedModule(array $component)
+    public function getSelectedComponent(array $component)
     {
         return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_CARD];
     }

@@ -17,7 +17,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         );
     }
 
-    public function getSelectedModule(array $component)
+    public function getSelectedComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
@@ -29,7 +29,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
                 return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_FILTERCARD];
         }
 
-        return parent::getSelectedModule($component);
+        return parent::getSelectedComponent($component);
     }
     
     public function getHiddenInputComponent(array $component)
