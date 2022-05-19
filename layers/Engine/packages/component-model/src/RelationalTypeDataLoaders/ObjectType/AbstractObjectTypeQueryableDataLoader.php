@@ -68,7 +68,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
             foreach ($filtering_components as $component) {
                 /** @var FilterDataComponentProcessorInterface */
                 $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
-                $filterDataComponentProcessor->filterHeadmoduleDataloadQueryArgs($component, $query);
+                $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($component, $query);
             }
         }
 

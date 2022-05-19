@@ -783,9 +783,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($component, $props);
+        $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST:

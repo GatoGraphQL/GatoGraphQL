@@ -35,9 +35,9 @@ trait QueryDataComponentProcessorTrait
     //     return null;
     // }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($component, $props);
+        $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
         // Attributes to pass to the query
         $ret[DataloadingConstants::QUERYARGS] = $this->getImmutableDataloadQueryArgs($component, $props);
@@ -53,9 +53,9 @@ trait QueryDataComponentProcessorTrait
         ];
     }
 
-    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getMutableonmodelHeaddatasetmoduleDataProperties($component, $props);
+        $ret = parent::getMutableonmodelHeaddatasetcomponentDataProperties($component, $props);
 
         // Attributes overriding the query args, taken from the request
         if (!isset($ret[DataloadingConstants::IGNOREREQUESTPARAMS]) || !$ret[DataloadingConstants::IGNOREREQUESTPARAMS]) {
@@ -70,9 +70,9 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($component, $props);
+        $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
 
         $ret[DataloadingConstants::QUERYARGS] = $this->getMutableonrequestDataloadQueryArgs($component, $props);
 

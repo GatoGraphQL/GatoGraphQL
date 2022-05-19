@@ -15,9 +15,9 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         );
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $component, $props);
+        parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:

@@ -23,9 +23,9 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $component, $props);
+        parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
         // If no sticky posts, then make sure we're bringing no results
         $cmsService = CMSServiceFacade::getInstance();

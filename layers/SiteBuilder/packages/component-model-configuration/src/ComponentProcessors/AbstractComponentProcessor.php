@@ -139,9 +139,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return parent::getActionExecutionCheckpoints($component, $props);
     }
 
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($component, $props);
+        $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
 
         if ($dataload_source = $this->getDataloadSource($component, $props)) {
             $ret[DataloadingConstants::SOURCE] = $dataload_source;

@@ -64,9 +64,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props): void
+    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props): void
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $component, $props);
+        parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
 
         // Is the component lazy-load?

@@ -65,13 +65,13 @@ interface ComponentProcessorInterface
     public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
     public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array;
     public function getDatasetmoduletreeSectionFlattenedComponents(array $component): array;
-    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array;
+    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array;
     public function getMutableonmodelDataPropertiesDatasetmoduletree(array $component, array &$props): array;
     public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
-    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $component, array &$props): array;
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(array $component, array &$props): array;
     public function getMutableonrequestDataPropertiesDatasetmoduletree(array $component, array &$props): array;
     public function getMutableonrequestDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array;
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array;
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array;
     public function getDataFeedbackDatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;

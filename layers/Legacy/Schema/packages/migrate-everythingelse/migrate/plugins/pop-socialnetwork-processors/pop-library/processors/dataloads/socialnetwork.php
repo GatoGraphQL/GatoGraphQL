@@ -41,9 +41,9 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getDataAccessCheckpoints($component, $props);
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $component, $props);
+        parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
@@ -59,9 +59,9 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         }
     }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($component, $props);
+        $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:

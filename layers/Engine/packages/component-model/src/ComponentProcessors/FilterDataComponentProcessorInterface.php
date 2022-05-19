@@ -8,5 +8,5 @@ interface FilterDataComponentProcessorInterface
 {
     public function getDataloadQueryArgsFilteringComponents(array $component): array;
     public function getActiveDataloadQueryArgsFilteringComponents(array $component, array $source = null): array;
-    public function filterHeadmoduleDataloadQueryArgs(array $component, array &$query, array $source = null): void;
+    public function filterHeadcomponentDataloadQueryArgs(array $component, array &$query, array $source = null): void;
 }

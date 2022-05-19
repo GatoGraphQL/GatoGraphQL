@@ -17,7 +17,7 @@ trait FilterDataComponentProcessorTrait
      */
     protected array $activeDataloadQueryArgsFilteringModules = [];
 
-    public function filterHeadmoduleDataloadQueryArgs(array $component, array &$query, array $source = null): void
+    public function filterHeadcomponentDataloadQueryArgs(array $component, array &$query, array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
             foreach ($activeDataloadQueryArgsFilteringModules as $subComponent) {

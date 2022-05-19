@@ -8,13 +8,13 @@ class PoP_UserStateModuleDecoratorProcessorHooks
     {
         \PoP\Root\App::addAction(
             AbstractComponentProcessor::HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES,
-            $this->addHeaddatasetmoduleDataProperties(...),
+            $this->addHeaddatasetcomponentDataProperties(...),
             10,
             4
         );
     }
 
-    public function addHeaddatasetmoduleDataProperties($ret_in_array, array $component, $props_in_array, $processor)
+    public function addHeaddatasetcomponentDataProperties($ret_in_array, array $component, $props_in_array, $processor)
     {
         $processoruserstatedecorator = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessorDecorator($processor);
 

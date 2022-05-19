@@ -789,7 +789,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // And then, only for the top node, add its extra properties
             $properties = array_merge(
                 $this->getDatasetmoduletreeSectionFlattenedDataFields($component, $props),
-                $this->getImmutableHeaddatasetmoduleDataProperties($component, $props)
+                $this->getImmutableHeaddatasetcomponentDataProperties($component, $props)
             );
 
             if ($properties) {
@@ -896,7 +896,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //     }
     // }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
         // By default return nothing at the last level
         $ret = array();
@@ -907,13 +907,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // Add the properties below either as static or mutableonrequest
         if ($datasource == DataSources::IMMUTABLE) {
-            $this->addHeaddatasetmoduleDataProperties($ret, $component, $props);
+            $this->addHeaddatasetcomponentDataProperties($ret, $component, $props);
         }
 
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props): void
+    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -938,7 +938,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // Only if this component loads data
         if ($this->doesComponentLoadData($component)) {
-            $properties = $this->getMutableonmodelHeaddatasetmoduleDataProperties($component, $props);
+            $properties = $this->getMutableonmodelHeaddatasetcomponentDataProperties($component, $props);
             if ($properties) {
                 $ret[DataLoading::DATA_PROPERTIES] = $properties;
             }
@@ -947,14 +947,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
         $ret = array();
 
         // Add the properties below either as static or mutableonrequest
         $datasource = $this->getDatasource($component, $props);
         if ($datasource == DataSources::MUTABLEONMODEL) {
-            $this->addHeaddatasetmoduleDataProperties($ret, $component, $props);
+            $this->addHeaddatasetcomponentDataProperties($ret, $component, $props);
         }
 
         // Fetch params from request?
@@ -987,9 +987,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // // And then, only for the top node, add its extra properties
             // $properties = array_merge(
             //     $this->get_mutableonrequest_data_properties_datasetmoduletree_section($component, $props),
-            //     $this->getMutableonrequestHeaddatasetmoduleDataProperties($component, $props)
+            //     $this->getMutableonrequestHeaddatasetcomponentDataProperties($component, $props)
             // );
-            $properties = $this->getMutableonrequestHeaddatasetmoduleDataProperties($component, $props);
+            $properties = $this->getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
 
             if ($properties) {
                 $ret[DataLoading::DATA_PROPERTIES] = $properties;
@@ -999,14 +999,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
     {
         $ret = array();
 
         // Add the properties below either as static or mutableonrequest
         $datasource = $this->getDatasource($component, $props);
         if ($datasource == DataSources::MUTABLEONREQUEST) {
-            $this->addHeaddatasetmoduleDataProperties($ret, $component, $props);
+            $this->addHeaddatasetcomponentDataProperties($ret, $component, $props);
         }
 
         // When loading data or execution an action, check if to validate checkpoints?

@@ -110,7 +110,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             /** @var FilterDataComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($filterDataloadingModule);
-            $filterDataComponentProcessor->filterHeadmoduleDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);
+            $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);
         }
         // InputObjects can also provide filtering query values
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
