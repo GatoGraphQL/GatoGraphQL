@@ -235,10 +235,10 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         // The Intercept URLs are runtime instead of static, since they contains information
         // given through the URL, which cannot not cached in the static file
-        if ($intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
+        if ($intercept_urls = $this->getComponentInterceptURLs($component, $props)) {
             $ret[GD_JS_INTERCEPTURLS][$componentOutputName] = $intercept_urls;
         }
-        if ($extra_intercept_urls = $this->getComponentExtraInterceptUrls($component, $props)) {
+        if ($extra_intercept_urls = $this->getComponentExtraInterceptURLs($component, $props)) {
             $ret[GD_JS_EXTRAINTERCEPTURLS][$componentOutputName] = $extra_intercept_urls;
         }
 
@@ -273,7 +273,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         /**
          * Interceptor
          */
-        if ($intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
+        if ($intercept_urls = $this->getComponentInterceptURLs($component, $props)) {
             $intercept_type = $this->getInterceptType($component, $props);
             $ret[GD_JS_INTERCEPT] = array(
                 GD_JS_TYPE => $intercept_type ? $intercept_type : 'fullurl'
@@ -313,22 +313,22 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getIntercepturlsMergedcomponentTree(array $component, array &$props)
     {
-        return $this->executeOnSelfAndMergeWithComponents('getInterceptUrls', __FUNCTION__, $component, $props, false);
+        return $this->executeOnSelfAndMergeWithComponents('getInterceptURLs', __FUNCTION__, $component, $props, false);
     }
 
-    public function getInterceptUrls(array $component, array &$props)
+    public function getInterceptURLs(array $component, array &$props)
     {
-        if ($component_intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
+        if ($component_intercept_urls = $this->getComponentInterceptURLs($component, $props)) {
             return array_unique(array_values($component_intercept_urls));
         }
 
         return array();
     }
-    public function getComponentInterceptUrls(array $component, array &$props)
+    public function getComponentInterceptURLs(array $component, array &$props)
     {
         return array();
     }
-    public function getComponentExtraInterceptUrls(array $component, array &$props)
+    public function getComponentExtraInterceptURLs(array $component, array &$props)
     {
         return array();
     }

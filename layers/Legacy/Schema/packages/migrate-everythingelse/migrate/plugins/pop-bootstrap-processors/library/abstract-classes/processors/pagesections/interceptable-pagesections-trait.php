@@ -6,9 +6,9 @@ define('GD_CONSTANT_REPLICATETYPE_SINGLE', 'single');
 
 trait PoP_Module_Processor_InterceptablePageSectionsTrait
 {
-    public function getComponentInterceptUrls(array $component, array &$props)
+    public function getComponentInterceptURLs(array $component, array &$props)
     {
-        $ret = parent::getComponentInterceptUrls($component, $props);
+        $ret = parent::getComponentInterceptURLs($component, $props);
 
         $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
