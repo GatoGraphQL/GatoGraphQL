@@ -20,7 +20,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ComponentFilterManagerInterface $moduleFilterManager = null;
+    private ?ComponentFilterManagerInterface $componentFilterManager = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -30,13 +30,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    final public function setComponentFilterManager(ComponentFilterManagerInterface $moduleFilterManager): void
+    final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
     {
-        $this->moduleFilterManager = $moduleFilterManager;
+        $this->componentFilterManager = $componentFilterManager;
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
+        return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
 
     public function initialize(array &$state): void
