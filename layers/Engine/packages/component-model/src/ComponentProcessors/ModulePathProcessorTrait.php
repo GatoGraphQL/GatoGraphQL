@@ -42,7 +42,7 @@ trait ModulePathProcessorTrait
         });
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         $subcomponents_ret = array();
         foreach ($subComponents as $subComponent) {
@@ -79,7 +79,7 @@ trait ModulePathProcessorTrait
         });
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
             $ret = array_merge_recursive(
@@ -113,7 +113,7 @@ trait ModulePathProcessorTrait
         $subComponents = $this->getAllSubcomponents($component);
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         $subcomponents_ret = array();
         foreach ($subComponents as $subComponent) {
@@ -147,7 +147,7 @@ trait ModulePathProcessorTrait
         $subComponents = $this->getAllSubcomponents($component);
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
             $subcomponent_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $recursive);

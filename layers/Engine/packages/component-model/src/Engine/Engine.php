@@ -935,7 +935,7 @@ class Engine implements EngineInterface
         $subComponents = $processor->getAllSubcomponents($component);
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
             $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
@@ -983,7 +983,7 @@ class Engine implements EngineInterface
         $subComponents = $processor->getAllSubcomponents($component);
         $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
             $this->addDataloadingModuleFullpaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
@@ -1000,19 +1000,19 @@ class Engine implements EngineInterface
     ): void {
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
-        $submodulesOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
+        $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $subComponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $moduleOutputName
-            $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
+            $subcomponentOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
 
             // If the path doesn't exist, create it
-            if (!isset($array_pointer[$submoduleOutputName][$submodulesOutputProperty])) {
-                $array_pointer[$submoduleOutputName][$submodulesOutputProperty] = [];
+            if (!isset($array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty])) {
+                $array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty] = [];
             }
 
             // The pointer is the location in the array where the value will be set
-            $array_pointer = &$array_pointer[$submoduleOutputName][$submodulesOutputProperty];
+            $array_pointer = &$array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty];
         }
 
         $moduleOutputName = $this->getModuleHelpers()->getModuleOutputName($component);
@@ -1120,7 +1120,7 @@ class Engine implements EngineInterface
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
-        $submodulesOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
+        $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
@@ -1136,8 +1136,8 @@ class Engine implements EngineInterface
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
             foreach ($module_path as $subComponent) {
-                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
-                $data_properties = &$data_properties[$submoduleFullName][$submodulesOutputProperty];
+                $subcomponentFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
+                $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -1165,9 +1165,9 @@ class Engine implements EngineInterface
             $props = &$root_props;
             $model_props = &$root_model_props;
             foreach ($module_path as $subComponent) {
-                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
-                $props = &$props[$submoduleFullName][Props::SUBCOMPONENTS];
-                $model_props = &$model_props[$submoduleFullName][Props::SUBCOMPONENTS];
+                $subcomponentFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
+                $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
+                $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
             }
 
             $component_props = null;
@@ -1333,9 +1333,9 @@ class Engine implements EngineInterface
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_componentPath as $subComponent) {
-                        $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
-                        $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBCOMPONENTS];
-                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBCOMPONENTS];
+                        $subcomponentFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
+                        $referencer_props = &$referencer_props[$subcomponentFullName][Props::SUBCOMPONENTS];
+                        $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
 
                     if (
@@ -2300,7 +2300,7 @@ class Engine implements EngineInterface
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
                             // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
+                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
                                 function ($field_id) use ($typedSubcomponentIDs) {
@@ -2459,13 +2459,13 @@ class Engine implements EngineInterface
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 /** @var ModuleInfo */
                 $moduleInfo = App::getModule(Module::class)->getInfo();
-                $submodulesOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
+                $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
                 // Advance the position of the array into the current component
                 foreach ($module_path as $subComponent) {
-                    $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
-                    $componentdata[$submoduleOutputName][$submodulesOutputProperty] = $componentdata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
-                    $componentdata = &$componentdata[$submoduleOutputName][$submodulesOutputProperty];
+                    $subcomponentOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
+                    $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
+                    $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
                 }
                 // Merge the feedback in
                 $componentdata = array_merge_recursive(

@@ -22,7 +22,7 @@ class ModulePathManager implements ModulePathManagerInterface
     }
 
     /**
-     * The `prepare` function advances the componentPath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
     public function prepareForPropagation(array $component, array &$props): void
     {
