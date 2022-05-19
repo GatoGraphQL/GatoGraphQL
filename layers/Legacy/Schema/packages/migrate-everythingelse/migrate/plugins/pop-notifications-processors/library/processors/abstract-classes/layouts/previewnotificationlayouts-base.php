@@ -215,14 +215,14 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         if ($this->getBottomSubcomponents($component)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_map(
-                [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
+                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $this->getBottomSubcomponents($component)
             );
             foreach ($this->getConditionalBottomSubcomponents($component) as $conditionalLeafComponentField) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'],
                     array_map(
-                        [\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance(), 'getComponentOutputName'],
+                        \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                         $conditionalLeafComponentField->getConditionalNestedComponents()
                     )
                 );
