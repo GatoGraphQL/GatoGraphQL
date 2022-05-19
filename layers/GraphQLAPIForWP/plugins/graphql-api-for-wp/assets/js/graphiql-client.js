@@ -30,7 +30,8 @@ ReactDOM.render(
   React.createElement(GraphiQL, {
     fetcher: graphQLFetcher,
     defaultQuery: defaultQuery,
-    response: response
+    response: response,
+    headerEditorEnabled: false
   }),
   document.getElementById('graphiql')
 );
