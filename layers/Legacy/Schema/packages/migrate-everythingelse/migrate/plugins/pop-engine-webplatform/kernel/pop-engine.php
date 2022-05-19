@@ -163,7 +163,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             }
 
             // Specify all the URLs to be intercepted by the current page. This is needed to obtain their configuration in the webplatform, under this page's URL
-            $this->intercept_urls = $root_processor->getIntercepturlsMergedcomponentTree($root_component, $root_props);
+            $this->intercept_urls = $root_processor->getIntercepturlsMergedComponentTree($root_component, $root_props);
         }
 
         return $ret;

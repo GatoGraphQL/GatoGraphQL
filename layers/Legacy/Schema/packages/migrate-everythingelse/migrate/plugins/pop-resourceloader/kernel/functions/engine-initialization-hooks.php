@@ -57,14 +57,14 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 			$helperCalculations['template-resources'] = array_unique(
 				array_merge(
 					$helperCalculations['template-resources'] ?? array(),
-					$processor->getTemplateResourcesMergedcomponentTree($component, $props)
+					$processor->getTemplateResourcesMergedComponentTree($component, $props)
 				),
 				SORT_REGULAR
 			);
 			$helperCalculations['component-resources'] = array_unique(
 				array_merge(
 					$helperCalculations['component-resources'] ?? array(),
-					$processorresourcedecorator->getResourcesMergedcomponentTree($component, $props)
+					$processorresourcedecorator->getResourcesMergedComponentTree($component, $props)
 				),
 				SORT_REGULAR
 			);

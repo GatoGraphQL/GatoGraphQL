@@ -311,7 +311,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // Intercept URLs
     //-------------------------------------------------
 
-    public function getIntercepturlsMergedcomponentTree(array $component, array &$props)
+    public function getIntercepturlsMergedComponentTree(array $component, array &$props)
     {
         return $this->executeOnSelfAndMergeWithComponents('getInterceptURLs', __FUNCTION__, $component, $props, false);
     }
