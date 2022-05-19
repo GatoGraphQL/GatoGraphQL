@@ -6,13 +6,13 @@ class PoPTheme_Wassup_CommonPages_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
-            $this->getModuleCssResources(...),
+            $this->getComponentCSSResources(...),
             10,
             6
         );
     }
 
-    public function getModuleCssResources($resources, array $component, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
         switch ($component[1]) {
             case GD_ClusterCommonPages_Module_Processor_CustomScrolls::COMPONENT_SCROLL_OURSPONSORS_SMALLDETAILS:

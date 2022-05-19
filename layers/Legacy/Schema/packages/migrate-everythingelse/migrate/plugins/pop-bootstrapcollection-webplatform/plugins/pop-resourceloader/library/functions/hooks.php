@@ -6,13 +6,13 @@ class PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
-            $this->getModuleCssResources(...),
+            $this->getComponentCSSResources(...),
             10,
             5
         );
     }
 
-    public function getModuleCssResources($resources, array $component, array $templateResource, $template, array $props)
+    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props)
     {
         switch ($template) {
             case POP_TEMPLATE_FORMINPUT_DATERANGE:

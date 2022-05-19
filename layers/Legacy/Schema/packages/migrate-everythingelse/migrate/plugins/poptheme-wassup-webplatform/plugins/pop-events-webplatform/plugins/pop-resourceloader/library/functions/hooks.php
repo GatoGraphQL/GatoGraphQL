@@ -6,13 +6,13 @@ class PoPTheme_Wassup_Events_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
-            $this->getModuleCssResources(...),
+            $this->getComponentCSSResources(...),
             10,
             6
         );
     }
 
-    public function getModuleCssResources($resources, array $component, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
 
         // Artificial property added to identify the template when adding component-resources
