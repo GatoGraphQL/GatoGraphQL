@@ -17,7 +17,7 @@ class Page extends AbstractComponentFilter
     /**
      * Exclude until reaching the pageSection
      */
-    public function excludeModule(array $component, array &$props): bool
+    public function excludeSubcomponent(array $component, array &$props): bool
     {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
         return !($processor instanceof PageInterface);

@@ -22,7 +22,7 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function excludeModule(array $component, array &$props): bool
+    public function excludeSubcomponent(array $component, array &$props): bool
     {
         return false;
     }

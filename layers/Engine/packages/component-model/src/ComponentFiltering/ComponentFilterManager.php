@@ -120,7 +120,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->neverExclude = $neverExclude;
     }
 
-    public function excludeModule(array $component, array &$props): bool
+    public function excludeSubcomponent(array $component, array &$props): bool
     {
         if (!$this->initialized) {
             $this->init();
@@ -133,7 +133,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
                 return false;
             }
 
-            return $this->selected_filter->excludeModule($component, $props);
+            return $this->selected_filter->excludeSubcomponent($component, $props);
         }
 
         return false;
@@ -164,7 +164,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             $this->init();
         }
         if ($this->selected_filter_name) {
-            if (!$this->neverExclude && is_null($this->not_excluded_ancestor_component) && $this->excludeModule($component, $props) === false) {
+            if (!$this->neverExclude && is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
                 // Set the current component as the one which is not excluded.
                 $component_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
@@ -194,7 +194,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->getModulePathManager()->restoreFromPropagation($component, $props);
 
         if ($this->selected_filter_name) {
-            if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_component) && $this->excludeModule($component, $props) === false) {
+            if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
                 $component_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
 

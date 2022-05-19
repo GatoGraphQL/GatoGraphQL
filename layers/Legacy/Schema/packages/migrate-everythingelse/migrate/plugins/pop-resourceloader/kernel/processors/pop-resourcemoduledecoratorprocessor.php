@@ -62,7 +62,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         if ($this->isDynamicModule($component, $props)) {
 
             // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-            if (!$modulefilter_manager->excludeModule($component, $props)) {
+            if (!$modulefilter_manager->excludeSubcomponent($component, $props)) {
 
                 return $this->getResourcesMergedmoduletree($component, $props);
             }
@@ -138,7 +138,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         // If the module path has been set to true, then from this module downwards all modules are dynamic
         if ($this->isDynamicModule($component, $props)) {
 
-            if (!$modulefilter_manager->excludeModule($component, $props)) {
+            if (!$modulefilter_manager->excludeSubcomponent($component, $props)) {
 
                 return $processor->getTemplateResourcesMergedmoduletree($component, $props);
             }

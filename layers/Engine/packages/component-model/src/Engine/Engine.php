@@ -910,7 +910,7 @@ class Engine implements EngineInterface
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+        if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             // If the current component loads data, then add its path to the list
             if ($interreferenced_componentPath = $processor->getDataFeedbackInterreferencedComponentPath($component, $props)) {
                 $referenced_componentPath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_componentPath);
@@ -960,7 +960,7 @@ class Engine implements EngineInterface
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+        if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             // If the current component loads data, then add its path to the list
             if ($processor->moduleLoadsData($component)) {
                 $paths[] = array_merge(

@@ -56,7 +56,7 @@ class ModulePaths extends AbstractComponentFilter
         return 'componentPaths';
     }
 
-    public function excludeModule(array $component, array &$props): bool
+    public function excludeSubcomponent(array $component, array &$props): bool
     {
         if (is_null($this->paths)) {
             $this->init();

@@ -30,7 +30,7 @@ trait ModulePathProcessorTrait
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+        if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             if ($component_ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
                 $ret[$key] = $component_ret;
             }
@@ -67,7 +67,7 @@ trait ModulePathProcessorTrait
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+        if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             $ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         } else {
             $ret = [];
@@ -101,7 +101,7 @@ trait ModulePathProcessorTrait
         $key = $use_component_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($component) : $componentFullName;
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+        if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             // Maybe only execute function on the dataloading modules
             if (!isset($options['only-execute-on-dataloading-components']) || !$options['only-execute-on-dataloading-components'] || $this->getComponentProcessor($component)->startDataloadingSection($component)) {
                 if ($component_ret = $this->$eval_self_fn($component, $props)) {
@@ -138,7 +138,7 @@ trait ModulePathProcessorTrait
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+        if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             $ret = $this->$eval_self_fn($component, $props);
         } else {
             $ret = [];

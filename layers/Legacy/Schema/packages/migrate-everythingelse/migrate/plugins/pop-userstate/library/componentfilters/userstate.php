@@ -15,7 +15,7 @@ class PoP_ComponentFilter_UserState extends AbstractComponentFilter
     /**
      * Exclude if it has no user state
      */
-    public function excludeModule(array $component, array &$props): bool
+    public function excludeSubcomponent(array $component, array &$props): bool
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $componentprocessor_manager->getProcessor($component);
