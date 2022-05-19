@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    protected function getModuleClasses(array $component, array &$props)
+    protected function getComponentClasses(array $component, array &$props)
     {
         return array();
     }
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
             $ret[GD_JS_CLASSES]['wrapper'] = $wrapper_class;
         }
 
-        if ($componentclasses = $this->getModuleClasses($component, $props)) {
+        if ($componentclasses = $this->getComponentClasses($component, $props)) {
             $ret['componentclasses'] = $componentclasses;
         }
 

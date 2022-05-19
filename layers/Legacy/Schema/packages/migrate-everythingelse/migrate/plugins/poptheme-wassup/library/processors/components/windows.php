@@ -60,9 +60,9 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         return null;
     }
 
-    protected function getModuleClasses(array $component, array &$props)
+    protected function getComponentClasses(array $component, array &$props)
     {
-        $ret = parent::getModuleClasses($component, $props);
+        $ret = parent::getComponentClasses($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         switch ($component[1]) {
