@@ -342,14 +342,14 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         );
     }
 
-    protected function addModuleNameAsClass(array $component, array &$props)
+    protected function addComponentNameAsClass(array $component, array &$props)
     {
         return false;
     }
 
     public function initHTMLCSSPlatformModelProps(array $component, array &$props)
     {
-        if ($this->addModuleNameAsClass($component, $props)) {
+        if ($this->addComponentNameAsClass($component, $props)) {
             $this->appendProp($component, $props, 'class', DefinitionManagerFacade::getInstance()->getOriginalName($component));
         }
 
