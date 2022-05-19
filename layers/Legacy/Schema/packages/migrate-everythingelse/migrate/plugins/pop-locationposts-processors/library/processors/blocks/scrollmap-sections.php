@@ -111,7 +111,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
         return parent::getLatestcountSubcomponent($component);
     }
 
-    protected function getModuleTogglemapanchorcontrolPath(array $component)
+    protected function getComponentTogglemapanchorcontrolPath(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
@@ -162,7 +162,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                if ($path = $this->getModuleTogglemapanchorcontrolPath($component)) {
+                if ($path = $this->getComponentTogglemapanchorcontrolPath($component)) {
                     $this->setProp(
                         $path,
                         $props,
