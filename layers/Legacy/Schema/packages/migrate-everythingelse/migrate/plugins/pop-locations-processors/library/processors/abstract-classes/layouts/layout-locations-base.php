@@ -8,9 +8,9 @@ abstract class GD_EM_Module_Processor_LocationLayoutsBase extends PoPEngine_Quer
     }
 
     /**
-     * @todo Migrate from string to LeafModuleField
+     * @todo Migrate from string to LeafComponentField
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array
     {

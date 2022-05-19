@@ -11,9 +11,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-class RelationalModuleField extends LeafField implements ModuleFieldInterface
+class RelationalComponentField extends LeafField implements ComponentFieldInterface
 {
-    use ModuleFieldTrait;
+    use ComponentFieldTrait;
 
     /**
      * @param array<array> $nestedModules

@@ -10,9 +10,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-class ConditionalLeafModuleField extends LeafField implements ModuleFieldInterface
+class ConditionalLeafComponentField extends LeafField implements ComponentFieldInterface
 {
-    use ModuleFieldTrait;
+    use ComponentFieldTrait;
 
     /**
      * The condition must be satisfied on the implicit field.

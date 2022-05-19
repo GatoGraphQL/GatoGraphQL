@@ -10,9 +10,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-class LeafModuleField extends LeafField implements ModuleFieldInterface
+class LeafComponentField extends LeafField implements ComponentFieldInterface
 {
-    use ModuleFieldTrait;
+    use ComponentFieldTrait;
 
     /**
      * @param Argument[] $arguments

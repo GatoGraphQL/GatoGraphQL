@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
 
 class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
@@ -14,7 +14,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
     }
 
     /**
-     * @return ConditionalLeafModuleField[]
+     * @return ConditionalLeafComponentField[]
      */
     public function getConditionalOnDataFieldSubcomponents(array $component): array
     {

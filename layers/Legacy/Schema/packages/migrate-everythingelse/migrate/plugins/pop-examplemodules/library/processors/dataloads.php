@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
@@ -112,7 +112,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array
     {
@@ -123,13 +123,13 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
             case self::COMPONENT_EXAMPLE_TAGLATESTPOSTS:
-                $ret[] = new RelationalModuleField(
+                $ret[] = new RelationalComponentField(
                     'author',
                     [
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
                     ]
                 );
-                $ret[] = new RelationalModuleField(
+                $ret[] = new RelationalComponentField(
                     'comments',
                     [
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_COMMENT],
@@ -142,9 +142,9 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     }
 
     /**
-     * @todo Migrate from string to LeafModuleField
+     * @todo Migrate from string to LeafComponentField
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array
     {

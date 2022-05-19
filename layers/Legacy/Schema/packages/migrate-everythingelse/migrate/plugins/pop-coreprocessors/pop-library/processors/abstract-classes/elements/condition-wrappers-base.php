@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
 
 abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     }
 
     /**
-     * @return ConditionalLeafModuleField[]
+     * @return ConditionalLeafComponentField[]
      */
     public function getConditionalOnDataFieldSubcomponents(array $component): array
     {
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
         if ($conditionDataField = $this->getConditionField($component)) {
             if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
-                $ret[] = new ConditionalLeafModuleField(
+                $ret[] = new ConditionalLeafComponentField(
                     $conditionDataField,
                     $layouts
                 );
@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
             if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
                 // Calculate the "not" data field for the conditionDataField
                 $notConditionDataField = $this->getNotConditionField($component);
-                $ret[] = new ConditionalLeafModuleField(
+                $ret[] = new ConditionalLeafComponentField(
                     $notConditionDataField,
                     $conditionfailed_layouts
                 );
@@ -53,9 +53,9 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     }
 
     /**
-     * @todo Migrate from string to LeafModuleField
+     * @todo Migrate from string to LeafComponentField
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array
     {
