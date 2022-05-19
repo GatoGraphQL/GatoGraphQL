@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENT_INPUTGROUP];
     }
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getInputSubcomponent($component);
     }

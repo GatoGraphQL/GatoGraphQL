@@ -5,7 +5,7 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getComponentSubcomponent($component);
     }

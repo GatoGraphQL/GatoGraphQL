@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends P
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getHiddenInputComponent($component);
     }

@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_MULTIPLE];
     }
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getFeaturedimageinnerSubcomponent($component);
     }

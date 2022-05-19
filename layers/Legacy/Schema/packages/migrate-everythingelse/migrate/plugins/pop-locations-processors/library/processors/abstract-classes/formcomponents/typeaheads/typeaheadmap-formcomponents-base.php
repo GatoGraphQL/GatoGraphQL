@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         return $ret;
     }
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getLocationsTypeaheadSubcomponent($component);
     }

@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getInputSubcomponent($component);
     }

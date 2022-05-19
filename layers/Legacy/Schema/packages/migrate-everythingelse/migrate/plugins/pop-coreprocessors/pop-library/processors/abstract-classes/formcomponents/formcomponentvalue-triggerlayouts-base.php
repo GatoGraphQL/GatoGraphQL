@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENTVALUE_TRIGGERLAYOUT];
     }
 
-    public function getFormcomponentModule(array $component)
+    public function getFormcomponentComponent(array $component)
     {
         return $this->getTriggerSubcomponent($component);
     }
