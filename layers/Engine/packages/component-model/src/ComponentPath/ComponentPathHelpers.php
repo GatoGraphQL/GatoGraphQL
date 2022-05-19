@@ -17,16 +17,16 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
 {
     use BasicServiceTrait;
 
-    private ?ComponentPathManagerInterface $modulePathManager = null;
+    private ?ComponentPathManagerInterface $componentPathManager = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
 
-    final public function setComponentPathManager(ComponentPathManagerInterface $modulePathManager): void
+    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
     {
-        $this->modulePathManager = $modulePathManager;
+        $this->componentPathManager = $componentPathManager;
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
     {

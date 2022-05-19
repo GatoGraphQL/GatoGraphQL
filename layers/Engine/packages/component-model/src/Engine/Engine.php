@@ -68,8 +68,8 @@ class Engine implements EngineInterface
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    private ?ComponentPathHelpersInterface $modulePathHelpers = null;
-    private ?ComponentPathManagerInterface $modulePathManager = null;
+    private ?ComponentPathHelpersInterface $componentPathHelpers = null;
+    private ?ComponentPathManagerInterface $componentPathManager = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $moduleFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
@@ -117,21 +117,21 @@ class Engine implements EngineInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
-    final public function setComponentPathHelpers(ComponentPathHelpersInterface $modulePathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
-        $this->modulePathHelpers = $modulePathHelpers;
+        $this->componentPathHelpers = $componentPathHelpers;
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
-    final public function setComponentPathManager(ComponentPathManagerInterface $modulePathManager): void
+    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
     {
-        $this->modulePathManager = $modulePathManager;
+        $this->componentPathManager = $componentPathManager;
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
