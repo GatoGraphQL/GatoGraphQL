@@ -42,10 +42,10 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubcomponent($component)) {
             $ret[] = $quicklinkgroup_bottom;
         }
-        if ($bottom_submodules = $this->getBottomSubcomponents($component)) {
+        if ($bottom_subcomponents = $this->getBottomSubcomponents($component)) {
             $ret = array_merge(
                 $ret,
-                $bottom_submodules
+                $bottom_subcomponents
             );
         }
         if ($post_thumb = $this->getPostThumbSubcomponent($component)) {

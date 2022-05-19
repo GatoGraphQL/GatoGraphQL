@@ -156,17 +156,17 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_GROUP_AUTHOR_DESCRIPTION:
                 // Associate modules all together
                 // First assign the frontend-id to the collapsible module
-                $collapsible_submodules = array(
+                $collapsible_subcomponents = array(
                     self::COMPONENT_GROUP_HOME_WELCOME => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME],
                     self::COMPONENT_GROUP_HOME_COMPACTWELCOME => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME],
                     self::COMPONENT_GROUP_AUTHOR_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT],
                 );
                 $frontend_id = $this->getFrontendId($component, $props);
                 $collapsible_frontend_id = $frontend_id.'collapse';
-                $this->setProp([$collapsible_submodules[$component[1]]], $props, 'frontend-id', $collapsible_frontend_id);
+                $this->setProp([$collapsible_subcomponents[$component[1]]], $props, 'frontend-id', $collapsible_frontend_id);
 
                 // Then set the frontend-id to the labels
-                $label_submodules_set = array(
+                $label_subcomponents_set = array(
                     self::COMPONENT_GROUP_HOME_WELCOME => array(
                         [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::COMPONENT_HTMLCODE_HOMEWELCOMETOP],
                         [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM],
@@ -180,7 +180,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                         [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
                     ),
                 );
-                foreach ($label_submodules_set[$component[1]] as $subComponent) {
+                foreach ($label_subcomponents_set[$component[1]] as $subComponent) {
                     $this->setProp([$subComponent], $props, 'target-id', $collapsible_frontend_id);
                 }
                 break;

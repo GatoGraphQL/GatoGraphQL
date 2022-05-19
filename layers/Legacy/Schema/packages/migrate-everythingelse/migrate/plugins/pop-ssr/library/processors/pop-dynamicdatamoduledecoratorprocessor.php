@@ -68,7 +68,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             return $componentprocessor_manager->getProcessor($component)->getDatasetmoduletreeSectionFlattenedDataFields($component, $props);
         }
 
-        // Otherwise, propagate to the modules and submodules
+        // Otherwise, propagate to the modules and subcomponents
         $ret = array();
 
         // Propagate down to the components
@@ -114,7 +114,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //         return $componentprocessor_manager->getProcessor($component)->get_mutableonrequest_data_properties_datasetmoduletree_section($component, $props);
     //     }
 
-    //     // Otherwise, propagate to the modules and submodules
+    //     // Otherwise, propagate to the modules and subcomponents
     //     $ret = array();
 
     //     // Propagate down to the components

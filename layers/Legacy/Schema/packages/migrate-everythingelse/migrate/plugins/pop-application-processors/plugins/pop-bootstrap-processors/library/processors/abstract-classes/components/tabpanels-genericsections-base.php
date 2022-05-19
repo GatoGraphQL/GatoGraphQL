@@ -26,8 +26,8 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($subComponent);
                 if ($thumb = $format_thumbs[$format] ?? null) {
-                    $submoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($subComponent);
-                    $ret[$submoduleFullName] = $thumb;
+                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($subComponent);
+                    $ret[$subcomponentFullName] = $thumb;
                 }
             }
         }
@@ -59,8 +59,8 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($subComponent);
                 if ($title = $format_titles[$format] ?? null) {
-                    $submoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($subComponent);
-                    $ret[$submoduleFullName] = $title;
+                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($subComponent);
+                    $ret[$subcomponentFullName] = $title;
                 }
             }
         }

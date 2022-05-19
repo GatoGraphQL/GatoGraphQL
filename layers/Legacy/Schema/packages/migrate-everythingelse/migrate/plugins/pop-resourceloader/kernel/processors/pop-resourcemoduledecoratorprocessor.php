@@ -78,7 +78,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $subComponents = $this->getDecoratedcomponentProcessor($component)->getAllSubcomponents($component);
         $subComponents = $modulefilter_manager->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no subcomponents
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
 
@@ -154,7 +154,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $subComponents = $processor->getAllSubcomponents($component);
         $subComponents = $modulefilter_manager->removeExcludedSubcomponents($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no subcomponents
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
 

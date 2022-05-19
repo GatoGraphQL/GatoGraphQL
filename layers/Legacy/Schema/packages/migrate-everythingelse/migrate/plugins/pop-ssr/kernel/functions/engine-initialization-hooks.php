@@ -112,7 +112,7 @@ class PoP_SSR_EngineInitialization_Hooks
     protected function removeConfiguration(&$data, $engine)
     {
 
-        // Iterate all the levels of the configuration, stepping down from module to its submodules,
+        // Iterate all the levels of the configuration, stepping down from module to its subcomponents,
         // and delete all their properties unless their module has been marked as dynamic, in which case the data will be needed to print their HTML dynamically in the webplatform
     }
 

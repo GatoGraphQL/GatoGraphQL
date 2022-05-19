@@ -49,11 +49,11 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         // foreach ($this->getSubcomponents($component) as $subComponent) {
 
-        //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
+        //     $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
         //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
-        //     $ret[$submoduleOutputName]['data-initjs-targets'] = sprintf(
+        //     $ret[$subcomponentOutputName]['data-initjs-targets'] = sprintf(
         //         '%s > %s',
-        //         '#'.$frontend_id.'-'.$submoduleOutputName.'-container',
+        //         '#'.$frontend_id.'-'.$subcomponentOutputName.'-container',
         //         'div.pop-block'
         //     );
         // }
@@ -82,12 +82,12 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
     //     foreach ($this->getSubcomponents($component) as $subComponent) {
 
-    //         $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
+    //         $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
     //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
     //         $ret[] = sprintf(
     //             '%s > %s > %s',
-    //             '#'.$frontend_id.'-'.$submoduleOutputName.'.'.$this->getPanelactiveClass($component),
-    //             '#'.$frontend_id.'-'.$submoduleOutputName.'-container',
+    //             '#'.$frontend_id.'-'.$subcomponentOutputName.'.'.$this->getPanelactiveClass($component),
+    //             '#'.$frontend_id.'-'.$subcomponentOutputName.'-container',
     //             'div.pop-block'
     //         );
     //     }
