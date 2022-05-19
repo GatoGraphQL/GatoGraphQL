@@ -469,7 +469,7 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsModuletree(array $component): array
+    public function getModelPropsComponenttree(array $component): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -487,7 +487,7 @@ class Engine implements EngineInterface
         // If there is no cached one, or not using the cache, generate the props and cache it
         if ($model_props === null) {
             $model_props = [];
-            $processor->initModelPropsModuletree($component, $model_props, [], []);
+            $processor->initModelPropsComponenttree($component, $model_props, [], []);
 
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
@@ -498,12 +498,12 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsModuletree(array $component, array $props): array
+    public function addRequestPropsComponenttree(array $component, array $props): array
     {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
-        $processor->initRequestPropsModuletree($component, $props, [], []);
+        $processor->initRequestPropsComponenttree($component, $props, [], []);
 
         return $props;
     }
@@ -523,13 +523,13 @@ class Engine implements EngineInterface
 
         // Save it to be used by the children class
         // Static props are needed for both static/mutableonrequest operations, so build it always
-        $engineState->model_props = $this->getModelPropsModuletree($component);
+        $engineState->model_props = $this->getModelPropsComponenttree($component);
 
         // If only getting static content, then no need to add the mutableonrequest props
         if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $engineState->props = $engineState->model_props;
         } else {
-            $engineState->props = $this->addRequestPropsModuletree($component, $engineState->model_props);
+            $engineState->props = $this->addRequestPropsComponenttree($component, $engineState->model_props);
         }
 
         // Allow for extra operations (eg: calculate resources)
@@ -1260,11 +1260,11 @@ class Engine implements EngineInterface
                     // Eg: Locations Map for the Create Individual Profile: it allows to pre-select locations,
                     // these ones must be fetched even if the block has a static typeResolver
                     // If it has extend, add those ids under its relationalTypeOutputDBKey
-                    $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataModuletree($component, $model_props);
+                    $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataComponenttree($component, $model_props);
                     if ($datasource == DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
-                            $processor->getMutableonrequestSupplementaryDBObjectDataModuletree($component, $props)
+                            $processor->getMutableonrequestSupplementaryDBObjectDataComponenttree($component, $props)
                         );
                     }
                     foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {

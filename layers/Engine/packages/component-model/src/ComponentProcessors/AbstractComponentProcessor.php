@@ -144,7 +144,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function executeInitPropsComponenttree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the component to its string representation to access it in the array
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -216,9 +216,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    public function initModelPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
+    public function initModelPropsComponenttree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantComponents(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsComponenttree($this->initModelProps(...), $this->getModelPropsForDescendantComponents(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getModelPropsForDescendantComponents(array $component, array &$props): array
@@ -296,9 +296,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function initRequestPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
+    public function initRequestPropsComponenttree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponents(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsComponenttree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponents(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getRequestPropsForDescendantComponents(array $component, array &$props): array
@@ -421,7 +421,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // If the component is a string, there are 2 possibilities: either it is the current component or not
         // If it is not, then it is a descendant component, which will appear at some point down the path.
-        // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsModuletree`
+        // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsComponenttree`
         if ($this->isDescendantModule($component_or_componentPath, $props)) {
             // It is a child component
             $att_component = $component_or_componentPath;
@@ -1030,10 +1030,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function getDataFeedbackDatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        return $this->executeOnSelfAndPropagateToDatasetmodules('getDataFeedbackModuletree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        return $this->executeOnSelfAndPropagateToDatasetmodules('getDataFeedbackComponenttree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
-    public function getDataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackComponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = array();
 
@@ -1289,7 +1289,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
 
-    public function getModelSupplementaryDBObjectDataModuletree(array $component, array &$props): array
+    public function getModelSupplementaryDBObjectDataComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getModelSupplementaryDBObjectData', __FUNCTION__, $component, $props);
     }
@@ -1303,7 +1303,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
 
-    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $component, array &$props): array
+    public function getMutableonrequestSupplementaryDBObjectDataComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $component, $props);
     }

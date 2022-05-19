@@ -12,7 +12,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions
     //-------------------------------------------------
 
-    public function getJsmethodsModuletree(array $component, array &$props): array
+    public function getJsmethodsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getProcessedJsmethods', __FUNCTION__, $component, $props);
     }
@@ -105,7 +105,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Static JS Settings
     //-------------------------------------------------
 
-    public function getImmutableJssettingsModuletree(array $component, array &$props): array
+    public function getImmutableJssettingsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getImmutableJssettings', __FUNCTION__, $component, $props);
     }
@@ -143,7 +143,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Stateful JS Settings
     //-------------------------------------------------
 
-    public function getMutableonmodelJssettingsModuletree(array $component, array &$props): array
+    public function getMutableonmodelJssettingsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelJssettings', __FUNCTION__, $component, $props);
     }
@@ -172,7 +172,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonrequestJssettingsModuletree(array $component, array &$props): array
+    public function getMutableonrequestJssettingsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestJssettings', __FUNCTION__, $component, $props);
     }
@@ -203,10 +203,10 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
     public function getJsdataFeedbackDatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        return $this->executeOnSelfAndPropagateToDatasetcomponents('getJsdataFeedbackModuletree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        return $this->executeOnSelfAndPropagateToDatasetcomponents('getJsdataFeedbackComponenttree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
-    public function getJsdataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedbackComponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = array();
 

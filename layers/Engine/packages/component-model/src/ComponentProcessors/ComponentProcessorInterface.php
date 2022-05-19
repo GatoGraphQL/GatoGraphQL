@@ -17,12 +17,12 @@ interface ComponentProcessorInterface
     public function getComponentsToProcess(): array;
     public function getSubcomponents(array $component): array;
     public function getAllSubcomponents(array $component): array;
-    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
-    public function initModelPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
+    public function executeInitPropsComponenttree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
+    public function initModelPropsComponenttree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getModelPropsForDescendantComponents(array $component, array &$props): array;
     public function getModelPropsForDescendantDatasetmodules(array $component, array &$props): array;
     public function initModelProps(array $component, array &$props): void;
-    public function initRequestPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
+    public function initRequestPropsComponenttree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getRequestPropsForDescendantComponents(array $component, array &$props): array;
     public function getRequestPropsForDescendantDatasetmodules(array $component, array &$props): array;
     public function initRequestProps(array $component, array &$props): void;
@@ -73,7 +73,7 @@ interface ComponentProcessorInterface
     public function getMutableonrequestDataPropertiesDatasetcomponenttreeFullsection(array $component, array &$props): array;
     public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array;
     public function getDataFeedbackDatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
-    public function getDataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
+    public function getDataFeedbackComponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
     public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array;
     public function getBackgroundurlsMergeddatasetcomponenttree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
@@ -83,9 +83,9 @@ interface ComponentProcessorInterface
     public function getActionExecutionCheckpoints(array $component, array &$props): array;
     public function shouldExecuteMutation(array $component, array &$props): bool;
     public function getModulesToPropagateDataProperties(array $component): array;
-    public function getModelSupplementaryDBObjectDataModuletree(array $component, array &$props): array;
+    public function getModelSupplementaryDBObjectDataComponenttree(array $component, array &$props): array;
     public function getModelSupplementaryDBObjectData(array $component, array &$props): array;
-    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $component, array &$props): array;
+    public function getMutableonrequestSupplementaryDBObjectDataComponenttree(array $component, array &$props): array;
     public function getMutableonrequestSupplementaryDbobjectdata(array $component, array &$props): array;
     public function doesComponentLoadData(array $component): bool;
     public function startDataloadingSection(array $component): bool;

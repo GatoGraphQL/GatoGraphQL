@@ -19,7 +19,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
-    public function getImmutableSettingsModuletree(array $component, array &$props): array
+    public function getImmutableSettingsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getImmutableSettings', __FUNCTION__, $component, $props);
     }
@@ -48,7 +48,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // New PUBLIC Functions: Model Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonmodelSettingsModuletree(array $component, array &$props): array
+    public function getMutableonmodelSettingsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelSettings', __FUNCTION__, $component, $props);
     }
@@ -73,7 +73,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // New PUBLIC Functions: Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonrequestSettingsModuletree(array $component, array &$props): array
+    public function getMutableonrequestSettingsComponenttree(array $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestSettings', __FUNCTION__, $component, $props);
     }

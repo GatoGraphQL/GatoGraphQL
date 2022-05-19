@@ -68,20 +68,20 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 $mutableonmodel_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS);
             }
             if ($immutable_jssettings === null) {
-                $immutable_jssettings = $processor->getImmutableJssettingsModuletree($component, $model_props);
+                $immutable_jssettings = $processor->getImmutableJssettingsComponenttree($component, $model_props);
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATICJSSETTINGS, $immutable_jssettings);
                 }
             }
             if ($mutableonmodel_jssettings === null) {
-                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsModuletree($component, $model_props);
+                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsComponenttree($component, $model_props);
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS, $mutableonmodel_jssettings);
                 }
             }
 
             if ($datasourceselector == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
-                $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($component, $props);
+                $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsComponenttree($component, $props);
             }
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"

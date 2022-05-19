@@ -704,7 +704,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,
             // and then visiting the 2nd post will not have its needed resource loaded
-            $entry_model_props = $engine->getModelPropsModuletree($entryComponent);
+            $entry_model_props = $engine->getModelPropsComponenttree($entryComponent);
         }
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
@@ -744,7 +744,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $componentprocessor_manager->getProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
-        $blockJSMethods = $processor->getJsmethodsModuletree($entryComponent, $entry_model_props);
+        $blockJSMethods = $processor->getJsmethodsComponenttree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);
     }
 
