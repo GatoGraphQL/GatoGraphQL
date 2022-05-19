@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
             // $ret[] = [self::class, self::COMPONENT_FORMINPUT_FILTERNAME];
         }
 
-        if ($submitbtn = $this->getSubmitbtnModule($component)) {
+        if ($submitbtn = $this->getSubmitbtnComponent($component)) {
             $ret[] = $submitbtn;
         }
 
@@ -72,7 +72,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     //     return null;
     // }
 
-    public function getSubmitbtnModule(array $component)
+    public function getSubmitbtnComponent(array $component)
     {
         return [PoP_Module_Processor_FormGroups::class, PoP_Module_Processor_FormGroups::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH];
     }

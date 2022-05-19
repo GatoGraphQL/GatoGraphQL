@@ -36,7 +36,7 @@ class PoP_PostsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Proc
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $component)
+    protected function getSectionFilterComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYPOSTS_TABLE_EDIT:
@@ -45,7 +45,7 @@ class PoP_PostsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Proc
                 return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS];
         }
 
-        return parent::getSectionfilterModule($component);
+        return parent::getSectionFilterComponent($component);
     }
 
     protected function getControlgroupTopSubcomponent(array $component)

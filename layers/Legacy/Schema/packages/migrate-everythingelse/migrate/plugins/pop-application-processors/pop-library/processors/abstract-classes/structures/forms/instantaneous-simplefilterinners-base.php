@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function getSubmitbtnModule(array $component)
+    public function getSubmitbtnComponent(array $component)
     {
 
         // Use a special Search button, so it doesn't share the $props with the Search from the filter
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
     {
 
         // When clicking on any button, already submit the form
-        if ($submit_btn = $this->getSubmitbtnModule($component)) {
+        if ($submit_btn = $this->getSubmitbtnComponent($component)) {
             // $trigger_component can only be the Filter and not the FilterInner, because FilterInner has no id, which is needed for previouscomponents-ids
             if ($trigger_component = $this->getProp($component, $props, 'trigger-component')) {
                 // Execute JS and set all needed params
@@ -63,7 +63,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
     {
 
         // When clicking on any button, already submit the form
-        if ($submit_btn = $this->getSubmitbtnModule($component)) {
+        if ($submit_btn = $this->getSubmitbtnComponent($component)) {
             // Do not show
             $this->appendProp($submit_btn, $props, 'class', 'hidden');
         }

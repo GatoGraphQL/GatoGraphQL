@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
         return $ret;
     }
 
-    public function getAuthorAvatarModule(array $component)
+    public function getAuthorAvatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR82];

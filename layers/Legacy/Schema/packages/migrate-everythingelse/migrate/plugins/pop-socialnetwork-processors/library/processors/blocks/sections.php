@@ -150,7 +150,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $component)
+    protected function getSectionFilterComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
@@ -164,7 +164,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
                 break;
         }
 
-        return parent::getSectionfilterModule($component);
+        return parent::getSectionFilterComponent($component);
     }
 
     protected function getControlgroupTopSubcomponent(array $component)

@@ -162,7 +162,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             }
         }
 
-        if ($sectionfilter = $this->getSectionfilterModule($component)) {
+        if ($sectionfilter = $this->getSectionFilterComponent($component)) {
             // Class needed to push the "Loading" status a tiny bit down, so it doesn't show on top of the sectionfilter
             $this->appendProp($component, $props, 'class', 'withsectionfilter');
 
@@ -179,7 +179,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        if ($sectionfilter_component = $this->getSectionfilterModule($component)) {
+        if ($sectionfilter_component = $this->getSectionFilterComponent($component)) {
             $ret[] = $sectionfilter_component;
         }
 
@@ -190,7 +190,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return $ret;
     }
 
-    protected function getSectionfilterModule(array $component)
+    protected function getSectionFilterComponent(array $component)
     {
         return null;
     }

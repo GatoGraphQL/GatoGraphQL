@@ -258,7 +258,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $component)
+    protected function getSectionFilterComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
@@ -309,7 +309,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
                 return [PoP_Module_Processor_InstantaneousFilters::class, PoP_Module_Processor_InstantaneousFilters::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS];
         }
 
-        return parent::getSectionfilterModule($component);
+        return parent::getSectionFilterComponent($component);
     }
 
     protected function getDescriptionBottom(array $component, array &$props)

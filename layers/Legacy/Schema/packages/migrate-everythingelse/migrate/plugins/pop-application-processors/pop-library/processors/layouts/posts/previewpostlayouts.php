@@ -263,7 +263,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getAuthorAvatarModule(array $component)
+    public function getAuthorAvatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -276,7 +276,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
             }
         }
 
-        return parent::getAuthorAvatarModule($component);
+        return parent::getAuthorAvatarComponent($component);
     }
 
     public function authorPositions(array $component)

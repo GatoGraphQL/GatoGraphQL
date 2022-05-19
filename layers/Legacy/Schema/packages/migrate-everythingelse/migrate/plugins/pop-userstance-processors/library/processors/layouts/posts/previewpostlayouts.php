@@ -109,7 +109,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getAuthorAvatarModule(array $component)
+    public function getAuthorAvatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -120,7 +120,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
             }
         }
 
-        return parent::getAuthorAvatarModule($component);
+        return parent::getAuthorAvatarComponent($component);
     }
 
     public function getBottomSubcomponents(array $component)

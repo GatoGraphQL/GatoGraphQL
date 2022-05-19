@@ -86,7 +86,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
         if (!$this->getPostThumbSubcomponent($component)) {
-            if ($author_avatar = $this->getAuthorAvatarModule($component)) {
+            if ($author_avatar = $this->getAuthorAvatarComponent($component)) {
                 $components[] = $author_avatar;
             }
         }
@@ -143,7 +143,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR];
     }
-    public function getAuthorAvatarModule(array $component)
+    public function getAuthorAvatarComponent(array $component)
     {
         return null;
     }
@@ -283,7 +283,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         if ($post_thumb = $this->getPostThumbSubcomponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($post_thumb);
         } else {
-            if ($author_avatar = $this->getAuthorAvatarModule($component)) {
+            if ($author_avatar = $this->getAuthorAvatarComponent($component)) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['author-avatar'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($author_avatar);
             }
         }

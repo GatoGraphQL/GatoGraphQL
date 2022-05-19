@@ -36,7 +36,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $component)
+    protected function getSectionFilterComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT:
@@ -48,7 +48,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
                 break;
         }
 
-        return parent::getSectionfilterModule($component);
+        return parent::getSectionFilterComponent($component);
     }
 
     protected function getControlgroupTopSubcomponent(array $component)
