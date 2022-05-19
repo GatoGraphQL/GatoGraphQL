@@ -238,7 +238,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         if ($intercept_urls = $this->getComponentInterceptUrls($component, $props)) {
             $ret[GD_JS_INTERCEPTURLS][$componentOutputName] = $intercept_urls;
         }
-        if ($extra_intercept_urls = $this->getModuleExtraInterceptUrls($component, $props)) {
+        if ($extra_intercept_urls = $this->getComponentExtraInterceptUrls($component, $props)) {
             $ret[GD_JS_EXTRAINTERCEPTURLS][$componentOutputName] = $extra_intercept_urls;
         }
 
@@ -328,7 +328,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     {
         return array();
     }
-    public function getModuleExtraInterceptUrls(array $component, array &$props)
+    public function getComponentExtraInterceptUrls(array $component, array &$props)
     {
         return array();
     }
