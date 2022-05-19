@@ -366,6 +366,7 @@ class App extends Component<{}, State> {
           onEditVariables={this._onEditVariables}
           onEditOperationName={this._onEditOperationName}
           response={response}
+          headerEditorEnabled={false}
         >
           <GraphiQL.Toolbar>
             <GraphiQL.Button
