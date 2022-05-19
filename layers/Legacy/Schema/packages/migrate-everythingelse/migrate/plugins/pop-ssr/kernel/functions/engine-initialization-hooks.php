@@ -150,7 +150,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $engineState = App::getEngineState();
             $entry_model_props = $engineState->model_props;
-            $dynamic_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetcomponenttree($entryComponent, $entry_model_props);
+            $dynamic_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetcomponentTree($entryComponent, $entry_model_props);
 
             if ($useCache) {
                 $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES, $dynamic_data_properties);

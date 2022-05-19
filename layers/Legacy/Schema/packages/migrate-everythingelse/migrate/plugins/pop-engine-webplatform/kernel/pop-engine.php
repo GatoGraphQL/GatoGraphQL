@@ -68,20 +68,20 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 $mutableonmodel_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS);
             }
             if ($immutable_jssettings === null) {
-                $immutable_jssettings = $processor->getImmutableJssettingsComponenttree($component, $model_props);
+                $immutable_jssettings = $processor->getImmutableJssettingsComponentTree($component, $model_props);
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATICJSSETTINGS, $immutable_jssettings);
                 }
             }
             if ($mutableonmodel_jssettings === null) {
-                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsComponenttree($component, $model_props);
+                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsComponentTree($component, $model_props);
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS, $mutableonmodel_jssettings);
                 }
             }
 
             if ($datasourceselector == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
-                $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsComponenttree($component, $props);
+                $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsComponentTree($component, $props);
             }
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -163,7 +163,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             }
 
             // Specify all the URLs to be intercepted by the current page. This is needed to obtain their configuration in the webplatform, under this page's URL
-            $this->intercept_urls = $root_processor->getIntercepturlsMergedcomponenttree($root_component, $root_props);
+            $this->intercept_urls = $root_processor->getIntercepturlsMergedcomponentTree($root_component, $root_props);
         }
 
         return $ret;
@@ -204,7 +204,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         if (!is_null($componentjsdata)) {
 
             // Add the feedback into the object
-            if ($feedback = $processor->getJsdataFeedbackDatasetcomponenttree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
+            if ($feedback = $processor->getJsdataFeedbackDatasetcomponentTree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
 
                 // Advance the position of the array into the current component
                 foreach ($component_path as $subComponent) {

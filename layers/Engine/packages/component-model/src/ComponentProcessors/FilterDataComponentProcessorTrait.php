@@ -63,7 +63,7 @@ trait FilterDataComponentProcessorTrait
     public function getDataloadQueryArgsFilteringComponents(array $component): array
     {
         return array_values(array_filter(
-            $this->getDatasetcomponenttreeSectionFlattenedComponents($component),
+            $this->getDatasetcomponentTreeSectionFlattenedComponents($component),
             function ($component) {
                 return $this->getComponentProcessorManager()->getProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface;
             }

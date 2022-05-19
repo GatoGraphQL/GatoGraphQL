@@ -112,7 +112,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
     {
 
         // Important: the TYPEAHEAD_COMPONENT (eg: PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
-        // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetcomponenttreeSectionFlattenedDataFields
+        // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetcomponentTreeSectionFlattenedDataFields
         // To fix this, in self::COMPONENT_FORMINPUT_TYPEAHEAD data_properties we stop spreading down, so it never reaches below there to get further data-fields
         return array_values(
             array_diff(

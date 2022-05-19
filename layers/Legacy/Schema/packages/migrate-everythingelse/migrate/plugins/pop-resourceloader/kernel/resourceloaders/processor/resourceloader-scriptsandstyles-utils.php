@@ -594,7 +594,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                             $processor = $componentprocessor_manager->getProcessor($entryComponent);
                             $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
                             // @todo Check where $props comes from. Temporarily replaced with [] to avoid IDE error
-                            self::$dynamic_component_resources = $processorresourcedecorator->getDynamicResourcesMergedcomponenttree($entryComponent, []/*$props*/);
+                            self::$dynamic_component_resources = $processorresourcedecorator->getDynamicResourcesMergedcomponentTree($entryComponent, []/*$props*/);
 
                             // And store them on the cache
                             if ($useCache) {

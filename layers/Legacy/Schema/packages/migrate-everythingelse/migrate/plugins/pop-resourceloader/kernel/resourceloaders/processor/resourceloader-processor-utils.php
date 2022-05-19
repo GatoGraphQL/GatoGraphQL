@@ -704,7 +704,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,
             // and then visiting the 2nd post will not have its needed resource loaded
-            $entry_model_props = $engine->getModelPropsComponenttree($entryComponent);
+            $entry_model_props = $engine->getModelPropsComponentTree($entryComponent);
         }
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
@@ -713,11 +713,11 @@ class PoP_ResourceLoaderProcessorUtils {
         $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
-        $templateResources = $entry_processor->getTemplateResourcesMergedcomponenttree($entryComponent, $entry_model_props);
+        $templateResources = $entry_processor->getTemplateResourcesMergedcomponentTree($entryComponent, $entry_model_props);
 
         // We also need to get the dynamic-templates and save it on the vars cache.
         // It will be needed from there when doing `function isDefer(array $resource, $model_instance_id)`
-        if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedcomponenttree($entryComponent, $entry_model_props)) {
+        if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedcomponentTree($entryComponent, $entry_model_props)) {
             $memorymanager = TransientCacheManagerFacade::getInstance();
             $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources);
         }
@@ -733,7 +733,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Get all the resources the module is dependent on. Eg: inline CSS styles
         // $modules_resources = array_values(array_unique(arrayFlatten(array_values($entry_processorresourcedecorator->getModulesResources($entryComponent, $entry_model_props)))));
-        $modules_resources = $entry_processorresourcedecorator->getResourcesMergedcomponenttree($entryComponent, $entry_model_props);
+        $modules_resources = $entry_processorresourcedecorator->getResourcesMergedcomponentTree($entryComponent, $entry_model_props);
 
         // Finally, merge all the template and JS resources together
         return self::calculateResources($componentFilter, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
@@ -744,7 +744,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $componentprocessor_manager->getProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
-        $blockJSMethods = $processor->getJsmethodsComponenttree($entryComponent, $entry_model_props);
+        $blockJSMethods = $processor->getJsmethodsComponentTree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);
     }
 

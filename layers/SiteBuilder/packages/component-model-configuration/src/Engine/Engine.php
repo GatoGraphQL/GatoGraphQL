@@ -95,19 +95,19 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // If there is no cached one, generate the configuration and cache it
         if ($immutable_settings === null) {
-            $immutable_settings = $processor->getImmutableSettingsComponenttree($component, $model_props);
+            $immutable_settings = $processor->getImmutableSettingsComponentTree($component, $model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS, $immutable_settings);
             }
         }
         if ($mutableonmodel_settings === null) {
-            $mutableonmodel_settings = $processor->getMutableonmodelSettingsComponenttree($component, $model_props);
+            $mutableonmodel_settings = $processor->getMutableonmodelSettingsComponentTree($component, $model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
         if ($datasourceselector == DataSourceSelectors::MODELANDREQUEST) {
-            $mutableonrequest_settings = $processor->getMutableonrequestSettingsComponenttree($component, $props);
+            $mutableonrequest_settings = $processor->getMutableonrequestSettingsComponentTree($component, $props);
         }
 
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"

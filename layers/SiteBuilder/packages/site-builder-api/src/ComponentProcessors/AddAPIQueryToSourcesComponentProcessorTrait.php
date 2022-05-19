@@ -17,7 +17,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
         if (!$sources) {
             return [];
         }
-        $flattened_datafields = $this->getDatasetcomponenttreeSectionFlattenedDataFields($component, $props);
+        $flattened_datafields = $this->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props);
         $apiFields = [];
         $heap = [
             '' => [&$flattened_datafields],
