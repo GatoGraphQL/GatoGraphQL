@@ -864,7 +864,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Propagate down to the components
         // $this->flattenDatasetcomponentTreeComponents(__FUNCTION__, $ret, $component);
         // Exclude the subcomponent components here
-        if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
+        if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
             foreach ($subComponents as $subComponent) {
                 $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
 
@@ -879,7 +879,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // protected function flattenDatasetcomponentTreeComponents($propagate_fn, &$ret, array $component)
     // {
     //     // Exclude the subcomponent components here
-    //     if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
+    //     if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
     //         foreach ($subComponents as $subComponent) {
     //             $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
 
@@ -1097,7 +1097,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getComponentPathHelpers()->getStringifiedModulePropagationCurrentPath($component);
     }
 
-    public function getModulesToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(array $component): array
     {
         return $this->getSubcomponentsByGroup(
             $component,
@@ -1114,7 +1114,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // Exclude the subcomponent components here
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
+        if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-subcomponents must have their data-fields added under entry "conditional-data-fields"
             $conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubcomponents($component);

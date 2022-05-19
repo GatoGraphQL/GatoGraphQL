@@ -113,9 +113,9 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         return $ret;
     }
 
-    public function getModulesToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(array $component): array
     {
-        $ret = parent::getModulesToPropagateDataProperties($component);
+        $ret = parent::getComponentsToPropagateDataProperties($component);
 
         if ($trigger_layout = $this->getTriggerLayoutSubcomponent($component)) {
             // Important: the trigger layout must not be included, since it doesn't apply to the same entity being iterated

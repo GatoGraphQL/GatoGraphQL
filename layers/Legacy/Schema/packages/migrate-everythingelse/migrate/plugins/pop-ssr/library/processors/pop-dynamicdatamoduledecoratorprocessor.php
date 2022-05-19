@@ -136,7 +136,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $processor = $this->getDecoratedcomponentProcessor($component);
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($component, $props);
-        if ($subComponents = $processor->getModulesToPropagateDataProperties($component)) {
+        if ($subComponents = $processor->getComponentsToPropagateDataProperties($component)) {
             foreach ($subComponents as $subComponent) {
                 $subcomponent_processor = $componentprocessor_manager->getProcessor($subComponent);
 

@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         );
     }
 
-    public function getModulesToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(array $component): array
     {
 
         // Important: the MENTION_COMPONENT (eg: PoP_Module_Processor_UserMentionComponentLayouts::COMPONENT_LAYOUTUSER_MENTION_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
             return array();
         }
 
-        return parent::getModulesToPropagateDataProperties($component);
+        return parent::getComponentsToPropagateDataProperties($component);
     }
 
     public function addQuicktags(array $component, array &$props)

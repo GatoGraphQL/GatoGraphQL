@@ -82,7 +82,7 @@ interface ComponentProcessorInterface
     public function getDataAccessCheckpoints(array $component, array &$props): array;
     public function getActionExecutionCheckpoints(array $component, array &$props): array;
     public function shouldExecuteMutation(array $component, array &$props): bool;
-    public function getModulesToPropagateDataProperties(array $component): array;
+    public function getComponentsToPropagateDataProperties(array $component): array;
     public function getModelSupplementaryDBObjectDataComponentTree(array $component, array &$props): array;
     public function getModelSupplementaryDBObjectData(array $component, array &$props): array;
     public function getMutableonrequestSupplementaryDBObjectDataComponentTree(array $component, array &$props): array;
