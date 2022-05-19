@@ -10,16 +10,22 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-class LeafModuleField extends LeafField implements ModuleFieldInterface
+class ConditionalRelationalComponentField extends LeafField implements ComponentFieldInterface
 {
-    use ModuleFieldTrait;
+    use ComponentFieldTrait;
 
     /**
+     * The condition must be satisfied on the implicit field.
+     * When the value of the field is `true`, load the conditional
+     * domain switching fields.
+     *
+     * @param RelationalComponentField[] $conditionalRelationalComponentFields
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
     public function __construct(
         string $name,
+        protected array $conditionalRelationalComponentFields,
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
@@ -35,17 +41,10 @@ class LeafModuleField extends LeafField implements ModuleFieldInterface
     }
 
     /**
-     * Retrieve a new instance with all the properties from the LeafField
+     * @return RelationalComponentField[]
      */
-    public static function fromLeafField(
-        LeafField $leafField,
-    ): self {
-        return new self(
-            $leafField->getName(),
-            $leafField->getAlias(),
-            $leafField->getArguments(),
-            $leafField->getDirectives(),
-            $leafField->getLocation(),
-        );
+    public function getConditionalRelationalComponentFields(): array
+    {
+        return $this->conditionalRelationalComponentFields;
     }
 }

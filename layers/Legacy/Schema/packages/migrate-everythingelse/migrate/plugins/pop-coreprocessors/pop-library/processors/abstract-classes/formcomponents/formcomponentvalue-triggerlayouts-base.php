@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -122,9 +122,9 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     }
 
     /**
-     * @todo Migrate from string to LeafModuleField
+     * @todo Migrate from string to LeafComponentField
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array
     {
@@ -150,13 +150,13 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array
     {
         if ($field = $this->getDbobjectField($component)) {
             return [
-                new RelationalModuleField(
+                new RelationalComponentField(
                     $field,
                     [
                         $this->getTriggerSubcomponent($component),

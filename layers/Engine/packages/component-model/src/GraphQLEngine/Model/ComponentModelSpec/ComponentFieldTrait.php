@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
-trait ModuleFieldTrait
+trait ComponentFieldTrait
 {
     /**
      * Allow doing `array_unique` based on the underlying Field

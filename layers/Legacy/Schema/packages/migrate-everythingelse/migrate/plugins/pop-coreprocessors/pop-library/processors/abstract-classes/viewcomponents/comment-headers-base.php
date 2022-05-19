@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 
 abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -15,13 +15,13 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array
     {
         if ($header = $this->getHeaderSubcomponent($component)) {
             return [
-                new RelationalModuleField(
+                new RelationalComponentField(
                     'customPost',
                     [
                         $header,

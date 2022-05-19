@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 
 class ComponentProcessor_Layouts extends AbstractComponentProcessor
@@ -24,9 +24,9 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     }
 
     /**
-     * @todo Migrate from string to LeafModuleField
+     * @todo Migrate from string to LeafComponentField
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array
     {
@@ -56,7 +56,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array
     {
@@ -64,7 +64,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
 
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_COMMENT:
-                $ret[] = new RelationalModuleField(
+                $ret[] = new RelationalComponentField(
                     'author',
                     [
                         [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {
@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getTargetDynamicallyRenderedSubcomponentSubcomponents(array $component)
     {
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array
     {

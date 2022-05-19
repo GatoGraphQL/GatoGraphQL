@@ -26,9 +26,9 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
     }
 
     /**
-     * @todo Migrate from string to LeafModuleField
+     * @todo Migrate from string to LeafComponentField
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array
     {

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
 
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {
@@ -17,35 +17,35 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     }
 
     /**
-     * @param ConditionalLeafModuleField[] $conditionalLeafModuleFields
-     * @return ConditionalLeafModuleField[]
+     * @param ConditionalLeafComponentField[] $conditionalLeafComponentFields
+     * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalBottomSubcomponents(array $conditionalLeafModuleFields): array
+    public function getConditionalBottomSubcomponents(array $conditionalLeafComponentFields): array
     {
         // Add layout for action "updated_user_membership"
-        $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
+        $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
             'isUserNotification',
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
             ]
         );
-        return $conditionalLeafModuleFields;
+        return $conditionalLeafComponentFields;
     }
 
     /**
-     * @param ConditionalLeafModuleField[] $conditionalLeafModuleFields
-     * @return ConditionalLeafModuleField[]
+     * @param ConditionalLeafComponentField[] $conditionalLeafComponentFields
+     * @return ConditionalLeafComponentField[]
      */
-    public function getQuicklinkgroupBottomSubcomponent(array $conditionalLeafModuleFields): array
+    public function getQuicklinkgroupBottomSubcomponent(array $conditionalLeafComponentFields): array
     {
         // Add layout for action "joined_community"
-        $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
+        $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
             'isUserNotification',
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
             ]
         );
-        return $conditionalLeafModuleFields;
+        return $conditionalLeafComponentFields;
     }
 }
 

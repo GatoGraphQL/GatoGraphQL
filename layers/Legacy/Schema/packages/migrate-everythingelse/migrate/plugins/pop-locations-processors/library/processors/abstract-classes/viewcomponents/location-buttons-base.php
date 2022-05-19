@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     }
 
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array
     {
@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
             if ($components) {
                 return [
-                    new RelationalModuleField(
+                    new RelationalComponentField(
                         'locations',
                         $components
                     ),

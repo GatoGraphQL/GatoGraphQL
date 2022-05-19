@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalModuleField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -46,19 +46,19 @@ interface ComponentProcessorInterface
     public function getComponentMutationResolverBridge(array $component): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void;
     /**
-     * @return LeafModuleField[]
+     * @return LeafComponentField[]
      */
     public function getDataFields(array $component, array &$props): array;
     /**
-     * @return RelationalModuleField[]
+     * @return RelationalComponentField[]
      */
     public function getRelationalSubcomponents(array $component): array;
     /**
-     * @return ConditionalLeafModuleField[]
+     * @return ConditionalLeafComponentField[]
      */
     public function getConditionalOnDataFieldSubcomponents(array $component): array;
     /**
-     * @return ConditionalRelationalModuleField[]
+     * @return ConditionalRelationalComponentField[]
      */
     public function getConditionalOnDataFieldRelationalSubcomponents(array $component): array;
     public function getImmutableDataPropertiesDatasetcomponentTree(array $component, array &$props): array;
