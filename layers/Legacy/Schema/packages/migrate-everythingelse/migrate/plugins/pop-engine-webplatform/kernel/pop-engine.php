@@ -37,9 +37,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         );
     }
 
-    public function getModuleSettings(array $component, $model_props, array &$props)
+    public function getComponentSettings(array $component, $model_props, array &$props)
     {
-        $ret = parent::getModuleSettings($component, $model_props, $props);
+        $ret = parent::getComponentSettings($component, $model_props, $props);
 
         // Validate that the strata includes the required stratum
         if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {

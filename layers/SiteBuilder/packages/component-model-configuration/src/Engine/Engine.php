@@ -62,7 +62,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         if (in_array(DataOutputItems::COMPONENTSETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleSettings($component, $engineState->model_props, $engineState->props)
+                $this->getComponentSettings($component, $engineState->model_props, $engineState->props)
             );
         }
 
@@ -73,7 +73,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         );
     }
 
-    public function getModuleSettings(array $component, $model_props, array &$props)
+    public function getComponentSettings(array $component, $model_props, array &$props)
     {
         $ret = array();
 
