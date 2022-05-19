@@ -34,14 +34,14 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         return null;
     }
 
-    public function getTextfieldModule(array $component, array &$props)
+    public function getTextfieldComponent(array $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
                 return [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY];
         }
 
-        return parent::getTextfieldModule($component, $props);
+        return parent::getTextfieldComponent($component, $props);
     }
 
     public function initModelProps(array $component, array &$props): void
