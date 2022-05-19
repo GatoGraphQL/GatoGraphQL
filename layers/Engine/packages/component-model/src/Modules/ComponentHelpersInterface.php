@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Modules;
 interface ComponentHelpersInterface
 {
     public function getComponentFullName(array $component): string;
-    public function getModuleFromFullName(string $componentFullName): ?array;
+    public function getComponentFromFullName(string $componentFullName): ?array;
     public function getComponentOutputName(array $component): string;
-    public function getModuleFromOutputName(string $componentOutputName): ?array;
+    public function getComponentFromOutputName(string $componentOutputName): ?array;
 }

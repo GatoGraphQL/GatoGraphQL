@@ -58,7 +58,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     public function recastComponentPath(string $componentPath_as_string): array
     {
         return array_map(
-            [$this->getComponentHelpers(), 'getModuleFromOutputName'],
+            [$this->getComponentHelpers(), 'getComponentFromOutputName'],
             explode(
                 ComponentPath::COMPONENT_SEPARATOR,
                 $componentPath_as_string

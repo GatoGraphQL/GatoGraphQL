@@ -87,7 +87,7 @@ class AppStateProvider extends AbstractAppStateProvider
         if ($state['componentFilter'] === $this->headComponent->getName()) {
             if ($enablePassingStateViaRequest) {
                 if ($headComponent = Request::getHeadModule()) {
-                    $state['headComponent'] = $this->getComponentHelpers()->getModuleFromOutputName($headComponent);
+                    $state['headComponent'] = $this->getComponentHelpers()->getComponentFromOutputName($headComponent);
                 }
             }
         }

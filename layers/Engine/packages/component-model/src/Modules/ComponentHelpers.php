@@ -15,7 +15,7 @@ class ComponentHelpers implements ComponentHelpersInterface
     {
         return ProcessorItemUtils::getItemFullName($component);
     }
-    public function getModuleFromFullName(string $componentFullName): ?array
+    public function getComponentFromFullName(string $componentFullName): ?array
     {
         return ProcessorItemUtils::getItemFromFullName($componentFullName);
     }
@@ -23,7 +23,7 @@ class ComponentHelpers implements ComponentHelpersInterface
     {
         return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::COMPONENTS);
     }
-    public function getModuleFromOutputName(string $componentOutputName): ?array
+    public function getComponentFromOutputName(string $componentOutputName): ?array
     {
         return ProcessorItemUtils::getItemFromOutputName($componentOutputName, DefinitionGroups::COMPONENTS);
     }
