@@ -8,7 +8,7 @@ use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\Engine\Configuration\Request;
-use PoP\Engine\ComponentFilters\HeadModule;
+use PoP\Engine\ComponentFilters\HeadComponent;
 use PoP\Engine\ComponentFilters\MainContentModule;
 use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 use PoP\Root\App;
@@ -18,20 +18,20 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?HeadModule $headComponent = null;
+    private ?HeadComponent $headComponent = null;
     private ?ComponentPaths $componentPaths = null;
     private ?MainContentModule $mainContentComponent = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
 
-    final public function setHeadModule(HeadModule $headComponent): void
+    final public function setHeadComponent(HeadComponent $headComponent): void
     {
         $this->headComponent = $headComponent;
     }
-    final protected function getHeadModule(): HeadModule
+    final protected function getHeadComponent(): HeadComponent
     {
-        return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
+        return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
     }    
     final public function setComponentPaths(ComponentPaths $componentPaths): void
     {
@@ -86,7 +86,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
         if ($state['componentFilter'] === $this->headComponent->getName()) {
             if ($enablePassingStateViaRequest) {
-                if ($headComponent = Request::getHeadModule()) {
+                if ($headComponent = Request::getHeadComponent()) {
                     $state['headComponent'] = $this->getComponentHelpers()->getComponentFromOutputName($headComponent);
                 }
             }

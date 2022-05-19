@@ -6,22 +6,22 @@ namespace PoP\Engine\Hooks\ComponentFilters;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Modules\ComponentHelpersInterface;
-use PoP\Engine\ComponentFilters\HeadModule;
+use PoP\Engine\ComponentFilters\HeadComponent;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
-class HeadModuleHookSet extends AbstractHookSet
+class HeadComponentHookSet extends AbstractHookSet
 {
-    private ?HeadModule $headComponent = null;
+    private ?HeadComponent $headComponent = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
     
-    final public function setHeadModule(HeadModule $headComponent): void
+    final public function setHeadComponent(HeadComponent $headComponent): void
     {
         $this->headComponent = $headComponent;
     }
-    final protected function getHeadModule(): HeadModule
+    final protected function getHeadComponent(): HeadComponent
     {
-        return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
+        return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
