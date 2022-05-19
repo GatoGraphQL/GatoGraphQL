@@ -3428,7 +3428,7 @@ window.pop.Manager = {
 			that.generateUniqueId(domain);
 		}
 		
-		var html = that.getModuleHtml(domain, pageSection, target, componentName, options);
+		var html = that.getComponentHTML(domain, pageSection, target, componentName, options);
 		var targetContainer = that.getMergeTarget(target, componentName, options);
 
 		// Default operation: REPLACE
@@ -3629,7 +3629,7 @@ window.pop.Manager = {
 		return targetConfiguration;
 	},
 
-	getModuleHtml : function(domain, pageSection, target, componentName, options, dbKey, objectID) {
+	getComponentHTML : function(domain, pageSection, target, componentName, options, dbKey, objectID) {
 
 		var that = this;
 		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, componentName);

@@ -186,7 +186,7 @@ window.pop.FullCalendar = {
 			html = '';
 			pop.JSRuntimeManager.setBlockURL(domain, block);
 			$.each(layouts, function(index, layout) {
-				html += pop.Manager.getModuleHtml(domain, pageSection, block, layout, options, dbKey, eventId);
+				html += pop.Manager.getComponentHTML(domain, pageSection, block, layout, options, dbKey, eventId);
 			});
 
 			// Save the html for next time

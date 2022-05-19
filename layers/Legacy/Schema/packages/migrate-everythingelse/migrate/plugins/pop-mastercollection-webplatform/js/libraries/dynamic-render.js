@@ -14,7 +14,7 @@ window.pop.DynamicRender = {
 		options = $.extend(options, {extendContext: extendContext});
 		
 		pop.JSRuntimeManager.setBlockURL(domain, block);
-		var html = pop.Manager.getModuleHtml(domain, pageSection, block, moduleName, options);
+		var html = pop.Manager.getComponentHTML(domain, pageSection, block, moduleName, options);
 		var merged = pop.Manager.mergeHtml(html, targetContainer, options['operation']);
 		pop.Manager.runJSMethods(domain, pageSection, block, moduleName, 'last');
 
