@@ -9,7 +9,7 @@ use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ComponentFilters\HeadComponent;
-use PoP\Engine\ComponentFilters\MainContentModule;
+use PoP\Engine\ComponentFilters\MainContentComponent;
 use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
@@ -20,7 +20,7 @@ class AppStateProvider extends AbstractAppStateProvider
 {
     private ?HeadComponent $headComponent = null;
     private ?ComponentPaths $componentPaths = null;
-    private ?MainContentModule $mainContentComponent = null;
+    private ?MainContentComponent $mainContentComponent = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
@@ -41,13 +41,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
-    final public function setMainContentModule(MainContentModule $mainContentComponent): void
+    final public function setMainContentComponent(MainContentComponent $mainContentComponent): void
     {
         $this->mainContentComponent = $mainContentComponent;
     }
-    final protected function getMainContentModule(): MainContentModule
+    final protected function getMainContentComponent(): MainContentComponent
     {
-        return $this->mainContentComponent ??= $this->instanceManager->getInstance(MainContentModule::class);
+        return $this->mainContentComponent ??= $this->instanceManager->getInstance(MainContentComponent::class);
     }
     final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
     {

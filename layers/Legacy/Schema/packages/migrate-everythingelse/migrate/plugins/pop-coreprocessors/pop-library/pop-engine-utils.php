@@ -7,7 +7,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManager;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
-use PoP\Engine\ComponentFilters\MainContentModule;
+use PoP\Engine\ComponentFilters\MainContentComponent;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPCore_ModuleManager_Utils
@@ -19,8 +19,8 @@ class PoPCore_ModuleManager_Utils
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DBItemListDataStructureFormatter */
         $dbItemListDataStructureFormatter = $instanceManager->getInstance(DBItemListDataStructureFormatter::class);
-        /** @var MainContentModule */
-        $mainContentComponent = $instanceManager->getInstance(MainContentModule::class);
+        /** @var MainContentComponent */
+        $mainContentComponent = $instanceManager->getInstance(MainContentComponent::class);
         $args = [
             Params::VERSION => ApplicationInfoFacade::getInstance()->getVersion(),
             Params::OUTPUT => Outputs::JSON,
