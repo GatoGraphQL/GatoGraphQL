@@ -378,7 +378,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $ret = array_merge(
                 $ret,
                 array_map(
-                    [$this->getComponentHelpers(), 'getComponentFullName'],
+                    $this->getComponentHelpers()->getComponentFullName(...),
                     $component_or_componentPath
                 )
             );
@@ -393,7 +393,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if ($starting_from_componentPath) {
             // Convert it to string
             $startingFromComponentPathFullNames = array_map(
-                [$this->getComponentHelpers(), 'getComponentFullName'],
+                $this->getComponentHelpers()->getComponentFullName(...),
                 $starting_from_componentPath
             );
 

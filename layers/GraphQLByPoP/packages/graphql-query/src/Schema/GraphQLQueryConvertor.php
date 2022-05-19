@@ -397,7 +397,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $directive->getNestedDirectives()
             );
             $nestedDirectives = array_map(
-                [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
+                $this->getFieldQueryInterpreter()->convertDirectiveToFieldDirective(...),
                 $nestedDirectives
             );
             $directiveComposableDirectives = QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING . implode(

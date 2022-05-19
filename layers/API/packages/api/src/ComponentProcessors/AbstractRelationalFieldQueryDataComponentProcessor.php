@@ -254,7 +254,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $allFieldFragmentModelsFromFieldsOrFragmentBonds
             );
             $nestedFieldIDs = array_map(
-                [$this, 'getFieldUniqueID'],
+                $this->getFieldUniqueID(...),
                 $nestedFields
             );
             $nestedModule = [

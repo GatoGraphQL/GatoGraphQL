@@ -858,7 +858,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                      */
                     QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ',
                     array_map(
-                        [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
+                        $this->getFieldQueryInterpreter()->convertDirectiveToFieldDirective(...),
                         $directives
                     )
                 );
