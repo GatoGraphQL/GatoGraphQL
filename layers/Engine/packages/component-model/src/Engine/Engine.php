@@ -544,7 +544,7 @@ class Engine implements EngineInterface
         if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleDatasetSettings($component, $engineState->model_props, $engineState->props)
+                $this->getComponentDatasetSettings($component, $engineState->model_props, $engineState->props)
             );
         }
 
@@ -559,7 +559,7 @@ class Engine implements EngineInterface
         ) {
             $data = array_merge(
                 $data,
-                $this->getModuleData($component, $engineState->model_props, $engineState->props)
+                $this->getComponentData($component, $engineState->model_props, $engineState->props)
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
@@ -576,7 +576,7 @@ class Engine implements EngineInterface
             in_array(DataOutputItems::META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
-            // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
+            // IMPORTANT: Call these methods after doing ->getComponentData, since the background_urls and other info is calculated there and printed here
             if ($requestmeta = $this->getRequestMeta()) {
                 $data['requestmeta'] = $has_extra_routes ? array($current_uri => $requestmeta) : $requestmeta;
             }
@@ -627,7 +627,7 @@ class Engine implements EngineInterface
             $engineState = App::getEngineState();
 
             // Also add the request, session and site meta.
-            // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
+            // IMPORTANT: Call these methods after doing ->getComponentData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
             if ($this->getExtraRoutes()) {
                 $engineState->data['requestmeta'][Response::MULTIPLE_ROUTES] = true;
@@ -644,7 +644,7 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getModuleDatasetSettings(array $component, $model_props, array &$props): array
+    public function getComponentDatasetSettings(array $component, $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */
@@ -1039,7 +1039,7 @@ class Engine implements EngineInterface
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1068,7 +1068,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            '\PoP\ComponentModel\Engine:getModuleData:start',
+            '\PoP\ComponentModel\Engine:getComponentData:start',
             $root_component,
             array(&$root_model_props),
             array(&$root_props),
@@ -1323,7 +1323,7 @@ class Engine implements EngineInterface
             }
 
             // Integrate the feedback into $componentdata
-            $this->processAndAddModuleData($module_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+            $this->processAndAddComponentData($module_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this component's data results
             if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($module_path, array($component)))] ?? null) {
@@ -1351,7 +1351,7 @@ class Engine implements EngineInterface
                     } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                         $referencer_component_props = &$referencer_props;
                     }
-                    $this->processAndAddModuleData($referencer_componentPath, $referencer_component, $referencer_component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+                    $this->processAndAddComponentData($referencer_componentPath, $referencer_component, $referencer_component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
             }
 
@@ -1363,7 +1363,7 @@ class Engine implements EngineInterface
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
-                '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
+                '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
                 $component,
                 array(&$component_props),
                 array(&$data_properties),
@@ -1462,7 +1462,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            '\PoP\ComponentModel\Engine:getModuleData:end',
+            '\PoP\ComponentModel\Engine:getComponentData:end',
             $root_component,
             array(&$root_model_props),
             array(&$root_props),
@@ -2438,7 +2438,7 @@ class Engine implements EngineInterface
         }
     }
 
-    protected function processAndAddModuleData(
+    protected function processAndAddComponentData(
         array $module_path,
         array $component,
         array &$props,

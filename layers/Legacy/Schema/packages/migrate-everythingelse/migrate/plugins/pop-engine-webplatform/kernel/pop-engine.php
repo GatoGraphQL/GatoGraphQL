@@ -124,9 +124,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
     {
-        $ret = parent::getModuleData($root_component, $root_model_props, $root_props);
+        $ret = parent::getComponentData($root_component, $root_model_props, $root_props);
 
         // Only add the extra information if the entry-component is of the right object class
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
@@ -169,7 +169,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         return $ret;
     }
 
-    protected function processAndAddModuleData(
+    protected function processAndAddComponentData(
         array $component_path,
         array $component,
         array &$props,
@@ -179,7 +179,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $executed,
         $objectIDs
     ): void {
-        parent::processAndAddModuleData($component_path, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
+        parent::processAndAddComponentData($component_path, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         // Validate that the strata includes the required stratum
         if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {

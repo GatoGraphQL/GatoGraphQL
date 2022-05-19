@@ -10,19 +10,19 @@ class PoP_UserState_EngineHooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:start',
+            '\PoP\ComponentModel\Engine:getComponentData:start',
             $this->start(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
-            $this->calculateDataloadingModuleData(...),
+            '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+            $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:end',
+            '\PoP\ComponentModel\Engine:getComponentData:end',
             $this->end(...),
             10,
             5
@@ -35,7 +35,7 @@ class PoP_UserState_EngineHooks
         $helperCalculations['has-userstatedata-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
+    public function calculateDataloadingComponentData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
     {
         $data_properties = &$data_properties_in_array[0];
 

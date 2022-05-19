@@ -41,19 +41,19 @@ class LazyLoadHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:start',
+            '\PoP\ComponentModel\Engine:getComponentData:start',
             $this->start(...),
             10,
             4
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:dataloading-component',
-            $this->calculateDataloadingModuleData(...),
+            '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+            $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getModuleData:end',
+            '\PoP\ComponentModel\Engine:getComponentData:end',
             $this->end(...),
             10,
             5
@@ -66,7 +66,7 @@ class LazyLoadHookSet extends AbstractHookSet
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
+    public function calculateDataloadingComponentData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 

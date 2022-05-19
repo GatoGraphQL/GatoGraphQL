@@ -62,7 +62,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $request['hist_time'] = ($lastaccess && $lastaccess > $yesterday) ? $lastaccess : $yesterday;
 
                 // Regenerate the data
-                $data = $engine->getModuleData($component, $processor, $engineState->props, $formatter, $request);
+                $data = $engine->getComponentData($component, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
                 // Simply check if the dbobjectids for the user is empty, for the main block

@@ -18,11 +18,11 @@ interface EngineInterface
     public function calculateOutputData(): void;
     public function getModelPropsModuletree(array $component): array;
     public function addRequestPropsModuletree(array $component, array $props): array;
-    public function getModuleDatasetSettings(array $component, $model_props, array &$props): array;
+    public function getComponentDatasetSettings(array $component, $model_props, array &$props): array;
     public function getRequestMeta(): array;
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution;
-    public function getModuleData(array $root_component, array $root_model_props, array $root_props): array;
+    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array;
     public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }
