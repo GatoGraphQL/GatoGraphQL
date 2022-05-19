@@ -991,7 +991,7 @@ class Engine implements EngineInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function assignValueForModule(
+    protected function assignValueForComponent(
         array &$array,
         array $module_path,
         array $component,
@@ -1310,14 +1310,14 @@ class Engine implements EngineInterface
             // Integrate the dbobjectids into $datasetcomponentdata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous component when iterating down
             if ($datasetcomponentdata !== null) {
-                $this->assignValueForModule($datasetcomponentdata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
+                $this->assignValueForComponent($datasetcomponentdata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
                 if (!is_null($datasetcomponentmeta)) {
                     if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
-                        $this->assignValueForModule($datasetcomponentmeta, $module_path, $component, DataLoading::META, $dataset_meta);
+                        $this->assignValueForComponent($datasetcomponentmeta, $module_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
             }
