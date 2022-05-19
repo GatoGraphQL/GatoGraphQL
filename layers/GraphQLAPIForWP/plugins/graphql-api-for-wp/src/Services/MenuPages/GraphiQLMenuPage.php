@@ -155,10 +155,10 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             #
 
             query {
-              posts(limit:3) {
+              posts(pagination: { limit: 3 }) {
                 id
                 title
-                date(format:"d/m/Y")
+                date
                 url
                 author {
                   id

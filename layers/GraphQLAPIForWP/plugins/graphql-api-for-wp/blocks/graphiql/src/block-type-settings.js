@@ -90,7 +90,7 @@ export const blockTypeSettings = {
 	 */
 	example: {
 		attributes: {
-			query: 'query {\n  posts(limit:3) {\n    id\n    title\n  }\n}',
+			query: 'query {\n  posts(pagination: { limit: 3 }) {\n    id\n    title\n  }\n}',
 		},
 	},
 
