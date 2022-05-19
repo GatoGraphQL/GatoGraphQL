@@ -220,7 +220,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     public function getButtonhtml($title, $url)
     {
         $template = '';
-        foreach ($this->getModuleFolders() as $template_folder) {
+        foreach ($this->getTemplateFolders() as $template_folder) {
             if (file_exists($template_folder . POP_EMAILTEMPLATE_BUTTON)) {
                 $template = $template_folder . POP_EMAILTEMPLATE_BUTTON;
                 break;
