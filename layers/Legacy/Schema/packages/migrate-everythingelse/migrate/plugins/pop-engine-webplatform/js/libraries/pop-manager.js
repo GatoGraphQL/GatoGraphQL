@@ -3614,7 +3614,7 @@ window.pop.Manager = {
 	getTargetConfiguration : function(domain, pageSection, target, componentName) {
 	
 		var that = this;
-		var componentPath = that.getModulePath(domain, pageSection, target, componentName);
+		var componentPath = that.getComponentPath(domain, pageSection, target, componentName);
 		var targetConfiguration = that.getPageSectionConfiguration(domain, pageSection);
 		
 		// Go down all levels of the configuration, until finding the level for the component-cb
@@ -3638,7 +3638,7 @@ window.pop.Manager = {
 		var targetContext = targetConfiguration;
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
-		var componentPath = that.getModulePath(domain, pageSection, target, componentName);
+		var componentPath = that.getComponentPath(domain, pageSection, target, componentName);
 		if (componentPath.length) {
 			var block = that.getBlock(target);
 			that.initContextSettings(domain, pageSection, block, targetContext);
@@ -4499,7 +4499,7 @@ window.pop.Manager = {
 		return allowed;
 	},
 
-	getModulePath : function(domain, pageSection, target, componentName) {
+	getComponentPath : function(domain, pageSection, target, componentName) {
 	
 		var that = this;
 		

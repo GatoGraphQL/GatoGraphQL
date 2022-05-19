@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
+use PoP\ComponentModel\Facades\ComponentPath\ComponentPathManagerFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ComponentProcessors\DataloadingModuleInterface;
@@ -209,7 +209,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {
-                $component_path_manager = ModulePathManagerFacade::getInstance();
+                $component_path_manager = ComponentPathManagerFacade::getInstance();
                 $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
                 $component_propagation_current_path[] = $inner;

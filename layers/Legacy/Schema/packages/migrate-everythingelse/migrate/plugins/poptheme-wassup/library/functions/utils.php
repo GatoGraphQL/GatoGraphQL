@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\ComponentFilters\ModulePaths;
+use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPThemeWassup_Utils
@@ -11,8 +11,8 @@ class PoPThemeWassup_Utils
     {
         if (is_null(self::$checkLoadingPagesectionModule)) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var ModulePaths */
-            $componentPaths = $instanceManager->getInstance(ModulePaths::class);
+            /** @var ComponentPaths */
+            $componentPaths = $instanceManager->getInstance(ComponentPaths::class);
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
             self::$checkLoadingPagesectionModule = \PoP\Root\App::applyFilters(

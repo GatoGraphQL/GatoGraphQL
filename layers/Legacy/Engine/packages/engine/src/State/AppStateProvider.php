@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\State;
 
-use PoP\ComponentModel\ComponentFilters\ModulePaths;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\ComponentFilters\ComponentPaths;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ComponentFilters\HeadModule;
@@ -19,10 +19,10 @@ use PoP\Root\State\AbstractAppStateProvider;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?HeadModule $headComponent = null;
-    private ?ModulePaths $componentPaths = null;
+    private ?ComponentPaths $componentPaths = null;
     private ?MainContentModule $mainContentComponent = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
-    private ?ModulePathHelpersInterface $componentPathHelpers = null;
+    private ?ComponentPathHelpersInterface $componentPathHelpers = null;
     private ?ModuleHelpersInterface $componentHelpers = null;
 
     final public function setHeadModule(HeadModule $headComponent): void
@@ -33,13 +33,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->headComponent ??= $this->instanceManager->getInstance(HeadModule::class);
     }    
-    final public function setModulePaths(ModulePaths $componentPaths): void
+    final public function setComponentPaths(ComponentPaths $componentPaths): void
     {
         $this->componentPaths = $componentPaths;
     }
-    final protected function getModulePaths(): ModulePaths
+    final protected function getComponentPaths(): ComponentPaths
     {
-        return $this->componentPaths ??= $this->instanceManager->getInstance(ModulePaths::class);
+        return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
     final public function setMainContentModule(MainContentModule $mainContentComponent): void
     {
@@ -57,13 +57,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
         $this->componentPathHelpers = $componentPathHelpers;
     }
-    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
     final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
     {
@@ -93,7 +93,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
         if ($state['componentFilter'] === $this->componentPaths->getName()) {
             if ($enablePassingStateViaRequest) {
-                $state['componentPaths'] = $this->getModulePathHelpers()->getModulePaths();
+                $state['componentPaths'] = $this->getComponentPathHelpers()->getComponentPaths();
             }
         }
         // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state

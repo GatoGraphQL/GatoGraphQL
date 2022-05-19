@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModulePath;
+namespace PoP\ComponentModel\ComponentPath;
 
-class ModulePathManager implements ModulePathManagerInterface
+class ComponentPathManager implements ComponentPathManagerInterface
 {
     /**
      * @var array[]|null

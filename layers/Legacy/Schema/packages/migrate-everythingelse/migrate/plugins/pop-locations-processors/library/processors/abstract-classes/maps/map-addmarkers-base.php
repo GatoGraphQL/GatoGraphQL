@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
         return array();
     }
 
-    // function getModulePath(array $component, array &$props) {
+    // function getComponentPath(array $component, array &$props) {
     
     //     return $component;
     // }

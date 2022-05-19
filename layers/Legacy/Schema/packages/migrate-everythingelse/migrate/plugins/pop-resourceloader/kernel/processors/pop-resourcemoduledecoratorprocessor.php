@@ -101,7 +101,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     function isDynamicModule(array $component, array &$props) {
 
         // // By default: does it have a path?
-        // return $this->getDecoratedcomponentProcessor($component)->getModulePath($component, $props);
+        // return $this->getDecoratedcomponentProcessor($component)->getComponentPath($component, $props);
         return $this->getDecoratedcomponentProcessor($component)->getProp($component, $props, 'dynamic-component');
     }
 

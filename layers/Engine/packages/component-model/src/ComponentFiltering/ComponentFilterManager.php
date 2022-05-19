@@ -6,8 +6,8 @@ namespace PoP\ComponentModel\ComponentFiltering;
 
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -43,24 +43,24 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected bool $neverExclude = false;
 
-    private ?ModulePathManagerInterface $componentPathManager = null;
-    private ?ModulePathHelpersInterface $componentPathHelpers = null;
+    private ?ComponentPathManagerInterface $componentPathManager = null;
+    private ?ComponentPathHelpersInterface $componentPathHelpers = null;
 
-    final public function setModulePathManager(ModulePathManagerInterface $componentPathManager): void
+    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
     {
         $this->componentPathManager = $componentPathManager;
     }
-    final protected function getModulePathManager(): ModulePathManagerInterface
+    final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        return $this->componentPathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
         $this->componentPathHelpers = $componentPathHelpers;
     }
-    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
 
     public function addComponentFilter(ComponentFilterInterface $componentFilter): void
@@ -166,10 +166,10 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
                 // Set the current component as the one which is not excluded.
-                $component_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
+                $component_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
 
-                $this->not_excluded_ancestor_component = $this->getModulePathHelpers()->stringifyModulePath($component_propagation_current_path);
+                $this->not_excluded_ancestor_component = $this->getComponentPathHelpers()->stringifyComponentPath($component_propagation_current_path);
 
                 // Add it to the list of not-excluded components
                 if (!in_array($this->not_excluded_ancestor_component, $this->not_excluded_component_sets_as_string)) {
@@ -182,7 +182,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         }
 
         // Add the component to the path
-        $this->getModulePathManager()->prepareForPropagation($component, $props);
+        $this->getComponentPathManager()->prepareForPropagation($component, $props);
     }
     public function restoreFromPropagation(array $component, array &$props): void
     {
@@ -191,15 +191,15 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         }
 
         // Remove the component from the path
-        $this->getModulePathManager()->restoreFromPropagation($component, $props);
+        $this->getComponentPathManager()->restoreFromPropagation($component, $props);
 
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
-                $component_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
+                $component_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
 
                 // If the current component was set as the one not excluded, then reset it
-                if ($this->not_excluded_ancestor_component == $this->getModulePathHelpers()->stringifyModulePath($component_propagation_current_path)) {
+                if ($this->not_excluded_ancestor_component == $this->getComponentPathHelpers()->stringifyComponentPath($component_propagation_current_path)) {
                     $this->not_excluded_ancestor_component = null;
                 }
             }

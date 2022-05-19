@@ -320,7 +320,7 @@ class PoP_ServerSideManager
 
     public function getTargetConfiguration($domain, $pageSection, $target, $componentName)
     {
-        $componentPath = $this->getModulePath($domain, $pageSection, $target, $componentName);
+        $componentPath = $this->getComponentPath($domain, $pageSection, $target, $componentName);
         $targetConfiguration = $this->getPageSectionConfiguration($domain, $pageSection);
 
         // Go down all levels of the configuration, until finding the level for the component-cb
@@ -512,7 +512,7 @@ class PoP_ServerSideManager
         return $el;
     }
 
-    public function getModulePath($domain, $pageSection, $target, $componentName)
+    public function getComponentPath($domain, $pageSection, $target, $componentName)
     {
         $componentPaths = $this->getStatelessSettings($domain, $pageSection, $target, 'components-paths');
         return $componentPaths[$componentName];

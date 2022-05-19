@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFilters;
 
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 
-class ModulePaths extends AbstractComponentFilter
+class ComponentPaths extends AbstractComponentFilter
 {
-    private ?ModulePathHelpersInterface $componentPathHelpers = null;
+    private ?ComponentPathHelpersInterface $componentPathHelpers = null;
 
-    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
         $this->componentPathHelpers = $componentPathHelpers;
     }
-    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
 
     /**
@@ -33,20 +33,20 @@ class ModulePaths extends AbstractComponentFilter
      */
     protected array $backlog_unsettled_paths = [];
 
-    private ?ModulePathManagerInterface $componentPathManager = null;
+    private ?ComponentPathManagerInterface $componentPathManager = null;
 
-    final public function setModulePathManager(ModulePathManagerInterface $componentPathManager): void
+    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
     {
         $this->componentPathManager = $componentPathManager;
     }
-    final protected function getModulePathManager(): ModulePathManagerInterface
+    final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        return $this->componentPathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
 
     protected function init(): void
     {
-        $this->paths = $this->getModulePathHelpers()->getModulePaths();
+        $this->paths = $this->getComponentPathHelpers()->getComponentPaths();
         $this->propagation_unsettled_paths = $this->paths;
         $this->backlog_unsettled_paths = array();
     }
@@ -161,7 +161,7 @@ class ModulePaths extends AbstractComponentFilter
     }
     protected function getBacklogEntry(): string
     {
-        $entry = json_encode($this->getModulePathManager()->getPropagationCurrentPath());
+        $entry = json_encode($this->getComponentPathManager()->getPropagationCurrentPath());
         if ($entry === false) {
             return '';
         }

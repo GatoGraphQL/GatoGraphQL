@@ -12,7 +12,7 @@ use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Root\App;
 
-trait ModulePathProcessorTrait
+trait ComponentPathProcessorTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
     abstract protected function getComponentFilterManager(): ComponentFilterManagerInterface;

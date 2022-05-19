@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModulePath;
+namespace PoP\ComponentModel\ComponentPath;
 
-interface ModulePathManagerInterface
+interface ComponentPathManagerInterface
 {
     public function getPropagationCurrentPath(): ?array;
     public function setPropagationCurrentPath(?array $propagation_current_path = null): void;

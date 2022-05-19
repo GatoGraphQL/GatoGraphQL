@@ -15,8 +15,8 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\ComponentFilters\ModulePaths;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\ComponentFilters\ComponentPaths;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -30,7 +30,7 @@ use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 {
-    use ModulePathProcessorTrait;
+    use ComponentPathProcessorTrait;
     use BasicServiceTrait;
 
     public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
@@ -43,13 +43,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     protected const COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS = 'conditional-on-data-field-relational-subcomponents';
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ModulePathHelpersInterface $componentPathHelpers = null;
+    private ?ComponentPathHelpersInterface $componentPathHelpers = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
-    private ?ModulePaths $componentPaths = null;
+    private ?ComponentPaths $componentPaths = null;
     private ?ModuleHelpersInterface $componentHelpers = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
@@ -60,13 +60,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $componentPathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
         $this->componentPathHelpers = $componentPathHelpers;
     }
-    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
     {
@@ -108,13 +108,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
-    final public function setModulePaths(ModulePaths $componentPaths): void
+    final public function setComponentPaths(ComponentPaths $componentPaths): void
     {
         $this->componentPaths = $componentPaths;
     }
-    final protected function getModulePaths(): ModulePaths
+    final protected function getComponentPaths(): ComponentPaths
     {
-        return $this->componentPaths ??= $this->instanceManager->getInstance(ModulePaths::class);
+        return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
     final public function setModuleHelpers(ModuleHelpersInterface $componentHelpers): void
     {
@@ -335,7 +335,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return (string)key($props);
     }
 
-    private function isModulePath(array $component_or_componentPath): bool
+    private function isComponentPath(array $component_or_componentPath): bool
     {
         // $component_or_componentPath can be either a single component (the current one, or its descendant), or a targetted path of components
         // Because a component is itself represented as an array, to know which is the case, we must ask if it is:
@@ -347,7 +347,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     private function isDescendantModule(array $component_or_componentPath, array &$props): bool
     {
         // If it is not an array of arrays, then this array is directly the component, or the descendant component on which to set the property
-        if (!$this->isModulePath($component_or_componentPath)) {
+        if (!$this->isComponentPath($component_or_componentPath)) {
             // From the root of the $props we obtain the current component
             $componentFullName = $this->getPathHeadModule($props);
 
@@ -374,7 +374,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array($componentFullName);
 
         // If it is an array, then we're passing the path to find the component to which to add the att
-        if ($this->isModulePath($component_or_componentPath)) {
+        if ($this->isComponentPath($component_or_componentPath)) {
             $ret = array_merge(
                 $ret,
                 array_map(
@@ -1094,7 +1094,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function shouldExecuteMutation(array $component, array &$props): bool
     {
         // By default, execute only if the component is targeted for execution and doing POST
-        return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($component);
+        return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getComponentPathHelpers()->getStringifiedModulePropagationCurrentPath($component);
     }
 
     public function getModulesToPropagateDataProperties(array $component): array

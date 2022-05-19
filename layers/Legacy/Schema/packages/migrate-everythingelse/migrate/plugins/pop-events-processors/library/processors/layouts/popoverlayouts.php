@@ -43,7 +43,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         parent::initModelProps($component, $props);
     }
 
-    // function getModulePath(array $component, array &$props) {
+    // function getComponentPath(array $component, array &$props) {
 
     //     switch ($component[1]) {
 
@@ -52,7 +52,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
     //             return $component;
     //     }
 
-    //     return parent::getModulePath($component, $props);
+    //     return parent::getComponentPath($component, $props);
     // }
 }
 

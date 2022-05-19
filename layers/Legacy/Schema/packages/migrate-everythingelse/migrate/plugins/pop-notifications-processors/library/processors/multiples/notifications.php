@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
+use PoP\ComponentModel\Facades\ComponentPath\ComponentPathManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_MultiplesBase
@@ -52,7 +52,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
-                $component_path_manager = ModulePathManagerFacade::getInstance();
+                $component_path_manager = ComponentPathManagerFacade::getInstance();
                 $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
                 $component_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS];

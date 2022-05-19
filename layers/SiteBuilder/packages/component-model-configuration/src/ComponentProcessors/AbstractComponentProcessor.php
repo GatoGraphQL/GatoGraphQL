@@ -169,10 +169,10 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
         // Because a component can interact with itself by adding ?componentPaths=...,
         // then, by default, we simply set the dataload source to point to itself!
-        $stringified_component_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($component);
+        $stringified_component_propagation_current_path = $this->getComponentPathHelpers()->getStringifiedModulePropagationCurrentPath($component);
         $ret = GeneralUtils::addQueryArgs(
             [
-                Params::COMPONENTFILTER => $this->getModulePaths()->getName(),
+                Params::COMPONENTFILTER => $this->getComponentPaths()->getName(),
                 Params::COMPONENTPATHS . '[]' => $stringified_component_propagation_current_path,
             ],
             $this->getRequestHelperService()->getCurrentURL()
@@ -189,7 +189,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         if ($extra_component_paths = $this->getProp($component, $props, 'dataload-source-add-componentPaths')) {
             foreach ($extra_component_paths as $componentPath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    Params::COMPONENTPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($componentPath),
+                    Params::COMPONENTPATHS . '[]' => $this->getComponentPathHelpers()->stringifyComponentPath($componentPath),
                 ], $ret);
             }
         }

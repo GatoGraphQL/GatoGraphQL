@@ -39,8 +39,8 @@ use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
@@ -68,8 +68,8 @@ class Engine implements EngineInterface
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    private ?ModulePathHelpersInterface $modulePathHelpers = null;
-    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ComponentPathHelpersInterface $modulePathHelpers = null;
+    private ?ComponentPathManagerInterface $modulePathManager = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $moduleFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
@@ -117,21 +117,21 @@ class Engine implements EngineInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
-    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setComponentPathHelpers(ComponentPathHelpersInterface $modulePathHelpers): void
     {
         $this->modulePathHelpers = $modulePathHelpers;
     }
-    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
-    final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    final public function setComponentPathManager(ComponentPathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
     }
-    final protected function getModulePathManager(): ModulePathManagerInterface
+    final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -913,7 +913,7 @@ class Engine implements EngineInterface
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
             // If the current component loads data, then add its path to the list
             if ($interreferenced_componentPath = $processor->getDataFeedbackInterreferencedComponentPath($component, $props)) {
-                $referenced_componentPath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_componentPath);
+                $referenced_componentPath = $this->getComponentPathHelpers()->stringifyComponentPath($interreferenced_componentPath);
                 $paths[$referenced_componentPath] = $paths[$referenced_componentPath] ?? [];
                 $paths[$referenced_componentPath][] = array_merge(
                     $module_path,
@@ -1032,7 +1032,7 @@ class Engine implements EngineInterface
         return null;
     }
 
-    protected function getModulePathKey(array $module_path, array $component): string
+    protected function getComponentPathKey(array $module_path, array $component): string
     {
         $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
         return $componentFullName . '-' . implode('.', $module_path);
@@ -1131,7 +1131,7 @@ class Engine implements EngineInterface
             $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
-            $this->getModulePathManager()->setPropagationCurrentPath($module_path);
+            $this->getComponentPathManager()->setPropagationCurrentPath($module_path);
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
@@ -1188,7 +1188,7 @@ class Engine implements EngineInterface
             $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
             // The component path key is used for storing temporary results for later retrieval
-            $module_path_key = $this->getModulePathKey($module_path, $component);
+            $module_path_key = $this->getComponentPathKey($module_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
             $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
@@ -1326,7 +1326,7 @@ class Engine implements EngineInterface
             $this->processAndAddModuleData($module_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this component's data results
-            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($component)))] ?? null) {
+            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($module_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
 
@@ -1378,7 +1378,7 @@ class Engine implements EngineInterface
 
         // Reset the filtermanager state and the pathmanager current path
         $this->getComponentFilterManager()->setNeverExclude(false);
-        $this->getModulePathManager()->setPropagationCurrentPath();
+        $this->getComponentPathManager()->setPropagationCurrentPath();
 
         $ret = [];
 

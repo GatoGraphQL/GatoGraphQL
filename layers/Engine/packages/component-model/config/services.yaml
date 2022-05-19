@@ -93,8 +93,8 @@ services:
     PoP\ComponentModel\Error\ErrorProviderInterface:
         class: \PoP\ComponentModel\Error\ErrorProvider
 
-    PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
-        class: \PoP\ComponentModel\ModulePath\ModulePathManager
+    PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface:
+        class: \PoP\ComponentModel\ComponentPath\ComponentPathManager
 
     PoP\ComponentModel\Modules\ModuleHelpersInterface:
         class: \PoP\ComponentModel\Modules\ModuleHelpers
@@ -108,8 +108,8 @@ services:
         arguments:
             PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface: '@default_data_structure_formatter'
 
-    PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
-        class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
+    PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface:
+        class: \PoP\ComponentModel\ComponentPath\ComponentPathHelpers
 
     PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface:
         class: \PoP\ComponentModel\ComponentProcessors\ComponentProcessorManager

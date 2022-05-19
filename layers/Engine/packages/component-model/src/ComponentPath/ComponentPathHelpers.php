@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModulePath;
+namespace PoP\ComponentModel\ComponentPath;
 
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
+use PoP\ComponentModel\Facades\ComponentPath\ComponentPathHelpersFacade;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
-use PoP\ComponentModel\Tokens\ModulePath;
+use PoP\ComponentModel\Tokens\ComponentPath;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
-class ModulePathHelpers implements ModulePathHelpersInterface
+class ComponentPathHelpers implements ComponentPathHelpersInterface
 {
     use BasicServiceTrait;
 
-    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ComponentPathManagerInterface $modulePathManager = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
 
-    final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    final public function setComponentPathManager(ComponentPathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
     }
-    final protected function getModulePathManager(): ModulePathManagerInterface
+    final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
     {
@@ -39,15 +39,15 @@ class ModulePathHelpers implements ModulePathHelpersInterface
 
     public function getStringifiedModulePropagationCurrentPath(array $component): string
     {
-        $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
+        $module_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
         $module_propagation_current_path[] = $component;
-        return $this->stringifyModulePath($module_propagation_current_path);
+        return $this->stringifyComponentPath($module_propagation_current_path);
     }
 
-    public function stringifyModulePath(array $componentPath): string
+    public function stringifyComponentPath(array $componentPath): string
     {
         return implode(
-            ModulePath::COMPONENT_SEPARATOR,
+            ComponentPath::COMPONENT_SEPARATOR,
             array_map(
                 [$this->getModuleHelpers(), 'getModuleOutputName'],
                 $componentPath
@@ -55,12 +55,12 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         );
     }
 
-    public function recastModulePath(string $componentPath_as_string): array
+    public function recastComponentPath(string $componentPath_as_string): array
     {
         return array_map(
             [$this->getModuleHelpers(), 'getModuleFromOutputName'],
             explode(
-                ModulePath::COMPONENT_SEPARATOR,
+                ComponentPath::COMPONENT_SEPARATOR,
                 $componentPath_as_string
             )
         );
@@ -69,7 +69,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     /**
      * @return array<string[]>
      */
-    public function getModulePaths(): array
+    public function getComponentPaths(): array
     {
         /** @var RootModuleConfiguration */
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
@@ -77,7 +77,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
             return [];
         }
 
-        $paths = Request::getModulePaths();
+        $paths = Request::getComponentPaths();
         if (!$paths) {
             return [];
         }
@@ -89,7 +89,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
             $paths,
             function ($item) use ($paths) {
                 foreach ($paths as $path) {
-                    if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ModulePath::COMPONENT_SEPARATOR) {
+                    if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ComponentPath::COMPONENT_SEPARATOR) {
                         return false;
                     }
                 }
@@ -101,7 +101,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         $componentPaths = [];
         foreach ($paths as $path) {
             // Each path must be converted to an array of the modules
-            $componentPaths[] = ModulePathHelpersFacade::getInstance()->recastModulePath($path);
+            $componentPaths[] = ComponentPathHelpersFacade::getInstance()->recastComponentPath($path);
         }
 
         return $componentPaths;

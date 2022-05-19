@@ -117,7 +117,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	return null;
     // }
 
-    // function getModulePath(array $component, array &$props) {
+    // function getComponentPath(array $component, array &$props) {
 
     // 	// Allow to be set from upper modules. Eg: Datum Dynamic Layout can set it to its triggered component,
     // 	// which will need to be rendered dynamically on the htmlcssplatform on runtime
@@ -202,7 +202,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	$ret = array();
 
     // 	// Has this level a component cb?
-    // 	if ($module_path = $this->getModulePath($component, $props)) {
+    // 	if ($module_path = $this->getComponentPath($component, $props)) {
 
     // 		// Key: component / Value: path to arrive to this component
     // 		$ret[$component[1]] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $moduleOutputName);
