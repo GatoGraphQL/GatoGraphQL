@@ -22,14 +22,14 @@ class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_
         return parent::getBtnTitle($component);
     }
 
-    public function getLocationModule(array $component)
+    public function getLocationComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
                 return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONNAME];
         }
         
-        return parent::getLocationModule($component);
+        return parent::getLocationComponent($component);
     }
 }
 

@@ -92,7 +92,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
             $form_data[MutationInputProperties::STATUS] = $keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH;
         }
 
-        if ($featuredimage = $this->getFeaturedimageModule()) {
+        if ($featuredimage = $this->getFeaturedimageComponent()) {
             $form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID] = $this->getComponentProcessorManager()->getProcessor($featuredimage)->getValue($featuredimage);
         }
 
@@ -135,7 +135,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     protected function getCategories()
     {
         if ($this->showCategories()) {
-            if ($categories_component = $this->getCategoriesModule()) {
+            if ($categories_component = $this->getCategoriesComponent()) {
                 // We might decide to allow the user to input many sections, or only one section, so this value might be an array or just the value
                 // So treat it always as an array
                 $categories = $this->getComponentProcessorManager()->getProcessor($categories_component)->getValue($categories_component);
@@ -164,7 +164,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         // );
     }
 
-    protected function getCategoriesModule()
+    protected function getCategoriesComponent()
     {
         if ($this->showCategories()) {
             if ($this->canInputMultipleCategories()) {
@@ -195,7 +195,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return App::applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);
     }
 
-    protected function getFeaturedimageModule()
+    protected function getFeaturedimageComponent()
     {
         return [PoP_Module_Processor_FeaturedImageFormComponents::class, PoP_Module_Processor_FeaturedImageFormComponents::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE];
     }

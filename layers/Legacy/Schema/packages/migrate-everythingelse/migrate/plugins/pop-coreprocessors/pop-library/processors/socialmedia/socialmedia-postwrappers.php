@@ -17,7 +17,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
         );
     }
 
-    public function getSocialmediaModule(array $component)
+    public function getSocialmediaComponent(array $component)
     {
         $socialmedias = array(
             self::COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_POSTSOCIALMEDIA],
@@ -30,7 +30,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
             return $socialmedia;
         }
 
-        return parent::getSocialmediaModule($component);
+        return parent::getSocialmediaComponent($component);
     }
 }
 

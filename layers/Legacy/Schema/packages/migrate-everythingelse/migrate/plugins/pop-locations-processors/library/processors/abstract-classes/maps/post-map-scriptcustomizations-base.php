@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPTCUSTOMIZATION_POST];
     }
 
-    public function getAuthorsModule(array $component)
+    public function getAuthorsComponent(array $component)
     {
         return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
     }
@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
      */
     public function getRelationalSubcomponents(array $component): array
     {
-        if ($authors_component = $this->getAuthorsModule($component)) {
+        if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
                 new RelationalModuleField(
                     'author',
@@ -101,7 +101,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
                 $this->getThumbField($component, $props)),
         );
 
-        if ($authors_component = $this->getAuthorsModule($component)) {
+        if ($authors_component = $this->getAuthorsComponent($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($authors_component);
             $ret['authors-sep'] = $this->getAuthorsSeparator($component, $props);
         }

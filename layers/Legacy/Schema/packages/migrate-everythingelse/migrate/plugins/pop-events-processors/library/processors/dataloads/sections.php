@@ -177,7 +177,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
         // if it's a map, add the Map block. Do it before adding the Scroll, because otherwise there's an error:
         // The map is not created yet, however the links in the elements are already trying to add the markers
-        if ($map_inner_component = $this->getPostmapInnerModule($component)) {
+        if ($map_inner_component = $this->getPostmapInnerComponent($component)) {
             $ret[] = [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::COMPONENT_EM_MAP_POST];
             $ret[] = $map_inner_component;
         }
@@ -185,7 +185,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getPostmapInnerModule(array $component)
+    protected function getPostmapInnerComponent(array $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::COMPONENT_CALENDAR_EVENTSMAP],

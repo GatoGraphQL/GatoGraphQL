@@ -727,7 +727,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Comment Leo 21/11/2017: when switching from all methods to critical/noncritical ones, I dropped the array_values() out from $methods,
         // and added it when calculating $(non)critical_methods
         $loadingSite = self::isLoadingSite($componentFilter);
-        $methods = self::getJsmethodsFromModule($loadingSite, $entryComponent, $entry_model_props);
+        $methods = self::getJsmethodsFromComponent($loadingSite, $entryComponent, $entry_model_props);
         $critical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_CRITICAL]);
         $noncritical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_NONCRITICAL]);
 
@@ -739,7 +739,7 @@ class PoP_ResourceLoaderProcessorUtils {
         return self::calculateResources($componentFilter, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
     }
 
-    public static function getJsmethodsFromModule($addInitial, $entryComponent, $entry_model_props) {
+    public static function getJsmethodsFromComponent($addInitial, $entryComponent, $entry_model_props) {
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $componentprocessor_manager->getProcessor($entryComponent);

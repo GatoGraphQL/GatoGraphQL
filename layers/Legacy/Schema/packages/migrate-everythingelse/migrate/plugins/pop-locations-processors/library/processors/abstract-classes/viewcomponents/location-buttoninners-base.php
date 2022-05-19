@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_LOCATIONBUTTONINNER];
     }
 
-    public function getLocationModule(array $component)
+    public function getLocationComponent(array $component)
     {
         return null;
     }
@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($location_component = $this->getLocationModule($component)) {
+        if ($location_component = $this->getLocationComponent($component)) {
             $ret['separator'] = $this->separator($component, $props);
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($location_component);
         } else {
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
      */
     public function getRelationalSubcomponents(array $component): array
     {
-        if ($location_component = $this->getLocationModule($component)) {
+        if ($location_component = $this->getLocationComponent($component)) {
             return [
                 new RelationalModuleField(
                     'locations',

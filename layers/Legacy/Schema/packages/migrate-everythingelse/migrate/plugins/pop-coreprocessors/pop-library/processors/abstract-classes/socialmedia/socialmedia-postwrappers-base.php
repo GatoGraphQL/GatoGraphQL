@@ -4,7 +4,7 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getSocialmediaModule(array $component)
+    public function getSocialmediaComponent(array $component)
     {
         return null;
     }
@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Modul
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        $ret[] = $this->getSocialmediaModule($component);
+        $ret[] = $this->getSocialmediaComponent($component);
 
         return $ret;
     }

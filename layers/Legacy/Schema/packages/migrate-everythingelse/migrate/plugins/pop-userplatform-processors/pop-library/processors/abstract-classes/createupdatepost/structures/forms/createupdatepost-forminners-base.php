@@ -22,7 +22,7 @@ abstract class Wassup_Module_Processor_CreateUpdatePostFormInnersBase extends Po
         return false;
     }
 
-    protected function getCategoriesModule(array $component)
+    protected function getCategoriesComponent(array $component)
     {
         return [PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES];
     }

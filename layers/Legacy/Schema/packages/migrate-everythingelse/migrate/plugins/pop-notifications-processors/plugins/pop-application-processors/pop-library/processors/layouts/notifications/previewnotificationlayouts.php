@@ -13,7 +13,7 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
         );
     }
     
-    public function getUserAvatarModule(array $component)
+    public function getUserAvatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -22,7 +22,7 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
             }
         }
 
-        return parent::getUserAvatarModule($component);
+        return parent::getUserAvatarComponent($component);
     }
 }
 

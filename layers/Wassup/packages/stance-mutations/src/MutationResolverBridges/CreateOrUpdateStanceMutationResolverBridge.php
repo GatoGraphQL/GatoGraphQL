@@ -55,13 +55,13 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    protected function getCategoriesModule()
+    protected function getCategoriesComponent()
     {
         if ($this->showCategories()) {
             return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE];
         }
 
-        return parent::getCategoriesModule();
+        return parent::getCategoriesComponent();
     }
 
     protected function showCategories()

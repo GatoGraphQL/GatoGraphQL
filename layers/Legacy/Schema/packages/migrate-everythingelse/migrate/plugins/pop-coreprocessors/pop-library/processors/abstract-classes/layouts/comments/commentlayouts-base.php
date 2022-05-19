@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     public function getSubcomponents(array $component): array
     {
         $ret = parent::getSubcomponents($component);
-        $ret[] = $this->getBtnreplyModule($component);
+        $ret[] = $this->getBtnreplyComponent($component);
 
         if ($abovelayout_components = $this->getAbovelayoutLayoutSubcomponents($component)) {
             $ret = array_merge(
@@ -36,17 +36,17 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_COMMENT];
     }
 
-    public function getBtnreplyModule(array $component)
+    public function getBtnreplyComponent(array $component)
     {
         return [PoP_Module_Processor_CommentViewComponentButtons::class, PoP_Module_Processor_CommentViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY];
     }
 
-    public function getAuthornameModule(array $component)
+    public function getAuthornameComponent(array $component)
     {
         return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR];
     }
 
-    public function getAuthoravatarModule(array $component)
+    public function getAuthoravatarComponent(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR];
@@ -63,11 +63,11 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         $ret = parent::getRelationalSubcomponents($component);
 
         $components = array(
-            $this->getAuthornameModule($component),
+            $this->getAuthornameComponent($component),
         );
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($authoravatar = $this->getAuthoravatarModule($component)) {
+            if ($authoravatar = $this->getAuthoravatarComponent($component)) {
                 $components[] = $authoravatar;
             }
         }
@@ -108,14 +108,14 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $btnreply = $this->getBtnreplyModule($component);
-        $authorname = $this->getAuthornameModule($component);
+        $btnreply = $this->getBtnreplyComponent($component);
+        $authorname = $this->getAuthornameComponent($component);
 
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['btn-replycomment'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($btnreply);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authorname'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($authorname);
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($authoravatar = $this->getAuthoravatarModule($component)) {
+            if ($authoravatar = $this->getAuthoravatarComponent($component)) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authoravatar'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($authoravatar);
             }
         }

@@ -36,7 +36,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         return parent::initMarkers($component);
     }
 
-    public function getLocationModule(array $component)
+    public function getLocationComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
@@ -48,10 +48,10 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
                 return [PoP_Module_Processor_LocationViewComponentLinks::class, PoP_Module_Processor_LocationViewComponentLinks::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME];
         }
 
-        return parent::getLocationModule($component);
+        return parent::getLocationComponent($component);
     }
 
-    public function getLocationComplementModule(array $component)
+    public function getLocationComplementComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
@@ -59,7 +59,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
                 return [PoP_Module_Processor_LocationAddressLayouts::class, PoP_Module_Processor_LocationAddressLayouts::COMPONENT_EM_LAYOUT_LOCATIONADDRESS];
         }
 
-        return parent::getLocationComplementModule($component);
+        return parent::getLocationComplementComponent($component);
     }
     public function getJoinSeparator(array $component)
     {
