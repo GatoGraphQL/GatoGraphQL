@@ -8,14 +8,14 @@ abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends P
 
     public function getFormcomponentModule(array $component)
     {
-        return $this->getHiddeninputModule($component);
+        return $this->getHiddenInputComponent($component);
     }
 
     public function getLayoutSubcomponents(array $component)
     {
         return array(
             $this->getSelectedModule($component),
-            $this->getHiddeninputModule($component),
+            $this->getHiddenInputComponent($component),
         );
     }
 
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends P
     {
         return null;
     }
-    public function getHiddeninputModule(array $component)
+    public function getHiddenInputComponent(array $component)
     {
         return null;
     }

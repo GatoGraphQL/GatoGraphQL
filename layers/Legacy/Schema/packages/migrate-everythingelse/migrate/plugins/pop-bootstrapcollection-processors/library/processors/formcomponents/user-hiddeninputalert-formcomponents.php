@@ -11,14 +11,14 @@ class PoP_Module_Processor_UserHiddenInputAlertFormComponents extends PoP_Module
         );
     }
     
-    public function getHiddeninputModule(array $component)
+    public function getHiddenInputComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER:
                 return [PoP_Module_Processor_HiddenInputFormInputs::class, PoP_Module_Processor_HiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER];
         }
 
-        return parent::getHiddeninputModule($component);
+        return parent::getHiddenInputComponent($component);
     }
 }
 

@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
         );
     }
     
-    public function getHiddeninputModule(array $component)
+    public function getHiddenInputComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
                 return [GD_URE_Processor_SelectableHiddenInputFormInputs::class, GD_URE_Processor_SelectableHiddenInputFormInputs::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES];
         }
 
-        return parent::getHiddeninputModule($component);
+        return parent::getHiddenInputComponent($component);
     }
 
     public function isMultiple(array $component): bool

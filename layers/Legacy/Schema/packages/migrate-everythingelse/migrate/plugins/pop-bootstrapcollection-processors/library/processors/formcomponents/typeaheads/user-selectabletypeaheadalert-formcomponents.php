@@ -32,7 +32,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         return parent::getSelectedModule($component);
     }
     
-    public function getHiddeninputModule(array $component)
+    public function getHiddenInputComponent(array $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
@@ -48,7 +48,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
                 return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS];
         }
 
-        return parent::getHiddeninputModule($component);
+        return parent::getHiddenInputComponent($component);
     }
 
     public function isMultiple(array $component): bool
