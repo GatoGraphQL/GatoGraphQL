@@ -242,18 +242,23 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function validateUpdate(array &$errors, array $form_data): void
     {
-
         $customPostID = $form_data[MutationInputProperties::ID] ?? null;
         if (!$customPostID) {
-            $errors[] = $this->__('The ID is missing', 'custompost-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            );
             return;
         }
 
         $post = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
         if (!$post) {
-            $errors[] = sprintf(
-                $this->__('There is no entity with ID \'%s\'', 'custompost-mutations'),
-                $customPostID
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
+                [
+                    $customPostID,
+                ]
             );
             return;
         }
@@ -261,9 +266,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Check that the user has access to the edited custom post
         $userID = App::getState('current-user-id');
         if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
-            $errors[] = sprintf(
-                $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
-                $customPostID
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E8,
+                [
+                    $customPostID,
+                ]
             );
             return;
         }
