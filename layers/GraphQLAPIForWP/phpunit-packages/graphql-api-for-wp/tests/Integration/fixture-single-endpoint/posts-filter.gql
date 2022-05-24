@@ -1,5 +1,5 @@
 query {
-  postsByAuthorIDs: posts(filter: { authorIDs: 2 }) {
+  postsByAuthorIDs: posts(filter: { authorIDs: 4 }) {
     id
     title
   }
@@ -15,7 +15,7 @@ query {
     id
     title
   }
-  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 2 }) {
+  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 4 }) {
     id
     title
   }

@@ -1,0 +1,37 @@
+{
+  "errors": [
+    {
+      "message": "You don't have permission to edit custom post with ID '1'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "id": 1,
+        "fields": [
+          "update(input: {title: \"Hello world! 33333\"})",
+          "resolveValueAndMerge"
+        ],
+        "code": "PoPCMSSchema\\CustomPostMutations\\e8"
+      }
+    }
+  ],
+  "data": {
+    "disallowedPost": {
+      "firstTitle": "Hello world!",
+      "update": null
+    },
+    "allowedPost": {
+      "firstTitle": "HTTP caching improves performance",
+      "update": {
+        "secondTitle": "HTTP caching improves performance 33333",
+        "update": {
+          "thirdTitle": "HTTP caching improves performance"
+        }
+      }
+    }
+  }
+}
