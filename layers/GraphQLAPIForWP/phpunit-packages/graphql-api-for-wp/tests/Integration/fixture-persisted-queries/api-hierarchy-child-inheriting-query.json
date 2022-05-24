@@ -8,10 +8,6 @@
                     "title": "Hello world!"
                 },
                 {
-                    "id": 28,
-                    "title": "HTTP caching improves performance"
-                },
-                {
                     "id": 25,
                     "title": "Public or Private API mode, for extra security"
                 },
@@ -22,6 +18,10 @@
                 {
                     "id": 21,
                     "title": "Customize the schema for each client"
+                },
+                {
+                    "id": 19,
+                    "title": "Nested mutations are a must have"
                 }
             ]
         }
