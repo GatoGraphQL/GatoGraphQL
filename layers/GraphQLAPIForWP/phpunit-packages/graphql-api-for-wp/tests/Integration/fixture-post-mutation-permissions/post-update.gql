@@ -1,0 +1,28 @@
+mutation {
+  disallowedPost: post(by: {id: 1}) {
+    firstTitle: title
+    update(input: {
+      title: "Hello world! 33333"
+    }) {
+      secondTitle: title
+      update(input: {
+        title: "Hello world!"
+      }) {
+        thirdTitle: title
+      }
+    }
+  }
+  allowedPost: post(by: {id: 28}) {
+    firstTitle: title
+    update(input: {
+      title: "HTTP caching improves performance 33333"
+    }) {
+      secondTitle: title
+      update(input: {
+        title: "HTTP caching improves performance"
+      }) {
+        thirdTitle: title
+      }
+    }
+  }
+}
