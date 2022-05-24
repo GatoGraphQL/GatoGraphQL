@@ -16,9 +16,9 @@
                 "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
                 "title": "HTTP caching improves performance",
                 "author": {
-                    "id": 1,
-                    "username": "admin",
-                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
+                    "id": 4,
+                    "username": "author",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/author\/"
                 }
             },
             {
