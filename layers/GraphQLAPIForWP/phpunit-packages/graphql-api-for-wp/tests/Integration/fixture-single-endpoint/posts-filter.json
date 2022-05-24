@@ -42,14 +42,6 @@
                 "title": "Hello world!"
             },
             {
-                "id": 28,
-                "title": "HTTP caching improves performance"
-            },
-            {
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
                 "id": 23,
                 "title": "GraphQL or REST? Why not both?"
             },
@@ -64,10 +56,6 @@
             {
                 "id": 16,
                 "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 13,
-                "title": "Released v0.6, check it out"
             }
         ],
         "postsByDateQuery": [
