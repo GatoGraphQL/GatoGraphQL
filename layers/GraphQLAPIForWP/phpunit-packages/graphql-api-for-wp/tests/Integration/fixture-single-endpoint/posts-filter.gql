@@ -1,0 +1,62 @@
+query {
+  postsByAuthorIDs: posts(filter: { authorIDs: 2 }) {
+    id
+    title
+  }
+  postsByAuthorSlug: posts(filter: { authorSlug: "admin" }) {
+    id
+    title
+  }
+  postsByCategoryIDs: posts(filter: { categoryIDs: [1] }) {
+    id
+    title
+  }
+  postsByDateQuery: posts(filter: { dateQuery: { after: "2022-01-01" } }) {
+    id
+    title
+  }
+  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 2 }) {
+    id
+    title
+  }
+  postsByExcludeIDs: posts(filter: { excludeIDs: [1, 28] }) {
+    id
+    title
+  }
+  postsByHasPassword: posts(filter: { hasPassword: true }) {
+    id
+    title
+  }
+  postsByIds: posts(filter: { ids: [1, 28] }) {
+    id
+    title
+  }
+  postsByIsSticky: posts(filter: { isSticky: true }) {
+    id
+    title
+  }
+  postsByMetaQuery: posts(filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: EXISTS } } } }) {
+    id
+    title
+  }
+  postsByPassword: posts(filter: { password: "password" }) {
+    id
+    title
+  }
+  postsBySearch: posts(filter: { search: "hello" }) {
+    id
+    title
+  }
+  postsByStatus: posts(filter: { status: draft }) {
+    id
+    title
+  }
+  postsByTagIDs: posts(filter: { tagIDs: [3, 4] }) {
+    id
+    title
+  }
+  postsByTagSlugs: posts(filter: { tagSlugs: ["plugin", "release"] }) {
+    id
+    title
+  }
+}
