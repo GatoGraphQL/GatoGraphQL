@@ -1,205 +1,202 @@
 {
     "data": {
-      "postsByAuthorIDs": [],
-      "postsByAuthorSlug": [
-        {
-          "id": 1,
-          "title": "Hello world!"
-        },
-        {
-          "id": 28,
-          "title": "HTTP caching improves performance"
-        },
-        {
-          "id": 25,
-          "title": "Public or Private API mode, for extra security"
-        },
-        {
-          "id": 23,
-          "title": "GraphQL or REST? Why not both?"
-        },
-        {
-          "id": 21,
-          "title": "Customize the schema for each client"
-        },
-        {
-          "id": 19,
-          "title": "Nested mutations are a must have"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        },
-        {
-          "id": 13,
-          "title": "Released v0.6, check it out"
-        }
-      ],
-      "postsByCategoryIDs": [
-        {
-          "id": 1,
-          "title": "Hello world!"
-        },
-        {
-          "id": 28,
-          "title": "HTTP caching improves performance"
-        },
-        {
-          "id": 25,
-          "title": "Public or Private API mode, for extra security"
-        },
-        {
-          "id": 23,
-          "title": "GraphQL or REST? Why not both?"
-        },
-        {
-          "id": 21,
-          "title": "Customize the schema for each client"
-        },
-        {
-          "id": 19,
-          "title": "Nested mutations are a must have"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        },
-        {
-          "id": 13,
-          "title": "Released v0.6, check it out"
-        }
-      ],
-      "postsByDateQuery": [
-        {
-          "id": 1,
-          "title": "Hello world!"
-        }
-      ],
-      "postsByExcludeAuthorIDs": [
-        {
-          "id": 1,
-          "title": "Hello world!"
-        },
-        {
-          "id": 28,
-          "title": "HTTP caching improves performance"
-        },
-        {
-          "id": 25,
-          "title": "Public or Private API mode, for extra security"
-        },
-        {
-          "id": 23,
-          "title": "GraphQL or REST? Why not both?"
-        },
-        {
-          "id": 21,
-          "title": "Customize the schema for each client"
-        },
-        {
-          "id": 19,
-          "title": "Nested mutations are a must have"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        },
-        {
-          "id": 13,
-          "title": "Released v0.6, check it out"
-        }
-      ],
-      "postsByExcludeIDs": [
-        {
-          "id": 25,
-          "title": "Public or Private API mode, for extra security"
-        },
-        {
-          "id": 23,
-          "title": "GraphQL or REST? Why not both?"
-        },
-        {
-          "id": 21,
-          "title": "Customize the schema for each client"
-        },
-        {
-          "id": 19,
-          "title": "Nested mutations are a must have"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        },
-        {
-          "id": 13,
-          "title": "Released v0.6, check it out"
-        }
-      ],
-      "postsByHasPassword": [],
-      "postsByIds": [
-        {
-          "id": 1,
-          "title": "Hello world!"
-        },
-        {
-          "id": 28,
-          "title": "HTTP caching improves performance"
-        }
-      ],
-      "postsByIsSticky": [],
-      "postsByMetaQuery": [
-        {
-          "id": 25,
-          "title": "Public or Private API mode, for extra security"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        },
-        {
-          "id": 13,
-          "title": "Released v0.6, check it out"
-        }
-      ],
-      "postsByPassword": [],
-      "postsBySearch": [
-        {
-          "id": 1,
-          "title": "Hello world!"
-        }
-      ],
-      "postsByStatus": [],
-      "postsByTagIDs": [
-        {
-          "id": 25,
-          "title": "Public or Private API mode, for extra security"
-        },
-        {
-          "id": 21,
-          "title": "Customize the schema for each client"
-        },
-        {
-          "id": 19,
-          "title": "Nested mutations are a must have"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        }
-      ],
-      "postsByTagSlugs": [
-        {
-          "id": 19,
-          "title": "Nested mutations are a must have"
-        },
-        {
-          "id": 16,
-          "title": "Working on flat chain syntax next"
-        },
-        {
-          "id": 13,
-          "title": "Released v0.6, check it out"
-        }
-      ]
+        "postsByAuthorIDs": [
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            }
+        ],
+        "postsByAuthorSlug": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByCategoryIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByDateQuery": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByExcludeAuthorIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByExcludeIDs": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByHasPassword": [],
+        "postsByIds": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            }
+        ],
+        "postsByIsSticky": [],
+        "postsByMetaQuery": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByPassword": [],
+        "postsBySearch": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByStatus": [],
+        "postsByTagIDs": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            }
+        ],
+        "postsByTagSlugs": [
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ]
     }
-  }
+}
