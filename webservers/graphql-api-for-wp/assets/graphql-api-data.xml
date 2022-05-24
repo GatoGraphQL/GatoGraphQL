@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.9.3" created="2022-05-09 11:05" -->
+	<!-- generator="WordPress/5.9.3" created="2022-05-24 13:43" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,14 +29,27 @@
 	<title>GraphQL API</title>
 	<link>https://graphql-api.lndo.site</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Mon, 09 May 2022 11:05:15 +0000</pubDate>
+	<pubDate>Tue, 24 May 2022 13:43:03 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://graphql-api.lndo.site</wp:base_site_url>
 	<wp:base_blog_url>https://graphql-api.lndo.site</wp:base_blog_url>
 
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[admin@example.com]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>4</wp:author_id><wp:author_login><![CDATA[author]]></wp:author_login><wp:author_email><![CDATA[author@test.com]]></wp:author_email><wp:author_display_name><![CDATA[Author Marquez]]></wp:author_display_name><wp:author_first_name><![CDATA[Author]]></wp:author_first_name><wp:author_last_name><![CDATA[Marquez]]></wp:author_last_name></wp:author>
 
+		<wp:category>
+		<wp:term_id>11</wp:term_id>
+		<wp:category_nicename><![CDATA[advanced]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Advanced]]></wp:cat_name>
+	</wp:category>
+		<wp:category>
+		<wp:term_id>12</wp:term_id>
+		<wp:category_nicename><![CDATA[blog]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Blog]]></wp:cat_name>
+	</wp:category>
 		<wp:category>
 		<wp:term_id>1</wp:term_id>
 		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
@@ -834,8 +847,8 @@
 		<wp:post_id>1</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-17 13:06:58]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-17 13:06:58]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-04-17 13:06:58]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-04-17 13:06:58]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-24 10:30:08]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-24 10:30:08]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[hello-world]]></wp:post_name>
@@ -846,7 +859,7 @@
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
-					</item>
+						</item>
 					<item>
 		<title><![CDATA[Sample Page]]></title>
 		<link>https://graphql-api.lndo.site/sample-page/</link>
@@ -964,8 +977,8 @@
 		<wp:post_id>13</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 03:56:13]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 03:56:13]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 03:56:13]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 03:56:13]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-24 13:42:31]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-24 13:42:31]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[released-v0-6-check-it-out]]></wp:post_name>
@@ -975,9 +988,9 @@
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
+										<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
+		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
 		<category domain="post_tag" nicename="release"><![CDATA[release]]></category>
-		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
 		<wp:meta_value><![CDATA[14]]></wp:meta_value>
@@ -1034,8 +1047,12 @@
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[default]]></wp:meta_value>
+		</wp:postmeta>
 							<wp:comment>
-			<wp:comment_id>3</wp:comment_id>
+			<wp:comment_id>2</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1049,7 +1066,7 @@
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
-			<wp:comment_id>4</wp:comment_id>
+			<wp:comment_id>3</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1059,7 +1076,7 @@
 			<wp:comment_content><![CDATA[Very slick]]></wp:comment_content>
 			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
-			<wp:comment_parent>3</wp:comment_parent>
+			<wp:comment_parent>2</wp:comment_parent>
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					</item>
@@ -1377,7 +1394,7 @@
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:comment>
-			<wp:comment_id>5</wp:comment_id>
+			<wp:comment_id>4</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1391,7 +1408,7 @@
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
-			<wp:comment_id>6</wp:comment_id>
+			<wp:comment_id>5</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1401,11 +1418,11 @@
 			<wp:comment_content><![CDATA[That can be configured, as either "public" or "private" API mode]]></wp:comment_content>
 			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
-			<wp:comment_parent>5</wp:comment_parent>
+			<wp:comment_parent>4</wp:comment_parent>
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
-			<wp:comment_id>7</wp:comment_id>
+			<wp:comment_id>6</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1415,11 +1432,11 @@
 			<wp:comment_content><![CDATA[I see, thanks!]]></wp:comment_content>
 			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
-			<wp:comment_parent>6</wp:comment_parent>
+			<wp:comment_parent>5</wp:comment_parent>
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
-			<wp:comment_id>8</wp:comment_id>
+			<wp:comment_id>7</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1433,7 +1450,7 @@
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
-			<wp:comment_id>9</wp:comment_id>
+			<wp:comment_id>8</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1443,7 +1460,7 @@
 			<wp:comment_content><![CDATA[As many as you want!]]></wp:comment_content>
 			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
-			<wp:comment_parent>8</wp:comment_parent>
+			<wp:comment_parent>7</wp:comment_parent>
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					</item>
@@ -1670,8 +1687,8 @@ video/mp4
 		<wp:post_id>25</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:06:52]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:06:52]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 04:06:52]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 04:06:52]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-24 13:42:00]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-24 13:42:00]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[public-or-private-api-mode-for-extra-security]]></wp:post_name>
@@ -1681,9 +1698,9 @@ video/mp4
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
+										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="post_tag" nicename="security"><![CDATA[security]]></category>
-		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
 		<wp:meta_value><![CDATA[26]]></wp:meta_value>
@@ -1740,8 +1757,12 @@ video/mp4
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[default]]></wp:meta_value>
+		</wp:postmeta>
 							<wp:comment>
-			<wp:comment_id>10</wp:comment_id>
+			<wp:comment_id>9</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1755,7 +1776,7 @@ video/mp4
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
-			<wp:comment_id>11</wp:comment_id>
+			<wp:comment_id>10</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1791,8 +1812,8 @@ video/mp4
 		<wp:post_id>28</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:08:47]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:08:47]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 04:08:47]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 04:08:47]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-24 13:41:53]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-24 13:41:53]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[http-caching-improves-performance]]></wp:post_name>
@@ -1802,7 +1823,7 @@ video/mp4
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
@@ -1831,8 +1852,12 @@ video/mp4
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[default]]></wp:meta_value>
+		</wp:postmeta>
 							<wp:comment>
-			<wp:comment_id>12</wp:comment_id>
+			<wp:comment_id>11</wp:comment_id>
 			<wp:comment_author><![CDATA[admin]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[admin@example.com]]></wp:comment_author_email>
 			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
@@ -1961,8 +1986,8 @@ video/mp4
 		<wp:post_id>261</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-21 06:26:40]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-21 06:26:40]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-09 11:05:02]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-09 11:05:02]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-04-21 06:26:40]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-04-21 06:26:40]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[power-users]]></wp:post_name>
