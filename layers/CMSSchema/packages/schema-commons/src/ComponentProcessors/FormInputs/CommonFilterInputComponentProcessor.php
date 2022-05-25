@@ -18,17 +18,13 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\FormInputs\BooleanFormInput;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeIDsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeParentIDsFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FormatFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\GMTFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\LimitFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OffsetFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderByFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDsFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\PathOrPathsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugsFilterInputProcessor;
@@ -67,11 +63,8 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
     private ?LimitFilterInputProcessor $limitFilterInputProcessor = null;
     private ?OffsetFilterInputProcessor $offsetFilterInputProcessor = null;
-    private ?OrderByFilterInputProcessor $orderByFilterInputProcessor = null;
-    private ?OrderFilterInputProcessor $orderFilterInputProcessor = null;
     private ?ParentIDFilterInputProcessor $parentIDFilterInputProcessor = null;
     private ?ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor = null;
-    private ?PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor = null;
     private ?SearchFilterInputProcessor $searchFilterInputProcessor = null;
     private ?SlugFilterInputProcessor $slugFilterInputProcessor = null;
     private ?SlugsFilterInputProcessor $slugsFilterInputProcessor = null;
@@ -172,22 +165,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     {
         return $this->offsetFilterInputProcessor ??= $this->instanceManager->getInstance(OffsetFilterInputProcessor::class);
     }
-    final public function setOrderByFilterInputProcessor(OrderByFilterInputProcessor $orderByFilterInputProcessor): void
-    {
-        $this->orderByFilterInputProcessor = $orderByFilterInputProcessor;
-    }
-    final protected function getOrderByFilterInputProcessor(): OrderByFilterInputProcessor
-    {
-        return $this->orderByFilterInputProcessor ??= $this->instanceManager->getInstance(OrderByFilterInputProcessor::class);
-    }
-    final public function setOrderFilterInputProcessor(OrderFilterInputProcessor $orderFilterInputProcessor): void
-    {
-        $this->orderFilterInputProcessor = $orderFilterInputProcessor;
-    }
-    final protected function getOrderFilterInputProcessor(): OrderFilterInputProcessor
-    {
-        return $this->orderFilterInputProcessor ??= $this->instanceManager->getInstance(OrderFilterInputProcessor::class);
-    }
     final public function setParentIDFilterInputProcessor(ParentIDFilterInputProcessor $parentIDFilterInputProcessor): void
     {
         $this->parentIDFilterInputProcessor = $parentIDFilterInputProcessor;
@@ -203,14 +180,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     final protected function getParentIDsFilterInputProcessor(): ParentIDsFilterInputProcessor
     {
         return $this->parentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDsFilterInputProcessor::class);
-    }
-    final public function setPathOrPathsFilterInputProcessor(PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor): void
-    {
-        $this->pathOrPathsFilterInputProcessor = $pathOrPathsFilterInputProcessor;
-    }
-    final protected function getPathOrPathsFilterInputProcessor(): PathOrPathsFilterInputProcessor
-    {
-        return $this->pathOrPathsFilterInputProcessor ??= $this->instanceManager->getInstance(PathOrPathsFilterInputProcessor::class);
     }
     final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $searchFilterInputProcessor): void
     {
