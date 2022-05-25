@@ -20,7 +20,6 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
     public final const FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
     public final const FILTERINPUT_SLUGS = 'filterinput-slugs';
     public final const FILTERINPUT_SLUG = 'filterinput-slug';
-    public final const FILTERINPUT_PATH_OR_PATHS = 'filterinput-path-or-paths';
     public final const FILTERINPUT_DATEFORMAT = 'filterinput-dateformat';
     public final const FILTERINPUT_GMT = 'filterinput-gmt';
 
@@ -39,7 +38,6 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
             [self::class, self::FILTERINPUT_EXCLUDE_PARENT_IDS],
             [self::class, self::FILTERINPUT_SLUGS],
             [self::class, self::FILTERINPUT_SLUG],
-            [self::class, self::FILTERINPUT_PATH_OR_PATHS],
             [self::class, self::FILTERINPUT_DATEFORMAT],
             [self::class, self::FILTERINPUT_GMT],
         );
@@ -83,9 +81,6 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
                 break;
             case self::FILTERINPUT_SLUG:
                 $query['slug'] = $value;
-                break;
-            case self::FILTERINPUT_PATH_OR_PATHS:
-                $query['paths'] = is_array($value) ? $value : [$value];
                 break;
             case self::FILTERINPUT_DATEFORMAT:
                 $query['format'] = $value;
