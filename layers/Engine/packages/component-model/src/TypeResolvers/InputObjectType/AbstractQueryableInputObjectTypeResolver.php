@@ -25,7 +25,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return null;
     }

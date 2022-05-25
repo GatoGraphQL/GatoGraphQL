@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver as UpstreamRootMenusFilterInputObjectTypeResolver;
 use PoPWPSchema\Menus\FilterInputProcessors\FilterInputProcessor;
@@ -48,7 +49,7 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
             'locations' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LOCATIONS],

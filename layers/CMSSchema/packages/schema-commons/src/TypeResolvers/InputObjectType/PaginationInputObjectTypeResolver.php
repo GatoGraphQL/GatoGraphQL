@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\SchemaCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
@@ -134,7 +135,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         return null;
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
             'limit' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],

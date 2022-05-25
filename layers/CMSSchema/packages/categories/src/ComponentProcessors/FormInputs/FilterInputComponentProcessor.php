@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -17,6 +18,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public final const COMPONENT_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?FilterInputProcessor $filterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -26,6 +28,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
+    final public function setFilterInputProcessor(FilterInputProcessor $filterInputProcessor): void
+    {
+        $this->filterInputProcessor = $filterInputProcessor;
+    }
+    final protected function getFilterInputProcessor(): FilterInputProcessor
+    {
+        return $this->filterInputProcessor ??= $this->instanceManager->getInstance(FilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -34,7 +44,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?array
+    public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
             self::COMPONENT_FILTERINPUT_CATEGORY_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CATEGORY_IDS],

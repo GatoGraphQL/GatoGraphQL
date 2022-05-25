@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\SchemaHooks;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPWPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
@@ -145,7 +146,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
         ?array $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?array {
+    ): ?FilterInputProcessorInterface {
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }

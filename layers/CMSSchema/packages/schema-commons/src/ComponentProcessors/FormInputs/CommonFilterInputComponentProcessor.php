@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\FormInputs\BooleanFormInput;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\FormInputs\BooleanFormInput;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
@@ -96,7 +97,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         );
     }
 
-    public function getFilterInput(array $component): ?array
+    public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
             self::COMPONENT_FILTERINPUT_SORT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SORT],
