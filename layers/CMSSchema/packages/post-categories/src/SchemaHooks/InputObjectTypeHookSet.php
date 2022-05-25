@@ -12,12 +12,13 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Categories\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Categories\FilterInputProcessors\CategoryIDsFilterInputProcessor;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?CategoryIDsFilterInputProcessor $categoryIDsFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -26,6 +27,14 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    final public function setCategoryIDsFilterInputProcessor(CategoryIDsFilterInputProcessor $categoryIDsFilterInputProcessor): void
+    {
+        $this->categoryIDsFilterInputProcessor = $categoryIDsFilterInputProcessor;
+    }
+    final protected function getCategoryIDsFilterInputProcessor(): CategoryIDsFilterInputProcessor
+    {
+        return $this->categoryIDsFilterInputProcessor ??= $this->instanceManager->getInstance(CategoryIDsFilterInputProcessor::class);
     }
 
     protected function init(): void
@@ -113,7 +122,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'categoryIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CATEGORY_IDS],
+            'categoryIDs' => $this->getCategoryIDsFilterInputProcessor(),
             default => $inputFieldFilterInput,
         };
     }
