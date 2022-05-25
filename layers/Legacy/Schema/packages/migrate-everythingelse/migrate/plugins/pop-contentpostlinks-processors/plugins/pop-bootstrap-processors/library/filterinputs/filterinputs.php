@@ -14,6 +14,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         );
     }
 
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
     protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {

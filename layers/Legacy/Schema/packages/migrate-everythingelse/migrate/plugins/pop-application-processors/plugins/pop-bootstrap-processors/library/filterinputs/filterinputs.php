@@ -20,6 +20,9 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractV
         );
     }
 
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
     protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {

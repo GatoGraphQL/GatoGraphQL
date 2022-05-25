@@ -12,6 +12,9 @@ class PoP_Module_Processor_ReferencesFilterInputProcessor extends AbstractValueT
         );
     }
 
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
     protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
