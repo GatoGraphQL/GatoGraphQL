@@ -153,7 +153,7 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputProcessorInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?FilterInputProcessorInterface {

@@ -155,7 +155,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputProcessorInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?FilterInputProcessorInterface {

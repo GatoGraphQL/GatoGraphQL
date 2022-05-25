@@ -162,7 +162,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputProcessorInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?FilterInputProcessorInterface {
