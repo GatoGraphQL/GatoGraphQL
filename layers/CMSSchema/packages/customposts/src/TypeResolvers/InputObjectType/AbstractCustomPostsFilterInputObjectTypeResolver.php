@@ -15,7 +15,7 @@ use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
@@ -27,6 +27,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor = null;
     private ?UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor = null;
+    private ?SearchFilterInputProcessor $seachFilterInputProcessor = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -75,6 +76,14 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     final protected function getUnionCustomPostTypesFilterInputProcessor(): UnionCustomPostTypesFilterInputProcessor
     {
         return $this->unionCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInputProcessor::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $seachFilterInputProcessor): void
+    {
+        $this->seachFilterInputProcessor = $seachFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->seachFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
     }
 
     public function getAdminInputFieldNames(): array
@@ -150,7 +159,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return match ($inputFieldName) {
             'status' => $this->getCustomPostStatusFilterInputProcessor(),
-            'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
+            'search' => $this->getSearchFilterInputProcessor(),
             'customPostTypes' => $this->getUnionCustomPostTypesFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };

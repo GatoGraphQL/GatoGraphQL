@@ -16,7 +16,22 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\FormInputs\BooleanFormInput;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeIDsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeParentIDsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FormatFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\GMTFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\LimitFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OffsetFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderByFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\PathOrPathsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SortFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
@@ -44,6 +59,22 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?SortFilterInputProcessor $sortFilterInputProcessor = null;
+
+    private ?ExcludeIDsFilterInputProcessor $excludeIDsFilterInputProcessor = null;
+    private ?ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor = null;
+    private ?FormatFilterInputProcessor $formatFilterInputProcessor = null;
+    private ?GMTFilterInputProcessor $gMTFilterInputProcessor = null;
+    private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
+    private ?LimitFilterInputProcessor $limitFilterInputProcessor = null;
+    private ?OffsetFilterInputProcessor $offsetFilterInputProcessor = null;
+    private ?OrderByFilterInputProcessor $orderByFilterInputProcessor = null;
+    private ?OrderFilterInputProcessor $orderFilterInputProcessor = null;
+    private ?ParentIDFilterInputProcessor $parentIDFilterInputProcessor = null;
+    private ?ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor = null;
+    private ?PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor = null;
+    private ?SearchFilterInputProcessor $searchFilterInputProcessor = null;
+    private ?SlugFilterInputProcessor $slugFilterInputProcessor = null;
+    private ?SlugsFilterInputProcessor $slugsFilterInputProcessor = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -85,6 +116,126 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     {
         return $this->sortFilterInputProcessor ??= $this->instanceManager->getInstance(SortFilterInputProcessor::class);
     }
+    final public function setExcludeIDsFilterInputProcessor(ExcludeIDsFilterInputProcessor $excludeIDsFilterInputProcessor): void
+    {
+        $this->excludeIDsFilterInputProcessor = $excludeIDsFilterInputProcessor;
+    }
+    final protected function getExcludeIDsFilterInputProcessor(): ExcludeIDsFilterInputProcessor
+    {
+        return $this->excludeIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeIDsFilterInputProcessor::class);
+    }
+    final public function setExcludeParentIDsFilterInputProcessor(ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor): void
+    {
+        $this->excludeParentIDsFilterInputProcessor = $excludeParentIDsFilterInputProcessor;
+    }
+    final protected function getExcludeParentIDsFilterInputProcessor(): ExcludeParentIDsFilterInputProcessor
+    {
+        return $this->excludeParentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeParentIDsFilterInputProcessor::class);
+    }
+    final public function setFormatFilterInputProcessor(FormatFilterInputProcessor $formatFilterInputProcessor): void
+    {
+        $this->formatFilterInputProcessor = $formatFilterInputProcessor;
+    }
+    final protected function getFormatFilterInputProcessor(): FormatFilterInputProcessor
+    {
+        return $this->formatFilterInputProcessor ??= $this->instanceManager->getInstance(FormatFilterInputProcessor::class);
+    }
+    final public function setGMTFilterInputProcessor(GMTFilterInputProcessor $gMTFilterInputProcessor): void
+    {
+        $this->gMTFilterInputProcessor = $gMTFilterInputProcessor;
+    }
+    final protected function getGMTFilterInputProcessor(): GMTFilterInputProcessor
+    {
+        return $this->gMTFilterInputProcessor ??= $this->instanceManager->getInstance(GMTFilterInputProcessor::class);
+    }
+    final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
+    {
+        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+    }
+    final protected function getIncludeFilterInputProcessor(): IncludeFilterInputProcessor
+    {
+        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(IncludeFilterInputProcessor::class);
+    }
+    final public function setLimitFilterInputProcessor(LimitFilterInputProcessor $limitFilterInputProcessor): void
+    {
+        $this->limitFilterInputProcessor = $limitFilterInputProcessor;
+    }
+    final protected function getLimitFilterInputProcessor(): LimitFilterInputProcessor
+    {
+        return $this->limitFilterInputProcessor ??= $this->instanceManager->getInstance(LimitFilterInputProcessor::class);
+    }
+    final public function setOffsetFilterInputProcessor(OffsetFilterInputProcessor $offsetFilterInputProcessor): void
+    {
+        $this->offsetFilterInputProcessor = $offsetFilterInputProcessor;
+    }
+    final protected function getOffsetFilterInputProcessor(): OffsetFilterInputProcessor
+    {
+        return $this->offsetFilterInputProcessor ??= $this->instanceManager->getInstance(OffsetFilterInputProcessor::class);
+    }
+    final public function setOrderByFilterInputProcessor(OrderByFilterInputProcessor $orderByFilterInputProcessor): void
+    {
+        $this->orderByFilterInputProcessor = $orderByFilterInputProcessor;
+    }
+    final protected function getOrderByFilterInputProcessor(): OrderByFilterInputProcessor
+    {
+        return $this->orderByFilterInputProcessor ??= $this->instanceManager->getInstance(OrderByFilterInputProcessor::class);
+    }
+    final public function setOrderFilterInputProcessor(OrderFilterInputProcessor $orderFilterInputProcessor): void
+    {
+        $this->orderFilterInputProcessor = $orderFilterInputProcessor;
+    }
+    final protected function getOrderFilterInputProcessor(): OrderFilterInputProcessor
+    {
+        return $this->orderFilterInputProcessor ??= $this->instanceManager->getInstance(OrderFilterInputProcessor::class);
+    }
+    final public function setParentIDFilterInputProcessor(ParentIDFilterInputProcessor $parentIDFilterInputProcessor): void
+    {
+        $this->parentIDFilterInputProcessor = $parentIDFilterInputProcessor;
+    }
+    final protected function getParentIDFilterInputProcessor(): ParentIDFilterInputProcessor
+    {
+        return $this->parentIDFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDFilterInputProcessor::class);
+    }
+    final public function setParentIDsFilterInputProcessor(ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor): void
+    {
+        $this->parentIDsFilterInputProcessor = $parentIDsFilterInputProcessor;
+    }
+    final protected function getParentIDsFilterInputProcessor(): ParentIDsFilterInputProcessor
+    {
+        return $this->parentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDsFilterInputProcessor::class);
+    }
+    final public function setPathOrPathsFilterInputProcessor(PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor): void
+    {
+        $this->pathOrPathsFilterInputProcessor = $pathOrPathsFilterInputProcessor;
+    }
+    final protected function getPathOrPathsFilterInputProcessor(): PathOrPathsFilterInputProcessor
+    {
+        return $this->pathOrPathsFilterInputProcessor ??= $this->instanceManager->getInstance(PathOrPathsFilterInputProcessor::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $searchFilterInputProcessor): void
+    {
+        $this->searchFilterInputProcessor = $searchFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->searchFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+    }
+    final public function setSlugFilterInputProcessor(SlugFilterInputProcessor $slugFilterInputProcessor): void
+    {
+        $this->slugFilterInputProcessor = $slugFilterInputProcessor;
+    }
+    final protected function getSlugFilterInputProcessor(): SlugFilterInputProcessor
+    {
+        return $this->slugFilterInputProcessor ??= $this->instanceManager->getInstance(SlugFilterInputProcessor::class);
+    }
+    final public function setSlugsFilterInputProcessor(SlugsFilterInputProcessor $slugsFilterInputProcessor): void
+    {
+        $this->slugsFilterInputProcessor = $slugsFilterInputProcessor;
+    }
+    final protected function getSlugsFilterInputProcessor(): SlugsFilterInputProcessor
+    {
+        return $this->slugsFilterInputProcessor ??= $this->instanceManager->getInstance(SlugsFilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -111,20 +262,20 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     {
         $filterInputs = [
             self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_LIMIT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],
-            self::COMPONENT_FILTERINPUT_OFFSET => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_OFFSET],
-            self::COMPONENT_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
-            self::COMPONENT_FILTERINPUT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            self::COMPONENT_FILTERINPUT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_IDS],
-            self::COMPONENT_FILTERINPUT_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_IDS],
-            self::COMPONENT_FILTERINPUT_PARENT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_ID],
-            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_PARENT_IDS],
-            self::COMPONENT_FILTERINPUT_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUGS],
-            self::COMPONENT_FILTERINPUT_SLUG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUG],
-            self::COMPONENT_FILTERINPUT_DATEFORMAT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATEFORMAT],
-            self::COMPONENT_FILTERINPUT_GMT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GMT],
+            self::COMPONENT_FILTERINPUT_LIMIT => $this->getLimitFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_OFFSET => $this->getOffsetFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_SEARCH => $this->getSearchFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_IDS => $this->getIncludeFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_ID => $this->getIncludeFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS => $this->getIncludeFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS => $this->getExcludeIDsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_PARENT_IDS => $this->getParentIDsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_PARENT_ID => $this->getParentIDFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getExcludeParentIDsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_SLUGS => $this->getSlugsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_SLUG => $this->getSlugFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_DATEFORMAT => $this->getFormatFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_GMT => $this->getGMTFilterInputProcessor(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

@@ -21,7 +21,10 @@ use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\FilterInputProcessors\UnionCustomPostTypesFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeParentIDsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
@@ -38,6 +41,10 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     private ?CustomPostIDsFilterInputProcessor $customPostIDsFilterInputProcessor = null;
     private ?ExcludeCustomPostIDsFilterInputProcessor $excludeCustomPostIDsFilterInputProcessor = null;
     private ?UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor = null;
+    private ?SearchFilterInputProcessor $searchFilterInputProcessor = null;
+    private ?ParentIDFilterInputProcessor $parentIDFilterInputProcessor = null;
+    private ?ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor = null;
+    private ?ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -126,6 +133,38 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     final protected function getUnionCustomPostTypesFilterInputProcessor(): UnionCustomPostTypesFilterInputProcessor
     {
         return $this->unionCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInputProcessor::class);
+    }
+    final public function setExcludeParentIDsFilterInputProcessor(ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor): void
+    {
+        $this->excludeParentIDsFilterInputProcessor = $excludeParentIDsFilterInputProcessor;
+    }
+    final protected function getExcludeParentIDsFilterInputProcessor(): ExcludeParentIDsFilterInputProcessor
+    {
+        return $this->excludeParentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeParentIDsFilterInputProcessor::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $searchFilterInputProcessor): void
+    {
+        $this->searchFilterInputProcessor = $searchFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->searchFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+    }
+    final public function setParentIDFilterInputProcessor(ParentIDFilterInputProcessor $parentIDFilterInputProcessor): void
+    {
+        $this->parentIDFilterInputProcessor = $parentIDFilterInputProcessor;
+    }
+    final protected function getParentIDFilterInputProcessor(): ParentIDFilterInputProcessor
+    {
+        return $this->parentIDFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDFilterInputProcessor::class);
+    }
+    final public function setParentIDsFilterInputProcessor(ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor): void
+    {
+        $this->parentIDsFilterInputProcessor = $parentIDsFilterInputProcessor;
+    }
+    final protected function getParentIDsFilterInputProcessor(): ParentIDsFilterInputProcessor
+    {
+        return $this->parentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDsFilterInputProcessor::class);
     }
 
     public function getAdminInputFieldNames(): array
@@ -223,11 +262,11 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     {
         return match ($inputFieldName) {
             'status' => $this->getCommentStatusFilterInputProcessor(),
-            'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
+            'search' => $this->getSearchFilterInputProcessor(),
             'types' => $this->getCommentTypesFilterInputProcessor(),
-            'parentID' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_PARENT_ID],
-            'parentIDs' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_PARENT_IDS],
-            'excludeParentIDs' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_EXCLUDE_PARENT_IDS],
+            'parentID' => $this->getParentIDFilterInputProcessor(),
+            'parentIDs' => $this->getParentIDsFilterInputProcessor(),
+            'excludeParentIDs' => $this->getExcludeParentIDsFilterInputProcessor(),
             'customPostID' => $this->getCustomPostIDFilterInputProcessor(),
             'customPostIDs' => $this->getCustomPostIDsFilterInputProcessor(),
             'excludeCustomPostIDs' => $this->getExcludeCustomPostIDsFilterInputProcessor(),

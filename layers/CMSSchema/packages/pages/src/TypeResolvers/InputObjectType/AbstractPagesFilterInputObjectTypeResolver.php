@@ -7,10 +7,41 @@ namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeParentIDsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDsFilterInputProcessor;
 
 abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver
 {
+    private ?ParentIDFilterInputProcessor $parentIDFilterInputProcessor = null;
+    private ?ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor = null;
+    private ?ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor = null;
+
+    final public function setParentIDFilterInputProcessor(ParentIDFilterInputProcessor $parentIDFilterInputProcessor): void
+    {
+        $this->parentIDFilterInputProcessor = $parentIDFilterInputProcessor;
+    }
+    final protected function getParentIDFilterInputProcessor(): ParentIDFilterInputProcessor
+    {
+        return $this->parentIDFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDFilterInputProcessor::class);
+    }
+    final public function setParentIDsFilterInputProcessor(ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor): void
+    {
+        $this->parentIDsFilterInputProcessor = $parentIDsFilterInputProcessor;
+    }
+    final protected function getParentIDsFilterInputProcessor(): ParentIDsFilterInputProcessor
+    {
+        return $this->parentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDsFilterInputProcessor::class);
+    }
+    final public function setExcludeParentIDsFilterInputProcessor(ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor): void
+    {
+        $this->excludeParentIDsFilterInputProcessor = $excludeParentIDsFilterInputProcessor;
+    }
+    final protected function getExcludeParentIDsFilterInputProcessor(): ExcludeParentIDsFilterInputProcessor
+    {
+        return $this->excludeParentIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeParentIDsFilterInputProcessor::class);
+    }
+
     abstract protected function addParentInputFields(): bool;
 
     public function getInputFieldNameTypeResolvers(): array
@@ -49,9 +80,9 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'parentID' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_PARENT_ID],
-            'parentIDs' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_PARENT_IDS],
-            'excludeParentIDs' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_EXCLUDE_PARENT_IDS],
+            'parentID' => $this->getParentIDFilterInputProcessor(),
+            'parentIDs' => $this->getParentIDsFilterInputProcessor(),
+            'excludeParentIDs' => $this->getExcludeParentIDsFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
