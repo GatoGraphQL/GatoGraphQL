@@ -9,9 +9,4 @@ use PoP\Root\Services\BasicServiceTrait;
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
     use BasicServiceTrait;
-
-    public function getFilterInputsToProcess(): array
-    {
-        return [];
-    }
 }
