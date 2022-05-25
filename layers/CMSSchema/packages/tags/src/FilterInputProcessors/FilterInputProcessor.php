@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
     public final const FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';

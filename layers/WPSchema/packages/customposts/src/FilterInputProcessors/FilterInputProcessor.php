@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_HAS_PASSWORD = 'filterinput-has-password';
     public final const FILTERINPUT_PASSWORD = 'filterinput-password';

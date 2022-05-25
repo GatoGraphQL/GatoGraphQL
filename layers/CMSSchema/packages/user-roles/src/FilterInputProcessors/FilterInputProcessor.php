@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
     public final const FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';

@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
 

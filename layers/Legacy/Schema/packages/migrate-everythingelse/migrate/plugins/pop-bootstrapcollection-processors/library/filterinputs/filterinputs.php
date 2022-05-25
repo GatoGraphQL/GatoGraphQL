@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class PoP_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_MultiSelectFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
     public final const FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';

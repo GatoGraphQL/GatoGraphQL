@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
     public final const FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';

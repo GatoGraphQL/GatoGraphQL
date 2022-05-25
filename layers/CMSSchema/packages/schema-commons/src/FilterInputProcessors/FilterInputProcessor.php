@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_SORT = 'filterinput-sort';
     public final const FILTERINPUT_ORDER = 'filterinput-order';

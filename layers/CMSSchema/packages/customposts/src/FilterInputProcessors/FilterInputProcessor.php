@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public final const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';

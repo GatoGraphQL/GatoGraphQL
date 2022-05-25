@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class PoP_Module_Processor_ReferencesFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_ReferencesFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
 

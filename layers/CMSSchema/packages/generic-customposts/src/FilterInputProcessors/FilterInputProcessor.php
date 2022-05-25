@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\GenericCustomPosts\FilterInputProcessors;
 
 use PoP\Root\App;
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPCMSSchema\GenericCustomPosts\Module;
 use PoPCMSSchema\GenericCustomPosts\ModuleConfiguration;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
 

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Categories\FilterInputProcessors;
-
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+namespace PoP\ComponentModel\FilterInputProcessors;
 
 abstract class AbstractValueToQueryFilterInputProcessor extends AbstractFilterInputProcessor
 {

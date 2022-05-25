@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class FilterInputProcessor extends AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_NAME = 'filterinput-name';
     public final const FILTERINPUT_USERNAME = 'filterinput-username';
