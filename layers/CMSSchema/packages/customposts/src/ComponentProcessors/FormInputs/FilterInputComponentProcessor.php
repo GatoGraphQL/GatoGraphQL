@@ -11,6 +11,7 @@ use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPosts\FilterInputProcessors\CustomPostStatusFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
@@ -22,6 +23,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
+    private ?CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor = null;
 
     final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
     {
@@ -39,6 +41,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
+    final public function setCustomPostStatusFilterInputProcessor(CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor): void
+    {
+        $this->customPostStatusFilterInputProcessor = $customPostStatusFilterInputProcessor;
+    }
+    final protected function getCustomPostStatusFilterInputProcessor(): CustomPostStatusFilterInputProcessor
+    {
+        return $this->customPostStatusFilterInputProcessor ??= $this->instanceManager->getInstance(CustomPostStatusFilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -51,7 +61,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTSTATUS],
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getCustomPostStatusFilterInputProcessor(),
             self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         ];
         return $filterInputs[$component[1]] ?? null;
