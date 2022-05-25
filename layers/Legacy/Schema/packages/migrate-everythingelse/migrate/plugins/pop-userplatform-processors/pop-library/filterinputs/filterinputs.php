@@ -16,7 +16,7 @@ class PoP_Module_Processor_UserPlatformFilterInputProcessor extends AbstractValu
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_BUTTONGROUP_CATEGORIES:

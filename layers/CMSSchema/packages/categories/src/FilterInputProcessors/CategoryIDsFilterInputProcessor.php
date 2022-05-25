@@ -8,7 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProc
 
 class CategoryIDsFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         return 'category-ids';
     }

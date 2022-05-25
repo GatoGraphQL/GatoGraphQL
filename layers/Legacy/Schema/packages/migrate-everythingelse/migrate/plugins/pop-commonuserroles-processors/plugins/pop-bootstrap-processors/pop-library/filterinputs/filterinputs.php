@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractVa
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
 

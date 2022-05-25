@@ -12,7 +12,7 @@ use PoPCMSSchema\GenericCustomPosts\ModuleConfiguration;
 
 class GenericCustomPostTypesFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         return 'custompost-types';
     }

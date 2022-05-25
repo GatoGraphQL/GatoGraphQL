@@ -8,7 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProc
 
 class ParentIDFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         return 'parent-id';
     }

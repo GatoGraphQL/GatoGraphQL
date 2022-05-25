@@ -10,7 +10,7 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class UnionCustomPostTypesFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         return 'custompost-types';
     }

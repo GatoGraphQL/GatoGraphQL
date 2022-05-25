@@ -11,7 +11,7 @@ class SortFilterInputProcessor extends AbstractArrayValuesToQueryFilterInputProc
     /**
      * @return array<int|string,string>
      */
-    protected function getValueToQueryArgKeys(array $filterInput): array
+    protected function getValueToQueryArgKeys(): array
     {
         return ['orderby', 'order'];
     }

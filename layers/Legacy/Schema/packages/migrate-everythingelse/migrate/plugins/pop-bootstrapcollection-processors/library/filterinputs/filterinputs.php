@@ -14,7 +14,7 @@ class PoP_Module_Processor_MultiSelectFilterInputProcessor extends AbstractValue
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_MODERATEDPOSTSTATUS:

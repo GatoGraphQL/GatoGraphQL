@@ -20,7 +20,7 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractV
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_POSTSECTIONS:

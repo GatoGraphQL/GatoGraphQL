@@ -12,7 +12,7 @@ class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractValueT
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
 

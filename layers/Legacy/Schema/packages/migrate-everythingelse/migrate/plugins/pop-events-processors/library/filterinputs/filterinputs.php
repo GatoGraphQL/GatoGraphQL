@@ -12,7 +12,7 @@ class PoP_Events_Module_Processor_FilterInputProcessor extends AbstractValueToQu
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_EVENTSCOPE:

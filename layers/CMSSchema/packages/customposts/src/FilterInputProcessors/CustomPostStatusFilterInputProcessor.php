@@ -20,7 +20,7 @@ class CustomPostStatusFilterInputProcessor extends AbstractValueToQueryFilterInp
         return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         return 'status';
     }

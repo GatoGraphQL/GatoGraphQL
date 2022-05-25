@@ -6,12 +6,12 @@ namespace PoP\ComponentModel\FilterInputProcessors;
 
 abstract class AbstractArrayValuesToQueryFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    final public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    final public function filterDataloadQueryArgs(array &$query, mixed $value): void
     {
         /** @var array $value */
         $value = $this->getValue($value);
         $avoidSettingArrayValueIfEmpty = $this->avoidSettingArrayValueIfEmpty();
-        foreach ($this->getValueToQueryArgKeys($filterInput) as $valueKey => $queryKey) {
+        foreach ($this->getValueToQueryArgKeys() as $valueKey => $queryKey) {
             if (is_numeric($valueKey)) {
                 $valueKey = $queryKey;
             }
@@ -25,7 +25,7 @@ abstract class AbstractArrayValuesToQueryFilterInputProcessor extends AbstractFi
     /**
      * @return array<int|string,string>
      */
-    abstract protected function getValueToQueryArgKeys(array $filterInput): array;
+    abstract protected function getValueToQueryArgKeys(): array;
     
     protected function getValue(array $value): array
     {

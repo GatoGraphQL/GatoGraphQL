@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractValueToQueryF
         );
     }
 
-    protected function getQueryArgKey(array $filterInput): string
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:
