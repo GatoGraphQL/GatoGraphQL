@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FilterInputProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 
-class CustomPostStatusFilterInputProcessor extends AbstractFilterInputProcessor
+class CustomPostStatusFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
 
@@ -20,23 +20,27 @@ class CustomPostStatusFilterInputProcessor extends AbstractFilterInputProcessor
         return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
 
-    final public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    protected function getQueryArgKey(array $filterInput): string
     {
-        if (!$value) {
-            return;
-        }
-        
-        // Remove any status that is not in the Enum
-        $value = array_intersect(
+        return 'status';
+    }
+
+    /**
+     * Remove any status that is not in the Enum
+     */
+    protected function getValue(mixed $value): mixed
+    {
+        return array_intersect(
             $value,
             $this->getFilterCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues()
         );
-        
-        // If no status is valid, do not set, as to not override the default value
-        if (!$value) {
-            return;
-        }
-        
-        $query['status'] = $value;
+    }
+
+    /**
+     * If no status is valid, do not set, as to not override the default value
+     */
+    protected function avoidSettingValueIfEmpty(): bool
+    {
+        return true;
     }
 }
