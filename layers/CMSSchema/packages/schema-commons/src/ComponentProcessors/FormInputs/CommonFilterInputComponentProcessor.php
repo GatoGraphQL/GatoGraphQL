@@ -17,6 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\FormInputs\BooleanFormInput;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SortFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
 
@@ -42,6 +43,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?SortFilterInputProcessor $sortFilterInputProcessor = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -75,6 +77,14 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setSortFilterInputProcessor(SortFilterInputProcessor $sortFilterInputProcessor): void
+    {
+        $this->sortFilterInputProcessor = $sortFilterInputProcessor;
+    }
+    final protected function getSortFilterInputProcessor(): SortFilterInputProcessor
+    {
+        return $this->sortFilterInputProcessor ??= $this->instanceManager->getInstance(SortFilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -100,7 +110,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_SORT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SORT],
+            self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInputProcessor(),
             self::COMPONENT_FILTERINPUT_LIMIT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],
             self::COMPONENT_FILTERINPUT_OFFSET => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_OFFSET],
             self::COMPONENT_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
