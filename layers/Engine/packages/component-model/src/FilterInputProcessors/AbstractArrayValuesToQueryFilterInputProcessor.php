@@ -11,18 +11,21 @@ abstract class AbstractArrayValuesToQueryFilterInputProcessor extends AbstractFi
         /** @var array $value */
         $value = $this->getValue($value);
         $avoidSettingArrayValueIfEmpty = $this->avoidSettingArrayValueIfEmpty();
-        foreach ($this->getQueryArgKeys($filterInput) as $key) {
-            if ($avoidSettingArrayValueIfEmpty && empty($value[$key] ?? null)) {
+        foreach ($this->getValueToQueryArgKeys($filterInput) as $valueKey => $queryKey) {
+            if (is_numeric($valueKey)) {
+                $valueKey = $queryKey;
+            }
+            if ($avoidSettingArrayValueIfEmpty && empty($value[$valueKey] ?? null)) {
                 continue;
             }
-            $query[$key] = $value[$key] ?? null;
+            $query[$queryKey] = $value[$valueKey] ?? null;
         }
     }
 
     /**
-     * @return string[]
+     * @return array<int|string,string>
      */
-    abstract protected function getQueryArgKeys(array $filterInput): array;
+    abstract protected function getValueToQueryArgKeys(array $filterInput): array;
     
     protected function getValue(array $value): array
     {

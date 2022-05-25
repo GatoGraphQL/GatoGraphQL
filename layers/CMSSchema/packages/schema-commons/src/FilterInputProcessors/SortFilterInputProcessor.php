@@ -9,9 +9,9 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractArrayValuesToQueryFilterInp
 class SortFilterInputProcessor extends AbstractArrayValuesToQueryFilterInputProcessor
 {
     /**
-     * @return string[]
+     * @return array<int|string,string>
      */
-    protected function getQueryArgKeys(array $filterInput): array
+    protected function getValueToQueryArgKeys(array $filterInput): array
     {
         return ['orderby', 'order'];
     }
