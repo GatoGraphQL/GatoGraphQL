@@ -22,16 +22,21 @@ class CustomPostStatusFilterInputProcessor extends AbstractFilterInputProcessor
 
     final public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
     {
-        // Remove any status that is not in the Enum
-        if ($value) {
-            $value = array_intersect(
-                $value,
-                $this->getFilterCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues()
-            );
-            // If no status is valid, do not set, as to not override the default value
-            if ($value) {
-                $query['status'] = $value;
-            }
+        if (!$value) {
+            return;
         }
+        
+        // Remove any status that is not in the Enum
+        $value = array_intersect(
+            $value,
+            $this->getFilterCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues()
+        );
+        
+        // If no status is valid, do not set, as to not override the default value
+        if (!$value) {
+            return;
+        }
+        
+        $query['status'] = $value;
     }
 }
