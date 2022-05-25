@@ -84,9 +84,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
          * If the input field defines a FilterInput, apply it to obtain the filtering query
          */
         if ($filterInput = $this->getConsolidatedInputFieldFilterInput($inputFieldName)) {
-            /** @var FilterInputProcessorInterface */
-            $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
-            $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
+            $filterInput->filterDataloadQueryArgs($query, $inputFieldValue);
             return;
         }
 

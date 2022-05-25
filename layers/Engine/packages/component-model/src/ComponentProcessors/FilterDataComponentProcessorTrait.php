@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 
 trait FilterDataComponentProcessorTrait
@@ -25,9 +24,7 @@ trait FilterDataComponentProcessorTrait
                 $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subComponent);
                 $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subComponent, $source);
                 if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subComponent)) {
-                    /** @var FilterInputProcessorInterface */
-                    $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
-                    $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);
+                    $filterInput->filterDataloadQueryArgs($query, $value);
                 }
             }
         }
