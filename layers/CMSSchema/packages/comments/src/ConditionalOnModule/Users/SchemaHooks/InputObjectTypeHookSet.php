@@ -12,13 +12,16 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors\CustomPostAuthorIDsFilterInputProcessor;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors\ExcludeCustomPostAuthorIDsFilterInputProcessor;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\FilterInputProcessor as UsersCustomPostsFilterInputProcessor;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?CustomPostAuthorIDsFilterInputProcessor $customPostAuthorIDsFilterInputProcessor = null;
+    private ?ExcludeCustomPostAuthorIDsFilterInputProcessor $excludeCustomPostAuthorIDsFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -27,6 +30,22 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    final public function setCustomPostAuthorIDsFilterInputProcessor(CustomPostAuthorIDsFilterInputProcessor $customPostAuthorIDsFilterInputProcessor): void
+    {
+        $this->customPostAuthorIDsFilterInputProcessor = $customPostAuthorIDsFilterInputProcessor;
+    }
+    final protected function getCustomPostAuthorIDsFilterInputProcessor(): CustomPostAuthorIDsFilterInputProcessor
+    {
+        return $this->customPostAuthorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInputProcessor::class);
+    }
+    final public function setExcludeCustomPostAuthorIDsFilterInputProcessor(ExcludeCustomPostAuthorIDsFilterInputProcessor $excludeCustomPostAuthorIDsFilterInputProcessor): void
+    {
+        $this->excludeCustomPostAuthorIDsFilterInputProcessor = $excludeCustomPostAuthorIDsFilterInputProcessor;
+    }
+    final protected function getExcludeCustomPostAuthorIDsFilterInputProcessor(): ExcludeCustomPostAuthorIDsFilterInputProcessor
+    {
+        return $this->excludeCustomPostAuthorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInputProcessor::class);
     }
 
     protected function init(): void
@@ -125,8 +144,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
         return match ($inputFieldName) {
             'authorIDs' => [UsersCustomPostsFilterInputProcessor::class, UsersCustomPostsFilterInputProcessor::FILTERINPUT_AUTHOR_IDS],
             'excludeAuthorIDs' => [UsersCustomPostsFilterInputProcessor::class, UsersCustomPostsFilterInputProcessor::FILTERINPUT_EXCLUDE_AUTHOR_IDS],
-            'customPostAuthorIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOST_AUTHOR_IDS],
-            'excludeCustomPostAuthorIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS],
+            'customPostAuthorIDs' => $this->getCustomPostAuthorIDsFilterInputProcessor(),
+            'excludeCustomPostAuthorIDs' => $this->getExcludeCustomPostAuthorIDsFilterInputProcessor(),
             default => $inputFieldFilterInput,
         };
     }
