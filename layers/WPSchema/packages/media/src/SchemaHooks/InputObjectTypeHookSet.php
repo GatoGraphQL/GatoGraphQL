@@ -12,11 +12,12 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugFilterInputProcessor;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?SlugFilterInputProcessor $slugFilterInputProcessor = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -25,6 +26,14 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setSlugFilterInputProcessor(SlugFilterInputProcessor $slugFilterInputProcessor): void
+    {
+        $this->slugFilterInputProcessor = $slugFilterInputProcessor;
+    }
+    final protected function getSlugFilterInputProcessor(): SlugFilterInputProcessor
+    {
+        return $this->slugFilterInputProcessor ??= $this->instanceManager->getInstance(SlugFilterInputProcessor::class);
     }
 
     protected function init(): void
@@ -90,7 +99,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'slug' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUG],
+            'slug' => $this->getSlugFilterInputProcessor(),
             default => $inputFieldFilterInput,
         };
     }

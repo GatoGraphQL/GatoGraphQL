@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
 use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
@@ -20,6 +20,7 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -44,6 +45,14 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
         return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+    }
+    final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
+    {
+        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+    }
+    final protected function getIncludeFilterInputProcessor(): IncludeFilterInputProcessor
+    {
+        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(IncludeFilterInputProcessor::class);
     }
 
     public function getTypeName(): string
@@ -89,7 +98,7 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'id' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_INCLUDE],
+            'id' => $this->getIncludeFilterInputProcessor(),
             'username' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USERNAME],
             'email' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL],
             default => parent::getInputFieldFilterInput($inputFieldName),

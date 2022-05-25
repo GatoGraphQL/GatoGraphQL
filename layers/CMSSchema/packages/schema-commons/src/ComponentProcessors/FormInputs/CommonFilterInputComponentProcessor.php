@@ -55,11 +55,10 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?SortFilterInputProcessor $sortFilterInputProcessor = null;
-
     private ?ExcludeIDsFilterInputProcessor $excludeIDsFilterInputProcessor = null;
     private ?ExcludeParentIDsFilterInputProcessor $excludeParentIDsFilterInputProcessor = null;
     private ?FormatFilterInputProcessor $formatFilterInputProcessor = null;
-    private ?GMTFilterInputProcessor $gMTFilterInputProcessor = null;
+    private ?GMTFilterInputProcessor $gmtFilterInputProcessor = null;
     private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
     private ?LimitFilterInputProcessor $limitFilterInputProcessor = null;
     private ?OffsetFilterInputProcessor $offsetFilterInputProcessor = null;
@@ -133,13 +132,13 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     {
         return $this->formatFilterInputProcessor ??= $this->instanceManager->getInstance(FormatFilterInputProcessor::class);
     }
-    final public function setGMTFilterInputProcessor(GMTFilterInputProcessor $gMTFilterInputProcessor): void
+    final public function setGMTFilterInputProcessor(GMTFilterInputProcessor $gmtFilterInputProcessor): void
     {
-        $this->gMTFilterInputProcessor = $gMTFilterInputProcessor;
+        $this->gmtFilterInputProcessor = $gmtFilterInputProcessor;
     }
     final protected function getGMTFilterInputProcessor(): GMTFilterInputProcessor
     {
-        return $this->gMTFilterInputProcessor ??= $this->instanceManager->getInstance(GMTFilterInputProcessor::class);
+        return $this->gmtFilterInputProcessor ??= $this->instanceManager->getInstance(GMTFilterInputProcessor::class);
     }
     final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
     {

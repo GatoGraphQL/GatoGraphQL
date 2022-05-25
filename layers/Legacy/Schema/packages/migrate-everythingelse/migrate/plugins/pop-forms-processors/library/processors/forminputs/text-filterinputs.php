@@ -5,9 +5,8 @@ use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
 use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor as UserFilterInputProcessor;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -18,6 +17,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public final const COMPONENT_FILTERINPUT_NAME = 'filterinput-name';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?SearchFilterInputProcessor $searchFilterInputProcessor = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -26,6 +26,14 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $searchFilterInputProcessor): void
+    {
+        $this->searchFilterInputProcessor = $searchFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->searchFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
     }
 
     public function getComponentsToProcess(): array
@@ -40,7 +48,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
+            self::COMPONENT_FILTERINPUT_SEARCH => $this->getSearchFilterInputProcessor(),
             self::COMPONENT_FILTERINPUT_NAME => [UserFilterInputProcessor::class, UserFilterInputProcessor::FILTERINPUT_NAME],
             self::COMPONENT_FILTERINPUT_HASHTAGS => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERINPUT_HASHTAGS],
         ];

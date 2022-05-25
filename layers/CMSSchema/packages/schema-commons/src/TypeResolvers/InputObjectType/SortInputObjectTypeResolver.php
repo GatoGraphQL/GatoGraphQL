@@ -7,7 +7,8 @@ namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderByFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\EnumType\OrderEnumTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Order;
 
@@ -15,6 +16,8 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?OrderEnumTypeResolver $orderEnumTypeResolver = null;
+    private ?OrderByFilterInputProcessor $excludeIDsFilterInputProcessor = null;
+    private ?OrderFilterInputProcessor $includeFilterInputProcessor = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -31,6 +34,22 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     final protected function getOrderEnumTypeResolver(): OrderEnumTypeResolver
     {
         return $this->orderEnumTypeResolver ??= $this->instanceManager->getInstance(OrderEnumTypeResolver::class);
+    }
+    final public function setOrderByFilterInputProcessor(OrderByFilterInputProcessor $excludeIDsFilterInputProcessor): void
+    {
+        $this->excludeIDsFilterInputProcessor = $excludeIDsFilterInputProcessor;
+    }
+    final protected function getOrderByFilterInputProcessor(): OrderByFilterInputProcessor
+    {
+        return $this->excludeIDsFilterInputProcessor ??= $this->instanceManager->getInstance(OrderByFilterInputProcessor::class);
+    }
+    final public function setOrderFilterInputProcessor(OrderFilterInputProcessor $includeFilterInputProcessor): void
+    {
+        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+    }
+    final protected function getOrderFilterInputProcessor(): OrderFilterInputProcessor
+    {
+        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(OrderFilterInputProcessor::class);
     }
 
     public function getTypeName(): string
@@ -71,8 +90,8 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'order' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
-            'by' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDERBY],
+            'order' => $this->getOrderFilterInputProcessor(),
+            'by' => $this->getOrderByFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
