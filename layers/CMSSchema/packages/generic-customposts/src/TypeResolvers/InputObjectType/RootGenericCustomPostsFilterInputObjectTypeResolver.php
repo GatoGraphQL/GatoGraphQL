@@ -8,12 +8,13 @@ use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostsFilterInputObjectTypeResolverInterface;
-use PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\GenericCustomPostTypesFilterInputProcessor;
 use PoPCMSSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnumTypeResolver;
 
 class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements CustomPostsFilterInputObjectTypeResolverInterface
 {
     private ?GenericCustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
+    private ?GenericCustomPostTypesFilterInputProcessor $genericCustomPostTypesFilterInputProcessor = null;
 
     final public function setGenericCustomPostEnumTypeResolver(GenericCustomPostEnumTypeResolver $customPostEnumTypeResolver): void
     {
@@ -22,6 +23,14 @@ class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustom
     final protected function getGenericCustomPostEnumTypeResolver(): GenericCustomPostEnumTypeResolver
     {
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostEnumTypeResolver::class);
+    }
+    final public function setGenericCustomPostTypesFilterInputProcessor(GenericCustomPostTypesFilterInputProcessor $genericCustomPostTypesFilterInputProcessor): void
+    {
+        $this->genericCustomPostTypesFilterInputProcessor = $genericCustomPostTypesFilterInputProcessor;
+    }
+    final protected function getGenericCustomPostTypesFilterInputProcessor(): GenericCustomPostTypesFilterInputProcessor
+    {
+        return $this->genericCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(GenericCustomPostTypesFilterInputProcessor::class);
     }
 
     public function getTypeName(): string
@@ -71,7 +80,7 @@ class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustom
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'customPostTypes' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GENERICCUSTOMPOSTTYPES],
+            'customPostTypes' => $this->getGenericCustomPostTypesFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
