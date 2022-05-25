@@ -34,7 +34,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?array
+    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldFilterInputCache)) {
             return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];
