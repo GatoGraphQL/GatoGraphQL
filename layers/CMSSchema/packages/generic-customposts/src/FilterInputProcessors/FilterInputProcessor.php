@@ -21,7 +21,7 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    protected function getQueryArgKey(array $filterInput): string
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

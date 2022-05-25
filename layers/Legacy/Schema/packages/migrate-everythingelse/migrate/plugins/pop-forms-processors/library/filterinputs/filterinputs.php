@@ -14,7 +14,7 @@ class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractValueToQuer
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    protected function getQueryArgKey(array $filterInput): string
     {
         switch ($filterInput[1]) {
             case self::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:

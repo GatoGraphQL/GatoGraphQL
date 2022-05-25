@@ -12,7 +12,7 @@ class PoP_Events_Module_Processor_FilterInputProcessor extends AbstractValueToQu
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    protected function getQueryArgKey(array $filterInput): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_EVENTSCOPE:
