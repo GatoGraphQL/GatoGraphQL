@@ -13,7 +13,6 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
     public final const FILTERINPUT_LIMIT = 'filterinput-limit';
     public final const FILTERINPUT_OFFSET = 'filterinput-offset';
     public final const FILTERINPUT_SEARCH = 'filterinput-search';
-    public final const FILTERINPUT_DATES = 'filterinput-dates';
     public final const FILTERINPUT_INCLUDE = 'filterinput-include';
     public final const FILTERINPUT_EXCLUDE_IDS = 'filterinput-exclude-ids';
     public final const FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
@@ -33,7 +32,6 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
             [self::class, self::FILTERINPUT_LIMIT],
             [self::class, self::FILTERINPUT_OFFSET],
             [self::class, self::FILTERINPUT_SEARCH],
-            [self::class, self::FILTERINPUT_DATES],
             [self::class, self::FILTERINPUT_INCLUDE],
             [self::class, self::FILTERINPUT_EXCLUDE_IDS],
             [self::class, self::FILTERINPUT_PARENT_IDS],
@@ -64,14 +62,6 @@ class FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
                 break;
             case self::FILTERINPUT_SEARCH:
                 $query['search'] = $value;
-                break;
-            case self::FILTERINPUT_DATES:
-                if (isset($value['from'])) {
-                    $query['date-from'] = $value['from'];
-                }
-                if (isset($value['to'])) {
-                    $query['date-to'] = $value['to'];
-                }
                 break;
             case self::FILTERINPUT_INCLUDE:
                 $query['include'] = $value;
