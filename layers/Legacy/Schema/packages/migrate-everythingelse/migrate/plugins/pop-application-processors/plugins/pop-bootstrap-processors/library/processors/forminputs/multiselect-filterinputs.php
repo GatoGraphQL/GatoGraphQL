@@ -48,6 +48,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         );
     }
 
+    /**
+     * @todo Migrate from [FilterInputProcessor::class, FilterInputProcessor::NAME] to FilterInputProcessorInterface
+     */
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [

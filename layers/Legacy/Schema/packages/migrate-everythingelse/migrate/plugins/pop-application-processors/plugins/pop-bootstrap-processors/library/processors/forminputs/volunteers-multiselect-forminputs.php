@@ -32,6 +32,9 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
         );
     }
 
+    /**
+     * @todo Migrate from [FilterInputProcessor::class, FilterInputProcessor::NAME] to FilterInputProcessorInterface
+     */
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [

@@ -55,6 +55,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         );
     }
 
+    /**
+     * @todo Migrate from [FilterInputProcessor::class, FilterInputProcessor::NAME] to FilterInputProcessorInterface
+     */
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [

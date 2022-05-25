@@ -31,6 +31,9 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         );
     }
 
+    /**
+     * @todo Migrate from [FilterInputProcessor::class, FilterInputProcessor::NAME] to FilterInputProcessorInterface
+     */
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [

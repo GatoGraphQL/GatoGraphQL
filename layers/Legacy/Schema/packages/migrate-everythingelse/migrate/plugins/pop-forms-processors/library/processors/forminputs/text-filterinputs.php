@@ -54,6 +54,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         );
     }
 
+    /**
+     * @todo Migrate from [FilterInputProcessor::class, FilterInputProcessor::NAME] to FilterInputProcessorInterface
+     */
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
