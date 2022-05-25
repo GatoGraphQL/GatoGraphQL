@@ -4,9 +4,7 @@ use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputCom
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Processor_DateRangeFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -35,7 +33,8 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
+            // @todo This FilterInputProcessor was deleted, since it shouldn't be used anymore
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => null,
         ];
         return $filterInputs[$component[1]] ?? null;
     }

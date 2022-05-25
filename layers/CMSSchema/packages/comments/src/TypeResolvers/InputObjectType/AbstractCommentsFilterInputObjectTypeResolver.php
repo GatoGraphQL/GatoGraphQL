@@ -19,7 +19,7 @@ use PoPCMSSchema\Comments\Module;
 use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
-use PoPCMSSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor as CustomPostsFilterInputProcessor;
+use PoPCMSSchema\CustomPosts\FilterInputProcessors\UnionCustomPostTypesFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
@@ -37,6 +37,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     private ?CustomPostIDFilterInputProcessor $customPostIDFilterInputProcessor = null;
     private ?CustomPostIDsFilterInputProcessor $customPostIDsFilterInputProcessor = null;
     private ?ExcludeCustomPostIDsFilterInputProcessor $excludeCustomPostIDsFilterInputProcessor = null;
+    private ?UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -117,6 +118,14 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     final protected function getExcludeCustomPostIDsFilterInputProcessor(): ExcludeCustomPostIDsFilterInputProcessor
     {
         return $this->excludeCustomPostIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeCustomPostIDsFilterInputProcessor::class);
+    }
+    final public function setUnionCustomPostTypesFilterInputProcessor(UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor): void
+    {
+        $this->unionCustomPostTypesFilterInputProcessor = $unionCustomPostTypesFilterInputProcessor;
+    }
+    final protected function getUnionCustomPostTypesFilterInputProcessor(): UnionCustomPostTypesFilterInputProcessor
+    {
+        return $this->unionCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInputProcessor::class);
     }
 
     public function getAdminInputFieldNames(): array
@@ -222,7 +231,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
             'customPostID' => $this->getCustomPostIDFilterInputProcessor(),
             'customPostIDs' => $this->getCustomPostIDsFilterInputProcessor(),
             'excludeCustomPostIDs' => $this->getExcludeCustomPostIDsFilterInputProcessor(),
-            'customPostTypes' => [CustomPostsFilterInputProcessor::class, CustomPostsFilterInputProcessor::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
+            'customPostTypes' => $this->getUnionCustomPostTypesFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
