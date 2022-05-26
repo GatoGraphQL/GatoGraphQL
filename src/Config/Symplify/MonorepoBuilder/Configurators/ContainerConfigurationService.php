@@ -13,22 +13,22 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
+use Symplify\MonorepoBuilder\Config\MBConfig;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
 
 class ContainerConfigurationService
 {
     public function __construct(
-        protected ContainerConfigurator $containerConfigurator,
+        protected MBConfig $mbConfig,
         protected string $rootDirectory,
     ) {
     }
 
     public function configureContainer(): void
     {
-        $parameters = $this->containerConfigurator->parameters();
+        $parameters = $this->mbConfig->parameters();
 
         /**
          * Packages handled by the monorepo
@@ -38,14 +38,8 @@ class ContainerConfigurationService
                 CustomOption::PACKAGE_ORGANIZATIONS,
                 $packageOrganizationConfig->getPackagePathOrganizations()
             );
-            $parameters->set(
-                Option::PACKAGE_DIRECTORIES,
-                $packageOrganizationConfig->getPackageDirectories()
-            );
-            $parameters->set(
-                Option::PACKAGE_DIRECTORIES_EXCLUDES,
-                $packageOrganizationConfig->getPackageDirectoryExcludes()
-            );
+            $parameters->packageDirectories($packageOrganizationConfig->getPackageDirectories());
+            $parameters->packageDirectoriesExcludes($packageOrganizationConfig->getPackageDirectoryExcludes());
         }
 
         /**
@@ -112,20 +106,14 @@ class ContainerConfigurationService
          * Libraries that must always be required (or removed) in composer.json
          */
         if ($dataToAppendAndRemoveConfig = $this->getDataToAppendAndRemoveDataSource()) {
-            $parameters->set(
-                Option::DATA_TO_APPEND,
-                $dataToAppendAndRemoveConfig->getDataToAppend()
-            );
-            $parameters->set(
-                Option::DATA_TO_REMOVE,
-                $dataToAppendAndRemoveConfig->getDataToRemove()
-            );
+            $parameters->dataToAppend($dataToAppendAndRemoveConfig->getDataToAppend());
+            $parameters->dataToRemove($dataToAppendAndRemoveConfig->getDataToRemove());
         }
 
         /**
          * Configure services
          */
-        $services = $this->containerConfigurator->services();
+        $services = $this->mbConfig->services();
         $services->defaults()
             ->autowire()
             ->autoconfigure();
