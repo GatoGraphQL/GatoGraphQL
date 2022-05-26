@@ -80,4 +80,13 @@ query {
     id
     name
   }
+
+  usersSortedASC: users(pagination: { limit: 3 }, sort: { by: NAME, order: ASC}) {
+    id
+    name
+  }
+  usersSortedDESC: users(pagination: { limit: 3 }, sort: { by: NAME, order: DESC}) {
+    id
+    name
+  }
 }

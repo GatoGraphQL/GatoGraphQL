@@ -261,6 +261,34 @@
                 "id": 4,
                 "name": "Author Marquez"
             }
+        ],
+        "usersSortedASC": [
+            {
+                "id": 1,
+                "name": "admin"
+            },
+            {
+                "id": 4,
+                "name": "Author Marquez"
+            },
+            {
+                "id": 3,
+                "name": "Contributor Johnson"
+            }
+        ],
+        "usersSortedDESC": [
+            {
+                "id": 2,
+                "name": "Subscriber Bennett"
+            },
+            {
+                "id": 5,
+                "name": "Editor Smith"
+            },
+            {
+                "id": 3,
+                "name": "Contributor Johnson"
+            }
         ]
     }
 }
