@@ -99,7 +99,7 @@ query {
     id
     title
   }
-  postsByTagIDs: posts(filter: { tagIDs: [3, 4] }) {
+  postsByTagIDs: posts(filter: { tagIDs: [4, 5] }) {
     id
     title
   }
