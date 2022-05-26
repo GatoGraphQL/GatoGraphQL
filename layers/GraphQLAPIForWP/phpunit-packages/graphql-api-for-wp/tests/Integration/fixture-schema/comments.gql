@@ -31,7 +31,7 @@
     commentsByParentID: comments(filter: { parentID: 7 }) {
       id
     }
-    commentsByParentIDs: comments(filter: { parentIDs: [7] }) {
+    commentsByParentIDs: comments(filter: { parentID: null, parentIDs: [4, 7] }) {
       id
     }
     commentsBySearch: comments(filter: { search: "endpoint" }) {
