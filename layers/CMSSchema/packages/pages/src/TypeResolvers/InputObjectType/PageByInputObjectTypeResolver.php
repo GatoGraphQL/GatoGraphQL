@@ -4,11 +4,23 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByInputObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\PathOrPathsFilterInputProcessor;
 
 class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver
 {
+    private ?PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor = null;
+
+    final public function setPathOrPathsFilterInputProcessor(PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor): void
+    {
+        $this->pathOrPathsFilterInputProcessor = $pathOrPathsFilterInputProcessor;
+    }
+    final protected function getPathOrPathsFilterInputProcessor(): PathOrPathsFilterInputProcessor
+    {
+        return $this->pathOrPathsFilterInputProcessor ??= $this->instanceManager->getInstance(PathOrPathsFilterInputProcessor::class);
+    }
+
     public function getTypeName(): string
     {
         return 'PageByInput';
@@ -37,10 +49,10 @@ class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'path' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PATH_OR_PATHS],
+            'path' => $this->getPathOrPathsFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

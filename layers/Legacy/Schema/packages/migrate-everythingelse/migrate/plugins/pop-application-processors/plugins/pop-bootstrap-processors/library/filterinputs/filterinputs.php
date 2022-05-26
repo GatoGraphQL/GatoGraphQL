@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
     public final const FILTERINPUT_CATEGORIES = 'filterinput-categories';
@@ -20,7 +20,10 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractF
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_POSTSECTIONS:

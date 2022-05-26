@@ -6,11 +6,14 @@ namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\AuthorIDsFilterInputProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\AuthorSlugFilterInputProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\ExcludeAuthorIDsFilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -20,6 +23,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?AuthorIDsFilterInputProcessor $authorIDsFilterInputProcessor = null;
+    private ?AuthorSlugFilterInputProcessor $authorSlugFilterInputProcessor = null;
+    private ?ExcludeAuthorIDsFilterInputProcessor $excludeAuthorIDsFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -37,6 +43,30 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setAuthorIDsFilterInputProcessor(AuthorIDsFilterInputProcessor $authorIDsFilterInputProcessor): void
+    {
+        $this->authorIDsFilterInputProcessor = $authorIDsFilterInputProcessor;
+    }
+    final protected function getAuthorIDsFilterInputProcessor(): AuthorIDsFilterInputProcessor
+    {
+        return $this->authorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(AuthorIDsFilterInputProcessor::class);
+    }
+    final public function setAuthorSlugFilterInputProcessor(AuthorSlugFilterInputProcessor $authorSlugFilterInputProcessor): void
+    {
+        $this->authorSlugFilterInputProcessor = $authorSlugFilterInputProcessor;
+    }
+    final protected function getAuthorSlugFilterInputProcessor(): AuthorSlugFilterInputProcessor
+    {
+        return $this->authorSlugFilterInputProcessor ??= $this->instanceManager->getInstance(AuthorSlugFilterInputProcessor::class);
+    }
+    final public function setExcludeAuthorIDsFilterInputProcessor(ExcludeAuthorIDsFilterInputProcessor $excludeAuthorIDsFilterInputProcessor): void
+    {
+        $this->excludeAuthorIDsFilterInputProcessor = $excludeAuthorIDsFilterInputProcessor;
+    }
+    final protected function getExcludeAuthorIDsFilterInputProcessor(): ExcludeAuthorIDsFilterInputProcessor
+    {
+        return $this->excludeAuthorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -47,12 +77,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?array
+    public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_AUTHOR_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_IDS],
-            self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_SLUG],
-            self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_AUTHOR_IDS],
+            self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getAuthorIDsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => $this->getAuthorSlugFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getExcludeAuthorIDsFilterInputProcessor(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

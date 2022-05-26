@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Tags\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Tags\FilterInputProcessors\TagIDsFilterInputProcessor;
+use PoPCMSSchema\Tags\FilterInputProcessors\TagSlugsFilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -20,6 +22,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?TagSlugsFilterInputProcessor $tagSlugsFilterInputProcessor = null;
+    private ?TagIDsFilterInputProcessor $tagIDsFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -37,6 +41,22 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setTagSlugsFilterInputProcessor(TagSlugsFilterInputProcessor $tagSlugsFilterInputProcessor): void
+    {
+        $this->tagSlugsFilterInputProcessor = $tagSlugsFilterInputProcessor;
+    }
+    final protected function getTagSlugsFilterInputProcessor(): TagSlugsFilterInputProcessor
+    {
+        return $this->tagSlugsFilterInputProcessor ??= $this->instanceManager->getInstance(TagSlugsFilterInputProcessor::class);
+    }
+    final public function setTagIDsFilterInputProcessor(TagIDsFilterInputProcessor $tagIDsFilterInputProcessor): void
+    {
+        $this->tagIDsFilterInputProcessor = $tagIDsFilterInputProcessor;
+    }
+    final protected function getTagIDsFilterInputProcessor(): TagIDsFilterInputProcessor
+    {
+        return $this->tagIDsFilterInputProcessor ??= $this->instanceManager->getInstance(TagIDsFilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -46,11 +66,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?array
+    public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_TAG_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_SLUGS],
-            self::COMPONENT_FILTERINPUT_TAG_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_IDS],
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->getTagSlugsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_TAG_IDS => $this->getTagIDsFilterInputProcessor(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

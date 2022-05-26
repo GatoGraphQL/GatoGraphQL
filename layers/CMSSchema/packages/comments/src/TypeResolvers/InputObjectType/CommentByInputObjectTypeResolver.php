@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
 
 class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -19,6 +21,14 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
+    {
+        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+    }
+    final protected function getIncludeFilterInputProcessor(): IncludeFilterInputProcessor
+    {
+        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(IncludeFilterInputProcessor::class);
     }
 
     public function getTypeName(): string
@@ -46,10 +56,10 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'id' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            'id' => $this->getIncludeFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

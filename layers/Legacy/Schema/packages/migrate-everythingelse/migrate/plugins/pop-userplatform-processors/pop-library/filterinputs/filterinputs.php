@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class PoP_Module_Processor_UserPlatformFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_UserPlatformFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERINPUT_BUTTONGROUP_CATEGORIES = 'filterinput-buttongroup-categories';
     public final const FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS = 'filterinput-buttongroup-contentsections';
@@ -16,7 +16,10 @@ class PoP_Module_Processor_UserPlatformFilterInputProcessor extends AbstractFilt
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_BUTTONGROUP_CATEGORIES:

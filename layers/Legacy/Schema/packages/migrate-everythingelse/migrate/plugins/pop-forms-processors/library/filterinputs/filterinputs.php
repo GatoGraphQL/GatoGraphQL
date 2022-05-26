@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 
-class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
     public final const FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
@@ -14,7 +14,10 @@ class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractFilterInput
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:

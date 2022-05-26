@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
-class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
+class GD_URE_Module_Processor_FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
 {
     public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
     public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';
@@ -25,7 +25,10 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:

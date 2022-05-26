@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\SchemaHooks;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Categories\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Categories\FilterInputProcessors\CategoryIDsFilterInputProcessor;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?CategoryIDsFilterInputProcessor $categoryIDsFilterInputProcessor = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -25,6 +27,14 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    final public function setCategoryIDsFilterInputProcessor(CategoryIDsFilterInputProcessor $categoryIDsFilterInputProcessor): void
+    {
+        $this->categoryIDsFilterInputProcessor = $categoryIDsFilterInputProcessor;
+    }
+    final protected function getCategoryIDsFilterInputProcessor(): CategoryIDsFilterInputProcessor
+    {
+        return $this->categoryIDsFilterInputProcessor ??= $this->instanceManager->getInstance(CategoryIDsFilterInputProcessor::class);
     }
 
     protected function init(): void
@@ -104,15 +114,15 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputProcessorInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?array {
+    ): ?FilterInputProcessorInterface {
         if (!($inputObjectTypeResolver instanceof PostsFilterInputObjectTypeResolverInterface)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'categoryIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CATEGORY_IDS],
+            'categoryIDs' => $this->getCategoryIDsFilterInputProcessor(),
             default => $inputFieldFilterInput,
         };
     }

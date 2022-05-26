@@ -4,20 +4,23 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\TypeResolvers\InputObjectType;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoP\Root\App;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
+use PoPCMSSchema\Users\FilterInputProcessors\EmailOrEmailsFilterInputProcessor;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
-use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 
 class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    private ?SearchFilterInputProcessor $searchFilterInputProcessor = null;
+    private ?EmailOrEmailsFilterInputProcessor $emailOrEmailsFilterInputProcessor = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -34,6 +37,22 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
         return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $searchFilterInputProcessor): void
+    {
+        $this->searchFilterInputProcessor = $searchFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->searchFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+    }
+    final public function setEmailOrEmailsFilterInputProcessor(EmailOrEmailsFilterInputProcessor $emailOrEmailsFilterInputProcessor): void
+    {
+        $this->emailOrEmailsFilterInputProcessor = $emailOrEmailsFilterInputProcessor;
+    }
+    final protected function getEmailOrEmailsFilterInputProcessor(): EmailOrEmailsFilterInputProcessor
+    {
+        return $this->emailOrEmailsFilterInputProcessor ??= $this->instanceManager->getInstance(EmailOrEmailsFilterInputProcessor::class);
     }
 
     public function getTypeName(): string
@@ -87,11 +106,11 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'name' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
-            'emails' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
+            'name' => $this->getSearchFilterInputProcessor(),
+            'emails' => $this->getEmailOrEmailsFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

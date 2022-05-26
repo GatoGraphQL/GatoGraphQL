@@ -25,7 +25,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return null;
     }
@@ -34,7 +34,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?array
+    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldFilterInputCache)) {
             return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];
@@ -84,9 +84,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
          * If the input field defines a FilterInput, apply it to obtain the filtering query
          */
         if ($filterInput = $this->getConsolidatedInputFieldFilterInput($inputFieldName)) {
-            /** @var FilterInputProcessorInterface */
-            $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
-            $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
+            $filterInput->filterDataloadQueryArgs($query, $inputFieldValue);
             return;
         }
 

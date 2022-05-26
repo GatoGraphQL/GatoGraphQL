@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Media\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Media\FilterInputProcessors\MimeTypesFilterInputProcessor;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const COMPONENT_FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?MimeTypesFilterInputProcessor $mimeTypesFilterInputProcessor = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -26,6 +28,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setMimeTypesFilterInputProcessor(MimeTypesFilterInputProcessor $mimeTypesFilterInputProcessor): void
+    {
+        $this->mimeTypesFilterInputProcessor = $mimeTypesFilterInputProcessor;
+    }
+    final protected function getMimeTypesFilterInputProcessor(): MimeTypesFilterInputProcessor
+    {
+        return $this->mimeTypesFilterInputProcessor ??= $this->instanceManager->getInstance(MimeTypesFilterInputProcessor::class);
+    }
 
     public function getComponentsToProcess(): array
     {
@@ -34,10 +44,10 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?array
+    public function getFilterInput(array $component): ?FilterInputProcessorInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_MIME_TYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_MIME_TYPES],
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->getMimeTypesFilterInputProcessor(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

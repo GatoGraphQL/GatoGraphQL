@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Menus\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 
 abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?SearchFilterInputProcessor $seachFilterInputProcessor = null;
+    private ?SlugsFilterInputProcessor $slugsFilterInputProcessor = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -20,6 +24,22 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $seachFilterInputProcessor): void
+    {
+        $this->seachFilterInputProcessor = $seachFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->seachFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+    }
+    final public function setSlugsFilterInputProcessor(SlugsFilterInputProcessor $slugsFilterInputProcessor): void
+    {
+        $this->slugsFilterInputProcessor = $slugsFilterInputProcessor;
+    }
+    final protected function getSlugsFilterInputProcessor(): SlugsFilterInputProcessor
+    {
+        return $this->slugsFilterInputProcessor ??= $this->instanceManager->getInstance(SlugsFilterInputProcessor::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -50,11 +70,11 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'search' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
-            'slugs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUGS],
+            'search' => $this->getSearchFilterInputProcessor(),
+            'slugs' => $this->getSlugsFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

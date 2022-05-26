@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Media\FilterInputProcessors\FilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPCMSSchema\Media\FilterInputProcessors\MimeTypesFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
@@ -15,6 +16,8 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
 {
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?MimeTypesFilterInputProcessor $mimeTypesFilterInputProcessor = null;
+    private ?SearchFilterInputProcessor $seachFilterInputProcessor = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -31,6 +34,22 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setMimeTypesFilterInputProcessor(MimeTypesFilterInputProcessor $mimeTypesFilterInputProcessor): void
+    {
+        $this->mimeTypesFilterInputProcessor = $mimeTypesFilterInputProcessor;
+    }
+    final protected function getMimeTypesFilterInputProcessor(): MimeTypesFilterInputProcessor
+    {
+        return $this->mimeTypesFilterInputProcessor ??= $this->instanceManager->getInstance(MimeTypesFilterInputProcessor::class);
+    }
+    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $seachFilterInputProcessor): void
+    {
+        $this->seachFilterInputProcessor = $seachFilterInputProcessor;
+    }
+    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    {
+        return $this->seachFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -73,11 +92,11 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
     {
         return match ($inputFieldName) {
-            'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
-            'mimeTypes' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_MIME_TYPES],
+            'search' => $this->getSearchFilterInputProcessor(),
+            'mimeTypes' => $this->getMimeTypesFilterInputProcessor(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
