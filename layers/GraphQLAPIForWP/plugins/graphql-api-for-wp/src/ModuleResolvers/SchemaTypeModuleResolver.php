@@ -482,7 +482,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
-                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
+                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
