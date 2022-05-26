@@ -1710,10 +1710,10 @@ video/mp4
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>361</wp:post_id>
-		<wp:post_date><![CDATA[2022-05-26 05:13:32]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-05-26 05:13:32]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-26 05:13:32]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-26 05:13:32]]></wp:post_modified_gmt>
+		<wp:post_date><![CDATA[2022-05-25 05:13:32]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-05-25 05:13:32]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-05-25 05:13:32]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-25 05:13:32]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[graphql-api-header]]></wp:post_name>
@@ -1743,10 +1743,10 @@ video/mp4
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>362</wp:post_id>
-		<wp:post_date><![CDATA[2022-05-26 05:13:35]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-05-26 05:13:35]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-26 05:13:35]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-26 05:13:35]]></wp:post_modified_gmt>
+		<wp:post_date><![CDATA[2022-05-25 05:13:35]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-05-25 05:13:35]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-05-25 05:13:35]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-25 05:13:35]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[graphql-api-search-results]]></wp:post_name>
