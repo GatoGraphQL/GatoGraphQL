@@ -78,6 +78,16 @@
                 "comments": []
             },
             {
+                "__typename": "Page",
+                "id": 2,
+                "title": "Sample Page",
+                "date": "2022-04-17T13:06:58+00:00",
+                "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
+                "customPostType": "page",
+                "hasComments": false,
+                "comments": []
+            },
+            {
                 "__typename": "Post",
                 "id": 28,
                 "title": "HTTP caching improves performance",
@@ -89,25 +99,6 @@
                     {
                         "id": 11,
                         "content": "<p>Wow, this sounds awesome!<\/p>\n"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security",
-                "date": "2020-12-12T04:06:52+00:00",
-                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
-                "customPostType": "post",
-                "hasComments": true,
-                "comments": [
-                    {
-                        "id": 10,
-                        "content": "<p>Absolutely! And directives too!<\/p>\n"
-                    },
-                    {
-                        "id": 9,
-                        "content": "<p>Can I hide any field?<\/p>\n"
                     }
                 ]
             }
