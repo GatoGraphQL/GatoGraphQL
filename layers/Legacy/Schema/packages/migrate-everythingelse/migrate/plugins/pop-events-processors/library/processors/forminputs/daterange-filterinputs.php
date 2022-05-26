@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
@@ -32,12 +32,12 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     }
 
     /**
-     * @todo Migrate from [FilterInputProcessor::class, FilterInputProcessor::NAME] to FilterInputProcessorInterface
+     * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_EVENTSCOPE => [PoP_Events_Module_Processor_FilterInputProcessor::class, PoP_Events_Module_Processor_FilterInputPrDATEsor::FILTERINPUT_EVENTSCOPE],
+            self::COMPONENT_FILTERINPUT_EVENTSCOPE => [PoP_Events_Module_Processor_FilterInput::class, PoP_Events_Module_Processor_FilterInputPrDATEsor::FILTERINPUT_EVENTSCOPE],
         ];
         return $filterInputs[$component[1]] ?? null;
     }

@@ -6,18 +6,18 @@ namespace PoPCMSSchema\Comments\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
-use PoPCMSSchema\Comments\FilterInputProcessors\CommentStatusFilterInputProcessor;
-use PoPCMSSchema\Comments\FilterInputProcessors\CommentTypesFilterInputProcessor;
-use PoPCMSSchema\Comments\FilterInputProcessors\CustomPostIDFilterInputProcessor;
-use PoPCMSSchema\Comments\FilterInputProcessors\CustomPostIDsFilterInputProcessor;
-use PoPCMSSchema\Comments\FilterInputProcessors\ExcludeCustomPostIDsFilterInputProcessor;
+use PoPCMSSchema\Comments\FilterInputs\CommentStatusFilterInput;
+use PoPCMSSchema\Comments\FilterInputs\CommentTypesFilterInput;
+use PoPCMSSchema\Comments\FilterInputs\CustomPostIDFilterInput;
+use PoPCMSSchema\Comments\FilterInputs\CustomPostIDsFilterInput;
+use PoPCMSSchema\Comments\FilterInputs\ExcludeCustomPostIDsFilterInput;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 
@@ -32,11 +32,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?CommentStatusFilterInputProcessor $commentStatusFilterInputProcessor = null;
-    private ?CommentTypesFilterInputProcessor $commentTypesFilterInputProcessor = null;
-    private ?CustomPostIDFilterInputProcessor $customPostIDFilterInputProcessor = null;
-    private ?CustomPostIDsFilterInputProcessor $customPostIDsFilterInputProcessor = null;
-    private ?ExcludeCustomPostIDsFilterInputProcessor $excludeCustomPostIDsFilterInputProcessor = null;
+    private ?CommentStatusFilterInput $commentStatusFilterInput = null;
+    private ?CommentTypesFilterInput $commentTypesFilterInput = null;
+    private ?CustomPostIDFilterInput $customPostIDFilterInput = null;
+    private ?CustomPostIDsFilterInput $customPostIDsFilterInput = null;
+    private ?ExcludeCustomPostIDsFilterInput $excludeCustomPostIDsFilterInput = null;
 
     final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
     {
@@ -62,45 +62,45 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
-    final public function setCommentStatusFilterInputProcessor(CommentStatusFilterInputProcessor $commentStatusFilterInputProcessor): void
+    final public function setCommentStatusFilterInput(CommentStatusFilterInput $commentStatusFilterInput): void
     {
-        $this->commentStatusFilterInputProcessor = $commentStatusFilterInputProcessor;
+        $this->commentStatusFilterInput = $commentStatusFilterInput;
     }
-    final protected function getCommentStatusFilterInputProcessor(): CommentStatusFilterInputProcessor
+    final protected function getCommentStatusFilterInput(): CommentStatusFilterInput
     {
-        return $this->commentStatusFilterInputProcessor ??= $this->instanceManager->getInstance(CommentStatusFilterInputProcessor::class);
+        return $this->commentStatusFilterInput ??= $this->instanceManager->getInstance(CommentStatusFilterInput::class);
     }
-    final public function setCommentTypesFilterInputProcessor(CommentTypesFilterInputProcessor $commentTypesFilterInputProcessor): void
+    final public function setCommentTypesFilterInput(CommentTypesFilterInput $commentTypesFilterInput): void
     {
-        $this->commentTypesFilterInputProcessor = $commentTypesFilterInputProcessor;
+        $this->commentTypesFilterInput = $commentTypesFilterInput;
     }
-    final protected function getCommentTypesFilterInputProcessor(): CommentTypesFilterInputProcessor
+    final protected function getCommentTypesFilterInput(): CommentTypesFilterInput
     {
-        return $this->commentTypesFilterInputProcessor ??= $this->instanceManager->getInstance(CommentTypesFilterInputProcessor::class);
+        return $this->commentTypesFilterInput ??= $this->instanceManager->getInstance(CommentTypesFilterInput::class);
     }
-    final public function setCustomPostIDFilterInputProcessor(CustomPostIDFilterInputProcessor $customPostIDFilterInputProcessor): void
+    final public function setCustomPostIDFilterInput(CustomPostIDFilterInput $customPostIDFilterInput): void
     {
-        $this->customPostIDFilterInputProcessor = $customPostIDFilterInputProcessor;
+        $this->customPostIDFilterInput = $customPostIDFilterInput;
     }
-    final protected function getCustomPostIDFilterInputProcessor(): CustomPostIDFilterInputProcessor
+    final protected function getCustomPostIDFilterInput(): CustomPostIDFilterInput
     {
-        return $this->customPostIDFilterInputProcessor ??= $this->instanceManager->getInstance(CustomPostIDFilterInputProcessor::class);
+        return $this->customPostIDFilterInput ??= $this->instanceManager->getInstance(CustomPostIDFilterInput::class);
     }
-    final public function setCustomPostIDsFilterInputProcessor(CustomPostIDsFilterInputProcessor $customPostIDsFilterInputProcessor): void
+    final public function setCustomPostIDsFilterInput(CustomPostIDsFilterInput $customPostIDsFilterInput): void
     {
-        $this->customPostIDsFilterInputProcessor = $customPostIDsFilterInputProcessor;
+        $this->customPostIDsFilterInput = $customPostIDsFilterInput;
     }
-    final protected function getCustomPostIDsFilterInputProcessor(): CustomPostIDsFilterInputProcessor
+    final protected function getCustomPostIDsFilterInput(): CustomPostIDsFilterInput
     {
-        return $this->customPostIDsFilterInputProcessor ??= $this->instanceManager->getInstance(CustomPostIDsFilterInputProcessor::class);
+        return $this->customPostIDsFilterInput ??= $this->instanceManager->getInstance(CustomPostIDsFilterInput::class);
     }
-    final public function setExcludeCustomPostIDsFilterInputProcessor(ExcludeCustomPostIDsFilterInputProcessor $excludeCustomPostIDsFilterInputProcessor): void
+    final public function setExcludeCustomPostIDsFilterInput(ExcludeCustomPostIDsFilterInput $excludeCustomPostIDsFilterInput): void
     {
-        $this->excludeCustomPostIDsFilterInputProcessor = $excludeCustomPostIDsFilterInputProcessor;
+        $this->excludeCustomPostIDsFilterInput = $excludeCustomPostIDsFilterInput;
     }
-    final protected function getExcludeCustomPostIDsFilterInputProcessor(): ExcludeCustomPostIDsFilterInputProcessor
+    final protected function getExcludeCustomPostIDsFilterInput(): ExcludeCustomPostIDsFilterInput
     {
-        return $this->excludeCustomPostIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeCustomPostIDsFilterInputProcessor::class);
+        return $this->excludeCustomPostIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeCustomPostIDsFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -114,14 +114,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getCustomPostIDsFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->getCustomPostIDFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getExcludeCustomPostIDsFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_COMMENT_TYPES => $this->getCommentTypesFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_COMMENT_STATUS => $this->getCommentStatusFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getCustomPostIDsFilterInput(),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->getCustomPostIDFilterInput(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getExcludeCustomPostIDsFilterInput(),
+            self::COMPONENT_FILTERINPUT_COMMENT_TYPES => $this->getCommentTypesFilterInput(),
+            self::COMPONENT_FILTERINPUT_COMMENT_STATUS => $this->getCommentStatusFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

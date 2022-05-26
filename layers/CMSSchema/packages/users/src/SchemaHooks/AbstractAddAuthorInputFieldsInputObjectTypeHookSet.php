@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\SchemaHooks;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -13,9 +13,9 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\AuthorIDsFilterInputProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\AuthorSlugFilterInputProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\ExcludeAuthorIDsFilterInputProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\AuthorIDsFilterInput;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\AuthorSlugFilterInput;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\ExcludeAuthorIDsFilterInput;
 
 abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
@@ -23,9 +23,9 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?AuthorIDsFilterInputProcessor $authorIDsFilterInputProcessor = null;
-    private ?AuthorSlugFilterInputProcessor $authorSlugFilterInputProcessor = null;
-    private ?ExcludeAuthorIDsFilterInputProcessor $excludeAuthorIDsFilterInputProcessor = null;
+    private ?AuthorIDsFilterInput $authorIDsFilterInput = null;
+    private ?AuthorSlugFilterInput $authorSlugFilterInput = null;
+    private ?ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -43,29 +43,29 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setAuthorIDsFilterInputProcessor(AuthorIDsFilterInputProcessor $authorIDsFilterInputProcessor): void
+    final public function setAuthorIDsFilterInput(AuthorIDsFilterInput $authorIDsFilterInput): void
     {
-        $this->authorIDsFilterInputProcessor = $authorIDsFilterInputProcessor;
+        $this->authorIDsFilterInput = $authorIDsFilterInput;
     }
-    final protected function getAuthorIDsFilterInputProcessor(): AuthorIDsFilterInputProcessor
+    final protected function getAuthorIDsFilterInput(): AuthorIDsFilterInput
     {
-        return $this->authorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(AuthorIDsFilterInputProcessor::class);
+        return $this->authorIDsFilterInput ??= $this->instanceManager->getInstance(AuthorIDsFilterInput::class);
     }
-    final public function setAuthorSlugFilterInputProcessor(AuthorSlugFilterInputProcessor $authorSlugFilterInputProcessor): void
+    final public function setAuthorSlugFilterInput(AuthorSlugFilterInput $authorSlugFilterInput): void
     {
-        $this->authorSlugFilterInputProcessor = $authorSlugFilterInputProcessor;
+        $this->authorSlugFilterInput = $authorSlugFilterInput;
     }
-    final protected function getAuthorSlugFilterInputProcessor(): AuthorSlugFilterInputProcessor
+    final protected function getAuthorSlugFilterInput(): AuthorSlugFilterInput
     {
-        return $this->authorSlugFilterInputProcessor ??= $this->instanceManager->getInstance(AuthorSlugFilterInputProcessor::class);
+        return $this->authorSlugFilterInput ??= $this->instanceManager->getInstance(AuthorSlugFilterInput::class);
     }
-    final public function setExcludeAuthorIDsFilterInputProcessor(ExcludeAuthorIDsFilterInputProcessor $excludeAuthorIDsFilterInputProcessor): void
+    final public function setExcludeAuthorIDsFilterInput(ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput): void
     {
-        $this->excludeAuthorIDsFilterInputProcessor = $excludeAuthorIDsFilterInputProcessor;
+        $this->excludeAuthorIDsFilterInput = $excludeAuthorIDsFilterInput;
     }
-    final protected function getExcludeAuthorIDsFilterInputProcessor(): ExcludeAuthorIDsFilterInputProcessor
+    final protected function getExcludeAuthorIDsFilterInput(): ExcludeAuthorIDsFilterInput
     {
-        return $this->excludeAuthorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInputProcessor::class);
+        return $this->excludeAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
     }
 
     protected function init(): void
@@ -153,17 +153,17 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
     }
 
     public function getInputFieldFilterInput(
-        ?FilterInputProcessorInterface $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?FilterInputProcessorInterface {
+    ): ?FilterInputInterface {
         if (!$this->addAuthorInputFields($inputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'authorIDs' => $this->getAuthorIDsFilterInputProcessor(),
-            'authorSlug' => $this->getAuthorSlugFilterInputProcessor(),
-            'excludeAuthorIDs' => $this->getExcludeAuthorIDsFilterInputProcessor(),
+            'authorIDs' => $this->getAuthorIDsFilterInput(),
+            'authorSlug' => $this->getAuthorSlugFilterInput(),
+            'excludeAuthorIDs' => $this->getExcludeAuthorIDsFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

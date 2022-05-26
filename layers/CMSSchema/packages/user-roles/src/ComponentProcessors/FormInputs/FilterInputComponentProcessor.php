@@ -6,12 +6,12 @@ namespace PoPCMSSchema\UserRoles\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\UserRoles\FilterInputProcessors\ExcludeUserRolesFilterInputProcessor;
-use PoPCMSSchema\UserRoles\FilterInputProcessors\UserRolesFilterInputProcessor;
+use PoPCMSSchema\UserRoles\FilterInputs\ExcludeUserRolesFilterInput;
+use PoPCMSSchema\UserRoles\FilterInputs\UserRolesFilterInput;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -19,8 +19,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public final const COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?UserRolesFilterInputProcessor $userRolesFilterInputProcessor = null;
-    private ?ExcludeUserRolesFilterInputProcessor $excludeUserRolesFilterInputProcessor = null;
+    private ?UserRolesFilterInput $userRolesFilterInput = null;
+    private ?ExcludeUserRolesFilterInput $excludeUserRolesFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -30,21 +30,21 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setUserRolesFilterInputProcessor(UserRolesFilterInputProcessor $userRolesFilterInputProcessor): void
+    final public function setUserRolesFilterInput(UserRolesFilterInput $userRolesFilterInput): void
     {
-        $this->userRolesFilterInputProcessor = $userRolesFilterInputProcessor;
+        $this->userRolesFilterInput = $userRolesFilterInput;
     }
-    final protected function getUserRolesFilterInputProcessor(): UserRolesFilterInputProcessor
+    final protected function getUserRolesFilterInput(): UserRolesFilterInput
     {
-        return $this->userRolesFilterInputProcessor ??= $this->instanceManager->getInstance(UserRolesFilterInputProcessor::class);
+        return $this->userRolesFilterInput ??= $this->instanceManager->getInstance(UserRolesFilterInput::class);
     }
-    final public function setExcludeUserRolesFilterInputProcessor(ExcludeUserRolesFilterInputProcessor $excludeUserRolesFilterInputProcessor): void
+    final public function setExcludeUserRolesFilterInput(ExcludeUserRolesFilterInput $excludeUserRolesFilterInput): void
     {
-        $this->excludeUserRolesFilterInputProcessor = $excludeUserRolesFilterInputProcessor;
+        $this->excludeUserRolesFilterInput = $excludeUserRolesFilterInput;
     }
-    final protected function getExcludeUserRolesFilterInputProcessor(): ExcludeUserRolesFilterInputProcessor
+    final protected function getExcludeUserRolesFilterInput(): ExcludeUserRolesFilterInput
     {
-        return $this->excludeUserRolesFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInputProcessor::class);
+        return $this->excludeUserRolesFilterInput ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -55,11 +55,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getUserRolesFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getExcludeUserRolesFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getUserRolesFilterInput(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getExcludeUserRolesFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

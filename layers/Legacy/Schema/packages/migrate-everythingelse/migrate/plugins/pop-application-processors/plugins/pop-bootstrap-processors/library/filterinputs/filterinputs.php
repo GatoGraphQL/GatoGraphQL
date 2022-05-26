@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PoP_Module_Processor_CRUDMultiSelectFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
     public final const FILTERINPUT_CATEGORIES = 'filterinput-categories';

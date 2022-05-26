@@ -6,14 +6,14 @@ namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\AuthorIDsFilterInputProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\AuthorSlugFilterInputProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\ExcludeAuthorIDsFilterInputProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\AuthorIDsFilterInput;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\AuthorSlugFilterInput;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\ExcludeAuthorIDsFilterInput;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -23,9 +23,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?AuthorIDsFilterInputProcessor $authorIDsFilterInputProcessor = null;
-    private ?AuthorSlugFilterInputProcessor $authorSlugFilterInputProcessor = null;
-    private ?ExcludeAuthorIDsFilterInputProcessor $excludeAuthorIDsFilterInputProcessor = null;
+    private ?AuthorIDsFilterInput $authorIDsFilterInput = null;
+    private ?AuthorSlugFilterInput $authorSlugFilterInput = null;
+    private ?ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -43,29 +43,29 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setAuthorIDsFilterInputProcessor(AuthorIDsFilterInputProcessor $authorIDsFilterInputProcessor): void
+    final public function setAuthorIDsFilterInput(AuthorIDsFilterInput $authorIDsFilterInput): void
     {
-        $this->authorIDsFilterInputProcessor = $authorIDsFilterInputProcessor;
+        $this->authorIDsFilterInput = $authorIDsFilterInput;
     }
-    final protected function getAuthorIDsFilterInputProcessor(): AuthorIDsFilterInputProcessor
+    final protected function getAuthorIDsFilterInput(): AuthorIDsFilterInput
     {
-        return $this->authorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(AuthorIDsFilterInputProcessor::class);
+        return $this->authorIDsFilterInput ??= $this->instanceManager->getInstance(AuthorIDsFilterInput::class);
     }
-    final public function setAuthorSlugFilterInputProcessor(AuthorSlugFilterInputProcessor $authorSlugFilterInputProcessor): void
+    final public function setAuthorSlugFilterInput(AuthorSlugFilterInput $authorSlugFilterInput): void
     {
-        $this->authorSlugFilterInputProcessor = $authorSlugFilterInputProcessor;
+        $this->authorSlugFilterInput = $authorSlugFilterInput;
     }
-    final protected function getAuthorSlugFilterInputProcessor(): AuthorSlugFilterInputProcessor
+    final protected function getAuthorSlugFilterInput(): AuthorSlugFilterInput
     {
-        return $this->authorSlugFilterInputProcessor ??= $this->instanceManager->getInstance(AuthorSlugFilterInputProcessor::class);
+        return $this->authorSlugFilterInput ??= $this->instanceManager->getInstance(AuthorSlugFilterInput::class);
     }
-    final public function setExcludeAuthorIDsFilterInputProcessor(ExcludeAuthorIDsFilterInputProcessor $excludeAuthorIDsFilterInputProcessor): void
+    final public function setExcludeAuthorIDsFilterInput(ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput): void
     {
-        $this->excludeAuthorIDsFilterInputProcessor = $excludeAuthorIDsFilterInputProcessor;
+        $this->excludeAuthorIDsFilterInput = $excludeAuthorIDsFilterInput;
     }
-    final protected function getExcludeAuthorIDsFilterInputProcessor(): ExcludeAuthorIDsFilterInputProcessor
+    final protected function getExcludeAuthorIDsFilterInput(): ExcludeAuthorIDsFilterInput
     {
-        return $this->excludeAuthorIDsFilterInputProcessor ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInputProcessor::class);
+        return $this->excludeAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -77,12 +77,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getAuthorIDsFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => $this->getAuthorSlugFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getExcludeAuthorIDsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getAuthorIDsFilterInput(),
+            self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => $this->getAuthorSlugFilterInput(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getExcludeAuthorIDsFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

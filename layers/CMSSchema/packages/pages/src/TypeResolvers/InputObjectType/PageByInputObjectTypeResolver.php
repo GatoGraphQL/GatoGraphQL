@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByInputObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\PathOrPathsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\PathOrPathsFilterInput;
 
 class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver
 {
-    private ?PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor = null;
+    private ?PathOrPathsFilterInput $pathOrPathsFilterInput = null;
 
-    final public function setPathOrPathsFilterInputProcessor(PathOrPathsFilterInputProcessor $pathOrPathsFilterInputProcessor): void
+    final public function setPathOrPathsFilterInput(PathOrPathsFilterInput $pathOrPathsFilterInput): void
     {
-        $this->pathOrPathsFilterInputProcessor = $pathOrPathsFilterInputProcessor;
+        $this->pathOrPathsFilterInput = $pathOrPathsFilterInput;
     }
-    final protected function getPathOrPathsFilterInputProcessor(): PathOrPathsFilterInputProcessor
+    final protected function getPathOrPathsFilterInput(): PathOrPathsFilterInput
     {
-        return $this->pathOrPathsFilterInputProcessor ??= $this->instanceManager->getInstance(PathOrPathsFilterInputProcessor::class);
+        return $this->pathOrPathsFilterInput ??= $this->instanceManager->getInstance(PathOrPathsFilterInput::class);
     }
 
     public function getTypeName(): string
@@ -49,10 +49,10 @@ class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'path' => $this->getPathOrPathsFilterInputProcessor(),
+            'path' => $this->getPathOrPathsFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

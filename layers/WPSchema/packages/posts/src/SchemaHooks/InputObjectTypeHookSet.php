@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Posts\SchemaHooks;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -12,12 +12,12 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\AbstractPostsFilterInputObjectTypeResolver;
-use PoPWPSchema\Posts\FilterInputProcessors\IsStickyFilterInputProcessor;
+use PoPWPSchema\Posts\FilterInputs\IsStickyFilterInput;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?IsStickyFilterInputProcessor $isStickyFilterInputProcessor = null;
+    private ?IsStickyFilterInput $isStickyFilterInput = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -27,13 +27,13 @@ class InputObjectTypeHookSet extends AbstractHookSet
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    final public function setIsStickyFilterInputProcessor(IsStickyFilterInputProcessor $isStickyFilterInputProcessor): void
+    final public function setIsStickyFilterInput(IsStickyFilterInput $isStickyFilterInput): void
     {
-        $this->isStickyFilterInputProcessor = $isStickyFilterInputProcessor;
+        $this->isStickyFilterInput = $isStickyFilterInput;
     }
-    final protected function getIsStickyFilterInputProcessor(): IsStickyFilterInputProcessor
+    final protected function getIsStickyFilterInput(): IsStickyFilterInput
     {
-        return $this->isStickyFilterInputProcessor ??= $this->instanceManager->getInstance(IsStickyFilterInputProcessor::class);
+        return $this->isStickyFilterInput ??= $this->instanceManager->getInstance(IsStickyFilterInput::class);
     }
 
     protected function init(): void
@@ -91,15 +91,15 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?FilterInputProcessorInterface $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?FilterInputProcessorInterface {
+    ): ?FilterInputInterface {
         if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'isSticky' => $this->getIsStickyFilterInputProcessor(),
+            'isSticky' => $this->getIsStickyFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

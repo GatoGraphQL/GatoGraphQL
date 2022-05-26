@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPCMSSchema\CustomPosts\FilterInputProcessors\CustomPostStatusFilterInputProcessor;
-use PoPCMSSchema\CustomPosts\FilterInputProcessors\UnionCustomPostTypesFilterInputProcessor;
+use PoPCMSSchema\CustomPosts\FilterInputs\CustomPostStatusFilterInput;
+use PoPCMSSchema\CustomPosts\FilterInputs\UnionCustomPostTypesFilterInput;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
@@ -25,9 +25,9 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor = null;
-    private ?UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor = null;
-    private ?SearchFilterInputProcessor $seachFilterInputProcessor = null;
+    private ?CustomPostStatusFilterInput $customPostStatusFilterInput = null;
+    private ?UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput = null;
+    private ?SearchFilterInput $seachFilterInput = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -61,29 +61,29 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setCustomPostStatusFilterInputProcessor(CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor): void
+    final public function setCustomPostStatusFilterInput(CustomPostStatusFilterInput $customPostStatusFilterInput): void
     {
-        $this->customPostStatusFilterInputProcessor = $customPostStatusFilterInputProcessor;
+        $this->customPostStatusFilterInput = $customPostStatusFilterInput;
     }
-    final protected function getCustomPostStatusFilterInputProcessor(): CustomPostStatusFilterInputProcessor
+    final protected function getCustomPostStatusFilterInput(): CustomPostStatusFilterInput
     {
-        return $this->customPostStatusFilterInputProcessor ??= $this->instanceManager->getInstance(CustomPostStatusFilterInputProcessor::class);
+        return $this->customPostStatusFilterInput ??= $this->instanceManager->getInstance(CustomPostStatusFilterInput::class);
     }
-    final public function setUnionCustomPostTypesFilterInputProcessor(UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor): void
+    final public function setUnionCustomPostTypesFilterInput(UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput): void
     {
-        $this->unionCustomPostTypesFilterInputProcessor = $unionCustomPostTypesFilterInputProcessor;
+        $this->unionCustomPostTypesFilterInput = $unionCustomPostTypesFilterInput;
     }
-    final protected function getUnionCustomPostTypesFilterInputProcessor(): UnionCustomPostTypesFilterInputProcessor
+    final protected function getUnionCustomPostTypesFilterInput(): UnionCustomPostTypesFilterInput
     {
-        return $this->unionCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInputProcessor::class);
+        return $this->unionCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
     }
-    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $seachFilterInputProcessor): void
+    final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
     {
-        $this->seachFilterInputProcessor = $seachFilterInputProcessor;
+        $this->seachFilterInput = $seachFilterInput;
     }
-    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    final protected function getSearchFilterInput(): SearchFilterInput
     {
-        return $this->seachFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+        return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
 
     public function getAdminInputFieldNames(): array
@@ -155,12 +155,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'status' => $this->getCustomPostStatusFilterInputProcessor(),
-            'search' => $this->getSearchFilterInputProcessor(),
-            'customPostTypes' => $this->getUnionCustomPostTypesFilterInputProcessor(),
+            'status' => $this->getCustomPostStatusFilterInput(),
+            'search' => $this->getSearchFilterInput(),
+            'customPostTypes' => $this->getUnionCustomPostTypesFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

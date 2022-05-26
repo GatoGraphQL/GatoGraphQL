@@ -6,13 +6,13 @@ namespace PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPCMSSchema\CustomPosts\FilterInputProcessors\CustomPostStatusFilterInputProcessor;
-use PoPCMSSchema\CustomPosts\FilterInputProcessors\UnionCustomPostTypesFilterInputProcessor;
+use PoPCMSSchema\CustomPosts\FilterInputs\CustomPostStatusFilterInput;
+use PoPCMSSchema\CustomPosts\FilterInputs\UnionCustomPostTypesFilterInput;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 
@@ -23,8 +23,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
-    private ?CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor = null;
-    private ?UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor = null;
+    private ?CustomPostStatusFilterInput $customPostStatusFilterInput = null;
+    private ?UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput = null;
 
     final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
     {
@@ -42,21 +42,21 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
-    final public function setCustomPostStatusFilterInputProcessor(CustomPostStatusFilterInputProcessor $customPostStatusFilterInputProcessor): void
+    final public function setCustomPostStatusFilterInput(CustomPostStatusFilterInput $customPostStatusFilterInput): void
     {
-        $this->customPostStatusFilterInputProcessor = $customPostStatusFilterInputProcessor;
+        $this->customPostStatusFilterInput = $customPostStatusFilterInput;
     }
-    final protected function getCustomPostStatusFilterInputProcessor(): CustomPostStatusFilterInputProcessor
+    final protected function getCustomPostStatusFilterInput(): CustomPostStatusFilterInput
     {
-        return $this->customPostStatusFilterInputProcessor ??= $this->instanceManager->getInstance(CustomPostStatusFilterInputProcessor::class);
+        return $this->customPostStatusFilterInput ??= $this->instanceManager->getInstance(CustomPostStatusFilterInput::class);
     }
-    final public function setUnionCustomPostTypesFilterInputProcessor(UnionCustomPostTypesFilterInputProcessor $unionCustomPostTypesFilterInputProcessor): void
+    final public function setUnionCustomPostTypesFilterInput(UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput): void
     {
-        $this->unionCustomPostTypesFilterInputProcessor = $unionCustomPostTypesFilterInputProcessor;
+        $this->unionCustomPostTypesFilterInput = $unionCustomPostTypesFilterInput;
     }
-    final protected function getUnionCustomPostTypesFilterInputProcessor(): UnionCustomPostTypesFilterInputProcessor
+    final protected function getUnionCustomPostTypesFilterInput(): UnionCustomPostTypesFilterInput
     {
-        return $this->unionCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInputProcessor::class);
+        return $this->unionCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -67,11 +67,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getCustomPostStatusFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getUnionCustomPostTypesFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getCustomPostStatusFilterInput(),
+            self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getUnionCustomPostTypesFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

@@ -7,5 +7,5 @@ services:
     PoPCMSSchema\Comments\ConditionalOnModule\Users\ComponentProcessors\:
         resource: '../../../src/ConditionalOnModule/Users/ComponentProcessors/*'
 
-    PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors\:
-        resource: '../../../src/ConditionalOnModule/Users/FilterInputProcessors/*'
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputs\:
+        resource: '../../../src/ConditionalOnModule/Users/FilterInputs/*'

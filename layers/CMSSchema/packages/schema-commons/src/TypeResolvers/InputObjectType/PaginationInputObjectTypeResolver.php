@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\SchemaCommons\FeedbackItemProviders\FeedbackItemProvider;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\LimitFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OffsetFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\LimitFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\OffsetFilterInput;
 
 class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?OffsetFilterInputProcessor $excludeIDsFilterInputProcessor = null;
-    private ?LimitFilterInputProcessor $includeFilterInputProcessor = null;
+    private ?OffsetFilterInput $excludeIDsFilterInput = null;
+    private ?LimitFilterInput $includeFilterInput = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -26,21 +26,21 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    final public function setOffsetFilterInputProcessor(OffsetFilterInputProcessor $excludeIDsFilterInputProcessor): void
+    final public function setOffsetFilterInput(OffsetFilterInput $excludeIDsFilterInput): void
     {
-        $this->excludeIDsFilterInputProcessor = $excludeIDsFilterInputProcessor;
+        $this->excludeIDsFilterInput = $excludeIDsFilterInput;
     }
-    final protected function getOffsetFilterInputProcessor(): OffsetFilterInputProcessor
+    final protected function getOffsetFilterInput(): OffsetFilterInput
     {
-        return $this->excludeIDsFilterInputProcessor ??= $this->instanceManager->getInstance(OffsetFilterInputProcessor::class);
+        return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(OffsetFilterInput::class);
     }
-    final public function setLimitFilterInputProcessor(LimitFilterInputProcessor $includeFilterInputProcessor): void
+    final public function setLimitFilterInput(LimitFilterInput $includeFilterInput): void
     {
-        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+        $this->includeFilterInput = $includeFilterInput;
     }
-    final protected function getLimitFilterInputProcessor(): LimitFilterInputProcessor
+    final protected function getLimitFilterInput(): LimitFilterInput
     {
-        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(LimitFilterInputProcessor::class);
+        return $this->includeFilterInput ??= $this->instanceManager->getInstance(LimitFilterInput::class);
     }
 
     public function getTypeName(): string
@@ -154,11 +154,11 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         return null;
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'limit' => $this->getLimitFilterInputProcessor(),
-            'offset' => $this->getOffsetFilterInputProcessor(),
+            'limit' => $this->getLimitFilterInput(),
+            'offset' => $this->getOffsetFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

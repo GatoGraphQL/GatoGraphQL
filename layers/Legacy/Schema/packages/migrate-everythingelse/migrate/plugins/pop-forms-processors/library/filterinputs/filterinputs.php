@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PoP_Module_Processor_FormsFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
     public final const FILTERINPUT_HASHTAGS = 'filterinput-hashtags';

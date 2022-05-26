@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugsFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 
 abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?ParentIDFilterInputProcessor $parentIDFilterInputProcessor = null;
-    private ?SearchFilterInputProcessor $searchFilterInputProcessor = null;
-    private ?SlugsFilterInputProcessor $slugsFilterInputProcessor = null;
+    private ?ParentIDFilterInput $parentIDFilterInput = null;
+    private ?SearchFilterInput $searchFilterInput = null;
+    private ?SlugsFilterInput $slugsFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -27,29 +27,29 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setParentIDFilterInputProcessor(ParentIDFilterInputProcessor $parentIDFilterInputProcessor): void
+    final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
     {
-        $this->parentIDFilterInputProcessor = $parentIDFilterInputProcessor;
+        $this->parentIDFilterInput = $parentIDFilterInput;
     }
-    final protected function getParentIDFilterInputProcessor(): ParentIDFilterInputProcessor
+    final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
-        return $this->parentIDFilterInputProcessor ??= $this->instanceManager->getInstance(ParentIDFilterInputProcessor::class);
+        return $this->parentIDFilterInput ??= $this->instanceManager->getInstance(ParentIDFilterInput::class);
     }
-    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $searchFilterInputProcessor): void
+    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
     {
-        $this->searchFilterInputProcessor = $searchFilterInputProcessor;
+        $this->searchFilterInput = $searchFilterInput;
     }
-    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    final protected function getSearchFilterInput(): SearchFilterInput
     {
-        return $this->searchFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+        return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
-    final public function setSlugsFilterInputProcessor(SlugsFilterInputProcessor $slugsFilterInputProcessor): void
+    final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
     {
-        $this->slugsFilterInputProcessor = $slugsFilterInputProcessor;
+        $this->slugsFilterInput = $slugsFilterInput;
     }
-    final protected function getSlugsFilterInputProcessor(): SlugsFilterInputProcessor
+    final protected function getSlugsFilterInput(): SlugsFilterInput
     {
-        return $this->slugsFilterInputProcessor ??= $this->instanceManager->getInstance(SlugsFilterInputProcessor::class);
+        return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 
     abstract protected function addParentIDInputField(): bool;
@@ -86,12 +86,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'search' => $this->getSearchFilterInputProcessor(),
-            'slugs' => $this->getSlugsFilterInputProcessor(),
-            'parentID' => $this->getParentIDFilterInputProcessor(),
+            'search' => $this->getSearchFilterInput(),
+            'slugs' => $this->getSlugsFilterInput(),
+            'parentID' => $this->getParentIDFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

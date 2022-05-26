@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
-class GD_URE_Module_Processor_FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class GD_URE_Module_Processor_FilterInput extends AbstractValueToQueryFilterInput
 {
     public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
     public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';

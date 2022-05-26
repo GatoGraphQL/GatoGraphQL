@@ -13,8 +13,8 @@ services:
     PoPCMSSchema\SchemaCommons\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
-    PoPCMSSchema\SchemaCommons\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\SchemaCommons\FilterInputs\:
+        resource: '../src/FilterInputs/*'
 
     PoPCMSSchema\SchemaCommons\Hooks\:
         resource: '../src/Hooks/*'

@@ -13,5 +13,5 @@ services:
     PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors\:
         resource: '../../../src/ConditionalOnModule/CustomPosts/ComponentProcessors/*'
 
-    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\:
-        resource: '../../../src/ConditionalOnModule/CustomPosts/FilterInputProcessors/*'
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/FilterInputs/*'

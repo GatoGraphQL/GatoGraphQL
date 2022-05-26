@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
-use PoPCMSSchema\Users\FilterInputProcessors\EmailFilterInputProcessor;
-use PoPCMSSchema\Users\FilterInputProcessors\UsernameFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoPCMSSchema\Users\FilterInputs\EmailFilterInput;
+use PoPCMSSchema\Users\FilterInputs\UsernameFilterInput;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -21,9 +21,9 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
-    private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
-    private ?UsernameFilterInputProcessor $usernameFilterInputProcessor = null;
-    private ?EmailFilterInputProcessor $emailFilterInputProcessor = null;
+    private ?IncludeFilterInput $includeFilterInput = null;
+    private ?UsernameFilterInput $usernameFilterInput = null;
+    private ?EmailFilterInput $emailFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -49,29 +49,29 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     {
         return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
     }
-    final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
+    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
-        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+        $this->includeFilterInput = $includeFilterInput;
     }
-    final protected function getIncludeFilterInputProcessor(): IncludeFilterInputProcessor
+    final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(IncludeFilterInputProcessor::class);
+        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
     }
-    final public function setUsernameFilterInputProcessor(UsernameFilterInputProcessor $usernameFilterInputProcessor): void
+    final public function setUsernameFilterInput(UsernameFilterInput $usernameFilterInput): void
     {
-        $this->usernameFilterInputProcessor = $usernameFilterInputProcessor;
+        $this->usernameFilterInput = $usernameFilterInput;
     }
-    final protected function getUsernameFilterInputProcessor(): UsernameFilterInputProcessor
+    final protected function getUsernameFilterInput(): UsernameFilterInput
     {
-        return $this->usernameFilterInputProcessor ??= $this->instanceManager->getInstance(UsernameFilterInputProcessor::class);
+        return $this->usernameFilterInput ??= $this->instanceManager->getInstance(UsernameFilterInput::class);
     }
-    final public function setEmailFilterInputProcessor(EmailFilterInputProcessor $emailFilterInputProcessor): void
+    final public function setEmailFilterInput(EmailFilterInput $emailFilterInput): void
     {
-        $this->emailFilterInputProcessor = $emailFilterInputProcessor;
+        $this->emailFilterInput = $emailFilterInput;
     }
-    final protected function getEmailFilterInputProcessor(): EmailFilterInputProcessor
+    final protected function getEmailFilterInput(): EmailFilterInput
     {
-        return $this->emailFilterInputProcessor ??= $this->instanceManager->getInstance(EmailFilterInputProcessor::class);
+        return $this->emailFilterInput ??= $this->instanceManager->getInstance(EmailFilterInput::class);
     }
 
     public function getTypeName(): string
@@ -114,12 +114,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInputProcessor(),
-            'username' => $this->getUsernameFilterInputProcessor(),
-            'email' => $this->getEmailFilterInputProcessor(),
+            'id' => $this->getIncludeFilterInput(),
+            'username' => $this->getUsernameFilterInput(),
+            'email' => $this->getEmailFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

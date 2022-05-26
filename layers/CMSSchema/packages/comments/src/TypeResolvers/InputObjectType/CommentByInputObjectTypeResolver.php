@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 
 class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
+    private ?IncludeFilterInput $includeFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -22,13 +22,13 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
-    final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
+    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
-        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+        $this->includeFilterInput = $includeFilterInput;
     }
-    final protected function getIncludeFilterInputProcessor(): IncludeFilterInputProcessor
+    final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(IncludeFilterInputProcessor::class);
+        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
     }
 
     public function getTypeName(): string
@@ -56,10 +56,10 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInputProcessor(),
+            'id' => $this->getIncludeFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

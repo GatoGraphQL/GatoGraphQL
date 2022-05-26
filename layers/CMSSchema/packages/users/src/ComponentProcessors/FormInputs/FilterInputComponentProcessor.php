@@ -6,12 +6,12 @@ namespace PoPCMSSchema\Users\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Users\FilterInputProcessors\EmailOrEmailsFilterInputProcessor;
-use PoPCMSSchema\Users\FilterInputProcessors\NameFilterInputProcessor;
+use PoPCMSSchema\Users\FilterInputs\EmailOrEmailsFilterInput;
+use PoPCMSSchema\Users\FilterInputs\NameFilterInput;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
@@ -21,8 +21,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?NameFilterInputProcessor $nameFilterInputProcessor = null;
-    private ?EmailOrEmailsFilterInputProcessor $emailOrEmailsFilterInputProcessor = null;
+    private ?NameFilterInput $nameFilterInput = null;
+    private ?EmailOrEmailsFilterInput $emailOrEmailsFilterInput = null;
 
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
     {
@@ -40,21 +40,21 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setNameFilterInputProcessor(NameFilterInputProcessor $nameFilterInputProcessor): void
+    final public function setNameFilterInput(NameFilterInput $nameFilterInput): void
     {
-        $this->nameFilterInputProcessor = $nameFilterInputProcessor;
+        $this->nameFilterInput = $nameFilterInput;
     }
-    final protected function getNameFilterInputProcessor(): NameFilterInputProcessor
+    final protected function getNameFilterInput(): NameFilterInput
     {
-        return $this->nameFilterInputProcessor ??= $this->instanceManager->getInstance(NameFilterInputProcessor::class);
+        return $this->nameFilterInput ??= $this->instanceManager->getInstance(NameFilterInput::class);
     }
-    final public function setEmailOrEmailsFilterInputProcessor(EmailOrEmailsFilterInputProcessor $emailOrEmailsFilterInputProcessor): void
+    final public function setEmailOrEmailsFilterInput(EmailOrEmailsFilterInput $emailOrEmailsFilterInput): void
     {
-        $this->emailOrEmailsFilterInputProcessor = $emailOrEmailsFilterInputProcessor;
+        $this->emailOrEmailsFilterInput = $emailOrEmailsFilterInput;
     }
-    final protected function getEmailOrEmailsFilterInputProcessor(): EmailOrEmailsFilterInputProcessor
+    final protected function getEmailOrEmailsFilterInput(): EmailOrEmailsFilterInput
     {
-        return $this->emailOrEmailsFilterInputProcessor ??= $this->instanceManager->getInstance(EmailOrEmailsFilterInputProcessor::class);
+        return $this->emailOrEmailsFilterInput ??= $this->instanceManager->getInstance(EmailOrEmailsFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -65,11 +65,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_NAME => $this->getNameFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailOrEmailsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_NAME => $this->getNameFilterInput(),
+            self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailOrEmailsFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }
