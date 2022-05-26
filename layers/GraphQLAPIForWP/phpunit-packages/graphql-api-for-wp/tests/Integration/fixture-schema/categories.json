@@ -79,6 +79,11 @@
                     "id": 3
                 }
             ],
+            "categoriesBySlugs": [
+                {
+                    "id": 2
+                }
+            ],
             "categoriesBySortASC": [
                 {
                     "id": 2,

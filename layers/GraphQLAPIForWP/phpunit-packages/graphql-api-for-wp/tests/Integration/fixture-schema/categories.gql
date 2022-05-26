@@ -28,6 +28,9 @@
     categoriesBySearch: categories(filter: { search: "blo" }) {
       id
     }
+    categoriesBySlugs: categories(filter: { slugs: ["advanced", "non-existing"] }) {
+      id
+    }
     
     categoriesBySortASC: categories(sort: { by: NAME, order: ASC }) {
       id
