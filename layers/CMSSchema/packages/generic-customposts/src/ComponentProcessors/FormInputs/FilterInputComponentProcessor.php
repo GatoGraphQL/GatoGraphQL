@@ -6,11 +6,11 @@ namespace PoPCMSSchema\GenericCustomPosts\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\GenericCustomPostTypesFilterInputProcessor;
+use PoPCMSSchema\GenericCustomPosts\FilterInputs\GenericCustomPostTypesFilterInput;
 use PoPCMSSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnumTypeResolver;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
@@ -18,7 +18,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public final const COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
 
     private ?GenericCustomPostEnumTypeResolver $genericCustomPostEnumTypeResolver = null;
-    private ?GenericCustomPostTypesFilterInputProcessor $genericCustomPostTypesFilterInputProcessor = null;
+    private ?GenericCustomPostTypesFilterInput $genericCustomPostTypesFilterInput = null;
 
     final public function setGenericCustomPostEnumTypeResolver(GenericCustomPostEnumTypeResolver $genericCustomPostEnumTypeResolver): void
     {
@@ -28,13 +28,13 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->genericCustomPostEnumTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostEnumTypeResolver::class);
     }
-    final public function setGenericCustomPostTypesFilterInputProcessor(GenericCustomPostTypesFilterInputProcessor $genericCustomPostTypesFilterInputProcessor): void
+    final public function setGenericCustomPostTypesFilterInput(GenericCustomPostTypesFilterInput $genericCustomPostTypesFilterInput): void
     {
-        $this->genericCustomPostTypesFilterInputProcessor = $genericCustomPostTypesFilterInputProcessor;
+        $this->genericCustomPostTypesFilterInput = $genericCustomPostTypesFilterInput;
     }
-    final protected function getGenericCustomPostTypesFilterInputProcessor(): GenericCustomPostTypesFilterInputProcessor
+    final protected function getGenericCustomPostTypesFilterInput(): GenericCustomPostTypesFilterInput
     {
-        return $this->genericCustomPostTypesFilterInputProcessor ??= $this->instanceManager->getInstance(GenericCustomPostTypesFilterInputProcessor::class);
+        return $this->genericCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(GenericCustomPostTypesFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -44,10 +44,10 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostTypesFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostTypesFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

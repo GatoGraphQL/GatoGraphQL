@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FilterInputProcessors;
+namespace PoP\ComponentModel\FilterInputs;
 
 use PoP\Root\Services\BasicServiceTrait;
 
-abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
+abstract class AbstractFilterInput implements FilterInputInterface
 {
     use BasicServiceTrait;
 }

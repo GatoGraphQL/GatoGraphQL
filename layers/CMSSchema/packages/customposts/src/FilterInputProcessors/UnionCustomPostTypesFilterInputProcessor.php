@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPosts\FilterInputProcessors;
+namespace PoPCMSSchema\CustomPosts\FilterInputs;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
-class UnionCustomPostTypesFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class UnionCustomPostTypesFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {

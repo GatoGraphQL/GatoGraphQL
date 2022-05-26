@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Media\FilterInputProcessors\MimeTypesFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SearchFilterInputProcessor;
+use PoPCMSSchema\Media\FilterInputs\MimeTypesFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
@@ -16,8 +16,8 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
 {
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?MimeTypesFilterInputProcessor $mimeTypesFilterInputProcessor = null;
-    private ?SearchFilterInputProcessor $seachFilterInputProcessor = null;
+    private ?MimeTypesFilterInput $mimeTypesFilterInput = null;
+    private ?SearchFilterInput $seachFilterInput = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -35,21 +35,21 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setMimeTypesFilterInputProcessor(MimeTypesFilterInputProcessor $mimeTypesFilterInputProcessor): void
+    final public function setMimeTypesFilterInput(MimeTypesFilterInput $mimeTypesFilterInput): void
     {
-        $this->mimeTypesFilterInputProcessor = $mimeTypesFilterInputProcessor;
+        $this->mimeTypesFilterInput = $mimeTypesFilterInput;
     }
-    final protected function getMimeTypesFilterInputProcessor(): MimeTypesFilterInputProcessor
+    final protected function getMimeTypesFilterInput(): MimeTypesFilterInput
     {
-        return $this->mimeTypesFilterInputProcessor ??= $this->instanceManager->getInstance(MimeTypesFilterInputProcessor::class);
+        return $this->mimeTypesFilterInput ??= $this->instanceManager->getInstance(MimeTypesFilterInput::class);
     }
-    final public function setSearchFilterInputProcessor(SearchFilterInputProcessor $seachFilterInputProcessor): void
+    final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
     {
-        $this->seachFilterInputProcessor = $seachFilterInputProcessor;
+        $this->seachFilterInput = $seachFilterInput;
     }
-    final protected function getSearchFilterInputProcessor(): SearchFilterInputProcessor
+    final protected function getSearchFilterInput(): SearchFilterInput
     {
-        return $this->seachFilterInputProcessor ??= $this->instanceManager->getInstance(SearchFilterInputProcessor::class);
+        return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -92,11 +92,11 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'search' => $this->getSearchFilterInputProcessor(),
-            'mimeTypes' => $this->getMimeTypesFilterInputProcessor(),
+            'search' => $this->getSearchFilterInput(),
+            'mimeTypes' => $this->getMimeTypesFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

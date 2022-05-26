@@ -10,5 +10,5 @@ services:
     PoPCMSSchema\UserRoles\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
-    PoPCMSSchema\UserRoles\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\UserRoles\FilterInputs\:
+        resource: '../src/FilterInputs/*'

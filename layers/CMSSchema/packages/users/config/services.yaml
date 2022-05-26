@@ -10,8 +10,8 @@ services:
     PoPCMSSchema\Users\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPCMSSchema\Users\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\Users\FilterInputs\:
+        resource: '../src/FilterInputs/*'
 
     PoPCMSSchema\Users\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'

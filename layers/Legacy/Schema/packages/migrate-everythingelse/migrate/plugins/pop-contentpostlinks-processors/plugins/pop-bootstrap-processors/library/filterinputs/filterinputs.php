@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
     public final const FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';

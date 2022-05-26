@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver as UpstreamRootMenusFilterInputObjectTypeResolver;
-use PoPWPSchema\Menus\FilterInputProcessors\LocationsFilterInputProcessor;
+use PoPWPSchema\Menus\FilterInputs\LocationsFilterInput;
 use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationSelectableStringTypeResolver;
 
 class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInputObjectTypeResolver
 {
     private ?MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver = null;
-    private ?LocationsFilterInputProcessor $locationsFilterInputProcessor = null;
+    private ?LocationsFilterInput $locationsFilterInput = null;
 
     final public function setMenuLocationSelectableStringTypeResolver(MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver): void
     {
@@ -23,13 +23,13 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     {
         return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
     }
-    final public function setLocationsFilterInputProcessor(LocationsFilterInputProcessor $locationsFilterInputProcessor): void
+    final public function setLocationsFilterInput(LocationsFilterInput $locationsFilterInput): void
     {
-        $this->locationsFilterInputProcessor = $locationsFilterInputProcessor;
+        $this->locationsFilterInput = $locationsFilterInput;
     }
-    final protected function getLocationsFilterInputProcessor(): LocationsFilterInputProcessor
+    final protected function getLocationsFilterInput(): LocationsFilterInput
     {
-        return $this->locationsFilterInputProcessor ??= $this->instanceManager->getInstance(LocationsFilterInputProcessor::class);
+        return $this->locationsFilterInput ??= $this->instanceManager->getInstance(LocationsFilterInput::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -58,10 +58,10 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'locations' => $this->getLocationsFilterInputProcessor(),
+            'locations' => $this->getLocationsFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

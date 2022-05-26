@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPosts\FilterInputProcessors;
+namespace PoPCMSSchema\CustomPosts\FilterInputs;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 
-class CustomPostStatusFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class CustomPostStatusFilterInput extends AbstractValueToQueryFilterInput
 {
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
 

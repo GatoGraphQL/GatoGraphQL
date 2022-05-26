@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts\FilterInputProcessors;
+namespace PoPWPSchema\CustomPosts\FilterInputs;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PasswordFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PasswordFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {

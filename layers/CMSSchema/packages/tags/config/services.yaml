@@ -13,8 +13,8 @@ services:
     PoPCMSSchema\Tags\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
-    PoPCMSSchema\Tags\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\Tags\FilterInputs\:
+        resource: '../src/FilterInputs/*'
 
     PoPCMSSchema\Tags\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

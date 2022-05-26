@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputManagerInterface;
 use stdClass;
 
 abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
@@ -14,18 +14,18 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     /** @var array<string, ?array> */
     private array $consolidatedInputFieldFilterInputCache = [];
 
-    private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
+    private ?FilterInputManagerInterface $filterInputProcessorManager = null;
 
-    final public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
+    final public function setFilterInputManager(FilterInputManagerInterface $filterInputProcessorManager): void
     {
         $this->filterInputProcessorManager = $filterInputProcessorManager;
     }
-    final protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface
+    final protected function getFilterInputManager(): FilterInputManagerInterface
     {
-        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
+        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputManagerInterface::class);
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return null;
     }
@@ -34,7 +34,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldFilterInputCache)) {
             return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];

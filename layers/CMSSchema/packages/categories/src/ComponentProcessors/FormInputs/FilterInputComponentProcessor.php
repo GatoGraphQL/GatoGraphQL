@@ -6,19 +6,19 @@ namespace PoPCMSSchema\Categories\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\Categories\FilterInputProcessors\CategoryIDsFilterInputProcessor;
+use PoPCMSSchema\Categories\FilterInputs\CategoryIDsFilterInput;
 
 class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const COMPONENT_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?CategoryIDsFilterInputProcessor $categoryIDsFilterInputProcessor = null;
+    private ?CategoryIDsFilterInput $categoryIDsFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -28,13 +28,13 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
-    final public function setCategoryIDsFilterInputProcessor(CategoryIDsFilterInputProcessor $categoryIDsFilterInputProcessor): void
+    final public function setCategoryIDsFilterInput(CategoryIDsFilterInput $categoryIDsFilterInput): void
     {
-        $this->categoryIDsFilterInputProcessor = $categoryIDsFilterInputProcessor;
+        $this->categoryIDsFilterInput = $categoryIDsFilterInput;
     }
-    final protected function getCategoryIDsFilterInputProcessor(): CategoryIDsFilterInputProcessor
+    final protected function getCategoryIDsFilterInput(): CategoryIDsFilterInput
     {
-        return $this->categoryIDsFilterInputProcessor ??= $this->instanceManager->getInstance(CategoryIDsFilterInputProcessor::class);
+        return $this->categoryIDsFilterInput ??= $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -44,10 +44,10 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->getCategoryIDsFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->getCategoryIDsFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }

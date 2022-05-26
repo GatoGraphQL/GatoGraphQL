@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommons\FilterInputProcessors;
+namespace PoPCMSSchema\SchemaCommons\FilterInputs;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractArrayValuesToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractArrayValuesToQueryFilterInput;
 
-class DatesFilterInputProcessor extends AbstractArrayValuesToQueryFilterInputProcessor
+class DatesFilterInput extends AbstractArrayValuesToQueryFilterInput
 {
     /**
      * @return array<int|string,string>

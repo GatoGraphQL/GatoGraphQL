@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_UserPlatformFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PoP_Module_Processor_UserPlatformFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_BUTTONGROUP_CATEGORIES = 'filterinput-buttongroup-categories';
     public final const FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS = 'filterinput-buttongroup-contentsections';

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors;
+namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputs;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class ExcludeCustomPostAuthorIDsFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class ExcludeCustomPostAuthorIDsFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FilterInputProcessors;
+namespace PoP\ComponentModel\FilterInputs;
 
-abstract class AbstractArrayValuesToQueryFilterInputProcessor extends AbstractFilterInputProcessor
+abstract class AbstractArrayValuesToQueryFilterInput extends AbstractFilterInput
 {
     final public function filterDataloadQueryArgs(array &$query, mixed $value): void
     {

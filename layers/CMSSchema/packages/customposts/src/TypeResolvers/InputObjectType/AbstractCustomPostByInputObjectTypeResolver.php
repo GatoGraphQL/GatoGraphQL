@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\IncludeFilterInputProcessor;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 
 abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?IncludeFilterInputProcessor $includeFilterInputProcessor = null;
-    private ?SlugFilterInputProcessor $slugFilterInputProcessor = null;
+    private ?IncludeFilterInput $includeFilterInput = null;
+    private ?SlugFilterInput $slugFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -34,21 +34,21 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setIncludeFilterInputProcessor(IncludeFilterInputProcessor $includeFilterInputProcessor): void
+    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
-        $this->includeFilterInputProcessor = $includeFilterInputProcessor;
+        $this->includeFilterInput = $includeFilterInput;
     }
-    final protected function getIncludeFilterInputProcessor(): IncludeFilterInputProcessor
+    final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        return $this->includeFilterInputProcessor ??= $this->instanceManager->getInstance(IncludeFilterInputProcessor::class);
+        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
     }
-    final public function setSlugFilterInputProcessor(SlugFilterInputProcessor $slugFilterInputProcessor): void
+    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
     {
-        $this->slugFilterInputProcessor = $slugFilterInputProcessor;
+        $this->slugFilterInput = $slugFilterInput;
     }
-    final protected function getSlugFilterInputProcessor(): SlugFilterInputProcessor
+    final protected function getSlugFilterInput(): SlugFilterInput
     {
-        return $this->slugFilterInputProcessor ??= $this->instanceManager->getInstance(SlugFilterInputProcessor::class);
+        return $this->slugFilterInput ??= $this->instanceManager->getInstance(SlugFilterInput::class);
     }
 
     public function getTypeDescription(): ?string
@@ -81,11 +81,11 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputProcessorInterface
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInputProcessor(),
-            'slug' => $this->getSlugFilterInputProcessor(),
+            'id' => $this->getIncludeFilterInput(),
+            'slug' => $this->getSlugFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FilterInputProcessors;
+namespace PoP\ComponentModel\FilterInputs;
 
-interface FilterInputProcessorInterface
+interface FilterInputInterface
 {
     public function filterDataloadQueryArgs(array &$query, mixed $value): void;
 }

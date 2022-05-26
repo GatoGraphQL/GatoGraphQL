@@ -13,5 +13,5 @@ services:
     PoPCMSSchema\Comments\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
-    PoPCMSSchema\Comments\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\Comments\FilterInputs\:
+        resource: '../src/FilterInputs/*'

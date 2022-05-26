@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\GenericCustomPosts\FilterInputProcessors;
+namespace PoPCMSSchema\GenericCustomPosts\FilterInputs;
 
 use PoP\Root\App;
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPCMSSchema\GenericCustomPosts\Module;
 use PoPCMSSchema\GenericCustomPosts\ModuleConfiguration;
 
-class GenericCustomPostTypesFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class GenericCustomPostTypesFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {

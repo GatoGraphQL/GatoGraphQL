@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PoP_Module_Processor_UserStanceUserRolesFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 

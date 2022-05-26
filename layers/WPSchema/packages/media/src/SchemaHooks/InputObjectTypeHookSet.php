@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\SchemaHooks;
 
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -12,12 +12,12 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\SlugFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?SlugFilterInputProcessor $slugFilterInputProcessor = null;
+    private ?SlugFilterInput $slugFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -27,13 +27,13 @@ class InputObjectTypeHookSet extends AbstractHookSet
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setSlugFilterInputProcessor(SlugFilterInputProcessor $slugFilterInputProcessor): void
+    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
     {
-        $this->slugFilterInputProcessor = $slugFilterInputProcessor;
+        $this->slugFilterInput = $slugFilterInput;
     }
-    final protected function getSlugFilterInputProcessor(): SlugFilterInputProcessor
+    final protected function getSlugFilterInput(): SlugFilterInput
     {
-        return $this->slugFilterInputProcessor ??= $this->instanceManager->getInstance(SlugFilterInputProcessor::class);
+        return $this->slugFilterInput ??= $this->instanceManager->getInstance(SlugFilterInput::class);
     }
 
     protected function init(): void
@@ -91,15 +91,15 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?FilterInputProcessorInterface $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?FilterInputProcessorInterface {
+    ): ?FilterInputInterface {
         if (!($inputObjectTypeResolver instanceof MediaItemByInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'slug' => $this->getSlugFilterInputProcessor(),
+            'slug' => $this->getSlugFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

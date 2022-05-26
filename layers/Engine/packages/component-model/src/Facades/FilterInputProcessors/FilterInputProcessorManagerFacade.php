@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\FilterInputProcessors;
+namespace PoP\ComponentModel\Facades\FilterInputs;
 
 use PoP\Root\App;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputManagerInterface;
 
-class FilterInputProcessorManagerFacade
+class FilterInputManagerFacade
 {
-    public static function getInstance(): FilterInputProcessorManagerInterface
+    public static function getInstance(): FilterInputManagerInterface
     {
         /**
-         * @var FilterInputProcessorManagerInterface
+         * @var FilterInputManagerInterface
          */
-        $service = App::getContainer()->get(FilterInputProcessorManagerInterface::class);
+        $service = App::getContainer()->get(FilterInputManagerInterface::class);
         return $service;
     }
 }

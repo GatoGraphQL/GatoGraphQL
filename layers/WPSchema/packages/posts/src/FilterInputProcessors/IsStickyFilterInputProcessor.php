@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Posts\FilterInputProcessors;
+namespace PoPWPSchema\Posts\FilterInputs;
 
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class IsStickyFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class IsStickyFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {

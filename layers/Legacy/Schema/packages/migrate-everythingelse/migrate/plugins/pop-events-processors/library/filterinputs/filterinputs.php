@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Events_Module_Processor_FilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class PoP_Events_Module_Processor_FilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
 

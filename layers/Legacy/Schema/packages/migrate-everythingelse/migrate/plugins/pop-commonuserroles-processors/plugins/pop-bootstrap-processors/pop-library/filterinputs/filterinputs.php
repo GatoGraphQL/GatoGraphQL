@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractValueToQueryFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractValueToQueryFilterInputProcessor
+class GD_URE_Module_Processor_MultiSelectFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
     public final const URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';

@@ -1,11 +1,11 @@
 <?php
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
-use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\OrderFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\OrderFilterInput;
 
 class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_SelectFormInputsBase implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
@@ -17,7 +17,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     public final const COMPONENT_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?OrderFilterInputProcessor $orderFilterInputProcessor = null;
+    private ?OrderFilterInput $orderFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -27,13 +27,13 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setOrderFilterInputProcessor(OrderFilterInputProcessor $orderFilterInputProcessor): void
+    final public function setOrderFilterInput(OrderFilterInput $orderFilterInput): void
     {
-        $this->orderFilterInputProcessor = $orderFilterInputProcessor;
+        $this->orderFilterInput = $orderFilterInput;
     }
-    final protected function getOrderFilterInputProcessor(): OrderFilterInputProcessor
+    final protected function getOrderFilterInput(): OrderFilterInput
     {
-        return $this->orderFilterInputProcessor ??= $this->instanceManager->getInstance(OrderFilterInputProcessor::class);
+        return $this->orderFilterInput ??= $this->instanceManager->getInstance(OrderFilterInput::class);
     }
 
     public function getComponentsToProcess(): array
@@ -46,13 +46,13 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputProcessorInterface
+    public function getFilterInput(array $component): ?FilterInputInterface
     {
         $filterInputs = [
-            self::COMPONENT_FILTERINPUT_ORDERUSER => $this->getOrderFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_ORDERPOST => $this->getOrderFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_ORDERTAG => $this->getOrderFilterInputProcessor(),
-            self::COMPONENT_FILTERINPUT_ORDERCOMMENT => $this->getOrderFilterInputProcessor(),
+            self::COMPONENT_FILTERINPUT_ORDERUSER => $this->getOrderFilterInput(),
+            self::COMPONENT_FILTERINPUT_ORDERPOST => $this->getOrderFilterInput(),
+            self::COMPONENT_FILTERINPUT_ORDERTAG => $this->getOrderFilterInput(),
+            self::COMPONENT_FILTERINPUT_ORDERCOMMENT => $this->getOrderFilterInput(),
         ];
         return $filterInputs[$component[1]] ?? null;
     }
