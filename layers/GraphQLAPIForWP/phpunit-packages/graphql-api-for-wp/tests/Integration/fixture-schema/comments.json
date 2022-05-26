@@ -3,22 +3,118 @@
         "post": {
             "comments": [
                 {
-                    "id": 7,
+                    "approved": true,
+                    "authorEmail": "admin@example.com",
+                    "authorIP": "172.20.0.2",
+                    "authorName": "admin",
+                    "authorURL": "http://graphql-api-nginx.lndo.site",
                     "content": "<p>How many endpoints can create?</p>\n",
+                    "customPostID": 21,
+                    "date": "2020-12-12T04:03:35+00:00",
+                    "dateStr": "December 12, 2020",
+                    "id": 7,
+                    "karma": 0,
+                    "metaValue": null,
+                    "rawContent": "How many endpoints can create?",
+                    "responseCount": 1,
+                    "status": "approve",
+                    "type": "comment",
+                    "author": {
+                        "id": 1,
+                        "name": "admin"
+                    },
+                    "customPost": {
+                        "id": 21,
+                        "title": "Customize the schema for each client"
+                    },
+                    "parent": null,
                     "responses": [
                         {
+                            "approved": true,
+                            "authorEmail": "admin@example.com",
+                            "authorIP": "172.20.0.2",
+                            "authorName": "admin",
+                            "authorURL": "http://graphql-api-nginx.lndo.site",
+                            "content": "<p>As many as you want!</p>\n",
+                            "customPostID": 21,
+                            "date": "2020-12-12T04:03:43+00:00",
+                            "dateStr": "December 12, 2020",
                             "id": 8,
-                            "content": "<p>As many as you want!</p>\n"
+                            "karma": 0,
+                            "metaValue": null,
+                            "rawContent": "As many as you want!",
+                            "responseCount": 0,
+                            "status": "approve",
+                            "type": "comment",
+                            "author": {
+                                "id": 1,
+                                "name": "admin"
+                            },
+                            "customPost": {
+                                "id": 21,
+                                "title": "Customize the schema for each client"
+                            },
+                            "parent": {
+                                "id": 7
+                            }
                         }
                     ]
                 },
                 {
-                    "id": 4,
+                    "approved": true,
+                    "authorEmail": "admin@example.com",
+                    "authorIP": "172.20.0.2",
+                    "authorName": "admin",
+                    "authorURL": "http://graphql-api-nginx.lndo.site",
                     "content": "<p>Will the fields be shown or hidden when the user is denied access?</p>\n",
+                    "customPostID": 21,
+                    "date": "2020-12-12T04:02:44+00:00",
+                    "dateStr": "December 12, 2020",
+                    "id": 4,
+                    "karma": 0,
+                    "metaValue": null,
+                    "rawContent": "Will the fields be shown or hidden when the user is denied access?",
+                    "responseCount": 1,
+                    "status": "approve",
+                    "type": "comment",
+                    "author": {
+                        "id": 1,
+                        "name": "admin"
+                    },
+                    "customPost": {
+                        "id": 21,
+                        "title": "Customize the schema for each client"
+                    },
+                    "parent": null,
                     "responses": [
                         {
+                            "approved": true,
+                            "authorEmail": "admin@example.com",
+                            "authorIP": "172.20.0.2",
+                            "authorName": "admin",
+                            "authorURL": "http://graphql-api-nginx.lndo.site",
+                            "content": "<p>That can be configured, as either &#8220;public&#8221; or &#8220;private&#8221; API mode</p>\n",
+                            "customPostID": 21,
+                            "date": "2020-12-12T04:03:08+00:00",
+                            "dateStr": "December 12, 2020",
                             "id": 5,
-                            "content": "<p>That can be configured, as either &#8220;public&#8221; or &#8220;private&#8221; API mode</p>\n"
+                            "karma": 0,
+                            "metaValue": null,
+                            "rawContent": "That can be configured, as either \"public\" or \"private\" API mode",
+                            "responseCount": 1,
+                            "status": "approve",
+                            "type": "comment",
+                            "author": {
+                                "id": 1,
+                                "name": "admin"
+                            },
+                            "customPost": {
+                                "id": 21,
+                                "title": "Customize the schema for each client"
+                            },
+                            "parent": {
+                                "id": 4
+                            }
                         }
                     ]
                 }

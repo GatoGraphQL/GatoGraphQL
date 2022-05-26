@@ -10,6 +10,31 @@
 }
 
 fragment CommentData on Comment {
-  id
+  approved
+  author {
+    id
+    name
+  }
+  authorEmail
+  authorIP
+  authorName
+  authorURL
   content
+  customPost {
+    id
+    title
+  }
+  customPostID
+  date
+  dateStr
+  id
+  karma
+  metaValue(key: "description")
+  parent {
+    id
+  }
+  rawContent
+  responseCount
+  status
+  type
 }
