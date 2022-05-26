@@ -30,8 +30,9 @@ query {
     isStatus(status: pending)
     isSticky
     metaValue(key: "_thumbnail_id")
-    modifiedDate
-    modifiedDateStr(format: "m-d")
+    # These ones produce the value of data being inserted to DB, so can't save fixed value for testing
+    # modifiedDate
+    # modifiedDateStr(format: "m-d")
     postFormat
     rawContent
     slug
