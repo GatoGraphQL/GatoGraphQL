@@ -1,0 +1,100 @@
+query {
+  pages(pagination: { limit: 3 }) {
+    areCommentsOpen
+    author {
+      id
+      name
+    }
+    children {
+      id
+      title
+    }
+    childCount
+    commentCount
+    comments {
+      id
+    }
+    content
+    customPostType
+    date
+    dateStr
+    excerpt
+    featuredImage {
+      id
+      src
+    }
+    hasComments
+    hasFeaturedImage
+    id
+    isStatus(status: pending)
+    menuOrder
+    metaValue(key: "_thumbnail_id")
+    # These ones produce the value of data being inserted to DB, so can't save fixed value for testing
+    # modifiedDate
+    # modifiedDateStr(format: "m-d")
+    parent {
+      id
+      title
+    }
+    rawContent
+    slug
+    status
+    title
+    url
+    urlAbsolutePath
+  }
+
+  pagesByAuthorIDs: pages(filter: { authorIDs: 1 }) {
+    id
+    title
+  }
+  pagesByAuthorSlug: pages(filter: { authorSlug: "admin" }) {
+    id
+    title
+  }
+  pagesByDateQuery: pages(filter: { dateQuery: { after: "2022-01-01" } }) {
+    id
+    title
+  }
+  pagesByExcludeAuthorIDs: pages(filter: { excludeAuthorIDs: 1 }) {
+    id
+    title
+  }
+  pagesByExcludeIDs: pages(filter: { excludeIDs: [2, 3] }) {
+    id
+    title
+  }
+  pagesByIds: pages(filter: { ids: [2, 3], status: [publish, draft] }) {
+    id
+    title
+  }
+  pagesByMetaQuery: pages(filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: NOT_EXISTS } } } }) {
+    id
+    title
+  }
+  pagesByParentID: pages(filter: { parentID: 2 }) {
+    id
+    title
+  }
+  pagesByParentIDs: pages(filter: { parentIDs: 2 }) {
+    id
+    title
+  }
+  pagesBySearch: pages(filter: { search: "sample" }) {
+    id
+    title
+  }
+  pagesByStatus: pages(filter: { status: draft }) {
+    id
+    title
+  }
+
+  pagesSortedASC: pages(filter: { status: [publish, draft] }, sort: { by: TITLE, order: ASC}) {
+    id
+    title
+  }
+  pagesSortedDESC: pages(filter: { status: [publish, draft] }, sort: { by: TITLE, order: DESC}) {
+    id
+    title
+  }
+}
