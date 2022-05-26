@@ -1,0 +1,28 @@
+{
+    "data": {
+        "post": {
+            "comments": [
+                {
+                    "id": 7,
+                    "content": "<p>How many endpoints can create?</p>\n",
+                    "responses": [
+                        {
+                            "id": 8,
+                            "content": "<p>As many as you want!</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "content": "<p>Will the fields be shown or hidden when the user is denied access?</p>\n",
+                    "responses": [
+                        {
+                            "id": 5,
+                            "content": "<p>That can be configured, as either &#8220;public&#8221; or &#8220;private&#8221; API mode</p>\n"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

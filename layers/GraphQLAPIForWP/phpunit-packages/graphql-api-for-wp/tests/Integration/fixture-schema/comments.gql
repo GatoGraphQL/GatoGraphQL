@@ -1,0 +1,12 @@
+{
+  post(by:{ id: 21 }) {
+    comments {
+      id
+      content
+      responses {
+        id
+        content
+      }
+    }
+  }
+}
