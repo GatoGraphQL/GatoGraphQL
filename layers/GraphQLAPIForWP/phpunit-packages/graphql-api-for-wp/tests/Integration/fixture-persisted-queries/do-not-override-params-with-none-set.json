@@ -2,17 +2,17 @@
     "data": {
         "postTags": [
             {
-                "id": 9,
+                "id": 11,
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/wordpress\/",
                 "name": "wordpress"
             },
             {
-                "id": 8,
+                "id": 10,
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
                 "name": "security"
             },
             {
-                "id": 7,
+                "id": 9,
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/release\/",
                 "name": "release"
             }
