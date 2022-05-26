@@ -15,6 +15,11 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
 {
     use FixtureTestCaseTrait;
 
+    public function getDataSetAsString(bool $includeData = true): string
+    {
+        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
+    }
+
     /**
      * @return array<string,array<string>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
@@ -57,9 +62,4 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
         }
         return $pluginEntries;
     }
-
-    /**
-     * Directory under the fixture files are placed
-     */
-    abstract protected function getFixtureFolder(): string;
 }
