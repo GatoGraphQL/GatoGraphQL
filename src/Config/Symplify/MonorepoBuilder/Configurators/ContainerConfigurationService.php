@@ -174,7 +174,7 @@ class ContainerConfigurationService
         /**
          * Release workers
          */
-        $this->setReleaseWorkerServices($services);
+        $this->setReleaseWorkerServices();
     }
 
     protected function setCustomServices(ServicesConfigurator $services): void
@@ -185,15 +185,13 @@ class ContainerConfigurationService
             ->load('PoP\\PoP\\Extensions\\', $this->rootDirectory . '/src/Extensions/*');
     }
 
-    protected function setReleaseWorkerServices(ServicesConfigurator $services): void
+    protected function setReleaseWorkerServices(): void
     {
         /**
          * Release workers - in order to execute
          */
         if ($releaseWorkersConfig = $this->getReleaseWorkersDataSource()) {
-            foreach ($releaseWorkersConfig->getReleaseWorkerClasses() as $releaseWorkerClass) {
-                $services->set($releaseWorkerClass);
-            }
+            $this->mbConfig->workers($releaseWorkersConfig->getReleaseWorkerClasses());
         }
     }
 }
