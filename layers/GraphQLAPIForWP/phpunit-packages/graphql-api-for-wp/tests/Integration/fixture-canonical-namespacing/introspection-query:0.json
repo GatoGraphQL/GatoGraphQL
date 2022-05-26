@@ -245,9 +245,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -268,9 +272,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -741,9 +749,13 @@
                   "description": "The status to check if the post has",
                   "defaultValue": null,
                   "type": {
-                    "kind": "ENUM",
-                    "name": "CustomPostStatusEnum",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostStatusEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CustomPostStatusEnum",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -768,9 +780,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -791,9 +807,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1763,9 +1783,13 @@
                   "description": "Input to add a comment to a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootAddCommentToCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootAddCommentToCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootAddCommentToCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1786,9 +1810,13 @@
                   "description": "Input to update a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootCreatePostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreatePostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1825,9 +1853,13 @@
                   "description": "Choose which credentials to use to log-in, and provide them",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "LoginUserByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "LoginUserByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "LoginUserByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1860,9 +1892,13 @@
                   "description": "Input to remove the featured image from a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1883,9 +1919,13 @@
                   "description": "Input to add a comment to a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootReplyCommentFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootReplyCommentFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootReplyCommentFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1906,9 +1946,13 @@
                   "description": "Input to set categories on a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootSetCategoriesOnCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetCategoriesOnCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1929,9 +1973,13 @@
                   "description": "Input to set the featured image on a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1952,9 +2000,13 @@
                   "description": "Input to set tags on a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootSetTagsOnCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetTagsOnCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -1975,9 +2027,13 @@
                   "description": "Input to update a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootUpdatePostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdatePostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -2379,9 +2435,13 @@
                   "description": "The status to check if the post has",
                   "defaultValue": null,
                   "type": {
-                    "kind": "ENUM",
-                    "name": "CustomPostStatusEnum",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostStatusEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CustomPostStatusEnum",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -2422,9 +2482,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -2445,9 +2509,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -3106,9 +3174,13 @@
                   "description": "The status to check if the post has",
                   "defaultValue": null,
                   "type": {
-                    "kind": "ENUM",
-                    "name": "CustomPostStatusEnum",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostStatusEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CustomPostStatusEnum",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -3149,9 +3221,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -3172,9 +3248,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -3736,9 +3816,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -3759,9 +3843,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4015,9 +4103,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4038,9 +4130,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4280,9 +4376,13 @@
                   "description": "Oneof input to specify the property and data to fetch a comment",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CommentByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CommentByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CommentByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4421,9 +4521,13 @@
                   "description": "Oneof input to specify the property and data to fetch a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CustomPostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4562,9 +4666,13 @@
                   "description": "Oneof input to specify the property and data to fetch a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CustomPostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4719,9 +4827,13 @@
                   "description": "Oneof input to specify the property and data to fetch a media item",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "MediaItemByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "MediaItemByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "MediaItemByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4824,9 +4936,13 @@
                   "description": "Oneof input to specify the property and data to fetch a menu",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "MenuByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "MenuByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "MenuByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -4947,9 +5063,13 @@
                   "description": "Oneof input to specify the property and data to fetch a comment",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CommentByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CommentByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CommentByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5088,9 +5208,13 @@
                   "description": "Oneof input to specify the property and data to fetch a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CustomPostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5211,9 +5335,13 @@
                   "description": "Oneof input to specify the property and data to fetch a post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5316,9 +5444,13 @@
                   "description": "The option name",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5339,9 +5471,13 @@
                   "description": "The option name",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5362,9 +5498,13 @@
                   "description": "The option name",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5389,9 +5529,13 @@
                   "description": "Oneof input to specify the property and data to fetch a page",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PageByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PageByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PageByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5512,9 +5656,13 @@
                   "description": "Oneof input to specify the property and data to fetch a post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5590,9 +5738,13 @@
                   "description": "Oneof input to specify the property and data to fetch a category",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostCategoryByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostCategoryByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostCategoryByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5722,9 +5874,13 @@
                   "description": "Oneof input to specify the property and data to fetch a tag",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostTagByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostTagByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostTagByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -5985,9 +6141,13 @@
                   "description": "Oneof input to specify the property and data to fetch a user",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UserByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "UserByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "UserByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6107,9 +6267,13 @@
                   "description": "Input to add a comment to a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootAddCommentToCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootAddCommentToCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootAddCommentToCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6172,9 +6336,13 @@
                   "description": "Oneof input to specify the property and data to fetch a comment",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CommentByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CommentByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CommentByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6277,9 +6445,13 @@
                   "description": "Input to update a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootCreatePostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreatePostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6336,9 +6508,13 @@
                   "description": "Oneof input to specify the property and data to fetch a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CustomPostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6477,9 +6653,13 @@
                   "description": "Oneof input to specify the property and data to fetch a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CustomPostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6622,9 +6802,13 @@
                   "description": "Choose which credentials to use to log-in, and provide them",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "LoginUserByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "LoginUserByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "LoginUserByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6669,9 +6853,13 @@
                   "description": "Oneof input to specify the property and data to fetch a media item",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "MediaItemByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "MediaItemByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "MediaItemByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6774,9 +6962,13 @@
                   "description": "Oneof input to specify the property and data to fetch a menu",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "MenuByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "MenuByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "MenuByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -6909,9 +7101,13 @@
                   "description": "Oneof input to specify the property and data to fetch a comment",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CommentByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CommentByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CommentByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7050,9 +7246,13 @@
                   "description": "Oneof input to specify the property and data to fetch a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CustomPostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7173,9 +7373,13 @@
                   "description": "Oneof input to specify the property and data to fetch a post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7278,9 +7482,13 @@
                   "description": "The option name",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7301,9 +7509,13 @@
                   "description": "The option name",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7324,9 +7536,13 @@
                   "description": "The option name",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7351,9 +7567,13 @@
                   "description": "Oneof input to specify the property and data to fetch a page",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PageByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PageByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PageByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7474,9 +7694,13 @@
                   "description": "Oneof input to specify the property and data to fetch a post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7552,9 +7776,13 @@
                   "description": "Oneof input to specify the property and data to fetch a category",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostCategoryByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostCategoryByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostCategoryByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7684,9 +7912,13 @@
                   "description": "Oneof input to specify the property and data to fetch a tag",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostTagByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "PostTagByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostTagByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7911,9 +8143,13 @@
                   "description": "Input to remove the featured image from a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -7934,9 +8170,13 @@
                   "description": "Input to add a comment to a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootReplyCommentFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootReplyCommentFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootReplyCommentFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8005,9 +8245,13 @@
                   "description": "Input to set categories on a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootSetCategoriesOnCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetCategoriesOnCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8028,9 +8272,13 @@
                   "description": "Input to set the featured image on a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8051,9 +8299,13 @@
                   "description": "Input to set tags on a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootSetTagsOnCustomPostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnCustomPostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetTagsOnCustomPostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8074,9 +8326,13 @@
                   "description": "Input to update a custom post",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootUpdatePostFilterInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostFilterInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdatePostFilterInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8097,9 +8353,13 @@
                   "description": "Oneof input to specify the property and data to fetch a user",
                   "defaultValue": null,
                   "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UserByInput",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "UserByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "UserByInput",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8396,15 +8656,19 @@
                   "description": "User capabilities to check against",
                   "defaultValue": null,
                   "type": {
-                    "kind": "LIST",
-                    "name": "[String!]",
+                    "kind": "NON_NULL",
+                    "name": "[String!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "String!",
+                      "kind": "LIST",
+                      "name": "[String!]",
                       "ofType": {
-                        "kind": "SCALAR",
-                        "name": "String",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "String!",
+                        "ofType": {
+                          "kind": "SCALAR",
+                          "name": "String",
+                          "ofType": null
+                        }
                       }
                     }
                   }
@@ -8431,15 +8695,19 @@
                   "description": "User roles to check against",
                   "defaultValue": null,
                   "type": {
-                    "kind": "LIST",
-                    "name": "[String!]",
+                    "kind": "NON_NULL",
+                    "name": "[String!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "String!",
+                      "kind": "LIST",
+                      "name": "[String!]",
                       "ofType": {
-                        "kind": "SCALAR",
-                        "name": "String",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "String!",
+                        "ofType": {
+                          "kind": "SCALAR",
+                          "name": "String",
+                          "ofType": null
+                        }
                       }
                     }
                   }
@@ -8466,9 +8734,13 @@
                   "description": "User capability to check against",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8493,9 +8765,13 @@
                   "description": "User role to check against",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8564,9 +8840,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -8587,9 +8867,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -10013,9 +10297,13 @@
                   "description": "The name of the type",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -10697,9 +10985,13 @@
                   "description": "The status to check if the post has",
                   "defaultValue": null,
                   "type": {
-                    "kind": "ENUM",
-                    "name": "CustomPostStatusEnum",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "CustomPostStatusEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CustomPostStatusEnum",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -11269,9 +11561,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -11292,9 +11588,13 @@
                   "description": "The meta key",
                   "defaultValue": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   }
                 }
               ],
@@ -11413,9 +11713,13 @@
               "description": "Value and operator to compare against",
               "defaultValue": null,
               "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "MetaQueryCompareByInput",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MetaQueryCompareByInput",
+                  "ofType": null
+                }
               }
             },
             {
@@ -11423,9 +11727,13 @@
               "description": "Custom field key",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -11433,9 +11741,13 @@
               "description": "OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used",
               "defaultValue": "\"AND\"",
               "type": {
-                "kind": "ENUM",
-                "name": "RelationEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RelationEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RelationEnum",
+                  "ofType": null
+                }
               }
             },
             {
@@ -11443,9 +11755,13 @@
               "description": "Custom field type",
               "defaultValue": "\"CHAR\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryValueTypesEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryValueTypesEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryValueTypesEnum",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -11995,9 +12311,13 @@
               "description": "Value and operator to compare against",
               "defaultValue": null,
               "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "MetaQueryCompareByInput",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MetaQueryCompareByInput",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12005,9 +12325,13 @@
               "description": "Custom field key",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12015,9 +12339,13 @@
               "description": "OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used",
               "defaultValue": "\"AND\"",
               "type": {
-                "kind": "ENUM",
-                "name": "RelationEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RelationEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RelationEnum",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12025,9 +12353,13 @@
               "description": "Custom field type",
               "defaultValue": "\"CHAR\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryValueTypesEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryValueTypesEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryValueTypesEnum",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -12373,9 +12705,13 @@
               "description": "The password",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12383,9 +12719,13 @@
               "description": "The username or email",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -12559,9 +12899,13 @@
               "description": "The operator to compare against",
               "defaultValue": "\"IN\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryCompareByArrayValueOperator",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByArrayValueOperator!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryCompareByArrayValueOperator",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12569,15 +12913,19 @@
               "description": "Custom field value",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[AnyBuiltInScalar!]",
+                "kind": "NON_NULL",
+                "name": "[AnyBuiltInScalar!]!",
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "AnyBuiltInScalar!",
+                  "kind": "LIST",
+                  "name": "[AnyBuiltInScalar!]",
                   "ofType": {
-                    "kind": "SCALAR",
-                    "name": "AnyBuiltInScalar",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "AnyBuiltInScalar!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "AnyBuiltInScalar",
+                      "ofType": null
+                    }
                   }
                 }
               }
@@ -12649,9 +12997,13 @@
               "description": "The operator to compare against",
               "defaultValue": "\"EXISTS\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryCompareByKeyOperator",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByKeyOperator!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryCompareByKeyOperator",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -12670,9 +13022,13 @@
               "description": "The operator to compare against",
               "defaultValue": "\"EQUALS\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryCompareByNumericValueOperator",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByNumericValueOperator!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryCompareByNumericValueOperator",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12680,9 +13036,13 @@
               "description": "Custom field value",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "Numeric",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "Numeric!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Numeric",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -12701,9 +13061,13 @@
               "description": "The operator to compare against",
               "defaultValue": "\"EQUALS\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryCompareByStringValueOperator",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByStringValueOperator!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryCompareByStringValueOperator",
+                  "ofType": null
+                }
               }
             },
             {
@@ -12711,9 +13075,13 @@
               "description": "Custom field value",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -13115,9 +13483,13 @@
               "description": "The comment to add",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -13125,9 +13497,13 @@
               "description": "The ID of the custom post to add a comment to",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15407,9 +15783,13 @@
               "description": "The ID of the custom post",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -15458,9 +15838,13 @@
               "description": "The comment to add",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15468,9 +15852,13 @@
               "description": "The ID of the parent comment",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -15499,12 +15887,16 @@
               "description": "The IDs of the categories to set, of type 'PostCategory'",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[ID]",
+                "kind": "NON_NULL",
+                "name": "[ID]!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": "[ID]",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -15513,9 +15905,13 @@
               "description": "The ID of the post",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -15534,9 +15930,13 @@
               "description": "The ID of the custom post",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15544,9 +15944,13 @@
               "description": "The ID of the image to set as featured",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -15575,9 +15979,13 @@
               "description": "The ID of the post",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15585,12 +15993,16 @@
               "description": "The tags to set",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[String]",
+                "kind": "NON_NULL",
+                "name": "[String]!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": "[String]",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 }
               }
             }
@@ -15741,9 +16153,13 @@
               "description": "The ID of the custom post to update",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15831,9 +16247,13 @@
               "description": "Value and operator to compare against",
               "defaultValue": null,
               "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "MetaQueryCompareByInput",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MetaQueryCompareByInput",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15841,9 +16261,13 @@
               "description": "Custom field key",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15851,9 +16275,13 @@
               "description": "OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used",
               "defaultValue": "\"AND\"",
               "type": {
-                "kind": "ENUM",
-                "name": "RelationEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RelationEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RelationEnum",
+                  "ofType": null
+                }
               }
             },
             {
@@ -15861,9 +16289,13 @@
               "description": "Custom field type",
               "defaultValue": "\"CHAR\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryValueTypesEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryValueTypesEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryValueTypesEnum",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -16196,9 +16628,13 @@
               "description": "Value and operator to compare against",
               "defaultValue": null,
               "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "MetaQueryCompareByInput",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryCompareByInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MetaQueryCompareByInput",
+                  "ofType": null
+                }
               }
             },
             {
@@ -16206,9 +16642,13 @@
               "description": "Custom field key",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             {
@@ -16216,9 +16656,13 @@
               "description": "OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used",
               "defaultValue": "\"AND\"",
               "type": {
-                "kind": "ENUM",
-                "name": "RelationEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RelationEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "RelationEnum",
+                  "ofType": null
+                }
               }
             },
             {
@@ -16226,9 +16670,13 @@
               "description": "Custom field type",
               "defaultValue": "\"CHAR\"",
               "type": {
-                "kind": "ENUM",
-                "name": "MetaQueryValueTypesEnum",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "MetaQueryValueTypesEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MetaQueryValueTypesEnum",
+                  "ofType": null
+                }
               }
             }
           ],
@@ -17603,9 +18051,13 @@
               "description": "Argument that must evaluate to `true` to include the field value in the output",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
               }
             }
           ]
@@ -17624,9 +18076,13 @@
               "description": "Argument that must evaluate to `false` to include the field value in the output",
               "defaultValue": null,
               "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
               }
             }
           ]
@@ -17643,12 +18099,16 @@
               "description": "Capabilities to validate if the logged-in user has (any of them)",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[String]",
+                "kind": "NON_NULL",
+                "name": "[String]!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": "[String]",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 }
               }
             }
@@ -17666,12 +18126,16 @@
               "description": "Capabilities to validate if the logged-in user has (any of them)",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[String]",
+                "kind": "NON_NULL",
+                "name": "[String]!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": "[String]",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 }
               }
             }
@@ -17689,12 +18153,16 @@
               "description": "Roles to validate if the logged-in user has (any of them)",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[String]",
+                "kind": "NON_NULL",
+                "name": "[String]!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": "[String]",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 }
               }
             }
@@ -17712,12 +18180,16 @@
               "description": "Roles to validate if the logged-in user has (any of them)",
               "defaultValue": null,
               "type": {
-                "kind": "LIST",
-                "name": "[String]",
+                "kind": "NON_NULL",
+                "name": "[String]!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": "[String]",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 }
               }
             }
