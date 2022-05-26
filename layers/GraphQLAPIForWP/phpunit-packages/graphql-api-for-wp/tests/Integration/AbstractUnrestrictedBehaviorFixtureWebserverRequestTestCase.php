@@ -15,6 +15,11 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
     use FixtureTestCaseTrait;
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
+    public function getDataSetAsString(bool $includeData = true): string
+    {
+        return $this->appendFixtureFolderInfo(parent::getDataSetAsString($includeData));
+    }
+
     /**
      * Retrieve all files under the "/fixture" folder
      * to retrieve the GraphQL queries, and their
@@ -71,9 +76,4 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
         }
         return $providerItems;
     }
-
-    /**
-     * Directory under the fixture files are placed
-     */
-    abstract protected function getFixtureFolder(): string;
 }

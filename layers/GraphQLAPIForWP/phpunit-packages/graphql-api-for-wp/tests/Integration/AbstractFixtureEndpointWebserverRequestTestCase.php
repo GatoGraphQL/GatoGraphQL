@@ -15,6 +15,11 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
 {
     use FixtureTestCaseTrait;
 
+    public function getDataSetAsString(bool $includeData = true): string
+    {
+        return $this->appendFixtureFolderInfo(parent::getDataSetAsString($includeData));
+    }
+
     /**
      * Retrieve all GraphQL query files and their expected
      * responses from under the "/fixture" folder
@@ -111,9 +116,4 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
     {
         return false;
     }
-
-    /**
-     * Directory under the fixture files are placed
-     */
-    abstract protected function getFixtureFolder(): string;
 }
