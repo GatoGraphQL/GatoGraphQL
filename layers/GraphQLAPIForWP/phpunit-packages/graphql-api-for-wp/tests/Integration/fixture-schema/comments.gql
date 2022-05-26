@@ -1,12 +1,15 @@
 {
   post(by:{ id: 21 }) {
     comments {
-      id
-      content
+      ...CommentData
       responses {
-        id
-        content
+        ...CommentData
       }
     }
   }
+}
+
+fragment CommentData on Comment {
+  id
+  content
 }
