@@ -13,7 +13,7 @@
       id
     }
     categoriesByMetaQuery: categories(filter: { metaQuery: {
-      key: "_thumbnail_id",
+      key: "someMetaKeyThatDoesntExist",
       compareBy:{
         key: {
           operator: NOT_EXISTS
