@@ -25,12 +25,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -72,9 +76,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -99,9 +107,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -142,9 +154,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -169,9 +185,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -196,15 +216,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -247,9 +271,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -274,12 +302,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -321,9 +353,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -331,12 +367,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -411,12 +451,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -458,9 +502,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -485,9 +533,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -528,9 +580,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -555,9 +611,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -582,15 +642,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -633,9 +697,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -660,12 +728,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -707,9 +779,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -717,12 +793,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -797,12 +877,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -844,9 +928,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -871,9 +959,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -914,9 +1006,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -941,9 +1037,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -968,15 +1068,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -1031,9 +1135,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1058,12 +1166,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1117,9 +1229,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -1127,12 +1243,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1207,12 +1327,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1254,9 +1378,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1281,9 +1409,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1324,9 +1456,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1351,9 +1487,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1378,15 +1518,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -1445,9 +1589,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1472,12 +1620,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1519,9 +1671,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -1529,12 +1685,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1609,12 +1769,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1656,9 +1820,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1699,9 +1867,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1742,9 +1914,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1769,9 +1945,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1796,15 +1976,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -1847,9 +2031,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1874,12 +2062,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -1921,9 +2113,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -1931,12 +2127,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2011,12 +2211,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2058,9 +2262,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2101,9 +2309,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2160,9 +2372,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2187,9 +2403,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2214,15 +2434,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -2265,9 +2489,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2292,12 +2520,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2339,9 +2571,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -2349,12 +2585,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2429,12 +2669,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2476,9 +2720,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2519,9 +2767,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2562,9 +2814,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2589,9 +2845,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2616,15 +2876,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -2667,9 +2931,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2694,12 +2962,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2741,9 +3013,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -2751,12 +3027,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2831,12 +3111,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -2894,9 +3178,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2921,9 +3209,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2964,9 +3256,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -2991,9 +3287,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3018,15 +3318,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -3085,9 +3389,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3112,12 +3420,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -3159,9 +3471,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -3169,12 +3485,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -3249,12 +3569,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -3296,9 +3620,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3323,9 +3651,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3382,9 +3714,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3409,9 +3745,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3436,15 +3776,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -3487,9 +3831,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3514,12 +3862,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -3561,9 +3913,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -3571,12 +3927,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -3651,12 +4011,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -3750,9 +4114,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3777,9 +4145,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3820,9 +4192,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3863,9 +4239,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -3890,15 +4270,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -3981,9 +4365,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4008,12 +4396,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4055,9 +4447,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -4065,12 +4461,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4145,12 +4545,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4232,9 +4636,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4275,9 +4683,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4318,9 +4730,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4345,9 +4761,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4372,15 +4792,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -4439,9 +4863,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4466,12 +4894,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4513,9 +4945,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -4523,12 +4959,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4603,12 +5043,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4714,9 +5158,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4757,9 +5205,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4800,9 +5252,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4827,9 +5283,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4854,15 +5314,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -4921,9 +5385,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -4948,12 +5416,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -4995,9 +5467,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -5005,12 +5481,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -5101,12 +5581,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -5188,9 +5672,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5215,9 +5703,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5258,9 +5750,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5285,9 +5781,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5312,15 +5812,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -5379,9 +5883,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5406,12 +5914,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -5453,9 +5965,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -5463,12 +5979,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -5559,12 +6079,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -5665,9 +6189,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5692,9 +6220,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5735,9 +6267,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5762,9 +6298,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5789,15 +6329,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -5852,9 +6396,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -5879,12 +6427,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -5942,9 +6494,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -5952,12 +6508,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -6011,9 +6571,13 @@
                                     "description": "The name of the type",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6091,12 +6655,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -6224,9 +6792,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6291,9 +6863,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6334,9 +6910,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6361,9 +6941,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6388,15 +6972,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -6467,9 +7055,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6506,12 +7098,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -6585,9 +7181,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -6595,12 +7195,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -6715,12 +7319,16 @@
                                     "description": "The array of values on which to execute the `AND` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -6762,9 +7370,13 @@
                                     "description": "The interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6789,9 +7401,13 @@
                                     "description": "The union type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6832,9 +7448,13 @@
                                     "description": "The type name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6859,9 +7479,13 @@
                                     "description": "The type or interface name to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6886,15 +7510,19 @@
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String!]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
                                         "ofType": {
-                                            "kind": "NON_NULL",
-                                            "name": "String!",
+                                            "kind": "LIST",
+                                            "name": "[String!]",
                                             "ofType": {
-                                                "kind": "SCALAR",
-                                                "name": "String",
-                                                "ofType": null
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
                                             }
                                         }
                                     }
@@ -6937,9 +7565,13 @@
                                     "description": "The value from which to return its opposite value",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "Boolean",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -6964,12 +7596,16 @@
                                     "description": "The array of values on which to execute the `OR` operation",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[Boolean]",
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "Boolean",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[Boolean]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "Boolean",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -7011,9 +7647,13 @@
                                     "description": "The string containing the placeholders",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 },
                                 {
@@ -7021,12 +7661,16 @@
                                     "description": "The values to replace the placeholders with inside the string",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "LIST",
-                                        "name": "[String]",
+                                        "kind": "NON_NULL",
+                                        "name": "[String]!",
                                         "ofType": {
-                                            "kind": "SCALAR",
-                                            "name": "String",
-                                            "ofType": null
+                                            "kind": "LIST",
+                                            "name": "[String]",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -7407,9 +8051,13 @@
                             "description": "Argument that must evaluate to `true` to include the field value in the output",
                             "defaultValue": null,
                             "type": {
-                                "kind": "SCALAR",
-                                "name": "Boolean",
-                                "ofType": null
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
                             }
                         }
                     ]
@@ -7428,9 +8076,13 @@
                             "description": "Argument that must evaluate to `false` to include the field value in the output",
                             "defaultValue": null,
                             "type": {
-                                "kind": "SCALAR",
-                                "name": "Boolean",
-                                "ofType": null
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
                             }
                         }
                     ]
