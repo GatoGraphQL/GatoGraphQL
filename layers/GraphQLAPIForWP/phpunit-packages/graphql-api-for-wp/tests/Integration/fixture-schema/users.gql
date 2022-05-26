@@ -1,0 +1,50 @@
+query {
+  users(pagination: { limit: 3 }) {
+    avatar {
+      id
+      size
+      src
+    }
+    capabilities
+    customPostCount
+    customPosts {
+      __typename
+      ...on IsCustomPost {
+        id
+        title
+      }
+    }
+    description
+    displayName
+    email
+    firstName
+    hasAnyCapability(capabilities: ["manage_options", "edit_posts"])
+    hasAnyRole(roles: ["administrator", "editor"])
+    hasCapability(capability:"manage_options")
+    hasRole(role: "administrator")
+    id
+    lastName
+    locale
+    metaValue(key: "nickname")
+    name
+    nicename
+    nickname
+    postCount
+    posts {
+      id
+      title
+    }
+    registeredDate
+    registeredDateStr(format: "F j")
+    roleNames
+    roles {
+      id
+      name
+    }
+    slug
+    url
+    urlAbsolutePath
+    username
+    websiteURL
+  }
+}
