@@ -7,11 +7,41 @@
                     "childNames": [],
                     "count": 2,
                     "description": "",
+                    "id": 13,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Resource",
+                    "postCount": 2,
+                    "slug": "resource",
+                    "url": "https://graphql-api.lndo.site/category/blog/resource/",
+                    "urlAbsolutePath": "/category/blog/resource/",
+                    "parent": {
+                        "id": 3
+                    },
+                    "posts": [
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
+                        }
+                    ],
+                    "children": []
+                },
+                {
+                    "childCount": 1,
+                    "childNames": [
+                        "Resource"
+                    ],
+                    "count": 3,
+                    "description": "",
                     "id": 3,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "Blog",
-                    "postCount": 2,
+                    "postCount": 3,
                     "slug": "blog",
                     "url": "https://graphql-api.lndo.site/category/blog/",
                     "urlAbsolutePath": "/category/blog/",
@@ -22,22 +52,54 @@
                             "title": "Public or Private API mode, for extra security"
                         },
                         {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
+                        },
+                        {
                             "id": 13,
                             "title": "Released v0.6, check it out"
                         }
                     ],
-                    "children": []
+                    "children": [
+                        {
+                            "childCount": 0,
+                            "childNames": [],
+                            "count": 2,
+                            "description": "",
+                            "id": 13,
+                            "metaValue": null,
+                            "metaValues": null,
+                            "name": "Resource",
+                            "postCount": 2,
+                            "slug": "resource",
+                            "url": "https://graphql-api.lndo.site/category/blog/resource/",
+                            "urlAbsolutePath": "/category/blog/resource/",
+                            "parent": {
+                                "id": 3
+                            },
+                            "posts": [
+                                {
+                                    "id": 25,
+                                    "title": "Public or Private API mode, for extra security"
+                                },
+                                {
+                                    "id": 19,
+                                    "title": "Nested mutations are a must have"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "childCount": 0,
                     "childNames": [],
-                    "count": 2,
+                    "count": 3,
                     "description": "",
                     "id": 2,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "Advanced",
-                    "postCount": 2,
+                    "postCount": 3,
                     "slug": "advanced",
                     "url": "https://graphql-api.lndo.site/category/advanced/",
                     "urlAbsolutePath": "/category/advanced/",
@@ -50,12 +112,19 @@
                         {
                             "id": 25,
                             "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
                         }
                     ],
                     "children": []
                 }
             ],
             "categoriesByExcludeIDs": [
+                {
+                    "id": 13
+                },
                 {
                     "id": 3
                 }
@@ -67,13 +136,20 @@
             ],
             "categoriesByMetaQuery": [
                 {
+                    "id": 13
+                },
+                {
                     "id": 3
                 },
                 {
                     "id": 2
                 }
             ],
-            "categoriesByParentID": [],
+            "categoriesByParentID": [
+                {
+                    "id": 13
+                }
+            ],
             "categoriesBySearch": [
                 {
                     "id": 3
@@ -92,9 +168,17 @@
                 {
                     "id": 3,
                     "name": "Blog"
+                },
+                {
+                    "id": 13,
+                    "name": "Resource"
                 }
             ],
             "categoriesBySortDESC": [
+                {
+                    "id": 13,
+                    "name": "Resource"
+                },
                 {
                     "id": 3,
                     "name": "Blog"
