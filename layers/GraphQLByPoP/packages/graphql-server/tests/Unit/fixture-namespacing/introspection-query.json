@@ -1085,9 +1085,13 @@
                                     "description": "The name of the type",
                                     "defaultValue": null,
                                     "type": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
                                     }
                                 }
                             ],
@@ -1759,9 +1763,13 @@
                             "description": "Argument that must evaluate to `true` to include the field value in the output",
                             "defaultValue": null,
                             "type": {
-                                "kind": "SCALAR",
-                                "name": "Boolean",
-                                "ofType": null
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
                             }
                         }
                     ]
@@ -1780,9 +1788,13 @@
                             "description": "Argument that must evaluate to `false` to include the field value in the output",
                             "defaultValue": null,
                             "type": {
-                                "kind": "SCALAR",
-                                "name": "Boolean",
-                                "ofType": null
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
                             }
                         }
                     ]

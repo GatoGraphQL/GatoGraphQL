@@ -177,7 +177,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
     protected static function useSSL(): bool
     {
-        return false;
+        return true;
     }
 
     protected static function getWebserverDomain(): string
