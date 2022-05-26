@@ -4501,7 +4501,7 @@
                 {
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
-                  "defaultValue": "[\"post\"]",
+                  "defaultValue": "[\"post\",\"page\"]",
                   "type": {
                     "kind": "LIST",
                     "name": "[CustomPostEnum!]",
@@ -5188,7 +5188,7 @@
                 {
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
-                  "defaultValue": "[\"post\"]",
+                  "defaultValue": "[\"post\",\"page\"]",
                   "type": {
                     "kind": "LIST",
                     "name": "[CustomPostEnum!]",
@@ -6488,7 +6488,7 @@
                 {
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
-                  "defaultValue": "[\"post\"]",
+                  "defaultValue": "[\"post\",\"page\"]",
                   "type": {
                     "kind": "LIST",
                     "name": "[CustomPostEnum!]",
@@ -7226,7 +7226,7 @@
                 {
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
-                  "defaultValue": "[\"post\"]",
+                  "defaultValue": "[\"post\",\"page\"]",
                   "type": {
                     "kind": "LIST",
                     "name": "[CustomPostEnum!]",
@@ -13219,6 +13219,16 @@
               }
             },
             {
+              "name": "hasPassword",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
               "name": "ids",
               "description": "Limit results to elements with the given IDs",
               "defaultValue": null,
@@ -13252,6 +13262,16 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            {
+              "name": "password",
+              "description": "Include custom posts protected by a specific password",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               }
             },
             {
@@ -13728,7 +13748,7 @@
             {
               "name": "customPostTypes",
               "description": "Filter comments added to custom posts of given types",
-              "defaultValue": "[\"post\"]",
+              "defaultValue": "[\"post\",\"page\"]",
               "type": {
                 "kind": "LIST",
                 "name": "[CustomPostEnum!]",
@@ -14090,7 +14110,7 @@
             {
               "name": "customPostTypes",
               "description": "Filter custom posts of given types",
-              "defaultValue": "[\"post\"]",
+              "defaultValue": "[\"post\",\"page\"]",
               "type": {
                 "kind": "LIST",
                 "name": "[CustomPostEnum!]",
@@ -14774,7 +14794,7 @@
             {
               "name": "customPostTypes",
               "description": "Filter comments added to custom posts of given types",
-              "defaultValue": "[\"post\"]",
+              "defaultValue": "[\"post\",\"page\"]",
               "type": {
                 "kind": "LIST",
                 "name": "[CustomPostEnum!]",
@@ -14985,7 +15005,7 @@
             {
               "name": "customPostTypes",
               "description": "Filter custom posts of given types",
-              "defaultValue": "[\"post\"]",
+              "defaultValue": "[\"post\",\"page\"]",
               "type": {
                 "kind": "LIST",
                 "name": "[CustomPostEnum!]",
@@ -15152,7 +15172,7 @@
             {
               "name": "customPostTypes",
               "description": "Filter custom posts of given types",
-              "defaultValue": "[\"post\"]",
+              "defaultValue": "[\"post\",\"page\"]",
               "type": {
                 "kind": "LIST",
                 "name": "[CustomPostEnum!]",
@@ -15435,6 +15455,16 @@
               }
             },
             {
+              "name": "hasPassword",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
               "name": "ids",
               "description": "Limit results to elements with the given IDs",
               "defaultValue": null,
@@ -15496,6 +15526,16 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            {
+              "name": "password",
+              "description": "Include custom posts protected by a specific password",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               }
             },
             {
@@ -16477,7 +16517,7 @@
             {
               "name": "customPostTypes",
               "description": "Filter custom posts of given types",
-              "defaultValue": "[\"post\"]",
+              "defaultValue": "[\"post\",\"page\"]",
               "type": {
                 "kind": "LIST",
                 "name": "[CustomPostEnum!]",
@@ -17063,6 +17103,12 @@
           "inputFields": null,
           "interfaces": null,
           "enumValues": [
+            {
+              "name": "page",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
             {
               "name": "post",
               "description": null,
@@ -17996,6 +18042,11 @@
             {
               "kind": "OBJECT",
               "name": "Post",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Page",
               "ofType": null
             }
           ]
