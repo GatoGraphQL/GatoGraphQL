@@ -14,7 +14,7 @@ query {
     id
     title
   }
-  mediaItemsByDateQuery: mediaItems(filter: { dateQuery: { after: "2022-05-26" }, mimeTypes: "*" }) {
+  mediaItemsByDateQuery: mediaItems(filter: { dateQuery: { before: "2022-05-26" }, mimeTypes: "*" }) {
     id
     title
   }
@@ -34,7 +34,7 @@ query {
     id
     title
   }
-  mediaItemsBySearch: mediaItems(filter: { search: "hello", mimeTypes: "*" }) {
+  mediaItemsBySearch: mediaItems(filter: { search: "graphql", mimeTypes: "*" }) {
     id
     title
   }
