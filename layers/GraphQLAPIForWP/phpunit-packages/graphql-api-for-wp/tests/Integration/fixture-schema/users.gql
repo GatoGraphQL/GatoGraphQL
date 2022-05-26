@@ -47,4 +47,37 @@ query {
     username
     websiteURL
   }
+
+  usersByExcludeIDs: users(filter: { excludeIDs: [1] }) {
+    id
+    name
+  }
+  usersByExcludeRoles: users(filter: { excludeRoles: ["administrator"] }) {
+    id
+    name
+  }
+  usersByIds: users(filter: { ids: [1, 2] }) {
+    id
+    name
+  }
+  usersByMetaQuery: users(filter: { metaQuery: {
+    key: "nickname",
+    compareBy: {
+      stringValue: {
+        value: "admin"
+        operator: EQUALS
+      }
+    }
+  }}) {
+    id
+    name
+  }
+  usersByRoles: users(filter: { roles: ["author", "contributor"] }) {
+    id
+    name
+  }
+  usersBySearchBy: users(filter: { searchBy: { name: "Author Marquez" } }) {
+    id
+    name
+  }
 }

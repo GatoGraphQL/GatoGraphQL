@@ -193,6 +193,74 @@
                     }
                 ]
             }
+        ],
+        "usersByExcludeIDs": [
+            {
+                "id": 5,
+                "name": "Editor Smith"
+            },
+            {
+                "id": 4,
+                "name": "Author Marquez"
+            },
+            {
+                "id": 3,
+                "name": "Contributor Johnson"
+            },
+            {
+                "id": 2,
+                "name": "Subscriber Bennett"
+            }
+        ],
+        "usersByExcludeRoles": [
+            {
+                "id": 5,
+                "name": "Editor Smith"
+            },
+            {
+                "id": 4,
+                "name": "Author Marquez"
+            },
+            {
+                "id": 3,
+                "name": "Contributor Johnson"
+            },
+            {
+                "id": 2,
+                "name": "Subscriber Bennett"
+            }
+        ],
+        "usersByIds": [
+            {
+                "id": 2,
+                "name": "Subscriber Bennett"
+            },
+            {
+                "id": 1,
+                "name": "admin"
+            }
+        ],
+        "usersByMetaQuery": [
+            {
+                "id": 1,
+                "name": "admin"
+            }
+        ],
+        "usersByRoles": [
+            {
+                "id": 4,
+                "name": "Author Marquez"
+            },
+            {
+                "id": 3,
+                "name": "Contributor Johnson"
+            }
+        ],
+        "usersBySearchBy": [
+            {
+                "id": 4,
+                "name": "Author Marquez"
+            }
         ]
     }
 }
