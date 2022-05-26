@@ -1,0 +1,77 @@
+query {
+  defaultMediaItems: mediaItems(pagination: { limit: 3 }) {
+    ...MediaItemData
+  }
+  anyMimeTypeMediaItems: mediaItems(pagination: { limit: 3 }, filter: { mimeTypes: "*" }) {
+    ...MediaItemData
+  }
+
+  mediaItemsByAuthorIDs: mediaItems(filter: { authorIDs: 1, mimeTypes: "*" }) {
+    id
+    title
+  }
+  mediaItemsByAuthorSlug: mediaItems(filter: { authorSlug: "admin", mimeTypes: "*" }) {
+    id
+    title
+  }
+  mediaItemsByDateQuery: mediaItems(filter: { dateQuery: { after: "2022-05-26" }, mimeTypes: "*" }) {
+    id
+    title
+  }
+  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { excludeAuthorIDs: 1, mimeTypes: "*" }) {
+    id
+    title
+  }
+  mediaItemsByExcludeIDs: mediaItems(filter: { excludeIDs: [361], mimeTypes: "*" }) {
+    id
+    title
+  }
+  mediaItemsByIds: mediaItems(filter: { ids: [361, 363], mimeTypes: "*" }) {
+    id
+    title
+  }
+  mediaItemsByMimeTypes: mediaItems(filter: { mimeTypes: ["text/"] }) {
+    id
+    title
+  }
+  mediaItemsBySearch: mediaItems(filter: { search: "hello", mimeTypes: "*" }) {
+    id
+    title
+  }
+
+  mediaItemsSortedASC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: ASC}) {
+    id
+    title
+    date
+  }
+  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC}) {
+    id
+    title
+    date
+  }
+}
+
+fragment MediaItemData on Media {
+  altText
+  author {
+    id
+    name
+  } 
+  caption
+  date
+  dateStr(format: "F j")
+  description
+  height
+  id
+  mimeType
+  # modifiedDate
+  # modifiedDateStr
+  sizes
+  slug
+  src
+  srcSet
+  title
+  url
+  urlAbsolutePath
+  width
+}
