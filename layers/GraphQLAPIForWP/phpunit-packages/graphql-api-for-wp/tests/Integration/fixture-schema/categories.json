@@ -1,0 +1,104 @@
+{
+    "data": {
+        "post": {
+            "categories": [
+                {
+                    "childCount": 0,
+                    "childNames": [],
+                    "count": 2,
+                    "description": "",
+                    "id": 3,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Blog",
+                    "postCount": 2,
+                    "slug": "blog",
+                    "url": "https://graphql-api.lndo.site/category/blog/",
+                    "urlAbsolutePath": "/category/blog/",
+                    "parent": null,
+                    "posts": [
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 13,
+                            "title": "Released v0.6, check it out"
+                        }
+                    ],
+                    "children": []
+                },
+                {
+                    "childCount": 0,
+                    "childNames": [],
+                    "count": 2,
+                    "description": "",
+                    "id": 2,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Advanced",
+                    "postCount": 2,
+                    "slug": "advanced",
+                    "url": "https://graphql-api.lndo.site/category/advanced/",
+                    "urlAbsolutePath": "/category/advanced/",
+                    "parent": null,
+                    "posts": [
+                        {
+                            "id": 28,
+                            "title": "HTTP caching improves performance"
+                        },
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        }
+                    ],
+                    "children": []
+                }
+            ],
+            "categoriesByExcludeIDs": [
+                {
+                    "id": 3
+                }
+            ],
+            "categoriesByIds": [
+                {
+                    "id": 2
+                }
+            ],
+            "categoriesByMetaQuery": [
+                {
+                    "id": 3
+                },
+                {
+                    "id": 2
+                }
+            ],
+            "categoriesByParentID": [],
+            "categoriesBySearch": [
+                {
+                    "id": 3
+                }
+            ],
+            "categoriesBySortASC": [
+                {
+                    "id": 2,
+                    "name": "Advanced"
+                },
+                {
+                    "id": 3,
+                    "name": "Blog"
+                }
+            ],
+            "categoriesBySortDESC": [
+                {
+                    "id": 3,
+                    "name": "Blog"
+                },
+                {
+                    "id": 2,
+                    "name": "Advanced"
+                }
+            ]
+        }
+    }
+}
