@@ -18,7 +18,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     /**
      * To login a user in WordPress, request the following URL by post:
      *
-     *   curl 'http://graphql-api.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
+     *   curl 'https://graphql-api.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
      */
     protected static function getWebserverPingURL(): string
     {

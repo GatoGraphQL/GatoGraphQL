@@ -104,7 +104,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/website/home-posts-widget/</link>
 		<pubDate>Tue, 05 Jan 2021 02:10:47 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=5</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=5</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit:Int) {\n  posts(pagination: {\n    limit: $limit\n  }) {\n    id\n    url\n    title\n    author {\n      id\n      username\n      url\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
@@ -236,7 +236,7 @@
 		<link>https://graphql-api.lndo.site/graphql/mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 06:55:24 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=176</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=176</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
@@ -266,7 +266,7 @@
 		<link>https://graphql-api.lndo.site/graphql-ccl/ccl-for-mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 06:56:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=179</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=179</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/cache-control {"cacheControlMaxAge":30,"typeFields":["Queryable.url"]} /-->
 
@@ -292,7 +292,7 @@
 		<link>https://graphql-api.lndo.site/graphql-ccl/ccl-for-website/</link>
 		<pubDate>Thu, 07 Jan 2021 06:58:10 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=181</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=181</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/cache-control {"cacheControlMaxAge":20,"typeFields":["User.displayName","User.firstName","User.lastName","User.name","User.nicename"]} /-->
 
@@ -318,7 +318,7 @@
 		<link>https://graphql-api.lndo.site/graphql-acl/pro-users/</link>
 		<pubDate>Thu, 07 Jan 2021 06:59:29 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=184</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=184</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"schemaMode":"private","typeFields":["Comment.content","IsCustomPost.content"]} -->
 <!-- wp:graphql-api/access-control-user-roles {"accessControlGroup":"roles","value":["editor","author"]} /-->
@@ -344,7 +344,7 @@
 		<link>https://graphql-api.lndo.site/graphql-acl/clients/</link>
 		<pubDate>Thu, 07 Jan 2021 07:01:07 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=186</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=186</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"schemaMode":"public","typeFields":["Commentable.hasComments","SupportingFeaturedImage.hasFeaturedImage"]} -->
 <!-- wp:graphql-api/access-control-user-state {"accessControlGroup":"state","value":"in"} /-->
@@ -374,7 +374,7 @@
 		<link>https://graphql-api.lndo.site/graphql-acl/visitors/</link>
 		<pubDate>Thu, 07 Jan 2021 07:02:07 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=188</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=188</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"typeFields":["Media.author","Media.height","Media.id","Media.src","Media.width","Root.loginUser","Root.addCommentToCustomPost","Root.createPost","Root.logoutUser","Root.removeFeaturedImageFromCustomPost","Root.replyComment","Root.setFeaturedImageOnCustomPost"]} -->
 <!-- wp:graphql-api/access-control-user-roles {"accessControlGroup":"roles","value":["contributor"]} /-->
@@ -402,7 +402,7 @@
 		<link>https://graphql-api.lndo.site/graphql/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:04:56 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=196</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=196</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":191} /-->
 
@@ -432,7 +432,7 @@
 		<link>https://graphql-api.lndo.site/graphql/back-end-for-dev/</link>
 		<pubDate>Thu, 07 Jan 2021 07:05:20 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=198</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=198</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration /-->
 
@@ -462,7 +462,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:06:20 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=200</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=200</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql /-->
 
@@ -492,7 +492,7 @@
 		<link>https://graphql-api.lndo.site/graphql/customers/</link>
 		<pubDate>Tue, 19 Apr 2022 06:58:09 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=227</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=227</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration /-->
 
@@ -526,7 +526,7 @@
 		<link>https://graphql-api.lndo.site/graphql/customers/penguin-books/</link>
 		<pubDate>Tue, 19 Apr 2022 06:59:30 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=229</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=229</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration /-->
 
@@ -556,7 +556,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/user-account/</link>
 		<pubDate>Tue, 19 Apr 2022 07:29:37 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=237</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=237</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetUserAccountData(\n  $userID: ID!\n  $limit: Int\n) {\n  user(by: {\n    id: $userID\n  }) {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022userID\u0022: 1,\n  \u0022limit\u0022: 2\n}"} /-->
 
@@ -590,7 +590,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/user-account/full-data/</link>
 		<pubDate>Tue, 19 Apr 2022 07:31:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=240</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=240</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
 
@@ -620,7 +620,7 @@
 		<link>https://graphql-api.lndo.site/graphql-acl/power-users/</link>
 		<pubDate>Thu, 21 Apr 2022 05:53:14 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=256</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=256</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"typeFields":["Root.posts"]} -->
 <!-- wp:graphql-api/access-control-user-state {"accessControlGroup":"state","value":"in"} /-->
@@ -730,7 +730,7 @@
 		<link>https://graphql-api.lndo.site/graphql/power-users/</link>
 		<pubDate>Thu, 21 Apr 2022 06:27:03 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=263</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=263</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":261} /-->
 
@@ -790,7 +790,7 @@
 		<link>https://graphql-api.lndo.site/hello-world/</link>
 		<pubDate>Sun, 17 Apr 2022 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?p=1</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=1</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
@@ -817,7 +817,7 @@
 		<link>https://graphql-api.lndo.site/sample-page/</link>
 		<pubDate>Sun, 17 Apr 2022 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?page_id=2</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?page_id=2</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>
@@ -836,7 +836,7 @@
 <!-- /wp:quote -->
 
 <!-- wp:paragraph -->
-<p>As a new WordPress user, you should go to <a href="http://graphql-api.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
+<p>As a new WordPress user, you should go to <a href="https://graphql-api.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>2</wp:post_id>
@@ -863,9 +863,9 @@
 		<link>https://graphql-api.lndo.site/?page_id=3</link>
 		<pubDate>Sun, 17 Apr 2022 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?page_id=3</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?page_id=3</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:heading --><h2>Who we are</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Our website address is: http://graphql-api.lndo.site.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Comments</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Media</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Cookies</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Embedded content from other websites</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Who we share your data with</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>How long we retain your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>What rights you have over your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Where we send your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p><!-- /wp:paragraph -->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:heading --><h2>Who we are</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Our website address is: https://graphql-api.lndo.site.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Comments</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Media</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Cookies</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Embedded content from other websites</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Who we share your data with</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>How long we retain your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>What rights you have over your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Where we send your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p><!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>3</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-17 13:06:58]]></wp:post_date>
@@ -1504,7 +1504,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-schemaconfig/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:03:18 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-access-control-lists {"accessControlLists":[188]} /-->
 
@@ -1538,7 +1538,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-schemaconfig/mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 07:03:47 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-access-control-lists {"accessControlLists":[186,184]} /-->
 
@@ -1572,7 +1572,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/wp-global-styles-twentytwentytwo/</link>
 		<pubDate>Mon, 18 Apr 2022 06:14:12 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/wp-global-styles-twentytwentytwo/</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/wp-global-styles-twentytwentytwo/</guid>
 		<description></description>
 		<content:encoded><![CDATA[{"version": 2, "isGlobalStylesUserThemeJSON": true }]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1597,7 +1597,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-schemaconfig/power-users/</link>
 		<pubDate>Thu, 21 Apr 2022 06:26:40 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=261</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=261</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-access-control-lists {"accessControlLists":[256]} /-->
 
@@ -1631,7 +1631,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-query/logged-in-user-account/</link>
 		<pubDate>Thu, 21 Apr 2022 08:15:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=272</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=272</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetUserAccountData(\n  $limit: Int\n) {\n  me {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
 
@@ -1695,7 +1695,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-api-header/</link>
 		<pubDate>Thu, 26 May 2022 05:13:32 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-header.png</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-header.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1713,7 +1713,7 @@ video/mp4
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[http://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-header.png]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[https://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-header.png]]></wp:attachment_url>
 											<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 		<wp:meta_value><![CDATA[2022/05/graphql-api-header.png]]></wp:meta_value>
@@ -1728,7 +1728,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-api-search-results/</link>
 		<pubDate>Thu, 26 May 2022 05:13:35 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-search-results.png</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-search-results.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1746,7 +1746,7 @@ video/mp4
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[http://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-search-results.png]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[https://graphql-api.lndo.site/wp-content/uploads/2022/05/graphql-api-search-results.png]]></wp:attachment_url>
 											<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 		<wp:meta_value><![CDATA[2022/05/graphql-api-search-results.png]]></wp:meta_value>

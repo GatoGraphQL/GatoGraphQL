@@ -153,7 +153,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     /**
      * To visualize the list of all the modules, and find the "moduleID":
      *
-     * @see http://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
+     * @see https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
      */
     abstract protected function getModuleID(string $dataName): string;
 }
