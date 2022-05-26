@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\FilterInputs\FilterInputManagerInterface;
-
 trait FilterDataComponentProcessorTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
-    abstract protected function getFilterInputManager(): FilterInputManagerInterface;
 
     /**
      * @var array<string, array<string[]>>

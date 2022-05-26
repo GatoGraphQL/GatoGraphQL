@@ -6,24 +6,12 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
-use PoP\ComponentModel\FilterInputs\FilterInputManagerInterface;
 use stdClass;
 
 abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
 {
     /** @var array<string, ?array> */
     private array $consolidatedInputFieldFilterInputCache = [];
-
-    private ?FilterInputManagerInterface $filterInputProcessorManager = null;
-
-    final public function setFilterInputManager(FilterInputManagerInterface $filterInputProcessorManager): void
-    {
-        $this->filterInputProcessorManager = $filterInputProcessorManager;
-    }
-    final protected function getFilterInputManager(): FilterInputManagerInterface
-    {
-        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputManagerInterface::class);
-    }
 
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
