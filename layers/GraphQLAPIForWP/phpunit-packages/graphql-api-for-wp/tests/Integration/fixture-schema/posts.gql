@@ -1,4 +1,52 @@
 query {
+  posts(pagination: { limit: 3 }) {
+    areCommentsOpen
+    author {
+      id
+      name
+    }
+    categories {
+      id
+      name
+    }
+    categoryCount
+    categoryNames
+    commentCount
+    comments {
+      id
+    }
+    content
+    customPostType
+    date
+    dateStr
+    excerpt
+    featuredImage {
+      id
+      src
+    }
+    hasComments
+    hasFeaturedImage
+    id
+    isStatus(status: pending)
+    isSticky
+    metaValue(key: "_thumbnail_id")
+    modifiedDate
+    modifiedDateStr(format: "m-d")
+    postFormat
+    rawContent
+    slug
+    status
+    tagCount
+    tagNames
+    tags {
+      id
+      name
+    }
+    title
+    url
+    urlAbsolutePath
+  }
+
   postsByAuthorIDs: posts(filter: { authorIDs: 4 }) {
     id
     title
