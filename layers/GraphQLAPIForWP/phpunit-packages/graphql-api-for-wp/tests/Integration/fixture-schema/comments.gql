@@ -6,6 +6,43 @@
         ...CommentData
       }
     }
+    commentsByDateQuery: comments(filter: { dateQuery: { before: "2022-01-02" } }) {
+      id
+    }
+    commentsByExcludeIDs: comments(filter: { excludeIDs: [7] }) {
+      id
+    }
+    commentsByExcludeParentIDs: comments(filter: { excludeParentIDs: [7] }) {
+      id
+    }
+    commentsByIds: comments(filter: { ids: [7] }) {
+      id
+    }
+    commentsByMetaQuery: comments(filter: { metaQuery: {
+      key: "_thumbnail_id",
+      compareBy:{
+        key: {
+          operator: NOT_EXISTS
+        }
+      }
+    } }) {
+      id
+    }
+    commentsByParentID: comments(filter: { parentID: 7 }) {
+      id
+    }
+    commentsByParentIDs: comments(filter: { parentIDs: [7] }) {
+      id
+    }
+    commentsBySearch: comments(filter: { search: "endpoint" }) {
+      id
+    }
+    commentsByStatus: comments(filter: { status: [hold] }) {
+      id
+    }
+    commentsByTypes: comments(filter: { types: [pingback] }) {
+      id
+    }
   }
 }
 
