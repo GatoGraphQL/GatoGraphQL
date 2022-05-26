@@ -172,7 +172,27 @@
                 }
             ],
             "commentsByStatus": [],
-            "commentsByTypes": []
+            "commentsByTypes": [],
+            "commentsBySortASC": [
+                {
+                    "id": 4,
+                    "date": "2020-12-12T04:02:44+00:00"
+                },
+                {
+                    "id": 7,
+                    "date": "2020-12-12T04:03:35+00:00"
+                }
+            ],
+            "commentsBySortDESC": [
+                {
+                    "id": 7,
+                    "date": "2020-12-12T04:03:35+00:00"
+                },
+                {
+                    "id": 4,
+                    "date": "2020-12-12T04:02:44+00:00"
+                }
+            ]
         }
     }
 }

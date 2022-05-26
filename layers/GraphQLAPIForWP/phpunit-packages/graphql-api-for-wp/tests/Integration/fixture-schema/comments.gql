@@ -43,6 +43,15 @@
     commentsByTypes: comments(filter: { types: [pingback] }) {
       id
     }
+    
+    commentsBySortASC: comments(sort: { by: DATE, order: ASC }) {
+      id
+      date
+    }
+    commentsBySortDESC: comments(sort: { by: DATE, order: DESC }) {
+      id
+      date
+    }
   }
 }
 
