@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.9.3" created="2022-05-24 13:43" -->
+	<!-- generator="WordPress/6.0" created="2022-05-26 12:42" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>GraphQL API</title>
 	<link>https://graphql-api.lndo.site</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Tue, 24 May 2022 13:43:03 +0000</pubDate>
+	<pubDate>Thu, 26 May 2022 12:42:55 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://graphql-api.lndo.site</wp:base_site_url>
@@ -39,12 +39,6 @@
 	<wp:author><wp:author_id>4</wp:author_id><wp:author_login><![CDATA[author]]></wp:author_login><wp:author_email><![CDATA[author@test.com]]></wp:author_email><wp:author_display_name><![CDATA[Author Marquez]]></wp:author_display_name><wp:author_first_name><![CDATA[Author]]></wp:author_first_name><wp:author_last_name><![CDATA[Marquez]]></wp:author_last_name></wp:author>
 
 		<wp:category>
-		<wp:term_id>1</wp:term_id>
-		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
-		<wp:category_parent><![CDATA[]]></wp:category_parent>
-		<wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name>
-	</wp:category>
-	<wp:category>
 		<wp:term_id>2</wp:term_id>
 		<wp:category_nicename><![CDATA[advanced]]></wp:category_nicename>
 		<wp:category_parent><![CDATA[]]></wp:category_parent>
@@ -55,6 +49,18 @@
 		<wp:category_nicename><![CDATA[blog]]></wp:category_nicename>
 		<wp:category_parent><![CDATA[]]></wp:category_parent>
 		<wp:cat_name><![CDATA[Blog]]></wp:cat_name>
+	</wp:category>
+		<wp:category>
+		<wp:term_id>13</wp:term_id>
+		<wp:category_nicename><![CDATA[resource]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[blog]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Resource]]></wp:cat_name>
+	</wp:category>
+		<wp:category>
+		<wp:term_id>1</wp:term_id>
+		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name>
 	</wp:category>
 			<wp:tag>
 		<wp:term_id>4</wp:term_id>
@@ -97,7 +103,7 @@
 		<wp:tag_name><![CDATA[wordpress]]></wp:tag_name>
 	</wp:tag>
 			
-	<generator>https://wordpress.org/?v=5.9.3</generator>
+	<generator>https://wordpress.org/?v=6.0</generator>
 
 		<item>
 		<title><![CDATA[Home posts widget]]></title>
@@ -799,8 +805,8 @@
 		<wp:post_id>1</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-17 13:06:58]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-17 13:06:58]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-24 10:30:08]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-24 10:30:08]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-04-17 13:06:58]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-04-17 13:06:58]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[hello-world]]></wp:post_name>
@@ -929,8 +935,8 @@
 		<wp:post_id>13</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 03:56:13]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 03:56:13]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-24 13:42:31]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-24 13:42:31]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2020-12-12 03:56:13]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2020-12-12 03:56:13]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[released-v0-6-check-it-out]]></wp:post_name>
@@ -1101,9 +1107,11 @@
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
+										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+		<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
+		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
-		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+		<category domain="category" nicename="resource"><![CDATA[Resource]]></category>
 		<category domain="post_tag" nicename="wordpress"><![CDATA[wordpress]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
@@ -1387,8 +1395,8 @@ video/mp4
 		<wp:post_id>25</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:06:52]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:06:52]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-24 13:42:00]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-24 13:42:00]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-26 12:42:37]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-26 12:42:37]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[public-or-private-api-mode-for-extra-security]]></wp:post_name>
@@ -1399,8 +1407,9 @@ video/mp4
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
-										<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
+		<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
 		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
+		<category domain="category" nicename="resource"><![CDATA[Resource]]></category>
 		<category domain="post_tag" nicename="security"><![CDATA[security]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
@@ -1465,8 +1474,8 @@ video/mp4
 		<wp:post_id>28</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:08:47]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:08:47]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-24 13:41:53]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-24 13:41:53]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2020-12-12 04:08:47]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2020-12-12 04:08:47]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[http-caching-improves-performance]]></wp:post_name>
