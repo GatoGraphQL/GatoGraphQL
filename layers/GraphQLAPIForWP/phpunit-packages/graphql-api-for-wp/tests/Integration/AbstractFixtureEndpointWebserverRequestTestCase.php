@@ -17,7 +17,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
 
     public function getDataSetAsString(bool $includeData = true): string
     {
-        return $this->appendFixtureFolderInfo(parent::getDataSetAsString($includeData));
+        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
     }
 
     /**

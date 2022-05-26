@@ -40,12 +40,12 @@ trait FixtureTestCaseTrait
         );
     }
 
-    protected function appendFixtureFolderInfo(string $string): string
+    protected function addFixtureFolderInfo(string $string): string
     {
         return sprintf(
-            '%s (under fixture folder: "%s")',
+            ' (fixture folder: "%s")%s',
+            $this->getFixtureFolder(),
             $string,
-            $this->getFixtureFolder()
         );
     }
 }

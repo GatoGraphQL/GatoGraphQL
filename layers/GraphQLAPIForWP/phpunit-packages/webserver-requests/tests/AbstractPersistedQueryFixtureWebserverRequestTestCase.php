@@ -13,7 +13,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
 
     public function getDataSetAsString(bool $includeData = true): string
     {
-        return $this->appendFixtureFolderInfo(parent::getDataSetAsString($includeData));
+        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
     }
 
     /**
