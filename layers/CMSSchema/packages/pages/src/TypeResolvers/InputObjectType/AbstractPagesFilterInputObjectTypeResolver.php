@@ -11,7 +11,7 @@ use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ExcludeParentIDsFilterInput
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\ParentIDsFilterInputProcessor;
 
-abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver
+abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements PagesFilterInputObjectTypeResolverInterface
 {
     private ?ParentIDFilterInputProcessor $parentIDFilterInputProcessor = null;
     private ?ParentIDsFilterInputProcessor $parentIDsFilterInputProcessor = null;

@@ -1,0 +1,193 @@
+{
+    "data": {
+        "post": {
+            "categories": [
+                {
+                    "childCount": 0,
+                    "childNames": [],
+                    "count": 2,
+                    "description": "",
+                    "id": 4,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Resource",
+                    "postCount": 2,
+                    "slug": "resource",
+                    "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/",
+                    "urlAbsolutePath": "\/category\/blog\/resource\/",
+                    "parent": {
+                        "id": 3
+                    },
+                    "posts": [
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
+                        }
+                    ],
+                    "children": []
+                },
+                {
+                    "childCount": 1,
+                    "childNames": [
+                        "Resource"
+                    ],
+                    "count": 3,
+                    "description": "",
+                    "id": 3,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Blog",
+                    "postCount": 3,
+                    "slug": "blog",
+                    "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/",
+                    "urlAbsolutePath": "\/category\/blog\/",
+                    "parent": null,
+                    "posts": [
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
+                        },
+                        {
+                            "id": 13,
+                            "title": "Released v0.6, check it out"
+                        }
+                    ],
+                    "children": [
+                        {
+                            "childCount": 0,
+                            "childNames": [],
+                            "count": 2,
+                            "description": "",
+                            "id": 4,
+                            "metaValue": null,
+                            "metaValues": null,
+                            "name": "Resource",
+                            "postCount": 2,
+                            "slug": "resource",
+                            "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/",
+                            "urlAbsolutePath": "\/category\/blog\/resource\/",
+                            "parent": {
+                                "id": 3
+                            },
+                            "posts": [
+                                {
+                                    "id": 25,
+                                    "title": "Public or Private API mode, for extra security"
+                                },
+                                {
+                                    "id": 19,
+                                    "title": "Nested mutations are a must have"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "childCount": 0,
+                    "childNames": [],
+                    "count": 3,
+                    "description": "",
+                    "id": 2,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Advanced",
+                    "postCount": 3,
+                    "slug": "advanced",
+                    "url": "https:\/\/graphql-api.lndo.site\/category\/advanced\/",
+                    "urlAbsolutePath": "\/category\/advanced\/",
+                    "parent": null,
+                    "posts": [
+                        {
+                            "id": 28,
+                            "title": "HTTP caching improves performance"
+                        },
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
+                        }
+                    ],
+                    "children": []
+                }
+            ],
+            "categoriesByExcludeIDs": [
+                {
+                    "id": 4
+                },
+                {
+                    "id": 3
+                }
+            ],
+            "categoriesByIds": [
+                {
+                    "id": 2
+                }
+            ],
+            "categoriesByMetaQuery": [
+                {
+                    "id": 4
+                },
+                {
+                    "id": 3
+                },
+                {
+                    "id": 2
+                }
+            ],
+            "categoriesByParentID": [
+                {
+                    "id": 4
+                }
+            ],
+            "categoriesBySearch": [
+                {
+                    "id": 3
+                }
+            ],
+            "categoriesBySlugs": [
+                {
+                    "id": 2
+                }
+            ],
+            "categoriesBySortASC": [
+                {
+                    "id": 2,
+                    "name": "Advanced"
+                },
+                {
+                    "id": 3,
+                    "name": "Blog"
+                },
+                {
+                    "id": 4,
+                    "name": "Resource"
+                }
+            ],
+            "categoriesBySortDESC": [
+                {
+                    "id": 4,
+                    "name": "Resource"
+                },
+                {
+                    "id": 3,
+                    "name": "Blog"
+                },
+                {
+                    "id": 2,
+                    "name": "Advanced"
+                }
+            ]
+        }
+    }
+}

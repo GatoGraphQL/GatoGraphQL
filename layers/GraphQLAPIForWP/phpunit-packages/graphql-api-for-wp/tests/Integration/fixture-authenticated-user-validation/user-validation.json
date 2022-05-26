@@ -308,7 +308,7 @@
                 "id": 1,
                 "title": null,
                 "date": "2022-04-17T13:06:58+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
+                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
@@ -317,7 +317,7 @@
                 "id": 28,
                 "title": null,
                 "date": "2020-12-12T04:08:47+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
@@ -326,7 +326,7 @@
                 "id": 25,
                 "title": null,
                 "date": "2020-12-12T04:06:52+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
@@ -352,7 +352,7 @@
                 "id": 1,
                 "title": null,
                 "date": "2022-04-17T13:06:58+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
+                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
@@ -362,7 +362,7 @@
                 "id": 28,
                 "title": null,
                 "date": "2020-12-12T04:08:47+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
@@ -372,7 +372,7 @@
                 "id": 25,
                 "title": null,
                 "date": "2020-12-12T04:06:52+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
@@ -383,7 +383,7 @@
                 "id": 2,
                 "title": null,
                 "date": "2022-04-17T13:06:58+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/sample-page\/",
+                "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
                 "customPostType": null,
                 "hasComments": false,
                 "comments": null

@@ -1,4 +1,53 @@
 query {
+  posts(pagination: { limit: 3 }) {
+    areCommentsOpen
+    author {
+      id
+      name
+    }
+    categories {
+      id
+      name
+    }
+    categoryCount
+    categoryNames
+    commentCount
+    comments {
+      id
+    }
+    content
+    customPostType
+    date
+    dateStr
+    excerpt
+    featuredImage {
+      id
+      src
+    }
+    hasComments
+    hasFeaturedImage
+    id
+    isStatus(status: pending)
+    isSticky
+    metaValue(key: "_thumbnail_id")
+    # These ones produce the value of data being inserted to DB, so can't save fixed value for testing
+    # modifiedDate
+    # modifiedDateStr(format: "m-d")
+    postFormat
+    rawContent
+    slug
+    status
+    tagCount
+    tagNames
+    tags {
+      id
+      name
+    }
+    title
+    url
+    urlAbsolutePath
+  }
+
   postsByAuthorIDs: posts(filter: { authorIDs: 4 }) {
     id
     title
@@ -51,11 +100,20 @@ query {
     id
     title
   }
-  postsByTagIDs: posts(filter: { tagIDs: [3, 4] }) {
+  postsByTagIDs: posts(filter: { tagIDs: [4, 5] }) {
     id
     title
   }
   postsByTagSlugs: posts(filter: { tagSlugs: ["plugin", "release"] }) {
+    id
+    title
+  }
+
+  postsSortedASC: posts(pagination: { limit: 3 }, sort: { by: TITLE, order: ASC}) {
+    id
+    title
+  }
+  postsSortedDESC: posts(pagination: { limit: 3 }, sort: { by: TITLE, order: DESC}) {
     id
     title
   }

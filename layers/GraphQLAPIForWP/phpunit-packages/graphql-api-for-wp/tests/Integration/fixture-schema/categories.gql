@@ -1,0 +1,66 @@
+{
+  post(by:{ id: 25 }) {
+    categories {
+      ...PostCategoryData
+      children {
+        ...PostCategoryData
+      }
+    }
+    categoriesByExcludeIDs: categories(filter: { excludeIDs: [2] }) {
+      id
+    }
+    categoriesByIds: categories(filter: { ids: [2] }) {
+      id
+    }
+    categoriesByMetaQuery: categories(filter: { metaQuery: {
+      key: "someMetaKeyThatDoesntExist",
+      compareBy:{
+        key: {
+          operator: NOT_EXISTS
+        }
+      }
+    } }) {
+      id
+    }
+    categoriesByParentID: categories(filter: { parentID: 3 }) {
+      id
+    }
+    categoriesBySearch: categories(filter: { search: "blo" }) {
+      id
+    }
+    categoriesBySlugs: categories(filter: { slugs: ["advanced", "non-existing"] }) {
+      id
+    }
+    
+    categoriesBySortASC: categories(sort: { by: NAME, order: ASC }) {
+      id
+      name
+    }
+    categoriesBySortDESC: categories(sort: { by: NAME, order: DESC }) {
+      id
+      name
+    }
+  }
+}
+
+fragment PostCategoryData on PostCategory {
+  childCount
+  childNames
+  count
+  description
+  id
+  metaValue(key: "not-existing")
+  metaValues(key: "also-not-existing")
+  name
+  parent {
+    id
+  }
+  postCount
+  posts {
+    id
+    title
+  }
+  slug
+  url
+  urlAbsolutePath
+}
