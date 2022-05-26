@@ -48,13 +48,13 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
 
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_ORDERUSER => $this->getOrderFilterInput(),
             self::COMPONENT_FILTERINPUT_ORDERPOST => $this->getOrderFilterInput(),
             self::COMPONENT_FILTERINPUT_ORDERTAG => $this->getOrderFilterInput(),
             self::COMPONENT_FILTERINPUT_ORDERCOMMENT => $this->getOrderFilterInput(),
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

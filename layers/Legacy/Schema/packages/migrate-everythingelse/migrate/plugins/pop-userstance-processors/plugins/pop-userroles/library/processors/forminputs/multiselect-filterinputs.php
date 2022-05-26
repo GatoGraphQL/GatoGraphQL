@@ -37,10 +37,10 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInput::class, PoP_Module_Processor_UserStanceUserRolesFilterInput::FILTERINPUT_AUTHORROLE_MULTISELECT],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

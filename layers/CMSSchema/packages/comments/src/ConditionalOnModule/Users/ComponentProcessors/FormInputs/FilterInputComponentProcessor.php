@@ -57,11 +57,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS => $this->getCustomPostAuthorIDsFilterInput(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => $this->getExcludeCustomPostAuthorIDsFilterInput(),
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     public function getName(array $component): string

@@ -228,7 +228,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInput(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getLimitFilterInput(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getOffsetFilterInput(),
@@ -244,8 +244,8 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             self::COMPONENT_FILTERINPUT_SLUG => $this->getSlugFilterInput(),
             self::COMPONENT_FILTERINPUT_DATEFORMAT => $this->getFormatFilterInput(),
             self::COMPONENT_FILTERINPUT_GMT => $this->getGMTFilterInput(),
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     public function getInputClass(array $component): string

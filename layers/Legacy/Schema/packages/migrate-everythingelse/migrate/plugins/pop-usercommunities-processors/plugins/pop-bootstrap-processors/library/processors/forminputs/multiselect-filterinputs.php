@@ -60,12 +60,12 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES => [GD_URE_Module_Processor_FilterInput::class, GD_URE_Module_Processor_FilterInput::URE_FILTERINPUT_MEMBERPRIVILEGES],
             self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS => [GD_URE_Module_Processor_FilterInput::class, GD_URE_Module_Processor_FilterInput::URE_FILTERINPUT_MEMBERTAGS],
             self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS => [GD_URE_Module_Processor_FilterInput::class, GD_URE_Module_Processor_FilterInput::URE_FILTERINPUT_MEMBERSTATUS],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

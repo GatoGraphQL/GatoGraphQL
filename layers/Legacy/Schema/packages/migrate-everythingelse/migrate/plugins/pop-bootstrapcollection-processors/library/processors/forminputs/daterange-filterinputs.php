@@ -35,11 +35,11 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             // @todo This FilterInput was deleted, since it shouldn't be used anymore
             self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => null,
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

@@ -41,12 +41,12 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInput::class, GD_URE_Module_Processor_MultiSelectFilterInput::URE_FILTERINPUT_INDIVIDUALINTERESTS],
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInput::class, GD_URE_Module_Processor_MultiSelectFilterInput::URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInput::class, GD_URE_Module_Processor_MultiSelectFilterInput::URE_FILTERINPUT_ORGANIZATIONTYPES],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

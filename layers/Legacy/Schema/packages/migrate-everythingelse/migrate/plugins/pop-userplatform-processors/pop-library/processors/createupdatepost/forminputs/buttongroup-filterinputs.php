@@ -42,12 +42,12 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => [PoP_Module_Processor_UserPlatformFilterInput::class, PoP_Module_Processor_UserPlatformFilterInput::FILTERINPUT_BUTTONGROUP_CATEGORIES],
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInput::class, PoP_Module_Processor_UserPlatformFilterInput::FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInput::class, PoP_Module_Processor_UserPlatformFilterInput::FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

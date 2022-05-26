@@ -37,10 +37,10 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT => [PoP_Module_Processor_UserStanceFilterInput::class, PoP_Module_Processor_UserStanceFilterInput::FILTERINPUT_STANCE_MULTISELECT],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

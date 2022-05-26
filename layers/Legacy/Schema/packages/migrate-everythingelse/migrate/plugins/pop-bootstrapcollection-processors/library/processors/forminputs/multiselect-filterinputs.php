@@ -49,11 +49,11 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInput::class, PoP_Module_Processor_MultiSelectFilterInput::FILTERINPUT_MODERATEDPOSTSTATUS],
             self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInput::class, PoP_Module_Processor_MultiSelectFilterInput::FILTERINPUT_UNMODERATEDPOSTSTATUS],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)

@@ -38,10 +38,10 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
      */
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        $filterInputs = [
+        return match($component[1]) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_ReferencesFilterInput::class, PoP_Module_Processor_ReferencesFilterInput::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+            default => null,
+        };
     }
 
     // public function isFiltercomponent(array $component)
