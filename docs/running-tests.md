@@ -15,14 +15,8 @@ Integration tests are executed:
 
 When the Lando webserver is not running, integration tests are skipped.
 
-If some entry from the DB has been edited (eg: a persisted query) and some integration test fails, you can delete that entry, and regenerate it by running:
+If some entry from the DB has been edited (eg: a persisted query) and some integration test fails, you can regenerate the DB (with the initial set of data) by running:
 
 ```bash
-composer import-data
-```
-
-To import all the data again into the DB, you can first drop all tables from the WordPress DB (or destroy the database service in Lando), and then re-install the site and import all data:
-
-```bash
-composer install-site
+composer reset-db
 ```
