@@ -185,6 +185,34 @@
                 "id": 13,
                 "title": "Released v0.6, check it out"
             }
+        ],
+        "postsSortedASC": [
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsSortedDESC": [
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            }
         ]
     }
 }

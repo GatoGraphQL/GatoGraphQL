@@ -59,4 +59,13 @@ query {
     id
     title
   }
+
+  postsSortedASC: posts(pagination: { limit: 3 }, sort: { by: TITLE, order: ASC}) {
+    id
+    title
+  }
+  postsSortedDESC: posts(pagination: { limit: 3 }, sort: { by: TITLE, order: DESC}) {
+    id
+    title
+  }
 }
