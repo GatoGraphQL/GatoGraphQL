@@ -1399,6 +1399,7 @@ video/mp4
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+										<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
 		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="post_tag" nicename="security"><![CDATA[security]]></category>
 						<wp:postmeta>
