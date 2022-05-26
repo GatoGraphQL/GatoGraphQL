@@ -64,6 +64,10 @@ query {
     id
     title
   }
+  pagesByHasPassword: pages(filter: { hasPassword: true }) {
+    id
+    title
+  }
   pagesByIds: pages(filter: { ids: [2, 3], status: [publish, draft] }) {
     id
     title
@@ -77,6 +81,10 @@ query {
     title
   }
   pagesByParentIDs: pages(filter: { parentIDs: 2 }) {
+    id
+    title
+  }
+  pagesByPassword: pages(filter: { password: "password" }) {
     id
     title
   }

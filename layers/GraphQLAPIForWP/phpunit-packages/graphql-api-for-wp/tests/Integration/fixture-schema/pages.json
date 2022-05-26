@@ -51,14 +51,15 @@
         ],
         "pagesByExcludeAuthorIDs": [],
         "pagesByExcludeIDs": [],
+        "pagesByHasPassword": [],
         "pagesByIds": [
-            {
-                "id": 3,
-                "title": "Privacy Policy"
-            },
             {
                 "id": 2,
                 "title": "Sample Page"
+            },
+            {
+                "id": 3,
+                "title": "Privacy Policy"
             }
         ],
         "pagesByMetaQuery": [
@@ -69,6 +70,7 @@
         ],
         "pagesByParentID": [],
         "pagesByParentIDs": [],
+        "pagesByPassword": [],
         "pagesBySearch": [
             {
                 "id": 2,
