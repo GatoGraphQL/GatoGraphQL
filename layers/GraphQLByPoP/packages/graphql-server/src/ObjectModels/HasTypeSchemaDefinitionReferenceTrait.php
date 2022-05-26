@@ -23,7 +23,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
         ]);
         return GraphQLSchemaHelpers::getMaybeWrappedTypeName(
             $typeID,
-            $this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
+            $this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? $this->schemaDefinition[SchemaDefinition::MANDATORY] ?? null,
             $this->schemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,
             $this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
             $this->schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false,
