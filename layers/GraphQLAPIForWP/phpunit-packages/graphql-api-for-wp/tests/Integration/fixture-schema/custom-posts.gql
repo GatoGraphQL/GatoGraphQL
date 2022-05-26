@@ -51,6 +51,13 @@ query {
       title
     }
   }
+  customPostsByCustomPostTypes: customPosts(filter: { customPostTypes: "page" }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
   customPostsByDateQuery: customPosts(filter: { dateQuery: { after: "2022-01-01" } }) {
     __typename
     ...on IsCustomPost {

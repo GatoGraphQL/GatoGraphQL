@@ -136,6 +136,13 @@
                 "title": "Released v0.6, check it out"
             }
         ],
+        "customPostsByCustomPostTypes": [
+            {
+                "__typename": "Page",
+                "id": 2,
+                "title": "Sample Page"
+            }
+        ],
         "customPostsByDateQuery": [
             {
                 "__typename": "Post",
