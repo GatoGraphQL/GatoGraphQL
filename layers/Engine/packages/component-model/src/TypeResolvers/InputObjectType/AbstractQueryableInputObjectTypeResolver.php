@@ -10,7 +10,7 @@ use stdClass;
 
 abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
 {
-    /** @var array<string, ?array> */
+    /** @var array<string, ?FilterInputInterface> */
     private array $consolidatedInputFieldFilterInputCache = [];
 
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
