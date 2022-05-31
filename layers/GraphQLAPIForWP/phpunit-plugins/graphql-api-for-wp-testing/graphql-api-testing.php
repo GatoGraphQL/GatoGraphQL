@@ -30,8 +30,23 @@ add_action(
             return;
         }
 
-        // Validate we are in the DEV environment
-        if (!RootEnvironment::isApplicationEnvironmentDev()) {
+        /**
+         * Activate the plugin, only if:
+         *
+         * - we are in the DEV environment, or
+         * - we are executing integration tests (hosted in InstaWP)
+         */
+        $enablePlugin = RootEnvironment::isApplicationEnvironmentDev();
+        if (!$enablePlugin) {
+            $validTestingDomains = [
+                'instawp.io',
+            ];
+            // Calculate the top level domain (app.site.com => site.com)
+            $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
+            $host = $hostNames[1] . '.' . $hostNames[0];
+            $enablePlugin = in_array($host, $validTestingDomains);
+        }
+        if (!$enablePlugin) {
             return;
         }
         
