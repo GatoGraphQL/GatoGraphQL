@@ -179,11 +179,16 @@ jobs:
                 run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+            -   name: Uncompress plugin zip contents into new folder
+                uses: montudor/action-zip@v0.1.0
+                with:
+                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }} -d build/dist-plugin-${{ matrix.pluginConfig.zip_file }}
+
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v3
                 with:
-                    name: generated-plugins
-                    path: build/${{ matrix.pluginConfig.zip_file }}
+                    name: ${{ matrix.pluginConfig.zip_file }}
+                    path: build/dist-plugin-${{ matrix.pluginConfig.zip_file }}/*
                     retention-days: ${{ needs.provide_data.outputs.retention_days }}
 
     ###########################################################################
@@ -199,12 +204,6 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 if: github.event_name == 'release'
 
-            -   name: Uncompress artifact
-                uses: montudor/action-zip@v0.1.0
-                with:
-                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }} -d build/dist-plugin
-                if: github.event_name == 'release'
-
             -   id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
                 if: github.event_name == 'release'
@@ -215,7 +214,7 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
                     branch: ${{ matrix.pluginConfig.dist_repo_branch }}
-                    package-directory: 'build/dist-plugin'
+                    package-directory: 'build/dist-plugin-${{ matrix.pluginConfig.zip_file }}'
                     split-repository-organization: ${{ matrix.pluginConfig.dist_repo_organization }}
                     split-repository-name: ${{ matrix.pluginConfig.dist_repo_name }}
                     tag: ${{ steps.previous_tag.outputs.tag }}
