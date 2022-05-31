@@ -180,7 +180,7 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Upload plugin zip as artifact
-                uses: actions/upload-artifact@v2
+                uses: actions/upload-artifact@v3
                 with:
                     name: generated-plugins
                     path: build/${{ matrix.pluginConfig.zip_file }}
