@@ -64,7 +64,7 @@ jobs:
 
     # Build plugin => downgrade => (maybe) scope => (maybe) upload to release and deploy to dist repo
     process:
-        name: Generate plugin ${{ matrix.pluginConfig.zip_file }}
+        name: Generate plugin "${{ matrix.pluginConfig.zip_file }}"
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:
@@ -176,13 +176,13 @@ jobs:
     ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Uncompress plugin zip contents into new folder
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }} -d build/dist-plugin-${{ matrix.pluginConfig.zip_file }}
+                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin-${{ matrix.pluginConfig.zip_file }}
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v3
