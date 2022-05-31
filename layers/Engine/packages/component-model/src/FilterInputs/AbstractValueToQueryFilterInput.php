@@ -16,7 +16,7 @@ abstract class AbstractValueToQueryFilterInput extends AbstractFilterInput
     }
 
     abstract protected function getQueryArgKey(): string;
-    
+
     protected function getValue(mixed $value): mixed
     {
         return $value;

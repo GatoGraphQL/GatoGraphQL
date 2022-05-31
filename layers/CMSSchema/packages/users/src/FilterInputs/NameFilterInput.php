@@ -10,6 +10,6 @@ class NameFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {
-       return 'name';
+        return 'name';
     }
 }

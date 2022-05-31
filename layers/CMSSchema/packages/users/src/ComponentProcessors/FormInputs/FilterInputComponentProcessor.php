@@ -67,7 +67,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_NAME => $this->getNameFilterInput(),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailOrEmailsFilterInput(),
             default => null,

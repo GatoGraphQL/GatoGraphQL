@@ -57,7 +57,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getUserRolesFilterInput(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getExcludeUserRolesFilterInput(),
             default => null,

@@ -228,7 +228,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getFilterInput(array $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInput(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getLimitFilterInput(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getOffsetFilterInput(),

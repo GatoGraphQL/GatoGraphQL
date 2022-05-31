@@ -10,6 +10,6 @@ class ExcludeCustomPostAuthorIDsFilterInput extends AbstractValueToQueryFilterIn
 {
     protected function getQueryArgKey(): string
     {
-       return 'exclude-custompost-author-ids';
+        return 'exclude-custompost-author-ids';
     }
 }

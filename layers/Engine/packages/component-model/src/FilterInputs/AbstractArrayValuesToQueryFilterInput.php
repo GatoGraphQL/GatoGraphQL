@@ -26,7 +26,7 @@ abstract class AbstractArrayValuesToQueryFilterInput extends AbstractFilterInput
      * @return array<int|string,string>
      */
     abstract protected function getValueToQueryArgKeys(): array;
-    
+
     protected function getValue(array $value): array
     {
         return $value;
