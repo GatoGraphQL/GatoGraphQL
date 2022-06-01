@@ -22,7 +22,7 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources(array $resources, array $component, array $templateResource, string $template, array $props, $processor): array
     {
         switch ($component[1]) {
             case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_WELCOME:

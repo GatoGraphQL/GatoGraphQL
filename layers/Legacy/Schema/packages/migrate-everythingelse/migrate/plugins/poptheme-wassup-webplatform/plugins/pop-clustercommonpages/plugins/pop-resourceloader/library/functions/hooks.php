@@ -8,11 +8,11 @@ class PoPTheme_Wassup_CommonPages_ResourceLoaderProcessor_Hooks
             'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
             $this->getComponentCSSResources(...),
             10,
-            6
+            2
         );
     }
 
-    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources(array $resources, array $component): array
     {
         switch ($component[1]) {
             case GD_ClusterCommonPages_Module_Processor_CustomScrolls::COMPONENT_SCROLL_OURSPONSORS_SMALLDETAILS:
