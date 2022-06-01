@@ -13,9 +13,9 @@ class ModelInstance implements ModelInstanceInterface
 {
     use BasicServiceTrait;
 
-    public final const HOOK_COMPONENTS_RESULT = __CLASS__ . ':elements:result';
-    public final const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':elementsFromVars:postOrGetChange';
-    public final const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':elementsFromVars:result';
+    public final const HOOK_ELEMENTS_RESULT = __CLASS__ . ':elements:result';
+    public final const HOOK_ELEMENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':elementsFromVars:postOrGetChange';
+    public final const HOOK_ELEMENTSFROMVARS_RESULT = __CLASS__ . ':elementsFromVars:result';
 
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?DefinitionManagerInterface $definitionManager = null;
@@ -52,7 +52,7 @@ class ModelInstance implements ModelInstanceInterface
 
         // Mix the information specific to the module, with that present in the application state
         $elements = (array)App::applyFilters(
-            self::HOOK_COMPONENTS_RESULT,
+            self::HOOK_ELEMENTS_RESULT,
             array_merge(
                 $elements,
                 $this->getModelInstanceComponentsFromAppState()
@@ -102,7 +102,7 @@ class ModelInstance implements ModelInstanceInterface
         // Can the configuration change when doing a POST or GET?
         if (
             App::applyFilters(
-                self::HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE,
+                self::HOOK_ELEMENTSFROMVARS_POSTORGETCHANGE,
                 false
             )
         ) {
@@ -128,7 +128,7 @@ class ModelInstance implements ModelInstanceInterface
 
         // Allow for plug-ins to add their own vars. Eg: URE source parameter
         return (array)App::applyFilters(
-            self::HOOK_COMPONENTSFROMVARS_RESULT,
+            self::HOOK_ELEMENTSFROMVARS_RESULT,
             $elements
         );
     }

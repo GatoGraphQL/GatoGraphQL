@@ -13,7 +13,7 @@ class ApplicationStateHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
+            ModelInstance::HOOK_ELEMENTSFROMVARS_RESULT,
             $this->maybeAddComponent(...)
         );
     }

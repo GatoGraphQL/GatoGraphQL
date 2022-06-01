@@ -14,7 +14,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTS_RESULT,
+            ModelInstance::HOOK_ELEMENTS_RESULT,
             $this->getModelInstanceComponentsFromAppState(...)
         );
     }

@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popUserstanceModuleInstanceComponents');
+\PoP\Root\App::addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_ELEMENTS_RESULT, 'popUserstanceModuleInstanceComponents');
 function popUserstanceModuleInstanceComponents($components)
 {
 
