@@ -1015,7 +1015,10 @@ class Engine implements EngineInterface
      */
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution
     {
-        // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
+        /**
+         * Iterate through the list of all checkpoints, process all of them,
+         * if any produces an error, already return it
+         */
         foreach ($checkpoints as $checkpoint) {
             $feedbackItemResolution = $checkpoint->validateCheckpoint();
             if ($feedbackItemResolution !== null) {
