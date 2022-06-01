@@ -24,7 +24,11 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getDropdownSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
+    /**
+     * @param \PoP\ComponentModel\Component\Component[] $subcomponents
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getDropdownSubcomponents(array $subcomponents, \PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component->name) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
