@@ -928,9 +928,9 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
       case self::COMPONENT_SOMENAME2:
       case self::COMPONENT_SOMENAME3:
         
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT1];
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT2];
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT3];
+        $ret[] = new \PoP\ComponentModel\Component\Component(LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT1);
+        $ret[] = new \PoP\ComponentModel\Component\Component(LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT2);
+        $ret[] = new \PoP\ComponentModel\Component\Component(LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT3);
         break;
     }
 
