@@ -33,7 +33,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                         ? App::getState('query')
                         : $this->getRESTFields()
                     ]
-                ),
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),
