@@ -42,16 +42,6 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
         return $this->processors[$componentProcessorClass][$componentName];
     }
 
-    /**
-     * @deprecated Use the Service Container instead
-     */
-    public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void
-    {
-        foreach ($forItemNames as $forItemName) {
-            $this->overridingClasses[$overrideClass][$forItemName] = $withClass;
-        }
-    }
-
     protected function hasItemBeenLoaded(Component $component): bool
     {
         $componentProcessorClass = $component[0];
