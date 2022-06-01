@@ -73,7 +73,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 }
 

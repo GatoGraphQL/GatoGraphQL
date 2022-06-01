@@ -61,7 +61,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void

@@ -51,7 +51,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void

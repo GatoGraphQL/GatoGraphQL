@@ -74,7 +74,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 }
 

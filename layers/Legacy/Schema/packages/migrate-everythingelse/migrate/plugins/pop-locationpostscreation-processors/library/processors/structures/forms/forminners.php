@@ -50,7 +50,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
     protected function getEditorInitialvalue(\PoP\ComponentModel\Component\Component $component)
