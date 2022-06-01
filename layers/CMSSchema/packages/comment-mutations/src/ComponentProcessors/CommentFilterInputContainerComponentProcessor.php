@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\Comments\ComponentProcessors\CommentFilterInputContainerComponentProcessor as UpstreamCommentFilterInputContainerComponentProcessor;
 
 class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilterInputContainerComponentProcessor
@@ -25,8 +26,8 @@ class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilte
     {
         // Get the original config from above
         $targetModule = match ($component[1]) {
-            self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTS => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTS],
-            self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTS => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTS),
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT),
             default => null,
         };
         return parent::getFilterInputComponents($targetModule ?? $component);
