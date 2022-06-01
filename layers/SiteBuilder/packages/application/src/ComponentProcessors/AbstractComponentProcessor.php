@@ -65,7 +65,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, Component $component, array &$props): void
+    protected function addHeaddatasetcomponentDataProperties(array &$ret, Component $component, array &$props): void
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 

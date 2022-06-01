@@ -958,7 +958,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, Component $component, array &$props): void
+    protected function addHeaddatasetcomponentDataProperties(array &$ret, Component $component, array &$props): void
     {
         /**
          * Allow to add more stuff
