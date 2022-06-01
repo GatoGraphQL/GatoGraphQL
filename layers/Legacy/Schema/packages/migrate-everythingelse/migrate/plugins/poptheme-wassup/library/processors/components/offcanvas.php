@@ -48,16 +48,16 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     self::COMPONENT_OFFCANVAS_NAVIGATOR => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_NAVIGATOR],
                     self::COMPONENT_OFFCANVAS_BODY => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY],
                 );
-                $subComponent = $subComponents[$component[1]];
+                $subcomponent = $subComponents[$component[1]];
 
                 if ($load_component) {
-                    $ret[] = $subComponent;
+                    $ret[] = $subcomponent;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $componentAtts = array('empty' => true);
                     $ret[] = [
-                        $subComponent[0],
-                        $subComponent[1],
+                        $subcomponent[0],
+                        $subcomponent[1],
                         $componentAtts
                     ];
                 }
@@ -78,16 +78,16 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     self::COMPONENT_OFFCANVAS_BODYTABS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYTABS],
                     self::COMPONENT_OFFCANVAS_BODYSIDEINFO => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO],
                 );
-                $subComponent = $subComponents[$component[1]];
+                $subcomponent = $subComponents[$component[1]];
 
                 if ($load_component) {
-                    $ret[] = $subComponent;
+                    $ret[] = $subcomponent;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $componentAtts = array('empty' => true);
                     $ret[] = [
-                        $subComponent[0],
-                        $subComponent[1],
+                        $subcomponent[0],
+                        $subcomponent[1],
                         $componentAtts
                     ];
                 }

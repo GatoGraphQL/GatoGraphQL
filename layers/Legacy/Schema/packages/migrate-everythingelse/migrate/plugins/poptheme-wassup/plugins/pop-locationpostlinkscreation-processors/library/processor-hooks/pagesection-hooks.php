@@ -22,8 +22,8 @@ class PoP_LocationPostLinksCreation_PageSectionHooks
                         [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_LOCATIONPOSTLINK_CREATE],
                         [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_LOCATIONPOSTLINK_UPDATE],
                     );
-                    foreach ($subComponents as $subComponent) {
-                        $processor->setProp($subComponent, $props, 'title', '');
+                    foreach ($subComponents as $subcomponent) {
+                        $processor->setProp($subcomponent, $props, 'title', '');
                     }
                 }
                 break;

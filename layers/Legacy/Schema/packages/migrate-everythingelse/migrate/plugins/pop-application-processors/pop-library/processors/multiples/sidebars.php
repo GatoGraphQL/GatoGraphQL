@@ -190,18 +190,18 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                         '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_TAG_SIDEBAR],
                     );
                 }
-                foreach ($target_components as $target => $subComponent) {
+                foreach ($target_components as $target => $subcomponent) {
                      // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                    $this->appendProp(array($subComponent), $props, 'class', 'collapse');
+                    $this->appendProp(array($subcomponent), $props, 'class', 'collapse');
                     $this->mergeProp(
-                        array($subComponent),
+                        array($subcomponent),
                         $props,
                         'params',
                         array(
                             'data-collapse-target' => $target
                         )
                     );
-                    $this->mergeJsmethodsProp(array($subComponent), $props, array('waypointsToggleCollapse'));
+                    $this->mergeJsmethodsProp(array($subcomponent), $props, array('waypointsToggleCollapse'));
                 }
                 break;
 
@@ -209,22 +209,22 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                 $inners = array(
                     self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR],
                 );
-                $subComponent = $inners[$component[1]];
+                $subcomponent = $inners[$component[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
 
                 // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                $this->appendProp(array($subComponent), $props, 'class', 'collapse');
+                $this->appendProp(array($subcomponent), $props, 'class', 'collapse');
                 $this->mergeProp(
-                    array($subComponent),
+                    array($subcomponent),
                     $props,
                     'params',
                     array(
                         'data-collapse-target' => $mainblock_taget
                     )
                 );
-                $this->mergeJsmethodsProp(array($subComponent), $props, array('waypointsToggleCollapse'));
+                $this->mergeJsmethodsProp(array($subcomponent), $props, array('waypointsToggleCollapse'));
                 break;
         }
 

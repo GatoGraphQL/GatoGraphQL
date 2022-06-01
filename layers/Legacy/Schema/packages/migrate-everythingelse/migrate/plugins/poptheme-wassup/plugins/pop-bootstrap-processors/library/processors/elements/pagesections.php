@@ -96,7 +96,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_FRAMECOMPONENTS];
+                $subcomponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_FRAMECOMPONENTS];
                 $componentAtts = array();
 
                 // Requested a different target: load nothing
@@ -105,12 +105,12 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 }
                 if ($componentAtts) {
                     $ret[] = [
-                        $subComponent[0],
-                        $subComponent[1],
+                        $subcomponent[0],
+                        $subcomponent[1],
                         $componentAtts
                     ];
                 } else {
-                    $ret[] = $subComponent;
+                    $ret[] = $subcomponent;
                 }
                 break;
 

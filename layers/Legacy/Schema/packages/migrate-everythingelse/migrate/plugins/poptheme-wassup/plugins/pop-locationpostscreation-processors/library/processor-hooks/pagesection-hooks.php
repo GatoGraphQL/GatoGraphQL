@@ -22,8 +22,8 @@ class PoP_LocationPostsCreation_PageSectionHooks
                         [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_LOCATIONPOST_CREATE],
                         [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_LOCATIONPOST_UPDATE],
                     );
-                    foreach ($subComponents as $subComponent) {
-                        $processor->setProp($subComponent, $props, 'title', '');
+                    foreach ($subComponents as $subcomponent) {
+                        $processor->setProp($subcomponent, $props, 'title', '');
                     }
                 }
                 break;

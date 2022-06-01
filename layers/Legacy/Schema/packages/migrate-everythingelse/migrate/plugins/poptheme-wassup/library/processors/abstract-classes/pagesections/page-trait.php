@@ -36,19 +36,19 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
-        foreach ($this->getSubcomponents($component) as $subComponent) {
-            $this->appendProp([$subComponent], $props, 'class', 'pop-outerblock');
+        foreach ($this->getSubcomponents($component) as $subcomponent) {
+            $this->appendProp([$subcomponent], $props, 'class', 'pop-outerblock');
         }
 
         $topframeoptions = $this->getFrametopoptionsSubcomponents($component);
         $bottomframeoptions = $this->getFramebottomoptionsSubcomponents($component);
-        foreach ($this->getFrameoptionsSubcomponents($component) as $subComponent) {
-            $this->appendProp([$subComponent], $props, 'class', 'blocksection-controls pull-right');
+        foreach ($this->getFrameoptionsSubcomponents($component) as $subcomponent) {
+            $this->appendProp([$subcomponent], $props, 'class', 'blocksection-controls pull-right');
 
-            if (in_array($subComponent, $topframeoptions)) {
-                $this->appendProp([$subComponent], $props, 'class', 'top');
-            } elseif (in_array($subComponent, $bottomframeoptions)) {
-                $this->appendProp([$subComponent], $props, 'class', 'bottom');
+            if (in_array($subcomponent, $topframeoptions)) {
+                $this->appendProp([$subcomponent], $props, 'class', 'top');
+            } elseif (in_array($subcomponent, $bottomframeoptions)) {
+                $this->appendProp([$subcomponent], $props, 'class', 'bottom');
             }
         }
 

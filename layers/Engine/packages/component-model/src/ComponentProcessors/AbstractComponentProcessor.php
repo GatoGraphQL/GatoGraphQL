@@ -198,19 +198,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         if ($subComponents) {
             $props[$componentFullName][Props::SUBCOMPONENTS] = $props[$componentFullName][Props::SUBCOMPONENTS] ?? array();
-            foreach ($subComponents as $subComponent) {
-                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
+            foreach ($subComponents as $subcomponent) {
+                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
                 $subcomponent_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
                 // If the subcomponent belongs to the same dataset, then set the shared attributies for the same-dataset components
-                if (!$subcomponent_processor->startDataloadingSection($subComponent)) {
+                if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
                     $subcomponent_wildcard_props_to_propagate = array_merge(
                         $subcomponent_wildcard_props_to_propagate,
                         $get_props_for_descendant_datasetcomponents_fn($component, $component_props)
                     );
                 }
 
-                $subcomponent_processor->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponent_wildcard_props_to_propagate, $targetted_props_to_propagate);
+                $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponent_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -256,8 +256,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         if ($relationalTypeResolver !== null) {
             // Set the property "succeeding-typeResolver" on all descendants: the same typeResolver for all subcomponents, and the explicit one (or get the default one for "*") for relational objects
-            foreach ($this->getSubcomponents($component) as $subComponent) {
-                $this->setProp($subComponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
+            foreach ($this->getSubcomponents($component) as $subcomponent) {
+                $this->setProp($subcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
                 // @todo Pass the ComponentField directly, do not convert to string first
@@ -650,8 +650,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // Only components which do not load data
                 $subcomponent_components = array_filter(
                     $relationalComponentField->getNestedComponents(),
-                    function ($subComponent) {
-                        return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
+                    function ($subcomponent) {
+                        return !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent);
                     }
                 );
                 foreach ($subcomponent_components as $subcomponent_component) {
@@ -667,8 +667,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     // Only components which do not load data
                     $subcomponent_components = array_filter(
                         $relationalComponentField->getNestedComponents(),
-                        function ($subComponent) {
-                            return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
+                        function ($subcomponent) {
+                            return !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent);
                         }
                     );
                     foreach ($subcomponent_components as $subcomponent_component) {
@@ -678,11 +678,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Only components which do not load data
-            $subComponents = array_filter($this->getSubcomponents($component), function ($subComponent) {
-                return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
+            $subComponents = array_filter($this->getSubcomponents($component), function ($subcomponent) {
+                return !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent);
             });
-            foreach ($subComponents as $subComponent) {
-                $this->getComponentProcessorManager()->getProcessor($subComponent)->addToDatasetDatabaseKeys($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
+            foreach ($subComponents as $subcomponent) {
+                $this->getComponentProcessorManager()->getProcessor($subcomponent)->addToDatasetDatabaseKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
@@ -865,12 +865,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // $this->flattenDatasetcomponentTreeComponents(__FUNCTION__, $ret, $component);
         // Exclude the subcomponent components here
         if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
-            foreach ($subComponents as $subComponent) {
-                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
+            foreach ($subComponents as $subcomponent) {
+                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
-                if (!$subcomponent_processor->startDataloadingSection($subComponent)) {
-                    $subcomponent_processor->addDatasetcomponentTreeSectionFlattenedComponents($ret, $subComponent);
+                if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
+                    $subcomponent_processor->addDatasetcomponentTreeSectionFlattenedComponents($ret, $subcomponent);
                 }
             }
         }
@@ -880,12 +880,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // {
     //     // Exclude the subcomponent components here
     //     if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
-    //         foreach ($subComponents as $subComponent) {
-    //             $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
+    //         foreach ($subComponents as $subcomponent) {
+    //             $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
     //             // Propagate only if the subcomponent doesn't have a typeResolver. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
-    //             if (!$subcomponent_processor->startDataloadingSection($subComponent)) {
-    //                 if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subComponent)) {
+    //             if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
+    //                 if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent)) {
     //                     $ret = array_merge(
     //                         $ret,
     //                         $subcomponent_ret
@@ -1151,12 +1151,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             array_splice($conditionalSubcomponents, $i, 1);
                         }
                     }
-                    foreach ($conditionalSubcomponents as $subComponent) {
-                        $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
+                    foreach ($conditionalSubcomponents as $subcomponent) {
+                        $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
                         // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
-                        if (!$subcomponent_processor->startDataloadingSection($subComponent)) {
-                            if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
+                        if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
+                            if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
                                 if ($subcomponent_ret['data-fields'] ?? null) {
@@ -1196,12 +1196,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Second step: all the other subcomponents can be calculated directly
-            foreach ($subComponents as $subComponent) {
-                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
+            foreach ($subComponents as $subcomponent) {
+                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
-                if (!$subcomponent_processor->startDataloadingSection($subComponent)) {
-                    if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
+                if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
+                    if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,

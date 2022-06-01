@@ -10,8 +10,8 @@ abstract class PoP_Module_Processor_ControlButtonGroupsBase extends PoPEngine_Qu
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($blocktarget = $this->getProp($component, $props, 'control-target')) {
-            foreach ($this->getSubcomponents($component) as $subComponent) {
-                $this->setProp([$subComponent], $props, 'control-target', $blocktarget);
+            foreach ($this->getSubcomponents($component) as $subcomponent) {
+                $this->setProp([$subcomponent], $props, 'control-target', $blocktarget);
             }
         }
 

@@ -128,14 +128,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_404:
             case self::COMPONENT_BLOCK_BACKGROUNDMENU:
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'col-xs-12 col-sm-4');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'col-xs-12 col-sm-4');
                 }
                 break;
 
             case self::COMPONENT_BLOCK_SINGLEPOST:
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'col-xs-12');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'col-xs-12');
                 }
 
                 // Hide the Title, but not for the Comments
@@ -172,7 +172,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     ],
                 );
                 foreach ($subcomponent_descriptions as $subcomponent_description) {
-                    $subComponent = $subcomponent_description['subcomponent'];
+                    $subcomponent = $subcomponent_description['subcomponent'];
                     $description = sprintf(
                         '<h4>%s</h4>',
                         sprintf(
@@ -180,8 +180,8 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                             $subcomponent_description['description']
                         )
                     );
-                    $this->setProp([$subComponent], $props, 'title', '');
-                    $this->setProp([$subComponent], $props, 'description', $description);
+                    $this->setProp([$subcomponent], $props, 'title', '');
+                    $this->setProp([$subcomponent], $props, 'description', $description);
                 }
                 break;
 
@@ -198,8 +198,8 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                         $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)
                     ]
                 );
-                foreach ($subComponents as $subComponent) {
-                    $this->setProp($subComponent, $props, 'ignore-request-params', true);
+                foreach ($subComponents as $subcomponent) {
+                    $this->setProp($subcomponent, $props, 'ignore-request-params', true);
                 }
                 break;
         }

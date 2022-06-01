@@ -16,25 +16,25 @@ class PoPTheme_Wassup_WebPlatform_PageSectionHooks
     {
         $props = &$props_in_array[0];
 
-        foreach ($processor->getSubcomponents($component) as $subComponent) {
+        foreach ($processor->getSubcomponents($component) as $subcomponent) {
             // Needed to erase previous feedback messages when a pageSection opens. Eg: Reset password
-            $processor->mergeJsmethodsProp([$subComponent], $props, array('closeFeedbackMessagesOnPageSectionOpen'));
+            $processor->mergeJsmethodsProp([$subcomponent], $props, array('closeFeedbackMessagesOnPageSectionOpen'));
         }
 
         $subComponents = array(
             [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::COMPONENT_BLOCK_LOGIN],
             [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::COMPONENT_BLOCK_LOGOUT],
         );
-        foreach ($subComponents as $subComponent) {
+        foreach ($subComponents as $subcomponent) {
             $processor->mergeJsmethodsProp(
-                $subComponent,
+                $subcomponent,
                 $props,
                 array(
                     'closePageSectionOnSuccess',
                 )
             );
             $processor->mergeProp(
-                $subComponent,
+                $subcomponent,
                 $props,
                 'params',
                 array(

@@ -21,8 +21,8 @@ class PoPTheme_UserStance_PageSectionHooks
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_CREATE],
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_UPDATE],
                 );
-                foreach ($subComponents as $subComponent) {
-                    $processor->setProp($subComponent, $props, 'title', '');
+                foreach ($subComponents as $subcomponent) {
+                    $processor->setProp($subcomponent, $props, 'title', '');
                 }
                 break;
         }

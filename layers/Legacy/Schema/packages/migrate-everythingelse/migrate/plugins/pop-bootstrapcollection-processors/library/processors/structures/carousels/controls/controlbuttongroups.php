@@ -31,8 +31,8 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
             case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 // Pass the needed props down the line
                 if ($target = $this->getProp($component, $props, 'carousel-target')) {
-                    foreach ($this->getSubcomponents($component) as $subComponent) {
-                        $this->setProp([$subComponent], $props, 'carousel-target', $target);
+                    foreach ($this->getSubcomponents($component) as $subcomponent) {
+                        $this->setProp([$subcomponent], $props, 'carousel-target', $target);
                     }
                 }
                 break;

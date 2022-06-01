@@ -66,7 +66,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                         self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME],
                         self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT],
                     );
-                    $subComponent = $subComponents[$component[1]];
+                    $subcomponent = $subComponents[$component[1]];
 
                     // This value must be set by the parent module
                     $target_id = $this->getProp($component, $props, 'target-id');

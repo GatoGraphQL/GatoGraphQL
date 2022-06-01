@@ -18,11 +18,11 @@ trait FilterDataComponentProcessorTrait
     public function filterHeadcomponentDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$query, array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringComponents = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
-            foreach ($activeDataloadQueryArgsFilteringComponents as $subComponent) {
+            foreach ($activeDataloadQueryArgsFilteringComponents as $subcomponent) {
                 /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subComponent);
-                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subComponent, $source);
-                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subComponent)) {
+                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
+                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subcomponent, $source);
+                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subcomponent)) {
                     $filterInput->filterDataloadQueryArgs($query, $value);
                 }
             }

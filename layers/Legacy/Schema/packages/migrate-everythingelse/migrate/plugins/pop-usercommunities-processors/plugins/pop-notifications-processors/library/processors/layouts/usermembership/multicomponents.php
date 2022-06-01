@@ -31,8 +31,8 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
                 $this->appendProp($component, $props, 'class', 'pop-usermembership');
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'item');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'item');
                 }
                 break;
         }

@@ -207,8 +207,8 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             if ($feedback = $processor->getJsdataFeedbackDatasetcomponentTree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
 
                 // Advance the position of the array into the current component
-                foreach ($component_path as $subComponent) {
-                    $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subComponent);
+                foreach ($component_path as $subcomponent) {
+                    $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
                     $componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')] = $componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')] ?? array();
                     $componentjsdata = &$componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')];
                 }

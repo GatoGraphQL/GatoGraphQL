@@ -174,9 +174,9 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 			$ret['actions'][$component[1]] = $module_cb_actions;
     // 		}
     // 	}
-    // 	foreach ($this->getSubcomponentsByGroup($component) as $subComponent) {
+    // 	foreach ($this->getSubcomponentsByGroup($component) as $subcomponent) {
 
-    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesCbs($subComponent, $props)) {
+    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subcomponent)->getModulesCbs($subcomponent, $props)) {
 
     // 			$ret['cbs'] = array_merge(
     // 				$ret['cbs'],
@@ -210,9 +210,9 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // 	// Add the path from this component to its components
     // 	$subComponents = $this->getSubcomponentsByGroup($component);
-    // 	foreach ($subComponents as $subComponent) {
+    // 	foreach ($subComponents as $subcomponent) {
 
-    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesPaths($subComponent, $props)) {
+    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subcomponent)->getModulesPaths($subcomponent, $props)) {
 
     // 			// Add the extra path to the component
     // 			foreach ($subcomponent_ret as $subcomponent_component => $subcomponent_component_path) {

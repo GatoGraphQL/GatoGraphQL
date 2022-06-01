@@ -84,8 +84,8 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                         $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION)
                     ]
                 );
-                foreach ($subComponents as $subComponent) {
-                    $this->setProp($subComponent, $props, 'ignore-request-params', true);
+                foreach ($subComponents as $subcomponent) {
+                    $this->setProp($subcomponent, $props, 'ignore-request-params', true);
                 }
                 break;
         }

@@ -21,12 +21,12 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubcomponents($component) as $subComponent) {
-            $processor = $componentprocessor_manager->getProcessor($subComponent);
+        foreach ($this->getSubcomponents($component) as $subcomponent) {
+            $processor = $componentprocessor_manager->getProcessor($subcomponent);
             if ($processor instanceof FormattableModuleInterface) {
-                $format = $processor->getFormat($subComponent);
+                $format = $processor->getFormat($subcomponent);
                 if ($thumb = $format_thumbs[$format] ?? null) {
-                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subComponent);
+                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subcomponent);
                     $ret[$subcomponentFullName] = $thumb;
                 }
             }
@@ -54,12 +54,12 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         );
 
         $ret = array();
-        foreach ($this->getSubcomponents($component) as $subComponent) {
-            $processor = $componentprocessor_manager->getProcessor($subComponent);
+        foreach ($this->getSubcomponents($component) as $subcomponent) {
+            $processor = $componentprocessor_manager->getProcessor($subcomponent);
             if ($processor instanceof FormattableModuleInterface) {
-                $format = $processor->getFormat($subComponent);
+                $format = $processor->getFormat($subcomponent);
                 if ($title = $format_titles[$format] ?? null) {
-                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subComponent);
+                    $subcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subcomponent);
                     $ret[$subcomponentFullName] = $title;
                 }
             }

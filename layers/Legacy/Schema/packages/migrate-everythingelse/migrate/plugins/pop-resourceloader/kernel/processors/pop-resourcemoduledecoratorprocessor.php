@@ -80,9 +80,9 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no subcomponents
         $modulefilter_manager->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
+        foreach ($subComponents as $subcomponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicResourcesMergedComponentTree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subcomponent)->getDynamicResourcesMergedComponentTree($subcomponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -113,9 +113,9 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //         $ret[$component[1]] = $resources;
     //     }
 
-    //     foreach ($this->getDecoratedcomponentProcessor($component)->get_descendant_components_to_propagate($component) as $subComponent) {
+    //     foreach ($this->getDecoratedcomponentProcessor($component)->get_descendant_components_to_propagate($component) as $subcomponent) {
 
-    //         if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getModulesResources($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+    //         if ($subcomponent_ret = $this->getComponentProcessordecorator($subcomponent)->getModulesResources($subcomponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
     //             $ret = array_merge(
     //                 $ret,
@@ -156,9 +156,9 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no subcomponents
         $modulefilter_manager->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
+        foreach ($subComponents as $subcomponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicTemplateResourcesMergedComponentTree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subcomponent)->getDynamicTemplateResourcesMergedComponentTree($subcomponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(

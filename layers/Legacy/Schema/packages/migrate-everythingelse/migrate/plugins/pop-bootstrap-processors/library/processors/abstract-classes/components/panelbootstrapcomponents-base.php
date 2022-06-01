@@ -47,9 +47,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         $ret = array();
 
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // foreach ($this->getSubcomponents($component) as $subComponent) {
+        // foreach ($this->getSubcomponents($component) as $subcomponent) {
 
-        //     $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subComponent);
+        //     $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
         //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
         //     $ret[$subcomponentOutputName]['data-initjs-targets'] = sprintf(
         //         '%s > %s',
@@ -80,9 +80,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
     //     $ret = array();
 
-    //     foreach ($this->getSubcomponents($component) as $subComponent) {
+    //     foreach ($this->getSubcomponents($component) as $subcomponent) {
 
-    //         $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subComponent);
+    //         $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
     //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
     //         $ret[] = sprintf(
     //             '%s > %s > %s',
@@ -100,16 +100,16 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return array();
     }
 
-    public function isSubcomponentActivePanel(\PoP\ComponentModel\Component\Component $component, $subComponent)
+    public function isSubcomponentActivePanel(\PoP\ComponentModel\Component\Component $component, $subcomponent)
     {
         return false;
     }
     public function getActivepanelSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $subComponents = $this->getSubcomponents($component);
-        foreach ($subComponents as $subComponent) {
-            if ($this->isSubcomponentActivePanel($component, $subComponent)) {
-                return $subComponent;
+        foreach ($subComponents as $subcomponent) {
+            if ($this->isSubcomponentActivePanel($component, $subcomponent)) {
+                return $subcomponent;
             }
         }
 
@@ -149,9 +149,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         $ret = array();
 
-        foreach ($this->getSubcomponents($component) as $subComponent) {
+        foreach ($this->getSubcomponents($component) as $subcomponent) {
             $ret[] = [
-                'header-subcomponent' => $subComponent,
+                'header-subcomponent' => $subcomponent,
             ];
         }
 
@@ -170,7 +170,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         // Comment Leo 19/11/2018: Check this out: initially, this gets the title from the block, but since migrating blocks to dataloads, the processor may not have `getTitle` anymore and the code below explodes
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // return $componentprocessor_manager->getProcessor($subComponent)->getTitle($subComponent, $props);
+        // return $componentprocessor_manager->getProcessor($subcomponent)->getTitle($subcomponent, $props);
         return array();
     }
     public function getPanelheaderClass(\PoP\ComponentModel\Component\Component $component)
@@ -332,8 +332,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                     $active_subcomponent
                 )
             );
-            foreach ($inactive_subcomponents as $subComponent) {
-                $this->setProp([$subComponent], $props, 'skip-data-load', true);
+            foreach ($inactive_subcomponents as $subcomponent) {
+                $this->setProp([$subcomponent], $props, 'skip-data-load', true);
             }
         }
 
