@@ -42,7 +42,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     }
 
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

@@ -6,7 +6,7 @@ use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 class PoP_Module_QuickviewFrameBottomOptionsPageSectionComponentRoutingProcessor extends PoP_Module_QuickviewFrameTopOptionsPageSectionComponentRoutingProcessorBase
 {
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

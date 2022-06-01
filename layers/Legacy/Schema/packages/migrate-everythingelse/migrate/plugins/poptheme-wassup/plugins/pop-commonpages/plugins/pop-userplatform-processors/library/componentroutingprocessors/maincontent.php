@@ -5,7 +5,7 @@ use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
 class PoP_CommonPages_UserPlatform_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

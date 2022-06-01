@@ -55,7 +55,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
     }
 
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

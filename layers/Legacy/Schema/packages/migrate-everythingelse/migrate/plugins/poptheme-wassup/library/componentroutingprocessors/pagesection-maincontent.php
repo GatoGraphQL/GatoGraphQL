@@ -36,7 +36,7 @@ class PoP_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_Mai
     }
 
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

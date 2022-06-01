@@ -18,7 +18,7 @@ use PoPCMSSchema\Posts\ConditionalOnModule\API\ComponentProcessors\FieldDataload
 class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponentRoutingProcessor
 {
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

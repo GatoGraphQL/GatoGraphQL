@@ -46,7 +46,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
     }
 
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

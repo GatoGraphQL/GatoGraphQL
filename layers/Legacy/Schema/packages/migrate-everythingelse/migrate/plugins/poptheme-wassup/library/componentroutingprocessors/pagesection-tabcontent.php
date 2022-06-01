@@ -9,7 +9,7 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 class PoP_Module_TabContentPageSectionComponentRoutingProcessor extends PoP_Module_TabContentPageSectionComponentRoutingProcessorBase
 {
     /**
-     * @return array<string,array<mixed[]>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
