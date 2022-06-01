@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
+
 trait FilterDataComponentProcessorTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
@@ -27,6 +29,9 @@ trait FilterDataComponentProcessorTrait
         }
     }
 
+    /**
+     * @return Component[]
+     */
     public function getActiveDataloadQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component, array $source = null): array
     {
         // Search for cached result
@@ -54,6 +59,9 @@ trait FilterDataComponentProcessorTrait
         return $components;
     }
 
+    /**
+     * @return Component[]
+     */
     public function getDataloadQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_values(array_filter(
