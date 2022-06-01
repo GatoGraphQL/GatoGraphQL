@@ -134,6 +134,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
+    /**
+     * @return Component[]
+     */
     final public function getAllSubcomponents(Component $component): array
     {
         return $this->getSubcomponentsByGroup($component);
@@ -1367,6 +1370,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
+    /**
+     * @return Component[]
+     */
     private function getSubcomponentsByGroup(Component $component, array $elements = array()): array
     {
         if (empty($elements)) {
