@@ -53,7 +53,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:

@@ -33,7 +33,7 @@ trait DataloadComponentProcessorTrait
         return array();
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         return null;
     }

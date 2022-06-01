@@ -320,7 +320,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return parent::getFeedbackmessagesPosition($component);
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD:

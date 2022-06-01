@@ -34,7 +34,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP:

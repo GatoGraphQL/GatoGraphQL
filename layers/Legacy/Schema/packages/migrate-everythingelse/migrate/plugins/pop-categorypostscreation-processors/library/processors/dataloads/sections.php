@@ -277,7 +277,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:

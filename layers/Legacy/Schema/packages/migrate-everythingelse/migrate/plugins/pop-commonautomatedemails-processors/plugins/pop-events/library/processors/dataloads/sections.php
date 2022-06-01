@@ -47,7 +47,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
