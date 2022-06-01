@@ -6,10 +6,12 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\ModuleInfo;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
@@ -26,7 +28,6 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
@@ -38,11 +39,9 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
-use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
-use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
-use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Modules\ComponentHelpersInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -52,6 +51,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -73,7 +73,6 @@ class Engine implements EngineInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
-    private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -156,14 +155,6 @@ class Engine implements EngineInterface
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
-    }
-    final public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
-    {
-        $this->checkpointProcessorManager = $checkpointProcessorManager;
-    }
-    final protected function getCheckpointProcessorManager(): CheckpointProcessorManagerInterface
-    {
-        return $this->checkpointProcessorManager ??= $this->instanceManager->getInstance(CheckpointProcessorManagerInterface::class);
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
@@ -1019,11 +1010,17 @@ class Engine implements EngineInterface
         $array_pointer[$componentOutputName][$key] = $value;
     }
 
+    /**
+     * @param CheckpointInterface[] $checkpoints
+     */
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution
     {
-        // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
+        /**
+         * Iterate through the list of all checkpoints, process all of them,
+         * if any produces an error, already return it
+         */
         foreach ($checkpoints as $checkpoint) {
-            $feedbackItemResolution = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
+            $feedbackItemResolution = $checkpoint->validateCheckpoint();
             if ($feedbackItemResolution !== null) {
                 return $feedbackItemResolution;
             }

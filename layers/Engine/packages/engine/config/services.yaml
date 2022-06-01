@@ -20,8 +20,8 @@ services:
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoP\Engine\CheckpointProcessors\:
-        resource: '../src/CheckpointProcessors/*'
+    PoP\Engine\Checkpoints\:
+        resource: '../src/Checkpoints/*'
 
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

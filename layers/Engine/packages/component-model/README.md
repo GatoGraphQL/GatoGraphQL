@@ -1899,49 +1899,32 @@ function getRelevantPage($component, &$props) {
 }
 ```
 
-A checkpoint is resolved through a [CheckpointProcessor](#checkpointprocessor).
+A checkpoint is resolved through a [Checkpoint](#checkpoint).
 
-#### CheckpointProcessor
+#### Checkpoint
 
-A CheckpointProcessor is an object inheriting from class `AbstractCheckpointProcessor`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
+A Checkpoint is an object inheriting from class `AbstractCheckpoint`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
 
 For instance, to validate if the user IP is whitelisted can be implemented like this:
 
 ```php
 
-class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
+class WhitelistedIPCheckpoint extends \PoP\Engine\AbstractCheckpoint {
 
-  const CHECKPOINT_WHITELISTEDIP = 'checkpoint-whitelistedip';
-
-  function getCheckpointsToProcess() 
+  function validateCheckpoint() 
   {
-    return array(
-      [self::class, self::CHECKPOINT_WHITELISTEDIP],
-    );
-  }
+    // Validate the user's IP
+    $ip = get_client_ip();
+    if (!$ip) {          
+      return new \PoP\ComponentModel\Error\Error('ipempty');
+    }
 
-  function process($checkpoint) 
-  {
-    switch ($checkpoint) 
-    {
-      case self::CHECKPOINT_WHITELISTEDIP:
-
-        // Validate the user's IP
-        $ip = get_client_ip();
-        if (!$ip) {
-          
-          return new \PoP\ComponentModel\Error\Error('ipempty');
-        }
-
-        $whitelisted_ips = array(...);
-        if (!in_array($ip, $whitelisted_ips)) {
-          
-          return new \PoP\ComponentModel\Error\Error('ipincorrect');
-        }
-        break;
+    $whitelisted_ips = array(...);
+    if (!in_array($ip, $whitelisted_ips)) {      
+      return new \PoP\ComponentModel\Error\Error('ipincorrect');
     }
   
-    return parent::process($checkpoint, $component);
+    return parent::validateCheckpoint();
   }
 }
 ```

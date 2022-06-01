@@ -7,12 +7,10 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\CheckpointSets\CheckpointSets;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
@@ -22,6 +20,8 @@ use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -44,6 +44,7 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -97,6 +98,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
+    private ?EnabledMutationsCheckpoint $enabledMutationsCheckpoint = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -161,6 +163,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getVersioningService(): VersioningServiceInterface
     {
         return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
+    }
+    final public function setEnabledMutationsCheckpoint(EnabledMutationsCheckpoint $enabledMutationsCheckpoint): void
+    {
+        $this->enabledMutationsCheckpoint = $enabledMutationsCheckpoint;
+    }
+    final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
+    {
+        return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
     }
 
     final public function getClassesToAttachTo(): array
@@ -1079,20 +1089,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<array> A set of checkpoint sets
+     * @return CheckpointInterface[]
      */
-    protected function getValidationCheckpointSets(
+    protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs
     ): array {
-        $validationCheckpointSets = [];
+        $validationCheckpoints = [];
         // Check that mutations can be executed
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
-            $validationCheckpointSets[] = CheckpointSets::CAN_EXECUTE_MUTATIONS;
+            $validationCheckpoints[] = $this->getEnabledMutationsCheckpoint();
         }
-        return $validationCheckpointSets;
+        return $validationCheckpoints;
     }
 
     /**
@@ -1106,19 +1116,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Can perform validation through checkpoints
-        if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
-            foreach ($checkpointSets as $checkpointSet) {
-                $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpointSet);
-                if ($feedbackItemResolution !== null) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $feedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver
-                        )
-                    );
-                    return;
-                }
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
+            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
+            if ($feedbackItemResolution !== null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $feedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver
+                    )
+                );
+                return;
             }
         }
 

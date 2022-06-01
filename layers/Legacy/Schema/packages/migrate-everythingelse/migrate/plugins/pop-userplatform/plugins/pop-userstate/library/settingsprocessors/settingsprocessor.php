@@ -11,7 +11,7 @@ class PoP_UserPlatform_UserState_Module_SettingsProcessor extends \PoPCMSSchema\
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => false,

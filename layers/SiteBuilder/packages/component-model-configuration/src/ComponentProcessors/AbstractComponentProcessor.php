@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\Constants\DataLoading;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor as UpstreamAbstractComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
+use PoP\ComponentModel\Constants\DataLoading;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProcessor implements ComponentProcessorInterface
 {
@@ -108,7 +109,11 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return DataLoading::DATA_ACCESS_CHECKPOINTS;
     }
 
-    protected function maybeOverrideCheckpoints($checkpoints)
+    /**
+     * @param CheckpointInterface[] $checkpoints
+     * @return CheckpointInterface[]
+     */
+    protected function maybeOverrideCheckpoints(array $checkpoints): array
     {
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
         return App::applyFilters(
@@ -117,11 +122,14 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         );
     }
 
+    /**
+     * @return CheckpointInterface[]
+     */
     public function getDataAccessCheckpoints(array $component, array &$props): array
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             if ($this->getRelevantRouteCheckpointTarget($component, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
-                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
+                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getRouteCheckpoints($route));
             }
         }
 
@@ -132,7 +140,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             if ($this->getRelevantRouteCheckpointTarget($component, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
-                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
+                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getRouteCheckpoints($route));
             }
         }
 

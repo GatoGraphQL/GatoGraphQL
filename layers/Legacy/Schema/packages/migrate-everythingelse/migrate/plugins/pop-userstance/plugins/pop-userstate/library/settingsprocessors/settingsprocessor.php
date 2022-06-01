@@ -12,7 +12,7 @@ class PoP_UserStance_UserState_Module_SettingsProcessor extends \PoPCMSSchema\Us
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_USERSTANCE_ROUTE_ADDSTANCE => false,

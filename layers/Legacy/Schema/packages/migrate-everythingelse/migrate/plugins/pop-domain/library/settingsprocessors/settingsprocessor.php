@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 class PoPTheme_Wassup_Domain_Module_SettingsProcessor extends PoP_WebPlatformEngine_Module_SettingsProcessorBase
 {
     public function routesToProcess()
@@ -32,8 +34,10 @@ class PoPTheme_Wassup_Domain_Module_SettingsProcessor extends PoP_WebPlatformEng
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN => POPMULTIDOMAIN_CHECKPOINTCONFIGURATION_DOMAINVALID,//PoPMultiDomain_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPMULTIDOMAIN_CHECKPOINTCONFIGURATION_DOMAINVALID),//$profile_datafromserver,

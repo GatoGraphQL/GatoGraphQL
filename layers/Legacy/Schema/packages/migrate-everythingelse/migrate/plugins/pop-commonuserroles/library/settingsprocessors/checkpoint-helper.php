@@ -1,13 +1,13 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
+use PoPCMSSchema\UserState\Checkpoints\UserStateCheckpoint;
 
 const POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEORGANIZATION_DATAFROMSERVER = array(
-    [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],
-    [PoPCore_Dataload_CheckpointProcessor::class, PoPCore_Dataload_CheckpointProcessor::CHECKPOINT_PROFILEACCESS],
-    [GD_URE_Dataload_UserCheckpointProcessor::class, GD_URE_Dataload_UserCheckpointProcessor::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION],
+    [UserStateCheckpoint::class, UserStateCheckpoint::USERLOGGEDIN],
+    [PoPCore_Dataload_Checkpoint::class, PoPCore_Dataload_Checkpoint::CHECKPOINT_PROFILEACCESS],
+    [GD_URE_Dataload_UserCheckpoint::class, GD_URE_Dataload_UserCheckpoint::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION],
 );
 const POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEINDIVIDUAL_DATAFROMSERVER = array(
-    [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],
-    [PoPCore_Dataload_CheckpointProcessor::class, PoPCore_Dataload_CheckpointProcessor::CHECKPOINT_PROFILEACCESS],
-    [GD_URE_Dataload_UserCheckpointProcessor::class, GD_URE_Dataload_UserCheckpointProcessor::CHECKPOINT_LOGGEDINUSER_ISPROFILEINDIVIDUAL],
+    [UserStateCheckpoint::class, UserStateCheckpoint::USERLOGGEDIN],
+    [PoPCore_Dataload_Checkpoint::class, PoPCore_Dataload_Checkpoint::CHECKPOINT_PROFILEACCESS],
+    [GD_URE_Dataload_UserCheckpoint::class, GD_URE_Dataload_UserCheckpoint::CHECKPOINT_LOGGEDINUSER_ISPROFILEINDIVIDUAL],
 );

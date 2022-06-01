@@ -1,10 +1,10 @@
 <?php
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -14,6 +14,17 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     public final const COMPONENT_DATALOAD_UPVOTESPOSTS = 'dataload-upvotesposts';
     public final const COMPONENT_DATALOAD_DOWNVOTESPOSTS = 'dataload-downvotesposts';
 
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+    }
+    
     public function getComponentsToProcess(): array
     {
         return array(
@@ -26,6 +37,9 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     }
 
     // function getDataaccessCheckpointConfiguration(array $component, array &$props) {
+    /**
+     * @return CheckpointInterface[]
+     */
     public function getDataAccessCheckpoints(array $component, array &$props): array
     {
         switch ($component[1]) {
@@ -34,7 +48,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS:
             case self::COMPONENT_DATALOAD_UPVOTESPOSTS:
             case self::COMPONENT_DATALOAD_DOWNVOTESPOSTS:
-                return $this->maybeOverrideCheckpoints(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER);//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER);
+                return $this->maybeOverrideCheckpoints([$this->getUserLoggedInCheckpoint()]);
         }
 
         // return parent::getDataaccessCheckpointConfiguration($component, $props);

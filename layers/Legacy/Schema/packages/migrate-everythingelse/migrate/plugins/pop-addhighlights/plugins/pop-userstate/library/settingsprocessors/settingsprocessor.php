@@ -11,7 +11,7 @@ class PoP_AddHighlights_UserState_Module_SettingsProcessor extends \PoPCMSSchema
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT => false,

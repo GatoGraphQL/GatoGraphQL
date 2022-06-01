@@ -11,7 +11,7 @@ class PoP_EventLinksCreation_UserState_Module_SettingsProcessor extends \PoPCMSS
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK => PoP_ContentCreation_UserState_Utils::requireUserStateForContentcreationPages(),

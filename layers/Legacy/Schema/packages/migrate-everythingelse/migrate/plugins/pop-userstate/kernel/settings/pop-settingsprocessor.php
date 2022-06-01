@@ -24,7 +24,7 @@ abstract class SettingsProcessorBase
 
     abstract public function routesToProcess();
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return false;
     }

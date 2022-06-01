@@ -11,7 +11,7 @@ class PoP_CommonAutomatedEmails_EM_UserState_Module_SettingsProcessor extends \P
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY => false,

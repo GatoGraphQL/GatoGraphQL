@@ -11,7 +11,7 @@ class PoP_LocationPostsCreation_UserState_Module_SettingsProcessor extends \PoPC
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST => PoP_ContentCreation_UserState_Utils::requireUserStateForContentcreationPages(),
