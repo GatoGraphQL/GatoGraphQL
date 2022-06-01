@@ -19,7 +19,7 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceComponentsFromAppState(array $components): array
     {
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
