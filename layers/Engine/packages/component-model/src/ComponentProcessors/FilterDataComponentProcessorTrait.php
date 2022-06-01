@@ -11,12 +11,12 @@ trait FilterDataComponentProcessorTrait
     /**
      * @var array<string, array<string[]>>
      */
-    protected array $activeDataloadQueryArgsFilteringModules = [];
+    protected array $activeDataloadQueryArgsFilteringComponents = [];
 
     public function filterHeadcomponentDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$query, array $source = null): void
     {
-        if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
-            foreach ($activeDataloadQueryArgsFilteringModules as $subComponent) {
+        if ($activeDataloadQueryArgsFilteringComponents = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
+            foreach ($activeDataloadQueryArgsFilteringComponents as $subComponent) {
                 /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
                 $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subComponent);
                 $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subComponent, $source);
@@ -31,9 +31,9 @@ trait FilterDataComponentProcessorTrait
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
-        $this->activeDataloadQueryArgsFilteringModules[$cacheKey] = $this->activeDataloadQueryArgsFilteringModules[$cacheKey] ?? [];
-        if (!is_null($this->activeDataloadQueryArgsFilteringModules[$cacheKey][$component[1]] ?? null)) {
-            return $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$component[1]];
+        $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] = $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] ?? [];
+        if (!is_null($this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component[1]] ?? null)) {
+            return $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component[1]];
         }
 
         $components = [];
@@ -50,7 +50,7 @@ trait FilterDataComponentProcessorTrait
             );
         }
 
-        $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$component[1]] = $components;
+        $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component[1]] = $components;
         return $components;
     }
 
