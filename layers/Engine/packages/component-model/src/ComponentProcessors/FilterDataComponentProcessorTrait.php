@@ -11,7 +11,7 @@ trait FilterDataComponentProcessorTrait
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
 
     /**
-     * @var array<string, array<string[]>>
+     * @var array<string,array<string,Component[]>>
      */
     protected array $activeDataloadQueryArgsFilteringComponents = [];
 
@@ -36,8 +36,8 @@ trait FilterDataComponentProcessorTrait
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
-        $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] = $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] ?? [];
-        if (!is_null($this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name] ?? null)) {
+        $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] ??= [];
+        if (isset($this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name])) {
             return $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name];
         }
 
