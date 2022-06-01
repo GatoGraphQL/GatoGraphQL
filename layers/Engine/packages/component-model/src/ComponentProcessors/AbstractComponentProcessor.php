@@ -228,6 +228,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->executeInitPropsComponentTree($this->initModelProps(...), $this->getModelPropsForDescendantComponents(...), $this->getModelPropsForDescendantDatasetComponents(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantComponents(Component $component, array &$props): array
     {
         $ret = array();
@@ -247,6 +250,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantDatasetComponents(Component $component, array &$props): array
     {
         return [];
@@ -308,11 +314,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->executeInitPropsComponentTree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponents(...), $this->getRequestPropsForDescendantDatasetComponents(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestPropsForDescendantComponents(Component $component, array &$props): array
     {
         return [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestPropsForDescendantDatasetComponents(Component $component, array &$props): array
     {
         return [];
@@ -893,6 +905,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return Component[]
+     */
     public function getDatasetcomponentTreeSectionFlattenedComponents(Component $component): array
     {
         $ret = [];
@@ -907,6 +922,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
+    /**
+     * @param Component[] $ret
+     * @return void
+     */
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void
     {
         $ret[] = $component;
@@ -946,6 +965,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //     }
     // }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         // By default return nothing at the last level
@@ -963,6 +985,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @param array<string,mixed> $ret
+     * @param array<string,mixed> $props
+     */
     protected function addHeaddatasetcomponentDataProperties(array &$ret, Component $component, array &$props): void
     {
         /**
@@ -977,11 +1003,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelDataPropertiesDatasetcomponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array
     {
         $ret = array();
@@ -997,6 +1029,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = array();
@@ -1022,11 +1057,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestDataPropertiesDatasetcomponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array
     {
         $ret = array();
@@ -1049,6 +1090,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = array();
@@ -1078,11 +1122,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return $this->executeOnSelfAndPropagateToDatasetComponents('getDataFeedbackComponentTree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = array();

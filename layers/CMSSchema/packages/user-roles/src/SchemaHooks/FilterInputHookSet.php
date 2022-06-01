@@ -22,6 +22,10 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @param array[] $filterInputComponents
+     * @return Component[]
+     */
     public function getFilterInputComponents(array $filterInputComponents, Component $component): array
     {
         $adminComponentNames = [
