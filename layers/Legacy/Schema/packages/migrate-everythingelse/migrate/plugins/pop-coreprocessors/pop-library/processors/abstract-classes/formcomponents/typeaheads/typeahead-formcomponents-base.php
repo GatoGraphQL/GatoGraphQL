@@ -11,7 +11,10 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return $this->getInputSubcomponent($component);
     }
 
-    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
