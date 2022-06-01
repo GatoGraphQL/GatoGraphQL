@@ -27,11 +27,23 @@ interface ComponentProcessorInterface
     public function getAllSubcomponents(Component $component): array;
     public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsComponentTree(Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantComponents(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantDatasetComponents(Component $component, array &$props): array;
     public function initModelProps(Component $component, array &$props): void;
     public function initRequestPropsComponentTree(Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestPropsForDescendantComponents(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestPropsForDescendantDatasetComponents(Component $component, array &$props): array;
     public function initRequestProps(Component $component, array &$props): void;
     /**
