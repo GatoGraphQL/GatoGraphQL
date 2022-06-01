@@ -22,7 +22,7 @@ class PoPTheme_Wassup_UserAvatar_Module_OnlyMainContentComponentRoutingProcessor
         ];
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
             'component' => new Component(
-                $component[0],
+                $component->processorClass,
                 $component[1],
                 [
                     'executeupdate' => true,
