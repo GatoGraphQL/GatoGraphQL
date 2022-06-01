@@ -10,6 +10,8 @@ interface ComponentProcessorManagerInterface
 {
     /**
      * Return the ComponentProcessor that handles the Component
+     *
+     * @throws ShouldNotHappenException
      */
     public function getProcessor(Component $component): ComponentProcessorInterface;
 }
