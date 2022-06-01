@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
@@ -23,6 +24,10 @@ trait UserStateObjectTypeFieldResolverTrait
 
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @return CheckpointInterface[]
+     */
     protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,

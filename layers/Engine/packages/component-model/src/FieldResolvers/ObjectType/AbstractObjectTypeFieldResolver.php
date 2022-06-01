@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
@@ -1088,7 +1089,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<array> A set of checkpoint sets
+     * @return CheckpointInterface[]
      */
     protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,

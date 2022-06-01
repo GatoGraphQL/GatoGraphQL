@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserState\Checkpoints;
 
 use PoP\ComponentModel\Checkpoints\AbstractAggregateCheckpoint;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\Engine\Checkpoints\DoingPostCheckpoint;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
