@@ -20,7 +20,7 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $components): array
+    public function getModelInstanceComponentsFromAppState(array $elements): array
     {
         $nature = App::getState('nature');
 
@@ -39,10 +39,10 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = App::getState(['routing', 'queried-object-post-type']);
-                    $components[] = $this->__('post type:', 'pop-engine') . $customPostType;
+                    $elements[] = $this->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;
         }
-        return $components;
+        return $elements;
     }
 }

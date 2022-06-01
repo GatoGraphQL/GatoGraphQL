@@ -19,20 +19,20 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $components): array
+    public function getModelInstanceComponentsFromAppState(array $elements): array
     {
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
         if (App::getState('scheme') === APISchemes::API) {
             $query = App::getState('query');
             if ($query !== null) {
-                $components[] = $this->__('query:', 'pop-engine') . $query;
+                $elements[] = $this->__('query:', 'pop-engine') . $query;
             }
         }
 
         // Namespaces change the configuration
-        $components[] = $this->__('namespaced:', 'pop-engine') . (App::getState('namespace-types-and-interfaces') ?? false);
+        $elements[] = $this->__('namespaced:', 'pop-engine') . (App::getState('namespace-types-and-interfaces') ?? false);
 
-        return $components;
+        return $elements;
     }
 }

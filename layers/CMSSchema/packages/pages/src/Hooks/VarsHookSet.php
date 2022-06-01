@@ -20,7 +20,7 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $components): array
+    public function getModelInstanceComponentsFromAppState(array $elements): array
     {
         switch (App::getState('nature')) {
             case RequestNature::PAGE:
@@ -30,10 +30,10 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {
                     $page_id = App::getState(['routing', 'queried-object-id']);
-                    $components[] = $this->__('page id:', 'pop-engine') . $page_id;
+                    $elements[] = $this->__('page id:', 'pop-engine') . $page_id;
                 }
                 break;
         }
-        return $components;
+        return $elements;
     }
 }
