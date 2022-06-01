@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
+use PoP\Root\Routing\RequestNature;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
-use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
-use PoPCMSSchema\PostCategories\Module;
-use PoPCMSSchema\PostCategories\ModuleConfiguration;
 use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ComponentProcessors\CategoryPostFieldDataloadComponentProcessor;
 use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ComponentProcessors\PostCategoryFieldDataloadComponentProcessor;
+use PoPCMSSchema\PostCategories\Module;
+use PoPCMSSchema\PostCategories\ModuleConfiguration;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
@@ -42,15 +43,15 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     {
         $ret = array();
         $ret[CategoryRequestNature::CATEGORY][] = [
-            'component' => [
+            'component' => new Component(
                 PostCategoryFieldDataloadComponentProcessor::class,
                 PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                 ]
-            ],
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),
@@ -76,9 +77,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 PostCategoryFieldDataloadComponentProcessor::class,
                 PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                 ]
             ],
         );
@@ -98,9 +99,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 CategoryPostFieldDataloadComponentProcessor::class,
                 CategoryPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                     ]
                 ],
         );

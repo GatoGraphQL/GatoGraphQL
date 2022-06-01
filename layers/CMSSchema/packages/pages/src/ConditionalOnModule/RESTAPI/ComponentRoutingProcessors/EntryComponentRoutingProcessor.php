@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
@@ -25,15 +26,15 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret = array();
 
         $ret[RequestNature::PAGE][] = [
-            'component' => [
+            'component' => new Component(
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query')
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
                         : $this->getRESTFields()
-                    ]
-                ],
+                ]
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),

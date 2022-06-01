@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
-use PoP\Root\App;
-use PoPAPI\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
+use PoP\Root\App;
 use PoP\Root\Routing\RequestNature;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
-use PoPCMSSchema\Users\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
@@ -29,15 +30,15 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     {
         $ret = array();
         $ret[UserRequestNature::USER][] = [
-            'component' => [
+            'component' => new Component(
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                 ]
-            ],
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),
@@ -63,9 +64,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                     FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
                     : FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                 ]
             ],
         );
