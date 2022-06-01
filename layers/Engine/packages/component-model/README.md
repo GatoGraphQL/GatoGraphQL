@@ -1909,39 +1909,22 @@ For instance, to validate if the user IP is whitelisted can be implemented like 
 
 ```php
 
-class Checkpoint extends \PoP\Engine\AbstractCheckpoint {
+class WhitelistedIPCheckpoint extends \PoP\Engine\AbstractCheckpoint {
 
-  const CHECKPOINT_WHITELISTEDIP = 'checkpoint-whitelistedip';
-
-  function getCheckpointsToProcess() 
+  function validateCheckpoint() 
   {
-    return array(
-      [self::class, self::CHECKPOINT_WHITELISTEDIP],
-    );
-  }
+    // Validate the user's IP
+    $ip = get_client_ip();
+    if (!$ip) {          
+      return new \PoP\ComponentModel\Error\Error('ipempty');
+    }
 
-  function process($checkpoint) 
-  {
-    switch ($checkpoint) 
-    {
-      case self::CHECKPOINT_WHITELISTEDIP:
-
-        // Validate the user's IP
-        $ip = get_client_ip();
-        if (!$ip) {
-          
-          return new \PoP\ComponentModel\Error\Error('ipempty');
-        }
-
-        $whitelisted_ips = array(...);
-        if (!in_array($ip, $whitelisted_ips)) {
-          
-          return new \PoP\ComponentModel\Error\Error('ipincorrect');
-        }
-        break;
+    $whitelisted_ips = array(...);
+    if (!in_array($ip, $whitelisted_ips)) {      
+      return new \PoP\ComponentModel\Error\Error('ipincorrect');
     }
   
-    return parent::process($checkpoint, $component);
+    return parent::validateCheckpoint();
   }
 }
 ```
