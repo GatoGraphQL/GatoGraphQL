@@ -353,17 +353,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      */
     private function isDescendantModule(array|Component $component_or_componentPath, array &$props): bool
     {
-        // If it is not an array of arrays, then this array is directly the component, or the descendant component on which to set the property
-        if (!$this->isComponentPath($component_or_componentPath)) {
-            // From the root of the $props we obtain the current component
-            $componentFullName = $this->getPathHeadComponent($props);
-
-            // If the component were we are adding the att, is this same component, then we are already at the path
-            // If it is not, then go down one level to that component
-            return ($componentFullName !== $this->getComponentHelpers()->getComponentFullName($component_or_componentPath));
+        if ($this->isComponentPath($component_or_componentPath)) {
+            return false;
         }
 
-        return false;
+        /** @var Component */
+        $component = $component_or_componentPath;
+
+        // From the root of the $props we obtain the current component
+        $componentFullName = $this->getPathHeadComponent($props);
+
+        // If the component were we are adding the att, is this same component, then we are already at the path
+        // If it is not, then go down one level to that component
+        return ($componentFullName !== $this->getComponentHelpers()->getComponentFullName($component));
     }
 
     /**
@@ -383,18 +385,21 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Calculate the path to iterate down. It always starts with the current component
         $ret = array($componentFullName);
 
-        // If it is an array, then we're passing the path to find the component to which to add the att
-        if ($this->isComponentPath($component_or_componentPath)) {
-            $ret = array_merge(
-                $ret,
-                array_map(
-                    $this->getComponentHelpers()->getComponentFullName(...),
-                    $component_or_componentPath
-                )
-            );
+        if (!$this->isComponentPath($component_or_componentPath)) {
+            return $ret;
         }
 
-        return $ret;
+        /** @var array */
+        $componentPath = $component_or_componentPath;
+
+        // We're passing the path to find the component to which to add the att
+        return array_merge(
+            $ret,
+            array_map(
+                $this->getComponentHelpers()->getComponentFullName(...),
+                $componentPath
+            )
+        );
     }
 
     /**
