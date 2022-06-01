@@ -16,11 +16,11 @@ class VarsHookSet extends AbstractHookSet
     {
         App::addFilter(
             ModelInstance::HOOK_ELEMENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $elements): array
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
         // Removing fields changes the configuration
         /** @var ModuleConfiguration */

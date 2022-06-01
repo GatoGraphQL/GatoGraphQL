@@ -40,13 +40,13 @@ class ModelInstance implements ModelInstanceInterface
     public function getModelInstanceId(): string
     {
         // The string is too long. Use a hashing function to shorten it
-        return md5(implode('-', $this->getModelInstanceComponents()));
+        return md5(implode('-', $this->getModelInstanceElements()));
     }
 
     /**
      * @return string[]
      */
-    protected function getModelInstanceComponents(): array
+    protected function getModelInstanceElements(): array
     {
         $elements = array();
 
@@ -55,7 +55,7 @@ class ModelInstance implements ModelInstanceInterface
             self::HOOK_ELEMENTS_RESULT,
             array_merge(
                 $elements,
-                $this->getModelInstanceComponentsFromAppState()
+                $this->getModelInstanceElementsFromAppState()
             )
         );
 
@@ -78,7 +78,7 @@ class ModelInstance implements ModelInstanceInterface
     /**
      * @return string[]
      */
-    protected function getModelInstanceComponentsFromAppState(): array
+    protected function getModelInstanceElementsFromAppState(): array
     {
         $elements = array();
 

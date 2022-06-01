@@ -14,11 +14,11 @@ class VarsHookSet extends AbstractHookSet
     {
         App::addFilter(
             ModelInstance::HOOK_ELEMENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $elements): array
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $elements[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');
         if ($graphQLOperationType = App::getState('graphql-operation-type')) {
