@@ -1,8 +1,29 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoPCMSSchema\UserState\CheckpointSets\DoingPostUserLoggedInAggregateCheckpoint;
 
 trait PoP_UserStance_Module_SettingsProcessor_Trait
 {
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+    private ?DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint = null;
+
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+    }
+    final public function setDoingPostUserLoggedInAggregateCheckpoint(DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint): void
+    {
+        $this->doingPostUserLoggedInAggregateCheckpoint = $doingPostUserLoggedInAggregateCheckpoint;
+    }
+    final protected function getDoingPostUserLoggedInAggregateCheckpoint(): DoingPostUserLoggedInAggregateCheckpoint
+    {
+        return $this->doingPostUserLoggedInAggregateCheckpoint ??= $this->instanceManager->getInstance(DoingPostUserLoggedInAggregateCheckpoint::class);
+    }
+    
     public function routesToProcess()
     {
         return array_filter(
@@ -31,14 +52,14 @@ trait PoP_UserStance_Module_SettingsProcessor_Trait
     public function getCheckpoints()
     {
         return array(
-            POP_USERSTANCE_ROUTE_ADDSTANCE => UserStateCheckpointSets::LOGGEDIN_STATIC,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
-            POP_USERSTANCE_ROUTE_MYSTANCES => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_USERSTANCE_ROUTE_EDITSTANCE => POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_CANEDIT,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_CANEDIT),
+            POP_USERSTANCE_ROUTE_ADDSTANCE => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
+            POP_USERSTANCE_ROUTE_MYSTANCES => [$this->getUserLoggedInCheckpoint()],
+            POP_USERSTANCE_ROUTE_EDITSTANCE => POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_CANEDIT,
             // If first loading the page: do not let it fail checkpoint validation, hence LOGGEDIN_STATIC. However, it must always get the data from the server, hence REQUIREUSERSTATE
             // When doing a submit, handle it as the usual LOGGEDIN_DATAFROMSERVER
             POP_USERSTANCE_ROUTE_ADDOREDITSTANCE => doingPost() ?
-            UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER : //PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER) :
-            UserStateCheckpointSets::LOGGEDIN_STATIC,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC/*UserStateCheckpointSets::LOGGEDIN_STATIC_REQUIRESUSERSTATE*/),
+                [$this->getUserLoggedInCheckpoint()] : 
+                [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
         );
     }
 

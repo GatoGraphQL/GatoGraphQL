@@ -1,8 +1,29 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoPCMSSchema\UserState\CheckpointSets\DoingPostUserLoggedInAggregateCheckpoint;
 
 class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
 {
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+    private ?DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint = null;
+
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+    }
+    final public function setDoingPostUserLoggedInAggregateCheckpoint(DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint): void
+    {
+        $this->doingPostUserLoggedInAggregateCheckpoint = $doingPostUserLoggedInAggregateCheckpoint;
+    }
+    final protected function getDoingPostUserLoggedInAggregateCheckpoint(): DoingPostUserLoggedInAggregateCheckpoint
+    {
+        return $this->doingPostUserLoggedInAggregateCheckpoint ??= $this->instanceManager->getInstance(DoingPostUserLoggedInAggregateCheckpoint::class);
+    }
+    
     public function __construct()
     {
         \PoP\Root\App::addFilter(
@@ -13,11 +34,11 @@ class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
 
     public function overrideCheckpoints($checkpoints)
     {
-
         // Add the checkpoint condition of verifying that the user has Profile role
-        if ($checkpoints == UserStateCheckpointSets::LOGGEDIN_STATIC) {
+        if ($checkpoints === [$this->getDoingPostUserLoggedInAggregateCheckpoint()]) {
             return POPUSERPLATFORM_CHECKPOINTCONFIGURATION_LOGGEDINPROFILE_STATIC;//PoP_UserPlatform_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPUSERPLATFORM_CHECKPOINTCONFIGURATION_LOGGEDINPROFILE_STATIC);
-        } elseif ($checkpoints == UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER) {
+        }
+        if ($checkpoints === [$this->getUserLoggedInCheckpoint()]) {
             return POPUSERPLATFORM_CHECKPOINTCONFIGURATION_LOGGEDINPROFILE_DATAFROMSERVER;//PoP_UserPlatform_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPUSERPLATFORM_CHECKPOINTCONFIGURATION_LOGGEDINPROFILE_DATAFROMSERVER);
         }
 

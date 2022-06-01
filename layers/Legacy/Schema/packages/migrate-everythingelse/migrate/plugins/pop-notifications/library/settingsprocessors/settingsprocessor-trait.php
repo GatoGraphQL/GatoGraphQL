@@ -1,6 +1,4 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-
 trait AAL_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -28,9 +26,9 @@ trait AAL_Module_SettingsProcessor_Trait
     {
         return array(
             // POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS => PoP_UserState_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPUSERSTATE_CHECKPOINTCONFIGURATION_REQUIREUSERSTATE),
-            POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASREAD => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
+            POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD => [$this->getUserLoggedInCheckpoint()],
+            POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASREAD => [$this->getUserLoggedInCheckpoint()],
+            POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD => [$this->getUserLoggedInCheckpoint()],
         );
     }
 }

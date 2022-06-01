@@ -1,6 +1,4 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-
 trait PoP_AddComments_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -16,7 +14,7 @@ trait PoP_AddComments_Module_SettingsProcessor_Trait
     public function getCheckpoints()
     {
         return array(
-            POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => UserStateCheckpointSets::LOGGEDIN_STATIC,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
+            POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
         );
     }
 }

@@ -1,6 +1,4 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-
 trait PoP_CategoryPostsCreation_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -35,26 +33,26 @@ trait PoP_CategoryPostsCreation_Module_SettingsProcessor_Trait
     public function getCheckpoints()
     {
         return array(
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS01 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS02 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS03 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS04 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS05 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS06 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS07 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS08 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS09 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS10 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS11 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS12 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS13 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS14 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS15 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS16 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS17 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS18 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS01 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS02 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS03 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS04 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS05 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS06 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS07 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS08 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS09 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS10 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS11 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS12 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS13 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS14 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS15 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS16 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS17 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS18 => [$this->getUserLoggedInCheckpoint()],
+            POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [$this->getUserLoggedInCheckpoint()],
         );
     }
 }

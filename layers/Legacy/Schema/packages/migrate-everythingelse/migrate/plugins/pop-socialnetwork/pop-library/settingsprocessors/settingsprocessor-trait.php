@@ -1,6 +1,4 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-
 trait PoP_SocialNetwork_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -64,16 +62,16 @@ trait PoP_SocialNetwork_Module_SettingsProcessor_Trait
     public function getCheckpoints()
     {
         return array(
-            POP_SOCIALNETWORK_ROUTE_FOLLOWUSER => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_SUBSCRIBETOTAG => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_UPVOTEPOST => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
+            POP_SOCIALNETWORK_ROUTE_FOLLOWUSER => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_SUBSCRIBETOTAG => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_UPVOTEPOST => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST => [$this->getUserLoggedInCheckpoint()],
+            POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST => [$this->getUserLoggedInCheckpoint()],
         );
     }
 }
