@@ -20,12 +20,12 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $components): array
+    public function getModelInstanceComponentsFromAppState(array $elements): array
     {
         // Removing fields changes the configuration
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $components[] = $this->__('disable redundant root fields:', 'pop-engine') . $moduleConfiguration->disableRedundantRootTypeMutationFields();
-        return $components;
+        $elements[] = $this->__('disable redundant root fields:', 'pop-engine') . $moduleConfiguration->disableRedundantRootTypeMutationFields();
+        return $elements;
     }
 }

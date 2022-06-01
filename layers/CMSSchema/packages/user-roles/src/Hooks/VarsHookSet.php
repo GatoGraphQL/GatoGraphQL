@@ -32,7 +32,7 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState(array $components): array
+    public function getModelInstanceComponentsFromAppState(array $elements): array
     {
         switch (App::getState('nature')) {
             case RequestNature::USER:
@@ -47,10 +47,10 @@ class VarsHookSet extends AbstractHookSet
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     /** @var string */
                     $userRole = $this->getUserRoleTypeAPI()->getTheUserRole($user_id);
-                    $components[] = $this->__('user role:', 'pop-engine') . $userRole;
+                    $elements[] = $this->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;
         }
-        return $components;
+        return $elements;
     }
 }
