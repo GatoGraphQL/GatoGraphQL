@@ -15,10 +15,6 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
      * @var array<string, array>
      */
     private array $processors = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $overridingClasses = [];
 
     public function getProcessor(Component $component): ComponentProcessorInterface
     {
@@ -27,13 +23,6 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
 
         // Return the reference to the ItemProcessor instance, and created first if it doesn't exist
         if (!$this->hasItemBeenLoaded($component)) {
-            // If this class was overriden, use that one instead. Priority goes like this:
-            // 1. Overriden
-            // 3. Same class as requested
-            if ($class = $this->overridingClasses[$componentProcessorClass][$componentName] ?? null) {
-                $componentProcessorClass = $class;
-            }
-
             // Get the instance from the InstanceManager
             $processorInstance = $this->getInstanceManager()->getInstance($componentProcessorClass);
             $this->processors[$componentProcessorClass][$componentName] = $processorInstance;
