@@ -12,4 +12,14 @@ final class Component
         public readonly array $atts = [],
     ) {        
     }
+
+    public function __toString(): string
+    {
+        return sprintf(
+            '[%s, %s%s]',
+            $this->processorClass,
+            $this->name,
+            $this->atts !== [] ? ', ' . json_encode($this->atts) : ''
+        );
+    }
 }
