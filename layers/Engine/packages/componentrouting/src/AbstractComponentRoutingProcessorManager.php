@@ -36,10 +36,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         return ComponentRoutingGroups::ENTRYCOMPONENT;
     }
 
-    /**
-     * @return string[]|null
-     */
-    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?array
+    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?\PoP\ComponentModel\Component\Component
     {
         $group ??= $this->getDefaultGroup();
         $nature = App::getState('nature');

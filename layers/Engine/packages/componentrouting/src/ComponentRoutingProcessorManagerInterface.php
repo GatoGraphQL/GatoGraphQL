@@ -12,8 +12,5 @@ interface ComponentRoutingProcessorManagerInterface
      */
     public function getProcessors(string $group = null): array;
     public function getDefaultGroup(): string;
-    /**
-     * @return string[]|null
-     */
-    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?array;
+    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?\PoP\ComponentModel\Component\Component;
 }
