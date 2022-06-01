@@ -15,7 +15,10 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

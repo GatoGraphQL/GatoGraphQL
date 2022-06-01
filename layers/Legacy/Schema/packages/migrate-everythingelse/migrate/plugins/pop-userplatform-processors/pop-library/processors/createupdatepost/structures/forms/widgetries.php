@@ -18,7 +18,10 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         );
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

@@ -40,7 +40,10 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!

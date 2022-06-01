@@ -12,7 +12,10 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         );
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

@@ -33,7 +33,10 @@ class PoP_EventsCreation_Module_Processor_CustomScrollInners extends PoP_Module_
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

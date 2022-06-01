@@ -11,7 +11,10 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
         );
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         // Comment Leo 03/04/2015: IMPORTANT!
         // For the _wpnonce and the pid, get the value from the queryhandler when editing

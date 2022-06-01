@@ -30,7 +30,10 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!

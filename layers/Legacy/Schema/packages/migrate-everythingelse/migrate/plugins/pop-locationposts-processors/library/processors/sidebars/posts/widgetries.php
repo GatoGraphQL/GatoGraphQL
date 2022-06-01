@@ -15,7 +15,10 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
         );
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

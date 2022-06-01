@@ -11,7 +11,10 @@ abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends P
         return $this->getHiddenInputComponent($component);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array(
             $this->getSelectedComponent($component),

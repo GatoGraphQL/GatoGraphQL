@@ -2,7 +2,10 @@
 
 abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Module_Processor_CreateUserFormInnersBase
 {
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $components = parent::getLayoutSubcomponents($component);
 

@@ -30,7 +30,10 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $component);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

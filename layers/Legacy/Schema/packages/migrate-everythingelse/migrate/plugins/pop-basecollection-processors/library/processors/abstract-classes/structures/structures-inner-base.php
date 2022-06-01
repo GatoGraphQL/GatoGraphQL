@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -8,7 +7,10 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
@@ -33,8 +35,6 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     
     public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($layouts = $this->getLayoutSubcomponents($component)) {

@@ -27,7 +27,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

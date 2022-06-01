@@ -33,7 +33,10 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 

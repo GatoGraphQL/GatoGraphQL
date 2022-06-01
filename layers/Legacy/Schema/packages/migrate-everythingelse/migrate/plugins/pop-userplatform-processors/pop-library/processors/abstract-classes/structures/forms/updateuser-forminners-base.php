@@ -2,7 +2,10 @@
 
 abstract class PoP_Module_Processor_UpdateUserFormInnersBase extends PoP_Module_Processor_FormInnersBase
 {
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getLayoutSubcomponents($component),

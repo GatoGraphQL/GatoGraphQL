@@ -156,7 +156,10 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
