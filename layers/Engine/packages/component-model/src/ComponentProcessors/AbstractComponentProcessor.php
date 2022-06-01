@@ -519,8 +519,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         $component_props = &$props;
-        foreach ($starting_from_componentPath as $pathlevelModule) {
-            $pathlevelComponentFullName = $this->getComponentHelpers()->getComponentFullName($pathlevelModule);
+        foreach ($starting_from_componentPath as $pathlevelComponent) {
+            $pathlevelComponentFullName = $this->getComponentHelpers()->getComponentFullName($pathlevelComponent);
             $component_props = &$component_props[$pathlevelComponentFullName][Props::SUBCOMPONENTS];
         }
 
