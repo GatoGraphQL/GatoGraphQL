@@ -113,10 +113,10 @@ class ComponentPaths extends AbstractComponentFilter
                     return $subcomponents;
                 }
             } else {
-                // Then, check that the following element in the unsettled_path, which is the subComponent, is on the subcomponents
-                $unsettled_path_subComponent = $unsettled_path[1];
-                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subcomponents) && !in_array($unsettled_path_subComponent, $matching_subcomponents)) {
-                    $matching_subcomponents[] = $unsettled_path_subComponent;
+                // Then, check that the following element in the unsettled_path, which is the subcomponent, is on the subcomponents
+                $unsettled_path_subcomponent = $unsettled_path[1];
+                if ($unsettled_path_component == $component && in_array($unsettled_path_subcomponent, $subcomponents) && !in_array($unsettled_path_subcomponent, $matching_subcomponents)) {
+                    $matching_subcomponents[] = $unsettled_path_subcomponent;
                 }
             }
         }
