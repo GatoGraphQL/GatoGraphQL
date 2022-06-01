@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
-use PoP\SPA\Modules\PageInterface;
+use PoP\SPA\ComponentProcessors\PageComponentProcessorInterface;
 
-class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_MultiplePageBase implements PageInterface
+class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_MultiplePageBase implements PageComponentProcessorInterface
 {
     public final const COMPONENT_PAGE_QUICKVIEW = 'page-quickview';
     public final const COMPONENT_PAGE_QUICKVIEWSIDEINFO = 'page-quickviewsideinfo';

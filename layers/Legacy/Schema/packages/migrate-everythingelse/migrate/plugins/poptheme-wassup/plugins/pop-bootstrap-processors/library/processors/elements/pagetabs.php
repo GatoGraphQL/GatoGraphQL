@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
-use PoP\SPA\Modules\PageInterface;
+use PoP\SPA\ComponentProcessors\PageComponentProcessorInterface;
 
-class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSectionsBase implements PageInterface
+class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSectionsBase implements PageComponentProcessorInterface
 {
     public final const COMPONENT_PAGE_ADDONTABS = 'page-addontabs';
     public final const COMPONENT_PAGE_BODYTABS = 'page-bodytabs';
