@@ -1,4 +1,7 @@
 <?php
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 trait PoP_LocationPostLinksCreation_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -11,8 +14,10 @@ trait PoP_LocationPostLinksCreation_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],

@@ -1,4 +1,7 @@
 <?php
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 trait PoP_UserCommunities_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -16,8 +19,10 @@ trait PoP_UserCommunities_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES => [$this->getUserLoggedInCheckpoint()],

@@ -1,4 +1,7 @@
 <?php
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 trait AAL_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -21,8 +24,10 @@ trait AAL_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             // POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS => PoP_UserState_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPUSERSTATE_CHECKPOINTCONFIGURATION_REQUIREUSERSTATE),

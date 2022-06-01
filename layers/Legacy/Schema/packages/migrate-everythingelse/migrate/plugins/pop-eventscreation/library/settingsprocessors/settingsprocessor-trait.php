@@ -1,4 +1,7 @@
 <?php
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 trait PoP_EventsCreation_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -13,8 +16,10 @@ trait PoP_EventsCreation_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             POP_EVENTSCREATION_ROUTE_ADDEVENT => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],

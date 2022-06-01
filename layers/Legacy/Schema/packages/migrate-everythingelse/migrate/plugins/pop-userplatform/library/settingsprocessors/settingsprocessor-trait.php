@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 use PoPCMSSchema\UserState\Checkpoints\DoingPostUserLoggedInAggregateCheckpoint;
 
@@ -29,8 +30,10 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             // Allow the Change Password checkpoints to be overriden. Eg: by adding only non-WSL users

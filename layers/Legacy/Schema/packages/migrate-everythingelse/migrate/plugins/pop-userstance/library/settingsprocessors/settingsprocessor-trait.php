@@ -1,6 +1,7 @@
 <?php
-use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoPCMSSchema\UserState\Checkpoints\DoingPostUserLoggedInAggregateCheckpoint;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 trait PoP_UserStance_Module_SettingsProcessor_Trait
 {
@@ -48,8 +49,10 @@ trait PoP_UserStance_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             POP_USERSTANCE_ROUTE_ADDSTANCE => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
