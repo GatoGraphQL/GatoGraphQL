@@ -84,9 +84,9 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGS];
+                return new \PoP\ComponentModel\Component\Component(TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
-                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT];
+                return new \PoP\ComponentModel\Component\Component(TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT);
         }
 
         return parent::getFilterSubcomponent($component);

@@ -72,9 +72,9 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
-                return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS];
+                return new \PoP\ComponentModel\Component\Component(PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
-                return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT];
+                return new \PoP\ComponentModel\Component\Component(PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT);
         }
 
         return parent::getFilterSubcomponent($component);

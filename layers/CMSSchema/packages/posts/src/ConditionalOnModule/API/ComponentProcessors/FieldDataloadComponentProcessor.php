@@ -92,13 +92,13 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS];
+                return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT];
+                return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS];
+                return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
-                return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT];
+                return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT);
         }
 
         return parent::getFilterSubcomponent($component);

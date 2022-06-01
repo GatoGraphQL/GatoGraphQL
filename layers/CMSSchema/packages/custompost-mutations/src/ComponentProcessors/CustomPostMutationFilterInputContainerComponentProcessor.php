@@ -39,7 +39,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
         return array_merge(
             $targetFilterInputComponents,
             [
-                [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
+                new \PoP\ComponentModel\Component\Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS),
             ]
         );
     }

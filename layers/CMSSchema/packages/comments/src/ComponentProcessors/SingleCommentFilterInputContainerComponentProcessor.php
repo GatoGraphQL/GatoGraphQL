@@ -29,11 +29,11 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
     {
         return match ((string)$component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS => [
-                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS],
+                new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID],
-                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS],
+                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID),
+                new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS),
             ],
             default => [],
         };

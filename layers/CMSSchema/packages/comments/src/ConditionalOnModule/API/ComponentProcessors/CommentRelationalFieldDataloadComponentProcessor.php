@@ -66,7 +66,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return [CommentFilterInputContainerComponentProcessor::class, CommentFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_COMMENTS];
+                return new \PoP\ComponentModel\Component\Component(CommentFilterInputContainerComponentProcessor::class, CommentFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_COMMENTS);
         }
 
         return parent::getFilterSubcomponent($component);

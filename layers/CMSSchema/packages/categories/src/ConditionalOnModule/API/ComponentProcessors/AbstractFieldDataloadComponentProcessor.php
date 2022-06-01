@@ -62,9 +62,9 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES];
+                return new \PoP\ComponentModel\Component\Component(CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
-                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT];
+                return new \PoP\ComponentModel\Component\Component(CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT);
         }
 
         return parent::getFilterSubcomponent($component);

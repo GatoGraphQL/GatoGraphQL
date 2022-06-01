@@ -33,7 +33,7 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
             default => null,
         };
         $filterInputComponents = parent::getFilterInputComponents($targetModule);
-        $filterInputComponents[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS];
+        $filterInputComponents[] = new \PoP\ComponentModel\Component\Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS);
         return $filterInputComponents;
     }
 

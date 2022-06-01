@@ -19,7 +19,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
 
         $ret[RequestNature::PAGE][] = [
-            'component' => [FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE],
+            'component' => new \PoP\ComponentModel\Component\Component(FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE),
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],

@@ -850,7 +850,7 @@ To access the properties of a component, we must reference its corresponding Com
 $componentprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
 // Obtain the ComponentProcessor for component COMPONENT_SOMENAME
-$processor = $componentprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME]);
+$processor = $componentprocessor_manager->getProcessor(new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME));
 
 // Do something...
 // $processor->...
@@ -1441,12 +1441,12 @@ function getRelationalComponentFields($component)
     
       $ret['author'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_AUTHORNAME],
+          new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_AUTHORNAME),
         ]
       ];
       $ret['comments'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_COMMENTLAYOUT],
+          new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_COMMENTLAYOUT),
         ]
       ];
       break;
