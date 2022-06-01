@@ -24,6 +24,9 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $mediaFilterInputComponents = [

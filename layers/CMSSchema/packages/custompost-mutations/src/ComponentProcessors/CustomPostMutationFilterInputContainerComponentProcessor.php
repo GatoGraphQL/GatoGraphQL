@@ -26,6 +26,8 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
 
     /**
      * Retrieve the same elements as for Posts, and add the "status" filter
+     *
+     * @return Component[]
      */
     public function getFilterInputComponents(Component $component): array
     {

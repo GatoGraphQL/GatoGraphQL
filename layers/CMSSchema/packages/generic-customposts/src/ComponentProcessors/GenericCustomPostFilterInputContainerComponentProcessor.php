@@ -29,6 +29,9 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $genericCustomPostFilterInputComponents = [

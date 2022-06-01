@@ -28,6 +28,9 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $postFilterInputComponents = [

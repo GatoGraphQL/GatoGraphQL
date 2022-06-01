@@ -23,6 +23,9 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $menuFilterInputComponents = [

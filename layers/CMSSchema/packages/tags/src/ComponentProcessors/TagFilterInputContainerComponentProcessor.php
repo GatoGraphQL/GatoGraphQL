@@ -23,6 +23,9 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $tagFilterInputComponents = [

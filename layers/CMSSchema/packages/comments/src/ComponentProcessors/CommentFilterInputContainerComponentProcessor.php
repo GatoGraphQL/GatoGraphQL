@@ -45,6 +45,9 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $responseFilterInputComponents = [

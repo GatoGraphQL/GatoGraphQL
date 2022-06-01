@@ -26,6 +26,9 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         return match ((string)$component->name) {

@@ -27,6 +27,9 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         // Get the original config from above

@@ -35,6 +35,9 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         $customPostFilterInputComponents = [

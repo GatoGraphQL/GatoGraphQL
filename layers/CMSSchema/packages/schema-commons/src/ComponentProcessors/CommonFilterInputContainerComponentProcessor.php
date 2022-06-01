@@ -42,6 +42,9 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getFilterInputComponents(Component $component): array
     {
         return match ($component->name) {
