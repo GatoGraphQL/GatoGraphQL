@@ -108,6 +108,9 @@ interface ComponentProcessorInterface
     public function getImmutableDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
     public function getDatasetcomponentTreeSectionFlattenedDataFields(Component $component, array &$props): array;
+    /**
+     * @return Component[]
+     */
     public function getDatasetcomponentTreeSectionFlattenedComponents(Component $component): array;
     public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
     public function getMutableonmodelDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
