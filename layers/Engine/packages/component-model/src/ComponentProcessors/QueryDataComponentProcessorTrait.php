@@ -46,6 +46,9 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
+    /**
+     * @return Component[]
+     */
     public function getQueryArgsFilteringComponents(Component $component, array &$props): array
     {
         // Attributes overriding the query args, taken from the request
