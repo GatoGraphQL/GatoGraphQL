@@ -8,15 +8,21 @@ use PoP\ComponentModel\Component\Component;
 class ComponentPathManager implements ComponentPathManagerInterface
 {
     /**
-     * @var array[]|null
+     * @var Component[]|null
      */
     protected ?array $propagation_current_path = null;
 
+    /**
+     * @return Component[]|null
+     */
     public function getPropagationCurrentPath(): ?array
     {
         return $this->propagation_current_path;
     }
 
+    /**
+     * @param Component[]|null $propagation_current_path
+     */
     public function setPropagationCurrentPath(?array $propagation_current_path = null): void
     {
         $this->propagation_current_path = $propagation_current_path;

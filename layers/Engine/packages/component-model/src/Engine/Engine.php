@@ -935,6 +935,9 @@ class Engine implements EngineInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
+    /**
+     * @return array<Component[]>
+     */
     protected function getDataloadingComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
@@ -942,6 +945,10 @@ class Engine implements EngineInterface
         return $paths;
     }
 
+    /**
+     * @param array<Component[]> $paths
+     * @param Component[] $component_path
+     */
     private function addDataloadingComponentFullPaths(
         array &$paths,
         array $component_path,
