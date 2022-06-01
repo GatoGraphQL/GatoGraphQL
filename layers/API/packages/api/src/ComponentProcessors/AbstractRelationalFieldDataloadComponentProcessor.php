@@ -13,7 +13,7 @@ abstract class AbstractRelationalFieldDataloadComponentProcessor extends Abstrac
     {
         $ret = parent::getInnerSubcomponents($component);
         // The fields to retrieve are passed through component atts, so simply transfer all component atts down the line
-        $ret[] = new \PoP\ComponentModel\Component\Component(RelationalFieldQueryDataComponentProcessor::class, RelationalFieldQueryDataComponentProcessor::COMPONENT_LAYOUT_RELATIONALFIELDS, $component[2] ?? null);
+        $ret[] = new \PoP\ComponentModel\Component\Component(RelationalFieldQueryDataComponentProcessor::class, RelationalFieldQueryDataComponentProcessor::COMPONENT_LAYOUT_RELATIONALFIELDS, $component->atts);
         return $ret;
     }
 
