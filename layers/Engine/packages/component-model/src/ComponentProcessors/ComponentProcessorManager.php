@@ -12,9 +12,9 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
     use BasicServiceTrait;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,ComponentProcessorInterface>>
      */
-    private array $processors = [];
+    private array $componentProcessors = [];
 
     /**
      * Return the ComponentProcessor that handles the Component
@@ -23,11 +23,10 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
     {
         $componentProcessorClass = $component[0];
         $componentName = $component[1];
-        if (!isset($this->processors[$componentProcessorClass][$componentName])) {
+        if (!isset($this->componentProcessors[$componentProcessorClass][$componentName])) {
             $processorInstance = $this->getInstanceManager()->getInstance($componentProcessorClass);
-            $this->processors[$componentProcessorClass][$componentName] = $processorInstance;
+            $this->componentProcessors[$componentProcessorClass][$componentName] = $processorInstance;
         }
-
-        return $this->processors[$componentProcessorClass][$componentName];
+        return $this->componentProcessors[$componentProcessorClass][$componentName];
     }
 }
