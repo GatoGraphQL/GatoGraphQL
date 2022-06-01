@@ -43,6 +43,6 @@ class MutationCheckpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }

@@ -50,7 +50,7 @@ class PoP_UserCommunities_Dataload_UserCheckpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }
 

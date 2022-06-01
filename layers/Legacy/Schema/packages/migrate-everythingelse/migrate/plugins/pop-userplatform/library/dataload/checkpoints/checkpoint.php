@@ -37,7 +37,7 @@ class PoPCore_Dataload_Checkpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }
 

@@ -44,6 +44,6 @@ class RequestCheckpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }

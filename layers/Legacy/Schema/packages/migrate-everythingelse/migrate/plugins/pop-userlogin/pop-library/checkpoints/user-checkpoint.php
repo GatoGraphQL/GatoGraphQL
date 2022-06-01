@@ -26,7 +26,7 @@ class GD_UserLogin_Dataload_UserCheckpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }
 

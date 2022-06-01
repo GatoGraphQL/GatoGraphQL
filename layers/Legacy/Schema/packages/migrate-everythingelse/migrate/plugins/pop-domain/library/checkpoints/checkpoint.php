@@ -25,7 +25,7 @@ class PoP_Domain_Dataload_Checkpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }
 

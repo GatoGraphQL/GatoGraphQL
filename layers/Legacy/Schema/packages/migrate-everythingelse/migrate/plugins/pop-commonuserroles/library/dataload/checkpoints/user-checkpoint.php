@@ -33,7 +33,7 @@ class GD_URE_Dataload_UserCheckpoint extends AbstractCheckpoint
                 break;
         }
 
-        return parent::validateCheckpoint($checkpoint);
+        return parent::validateCheckpoint();
     }
 }
 
