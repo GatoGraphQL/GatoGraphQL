@@ -60,7 +60,7 @@ class ComponentHelpers implements ComponentHelpersInterface
                 )
             );
         }
-        
+
         return new Component(
             $processorClass,
             $name,

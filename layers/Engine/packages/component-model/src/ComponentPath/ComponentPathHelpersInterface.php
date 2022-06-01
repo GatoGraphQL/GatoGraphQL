@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentPath;
 
 use PoP\ComponentModel\Component\Component;
+
 interface ComponentPathHelpersInterface
 {
     public function getStringifiedModulePropagationCurrentPath(Component $component): string;

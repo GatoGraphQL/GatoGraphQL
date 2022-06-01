@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
-use PoP\ComponentModel\Component\Component;
-
 interface ComponentRoutingProcessorInterface
 {
     /**

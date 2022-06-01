@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentHelpers;
 
 use PoP\ComponentModel\Component\Component;
+
 interface ComponentHelpersInterface
 {
     public function getComponentFullName(Component $component): string;

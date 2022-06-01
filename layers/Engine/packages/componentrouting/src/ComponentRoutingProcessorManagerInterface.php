@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentRouting;
 
 use PoP\ComponentModel\Component\Component;
+
 interface ComponentRoutingProcessorManagerInterface
 {
     public function addComponentRoutingProcessor(ComponentRoutingProcessorInterface $processor): void;

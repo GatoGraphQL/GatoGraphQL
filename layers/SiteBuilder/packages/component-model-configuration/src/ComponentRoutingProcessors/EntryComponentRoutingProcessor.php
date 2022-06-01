@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ComponentRoutingProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoP_ConfigurationComponentModel_Module_Processor_Elements;
 

@@ -10,7 +10,7 @@ final class Component
         public readonly string $processorClass,
         public readonly string $name,
         public readonly array $atts = [],
-    ) {        
+    ) {
     }
 
     // public function __toString(): string

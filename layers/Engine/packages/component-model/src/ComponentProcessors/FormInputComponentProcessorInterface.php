@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
+
 interface FormInputComponentProcessorInterface
 {
     public function getValue(Component $component, ?array $source = null): mixed;

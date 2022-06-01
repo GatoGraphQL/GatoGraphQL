@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
+
 interface FilterInputContainerComponentProcessorInterface extends FilterDataComponentProcessorInterface
 {
     public function getFieldFilterInputNameTypeResolvers(Component $component): array;
