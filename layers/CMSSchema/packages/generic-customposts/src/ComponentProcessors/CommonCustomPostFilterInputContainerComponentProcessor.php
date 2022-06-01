@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\GenericCustomPosts\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
@@ -72,20 +73,20 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_GENERICTYPE:
-                $idFilterInputName = FilterInputHelper::getFilterInputName([
+                $idFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID
-                ]);
+                ));
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_GENERICTYPE:
-                $slugFilterInputName = FilterInputHelper::getFilterInputName([
+                $slugFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG
-                ]);
+                ));
                 if ($fieldArgName === $slugFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }

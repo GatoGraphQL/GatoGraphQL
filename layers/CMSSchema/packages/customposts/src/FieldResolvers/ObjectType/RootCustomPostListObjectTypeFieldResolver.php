@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\Module;
-use PoPCMSSchema\CustomPosts\ModuleConfiguration;
+use PoP\Root\App;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\CommonCustomPostFilterInputContainerComponentProcessor;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
+use PoPCMSSchema\CustomPosts\Module;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\RootCustomPostsFilterInputObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Add the Custom Post fields to the Root
@@ -107,10 +108,10 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         switch ($fieldName) {
             case 'customPost':
                 if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
-                    $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
+                    $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS
-                    ]);
+                    ));
                     $adminFieldArgNames[] = $customPostStatusFilterInputName;
                 }
                 break;

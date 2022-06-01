@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\Comments\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
@@ -44,10 +45,10 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
-                $idFilterInputName = FilterInputHelper::getFilterInputName([
+                $idFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID
-                ]);
+                ));
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }

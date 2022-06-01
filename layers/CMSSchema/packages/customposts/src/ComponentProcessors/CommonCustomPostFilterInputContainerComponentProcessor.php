@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
@@ -89,10 +90,10 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE:
-                $idFilterInputName = FilterInputHelper::getFilterInputName([
+                $idFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID
-                ]);
+                ));
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
@@ -100,10 +101,10 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_UNIONTYPE:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_UNIONTYPE:
-                $slugFilterInputName = FilterInputHelper::getFilterInputName([
+                $slugFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG
-                ]);
+                ));
                 if ($fieldArgName === $slugFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
