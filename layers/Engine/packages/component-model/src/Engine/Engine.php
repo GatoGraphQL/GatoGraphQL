@@ -923,11 +923,11 @@ class Engine implements EngineInterface
             )
         );
 
-        // Propagate to its inner modules
+        // Propagate to its inner components
         $subcomponents = $processor->getAllSubcomponents($component);
         $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
+        // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subcomponents as $subcomponent) {
             $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
@@ -971,11 +971,11 @@ class Engine implements EngineInterface
             )
         );
 
-        // Propagate to its inner modules
+        // Propagate to its inner components
         $subcomponents = $processor->getAllSubcomponents($component);
         $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
+        // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subcomponents as $subcomponent) {
             $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
@@ -1110,17 +1110,17 @@ class Engine implements EngineInterface
             );
         }
 
-        // Get the list of all modules which calculate their data feedback using another component's results
+        // Get the list of all components which calculate their data feedback using another component's results
         $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
-        // Get the list of all modules which load data, as a list of the component path starting from the top element (the entry component)
+        // Get the list of all components which load data, as a list of the component path starting from the top element (the entry component)
         $component_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
-        // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
+        // The components below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
         foreach ($component_fullpaths as $component_path) {
             // The component is the last element in the path.
@@ -1214,7 +1214,7 @@ class Engine implements EngineInterface
                     }
                 }
 
-                // Allow modules to change their data_properties based on the actionexecution of previous modules.
+                // Allow components to change their data_properties based on the actionexecution of previous components.
                 $processor->prepareDataPropertiesAfterMutationExecution($component, $component_props, $data_properties);
 
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
@@ -1323,7 +1323,7 @@ class Engine implements EngineInterface
             // Integrate the feedback into $componentdata
             $this->processAndAddComponentData($component_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
-            // Allow other modules to produce their own feedback using this component's data results
+            // Allow other components to produce their own feedback using this component's data results
             if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($component_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
