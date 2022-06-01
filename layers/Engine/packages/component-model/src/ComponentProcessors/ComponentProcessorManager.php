@@ -22,8 +22,9 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
     public function getProcessor(Component $component): ComponentProcessorInterface
     {
         if (!isset($this->componentProcessors[$component->processorClass][$component->name])) {
-            $processorInstance = $this->getInstanceManager()->getInstance($component->processorClass);
-            $this->componentProcessors[$component->processorClass][$component->name] = $processorInstance;
+            /** @var ComponentProcessorInterface */
+            $componentProcessor = $this->getInstanceManager()->getInstance($component->processorClass);
+            $this->componentProcessors[$component->processorClass][$component->name] = $componentProcessor;
         }
         return $this->componentProcessors[$component->processorClass][$component->name];
     }
