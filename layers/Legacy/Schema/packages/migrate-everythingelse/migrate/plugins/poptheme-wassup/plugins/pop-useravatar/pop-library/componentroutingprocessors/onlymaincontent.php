@@ -1,5 +1,6 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_UserAvatar_Module_OnlyMainContentComponentRoutingProcessor extends PoP_Module_OnlyMainContentComponentRoutingProcessorBase
@@ -15,18 +16,18 @@ class PoPTheme_Wassup_UserAvatar_Module_OnlyMainContentComponentRoutingProcessor
         // Two different actions, handled through $componentAtts:
         // 1. Upload the image to the S3 repository, when first accessing the page
         // 2. Update the avatar, on the POST operation
-        $component = [PoP_UserAvatarProcessors_Module_Processor_UserDataloads::class, PoP_UserAvatarProcessors_Module_Processor_UserDataloads::COMPONENT_DATALOAD_USERAVATAR_UPDATE];
+        $component = new Component(PoP_UserAvatarProcessors_Module_Processor_UserDataloads::class, PoP_UserAvatarProcessors_Module_Processor_UserDataloads::COMPONENT_DATALOAD_USERAVATAR_UPDATE);
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
             'component' => $component,
         ];
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
-            'component' => [
+            'component' => new Component(
                 $component[0],
                 $component[1],
                 [
                     'executeupdate' => true,
                 ],
-            ],
+            ),
             'conditions' => [
                 'action' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
             ],
