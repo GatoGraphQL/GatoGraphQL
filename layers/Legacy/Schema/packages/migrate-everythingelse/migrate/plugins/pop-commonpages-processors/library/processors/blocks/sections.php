@@ -8,13 +8,13 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
     public final const COMPONENT_BLOCK_WHOWEARE_SCROLL_LIST = 'block-whoweare-scroll-list';
     public final const COMPONENT_BLOCK_WHOWEARE_SCROLL_FULLVIEW = 'block-whoweare-scroll-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_WHOWEARE_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_WHOWEARE_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_WHOWEARE_SCROLL_FULLVIEW],
+            self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_WHOWEARE_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_WHOWEARE_SCROLL_LIST,
+            self::COMPONENT_BLOCK_WHOWEARE_SCROLL_FULLVIEW,
         );
     }
 

@@ -5,11 +5,11 @@ class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAv
     public final const COMPONENT_LAYOUT_USERAVATAR_60 = 'layout-useravatar-60';
     public final const COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE = 'layout-useravatar-60-responsive';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_60],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE],
+            self::COMPONENT_LAYOUT_USERAVATAR_60,
+            self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE,
         );
     }
 

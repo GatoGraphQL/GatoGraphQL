@@ -5,11 +5,11 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
     public final const COMPONENT_CONTENTLAYOUT_STANCES = 'contentlayout-stances';
     public final const COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE = 'contentlayout-stances-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTLAYOUT_STANCES],
-            [self::class, self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE],
+            self::COMPONENT_CONTENTLAYOUT_STANCES,
+            self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE,
         );
     }
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)

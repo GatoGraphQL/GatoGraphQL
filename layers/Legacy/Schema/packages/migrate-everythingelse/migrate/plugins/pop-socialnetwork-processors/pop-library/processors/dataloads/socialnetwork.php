@@ -25,14 +25,14 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_FOLLOWSUSERS],
-            [self::class, self::COMPONENT_DATALOAD_RECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS],
-            [self::class, self::COMPONENT_DATALOAD_UPVOTESPOSTS],
-            [self::class, self::COMPONENT_DATALOAD_DOWNVOTESPOSTS],
+            self::COMPONENT_DATALOAD_FOLLOWSUSERS,
+            self::COMPONENT_DATALOAD_RECOMMENDSPOSTS,
+            self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS,
+            self::COMPONENT_DATALOAD_UPVOTESPOSTS,
+            self::COMPONENT_DATALOAD_DOWNVOTESPOSTS,
         );
     }
 

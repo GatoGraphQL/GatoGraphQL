@@ -6,12 +6,12 @@ class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Modu
     public final const COMPONENT_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR = 'multiple-sectioninner-communities-sidebar';
     public final const COMPONENT_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR = 'multiple-authorsectioninner-communitymembers-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR,
         );
     }
 

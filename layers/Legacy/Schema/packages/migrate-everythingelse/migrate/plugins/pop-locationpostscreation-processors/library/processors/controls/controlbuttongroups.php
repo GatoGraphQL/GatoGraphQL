@@ -4,10 +4,10 @@ class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Pro
 {
     public final const COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST = 'customcontrolbuttongroup-addlocationpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST],
+            self::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST,
         );
     }
 

@@ -47,11 +47,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->excludeUserRolesFilterInput ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_USER_ROLES],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES],
+            self::COMPONENT_FILTERINPUT_USER_ROLES,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES,
         );
     }
 

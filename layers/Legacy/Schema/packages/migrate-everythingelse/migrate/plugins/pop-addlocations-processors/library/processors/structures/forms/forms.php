@@ -4,10 +4,10 @@ class GD_EM_Module_Processor_CreateLocationForms extends PoP_Module_Processor_Fo
 {
     public final const COMPONENT_FORM_CREATELOCATION = 'em-form-createlocation';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_CREATELOCATION],
+            self::COMPONENT_FORM_CREATELOCATION,
         );
     }
 

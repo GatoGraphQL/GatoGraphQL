@@ -9,12 +9,12 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
     public final const COMPONENT_EXAMPLE_AUTHOR = 'example-author';
     public final const COMPONENT_EXAMPLE_TAG = 'example-tag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EXAMPLE_HOME],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHOR],
-            [self::class, self::COMPONENT_EXAMPLE_TAG],
+            self::COMPONENT_EXAMPLE_HOME,
+            self::COMPONENT_EXAMPLE_AUTHOR,
+            self::COMPONENT_EXAMPLE_TAG,
         );
     }
 

@@ -8,12 +8,12 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myposts-scroll-simpleviewpreview';
     public final const COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myposts-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW,
         );
     }
 
@@ -55,13 +55,13 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
 
         // Add the format attr
         $tables = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT],
+            self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW,
         );
         if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;

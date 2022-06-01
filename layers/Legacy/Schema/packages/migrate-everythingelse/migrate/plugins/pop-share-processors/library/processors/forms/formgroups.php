@@ -4,10 +4,10 @@ class PoP_Share_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
 {
     public final const COMPONENT_FORMINPUTGROUP_DESTINATIONEMAIL = 'gf-forminputgroup-field-destinationemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_DESTINATIONEMAIL],
+            self::COMPONENT_FORMINPUTGROUP_DESTINATIONEMAIL,
         );
     }
 

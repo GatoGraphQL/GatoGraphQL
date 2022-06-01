@@ -12,15 +12,15 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public final const COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP = 'dataload-taglocationposts-scrollmap';
     public final const COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'dataload-taglocationposts-horizontalscrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP,
         );
     }
 
@@ -73,14 +73,14 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP,
         );
         $horizontalmaps = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP,
         );
 
         if (in_array($component, $maps)) {

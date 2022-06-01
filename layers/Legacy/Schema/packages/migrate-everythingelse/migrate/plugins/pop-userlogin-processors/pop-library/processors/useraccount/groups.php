@@ -4,10 +4,10 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
 {
     public final const COMPONENT_GROUP_LOGGEDINUSERDATA = 'group-loggedinuserdata';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GROUP_LOGGEDINUSERDATA],
+            self::COMPONENT_GROUP_LOGGEDINUSERDATA,
         );
     }
 

@@ -12,17 +12,17 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public final const COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE = 'forminput-locationpostcode';
     public final const COMPONENT_FORMINPUT_EM_LOCATIONREGION = 'forminput-locationregion';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONLAT],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONLNG],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONNAME],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE],
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONREGION],
+            self::COMPONENT_FORMINPUT_EM_LOCATIONLAT,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONLNG,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONNAME,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONADDRESS,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONTOWN,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONSTATE,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE,
+            self::COMPONENT_FORMINPUT_EM_LOCATIONREGION,
         );
     }
 

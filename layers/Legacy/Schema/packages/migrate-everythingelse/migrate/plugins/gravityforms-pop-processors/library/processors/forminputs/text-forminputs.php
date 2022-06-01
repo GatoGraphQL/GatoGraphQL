@@ -4,10 +4,10 @@ class GD_GF_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
 {
     public final const COMPONENT_GF_FORMINPUT_FORMID = 'forminput-formid';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GF_FORMINPUT_FORMID],
+            self::COMPONENT_GF_FORMINPUT_FORMID,
         );
     }
 

@@ -7,12 +7,12 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
     public final const COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL = 'code-emailnotifications-generallabel';
     public final const COMPONENT_CODE_EMAILDIGESTS_LABEL = 'code-dailyemaildigestslabel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL],
-            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL],
-            [self::class, self::COMPONENT_CODE_EMAILDIGESTS_LABEL],
+            self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL,
+            self::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL,
+            self::COMPONENT_CODE_EMAILDIGESTS_LABEL,
         );
     }
 

@@ -7,13 +7,13 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
     public final const COMPONENT_SCROLL_WHOWEARE_LIST = 'scroll-whoweare-list';
     public final const COMPONENT_SCROLL_WHOWEARE_FULLVIEW = 'scroll-whoweare-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_LIST],
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW],
+            self::COMPONENT_SCROLL_WHOWEARE_DETAILS,
+            self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL,
+            self::COMPONENT_SCROLL_WHOWEARE_LIST,
+            self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW,
         );
     }
 
@@ -51,16 +51,16 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL],
+            self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_DETAILS],
+            self::COMPONENT_SCROLL_WHOWEARE_DETAILS,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_LIST],
+            self::COMPONENT_SCROLL_WHOWEARE_LIST,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW],
+            self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW,
         );
 
         $extra_class = '';

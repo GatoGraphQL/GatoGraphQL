@@ -42,14 +42,14 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERCOUNT],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERCOUNT,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT,
         );
     }
 

@@ -9,14 +9,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
     public final const COMPONENT_BUTTON_POSTSTANCES_NEUTRAL = 'button-poststances-neutral';
     public final const COMPONENT_BUTTON_POSTSTANCES_AGAINST = 'button-poststances-against';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_STANCEEDIT],
-            [self::class, self::COMPONENT_BUTTON_STANCEVIEW],
-            [self::class, self::COMPONENT_BUTTON_POSTSTANCES_PRO],
-            [self::class, self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL],
-            [self::class, self::COMPONENT_BUTTON_POSTSTANCES_AGAINST],
+            self::COMPONENT_BUTTON_STANCEEDIT,
+            self::COMPONENT_BUTTON_STANCEVIEW,
+            self::COMPONENT_BUTTON_POSTSTANCES_PRO,
+            self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL,
+            self::COMPONENT_BUTTON_POSTSTANCES_AGAINST,
         );
     }
 

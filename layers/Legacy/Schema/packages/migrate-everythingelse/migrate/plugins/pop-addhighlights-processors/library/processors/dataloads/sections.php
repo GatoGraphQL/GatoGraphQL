@@ -19,21 +19,21 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
     public final const COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL = 'dataload-singlerelatedhighlightcontent-scroll-thumbnail';
     public final const COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST = 'dataload-singlerelatedhighlightcontent-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST,
         );
     }
 
@@ -102,28 +102,28 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
         // Add the format attr
         $navigators = array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR,
         );
         $addons = array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST,
         );
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_HIGHLIGHTS_TYPEAHEAD,
         );
         if (in_array($component, $navigators)) {
             $format = POP_FORMAT_NAVIGATOR;

@@ -15,18 +15,18 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
     public final const COMPONENT_GROUP_AUTHOR_WIDGETAREA = 'group-author-widgetarea';
     public final const COMPONENT_GROUP_TAG_WIDGETAREA = 'group-tag-widgetarea';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GROUP_HOMETOP],
-            [self::class, self::COMPONENT_GROUP_HOME_WELCOME],
-            [self::class, self::COMPONENT_GROUP_HOME_COMPACTWELCOME],
-            [self::class, self::COMPONENT_GROUP_HOME_WIDGETAREA],
-            [self::class, self::COMPONENT_GROUP_HOME_WELCOMEACCOUNT],
-            [self::class, self::COMPONENT_GROUP_AUTHORTOP],
-            [self::class, self::COMPONENT_GROUP_AUTHOR_DESCRIPTION],
-            [self::class, self::COMPONENT_GROUP_AUTHOR_WIDGETAREA],
-            [self::class, self::COMPONENT_GROUP_TAG_WIDGETAREA],
+            self::COMPONENT_GROUP_HOMETOP,
+            self::COMPONENT_GROUP_HOME_WELCOME,
+            self::COMPONENT_GROUP_HOME_COMPACTWELCOME,
+            self::COMPONENT_GROUP_HOME_WIDGETAREA,
+            self::COMPONENT_GROUP_HOME_WELCOMEACCOUNT,
+            self::COMPONENT_GROUP_AUTHORTOP,
+            self::COMPONENT_GROUP_AUTHOR_DESCRIPTION,
+            self::COMPONENT_GROUP_AUTHOR_WIDGETAREA,
+            self::COMPONENT_GROUP_TAG_WIDGETAREA,
         );
     }
 
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME];
                 $ret[] = [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM];
                 $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME];
-                $ret[] = [self::class, self::COMPONENT_GROUP_HOME_WELCOMEACCOUNT];
+                $ret[] = self::COMPONENT_GROUP_HOME_WELCOMEACCOUNT;
                 break;
 
             case self::COMPONENT_GROUP_HOME_COMPACTWELCOME:
@@ -106,24 +106,24 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
 
             case self::COMPONENT_GROUP_HOMETOP:
-                $ret[] = [self::class, self::COMPONENT_GROUP_HOME_COMPACTWELCOME];
+                $ret[] = self::COMPONENT_GROUP_HOME_COMPACTWELCOME;
 
                 // Allow MESYM to override this
                 if ($widgetarea = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:hometop:components:widget',
-                    [self::class, self::COMPONENT_GROUP_HOME_WIDGETAREA]
+                    self::COMPONENT_GROUP_HOME_WIDGETAREA
                 )) {
                     $ret[] = $widgetarea;
                 }
                 break;
 
             case self::COMPONENT_GROUP_AUTHORTOP:
-                $ret[] = [self::class, self::COMPONENT_GROUP_AUTHOR_DESCRIPTION];
+                $ret[] = self::COMPONENT_GROUP_AUTHOR_DESCRIPTION;
 
                 // Allow MESYM to override this
                 if ($widgetarea = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:authortop:components:widget',
-                    [self::class, self::COMPONENT_GROUP_AUTHOR_WIDGETAREA]
+                    self::COMPONENT_GROUP_AUTHOR_WIDGETAREA
                 )) {
                     $ret[] = $widgetarea;
                 }

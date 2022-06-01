@@ -4,10 +4,10 @@ class PoP_Module_Processor_SettingsFeedbackMessageInners extends PoP_Module_Proc
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS = 'feedbackmessageinner-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS,
         );
     }
 

@@ -23,27 +23,27 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     public final const COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_LIST = 'dataload-authorlinks-scroll-list';
     public final const COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST = 'dataload-taglinks-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_LINKS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST,
         );
     }
 
@@ -141,7 +141,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST:
-                return [self::class, self::COMPONENT_FILTER_TAGLINKS];
+                return self::COMPONENT_FILTER_TAGLINKS;
         }
 
         return parent::getFilterSubcomponent($component);
@@ -152,38 +152,38 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
 
         // Add the format attr
         $navigators = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_NAVIGATOR],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_NAVIGATOR,
         );
         $addons = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_ADDONS],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_ADDONS,
         );
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_LINKS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST,
         );
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_LINKS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_LINKS_TYPEAHEAD,
         );
         if (in_array($component, $navigators)) {
             $format = POP_FORMAT_NAVIGATOR;

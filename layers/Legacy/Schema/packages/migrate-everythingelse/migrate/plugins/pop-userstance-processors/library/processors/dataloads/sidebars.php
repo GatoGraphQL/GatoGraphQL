@@ -9,10 +9,10 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public final const COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR = 'dataload-single-stance-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR],
+            self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR,
         );
     }
 

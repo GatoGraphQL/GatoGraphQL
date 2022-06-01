@@ -11,11 +11,11 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
     public final const COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS = 'dataload-notifications-scroll-details';
     public final const COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST = 'dataload-notifications-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST,
         );
     }
 
@@ -67,10 +67,10 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;

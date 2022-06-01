@@ -7,13 +7,13 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
     public final const COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST = 'controlgroup-blockauthoreventlist';
     public final const COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST = 'controlgroup-blocktageventlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_EVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKEVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST],
+            self::COMPONENT_CONTROLGROUP_EVENTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKEVENTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST,
         );
     }
 

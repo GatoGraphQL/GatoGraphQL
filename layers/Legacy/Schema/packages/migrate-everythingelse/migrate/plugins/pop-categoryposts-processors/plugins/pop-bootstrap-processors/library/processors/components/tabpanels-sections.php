@@ -23,29 +23,29 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
     public final const COMPONENT_TABPANEL_CATEGORYPOSTS18 = 'categoryposts18-tabpanel';
     public final const COMPONENT_TABPANEL_CATEGORYPOSTS19 = 'categoryposts19-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS19],
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS00,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS01,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS02,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS03,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS04,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS05,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS06,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS07,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS08,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS09,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS10,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS11,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS12,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS13,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS14,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS15,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS16,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS17,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS18,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS19,
         );
     }
 

@@ -9,15 +9,15 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
     public final const COMPONENT_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-myevents-scroll-fullviewpreview';
     public final const COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-mypastevents-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_MYEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_BLOCK_MYPASTEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_BLOCK_MYEVENTS_TABLE_EDIT,
+            self::COMPONENT_BLOCK_MYPASTEVENTS_TABLE_EDIT,
+            self::COMPONENT_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW,
+            self::COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW,
         );
     }
 

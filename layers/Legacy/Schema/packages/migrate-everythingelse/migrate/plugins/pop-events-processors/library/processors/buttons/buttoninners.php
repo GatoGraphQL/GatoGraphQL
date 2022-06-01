@@ -6,11 +6,11 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
     public final const COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR = 'em-buttoninner-googlecalendar';
     public final const COMPONENT_EM_BUTTONINNER_ICAL = 'em-buttoninner-ical';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR],
-            [self::class, self::COMPONENT_EM_BUTTONINNER_ICAL],
+            self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR,
+            self::COMPONENT_EM_BUTTONINNER_ICAL,
         );
     }
 

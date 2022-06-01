@@ -7,11 +7,11 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT = 'dataload-mystances-table-edit';
     public final const COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'dataload-mystances-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW,
         );
     }
 
@@ -48,10 +48,10 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $tables = array(
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT],
+            self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW,
         );
         if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;

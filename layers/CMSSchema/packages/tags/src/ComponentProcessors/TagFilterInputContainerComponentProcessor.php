@@ -14,11 +14,11 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT,
         );
     }
 

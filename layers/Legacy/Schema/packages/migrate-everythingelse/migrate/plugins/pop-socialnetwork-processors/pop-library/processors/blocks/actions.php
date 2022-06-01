@@ -13,19 +13,19 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
     public final const COMPONENT_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
     public final const COMPONENT_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_FOLLOWUSER],
-            [self::class, self::COMPONENT_BLOCK_UNFOLLOWUSER],
-            [self::class, self::COMPONENT_BLOCK_RECOMMENDPOST],
-            [self::class, self::COMPONENT_BLOCK_UNRECOMMENDPOST],
-            [self::class, self::COMPONENT_BLOCK_SUBSCRIBETOTAG],
-            [self::class, self::COMPONENT_BLOCK_UNSUBSCRIBEFROMTAG],
-            [self::class, self::COMPONENT_BLOCK_UPVOTEPOST],
-            [self::class, self::COMPONENT_BLOCK_UNDOUPVOTEPOST],
-            [self::class, self::COMPONENT_BLOCK_DOWNVOTEPOST],
-            [self::class, self::COMPONENT_BLOCK_UNDODOWNVOTEPOST],
+            self::COMPONENT_BLOCK_FOLLOWUSER,
+            self::COMPONENT_BLOCK_UNFOLLOWUSER,
+            self::COMPONENT_BLOCK_RECOMMENDPOST,
+            self::COMPONENT_BLOCK_UNRECOMMENDPOST,
+            self::COMPONENT_BLOCK_SUBSCRIBETOTAG,
+            self::COMPONENT_BLOCK_UNSUBSCRIBEFROMTAG,
+            self::COMPONENT_BLOCK_UPVOTEPOST,
+            self::COMPONENT_BLOCK_UNDOUPVOTEPOST,
+            self::COMPONENT_BLOCK_DOWNVOTEPOST,
+            self::COMPONENT_BLOCK_UNDODOWNVOTEPOST,
         );
     }
 

@@ -7,12 +7,12 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
     public final const COMPONENT_BUTTONINNER_POSTVIEW = 'buttoninner-postview';
     public final const COMPONENT_BUTTONINNER_POSTPREVIEW = 'buttoninner-postpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONINNER_POSTEDIT],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTVIEW],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTPREVIEW],
+            self::COMPONENT_BUTTONINNER_POSTEDIT,
+            self::COMPONENT_BUTTONINNER_POSTVIEW,
+            self::COMPONENT_BUTTONINNER_POSTPREVIEW,
         );
     }
 

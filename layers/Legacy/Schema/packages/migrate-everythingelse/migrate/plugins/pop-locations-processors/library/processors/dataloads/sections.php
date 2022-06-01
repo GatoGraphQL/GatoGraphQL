@@ -7,11 +7,11 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD = 'dataload-locations-typeahead';
     public final const COMPONENT_DATALOAD_LOCATIONS_SCROLL = 'dataload-locations-scroll';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONS_SCROLL],
+            self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_LOCATIONS_SCROLL,
         );
     }
 
@@ -50,7 +50,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
 
         // Add the format attr
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD,
         );
         if (in_array($component, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;

@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Side
     public final const COMPONENT_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR = 'multiple-section-individuals-sidebar';
     public final const COMPONENT_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR = 'multiple-section-organizations-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR,
         );
     }
 

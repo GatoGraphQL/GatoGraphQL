@@ -6,11 +6,11 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public final const COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP = 'layout-menu-dropdownbutton-top';
     public final const COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE = 'layout-menu-dropdownbutton-side';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP],
-            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE],
+            self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP,
+            self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE,
         );
     }
 

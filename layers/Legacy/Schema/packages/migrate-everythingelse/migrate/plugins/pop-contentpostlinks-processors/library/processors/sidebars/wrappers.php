@@ -4,10 +4,10 @@ class PoP_ContentPostLinks_Module_Processor_WidgetWrappers extends PoP_Module_Pr
 {
     public final const COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES = 'layoutwrapper-link-categories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES],
+            self::COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES,
         );
     }
 

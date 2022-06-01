@@ -4,10 +4,10 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
 {
     public final const COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY = 'buttonwrapper-userpostactivity';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY],
+            self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY,
         );
     }
 

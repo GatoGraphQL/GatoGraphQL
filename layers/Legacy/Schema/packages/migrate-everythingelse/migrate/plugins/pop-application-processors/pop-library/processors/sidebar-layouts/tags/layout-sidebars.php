@@ -6,12 +6,12 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
     public final const COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL = 'layout-tagsidebar-horizontal';
     public final const COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL = 'layout-tagsidebar-compacthorizontal';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL],
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL],
+            self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL,
+            self::COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL,
+            self::COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL,
         );
     }
 

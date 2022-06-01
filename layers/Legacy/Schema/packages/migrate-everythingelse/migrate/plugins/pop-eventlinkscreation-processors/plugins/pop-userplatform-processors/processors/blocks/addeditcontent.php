@@ -5,11 +5,11 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
     public final const COMPONENT_BLOCK_EVENTLINK_UPDATE = 'block-eventlink-update';
     public final const COMPONENT_BLOCK_EVENTLINK_CREATE = 'block-eventlink-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_EVENTLINK_UPDATE],
-            [self::class, self::COMPONENT_BLOCK_EVENTLINK_CREATE],
+            self::COMPONENT_BLOCK_EVENTLINK_UPDATE,
+            self::COMPONENT_BLOCK_EVENTLINK_CREATE,
         );
     }
 

@@ -4,10 +4,10 @@ class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Proce
 {
     public final const COMPONENT_VERTICALSIDEBAR_TAG = 'vertical-sidebar-tag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VERTICALSIDEBAR_TAG],
+            self::COMPONENT_VERTICALSIDEBAR_TAG,
         );
     }
 

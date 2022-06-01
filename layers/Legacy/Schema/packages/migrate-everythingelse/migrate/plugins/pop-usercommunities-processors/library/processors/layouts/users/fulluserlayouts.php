@@ -4,10 +4,10 @@ class GD_UserCommunities_Module_Processor_CustomFullUserLayouts extends PoP_Modu
 {
     public final const COMPONENT_LAYOUT_FULLUSER_COMMUNITY = 'layout-fulluser-community';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY],
+            self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY,
         );
     }
 

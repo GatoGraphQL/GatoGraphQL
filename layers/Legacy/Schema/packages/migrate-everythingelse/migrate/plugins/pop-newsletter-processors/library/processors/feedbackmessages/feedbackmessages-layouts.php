@@ -7,11 +7,11 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER = 'layout-feedbackmessage-newsletter';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION = 'layout-feedbackmessage-newsletterunsubscription';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION,
         );
     }
 

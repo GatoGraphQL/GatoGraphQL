@@ -38,13 +38,13 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_APPLIESTO],
-            [self::class, self::COMPONENT_FILTERINPUT_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUT_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUT_POSTSECTIONS],
+            self::COMPONENT_FILTERINPUT_APPLIESTO,
+            self::COMPONENT_FILTERINPUT_CATEGORIES,
+            self::COMPONENT_FILTERINPUT_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUT_POSTSECTIONS,
         );
     }
 

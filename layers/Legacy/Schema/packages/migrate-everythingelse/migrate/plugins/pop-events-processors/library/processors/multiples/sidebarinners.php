@@ -12,20 +12,20 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public final const COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS = 'multiple-sidebarinner-section-authorpastevents';
     public final const COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR = 'multiple-sidebarinner-section-authoreventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS],
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS],
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR],
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS,
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS,
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR,
             
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS],
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS],
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS_CALENDAR],
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS,
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS,
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_TAG_EVENTS_CALENDAR,
             
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS],
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],
-            [self::class, self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR],
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS,
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS,
+            self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR,
         );
     }
 

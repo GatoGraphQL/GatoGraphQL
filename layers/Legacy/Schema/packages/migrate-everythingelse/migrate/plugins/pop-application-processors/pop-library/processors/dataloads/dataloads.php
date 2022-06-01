@@ -6,10 +6,10 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
 {
     public final const COMPONENT_DATALOAD_INITIALIZEDOMAIN = 'dataload-initializedomain';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_INITIALIZEDOMAIN],
+            self::COMPONENT_DATALOAD_INITIALIZEDOMAIN,
         );
     }
 

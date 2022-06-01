@@ -7,13 +7,13 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
     public final const COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW = 'subcomponent-referencedby-fullview';
     public final const COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY = 'lazysubcomponent-referencedby';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS],
-            [self::class, self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW],
-            [self::class, self::COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY],
+            self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS,
+            self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW,
+            self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW,
+            self::COMPONENT_LAZYSUBCOMPONENT_REFERENCEDBY,
         );
     }
 

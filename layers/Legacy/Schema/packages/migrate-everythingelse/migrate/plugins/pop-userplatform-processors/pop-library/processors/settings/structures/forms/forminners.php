@@ -4,10 +4,10 @@ class PoP_Module_Processor_SettingsFormInners extends PoP_Module_Processor_FormI
 {
     public final const COMPONENT_FORMINNER_SETTINGS = 'forminner-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_SETTINGS],
+            self::COMPONENT_FORMINNER_SETTINGS,
         );
     }
 

@@ -17,15 +17,15 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     public final const COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT = 'dataload-singleinteraction-content';
     public final const COMPONENT_DATALOAD_PAGE_CONTENT = 'dataload-page-content';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHOR_CONTENT],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT],
-            [self::class, self::COMPONENT_DATALOAD_TAG_CONTENT],
-            [self::class, self::COMPONENT_DATALOAD_SINGLE_CONTENT],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT],
-            [self::class, self::COMPONENT_DATALOAD_PAGE_CONTENT],
+            self::COMPONENT_DATALOAD_AUTHOR_CONTENT,
+            self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT,
+            self::COMPONENT_DATALOAD_TAG_CONTENT,
+            self::COMPONENT_DATALOAD_SINGLE_CONTENT,
+            self::COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT,
+            self::COMPONENT_DATALOAD_PAGE_CONTENT,
         );
     }
 

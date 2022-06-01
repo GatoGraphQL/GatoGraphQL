@@ -46,12 +46,12 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return $this->memberStatusEnumTypeResolver ??= $this->instanceManager->getInstance(MemberStatusEnumTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES],
-            [self::class, self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS],
-            [self::class, self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS],
+            self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES,
+            self::COMPONENT_URE_FILTERINPUT_MEMBERTAGS,
+            self::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS,
         );
     }
 

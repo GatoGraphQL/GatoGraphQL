@@ -5,10 +5,10 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
     public final const COMPONENT_URE_BUTTON_EDITMEMBERSHIP = 'ure-button-editmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP],
+            self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP,
         );
     }
 

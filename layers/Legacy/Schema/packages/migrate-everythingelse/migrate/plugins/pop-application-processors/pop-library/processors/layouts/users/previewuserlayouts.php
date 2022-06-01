@@ -11,17 +11,17 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR = 'layout-previewuser-postauthor';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_HEADER = 'layout-previewuser-header';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER],
+            self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER,
         );
     }
 

@@ -7,12 +7,12 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG = 'viewcomponent-postbutton-volunteer-big';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY = 'viewcomponent-postbutton-volunteer-tiny';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY],
+            self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY,
         );
     }
 

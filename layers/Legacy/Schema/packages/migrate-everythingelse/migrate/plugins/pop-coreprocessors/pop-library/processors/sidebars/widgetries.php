@@ -11,16 +11,16 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const COMPONENT_WIDGET_REFERENCES_LINE = 'widget-references-line';
     public final const COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE = 'widget-highlightedpost-line';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_POST_AUTHORS],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_POST_AUTHORS],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_AUTHORDESCRIPTION],
-            [self::class, self::COMPONENT_WIDGET_AUTHOR_CONTACT],
-            [self::class, self::COMPONENT_WIDGET_REFERENCES],
-            [self::class, self::COMPONENT_WIDGET_REFERENCES_LINE],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE],
+            self::COMPONENT_WIDGET_POST_AUTHORS,
+            self::COMPONENT_WIDGETCOMPACT_POST_AUTHORS,
+            self::COMPONENT_WIDGETCOMPACT_AUTHORDESCRIPTION,
+            self::COMPONENT_WIDGET_AUTHOR_CONTACT,
+            self::COMPONENT_WIDGET_REFERENCES,
+            self::COMPONENT_WIDGET_REFERENCES_LINE,
+            self::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE,
         );
     }
 

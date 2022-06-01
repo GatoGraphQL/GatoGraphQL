@@ -14,17 +14,17 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_OFFCANVAS_HOVER],
-            [self::class, self::COMPONENT_OFFCANVAS_NAVIGATOR],
-            [self::class, self::COMPONENT_OFFCANVAS_SIDE],
-            [self::class, self::COMPONENT_OFFCANVAS_TOP],
-            [self::class, self::COMPONENT_OFFCANVAS_BODYSIDEINFO],
-            [self::class, self::COMPONENT_OFFCANVAS_BACKGROUND],
-            [self::class, self::COMPONENT_OFFCANVAS_BODYTABS],
-            [self::class, self::COMPONENT_OFFCANVAS_BODY],
+            self::COMPONENT_OFFCANVAS_HOVER,
+            self::COMPONENT_OFFCANVAS_NAVIGATOR,
+            self::COMPONENT_OFFCANVAS_SIDE,
+            self::COMPONENT_OFFCANVAS_TOP,
+            self::COMPONENT_OFFCANVAS_BODYSIDEINFO,
+            self::COMPONENT_OFFCANVAS_BACKGROUND,
+            self::COMPONENT_OFFCANVAS_BODYTABS,
+            self::COMPONENT_OFFCANVAS_BODY,
         );
     }
 
@@ -68,8 +68,8 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
                     $dependencies = array(
-                        self::COMPONENT_OFFCANVAS_BODYTABS => [self::class, self::COMPONENT_OFFCANVAS_BODY],
-                        self::COMPONENT_OFFCANVAS_BODYSIDEINFO => [self::class, self::COMPONENT_OFFCANVAS_BODY],
+                        self::COMPONENT_OFFCANVAS_BODYTABS => self::COMPONENT_OFFCANVAS_BODY,
+                        self::COMPONENT_OFFCANVAS_BODYSIDEINFO => self::COMPONENT_OFFCANVAS_BODY,
                     );
                     $load_component = $dependencies[$component->name] == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }

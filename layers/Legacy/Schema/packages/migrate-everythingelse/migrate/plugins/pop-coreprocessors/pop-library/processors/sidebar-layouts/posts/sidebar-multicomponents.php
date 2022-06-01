@@ -6,12 +6,12 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
     public final const COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT = 'subjugatedpostconclusion-sidebarmulticomponent-left';
     public final const COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT = 'postconclusion-sidebarmulticomponent-right';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
-            [self::class, self::COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
-            [self::class, self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT],
+            self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT,
+            self::COMPONENT_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT,
+            self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT,
         );
     }
 

@@ -8,14 +8,14 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
     public final const COMPONENT_CONTENT_PAGECONTENT = 'content-pagecontent';
     public final const COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT = 'content-pagecontent-prettyprint';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENT_AUTHOR],
-            [self::class, self::COMPONENT_CONTENT_SINGLE],
-            [self::class, self::COMPONENT_CONTENT_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_CONTENT_PAGECONTENT],
-            [self::class, self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT],
+            self::COMPONENT_CONTENT_AUTHOR,
+            self::COMPONENT_CONTENT_SINGLE,
+            self::COMPONENT_CONTENT_USERPOSTINTERACTION,
+            self::COMPONENT_CONTENT_PAGECONTENT,
+            self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT,
         );
     }
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
@@ -31,8 +31,8 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         }
 
         $hookable = array(
-            [self::class, self::COMPONENT_CONTENT_SINGLE],
-            [self::class, self::COMPONENT_CONTENT_USERPOSTINTERACTION],
+            self::COMPONENT_CONTENT_SINGLE,
+            self::COMPONENT_CONTENT_USERPOSTINTERACTION,
         );
         if (in_array($component, $hookable)) {
             $inners = array(

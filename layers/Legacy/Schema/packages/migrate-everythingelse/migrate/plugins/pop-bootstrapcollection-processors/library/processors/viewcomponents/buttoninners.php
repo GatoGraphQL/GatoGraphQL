@@ -8,13 +8,13 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA = 'viewcomponent-buttoninner-api-socialmedia';
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-api-socialmedia-previewdropdown';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN,
         );
     }
     

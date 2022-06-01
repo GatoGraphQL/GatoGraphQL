@@ -7,12 +7,12 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     public final const COMPONENT_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
     public final const COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_NEWSLETTER],
-            [self::class, self::COMPONENT_BLOCKCODE_NEWSLETTER],
-            [self::class, self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION],
+            self::COMPONENT_BLOCK_NEWSLETTER,
+            self::COMPONENT_BLOCKCODE_NEWSLETTER,
+            self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION,
         );
     }
 

@@ -5,11 +5,11 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
     public final const COMPONENT_FORM_INVITENEWUSERS = 'form-inviteusers';
     public final const COMPONENT_FORM_MYPREFERENCES = 'form-mypreferences';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_INVITENEWUSERS],
-            [self::class, self::COMPONENT_FORM_MYPREFERENCES],
+            self::COMPONENT_FORM_INVITENEWUSERS,
+            self::COMPONENT_FORM_MYPREFERENCES,
         );
     }
 

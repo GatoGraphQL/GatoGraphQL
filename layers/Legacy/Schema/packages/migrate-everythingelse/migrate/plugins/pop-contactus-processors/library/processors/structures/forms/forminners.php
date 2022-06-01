@@ -4,10 +4,10 @@ class PoP_ContactUs_Module_Processor_GFFormInners extends PoP_Module_Processor_F
 {
     public final const COMPONENT_FORMINNER_CONTACTUS = 'forminner-contactus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_CONTACTUS],
+            self::COMPONENT_FORMINNER_CONTACTUS,
         );
     }
 

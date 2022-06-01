@@ -6,11 +6,11 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
     public final const COMPONENT_BUTTON_HIGHLIGHTEDIT = 'button-highlightedit';
     public final const COMPONENT_BUTTON_HIGHLIGHTVIEW = 'button-highlightview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_HIGHLIGHTEDIT],
-            [self::class, self::COMPONENT_BUTTON_HIGHLIGHTVIEW],
+            self::COMPONENT_BUTTON_HIGHLIGHTEDIT,
+            self::COMPONENT_BUTTON_HIGHLIGHTVIEW,
         );
     }
 

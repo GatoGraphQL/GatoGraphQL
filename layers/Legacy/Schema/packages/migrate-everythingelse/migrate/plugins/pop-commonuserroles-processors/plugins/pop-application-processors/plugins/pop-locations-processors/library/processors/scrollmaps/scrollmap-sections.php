@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proce
     public final const COMPONENT_SCROLLMAP_ORGANIZATIONS_SCROLLMAP = 'scrollmap-organizations-scrollmap';
     public final const COMPONENT_SCROLLMAP_INDIVIDUALS_SCROLLMAP = 'scrollmap-individuals-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLMAP_ORGANIZATIONS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_INDIVIDUALS_SCROLLMAP],
+            self::COMPONENT_SCROLLMAP_ORGANIZATIONS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_INDIVIDUALS_SCROLLMAP,
         );
     }
 

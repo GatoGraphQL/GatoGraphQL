@@ -12,12 +12,12 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     public final const COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES = 'carouselcontrols-authorstances';
     public final const COMPONENT_CAROUSELCONTROLS_TAGSTANCES = 'carouselcontrols-tagstances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_STANCES],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES],
+            self::COMPONENT_CAROUSELCONTROLS_STANCES,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES,
+            self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES,
         );
     }
 

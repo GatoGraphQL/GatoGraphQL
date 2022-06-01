@@ -13,19 +13,19 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const COMPONENT_SCROLLINNER_AUTHORSTANCES_LIST = 'scrollinner-authorstances-list';
     public final const COMPONENT_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scrollinner-singlerelatedstancecontent-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_STANCES_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_STANCES_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_STANCES_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_STANCES_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_STANCES_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORSTANCES_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORSTANCES_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORSTANCES_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLLINNER_STANCES_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_STANCES_ADDONS,
+            self::COMPONENT_SCROLLINNER_STANCES_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_STANCES_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_STANCES_LIST,
+            self::COMPONENT_SCROLLINNER_AUTHORSTANCES_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_AUTHORSTANCES_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_AUTHORSTANCES_LIST,
+            self::COMPONENT_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW,
         );
     }
 

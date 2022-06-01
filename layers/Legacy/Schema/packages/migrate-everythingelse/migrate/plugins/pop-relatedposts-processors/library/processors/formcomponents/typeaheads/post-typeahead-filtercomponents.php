@@ -26,10 +26,10 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES,
         );
     }
 

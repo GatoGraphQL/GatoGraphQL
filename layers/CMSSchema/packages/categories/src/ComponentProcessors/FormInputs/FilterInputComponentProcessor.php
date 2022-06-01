@@ -37,10 +37,10 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->categoryIDsFilterInput ??= $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_CATEGORY_IDS],
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS,
         );
     }
 

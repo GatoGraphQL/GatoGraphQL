@@ -4,10 +4,10 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
 {
     public final const COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT = 'subcomponent-notificationcomment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT],
+            self::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT,
         );
     }
 

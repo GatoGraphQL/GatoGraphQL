@@ -5,11 +5,11 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
     public final const COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS = 'block-stances-byorganizations-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS = 'block-stances-byindividuals-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS,
         );
     }
 

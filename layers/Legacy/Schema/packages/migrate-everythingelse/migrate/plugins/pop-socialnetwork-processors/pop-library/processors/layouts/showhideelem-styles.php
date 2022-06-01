@@ -23,29 +23,29 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
     public final const COMPONENT_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES = 'layout-undodownvoteposts-show-styles';
     public final const COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES = 'layout-undodownvoteposts-hide-styles';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_FOLLOWUSER_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNFOLLOWUSER_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_RECOMMENDPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_RECOMMENDPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNRECOMMENDPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UPVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UPVOTEPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_DOWNVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_DOWNVOTEPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES],
+            self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_FOLLOWUSER_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNFOLLOWUSER_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_RECOMMENDPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_RECOMMENDPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNRECOMMENDPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UPVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UPVOTEPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_DOWNVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_DOWNVOTEPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES,
         );
     }
 

@@ -4,10 +4,10 @@ class PoP_Module_Processor_PostUserMentionsLayouts extends PoP_Module_Processor_
 {
     public final const COMPONENT_LAYOUT_POSTUSERMENTIONS = 'layout-postusermentions';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTUSERMENTIONS],
+            self::COMPONENT_LAYOUT_POSTUSERMENTIONS,
         );
     }
 

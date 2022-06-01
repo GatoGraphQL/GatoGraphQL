@@ -9,13 +9,13 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
     public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES = 'forminput-text-typeaheadprofiles';
     public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT = 'forminput-text-typeaheadrelatedcontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEAD],
-            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH],
-            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES],
-            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT],
+            self::COMPONENT_FORMINPUT_TEXT_TYPEAHEAD,
+            self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH,
+            self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES,
+            self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT,
         );
     }
 

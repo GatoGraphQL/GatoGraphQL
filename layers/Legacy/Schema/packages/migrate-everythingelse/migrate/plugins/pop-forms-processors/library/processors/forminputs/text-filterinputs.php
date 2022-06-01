@@ -45,12 +45,12 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return $this->nameFilterInput ??= $this->instanceManager->getInstance(NameFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUT_HASHTAGS],
-            [self::class, self::COMPONENT_FILTERINPUT_NAME],
+            self::COMPONENT_FILTERINPUT_SEARCH,
+            self::COMPONENT_FILTERINPUT_HASHTAGS,
+            self::COMPONENT_FILTERINPUT_NAME,
         );
     }
 

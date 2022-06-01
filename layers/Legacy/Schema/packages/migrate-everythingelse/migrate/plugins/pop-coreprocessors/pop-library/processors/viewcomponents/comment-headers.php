@@ -5,11 +5,11 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
     public final const COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST = 'viewcomponent-header-commentpost';
     public final const COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL = 'viewcomponent-header-commentpost-url';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL],
+            self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST,
+            self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL,
         );
     }
 

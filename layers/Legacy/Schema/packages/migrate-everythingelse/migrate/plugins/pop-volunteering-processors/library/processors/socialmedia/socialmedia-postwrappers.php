@@ -5,11 +5,11 @@ class PoPCore_GenericForms_Module_Processor_SocialMediaPostWrappers extends PoP_
     public final const COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER = 'volunteerpost-socialmedia-simpleview-wrapper';
     public final const COMPONENT_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER = 'volunteerpost-socialmedia-wrapper';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER],
+            self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER,
+            self::COMPONENT_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER,
         );
     }
 

@@ -6,11 +6,11 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
     public final const COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES = 'ure-forminput-memberprivileges';
     public final const COMPONENT_URE_FORMINPUT_MEMBERTAGS = 'ure-forminput-membertags';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES],
-            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERTAGS],
+            self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES,
+            self::COMPONENT_URE_FORMINPUT_MEMBERTAGS,
         );
     }
 

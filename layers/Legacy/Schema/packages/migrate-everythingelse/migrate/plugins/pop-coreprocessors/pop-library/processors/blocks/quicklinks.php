@@ -4,10 +4,10 @@ class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksB
 {
     public final const COMPONENT_BLOCK_EVERYTHING_QUICKLINKS = 'block-everything-quicklinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS],
+            self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS,
         );
     }
 

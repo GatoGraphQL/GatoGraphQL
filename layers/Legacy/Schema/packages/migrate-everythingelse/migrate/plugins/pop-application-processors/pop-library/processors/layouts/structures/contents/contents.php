@@ -5,11 +5,11 @@ class Wassup_Module_Processor_LayoutContents extends PoP_Module_Processor_Conten
     public final const COMPONENT_CONTENTLAYOUT_HIGHLIGHTS = 'contentlayout-highlights';
     public final const COMPONENT_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE = 'contentlayout-highlights-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTLAYOUT_HIGHLIGHTS],
-            [self::class, self::COMPONENT_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE],
+            self::COMPONENT_CONTENTLAYOUT_HIGHLIGHTS,
+            self::COMPONENT_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE,
         );
     }
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)

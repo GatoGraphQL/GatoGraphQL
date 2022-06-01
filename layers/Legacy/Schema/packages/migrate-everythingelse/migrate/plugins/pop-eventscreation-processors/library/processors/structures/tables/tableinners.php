@@ -5,11 +5,11 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
     public final const COMPONENT_TABLEINNER_MYEVENTS = 'tableinner-myevents';
     public final const COMPONENT_TABLEINNER_MYPASTEVENTS = 'tableinner-mypastevents';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLEINNER_MYEVENTS],
-            [self::class, self::COMPONENT_TABLEINNER_MYPASTEVENTS],
+            self::COMPONENT_TABLEINNER_MYEVENTS,
+            self::COMPONENT_TABLEINNER_MYPASTEVENTS,
         );
     }
 

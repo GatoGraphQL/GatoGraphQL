@@ -12,14 +12,14 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     public final const COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY = 'block-tabpanel-singleupvotedby';
     public final const COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY = 'block-tabpanel-singledownvotedby';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY,
         );
     }
 

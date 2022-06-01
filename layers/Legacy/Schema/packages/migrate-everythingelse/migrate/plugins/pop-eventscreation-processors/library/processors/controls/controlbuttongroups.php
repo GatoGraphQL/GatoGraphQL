@@ -8,14 +8,14 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
     public final const COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS = 'customcontrolbuttongroup-tageventlinks';
     public final const COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS = 'customcontrolbuttongroup-myeventlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_AUTHOREVENTLINKS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS],
+            self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT,
+            self::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS,
+            self::COMPONENT_CONTROLBUTTONGROUP_AUTHOREVENTLINKS,
+            self::COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS,
+            self::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS,
         );
     }
 

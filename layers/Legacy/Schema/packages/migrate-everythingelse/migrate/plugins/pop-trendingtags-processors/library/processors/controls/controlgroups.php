@@ -5,10 +5,10 @@ class PoP_TrendingTags_Module_Processor_CustomControlGroups extends PoP_Module_P
 {
     public final const COMPONENT_CONTROLGROUP_TRENDINGTAGLIST = 'controlgroup-trendingtaglist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_TRENDINGTAGLIST],
+            self::COMPONENT_CONTROLGROUP_TRENDINGTAGLIST,
         );
     }
 

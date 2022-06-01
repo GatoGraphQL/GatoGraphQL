@@ -36,11 +36,11 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_LINKCATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUT_LINKACCESS],
+            self::COMPONENT_FILTERINPUT_LINKCATEGORIES,
+            self::COMPONENT_FILTERINPUT_LINKACCESS,
         );
     }
 

@@ -5,10 +5,10 @@ class Wassup_URE_AAL_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Pr
 {
     public final const COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS = 'ure-aal-layoutuser-membertags-desc';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS],
+            self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS,
         );
     }
 

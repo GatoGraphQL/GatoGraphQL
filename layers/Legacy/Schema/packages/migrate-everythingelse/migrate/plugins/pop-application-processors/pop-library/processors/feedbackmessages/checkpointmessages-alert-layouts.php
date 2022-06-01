@@ -4,10 +4,10 @@ class PoP_Application_Module_Processor_UserCheckpointMessageAlertLayouts extends
 {
     public final const COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN = 'layout-checkpointmessagealert-domain';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN],
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN,
         );
     }
 

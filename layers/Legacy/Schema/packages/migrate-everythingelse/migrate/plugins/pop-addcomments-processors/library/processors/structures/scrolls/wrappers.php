@@ -5,11 +5,11 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     public final const COMPONENT_WIDGETWRAPPER_POSTCOMMENTS = 'widgetwrapper-postcomments';
     public final const COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT = 'widgetwrapper-postcomments-appendtoscript';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT],
+            self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS,
+            self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT,
         );
     }
 

@@ -4,10 +4,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomDelegatorFilters exten
 {
     public final const COMPONENT_DELEGATORFILTER_MYCONTENTPOSTLINKS = 'delegatorfilter-mypostlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYCONTENTPOSTLINKS],
+            self::COMPONENT_DELEGATORFILTER_MYCONTENTPOSTLINKS,
         );
     }
 

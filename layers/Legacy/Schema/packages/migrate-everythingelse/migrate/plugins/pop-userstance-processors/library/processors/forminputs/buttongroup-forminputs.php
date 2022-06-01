@@ -4,10 +4,10 @@ class UserStance_Module_Processor_ButtonGroupFormInputs extends PoP_Module_Proce
 {
     public final const COMPONENT_FORMINPUT_BUTTONGROUP_STANCE = 'forminput-buttongroup-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE],
+            self::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE,
         );
     }
 

@@ -9,14 +9,14 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
     public final const COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR = 'multiple-authorposts-sidebar';
     public final const COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR = 'multiple-authorcategoryposts-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR,
         );
     }
 

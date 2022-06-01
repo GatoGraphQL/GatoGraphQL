@@ -7,12 +7,12 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT = 'layout-feedbackmessage-createcontent';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT = 'layout-feedbackmessage-updatecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_FLAG],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_FLAG,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT,
         );
     }
 
@@ -32,7 +32,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT:
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT:
                 $name = $this->getProp($component, $props, 'objectname');
-                if ($component == [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT]) {
+                if ($component == self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT) {
                     $ret['success-header'] = sprintf(
                         TranslationAPIFacade::getInstance()->__('Your %s was created successfully!', 'pop-userstance-processors'),
                         $name
@@ -41,7 +41,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
                         TranslationAPIFacade::getInstance()->__('Your %s was updated successfully!', 'pop-userstance-processors'),
                         $name
                     );
-                } elseif ($component == [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT]) {
+                } elseif ($component == self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT) {
                     $ret['success-header'] = sprintf(
                         TranslationAPIFacade::getInstance()->__('Your %s was updated successfully.', 'pop-userstance-processors'),
                         $name

@@ -8,11 +8,11 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
     public final const COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE = 'dataload-postlink-update';
     public final const COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE = 'dataload-postlink-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE],
-            [self::class, self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE],
+            self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE,
+            self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE,
         );
     }
 

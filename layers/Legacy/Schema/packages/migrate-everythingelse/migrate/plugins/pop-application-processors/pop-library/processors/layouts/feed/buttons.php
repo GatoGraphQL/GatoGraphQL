@@ -5,10 +5,10 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
 {
     public final const COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY = 'button-toggleuserpostactivity';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY],
+            self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY,
         );
     }
 

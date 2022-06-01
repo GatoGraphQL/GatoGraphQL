@@ -4,10 +4,10 @@ class PoP_Locations_Module_Processor_CustomSectionBlocks extends PoP_Module_Proc
 {
     public final const COMPONENT_BLOCK_LOCATIONS_SCROLL = 'block-locations-scroll';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LOCATIONS_SCROLL],
+            self::COMPONENT_BLOCK_LOCATIONS_SCROLL,
         );
     }
 

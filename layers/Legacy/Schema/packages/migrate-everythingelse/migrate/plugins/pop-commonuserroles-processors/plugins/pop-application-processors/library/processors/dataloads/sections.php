@@ -19,23 +19,23 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST = 'dataload-organizations-scroll-list';
     public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST = 'dataload-individuals-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST,
         );
     }
 
@@ -123,20 +123,20 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;

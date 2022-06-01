@@ -7,12 +7,12 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
     public final const COMPONENT_BLOCK_TABPANEL_TAGPOSTS = 'block-tabpanel-tagposts';
     public final const COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS = 'block-tabpanel-tagsubscribers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGPOSTS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS],
+            self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_TAGPOSTS,
+            self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS,
         );
     }
 

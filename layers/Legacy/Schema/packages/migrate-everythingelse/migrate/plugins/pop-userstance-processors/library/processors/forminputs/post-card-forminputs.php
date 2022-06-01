@@ -4,10 +4,10 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
 {
     public final const COMPONENT_FORMCOMPONENT_CARD_STANCETARGET = 'formcomponent-card-stancetarget';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET],
+            self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET,
         );
     }
 

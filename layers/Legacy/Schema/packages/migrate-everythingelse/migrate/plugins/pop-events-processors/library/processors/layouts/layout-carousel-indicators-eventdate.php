@@ -4,10 +4,10 @@ class PoP_Module_Processor_EventDateCarouselIndicatorLayouts extends PoP_Module_
 {
     public final const COMPONENT_EM_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE = 'em-layout-carousel-indicators-eventdate';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE],
+            self::COMPONENT_EM_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE,
         );
     }
 }

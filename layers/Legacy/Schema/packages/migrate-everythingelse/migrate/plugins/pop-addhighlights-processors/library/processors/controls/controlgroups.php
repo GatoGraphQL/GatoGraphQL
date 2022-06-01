@@ -4,10 +4,10 @@ class PoP_AddHighlights_Module_Processor_CustomControlGroups extends PoP_Module_
 {
     public final const COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST = 'controlgroup-myhighlightlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST],
+            self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST,
         );
     }
 

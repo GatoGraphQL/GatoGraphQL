@@ -12,14 +12,14 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     public final const COMPONENT_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
     public final const COMPONENT_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EXAMPLE_404],
-            [self::class, self::COMPONENT_EXAMPLE_HOMEWELCOME],
-            [self::class, self::COMPONENT_EXAMPLE_COMMENT],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
-            [self::class, self::COMPONENT_EXAMPLE_TAGPROPERTIES],
+            self::COMPONENT_EXAMPLE_404,
+            self::COMPONENT_EXAMPLE_HOMEWELCOME,
+            self::COMPONENT_EXAMPLE_COMMENT,
+            self::COMPONENT_EXAMPLE_AUTHORPROPERTIES,
+            self::COMPONENT_EXAMPLE_TAGPROPERTIES,
         );
     }
 
@@ -67,7 +67,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
                 $ret[] = new RelationalComponentField(
                     'author',
                     [
-                        [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
+                        self::COMPONENT_EXAMPLE_AUTHORPROPERTIES,
                     ]
                 );
                 break;

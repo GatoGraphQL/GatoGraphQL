@@ -15,21 +15,21 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public final const COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
     public final const COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_FILTER],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_CURRENTURL],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RESETEDITOR],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_SHARE],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK],
+            self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS,
+            self::COMPONENT_CONTROLBUTTONGROUP_FILTER,
+            self::COMPONENT_CONTROLBUTTONGROUP_CURRENTURL,
+            self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP,
+            self::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK,
+            self::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK,
+            self::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS,
+            self::COMPONENT_CONTROLBUTTONGROUP_RESETEDITOR,
+            self::COMPONENT_CONTROLBUTTONGROUP_SHARE,
+            self::COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE,
+            self::COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT,
+            self::COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK,
         );
     }
 

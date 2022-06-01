@@ -15,21 +15,21 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
     public final const COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST = 'block-organizations-scroll-list';
     public final const COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST = 'block-individuals-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST,
         );
     }
 

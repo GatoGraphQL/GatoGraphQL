@@ -4,10 +4,10 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
 {
     public final const COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH = 'submitbuttonformgroup-search';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH],
+            self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH,
         );
     }
 

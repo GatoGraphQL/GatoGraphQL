@@ -5,11 +5,11 @@ class PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts extends PoP
     public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS = 'layout-automatedemails-previewnotification-details';
     public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_LIST = 'layout-automatedemails-previewnotification-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_LIST],
+            self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS,
+            self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_LIST,
         );
     }
 }

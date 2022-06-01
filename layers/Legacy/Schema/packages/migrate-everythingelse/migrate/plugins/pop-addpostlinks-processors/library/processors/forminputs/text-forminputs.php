@@ -5,10 +5,10 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
 {
     public final const COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK = 'forminput-postlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK],
+            self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK,
         );
     }
 

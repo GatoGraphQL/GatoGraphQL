@@ -5,11 +5,11 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
     public final const COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS = 'filterinputgroup-moderatedpoststatus';
     public final const COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS = 'filterinputgroup-unmoderatedpoststatus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
+            self::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS,
+            self::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS,
         );
     }
 

@@ -5,11 +5,11 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_SHARE = 'dropdownbuttoncontrol-share';
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE = 'dropdownbuttoncontrol-resultsshare';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE],
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE,
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE,
         );
     }
 

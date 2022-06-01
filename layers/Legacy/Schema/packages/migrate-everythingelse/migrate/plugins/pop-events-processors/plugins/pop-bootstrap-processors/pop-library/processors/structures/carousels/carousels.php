@@ -6,12 +6,12 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
     public final const COMPONENT_CAROUSEL_AUTHOREVENTS = 'carousel-authorevents';
     public final const COMPONENT_CAROUSEL_TAGEVENTS = 'carousel-tagevents';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSEL_EVENTS],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHOREVENTS],
-            [self::class, self::COMPONENT_CAROUSEL_TAGEVENTS],
+            self::COMPONENT_CAROUSEL_EVENTS,
+            self::COMPONENT_CAROUSEL_AUTHOREVENTS,
+            self::COMPONENT_CAROUSEL_TAGEVENTS,
         );
     }
 

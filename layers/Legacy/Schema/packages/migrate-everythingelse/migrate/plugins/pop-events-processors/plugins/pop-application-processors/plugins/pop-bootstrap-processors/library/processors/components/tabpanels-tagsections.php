@@ -6,12 +6,12 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     public final const COMPONENT_TABPANEL_TAGPASTEVENTS = 'tabpanel-tagpastevents';
     public final const COMPONENT_TABPANEL_TAGEVENTSCALENDAR = 'tabpanel-tageventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_TAGPASTEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_TAGEVENTSCALENDAR],
+            self::COMPONENT_TABPANEL_TAGEVENTS,
+            self::COMPONENT_TABPANEL_TAGPASTEVENTS,
+            self::COMPONENT_TABPANEL_TAGEVENTSCALENDAR,
         );
     }
 

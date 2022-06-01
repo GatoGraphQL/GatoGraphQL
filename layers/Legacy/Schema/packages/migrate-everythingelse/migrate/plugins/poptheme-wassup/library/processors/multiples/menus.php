@@ -17,23 +17,23 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     public final const COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS = 'multiple-menu-body-mysections';
     public final const COMPONENT_MULTIPLE_MENU_BODY_ABOUT = 'multiple-menu-body-about';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_MENU_SIDEBAR_ABOUT],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_TOPNAV_ABOUT],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_TOP_ADDNEW],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_SIDE_ADDNEW],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_SIDE_MYSECTIONS],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_BODY_ADDCONTENT],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_BODY_SECTIONS],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS],
-            [self::class, self::COMPONENT_MULTIPLE_MENU_BODY_ABOUT],
+            self::COMPONENT_MULTIPLE_MENU_SIDEBAR_ABOUT,
+            self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN,
+            self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN,
+            self::COMPONENT_MULTIPLE_MENU_TOPNAV_ABOUT,
+            self::COMPONENT_MULTIPLE_MENU_TOP_ADDNEW,
+            self::COMPONENT_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN,
+            self::COMPONENT_MULTIPLE_MENU_SIDE_ADDNEW,
+            self::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS,
+            self::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET,
+            self::COMPONENT_MULTIPLE_MENU_SIDE_MYSECTIONS,
+            self::COMPONENT_MULTIPLE_MENU_BODY_ADDCONTENT,
+            self::COMPONENT_MULTIPLE_MENU_BODY_SECTIONS,
+            self::COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS,
+            self::COMPONENT_MULTIPLE_MENU_BODY_ABOUT,
         );
     }
 

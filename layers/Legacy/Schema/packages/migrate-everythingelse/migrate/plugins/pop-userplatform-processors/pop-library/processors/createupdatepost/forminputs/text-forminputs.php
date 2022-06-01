@@ -6,11 +6,11 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
     public final const COMPONENT_FORMINPUT_CUP_TITLE = 'forminput-cup-title';
     public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK = 'forminput-link';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CUP_TITLE],
-            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK],
+            self::COMPONENT_FORMINPUT_CUP_TITLE,
+            self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK,
         );
     }
 

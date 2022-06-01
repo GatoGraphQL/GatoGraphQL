@@ -6,11 +6,11 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
     public final const COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
     public final const COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP],
-            [self::class, self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS],
+            self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP,
+            self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS,
         );
     }
 

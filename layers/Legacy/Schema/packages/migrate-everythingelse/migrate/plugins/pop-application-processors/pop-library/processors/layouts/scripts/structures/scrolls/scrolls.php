@@ -7,13 +7,13 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
     public final const COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW = 'layout-referencedby-scroll-fullview';
     public final const COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE = 'layout-referencedby-scroll-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS],
-            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE],
+            self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS,
+            self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW,
+            self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW,
+            self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE,
         );
     }
 

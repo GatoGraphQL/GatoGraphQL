@@ -7,10 +7,10 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_TAGS = 'forminput-typeaheadcomponent-tags';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS],
+            self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS,
         );
     }
 

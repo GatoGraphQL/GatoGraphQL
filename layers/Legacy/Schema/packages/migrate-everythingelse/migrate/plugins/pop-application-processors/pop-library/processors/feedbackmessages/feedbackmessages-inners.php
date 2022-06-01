@@ -4,10 +4,10 @@ class PoP_Module_Processor_DomainFeedbackMessageInners extends PoP_Module_Proces
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_EMPTY = 'feedbackmessageinner-empty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_EMPTY],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_EMPTY,
         );
     }
 

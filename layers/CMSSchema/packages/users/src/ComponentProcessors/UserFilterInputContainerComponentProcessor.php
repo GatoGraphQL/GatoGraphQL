@@ -16,13 +16,13 @@ class UserFilterInputContainerComponentProcessor extends AbstractFilterInputCont
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS = 'filterinputcontainer-adminusers';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT = 'filterinputcontainer-adminusercount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_USERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_USERCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_USERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_USERCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT,
         );
     }
 

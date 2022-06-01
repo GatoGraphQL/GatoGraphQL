@@ -6,12 +6,12 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
     public final const COMPONENT_DROPDOWNBUTTONMENU_SIDE = 'dropdownbuttonmenu-side';
     public final const COMPONENT_MULTITARGETINDENTMENU = 'multitargetindentmenu';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DROPDOWNBUTTONMENU_TOP],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONMENU_SIDE],
-            [self::class, self::COMPONENT_MULTITARGETINDENTMENU],
+            self::COMPONENT_DROPDOWNBUTTONMENU_TOP,
+            self::COMPONENT_DROPDOWNBUTTONMENU_SIDE,
+            self::COMPONENT_MULTITARGETINDENTMENU,
         );
     }
 

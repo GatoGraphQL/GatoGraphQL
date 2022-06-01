@@ -12,18 +12,18 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
     public final const COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES = 'layout-previewuser-community-communities';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR = 'layout-previewuser-community-postauthor';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR],
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR,
         );
     }
 

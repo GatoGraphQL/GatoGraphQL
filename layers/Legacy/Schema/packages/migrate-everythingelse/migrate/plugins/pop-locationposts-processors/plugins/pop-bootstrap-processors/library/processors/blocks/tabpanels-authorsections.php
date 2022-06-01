@@ -6,10 +6,10 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks extends PoP
 {
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS = 'block-tabpanel-authorlocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS,
         );
     }
 

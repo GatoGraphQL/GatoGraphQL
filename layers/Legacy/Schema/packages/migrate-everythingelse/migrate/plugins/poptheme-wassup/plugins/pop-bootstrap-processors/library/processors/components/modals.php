@@ -6,10 +6,10 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
 {
     public final const COMPONENT_MODAL_QUICKVIEW = 'modal-quickview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MODAL_QUICKVIEW],
+            self::COMPONENT_MODAL_QUICKVIEW,
         );
     }
 

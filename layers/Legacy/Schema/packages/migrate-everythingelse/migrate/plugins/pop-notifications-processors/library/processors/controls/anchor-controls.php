@@ -7,11 +7,11 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
     public final const COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS = 'buttoncontrol-notifications';
     public final const COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD = 'buttoncontrol-notifications-markallasread';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS],
-            [self::class, self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD],
+            self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS,
+            self::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD,
         );
     }
 

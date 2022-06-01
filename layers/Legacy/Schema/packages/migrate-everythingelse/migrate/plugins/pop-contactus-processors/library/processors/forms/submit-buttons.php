@@ -5,10 +5,10 @@ class PoP_ContactUs_Module_Processor_SubmitButtons extends PoP_Module_Processor_
 {
     public final const COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE = 'gf-submitbutton-sendmessage';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE],
+            self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE,
         );
     }
 

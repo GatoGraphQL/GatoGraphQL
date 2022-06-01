@@ -5,11 +5,11 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageInners extends PoP_Module_P
     public final const COMPONENT_FEEDBACKMESSAGEINNER_NEWSLETTER = 'feedbackmessageinner-newsletter';
     public final const COMPONENT_FEEDBACKMESSAGEINNER_NEWSLETTERUNSUBSCRIPTION = 'feedbackmessageinner-newsletterunsubscription';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_NEWSLETTER],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_NEWSLETTERUNSUBSCRIPTION],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_NEWSLETTER,
+            self::COMPONENT_FEEDBACKMESSAGEINNER_NEWSLETTERUNSUBSCRIPTION,
         );
     }
 

@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
     public final const COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION = 'horizontal-sidebarinner-author-organization';
     public final const COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL = 'horizontal-sidebarinner-author-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION],
-            [self::class, self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL],
+            self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION,
+            self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL,
         );
     }
 

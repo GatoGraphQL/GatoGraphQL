@@ -6,12 +6,12 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
     public final const COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS = 'latestcount-author-locationposts';
     public final const COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS = 'latestcount-tag-locationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS],
+            self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS,
+            self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS,
         );
     }
 

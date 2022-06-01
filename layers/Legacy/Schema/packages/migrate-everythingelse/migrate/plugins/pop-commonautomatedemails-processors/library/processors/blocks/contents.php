@@ -7,10 +7,10 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
 {
     public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST = 'block-automatedemails-singlepost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST],
+            self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST,
         );
     }
 

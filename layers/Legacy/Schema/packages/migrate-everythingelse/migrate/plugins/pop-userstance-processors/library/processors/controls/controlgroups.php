@@ -8,13 +8,13 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
     public final const COMPONENT_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION = 'userstance-controlgroup-userpostinteraction';
     public final const COMPONENT_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION = 'userstance-controlgroup-userfullviewinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_STANCESTATS],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYSTANCELIST],
-            [self::class, self::COMPONENT_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION],
+            self::COMPONENT_CONTROLGROUP_STANCESTATS,
+            self::COMPONENT_CONTROLGROUP_MYSTANCELIST,
+            self::COMPONENT_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION,
+            self::COMPONENT_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION,
         );
     }
 

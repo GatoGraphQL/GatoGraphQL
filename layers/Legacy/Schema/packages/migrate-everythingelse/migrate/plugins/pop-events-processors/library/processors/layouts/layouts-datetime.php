@@ -6,12 +6,12 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
     public final const COMPONENT_EM_LAYOUT_DATETIMEHORIZONTAL = 'em-layout-datetimehorizontal';
     public final const COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS = 'em-layout-datetimedownloadlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_LAYOUT_DATETIME],
-            [self::class, self::COMPONENT_EM_LAYOUT_DATETIMEHORIZONTAL],
-            [self::class, self::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS],
+            self::COMPONENT_EM_LAYOUT_DATETIME,
+            self::COMPONENT_EM_LAYOUT_DATETIMEHORIZONTAL,
+            self::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS,
         );
     }
     public function getSeparator(\PoP\ComponentModel\Component\Component $component, array &$props)

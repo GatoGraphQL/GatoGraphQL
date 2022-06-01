@@ -24,29 +24,29 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
     public final const COMPONENT_BUTTON_UNDODOWNVOTEPOST_FULL = 'button-undodownvotepost-full';
     public final const COMPONENT_BUTTON_UNDODOWNVOTEPOST_PREVIEW = 'button-undodownvotepost-preview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_FOLLOWUSER_FULL],
-            [self::class, self::COMPONENT_BUTTON_UNFOLLOWUSER_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UNFOLLOWUSER_FULL],
-            [self::class, self::COMPONENT_BUTTON_RECOMMENDPOST_FULL],
-            [self::class, self::COMPONENT_BUTTON_RECOMMENDPOST_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UNRECOMMENDPOST_FULL],
-            [self::class, self::COMPONENT_BUTTON_UNRECOMMENDPOST_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_SUBSCRIBETOTAG_FULL],
-            [self::class, self::COMPONENT_BUTTON_SUBSCRIBETOTAG_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UNSUBSCRIBEFROMTAG_FULL],
-            [self::class, self::COMPONENT_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UPVOTEPOST_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UPVOTEPOST_FULL],
-            [self::class, self::COMPONENT_BUTTON_UNDOUPVOTEPOST_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UNDOUPVOTEPOST_FULL],
-            [self::class, self::COMPONENT_BUTTON_DOWNVOTEPOST_FULL],
-            [self::class, self::COMPONENT_BUTTON_DOWNVOTEPOST_PREVIEW],
-            [self::class, self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_FULL],
-            [self::class, self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_PREVIEW],
+            self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW,
+            self::COMPONENT_BUTTON_FOLLOWUSER_FULL,
+            self::COMPONENT_BUTTON_UNFOLLOWUSER_PREVIEW,
+            self::COMPONENT_BUTTON_UNFOLLOWUSER_FULL,
+            self::COMPONENT_BUTTON_RECOMMENDPOST_FULL,
+            self::COMPONENT_BUTTON_RECOMMENDPOST_PREVIEW,
+            self::COMPONENT_BUTTON_UNRECOMMENDPOST_FULL,
+            self::COMPONENT_BUTTON_UNRECOMMENDPOST_PREVIEW,
+            self::COMPONENT_BUTTON_SUBSCRIBETOTAG_FULL,
+            self::COMPONENT_BUTTON_SUBSCRIBETOTAG_PREVIEW,
+            self::COMPONENT_BUTTON_UNSUBSCRIBEFROMTAG_FULL,
+            self::COMPONENT_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW,
+            self::COMPONENT_BUTTON_UPVOTEPOST_PREVIEW,
+            self::COMPONENT_BUTTON_UPVOTEPOST_FULL,
+            self::COMPONENT_BUTTON_UNDOUPVOTEPOST_PREVIEW,
+            self::COMPONENT_BUTTON_UNDOUPVOTEPOST_FULL,
+            self::COMPONENT_BUTTON_DOWNVOTEPOST_FULL,
+            self::COMPONENT_BUTTON_DOWNVOTEPOST_PREVIEW,
+            self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_FULL,
+            self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_PREVIEW,
         );
     }
 

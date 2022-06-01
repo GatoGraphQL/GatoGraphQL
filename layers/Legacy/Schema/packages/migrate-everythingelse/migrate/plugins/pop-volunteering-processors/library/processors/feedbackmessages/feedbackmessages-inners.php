@@ -4,10 +4,10 @@ class PoP_Volunteering_Module_Processor_FeedbackMessageInners extends PoP_Module
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER = 'feedbackmessageinner-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER,
         );
     }
 

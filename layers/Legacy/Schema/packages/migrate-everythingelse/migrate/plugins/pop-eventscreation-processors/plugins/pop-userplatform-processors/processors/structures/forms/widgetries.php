@@ -5,10 +5,10 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
 {
     public final const COMPONENT_WIDGET_FORM_EVENTDETAILS = 'widget-form-event-details';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_FORM_EVENTDETAILS],
+            self::COMPONENT_WIDGET_FORM_EVENTDETAILS,
         );
     }
 

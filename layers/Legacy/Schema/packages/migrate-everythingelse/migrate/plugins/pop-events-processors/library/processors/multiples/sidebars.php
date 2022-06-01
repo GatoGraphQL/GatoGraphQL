@@ -15,20 +15,20 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public final const COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR = 'multiple-authorpastevents-sidebar';
     public final const COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR = 'multiple-authoreventscalendar-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_EVENTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_EVENTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_PASTEVENTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_EVENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOREVENTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_EVENTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_EVENTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_PASTEVENTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_EVENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHOREVENTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR,
         );
     }
 

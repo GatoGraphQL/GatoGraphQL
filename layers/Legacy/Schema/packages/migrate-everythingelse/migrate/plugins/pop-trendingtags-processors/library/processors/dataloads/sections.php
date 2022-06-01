@@ -6,11 +6,11 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
     public final const COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS = 'dataload-trendingtags-scroll-details';
     public final const COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST = 'dataload-trendingtags-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST,
         );
     }
 
@@ -37,10 +37,10 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
     {
         // Add the format attr
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;

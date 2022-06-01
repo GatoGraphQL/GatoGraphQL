@@ -8,14 +8,14 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
     public final const COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
     public final const COMPONENT_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_COMMUNITIES_DETAILS,
+            self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW,
+            self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL,
+            self::COMPONENT_SCROLL_COMMUNITIES_LIST,
         );
     }
 
@@ -42,17 +42,17 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
+            self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLL_COMMUNITIES_LIST,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
+            self::COMPONENT_SCROLL_COMMUNITIES_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
+            self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW,
         );
 
         $extra_class = '';

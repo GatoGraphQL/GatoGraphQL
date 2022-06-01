@@ -4,10 +4,10 @@ class PoP_Module_Processor_UserHiddenInputAlertFormComponents extends PoP_Module
 {
     public final const COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER = 'formcomponent-hiddeninputalert-layoutuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER],
+            self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTUSER,
         );
     }
     

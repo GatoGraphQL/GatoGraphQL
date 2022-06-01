@@ -5,11 +5,11 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
     public final const COMPONENT_MAP_STATICIMAGE = 'em-map-staticimage';
     public final const COMPONENT_MAP_STATICIMAGE_USERORPOST = 'em-map-staticimage-userorpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_STATICIMAGE],
-            [self::class, self::COMPONENT_MAP_STATICIMAGE_USERORPOST],
+            self::COMPONENT_MAP_STATICIMAGE,
+            self::COMPONENT_MAP_STATICIMAGE_USERORPOST,
         );
     }
 

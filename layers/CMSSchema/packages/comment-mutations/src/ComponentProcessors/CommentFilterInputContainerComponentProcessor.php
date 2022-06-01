@@ -14,11 +14,11 @@ class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilte
     public final const COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTS = 'filterinputcontainer-mycomments';
     public final const COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTCOUNT = 'filterinputcontainer-mycommentcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTCOUNT,
         );
     }
 

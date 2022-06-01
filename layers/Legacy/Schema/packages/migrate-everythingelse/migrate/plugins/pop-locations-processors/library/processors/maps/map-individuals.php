@@ -7,13 +7,13 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
     public final const COMPONENT_MAP_INDIVIDUAL_POST = 'em-map-individual-post';
     public final const COMPONENT_MAP_INDIVIDUAL_USER = 'em-map-individual-user';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_INDIVIDUAL],
-            [self::class, self::COMPONENT_MAP_SIDEBARINDIVIDUAL],
-            [self::class, self::COMPONENT_MAP_INDIVIDUAL_POST],
-            [self::class, self::COMPONENT_MAP_INDIVIDUAL_USER],
+            self::COMPONENT_MAP_INDIVIDUAL,
+            self::COMPONENT_MAP_SIDEBARINDIVIDUAL,
+            self::COMPONENT_MAP_INDIVIDUAL_POST,
+            self::COMPONENT_MAP_INDIVIDUAL_USER,
         );
     }
 

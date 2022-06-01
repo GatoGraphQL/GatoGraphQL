@@ -6,10 +6,10 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
 {
     public final const COMPONENT_DATALOAD_SHAREBYEMAIL = 'dataload-sharebyemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SHAREBYEMAIL],
+            self::COMPONENT_DATALOAD_SHAREBYEMAIL,
         );
     }
 

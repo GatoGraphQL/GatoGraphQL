@@ -10,15 +10,15 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
     public final const COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP = 'htmlcode-author-description-top';
     public final const COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM = 'htmlcode-author-description-bottom';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_HTMLCODE_HOMEWELCOMETOP],
-            [self::class, self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM],
-            [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP],
-            [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM],
-            [self::class, self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP],
-            [self::class, self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
+            self::COMPONENT_HTMLCODE_HOMEWELCOMETOP,
+            self::COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM,
+            self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP,
+            self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM,
+            self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP,
+            self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM,
         );
     }
 
@@ -79,7 +79,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                         '<i class="fa fa-close"></i>'
                     );
 
-                    if ($component == [self::class, self::COMPONENT_HTMLCODE_HOMEWELCOMETOP] || $component == [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP]) {
+                    if ($component == self::COMPONENT_HTMLCODE_HOMEWELCOMETOP] || $component == [self::class, self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP) {
                              // Allow qTrans to add the language links
                         $description = \PoP\Root\App::applyFilters(
                             'PoP_Module_Processor_HTMLCodes:homewelcometitle',

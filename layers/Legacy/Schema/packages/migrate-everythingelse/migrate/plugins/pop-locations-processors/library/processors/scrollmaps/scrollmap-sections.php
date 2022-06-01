@@ -15,21 +15,21 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
     public final const COMPONENT_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP = 'scrollmap-tagpastevents-scrollmap';
     public final const COMPONENT_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP = 'scrollmap-tagevents-horizontalscrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLMAP_EVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_PASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_USERS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_TAGEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_SCROLLMAP_EVENTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_PASTEVENTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_USERS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_USERS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_SCROLLMAP_AUTHOREVENTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_AUTHORPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_SCROLLMAP_TAGEVENTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP,
         );
     }
 

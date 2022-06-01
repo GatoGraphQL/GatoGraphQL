@@ -11,16 +11,16 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
     public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT,
         );
     }
 

@@ -16,18 +16,18 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT = 'buttoncontrol-stance-neutral-count';
     public final const COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT = 'buttoncontrol-stance-against-count';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT],
+            self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT,
         );
     }
 
@@ -91,19 +91,19 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 );
 
                 $general = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT],
+                    self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT,
                 );
                 $article = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT],
+                    self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT,
                 );
                 $combined = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT],
+                    self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT,
                 );
 
                 $query = array();

@@ -11,15 +11,15 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     public final const COMPONENT_ANCHORCONTROL_TOGGLETABS = 'anchorcontrol-toggletabs';
     public final const COMPONENT_ANCHORCONTROL_TOGGLETABSXS = 'anchorcontrol-toggletabsxs';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS],
+            self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO,
+            self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO,
+            self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS,
+            self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK,
+            self::COMPONENT_ANCHORCONTROL_TOGGLETABS,
+            self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS,
         );
     }
 
@@ -92,11 +92,11 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 $mode = '';
                 $classs = '';
                 $xs = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+                    self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS,
+                    self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK,
                 );
                 $tablet = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO],
+                    self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO,
                 );
                 if (in_array($component, $xs)) {
                     $mode = 'xs';
@@ -106,7 +106,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 }
 
                 $back = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
+                    self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK,
                 );
                 if (in_array($component, $back)) {
                     $classs .= ' btn btn-lg btn-link';
@@ -128,7 +128,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
             case self::COMPONENT_ANCHORCONTROL_TOGGLETABS:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS:
                 $xs = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS],
+                    self::COMPONENT_ANCHORCONTROL_TOGGLETABSXS,
                 );
                 if (in_array($component, $xs)) {
                     $mode = 'xs';

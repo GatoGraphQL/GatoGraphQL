@@ -13,19 +13,19 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public final const COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR = 'multiple-author-stances-stance-sidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR = 'multiple-single-stance-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR,
         );
     }
 

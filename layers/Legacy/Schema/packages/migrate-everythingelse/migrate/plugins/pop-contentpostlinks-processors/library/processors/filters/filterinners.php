@@ -6,12 +6,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilterInners extends PoP_Modul
     public final const COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS = 'filterinputcontainer-authorlinks';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGLINKS = 'filterinputcontainer-taglinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_LINKS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGLINKS],
+            self::COMPONENT_FILTERINPUTCONTAINER_LINKS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGLINKS,
         );
     }
 

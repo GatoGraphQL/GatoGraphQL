@@ -30,23 +30,23 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_PAGESECTION_QUICKVIEW],
-            [self::class, self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO],
-            [self::class, self::COMPONENT_PAGESECTION_ADDONTABS],
-            [self::class, self::COMPONENT_PAGESECTION_BACKGROUND],
-            [self::class, self::COMPONENT_PAGESECTION_FRAMECOMPONENTS],
-            [self::class, self::COMPONENT_PAGESECTION_HOLE],
-            [self::class, self::COMPONENT_PAGESECTION_HOVER],
-            [self::class, self::COMPONENT_PAGESECTION_NAVIGATOR],
-            [self::class, self::COMPONENT_PAGESECTION_SIDE],
-            [self::class, self::COMPONENT_PAGESECTION_TOP],
-            [self::class, self::COMPONENT_PAGESECTION_BODYSIDEINFO],
-            [self::class, self::COMPONENT_PAGESECTION_MODALS],
-            [self::class, self::COMPONENT_PAGESECTION_BODYTABS],
-            [self::class, self::COMPONENT_PAGESECTION_BODY],
+            self::COMPONENT_PAGESECTION_QUICKVIEW,
+            self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO,
+            self::COMPONENT_PAGESECTION_ADDONTABS,
+            self::COMPONENT_PAGESECTION_BACKGROUND,
+            self::COMPONENT_PAGESECTION_FRAMECOMPONENTS,
+            self::COMPONENT_PAGESECTION_HOLE,
+            self::COMPONENT_PAGESECTION_HOVER,
+            self::COMPONENT_PAGESECTION_NAVIGATOR,
+            self::COMPONENT_PAGESECTION_SIDE,
+            self::COMPONENT_PAGESECTION_TOP,
+            self::COMPONENT_PAGESECTION_BODYSIDEINFO,
+            self::COMPONENT_PAGESECTION_MODALS,
+            self::COMPONENT_PAGESECTION_BODYTABS,
+            self::COMPONENT_PAGESECTION_BODY,
         );
     }
 

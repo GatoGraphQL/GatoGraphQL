@@ -6,12 +6,12 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts extends P
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATECONTENT = 'layout-feedbackmessagealert-createcontent';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATECONTENT = 'layout-feedbackmessagealert-updatecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_FLAG],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATECONTENT],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATECONTENT],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_FLAG,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATECONTENT,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATECONTENT,
         );
     }
 

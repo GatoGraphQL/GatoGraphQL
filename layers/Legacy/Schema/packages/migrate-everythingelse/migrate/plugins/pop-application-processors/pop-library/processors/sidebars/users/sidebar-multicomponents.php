@@ -5,11 +5,11 @@ class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Modul
     public final const COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER = 'sidebarmulticomponent-genericuser';
     public final const COMPONENT_SIDEBARMULTICOMPONENT_AVATAR = 'sidebarmulticomponent-avatar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_AVATAR],
+            self::COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_AVATAR,
         );
     }
 

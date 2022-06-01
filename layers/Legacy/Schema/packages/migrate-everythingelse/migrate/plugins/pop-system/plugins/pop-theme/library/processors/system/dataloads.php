@@ -7,10 +7,10 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadCo
     public final const COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME = 'dataloadaction-system-generate-theme';
 
     // use PoP_System_Theme_Module_Processor_SystemActionsTrait;
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME],
+            self::COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME,
         );
     }
 

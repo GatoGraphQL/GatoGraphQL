@@ -10,11 +10,11 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
     public final const COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY = 'ure-typeahead-component-community';
     public final const COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS = 'ure-typeahead-component-communityplusmembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY],
-            [self::class, self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS],
+            self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY,
+            self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS,
         );
     }
 

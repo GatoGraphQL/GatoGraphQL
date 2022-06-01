@@ -16,13 +16,13 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
     public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
     public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES,
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES,
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT,
         );
     }
 

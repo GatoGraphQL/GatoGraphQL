@@ -7,13 +7,13 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
     public final const COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT = 'widgetwrapper-author-contact';
     public final const COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT = 'layoutwrapper-comments-appendtoscript';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT],
+            self::COMPONENT_WIDGETWRAPPER_REFERENCES,
+            self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE,
+            self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT,
+            self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT,
         );
     }
 

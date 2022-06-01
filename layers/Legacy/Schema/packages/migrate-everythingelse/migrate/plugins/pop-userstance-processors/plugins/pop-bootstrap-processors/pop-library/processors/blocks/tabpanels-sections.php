@@ -14,20 +14,20 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
     public final const COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'block-stances-neutral-article-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYSTANCES = 'block-mystances-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYSTANCES],
+            self::COMPONENT_BLOCK_TABPANEL_STANCES,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE,
+            self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE,
+            self::COMPONENT_BLOCK_TABPANEL_MYSTANCES,
         );
     }
 

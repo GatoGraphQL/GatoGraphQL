@@ -4,10 +4,10 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessages extends PoP_Module_Pro
 {
     public final const COMPONENT_FEEDBACKMESSAGE_CONTACTUSER = 'feedbackmessage-contactuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CONTACTUSER],
+            self::COMPONENT_FEEDBACKMESSAGE_CONTACTUSER,
         );
     }
 

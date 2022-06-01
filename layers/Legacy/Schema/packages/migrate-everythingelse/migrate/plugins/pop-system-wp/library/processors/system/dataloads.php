@@ -7,10 +7,10 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadCom
     public final const COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS = 'dataloadaction-system-activateplugins';
 
     // use PoP_SystemWP_WP_Module_Processor_SystemActionsTrait;
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
+            self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS,
         );
     }
 

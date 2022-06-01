@@ -6,11 +6,11 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
 {
     public final const COMPONENT_PAGE_ADDONTABS = 'page-addontabs';
     public final const COMPONENT_PAGE_BODYTABS = 'page-bodytabs';
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_PAGE_ADDONTABS],
-            [self::class, self::COMPONENT_PAGE_BODYTABS],
+            self::COMPONENT_PAGE_ADDONTABS,
+            self::COMPONENT_PAGE_BODYTABS,
         );
     }
 

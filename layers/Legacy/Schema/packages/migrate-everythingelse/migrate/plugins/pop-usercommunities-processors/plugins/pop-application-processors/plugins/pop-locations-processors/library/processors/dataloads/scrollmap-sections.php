@@ -9,11 +9,11 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public final const COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP = 'dataload-communities-scrollmap';
     public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'dataload-authormembers-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP,
         );
     }
 
@@ -52,8 +52,8 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;

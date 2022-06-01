@@ -19,25 +19,25 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
     public final const COMPONENT_LATESTCOUNT_TAG_STANCES_NEUTRAL = 'latestcount-tag-stances-neutral';
     public final const COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL = 'latestcount-single-stances-neutral';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL],
+            self::COMPONENT_LATESTCOUNT_STANCES,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES,
+            self::COMPONENT_LATESTCOUNT_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_STANCES_NEUTRAL,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES_NEUTRAL,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL,
         );
     }
 

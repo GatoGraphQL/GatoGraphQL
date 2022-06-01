@@ -4,10 +4,10 @@ class GD_QT_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompone
 {
     public final const COMPONENT_QT_FORMINPUTGROUP_LANGUAGE = 'qt-forminputgroup-language';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QT_FORMINPUTGROUP_LANGUAGE],
+            self::COMPONENT_QT_FORMINPUTGROUP_LANGUAGE,
         );
     }
 

@@ -16,21 +16,21 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     public final const COMPONENT_FORMINPUTGROUP_SENDERNAME = 'ure-forminputgroup-sendername';
     public final const COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE = 'ure-forminputgroup-additionalmessage';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_EDITOR],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_TEXTAREAEDITOR],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERUSER],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERPOST],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERTAG],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERCOMMENT],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_HASHTAGS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_NAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILS],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_SENDERNAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE],
+            self::COMPONENT_FORMINPUTGROUP_EDITOR,
+            self::COMPONENT_FORMINPUTGROUP_TEXTAREAEDITOR,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERUSER,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERPOST,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERTAG,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERCOMMENT,
+            self::COMPONENT_FILTERINPUTGROUP_SEARCH,
+            self::COMPONENT_FILTERINPUTGROUP_HASHTAGS,
+            self::COMPONENT_FILTERINPUTGROUP_NAME,
+            self::COMPONENT_FORMINPUTGROUP_EMAILS,
+            self::COMPONENT_FORMINPUTGROUP_SENDERNAME,
+            self::COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE,
         );
     }
 

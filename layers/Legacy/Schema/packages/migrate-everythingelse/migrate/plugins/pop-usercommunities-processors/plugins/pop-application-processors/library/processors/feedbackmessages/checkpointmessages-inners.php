@@ -5,11 +5,11 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageInners extends Po
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY = 'checkpointmessageinner-profilecommunity';
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP = 'checkpointmessageinner-profilecommunityeditmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP,
         );
     }
 

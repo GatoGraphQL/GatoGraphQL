@@ -7,13 +7,13 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
     public final const COMPONENT_BUTTONGROUP_AUTHORSTANCES = 'buttongroup-authorstances';
     public final const COMPONENT_BUTTONGROUP_TAGSTANCES = 'buttongroup-tagstances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONGROUP_STANCES],
-            [self::class, self::COMPONENT_BUTTONGROUP_MYSTANCES],
-            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORSTANCES],
-            [self::class, self::COMPONENT_BUTTONGROUP_TAGSTANCES],
+            self::COMPONENT_BUTTONGROUP_STANCES,
+            self::COMPONENT_BUTTONGROUP_MYSTANCES,
+            self::COMPONENT_BUTTONGROUP_AUTHORSTANCES,
+            self::COMPONENT_BUTTONGROUP_TAGSTANCES,
         );
     }
 

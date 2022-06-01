@@ -6,11 +6,11 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     public final const COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS = 'widgetcompact-automatedemails-post-authors';
     public final const COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO = 'widgetcompact-automatedemails-postinfo';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO],
+            self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS,
+            self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO,
         );
     }
 

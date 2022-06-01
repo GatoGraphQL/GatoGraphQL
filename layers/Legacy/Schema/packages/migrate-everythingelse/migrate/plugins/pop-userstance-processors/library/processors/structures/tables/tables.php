@@ -5,10 +5,10 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
     public final const COMPONENT_TABLE_MYSTANCES = 'table-mystances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLE_MYSTANCES],
+            self::COMPONENT_TABLE_MYSTANCES,
         );
     }
 

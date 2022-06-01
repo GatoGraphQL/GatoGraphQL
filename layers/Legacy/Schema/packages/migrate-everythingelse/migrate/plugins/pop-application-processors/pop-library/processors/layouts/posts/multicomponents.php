@@ -7,11 +7,11 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
     public final const COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION = 'multicomponent-userhighlightpostinteraction';
     public final const COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION = 'multicomponent-userpostinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION],
+            self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION,
+            self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION,
         );
     }
 

@@ -7,12 +7,12 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT = 'viewcomponent-buttoninner-addcomment';
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL = 'viewcomponent-buttoninner-addcomment-full';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL,
         );
     }
     

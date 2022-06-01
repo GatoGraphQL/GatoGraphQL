@@ -6,11 +6,11 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     public final const COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME = 'useraccount-userloggedinwelcome';
     public final const COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT = 'useraccount-userloggedinprompt';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME],
-            [self::class, self::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT],
+            self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME,
+            self::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT,
         );
     }
 

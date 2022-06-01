@@ -4,10 +4,10 @@ class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_Blo
 {
     public final const COMPONENT_BLOCK_SETTINGS = 'block-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_SETTINGS],
+            self::COMPONENT_BLOCK_SETTINGS,
         );
     }
 

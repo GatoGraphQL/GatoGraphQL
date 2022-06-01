@@ -4,10 +4,10 @@ class PoP_Core_Module_Processor_FormInners extends PoP_Module_Processor_FormInne
 {
     public final const COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS = 'forminner-everythingquicklinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS],
+            self::COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS,
         );
     }
 

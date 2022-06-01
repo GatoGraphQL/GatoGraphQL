@@ -205,24 +205,24 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_SORT],
-            [self::class, self::COMPONENT_FILTERINPUT_LIMIT],
-            [self::class, self::COMPONENT_FILTERINPUT_OFFSET],
-            [self::class, self::COMPONENT_FILTERINPUT_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_ID],
-            [self::class, self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_PARENT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_PARENT_ID],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_SLUGS],
-            [self::class, self::COMPONENT_FILTERINPUT_SLUG],
-            [self::class, self::COMPONENT_FILTERINPUT_DATEFORMAT],
-            [self::class, self::COMPONENT_FILTERINPUT_GMT],
+            self::COMPONENT_FILTERINPUT_SORT,
+            self::COMPONENT_FILTERINPUT_LIMIT,
+            self::COMPONENT_FILTERINPUT_OFFSET,
+            self::COMPONENT_FILTERINPUT_SEARCH,
+            self::COMPONENT_FILTERINPUT_IDS,
+            self::COMPONENT_FILTERINPUT_ID,
+            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS,
+            self::COMPONENT_FILTERINPUT_PARENT_IDS,
+            self::COMPONENT_FILTERINPUT_PARENT_ID,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS,
+            self::COMPONENT_FILTERINPUT_SLUGS,
+            self::COMPONENT_FILTERINPUT_SLUG,
+            self::COMPONENT_FILTERINPUT_DATEFORMAT,
+            self::COMPONENT_FILTERINPUT_GMT,
         );
     }
 

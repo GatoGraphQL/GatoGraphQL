@@ -7,10 +7,10 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
 {
     public final const COMPONENT_CAROUSELCONTROLS_USERS = 'carouselcontrols-users';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_USERS],
+            self::COMPONENT_CAROUSELCONTROLS_USERS,
         );
     }
 

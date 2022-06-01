@@ -7,11 +7,11 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
     public final const COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION = 'contentinner-userstancepostinteraction';
     public final const COMPONENT_CONTENTINNER_STANCESINGLE = 'contentinner-stancesingle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION],
-            [self::class, self::COMPONENT_CONTENTINNER_STANCESINGLE],
+            self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION,
+            self::COMPONENT_CONTENTINNER_STANCESINGLE,
         );
     }
 

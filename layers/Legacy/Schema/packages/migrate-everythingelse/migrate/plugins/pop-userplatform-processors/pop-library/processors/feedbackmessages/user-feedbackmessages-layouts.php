@@ -5,10 +5,10 @@ class PoP_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Process
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES = 'layout-feedbackmessage-mypreferences';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES,
         );
     }
 

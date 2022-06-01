@@ -7,13 +7,13 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
     public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES = 'filtercomponent-selectabletypeaheadalert-selectableprofiles';
     public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS = 'filtercomponent-selectabletypeaheadalert-communityusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS],
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS],
-            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES],
-            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS],
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS,
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS,
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES,
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS,
         );
     }
 

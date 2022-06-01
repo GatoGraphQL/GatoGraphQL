@@ -4,10 +4,10 @@ class PoP_Module_Processor_CreateLocationFeedbackMessages extends PoP_Module_Pro
 {
     public final const COMPONENT_FEEDBACKMESSAGE_CREATELOCATION = 'feedbackmessage-createlocation';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CREATELOCATION],
+            self::COMPONENT_FEEDBACKMESSAGE_CREATELOCATION,
         );
     }
 

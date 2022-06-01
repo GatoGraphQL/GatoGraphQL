@@ -25,10 +25,10 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT],
+            self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT,
         );
     }
 

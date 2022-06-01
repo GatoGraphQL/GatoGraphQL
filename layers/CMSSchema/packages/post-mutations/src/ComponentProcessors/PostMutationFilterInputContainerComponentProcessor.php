@@ -14,11 +14,11 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
     public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT = 'filterinputcontainer-mypostcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT,
         );
     }
 
@@ -28,8 +28,8 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $targetModule = match ($component->name) {
-            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
-            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => self::COMPONENT_FILTERINPUTCONTAINER_POSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT,
             default => null,
         };
         $filterInputComponents = parent::getFilterInputComponents($targetModule);

@@ -11,17 +11,17 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL = 'scroll-locationposts-thumbnail';
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_LIST = 'scroll-locationposts-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_LIST],
-            [self::class, self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_ADDONS,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_DETAILS,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_LIST,
+            self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW,
         );
     }
 
@@ -52,12 +52,12 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
         // Extra classes
         $simpleviews = array(
             [GD_Custom_EM_Module_Processor_CustomScrolls::class, GD_Custom_EM_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW,
         );
         $fullviews = array(
             [GD_Custom_EM_Module_Processor_CustomScrolls::class, GD_Custom_EM_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW,
         );
 
         $extra_class = '';

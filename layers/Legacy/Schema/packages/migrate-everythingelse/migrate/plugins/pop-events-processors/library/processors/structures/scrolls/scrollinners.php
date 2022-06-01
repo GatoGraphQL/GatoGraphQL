@@ -19,25 +19,25 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const COMPONENT_SCROLLINNER_EVENTS_LIST = 'scrollinner-events-list';
     public final const COMPONENT_SCROLLINNER_PASTEVENTS_LIST = 'scrollinner-pastevents-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_EVENTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_EVENTS_DETAILS,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS,
+            self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_EVENTS_LIST,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST,
+            self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW,
         );
     }
 

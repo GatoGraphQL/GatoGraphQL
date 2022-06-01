@@ -7,13 +7,13 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
     public final const COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW = 'scrollinner-organizations-fullview';
     public final const COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW = 'scrollinner-individuals-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_INDIVIDUALS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS,
+            self::COMPONENT_SCROLLINNER_INDIVIDUALS_DETAILS,
+            self::COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW,
         );
     }
 

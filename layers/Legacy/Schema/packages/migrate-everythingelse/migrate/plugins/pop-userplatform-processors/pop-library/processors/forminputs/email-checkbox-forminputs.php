@@ -7,12 +7,12 @@ class PoP_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatfor
     public final const COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminput-emaildigests-weeklylatestposts';
     public final const COMPONENT_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS = 'forminput-emaildigests-specialposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS],
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST,
+            self::COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS,
+            self::COMPONENT_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS,
         );
     }
 

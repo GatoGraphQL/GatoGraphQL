@@ -12,17 +12,17 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
     public final const COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS = 'layout-previewpost-locationpost-horizontalmapdetails';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED = 'layout-previewpost-locationpost-related';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED,
         );
     }
 

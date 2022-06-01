@@ -4,10 +4,10 @@ class UserStance_Module_Processor_TableInners extends PoP_Module_Processor_Table
 {
     public final const COMPONENT_TABLEINNER_MYSTANCES = 'tableinner-mystances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLEINNER_MYSTANCES],
+            self::COMPONENT_TABLEINNER_MYSTANCES,
         );
     }
 

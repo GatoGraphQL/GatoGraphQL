@@ -9,12 +9,12 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     public final const COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'layoutwrapper-userhighlightpostinteraction';
     public final const COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER = 'codewrapper-lazyloadingspinner';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER],
+            self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION,
+            self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION,
+            self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER,
         );
     }
 

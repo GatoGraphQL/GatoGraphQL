@@ -10,10 +10,10 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public final const COMPONENT_DATALOAD_FLAG = 'dataload-flag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_FLAG],
+            self::COMPONENT_DATALOAD_FLAG,
         );
     }
 

@@ -6,10 +6,10 @@ class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Widget
 {
     public final const COMPONENT_WIDGETCOMPACT_GENERICUSERINFO = 'widgetcompact-genericuserinfo';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETCOMPACT_GENERICUSERINFO],
+            self::COMPONENT_WIDGETCOMPACT_GENERICUSERINFO,
         );
     }
 

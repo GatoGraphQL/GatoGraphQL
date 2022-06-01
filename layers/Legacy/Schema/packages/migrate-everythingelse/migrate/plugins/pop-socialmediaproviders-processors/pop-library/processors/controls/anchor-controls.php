@@ -12,15 +12,15 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER = 'anchorcontrol-fixedshare-twitter';
     public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN = 'anchorcontrol-fixedshare-linkedin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_LINKEDIN],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN],
+            self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK,
+            self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER,
+            self::COMPONENT_ANCHORCONTROL_SHARE_LINKEDIN,
+            self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK,
+            self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER,
+            self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN,
         );
     }
 
@@ -91,9 +91,9 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                 );
 
                 $fixed = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN],
+                    self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK,
+                    self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER,
+                    self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN,
                 );
                 if (in_array($component, $fixed)) {
                       // Share the website URL

@@ -25,21 +25,21 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public final const COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP = 'dataload-tagpastevents-scrollmap';
     public final const COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP = 'dataload-tagevents-horizontalscrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_USERS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP,
         );
     }
 
@@ -103,23 +103,23 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_USERS_SCROLLMAP,
 
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP,
         );
         $horizontalmaps = array(
-            [self::class, self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
@@ -248,14 +248,14 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
         // Events: choose to only select past/future
         $past = array(
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP,
         );
         $future = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLLMAP,
         );
         if (in_array($component, $past)) {
             $daterange_class = 'daterange-past opens-right';

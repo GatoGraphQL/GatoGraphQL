@@ -4,10 +4,10 @@ class PoP_Core_Module_Processor_FeedbackMessageInners extends PoP_Module_Process
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWUSERS = 'feedbackmessageinner-inviteusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWUSERS],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWUSERS,
         );
     }
 

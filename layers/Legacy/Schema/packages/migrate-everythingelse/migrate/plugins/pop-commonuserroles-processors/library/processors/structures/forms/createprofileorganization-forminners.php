@@ -4,10 +4,10 @@ class GD_URE_Module_Processor_CreateProfileOrganizationFormInners extends GD_URE
 {
     public final const COMPONENT_FORMINNER_PROFILEORGANIZATION_CREATE = 'forminner-profileorganization-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_PROFILEORGANIZATION_CREATE],
+            self::COMPONENT_FORMINNER_PROFILEORGANIZATION_CREATE,
         );
     }
 }

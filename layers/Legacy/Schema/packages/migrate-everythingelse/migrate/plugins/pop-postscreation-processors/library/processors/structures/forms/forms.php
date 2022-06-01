@@ -4,10 +4,10 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostForms extends PoP_Modul
 {
     public final const COMPONENT_FORM_POST = 'form-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_POST],
+            self::COMPONENT_FORM_POST,
         );
     }
 

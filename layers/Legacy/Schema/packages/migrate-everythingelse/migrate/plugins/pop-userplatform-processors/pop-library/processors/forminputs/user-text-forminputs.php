@@ -13,18 +13,18 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
     public final const COMPONENT_FORMINPUT_CUU_FIRSTNAME = 'forminput-cuu-firstName';
     public final const COMPONENT_FORMINPUT_CUU_USERWEBSITEURL = 'forminput-cuu-userwebsiteurl';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CUU_USERNAME],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_EMAIL],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_CURRENTPASSWORD],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_PASSWORD],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_NEWPASSWORD],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_PASSWORDREPEAT],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_NEWPASSWORDREPEAT],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_FIRSTNAME],
-            [self::class, self::COMPONENT_FORMINPUT_CUU_USERWEBSITEURL],
+            self::COMPONENT_FORMINPUT_CUU_USERNAME,
+            self::COMPONENT_FORMINPUT_CUU_EMAIL,
+            self::COMPONENT_FORMINPUT_CUU_CURRENTPASSWORD,
+            self::COMPONENT_FORMINPUT_CUU_PASSWORD,
+            self::COMPONENT_FORMINPUT_CUU_NEWPASSWORD,
+            self::COMPONENT_FORMINPUT_CUU_PASSWORDREPEAT,
+            self::COMPONENT_FORMINPUT_CUU_NEWPASSWORDREPEAT,
+            self::COMPONENT_FORMINPUT_CUU_FIRSTNAME,
+            self::COMPONENT_FORMINPUT_CUU_USERWEBSITEURL,
         );
     }
 

@@ -7,13 +7,13 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER = 'forminput-hiddeninput-user';
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT = 'forminput-hiddeninput-comment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTPOST],
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST],
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER],
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT],
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTPOST,
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST,
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER,
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT,
         );
     }
 

@@ -16,22 +16,22 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
     public final const COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
     public final const COMPONENT_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKGROUP_POST],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOM],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_POSTEDIT],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_ADDONSPOSTEDIT],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_USER],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_USERBOTTOM],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_USERCOMPACT],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_TAG],
+            self::COMPONENT_QUICKLINKGROUP_POST,
+            self::COMPONENT_QUICKLINKGROUP_POSTBOTTOM,
+            self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER,
+            self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED,
+            self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER,
+            self::COMPONENT_QUICKLINKGROUP_POSTEDIT,
+            self::COMPONENT_QUICKLINKGROUP_ADDONSPOSTEDIT,
+            self::COMPONENT_QUICKLINKGROUP_USER,
+            self::COMPONENT_QUICKLINKGROUP_USERBOTTOM,
+            self::COMPONENT_QUICKLINKGROUP_USERCOMPACT,
+            self::COMPONENT_QUICKLINKGROUP_USER_EDITMEMBERS,
+            self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST,
+            self::COMPONENT_QUICKLINKGROUP_TAG,
         );
     }
 
@@ -50,7 +50,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 $subcomponents = array();
                 $subcomponents[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
                 $subcomponents[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS];
-                if ($component == [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
+                if ($component == self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDED) {
                     $subcomponents[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE];
                 }
                 $subcomponents = \PoP\Root\App::applyFilters(
@@ -74,7 +74,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                     $subcomponents[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
                 }
-                if ($component == [self::class, self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
+                if ($component == self::COMPONENT_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER) {
                     $subcomponents[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE];
                 }
                 $subcomponents = \PoP\Root\App::applyFilters(

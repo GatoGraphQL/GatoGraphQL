@@ -7,13 +7,13 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
     public final const COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW = 'scroll-myevents-fullviewpreview';
     public final const COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW = 'scroll-mypastevents-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW,
         );
     }
 
@@ -38,12 +38,12 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
 
         // Extra classes
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW,
         );
 
         $extra_class = '';

@@ -7,11 +7,11 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public final const COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ = 'custombuttoncontrol-addcontentfaq';
     public final const COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ = 'custombuttoncontrol-accountfaq';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ],
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ],
+            self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ,
+            self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ,
         );
     }
 

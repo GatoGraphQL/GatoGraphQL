@@ -17,19 +17,19 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
     public final const COMPONENT_LAYOUT_MULTIPLEUSER_LIST = 'layout-multipleuser-list';
     public final const COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER = 'layout-multipleuser-fulluser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_POSTAUTHOR],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR],
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_POSTAUTHOR,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR,
 
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_LIST],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER],
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_NAVIGATOR,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_DETAILS,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_LIST,
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER,
         );
     }
 

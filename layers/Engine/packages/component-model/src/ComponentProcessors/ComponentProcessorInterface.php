@@ -15,7 +15,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ComponentProcessorInterface
 {
-    public function getComponentsToProcess(): array;
+    public function getComponentNamesToProcess(): array;
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array;
     public function getAllSubcomponents(\PoP\ComponentModel\Component\Component $component): array;
     public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;

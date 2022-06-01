@@ -9,15 +9,15 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
     public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebar-compacthorizontal-organization';
     public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebar-compacthorizontal-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL,
         );
     }
 

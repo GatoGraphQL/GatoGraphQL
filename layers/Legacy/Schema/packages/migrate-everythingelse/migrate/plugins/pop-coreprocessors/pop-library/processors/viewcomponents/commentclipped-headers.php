@@ -4,10 +4,10 @@ class PoP_Module_Processor_CommentClippedViewComponentHeaders extends PoP_Module
 {
     public final const COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED = 'viewcomponent-header-commentclipped';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED],
+            self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED,
         );
     }
 

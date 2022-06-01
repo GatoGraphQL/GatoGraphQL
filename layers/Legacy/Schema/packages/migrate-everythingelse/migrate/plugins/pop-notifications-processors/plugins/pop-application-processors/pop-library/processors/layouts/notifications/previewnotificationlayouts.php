@@ -5,11 +5,11 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_PREVIEWNOTIFICATION_DETAILS = 'layout-previewnotification-details';
     public final const COMPONENT_LAYOUT_PREVIEWNOTIFICATION_LIST = 'layout-previewnotification-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_LIST],
+            self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_LIST,
         );
     }
     

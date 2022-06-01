@@ -5,11 +5,11 @@ class PoP_LocationPosts_Module_Processor_CustomScrollMaps extends PoP_Module_Pro
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_MAP = 'scroll-locationposts-map';
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_HORIZONTALMAP = 'scroll-locationposts-horizontalmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_MAP],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_MAP,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_HORIZONTALMAP,
         );
     }
 

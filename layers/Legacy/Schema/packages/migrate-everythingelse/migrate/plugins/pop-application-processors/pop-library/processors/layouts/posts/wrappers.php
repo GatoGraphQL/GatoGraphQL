@@ -8,11 +8,11 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
     public final const COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'multicomponentwrapper-userhighlightpostinteraction';
     public final const COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION = 'multicomponentwrapper-userpostinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION],
+            self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION,
+            self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION,
         );
     }
 

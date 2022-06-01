@@ -58,11 +58,11 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_TAG_SLUGS],
-            [self::class, self::COMPONENT_FILTERINPUT_TAG_IDS],
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS,
+            self::COMPONENT_FILTERINPUT_TAG_IDS,
         );
     }
 

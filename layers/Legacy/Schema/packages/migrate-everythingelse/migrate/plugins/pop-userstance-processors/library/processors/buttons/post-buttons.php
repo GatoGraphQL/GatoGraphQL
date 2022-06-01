@@ -7,12 +7,12 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
     public final const COMPONENT_BUTTON_STANCE_UPDATE = 'postbutton-stance-update';
     public final const COMPONENT_LAZYBUTTON_STANCE_CREATEORUPDATE = 'lazypostbutton-stance-createorupdate';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_STANCE_CREATE],
-            [self::class, self::COMPONENT_BUTTON_STANCE_UPDATE],
-            [self::class, self::COMPONENT_LAZYBUTTON_STANCE_CREATEORUPDATE],
+            self::COMPONENT_BUTTON_STANCE_CREATE,
+            self::COMPONENT_BUTTON_STANCE_UPDATE,
+            self::COMPONENT_LAZYBUTTON_STANCE_CREATEORUPDATE,
         );
     }
 

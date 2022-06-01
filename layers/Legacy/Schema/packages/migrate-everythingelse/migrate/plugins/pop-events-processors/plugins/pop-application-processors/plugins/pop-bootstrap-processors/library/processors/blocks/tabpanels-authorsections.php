@@ -8,12 +8,12 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS = 'block-tabpanel-authorpastevents';
     public final const COMPONENT_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR = 'block-tabpanel-authoreventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTS,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR,
         );
     }
 

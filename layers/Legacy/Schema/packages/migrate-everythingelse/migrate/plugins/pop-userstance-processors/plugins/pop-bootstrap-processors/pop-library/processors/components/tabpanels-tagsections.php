@@ -7,13 +7,13 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
     public final const COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL = 'tabpanel-tagstances-neutral';
     public final const COMPONENT_TABPANEL_TAGSTANCES_AGAINST = 'tabpanel-tagstances-against';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES],
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES_PRO],
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL],
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES_AGAINST],
+            self::COMPONENT_TABPANEL_TAGSTANCES,
+            self::COMPONENT_TABPANEL_TAGSTANCES_PRO,
+            self::COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL,
+            self::COMPONENT_TABPANEL_TAGSTANCES_AGAINST,
         );
     }
 

@@ -4,10 +4,10 @@ class PoP_Module_Processor_TagTypeaheadComponentLayouts extends PoP_Module_Proce
 {
     public final const COMPONENT_LAYOUTTAG_TYPEAHEAD_COMPONENT = 'layouttag-typeahead-component';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTTAG_TYPEAHEAD_COMPONENT],
+            self::COMPONENT_LAYOUTTAG_TYPEAHEAD_COMPONENT,
         );
     }
 }

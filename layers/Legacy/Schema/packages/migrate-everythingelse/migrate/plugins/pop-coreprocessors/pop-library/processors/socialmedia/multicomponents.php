@@ -12,18 +12,18 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     public final const COMPONENT_MULTICOMPONENT_USEROPTIONS = 'multicomponent-useroptions';
     public final const COMPONENT_MULTICOMPONENT_TAGOPTIONS = 'multicomponent-tagoptions';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA],
-            [self::class, self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA],
-            [self::class, self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_POSTOPTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USEROPTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_TAGOPTIONS],
+            self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA,
+            self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA,
+            self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA,
+            self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS,
+            self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS,
+            self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS,
+            self::COMPONENT_MULTICOMPONENT_POSTOPTIONS,
+            self::COMPONENT_MULTICOMPONENT_USEROPTIONS,
+            self::COMPONENT_MULTICOMPONENT_TAGOPTIONS,
         );
     }
 
@@ -51,18 +51,18 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
                 break;
 
             case self::COMPONENT_MULTICOMPONENT_POSTOPTIONS:
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA];
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS];
+                $components[] = self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA;
+                $components[] = self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS;
                 break;
 
             case self::COMPONENT_MULTICOMPONENT_USEROPTIONS:
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA];
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS];
+                $components[] = self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA;
+                $components[] = self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS;
                 break;
 
             case self::COMPONENT_MULTICOMPONENT_TAGOPTIONS:
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA];
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS];
+                $components[] = self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA;
+                $components[] = self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS;
                 break;
         }
 

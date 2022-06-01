@@ -4,10 +4,10 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks extends PoP_Mo
 {
     public final const COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS = 'block-tabpanel-taglocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS,
         );
     }
 

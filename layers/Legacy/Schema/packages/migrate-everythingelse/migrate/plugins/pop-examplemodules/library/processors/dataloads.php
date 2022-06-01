@@ -24,17 +24,17 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     public final const COMPONENT_EXAMPLE_PAGE = 'example-page';
     public final const COMPONENT_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EXAMPLE_LATESTPOSTS],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION],
-            [self::class, self::COMPONENT_EXAMPLE_TAGLATESTPOSTS],
-            [self::class, self::COMPONENT_EXAMPLE_TAGDESCRIPTION],
-            [self::class, self::COMPONENT_EXAMPLE_SINGLE],
-            [self::class, self::COMPONENT_EXAMPLE_PAGE],
-            [self::class, self::COMPONENT_EXAMPLE_HOMESTATICPAGE],
+            self::COMPONENT_EXAMPLE_LATESTPOSTS,
+            self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS,
+            self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION,
+            self::COMPONENT_EXAMPLE_TAGLATESTPOSTS,
+            self::COMPONENT_EXAMPLE_TAGDESCRIPTION,
+            self::COMPONENT_EXAMPLE_SINGLE,
+            self::COMPONENT_EXAMPLE_PAGE,
+            self::COMPONENT_EXAMPLE_HOMESTATICPAGE,
         );
     }
 

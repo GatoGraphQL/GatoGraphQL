@@ -9,13 +9,13 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA = 'viewcomponent-userbutton-api-socialmedia';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN = 'viewcomponent-userbutton-api-previewdropdown';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN,
         );
     }
 

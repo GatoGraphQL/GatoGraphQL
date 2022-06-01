@@ -14,14 +14,14 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
     public final const COMPONENT_FRAME_TOPSIMPLE = 'frame-topsimple';
     public final const COMPONENT_FRAME_TOPEMBED = 'frame-topembed';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FRAME_TOP],
-            [self::class, self::COMPONENT_FRAME_SIDE],
-            [self::class, self::COMPONENT_FRAME_BACKGROUND],
-            [self::class, self::COMPONENT_FRAME_TOPSIMPLE],
-            [self::class, self::COMPONENT_FRAME_TOPEMBED],
+            self::COMPONENT_FRAME_TOP,
+            self::COMPONENT_FRAME_SIDE,
+            self::COMPONENT_FRAME_BACKGROUND,
+            self::COMPONENT_FRAME_TOPSIMPLE,
+            self::COMPONENT_FRAME_TOPEMBED,
         );
     }
 
@@ -162,7 +162,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
 
             case self::COMPONENT_FRAME_BACKGROUND:
                 if (PoP_ApplicationProcessors_Utils::addBackgroundMenu()) {
-                    $ret[] = [self::class, self::COMPONENT_GROUP_BACKGROUNDMENU];
+                    $ret[] = self::COMPONENT_GROUP_BACKGROUNDMENU;
                 }
                 break;
         }
@@ -240,7 +240,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 // If class AAL_PoPProcessors is not initialized, then the class below does not exist, and will raise an exception
                 if (defined('POP_NOTIFICATIONSPROCESSORS_INITIALIZED')) {
                     $ret['ids'] = array(
-                        'notifications-count' => AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//[self::class, self::COMPONENT_ID_NOTIFICATIONSCOUNT],
+                        'notifications-count' => AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//self::COMPONENT_ID_NOTIFICATIONSCOUNT,
                     );
                     $ret['params'] = array(
                         'notifications-link' => array(
@@ -421,7 +421,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 }
 
                 if (PoP_ApplicationProcessors_Utils::addBackgroundMenu()) {
-                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName([self::class, self::COMPONENT_GROUP_BACKGROUNDMENU]);
+                    $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['menu'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(self::COMPONENT_GROUP_BACKGROUNDMENU);
                 }
                 break;
         }

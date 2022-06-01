@@ -5,11 +5,11 @@ class AAL_PoPProcessors_Module_Processor_ControlButtonGroups extends PoP_Module_
     public final const COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONLIST = 'controlbuttongroup-notificationlist';
     public final const COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD = 'controlbuttongroup-notifications-markallasread';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONLIST],
-            [self::class, self::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD],
+            self::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONLIST,
+            self::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD,
         );
     }
 

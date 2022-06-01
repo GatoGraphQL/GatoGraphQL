@@ -7,10 +7,10 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
 {
     public final const COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP = 'dataload-singleauthors-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP,
         );
     }
 
@@ -44,7 +44,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;

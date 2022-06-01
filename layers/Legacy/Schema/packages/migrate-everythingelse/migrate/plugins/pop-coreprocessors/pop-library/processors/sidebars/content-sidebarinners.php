@@ -5,11 +5,11 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
     public final const COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL = 'contentsidebarinner-horizontal';
     public final const COMPONENT_SIDEBARINNER_CONTENT_VERTICAL = 'contentsidebarinner-vertical';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL],
-            [self::class, self::COMPONENT_SIDEBARINNER_CONTENT_VERTICAL],
+            self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL,
+            self::COMPONENT_SIDEBARINNER_CONTENT_VERTICAL,
         );
     }
 

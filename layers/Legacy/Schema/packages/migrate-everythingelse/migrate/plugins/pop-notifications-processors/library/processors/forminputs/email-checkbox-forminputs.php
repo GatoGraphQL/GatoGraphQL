@@ -5,10 +5,10 @@ class PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs extends P
 {
     public final const COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS = 'forminput-emaildigests-dailynotifications';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS],
+            self::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS,
         );
     }
 

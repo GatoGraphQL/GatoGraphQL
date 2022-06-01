@@ -4,10 +4,10 @@ class GD_URE_Module_Processor_CustomContents extends PoP_Module_Processor_Conten
 {
     public final const COMPONENT_URE_CONTENT_MEMBER = 'ure-content-member';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_CONTENT_MEMBER],
+            self::COMPONENT_URE_CONTENT_MEMBER,
         );
     }
 

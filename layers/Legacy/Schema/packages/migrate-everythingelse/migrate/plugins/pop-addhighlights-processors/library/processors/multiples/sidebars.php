@@ -7,13 +7,13 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public final const COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR = 'multiple-single-highlight-sidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR = 'multiple-single-post-highlightssidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR,
         );
     }
 

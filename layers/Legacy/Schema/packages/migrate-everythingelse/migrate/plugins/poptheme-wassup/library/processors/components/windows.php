@@ -6,10 +6,10 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
 {
     public final const COMPONENT_WINDOW_ADDONS = 'window-addons';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WINDOW_ADDONS],
+            self::COMPONENT_WINDOW_ADDONS,
         );
     }
 

@@ -8,12 +8,12 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public final const COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'userstance-layoutwrapper-userpostinteraction';
     public final const COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION = 'userstance-layoutwrapper-userfullviewinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
-            [self::class, self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION],
+            self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION,
+            self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION,
+            self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION,
         );
     }
 

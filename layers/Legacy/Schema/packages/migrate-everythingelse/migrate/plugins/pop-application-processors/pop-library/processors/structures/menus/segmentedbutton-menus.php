@@ -4,11 +4,11 @@ class PoP_Module_Processor_SegmentedButtonMenus extends PoP_Module_Processor_Con
 {
     public final const COMPONENT_SEGMENTEDBUTTONMENU = 'segmentedbuttonmenu';
     public final const COMPONENT_NAVIGATORSEGMENTEDBUTTONMENU = 'navigatorsegmentedbuttonmenu';
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SEGMENTEDBUTTONMENU],
-            [self::class, self::COMPONENT_NAVIGATORSEGMENTEDBUTTONMENU],
+            self::COMPONENT_SEGMENTEDBUTTONMENU,
+            self::COMPONENT_NAVIGATORSEGMENTEDBUTTONMENU,
         );
     }
 

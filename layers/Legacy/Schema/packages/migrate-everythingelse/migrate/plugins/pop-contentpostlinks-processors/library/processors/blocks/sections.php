@@ -20,26 +20,26 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
     public final const COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST = 'block-authorlinks-scroll-list';
     public final const COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST = 'block-taglinks-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_LINKS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST,
         );
     }
 

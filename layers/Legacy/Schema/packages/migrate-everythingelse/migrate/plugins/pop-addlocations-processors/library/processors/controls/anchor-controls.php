@@ -6,10 +6,10 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
 {
     public final const COMPONENT_ANCHORCONTROL_CREATELOCATION = 'anchorcontrol-createlocation';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_CREATELOCATION],
+            self::COMPONENT_ANCHORCONTROL_CREATELOCATION,
         );
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)

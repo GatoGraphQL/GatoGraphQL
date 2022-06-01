@@ -6,12 +6,12 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageInners extends PoP_Module_Pr
     public final const COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWMEMBERS = 'feedbackmessageinner-invitemembers';
     public final const COMPONENT_FEEDBACKMESSAGEINNER_EDITMEMBERSHIP = 'feedbackmessageinner-editmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEMYCOMMUNITIES],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWMEMBERS],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_EDITMEMBERSHIP],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEMYCOMMUNITIES,
+            self::COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWMEMBERS,
+            self::COMPONENT_FEEDBACKMESSAGEINNER_EDITMEMBERSHIP,
         );
     }
 

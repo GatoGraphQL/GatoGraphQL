@@ -8,11 +8,11 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
     public final const COMPONENT_ANCHORCONTROL_ADDPOST = 'buttoncontrol-addpost';
     public final const COMPONENT_ANCHORCONTROL_TAGSLINK = 'buttoncontrol-tagslink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_ADDPOST],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TAGSLINK],
+            self::COMPONENT_ANCHORCONTROL_ADDPOST,
+            self::COMPONENT_ANCHORCONTROL_TAGSLINK,
         );
     }
 

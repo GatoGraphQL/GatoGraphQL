@@ -5,10 +5,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
 {
     public final const COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE = 'postbutton-postlink-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE],
+            self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE,
         );
     }
 

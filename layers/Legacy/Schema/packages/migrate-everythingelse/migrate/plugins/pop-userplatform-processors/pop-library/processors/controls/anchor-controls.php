@@ -7,11 +7,11 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
     public final const COMPONENT_ANCHORCONTROL_INVITENEWUSERS = 'anchorcontrol-invitenewusers';
     public final const COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS = 'anchorcontrol-share-invitenewusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS],
+            self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS,
+            self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS,
         );
     }
 

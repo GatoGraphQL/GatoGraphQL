@@ -12,18 +12,18 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     public final const COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES = 'filterinputgroup-organizationcategories';
     public final const COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES = 'filterinputgroup-organizationtypes';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES],
-            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON,
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER,
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME,
+            self::COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES,
+            self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES,
         );
     }
 

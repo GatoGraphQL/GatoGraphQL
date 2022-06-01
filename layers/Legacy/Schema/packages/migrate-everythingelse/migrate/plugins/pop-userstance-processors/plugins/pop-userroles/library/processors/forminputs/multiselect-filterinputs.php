@@ -25,10 +25,10 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT],
+            self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT,
         );
     }
 

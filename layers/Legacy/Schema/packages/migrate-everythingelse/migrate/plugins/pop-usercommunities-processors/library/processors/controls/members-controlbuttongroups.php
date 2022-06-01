@@ -4,10 +4,10 @@ class GD_URE_Module_Processor_CustomControlButtonGroups extends PoP_Module_Proce
 {
     public final const COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS = 'controlbuttongroup-invitenewmembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS],
+            self::COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS,
         );
     }
 

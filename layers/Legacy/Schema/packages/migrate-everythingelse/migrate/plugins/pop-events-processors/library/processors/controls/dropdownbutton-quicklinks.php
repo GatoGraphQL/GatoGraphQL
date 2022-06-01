@@ -4,10 +4,10 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
 {
     public final const COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS = 'em-dropdownbuttonquicklink-downloadlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS],
+            self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS,
         );
     }
 

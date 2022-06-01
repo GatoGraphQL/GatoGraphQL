@@ -4,10 +4,10 @@ class PoP_Module_Processor_NoLabelProfileFormGroups extends PoP_Module_Processor
 {
     public final const COMPONENT_FORMINPUTGROUP_CUP_DISPLAYEMAIL = 'forminputgroup-cup-displayemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_DISPLAYEMAIL],
+            self::COMPONENT_FORMINPUTGROUP_CUP_DISPLAYEMAIL,
         );
     }
 

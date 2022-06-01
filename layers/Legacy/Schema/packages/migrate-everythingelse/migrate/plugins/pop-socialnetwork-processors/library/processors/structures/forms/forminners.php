@@ -4,10 +4,10 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
 {
     public final const COMPONENT_FORMINNER_CONTACTUSER = 'forminner-contactuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_CONTACTUSER],
+            self::COMPONENT_FORMINNER_CONTACTUSER,
         );
     }
 

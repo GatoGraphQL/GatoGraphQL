@@ -6,10 +6,10 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 {
     public final const COMPONENT_MULTIPLE_LATESTNOTIFICATIONS = 'multiple-notifications-latestnotifications';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS],
+            self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS,
         );
     }
 
@@ -103,7 +103,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
                     $props,
                     'params',
                     array(
-                        'data-datasetcount-target' => '#'.AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//[self::class, self::COMPONENT_ID_NOTIFICATIONSCOUNT],
+                        'data-datasetcount-target' => '#'.AAL_PoPProcessors_NotificationUtils::getNotificationcountId(),//self::COMPONENT_ID_NOTIFICATIONSCOUNT,
                     )
                 );
                 break;

@@ -5,10 +5,10 @@ class GD_URE_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Process
 {
     public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS = 'forminput-text-typeaheadorganizations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS],
+            self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS,
         );
     }
 

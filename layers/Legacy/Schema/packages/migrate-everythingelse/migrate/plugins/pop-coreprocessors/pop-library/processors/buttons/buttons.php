@@ -9,14 +9,14 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public final const COMPONENT_BUTTON_POSTCOMMENTS = 'postbutton-comments';
     public final const COMPONENT_BUTTON_POSTCOMMENTS_LABEL = 'postbutton-comments-label';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN],
-            [self::class, self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA],
-            [self::class, self::COMPONENT_BUTTON_POSTPERMALINK],
-            [self::class, self::COMPONENT_BUTTON_POSTCOMMENTS],
-            [self::class, self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL],
+            self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN,
+            self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA,
+            self::COMPONENT_BUTTON_POSTPERMALINK,
+            self::COMPONENT_BUTTON_POSTCOMMENTS,
+            self::COMPONENT_BUTTON_POSTCOMMENTS_LABEL,
         );
     }
 

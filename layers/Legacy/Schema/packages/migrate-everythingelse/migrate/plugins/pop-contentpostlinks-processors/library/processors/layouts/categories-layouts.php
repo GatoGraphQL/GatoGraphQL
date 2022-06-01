@@ -4,10 +4,10 @@ class PoP_ContentPostLinks_Module_Processor_CategoriesLayouts extends PoP_Module
 {
     public final const COMPONENT_LAYOUT_LINK_CATEGORIES = 'layout-link-categories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_LINK_CATEGORIES],
+            self::COMPONENT_LAYOUT_LINK_CATEGORIES,
         );
     }
 

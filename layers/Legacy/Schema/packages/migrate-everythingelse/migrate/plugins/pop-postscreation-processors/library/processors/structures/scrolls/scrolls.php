@@ -5,11 +5,11 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
     public final const COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW = 'scroll-mylinks-simpleviewpreview';
     public final const COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW = 'scroll-mylinks-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW,
         );
     }
 
@@ -33,10 +33,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
 
         // Extra classes
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW,
         );
 
         $extra_class = '';

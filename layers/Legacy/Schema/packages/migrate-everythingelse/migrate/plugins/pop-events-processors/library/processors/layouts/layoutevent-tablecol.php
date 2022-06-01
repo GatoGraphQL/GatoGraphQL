@@ -4,10 +4,10 @@ class PoP_Module_Processor_EventDateAndTimeLayouts extends PoP_Module_Processor_
 {
     public final const COMPONENT_EM_LAYOUTEVENT_TABLECOL = 'em-layoutevent-tablecol';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_LAYOUTEVENT_TABLECOL],
+            self::COMPONENT_EM_LAYOUTEVENT_TABLECOL,
         );
     }
 }

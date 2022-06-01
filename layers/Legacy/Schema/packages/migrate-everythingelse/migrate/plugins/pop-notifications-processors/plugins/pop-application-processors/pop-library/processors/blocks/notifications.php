@@ -8,11 +8,11 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
     public final const COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS = 'block-notifications-scroll-details';
     public final const COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST = 'block-notifications-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST,
         );
     }
 

@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
     public final const COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION = 'vertical-sidebar-author-organization';
     public final const COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL = 'vertical-sidebar-author-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION],
-            [self::class, self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL],
+            self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION,
+            self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL,
         );
     }
 

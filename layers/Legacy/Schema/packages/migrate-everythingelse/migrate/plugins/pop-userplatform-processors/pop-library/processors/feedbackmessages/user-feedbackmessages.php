@@ -4,10 +4,10 @@ class PoP_Module_Processor_UserFeedbackMessages extends PoP_Module_Processor_Fee
 {
     public final const COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES = 'feedbackmessage-mypreferences';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES],
+            self::COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES,
         );
     }
 

@@ -4,10 +4,10 @@ class PoP_Module_Processor_FeaturedImageInnerComponentInputs extends PoP_Module_
 {
     public final const COMPONENT_FORMINPUT_FEATUREDIMAGEINNER = 'forminput-featuredimage-inner';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER],
+            self::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER,
         );
     }
 }

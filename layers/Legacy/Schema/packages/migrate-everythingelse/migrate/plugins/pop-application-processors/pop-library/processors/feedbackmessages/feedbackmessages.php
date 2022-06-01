@@ -5,11 +5,11 @@ class PoP_Module_Processor_DomainFeedbackMessages extends PoP_Module_Processor_F
     public final const COMPONENT_FEEDBACKMESSAGE_ITEMLIST = 'feedbackmessage-itemlist';
     public final const COMPONENT_FEEDBACKMESSAGE_EMPTY = 'feedbackmessage-empty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_ITEMLIST],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_EMPTY],
+            self::COMPONENT_FEEDBACKMESSAGE_ITEMLIST,
+            self::COMPONENT_FEEDBACKMESSAGE_EMPTY,
         );
     }
 

@@ -6,11 +6,11 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
     public final const COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP = 'ure-aal-buttoninner-editmembership';
     public final const COMPONENT_UREAAL_BUTTONINNER_VIEWALLMEMBERS = 'ure-aal-buttoninner-viewallmembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP],
-            [self::class, self::COMPONENT_UREAAL_BUTTONINNER_VIEWALLMEMBERS],
+            self::COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP,
+            self::COMPONENT_UREAAL_BUTTONINNER_VIEWALLMEMBERS,
         );
     }
 

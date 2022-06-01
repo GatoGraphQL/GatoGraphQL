@@ -5,10 +5,10 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
 {
     public final const COMPONENT_FORMINPUT_EDITOR = 'forminputeditor';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EDITOR],
+            self::COMPONENT_FORMINPUT_EDITOR,
         );
     }
 

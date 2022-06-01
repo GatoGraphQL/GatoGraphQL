@@ -4,10 +4,10 @@ class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_App
 {
     public final const COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON = 'script-createorupdatestancebutton';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON],
+            self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON,
         );
     }
 

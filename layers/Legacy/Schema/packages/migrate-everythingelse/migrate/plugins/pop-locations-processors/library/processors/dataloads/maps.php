@@ -8,10 +8,10 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
 
     public final const COMPONENT_DATALOAD_LOCATIONSMAP = 'dataload-locationsmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONSMAP],
+            self::COMPONENT_DATALOAD_LOCATIONSMAP,
         );
     }
 

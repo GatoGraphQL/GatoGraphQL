@@ -4,10 +4,10 @@ class PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts extends PoP_Module_P
 {
     public final const COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK = 'layout-addpostlinks-embedpreview-link';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
+            self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK,
         );
     }
     public function getFrameSrcField(\PoP\ComponentModel\Component\Component $component, array &$props)

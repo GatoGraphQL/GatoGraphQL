@@ -5,10 +5,10 @@ class PoP_Module_Processor_CaptchaFormInputs extends PoP_Module_Processor_Captch
 {
     public final const COMPONENT_FORMINPUT_CAPTCHA = 'forminput-captcha';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CAPTCHA],
+            self::COMPONENT_FORMINPUT_CAPTCHA,
         );
     }
 

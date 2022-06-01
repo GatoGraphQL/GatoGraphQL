@@ -6,12 +6,12 @@ class PoP_LocationPosts_Module_Processor_CustomFilters extends PoP_Module_Proces
     public final const COMPONENT_FILTER_TAGLOCATIONPOSTS = 'filter-taglocationposts';
     public final const COMPONENT_FILTER_LOCATIONPOSTS = 'filter-locationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTER_LOCATIONPOSTS],
-            [self::class, self::COMPONENT_FILTER_AUTHORLOCATIONPOSTS],
-            [self::class, self::COMPONENT_FILTER_TAGLOCATIONPOSTS],
+            self::COMPONENT_FILTER_LOCATIONPOSTS,
+            self::COMPONENT_FILTER_AUTHORLOCATIONPOSTS,
+            self::COMPONENT_FILTER_TAGLOCATIONPOSTS,
         );
     }
 

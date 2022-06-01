@@ -11,17 +11,17 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
     public final const COMPONENT_SCROLLINNER_PASTEVENTS_MAP = 'scrollinner-pastevents-map';
     public final const COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP = 'scrollinner-events-horizontalmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONS],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP],
+            self::COMPONENT_SCROLLINNER_USERS_MAP,
+            self::COMPONENT_SCROLLINNER_USER_MAP,
+            self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP,
+            self::COMPONENT_SCROLLINNER_LOCATIONS,
+            self::COMPONENT_SCROLLINNER_LOCATIONS_MAP,
+            self::COMPONENT_SCROLLINNER_EVENTS_MAP,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_MAP,
+            self::COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP,
         );
     }
 
@@ -51,7 +51,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
         $layouts = array(
             self::COMPONENT_SCROLLINNER_USERS_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
             self::COMPONENT_SCROLLINNER_USER_MAP => [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS],
-            self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP => [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS],//[self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_HORIZONTALMAPDETAILS],
+            self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP => [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS],//self::COMPONENT_LAYOUT_MULTIPLEUSER_HORIZONTALMAPDETAILS,
 
             self::COMPONENT_SCROLLINNER_LOCATIONS => [GD_EM_Module_Processor_LocationLayouts::class, GD_EM_Module_Processor_LocationLayouts::COMPONENT_EM_LAYOUT_LOCATIONS],
 

@@ -6,12 +6,12 @@ class PoP_Locations_Module_Processor_CustomControlButtonGroups extends PoP_Modul
     public final const COMPONENT_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP = 'controlbuttongroup-toggleauthormap';
     public final const COMPONENT_CONTROLBUTTONGROUP_TOGGLETAGMAP = 'controlbuttongroup-toggletagmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TOGGLETAGMAP],
+            self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP,
+            self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP,
+            self::COMPONENT_CONTROLBUTTONGROUP_TOGGLETAGMAP,
         );
     }
 

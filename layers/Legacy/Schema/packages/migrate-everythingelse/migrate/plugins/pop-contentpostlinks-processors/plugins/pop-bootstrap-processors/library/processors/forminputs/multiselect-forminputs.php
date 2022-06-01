@@ -5,10 +5,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 {
     public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES = 'forminput-linkcategories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES],
+            self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES,
         );
     }
 

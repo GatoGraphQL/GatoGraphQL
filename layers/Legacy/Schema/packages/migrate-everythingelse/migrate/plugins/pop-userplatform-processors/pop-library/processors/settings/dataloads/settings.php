@@ -7,10 +7,10 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
 {
     public final const COMPONENT_DATALOAD_SETTINGS = 'dataload-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SETTINGS],
+            self::COMPONENT_DATALOAD_SETTINGS,
         );
     }
 

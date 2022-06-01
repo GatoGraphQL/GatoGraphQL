@@ -5,11 +5,11 @@ class PoP_Module_Processor_ProfileFeedbackMessageInners extends PoP_Module_Proce
     public final const COMPONENT_FEEDBACKMESSAGEINNER_CREATEPROFILE = 'feedbackmessageinner-createprofile';
     public final const COMPONENT_FEEDBACKMESSAGEINNER_UPDATEPROFILE = 'feedbackmessageinner-updateprofile';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_CREATEPROFILE],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEPROFILE],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_CREATEPROFILE,
+            self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEPROFILE,
         );
     }
 

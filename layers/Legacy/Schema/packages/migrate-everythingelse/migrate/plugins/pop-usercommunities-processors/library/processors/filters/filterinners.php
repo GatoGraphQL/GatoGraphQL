@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
     public final const COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinputcontainer-mymembers';
     public final const COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinputcontainer-communities';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES,
         );
     }
 

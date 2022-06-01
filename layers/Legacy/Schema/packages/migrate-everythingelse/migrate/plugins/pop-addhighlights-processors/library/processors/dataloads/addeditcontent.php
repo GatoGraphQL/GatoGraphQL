@@ -7,11 +7,11 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     public final const COMPONENT_DATALOAD_HIGHLIGHT_UPDATE = 'dataload-highlight-update';
     public final const COMPONENT_DATALOAD_HIGHLIGHT_CREATE = 'dataload-highlight-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE],
-            [self::class, self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE],
+            self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE,
+            self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE,
         );
     }
 

@@ -5,10 +5,10 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
 {
     public final const COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS = 'widget-form-locationpostlinkdetails';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS],
+            self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS,
         );
     }
 
@@ -33,7 +33,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
                 }
 
                 // Comment Leo 16/01/2016: There's no need to ask for the LinkAccess since we don't show it anyway
-                // if ($component == [self::class, self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS]) {
+                // if ($component == self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS) {
                 //     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
                 // }
                 break;

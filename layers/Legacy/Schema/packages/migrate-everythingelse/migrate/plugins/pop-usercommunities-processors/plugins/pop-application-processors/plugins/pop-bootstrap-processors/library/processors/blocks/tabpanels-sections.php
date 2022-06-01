@@ -5,11 +5,11 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
     public final const COMPONENT_BLOCK_TABPANEL_COMMUNITIES = 'block-communities-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYMEMBERS = 'block-mymembers-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS],
+            self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES,
+            self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS,
         );
     }
 

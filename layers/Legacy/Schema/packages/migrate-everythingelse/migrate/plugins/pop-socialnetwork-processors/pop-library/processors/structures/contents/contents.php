@@ -13,19 +13,19 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
     public final const COMPONENT_CONTENT_DOWNVOTESPOSTS = 'content-downvotesposts';
     public final const COMPONENT_CONTENT_UNDODOWNVOTESPOSTS = 'content-undodownvotesposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENT_FOLLOWSUSERS],
-            [self::class, self::COMPONENT_CONTENT_UNFOLLOWSUSERS],
-            [self::class, self::COMPONENT_CONTENT_RECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_CONTENT_UNRECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_CONTENT_SUBSCRIBESTOTAGS],
-            [self::class, self::COMPONENT_CONTENT_UNSUBSCRIBESFROMTAGS],
-            [self::class, self::COMPONENT_CONTENT_UPVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENT_UNDOUPVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENT_DOWNVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENT_UNDODOWNVOTESPOSTS],
+            self::COMPONENT_CONTENT_FOLLOWSUSERS,
+            self::COMPONENT_CONTENT_UNFOLLOWSUSERS,
+            self::COMPONENT_CONTENT_RECOMMENDSPOSTS,
+            self::COMPONENT_CONTENT_UNRECOMMENDSPOSTS,
+            self::COMPONENT_CONTENT_SUBSCRIBESTOTAGS,
+            self::COMPONENT_CONTENT_UNSUBSCRIBESFROMTAGS,
+            self::COMPONENT_CONTENT_UPVOTESPOSTS,
+            self::COMPONENT_CONTENT_UNDOUPVOTESPOSTS,
+            self::COMPONENT_CONTENT_DOWNVOTESPOSTS,
+            self::COMPONENT_CONTENT_UNDODOWNVOTESPOSTS,
         );
     }
 

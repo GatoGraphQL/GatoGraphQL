@@ -12,18 +12,18 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarcompact-horizontal-highlight';
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST = 'layout-postsidebarcompact-horizontal-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_POST],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_POST,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST,
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL,
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST,
 
         );
     }

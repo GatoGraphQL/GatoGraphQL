@@ -7,13 +7,13 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT = 'checkpointmessageinner-loggedincanedit';
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN = 'checkpointmessageinner-loggedinisadmin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN,
         );
     }
 

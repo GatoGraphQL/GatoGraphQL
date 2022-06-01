@@ -4,10 +4,10 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Module_
 {
     public final const COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC = 'vertical-sidebarinner-author-generic';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
+            self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC,
         );
     }
 

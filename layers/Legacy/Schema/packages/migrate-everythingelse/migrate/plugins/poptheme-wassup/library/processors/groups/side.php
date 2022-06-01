@@ -4,10 +4,10 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
 {
     public final const COMPONENT_GROUP_SIDE = 'group-side';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GROUP_SIDE],
+            self::COMPONENT_GROUP_SIDE,
         );
     }
 

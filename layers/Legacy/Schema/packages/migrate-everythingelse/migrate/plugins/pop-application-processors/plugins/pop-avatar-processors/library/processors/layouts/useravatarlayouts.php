@@ -9,15 +9,15 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
     public final const COMPONENT_LAYOUT_USERAVATAR_150 = 'layout-useravatar-150';
     public final const COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE = 'layout-useravatar-150-responsive';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_40],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_40_RESPONSIVE],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_120],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_150],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE],
+            self::COMPONENT_LAYOUT_USERAVATAR_40,
+            self::COMPONENT_LAYOUT_USERAVATAR_40_RESPONSIVE,
+            self::COMPONENT_LAYOUT_USERAVATAR_120,
+            self::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE,
+            self::COMPONENT_LAYOUT_USERAVATAR_150,
+            self::COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE,
         );
     }
 

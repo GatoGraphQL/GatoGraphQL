@@ -32,19 +32,19 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     public final const COMPONENT_DATALOADACTION_DOWNVOTEPOST = 'dataloadaction-downvotepost';
     public final const COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST = 'dataloadaction-undodownvotepost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOADACTION_FOLLOWUSER],
-            [self::class, self::COMPONENT_DATALOADACTION_UNFOLLOWUSER],
-            [self::class, self::COMPONENT_DATALOADACTION_RECOMMENDPOST],
-            [self::class, self::COMPONENT_DATALOADACTION_UNRECOMMENDPOST],
-            [self::class, self::COMPONENT_DATALOADACTION_SUBSCRIBETOTAG],
-            [self::class, self::COMPONENT_DATALOADACTION_UNSUBSCRIBEFROMTAG],
-            [self::class, self::COMPONENT_DATALOADACTION_UPVOTEPOST],
-            [self::class, self::COMPONENT_DATALOADACTION_UNDOUPVOTEPOST],
-            [self::class, self::COMPONENT_DATALOADACTION_DOWNVOTEPOST],
-            [self::class, self::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST],
+            self::COMPONENT_DATALOADACTION_FOLLOWUSER,
+            self::COMPONENT_DATALOADACTION_UNFOLLOWUSER,
+            self::COMPONENT_DATALOADACTION_RECOMMENDPOST,
+            self::COMPONENT_DATALOADACTION_UNRECOMMENDPOST,
+            self::COMPONENT_DATALOADACTION_SUBSCRIBETOTAG,
+            self::COMPONENT_DATALOADACTION_UNSUBSCRIBEFROMTAG,
+            self::COMPONENT_DATALOADACTION_UPVOTEPOST,
+            self::COMPONENT_DATALOADACTION_UNDOUPVOTEPOST,
+            self::COMPONENT_DATALOADACTION_DOWNVOTEPOST,
+            self::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST,
         );
     }
 

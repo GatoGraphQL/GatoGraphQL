@@ -12,18 +12,18 @@ class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor
     public final const COMPONENT_DELEGATORFILTER_TAGSTANCES = 'delegatorfilter-tagstances';
     public final const COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE = 'delegatorfilter-tagstances-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYSTANCES],
-            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES_AUTHORROLE],
-            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES_STANCE],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES_STANCE],
-            [self::class, self::COMPONENT_DELEGATORFILTER_STANCES_GENERALSTANCE],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGSTANCES],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE],
+            self::COMPONENT_DELEGATORFILTER_STANCES,
+            self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES,
+            self::COMPONENT_DELEGATORFILTER_MYSTANCES,
+            self::COMPONENT_DELEGATORFILTER_STANCES_AUTHORROLE,
+            self::COMPONENT_DELEGATORFILTER_STANCES_STANCE,
+            self::COMPONENT_DELEGATORFILTER_AUTHORSTANCES_STANCE,
+            self::COMPONENT_DELEGATORFILTER_STANCES_GENERALSTANCE,
+            self::COMPONENT_DELEGATORFILTER_TAGSTANCES,
+            self::COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE,
         );
     }
 

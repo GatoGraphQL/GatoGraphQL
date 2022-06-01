@@ -4,10 +4,10 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
 {
     public final const COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES = 'layoutwrapper-locationpost-categories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES],
+            self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES,
         );
     }
 

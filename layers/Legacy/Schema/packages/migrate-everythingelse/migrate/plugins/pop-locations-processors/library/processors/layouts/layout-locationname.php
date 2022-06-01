@@ -5,11 +5,11 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
     public final const COMPONENT_EM_LAYOUT_LOCATIONNAME = 'em-layout-locationname';
     public final const COMPONENT_EM_LAYOUT_LOCATIONICONNAME = 'em-layout-locationiconname';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONNAME],
-            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME],
+            self::COMPONENT_EM_LAYOUT_LOCATIONNAME,
+            self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME,
         );
     }
 

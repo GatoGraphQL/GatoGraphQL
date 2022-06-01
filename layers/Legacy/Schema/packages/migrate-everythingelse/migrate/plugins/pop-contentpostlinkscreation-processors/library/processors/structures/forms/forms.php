@@ -4,10 +4,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
 {
     public final const COMPONENT_FORM_CONTENTPOSTLINK = 'form-contentpostlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_CONTENTPOSTLINK],
+            self::COMPONENT_FORM_CONTENTPOSTLINK,
         );
     }
 

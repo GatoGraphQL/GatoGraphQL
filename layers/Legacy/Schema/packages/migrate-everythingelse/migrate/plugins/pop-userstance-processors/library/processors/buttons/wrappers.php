@@ -6,10 +6,10 @@ class UserStance_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Co
 {
     public final const COMPONENT_BUTTONWRAPPER_STANCEVIEW = 'buttonwrapper-stanceview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONWRAPPER_STANCEVIEW],
+            self::COMPONENT_BUTTONWRAPPER_STANCEVIEW,
         );
     }
 

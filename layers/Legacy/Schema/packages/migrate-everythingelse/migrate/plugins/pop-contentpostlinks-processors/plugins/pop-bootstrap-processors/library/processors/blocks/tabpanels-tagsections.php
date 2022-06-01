@@ -4,10 +4,10 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
 {
     public final const COMPONENT_BLOCK_TABPANEL_TAGLINKS = 'block-tabpanel-taglinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_TAGLINKS],
+            self::COMPONENT_BLOCK_TABPANEL_TAGLINKS,
         );
     }
 
@@ -29,7 +29,7 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
     {
         switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGLINKS:
-                return [self::class, self::COMPONENT_FILTER_TAGLINKS];
+                return self::COMPONENT_FILTER_TAGLINKS;
         }
 
         return parent::getDelegatorfilterSubcomponent($component);

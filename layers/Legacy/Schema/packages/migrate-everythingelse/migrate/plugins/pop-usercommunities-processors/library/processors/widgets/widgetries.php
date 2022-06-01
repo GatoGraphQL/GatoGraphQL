@@ -6,11 +6,11 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const COMPONENT_URE_WIDGET_COMMUNITIES = 'ure-widget-communities';
     public final const COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES = 'ure-widgetcompact-communities';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_WIDGET_COMMUNITIES],
-            [self::class, self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES],
+            self::COMPONENT_URE_WIDGET_COMMUNITIES,
+            self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES,
         );
     }
 

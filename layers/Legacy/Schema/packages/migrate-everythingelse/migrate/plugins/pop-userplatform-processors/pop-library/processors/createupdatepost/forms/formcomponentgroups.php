@@ -5,10 +5,10 @@ class PoP_AddHighlights_Module_Processor_FormComponentGroups extends PoP_Module_
 {
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST = 'formcomponentgroup-card-highlightedpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST],
+            self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST,
         );
     }
 

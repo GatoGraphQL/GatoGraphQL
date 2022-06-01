@@ -17,13 +17,13 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTLIST = 'filterinputcontainer-adminpagelist';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT = 'filterinputcontainer-adminpagecount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT,
         );
     }
 

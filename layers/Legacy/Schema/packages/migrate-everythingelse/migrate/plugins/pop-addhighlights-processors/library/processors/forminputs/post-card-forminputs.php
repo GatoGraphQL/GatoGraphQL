@@ -4,10 +4,10 @@ class PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues ex
 {
     public final const COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST = 'card-highlightedpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST],
+            self::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST,
         );
     }
 

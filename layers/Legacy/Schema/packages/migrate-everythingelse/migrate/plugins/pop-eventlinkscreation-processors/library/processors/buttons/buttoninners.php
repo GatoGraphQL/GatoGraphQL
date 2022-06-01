@@ -5,10 +5,10 @@ class PoP_EventLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Pr
 {
     public final const COMPONENT_BUTTONINNER_EVENTLINK_CREATE = 'buttoninner-eventlink-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE],
+            self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE,
         );
     }
 

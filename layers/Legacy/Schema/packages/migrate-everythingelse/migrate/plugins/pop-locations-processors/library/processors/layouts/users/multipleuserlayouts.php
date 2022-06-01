@@ -4,10 +4,10 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
 {
     public final const COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS = 'layout-multipleuser-mapdetails';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
+            self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS,
         );
     }
 

@@ -6,12 +6,12 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS = 'simplefilterinputcontainer-authorhighlights';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS = 'simplefilterinputcontainer-myhighlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS,
         );
     }
 

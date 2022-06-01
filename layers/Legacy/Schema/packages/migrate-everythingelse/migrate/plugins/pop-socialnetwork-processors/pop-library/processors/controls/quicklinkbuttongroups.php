@@ -8,14 +8,14 @@ class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE = 'quicklinkbuttongroup-postdownvoteundodownvote';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM = 'quicklinkbuttongroup-tagsubscribetounsubscribefrom';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM],
+            self::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM,
         );
     }
 

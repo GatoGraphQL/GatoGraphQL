@@ -9,10 +9,10 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_USERS = 'forminput-typeaheadcomponent-users';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_USERS],
+            self::COMPONENT_TYPEAHEAD_COMPONENT_USERS,
         );
     }
 

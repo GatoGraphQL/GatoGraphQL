@@ -10,14 +10,14 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
     public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL = 'dataload-singlerelatedcontent-scroll-thumbnail';
     public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST = 'dataload-singlerelatedcontent-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST,
         );
     }
 
@@ -65,19 +65,19 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
 
         // Add the format attr
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;

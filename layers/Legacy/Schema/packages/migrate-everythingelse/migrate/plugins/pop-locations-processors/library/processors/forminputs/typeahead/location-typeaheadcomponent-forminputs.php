@@ -6,10 +6,10 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS = 'forminput-typeaheadcomponent-locations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS],
+            self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS,
         );
     }
 

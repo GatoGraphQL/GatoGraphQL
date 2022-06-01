@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
     public final const COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES = 'ure-widgetwrapper-communities';
     public final const COMPONENT_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES = 'ure-widgetcompactwrapper-communities';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES],
-            [self::class, self::COMPONENT_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES],
+            self::COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES,
+            self::COMPONENT_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES,
         );
     }
 

@@ -9,15 +9,15 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
     public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD = 'forminputgroup-lostpwdreset-newpassword';
     public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT = 'forminputgroup-lostpwdreset-passwordrepeat';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOGIN_PWD],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWD_USERNAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_CODE],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT],
+            self::COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME,
+            self::COMPONENT_FORMINPUTGROUP_LOGIN_PWD,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWD_USERNAME,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_CODE,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT,
         );
     }
 

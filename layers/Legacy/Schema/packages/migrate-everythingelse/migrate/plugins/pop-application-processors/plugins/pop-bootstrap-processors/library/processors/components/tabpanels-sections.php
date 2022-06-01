@@ -10,18 +10,18 @@ class PoP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
     public final const COMPONENT_TABPANEL_MYCONTENT = 'tabpanel-mycontent';
     public final const COMPONENT_TABPANEL_MYPOSTS = 'tabpanel-myposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_SEARCHCONTENT],
-            [self::class, self::COMPONENT_TABPANEL_CONTENT],
-            [self::class, self::COMPONENT_TABPANEL_POSTS],
+            self::COMPONENT_TABPANEL_SEARCHCONTENT,
+            self::COMPONENT_TABPANEL_CONTENT,
+            self::COMPONENT_TABPANEL_POSTS,
             
-            [self::class, self::COMPONENT_TABPANEL_SEARCHUSERS],
-            [self::class, self::COMPONENT_TABPANEL_USERS],
+            self::COMPONENT_TABPANEL_SEARCHUSERS,
+            self::COMPONENT_TABPANEL_USERS,
             
-            [self::class, self::COMPONENT_TABPANEL_MYCONTENT],
-            [self::class, self::COMPONENT_TABPANEL_MYPOSTS],
+            self::COMPONENT_TABPANEL_MYCONTENT,
+            self::COMPONENT_TABPANEL_MYPOSTS,
         );
     }
 

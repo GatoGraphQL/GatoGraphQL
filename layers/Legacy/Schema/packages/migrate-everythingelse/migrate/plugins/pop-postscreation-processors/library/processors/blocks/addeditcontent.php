@@ -5,11 +5,11 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     public final const COMPONENT_BLOCK_POST_UPDATE = 'block-post-update';
     public final const COMPONENT_BLOCK_POST_CREATE = 'block-post-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_POST_UPDATE],
-            [self::class, self::COMPONENT_BLOCK_POST_CREATE],
+            self::COMPONENT_BLOCK_POST_UPDATE,
+            self::COMPONENT_BLOCK_POST_CREATE,
         );
     }
 

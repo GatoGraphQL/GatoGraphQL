@@ -22,30 +22,30 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED = 'layout-previewpost-post-related';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT = 'layout-previewpost-post-edit';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER,
 
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LINE],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LINE,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT,
 
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT,
 
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT,
         );
     }
 

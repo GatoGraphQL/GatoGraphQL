@@ -13,15 +13,15 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
     public final const COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myevents-scroll-fullviewpreview';
     public final const COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-mypastevents-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW,
         );
     }
 
@@ -81,16 +81,16 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 
         // Add the format attr
         $tables = array(
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
+            self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW,
         );
         if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
@@ -138,14 +138,14 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 
         // Events: choose to only select past/future
         $past = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW,
         );
         $future = array(
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW,
         );
         if (in_array($component, $past)) {
             $daterange_class = 'daterange-past opens-right';

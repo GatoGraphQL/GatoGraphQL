@@ -20,22 +20,22 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
     public final const COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW = 'layout-singlemultiplepost-fullview';
     public final const COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT = 'layout-multiplepost-simpleview-abovecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_LIST],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_LINE],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT],
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_THUMBNAIL,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_LIST,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_LINE,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_RELATED,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_FULLVIEW,
+            self::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW,
+            self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT,
         );
     }
 

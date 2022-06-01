@@ -5,10 +5,10 @@ class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormMo
 {
     public final const COMPONENT_MODAL_SHAREBYEMAIL = 'modal-sharebyemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MODAL_SHAREBYEMAIL],
+            self::COMPONENT_MODAL_SHAREBYEMAIL,
         );
     }
     

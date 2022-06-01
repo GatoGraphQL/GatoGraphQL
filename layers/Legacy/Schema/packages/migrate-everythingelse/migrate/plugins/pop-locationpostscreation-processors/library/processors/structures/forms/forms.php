@@ -4,10 +4,10 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Pro
 {
     public final const COMPONENT_FORM_LOCATIONPOST = 'form-locationpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_LOCATIONPOST],
+            self::COMPONENT_FORM_LOCATIONPOST,
         );
     }
 

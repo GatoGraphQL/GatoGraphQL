@@ -68,12 +68,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->excludeAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_AUTHOR_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_AUTHOR_SLUG],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS],
+            self::COMPONENT_FILTERINPUT_AUTHOR_IDS,
+            self::COMPONENT_FILTERINPUT_AUTHOR_SLUG,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS,
         );
     }
 

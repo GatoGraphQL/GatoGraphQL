@@ -4,10 +4,10 @@ class PoP_Module_Processor_CustomControlButtonGroups extends PoP_Module_Processo
 {
     public final const COMPONENT_CONTROLBUTTONGROUP_ADDPOST = 'controlbuttongroup-addpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDPOST],
+            self::COMPONENT_CONTROLBUTTONGROUP_ADDPOST,
         );
     }
 

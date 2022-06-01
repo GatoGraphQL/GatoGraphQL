@@ -5,11 +5,11 @@ class PoP_Module_Processor_DomainFeedbackMessageAlertLayouts extends PoP_Module_
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST = 'layout-feedbackmessagealert-itemlist';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY = 'layout-feedbackmessagealert-empty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY,
         );
     }
 

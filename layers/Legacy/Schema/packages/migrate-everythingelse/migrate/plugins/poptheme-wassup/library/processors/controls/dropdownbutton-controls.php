@@ -5,11 +5,11 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE = 'dropdownbuttoncontrol-closetoggle';
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE = 'dropdownbuttoncontrol-quickviewclosetoggle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE],
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE,
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE,
         );
     }
 

@@ -5,11 +5,11 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
     public final const COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR = 'multiple-single-event-highlightssidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR = 'multiple-single-pastevent-highlightssidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR],
+            self::COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR,
         );
     }
 

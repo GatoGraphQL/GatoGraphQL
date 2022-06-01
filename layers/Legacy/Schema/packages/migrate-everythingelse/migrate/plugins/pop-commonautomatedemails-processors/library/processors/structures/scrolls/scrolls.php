@@ -8,14 +8,14 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
     public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scroll-automatedemails-latestcontent-thumbnail';
     public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scroll-automatedemails-latestcontent-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST,
         );
     }
 
@@ -42,19 +42,19 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW,
         );
 
         $extra_class = '';

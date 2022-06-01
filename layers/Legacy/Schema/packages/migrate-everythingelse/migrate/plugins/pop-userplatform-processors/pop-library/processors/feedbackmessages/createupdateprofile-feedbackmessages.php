@@ -5,11 +5,11 @@ class PoP_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Processor_
     public final const COMPONENT_FEEDBACKMESSAGE_CREATEPROFILE = 'feedbackmessage-createprofile';
     public final const COMPONENT_FEEDBACKMESSAGE_UPDATEPROFILE = 'feedbackmessage-updateprofile';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CREATEPROFILE],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_UPDATEPROFILE],
+            self::COMPONENT_FEEDBACKMESSAGE_CREATEPROFILE,
+            self::COMPONENT_FEEDBACKMESSAGE_UPDATEPROFILE,
         );
     }
 

@@ -9,14 +9,14 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public final const COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO = 'widgetcompact-highlight-info';
     public final const COMPONENT_WIDGETCOMPACT_POSTINFO = 'widgetcompact-post-info';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_CATEGORIES],
-            [self::class, self::COMPONENT_WIDGET_APPLIESTO],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_GENERICINFO],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_POSTINFO],
+            self::COMPONENT_WIDGET_CATEGORIES,
+            self::COMPONENT_WIDGET_APPLIESTO,
+            self::COMPONENT_WIDGETCOMPACT_GENERICINFO,
+            self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO,
+            self::COMPONENT_WIDGETCOMPACT_POSTINFO,
         );
     }
 

@@ -10,13 +10,13 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
     public final const COMPONENT_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
     public final const COMPONENT_BLOCK_LOGOUT = 'block-logout';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LOGIN],
-            [self::class, self::COMPONENT_BLOCK_LOSTPWD],
-            [self::class, self::COMPONENT_BLOCK_LOSTPWDRESET],
-            [self::class, self::COMPONENT_BLOCK_LOGOUT],
+            self::COMPONENT_BLOCK_LOGIN,
+            self::COMPONENT_BLOCK_LOSTPWD,
+            self::COMPONENT_BLOCK_LOSTPWDRESET,
+            self::COMPONENT_BLOCK_LOGOUT,
         );
     }
 
@@ -70,7 +70,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
             $ret[] = $inner;
         }
 
-        if ($component == [self::class, self::COMPONENT_BLOCK_LOGIN]) {
+        if ($component == self::COMPONENT_BLOCK_LOGIN) {
             $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME];
         }
 

@@ -9,15 +9,15 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'tabpanel-authorsubscribedtotags';
     public final const COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'tabpanel-authorrecommendedposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCONTENT],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORPOSTS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORFOLLOWERS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS],
+            self::COMPONENT_TABPANEL_AUTHORCONTENT,
+            self::COMPONENT_TABPANEL_AUTHORPOSTS,
+            self::COMPONENT_TABPANEL_AUTHORFOLLOWERS,
+            self::COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS,
+            self::COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS,
+            self::COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS,
         );
     }
 

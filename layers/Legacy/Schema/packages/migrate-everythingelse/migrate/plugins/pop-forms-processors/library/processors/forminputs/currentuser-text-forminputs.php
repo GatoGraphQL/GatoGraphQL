@@ -8,11 +8,11 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     public final const COMPONENT_FORMINPUT_NAME = 'gf-field-name';
     public final const COMPONENT_FORMINPUT_EMAIL = 'gf-field-email';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_NAME],
-            [self::class, self::COMPONENT_FORMINPUT_EMAIL],
+            self::COMPONENT_FORMINPUT_NAME,
+            self::COMPONENT_FORMINPUT_EMAIL,
         );
     }
 

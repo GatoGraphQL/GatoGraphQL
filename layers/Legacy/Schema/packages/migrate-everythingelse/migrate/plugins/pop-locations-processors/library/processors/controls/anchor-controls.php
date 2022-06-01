@@ -7,12 +7,12 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     public final const COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP = 'anchorcontrol-toggleauthormap';
     public final const COMPONENT_ANCHORCONTROL_TOGGLETAGMAP = 'anchorcontrol-toggletagmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEMAP],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP],
+            self::COMPONENT_ANCHORCONTROL_TOGGLEMAP,
+            self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP,
+            self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP,
         );
     }
 

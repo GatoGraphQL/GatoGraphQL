@@ -4,10 +4,10 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelComponents extends
 {
     public final const COMPONENT_TABPANEL_TAGLINKS = 'tabpanel-taglinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGLINKS],
+            self::COMPONENT_TABPANEL_TAGLINKS,
         );
     }
 

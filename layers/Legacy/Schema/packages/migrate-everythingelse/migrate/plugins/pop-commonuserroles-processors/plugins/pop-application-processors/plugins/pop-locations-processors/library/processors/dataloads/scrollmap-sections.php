@@ -7,11 +7,11 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
     public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP = 'dataload-organizations-scrollmap';
     public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP = 'dataload-individuals-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP,
         );
     }
 
@@ -50,8 +50,8 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;

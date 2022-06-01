@@ -922,7 +922,7 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
     {
       case self::COMPONENT_SOMENAME1:
         
-        $ret[] = [self::class, self::COMPONENT_SOMENAME2];
+        $ret[] = self::COMPONENT_SOMENAME2;
         break;
 
       case self::COMPONENT_SOMENAME2:
@@ -977,7 +977,7 @@ abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\Abstract
   protected function getThumbnailComponent($component) 
   {
     // Default value
-    return [self::class, self::COMPONENT_LAYOUT_THUMBNAILSMALL];
+    return self::COMPONENT_LAYOUT_THUMBNAILSMALL;
   }
   protected function getAftercontentComponents($component) 
   {
@@ -993,12 +993,12 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
     {
       case self::COMPONENT_SOMENAME1:
         
-        return [self::class, self::COMPONENT_LAYOUT_POSTCONTENT];
+        return self::COMPONENT_LAYOUT_POSTCONTENT;
 
       case self::COMPONENT_SOMENAME2:
       case self::COMPONENT_SOMENAME3:
         
-        return [self::class, self::COMPONENT_LAYOUT_POSTEXCERPT];
+        return self::COMPONENT_LAYOUT_POSTEXCERPT;
     }
 
     return parent::getContentComponent($component);
@@ -1009,11 +1009,11 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
     {
       case self::COMPONENT_SOMENAME1:
         
-        return [self::class, self::COMPONENT_LAYOUT_THUMBNAILBIG];
+        return self::COMPONENT_LAYOUT_THUMBNAILBIG;
 
       case self::COMPONENT_SOMENAME3:
         
-        return [self::class, self::COMPONENT_LAYOUT_THUMBNAILMEDIUM];
+        return self::COMPONENT_LAYOUT_THUMBNAILMEDIUM;
     }
 
     return parent::getThumbnailComponent($component);

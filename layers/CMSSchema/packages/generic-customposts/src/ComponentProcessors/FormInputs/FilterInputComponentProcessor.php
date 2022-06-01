@@ -37,10 +37,10 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->genericCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(GenericCustomPostTypesFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES],
+            self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES,
         );
     }
 

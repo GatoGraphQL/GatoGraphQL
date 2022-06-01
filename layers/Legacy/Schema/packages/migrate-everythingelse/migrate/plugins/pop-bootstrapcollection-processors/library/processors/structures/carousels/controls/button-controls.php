@@ -6,11 +6,11 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
     public final const COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV = 'carouselbuttoncontrol-carouselprev';
     public final const COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT = 'carouselbuttoncontrol-carouselnext';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV],
-            [self::class, self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT],
+            self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV,
+            self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT,
         );
     }
 

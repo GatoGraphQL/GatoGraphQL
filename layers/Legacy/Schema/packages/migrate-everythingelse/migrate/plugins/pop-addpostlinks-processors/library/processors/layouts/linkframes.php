@@ -5,11 +5,11 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
     public final const COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE = 'layout-addpostlinks-linkframevisible';
     public final const COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED = 'layout-addpostlinks-linkframecollapsed';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE],
-            [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED],
+            self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE,
+            self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED,
         );
     }
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)

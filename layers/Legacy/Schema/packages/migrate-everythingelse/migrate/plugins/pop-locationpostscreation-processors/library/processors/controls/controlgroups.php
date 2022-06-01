@@ -5,10 +5,10 @@ class CommonPages_EM_Module_Processor_ControlGroups extends PoP_Module_Processor
 {
     public final const COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST = 'controlgroup-mylocationpostlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST],
+            self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST,
         );
     }
 

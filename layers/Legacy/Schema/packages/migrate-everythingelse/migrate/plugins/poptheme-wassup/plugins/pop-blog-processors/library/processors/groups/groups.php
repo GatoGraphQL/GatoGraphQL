@@ -9,14 +9,14 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL = 'group-tagcontent-scroll-thumbnail';
     public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST = 'group-tagcontent-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST],
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST,
         );
     }
 

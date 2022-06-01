@@ -5,11 +5,11 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const COMPONENT_SCROLL_NOTIFICATIONS_DETAILS = 'scroll-notifications-details';
     public final const COMPONENT_SCROLL_NOTIFICATIONS_LIST = 'scroll-notifications-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_NOTIFICATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_NOTIFICATIONS_LIST],
+            self::COMPONENT_SCROLL_NOTIFICATIONS_DETAILS,
+            self::COMPONENT_SCROLL_NOTIFICATIONS_LIST,
         );
     }
 
@@ -33,10 +33,10 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
 
         // Extra classes
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_NOTIFICATIONS_LIST],
+            self::COMPONENT_SCROLL_NOTIFICATIONS_LIST,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_NOTIFICATIONS_DETAILS],
+            self::COMPONENT_SCROLL_NOTIFICATIONS_DETAILS,
         );
 
         $extra_class = '';

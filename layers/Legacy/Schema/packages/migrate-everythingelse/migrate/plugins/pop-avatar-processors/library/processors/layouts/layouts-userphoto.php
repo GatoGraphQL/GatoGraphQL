@@ -4,10 +4,10 @@ class PoP_Module_Processor_UserPhotoLayouts extends PoP_Module_Processor_UserPho
 {
     public final const COMPONENT_LAYOUT_AUTHOR_USERPHOTO = 'layout-author-userphoto';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_AUTHOR_USERPHOTO],
+            self::COMPONENT_LAYOUT_AUTHOR_USERPHOTO,
         );
     }
 }

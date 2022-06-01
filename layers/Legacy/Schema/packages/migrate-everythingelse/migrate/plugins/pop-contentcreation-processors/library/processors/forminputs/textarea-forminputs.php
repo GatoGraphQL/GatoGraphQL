@@ -5,10 +5,10 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
 {
     public final const COMPONENT_FORMINPUT_WHYFLAG = 'gf-field-whyflag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_WHYFLAG],
+            self::COMPONENT_FORMINPUT_WHYFLAG,
         );
     }
 

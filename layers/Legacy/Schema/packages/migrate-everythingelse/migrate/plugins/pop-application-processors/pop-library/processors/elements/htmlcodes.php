@@ -9,14 +9,14 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     public final const COMPONENT_CODE_404 = 'code-404';
     public final const COMPONENT_CODE_EMPTYSIDEINFO = 'code-emptysideinfo';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_HOMEWELCOME],
-            [self::class, self::COMPONENT_CODE_EMPTY],
-            [self::class, self::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION],
-            [self::class, self::COMPONENT_CODE_404],
-            [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO],
+            self::COMPONENT_CODE_HOMEWELCOME,
+            self::COMPONENT_CODE_EMPTY,
+            self::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION,
+            self::COMPONENT_CODE_404,
+            self::COMPONENT_CODE_EMPTYSIDEINFO,
         );
     }
 
@@ -26,7 +26,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 
         switch ($component->name) {
             case self::COMPONENT_CODE_EMPTYSIDEINFO:
-                // Comment Leo 07/12/2017: this function closes the sideinfo for [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO], and it must take place immediately,
+                // Comment Leo 07/12/2017: this function closes the sideinfo for self::COMPONENT_CODE_EMPTYSIDEINFO, and it must take place immediately,
                 // or otherwise the sideinfo will show and then disappear a few seconds later and it looks ugly (eg: in Verticals homepage, where there is no sideinfo)
                 $this->addJsmethod($ret, 'closePageSectionOnTabpaneShown', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
                 break;

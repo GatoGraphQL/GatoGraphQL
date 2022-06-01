@@ -5,10 +5,10 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
 {
     public final const COMPONENT_BUTTON_POST_CREATE = 'postbutton-post-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_POST_CREATE],
+            self::COMPONENT_BUTTON_POST_CREATE,
         );
     }
 

@@ -15,11 +15,11 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
     public final const COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinputcontainer-media-items';
     public final const COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT = 'filterinputcontainer-media-item-count';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMCOUNT,
         );
     }
 

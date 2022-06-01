@@ -4,10 +4,10 @@ class PoP_Module_Processor_NotificationTimeLayouts extends PoP_Module_Processor_
 {
     public final const COMPONENT_LAYOUT_NOTIFICATIONTIME = 'layout-notificationtime';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_NOTIFICATIONTIME],
+            self::COMPONENT_LAYOUT_NOTIFICATIONTIME,
         );
     }
 }

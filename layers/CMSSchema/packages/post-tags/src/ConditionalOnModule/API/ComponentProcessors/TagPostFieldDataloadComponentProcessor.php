@@ -39,10 +39,10 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
         );
     }
 

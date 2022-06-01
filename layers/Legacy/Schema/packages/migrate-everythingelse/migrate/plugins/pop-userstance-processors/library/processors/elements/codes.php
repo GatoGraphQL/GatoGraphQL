@@ -11,15 +11,15 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
     public final const COMPONENT_CODE_STANCECOUNT = 'code-stancecount';
     public final const COMPONENT_CODE_POSTSTANCE = 'code-poststance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_REFERENCEDAFTERREADING],
-            [self::class, self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING],
-            [self::class, self::COMPONENT_CODE_STANCECOUNT_GENERAL],
-            [self::class, self::COMPONENT_CODE_STANCECOUNT_ARTICLE],
-            [self::class, self::COMPONENT_CODE_STANCECOUNT],
-            [self::class, self::COMPONENT_CODE_POSTSTANCE],
+            self::COMPONENT_CODE_REFERENCEDAFTERREADING,
+            self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING,
+            self::COMPONENT_CODE_STANCECOUNT_GENERAL,
+            self::COMPONENT_CODE_STANCECOUNT_ARTICLE,
+            self::COMPONENT_CODE_STANCECOUNT,
+            self::COMPONENT_CODE_POSTSTANCE,
         );
     }
 

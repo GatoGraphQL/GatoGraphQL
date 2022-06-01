@@ -20,20 +20,20 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'dataload-authormembers-scroll-list';
     public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'dataload-authormembers-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL,
         );
     }
 
@@ -102,27 +102,27 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
 
         // Add the format attr
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_COMMUNITIES_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST,
         );
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_COMMUNITIES_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD,
         );
         $carousels = array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            self::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;

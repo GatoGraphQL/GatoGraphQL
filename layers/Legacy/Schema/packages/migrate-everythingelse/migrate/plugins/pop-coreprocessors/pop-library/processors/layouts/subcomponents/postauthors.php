@@ -5,11 +5,11 @@ class PoP_Module_Processor_PostAuthorLayouts extends PoP_Module_Processor_PostAu
     public final const COMPONENT_LAYOUT_POSTAUTHORS = 'layout-postauthors';
     public final const COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS = 'layout-simplepostauthors';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTAUTHORS],
-            [self::class, self::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS],
+            self::COMPONENT_LAYOUT_POSTAUTHORS,
+            self::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS,
         );
     }
 

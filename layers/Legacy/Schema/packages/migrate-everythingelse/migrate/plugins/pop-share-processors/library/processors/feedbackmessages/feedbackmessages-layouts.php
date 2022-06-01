@@ -5,10 +5,10 @@ class PoP_Share_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Proce
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL = 'layout-feedbackmessage-sharebyemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL,
         );
     }
 

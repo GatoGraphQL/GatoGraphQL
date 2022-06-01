@@ -8,13 +8,13 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
     public final const COMPONENT_SUBMITBUTTON_LOSTPWDRESET = 'submitbutton-lostpwdreset';
     public final const COMPONENT_SUBMITBUTTON_LOGOUT = 'submitbutton-logout';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOGIN],
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOSTPWD],
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOSTPWDRESET],
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOGOUT],
+            self::COMPONENT_SUBMITBUTTON_LOGIN,
+            self::COMPONENT_SUBMITBUTTON_LOSTPWD,
+            self::COMPONENT_SUBMITBUTTON_LOSTPWDRESET,
+            self::COMPONENT_SUBMITBUTTON_LOGOUT,
         );
     }
 

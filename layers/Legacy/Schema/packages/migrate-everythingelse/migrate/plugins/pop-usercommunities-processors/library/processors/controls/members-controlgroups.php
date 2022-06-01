@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
     public final const COMPONENT_CONTROLGROUP_MYMEMBERS = 'controlgroup-mymembers';
     public final const COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS = 'controlgroup-myblockmembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_MYMEMBERS],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS],
+            self::COMPONENT_CONTROLGROUP_MYMEMBERS,
+            self::COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS,
         );
     }
 

@@ -5,11 +5,11 @@ class UserStance_Module_Processor_ContentMultipleInners extends PoP_Module_Proce
     public final const COMPONENT_LAYOUTCONTENTINNER_STANCES = 'contentinnerlayout-stances';
     public final const COMPONENT_LAYOUTCONTENTINNER_STANCES_APPENDABLE = 'contentinnerlayout-stances-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_STANCES],
-            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_STANCES_APPENDABLE],
+            self::COMPONENT_LAYOUTCONTENTINNER_STANCES,
+            self::COMPONENT_LAYOUTCONTENTINNER_STANCES_APPENDABLE,
         );
     }
 

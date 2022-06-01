@@ -11,17 +11,17 @@ class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_Conten
     public final const COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE = 'contentinner-menu-dropdownbutton-side';
     public final const COMPONENT_CONTENTINNER_MENU_MULTITARGETINDENT = 'contentinner-menu-multitargetindent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_BUTTON],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_DROPDOWN],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_INDENT],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_SEGMENTEDBUTTON],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE],
-            [self::class, self::COMPONENT_CONTENTINNER_MENU_MULTITARGETINDENT],
+            self::COMPONENT_CONTENTINNER_MENU_BUTTON,
+            self::COMPONENT_CONTENTINNER_MENU_DROPDOWN,
+            self::COMPONENT_CONTENTINNER_MENU_INDENT,
+            self::COMPONENT_CONTENTINNER_MENU_SEGMENTEDBUTTON,
+            self::COMPONENT_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON,
+            self::COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP,
+            self::COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE,
+            self::COMPONENT_CONTENTINNER_MENU_MULTITARGETINDENT,
         );
     }
 

@@ -9,10 +9,10 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
 
     public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST = 'dataload-automatedemails-singlepost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST],
+            self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST,
         );
     }
 

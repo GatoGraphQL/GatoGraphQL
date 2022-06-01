@@ -4,10 +4,10 @@ class PoP_Module_Processor_CommentContentInners extends PoP_Module_Processor_Con
 {
     public final const COMPONENT_CONTENTINNER_COMMENTSINGLE = 'contentinner-commentsingle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_COMMENTSINGLE],
+            self::COMPONENT_CONTENTINNER_COMMENTSINGLE,
         );
     }
 

@@ -15,18 +15,18 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
     public final const COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN = 'anchorcontrol-closepagebtn';
     public final const COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG = 'anchorcontrol-closepagebtnbig';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_EXPANDCOLLAPSIBLE],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FILTERTOGGLE],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CURRENTURL],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_PRINT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CLOSEPAGE],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG],
+            self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS,
+            self::COMPONENT_ANCHORCONTROL_EXPANDCOLLAPSIBLE,
+            self::COMPONENT_ANCHORCONTROL_FILTERTOGGLE,
+            self::COMPONENT_ANCHORCONTROL_CURRENTURL,
+            self::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS,
+            self::COMPONENT_ANCHORCONTROL_PRINT,
+            self::COMPONENT_ANCHORCONTROL_CLOSEPAGE,
+            self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN,
+            self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG,
         );
     }
 

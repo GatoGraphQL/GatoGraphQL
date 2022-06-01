@@ -13,19 +13,19 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
     public final const COMPONENT_CONTENTINNER_DOWNVOTESPOSTS = 'contentinner-downvotesposts';
     public final const COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS = 'contentinner-undodownvotesposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_FOLLOWSUSERS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNFOLLOWSUSERS],
-            [self::class, self::COMPONENT_CONTENTINNER_RECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNRECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_SUBSCRIBESTOTAGS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNSUBSCRIBESFROMTAGS],
-            [self::class, self::COMPONENT_CONTENTINNER_UPVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNDOUPVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS],
+            self::COMPONENT_CONTENTINNER_FOLLOWSUSERS,
+            self::COMPONENT_CONTENTINNER_UNFOLLOWSUSERS,
+            self::COMPONENT_CONTENTINNER_RECOMMENDSPOSTS,
+            self::COMPONENT_CONTENTINNER_UNRECOMMENDSPOSTS,
+            self::COMPONENT_CONTENTINNER_SUBSCRIBESTOTAGS,
+            self::COMPONENT_CONTENTINNER_UNSUBSCRIBESFROMTAGS,
+            self::COMPONENT_CONTENTINNER_UPVOTESPOSTS,
+            self::COMPONENT_CONTENTINNER_UNDOUPVOTESPOSTS,
+            self::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS,
+            self::COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS,
         );
     }
 

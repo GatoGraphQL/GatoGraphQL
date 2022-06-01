@@ -6,11 +6,11 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
     public final const COMPONENT_FORMINPUT_COPYSEARCHURL = 'copysearchurl';
     public final const COMPONENT_FORMINPUT_API = 'api';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_COPYSEARCHURL],
-            [self::class, self::COMPONENT_FORMINPUT_API],
+            self::COMPONENT_FORMINPUT_COPYSEARCHURL,
+            self::COMPONENT_FORMINPUT_API,
         );
     }
 

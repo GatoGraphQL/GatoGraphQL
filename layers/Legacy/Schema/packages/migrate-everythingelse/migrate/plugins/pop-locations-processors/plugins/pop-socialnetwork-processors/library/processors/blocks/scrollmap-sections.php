@@ -9,15 +9,15 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
     public final const COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP = 'block-singledownvotedby-scrollmap';
     public final const COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP = 'block-tagsubscribers-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP],
+            self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP,
+            self::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP,
+            self::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP,
+            self::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
         );
     }
 

@@ -5,10 +5,10 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
 {
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST = 'dropdownbuttoncontrol-addrelatedpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST],
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST,
         );
     }
 

@@ -4,10 +4,10 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
 {
     public final const COMPONENT_CAROUSELINNER_AUTHORMEMBERS = 'carouselinner-authormembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS],
+            self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS,
         );
     }
 

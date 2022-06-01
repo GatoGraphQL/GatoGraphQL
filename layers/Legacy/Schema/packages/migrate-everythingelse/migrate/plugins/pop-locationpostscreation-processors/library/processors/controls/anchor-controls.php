@@ -6,10 +6,10 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
 {
     public final const COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST = 'custombuttoncontrol-addlocationpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST],
+            self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST,
         );
     }
 

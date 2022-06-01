@@ -18,22 +18,22 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     public final const COMPONENT_PAGE_TOP = 'page-top';
     public final const COMPONENT_PAGE_BODYSIDEINFO = 'page-bodysideinfo';
     public final const COMPONENT_PAGE_BODY = 'page-body';
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_PAGE_QUICKVIEW],
-            [self::class, self::COMPONENT_PAGE_QUICKVIEWSIDEINFO],
-            [self::class, self::COMPONENT_PAGE_ADDONS],
-            [self::class, self::COMPONENT_PAGE_BACKGROUND],
-            [self::class, self::COMPONENT_PAGE_FRAMECOMPONENTS],
-            [self::class, self::COMPONENT_PAGE_HOLE],
-            [self::class, self::COMPONENT_PAGE_HOVER],
-            [self::class, self::COMPONENT_PAGE_NAVIGATOR],
-            [self::class, self::COMPONENT_PAGE_MODALS],
-            [self::class, self::COMPONENT_PAGE_SIDE],
-            [self::class, self::COMPONENT_PAGE_TOP],
-            [self::class, self::COMPONENT_PAGE_BODYSIDEINFO],
-            [self::class, self::COMPONENT_PAGE_BODY],
+            self::COMPONENT_PAGE_QUICKVIEW,
+            self::COMPONENT_PAGE_QUICKVIEWSIDEINFO,
+            self::COMPONENT_PAGE_ADDONS,
+            self::COMPONENT_PAGE_BACKGROUND,
+            self::COMPONENT_PAGE_FRAMECOMPONENTS,
+            self::COMPONENT_PAGE_HOLE,
+            self::COMPONENT_PAGE_HOVER,
+            self::COMPONENT_PAGE_NAVIGATOR,
+            self::COMPONENT_PAGE_MODALS,
+            self::COMPONENT_PAGE_SIDE,
+            self::COMPONENT_PAGE_TOP,
+            self::COMPONENT_PAGE_BODYSIDEINFO,
+            self::COMPONENT_PAGE_BODY,
         );
     }
 

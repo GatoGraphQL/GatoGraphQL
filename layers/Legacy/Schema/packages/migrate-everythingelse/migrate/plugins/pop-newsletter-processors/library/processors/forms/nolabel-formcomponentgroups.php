@@ -5,10 +5,10 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
 {
     public final const COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER = 'forminputgroup-cup-newsletter';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER],
+            self::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER,
         );
     }
 

@@ -6,11 +6,11 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
     public final const COMPONENT_FORMINNER_NEWSLETTER = 'forminner-newsletter';
     public final const COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION = 'forminner-newsletterunsubscription';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_NEWSLETTER],
-            [self::class, self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION],
+            self::COMPONENT_FORMINNER_NEWSLETTER,
+            self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION,
         );
     }
 

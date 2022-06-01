@@ -14,15 +14,15 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public final const COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP = 'dataload-singledownvotedby-scrollmap';
     public final const COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP = 'dataload-tagsubscribers-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP,
+            self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP,
+            self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP,
+            self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP,
         );
     }
 
@@ -71,14 +71,14 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP,
+            self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP,
 
-            [self::class, self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
+            self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP,
+            self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP,
+            self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
+            self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;

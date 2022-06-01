@@ -5,10 +5,10 @@ class PoP_ConfigurationComponentModel_Module_Processor_Elements extends Abstract
 {
     public final const COMPONENT_EMPTY = 'empty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EMPTY],
+            self::COMPONENT_EMPTY,
         );
     }
 }

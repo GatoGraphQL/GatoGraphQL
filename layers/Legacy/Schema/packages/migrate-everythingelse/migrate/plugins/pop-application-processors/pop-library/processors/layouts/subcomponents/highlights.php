@@ -5,11 +5,11 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
     public final const COMPONENT_SUBCOMPONENT_HIGHLIGHTS = 'subcomponent-highlights';
     public final const COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS = 'lazysubcomponent-highlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS],
-            [self::class, self::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS],
+            self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS,
+            self::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS,
         );
     }
 

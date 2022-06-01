@@ -6,12 +6,12 @@ class PoP_Module_Processor_TableInners extends PoP_Module_Processor_TableInnersB
     public final const COMPONENT_TABLEINNER_MYHIGHLIGHTS = 'tableinner-myhighlights';
     public final const COMPONENT_TABLEINNER_MYPOSTS = 'tableinner-myposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLEINNER_MYCONTENT],
-            [self::class, self::COMPONENT_TABLEINNER_MYHIGHLIGHTS],
-            [self::class, self::COMPONENT_TABLEINNER_MYPOSTS],
+            self::COMPONENT_TABLEINNER_MYCONTENT,
+            self::COMPONENT_TABLEINNER_MYHIGHLIGHTS,
+            self::COMPONENT_TABLEINNER_MYPOSTS,
         );
     }
 

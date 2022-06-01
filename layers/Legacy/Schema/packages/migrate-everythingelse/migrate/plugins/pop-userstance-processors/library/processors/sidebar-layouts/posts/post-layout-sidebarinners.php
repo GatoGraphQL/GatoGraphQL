@@ -6,12 +6,12 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE = 'layout-postsidebarinner-horizontal-stance';
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE = 'layout-postsidebarinner-compacthorizontal-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE,
         );
     }
 

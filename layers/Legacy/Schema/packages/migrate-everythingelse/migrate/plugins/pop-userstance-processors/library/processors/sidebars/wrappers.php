@@ -11,17 +11,17 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
     public final const COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-opvotereferencedby-details';
     public final const COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'buttonwrapper-opvote-createorupdate';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCETARGET],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCES],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT],
-            [self::class, self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT],
+            self::COMPONENT_WIDGETWRAPPER_STANCETARGET,
+            self::COMPONENT_WIDGETWRAPPER_STANCES,
+            self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW,
+            self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE,
+            self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT,
+            self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE,
+            self::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT,
         );
     }
 

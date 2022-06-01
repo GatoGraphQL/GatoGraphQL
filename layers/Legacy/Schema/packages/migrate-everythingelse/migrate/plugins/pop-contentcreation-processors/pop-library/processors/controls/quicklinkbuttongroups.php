@@ -6,12 +6,12 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW = 'quicklinkbuttongroup-postview';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW = 'quicklinkbuttongroup-postpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTEDIT],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW],
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTEDIT,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW,
         );
     }
 

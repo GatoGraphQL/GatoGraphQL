@@ -23,29 +23,29 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
     public final const COMPONENT_TABPANEL_MYCATEGORYPOSTS18 = 'tabpanel-mycategoryposts18';
     public final const COMPONENT_TABPANEL_MYCATEGORYPOSTS19 = 'tabpanel-mycategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_TABPANEL_MYCATEGORYPOSTS19],
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS00,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS01,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS02,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS03,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS04,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS05,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS06,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS07,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS08,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS09,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS10,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS11,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS12,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS13,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS14,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS15,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS16,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS17,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS18,
+            self::COMPONENT_TABPANEL_MYCATEGORYPOSTS19,
         );
     }
 

@@ -15,20 +15,20 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
     public final const COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL = 'block-singlerelatedhighlightcontent-scroll-thumbnail';
     public final const COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST = 'block-singlerelatedhighlightcontent-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST],
+            self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST,
         );
     }
 

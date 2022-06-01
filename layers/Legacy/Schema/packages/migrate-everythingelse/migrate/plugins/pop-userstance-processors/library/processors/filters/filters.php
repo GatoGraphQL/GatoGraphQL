@@ -12,18 +12,18 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public final const COMPONENT_FILTER_TAGSTANCES = 'filter-tagstances';
     public final const COMPONENT_FILTER_TAGSTANCES_STANCE = 'filter-tagstances-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTER_STANCES],
-            [self::class, self::COMPONENT_FILTER_AUTHORSTANCES],
-            [self::class, self::COMPONENT_FILTER_MYSTANCES],
-            [self::class, self::COMPONENT_FILTER_STANCES_AUTHORROLE],
-            [self::class, self::COMPONENT_FILTER_STANCES_STANCE],
-            [self::class, self::COMPONENT_FILTER_AUTHORSTANCES_STANCE],
-            [self::class, self::COMPONENT_FILTER_STANCES_GENERALSTANCE],
-            [self::class, self::COMPONENT_FILTER_TAGSTANCES],
-            [self::class, self::COMPONENT_FILTER_TAGSTANCES_STANCE],
+            self::COMPONENT_FILTER_STANCES,
+            self::COMPONENT_FILTER_AUTHORSTANCES,
+            self::COMPONENT_FILTER_MYSTANCES,
+            self::COMPONENT_FILTER_STANCES_AUTHORROLE,
+            self::COMPONENT_FILTER_STANCES_STANCE,
+            self::COMPONENT_FILTER_AUTHORSTANCES_STANCE,
+            self::COMPONENT_FILTER_STANCES_GENERALSTANCE,
+            self::COMPONENT_FILTER_TAGSTANCES,
+            self::COMPONENT_FILTER_TAGSTANCES_STANCE,
         );
     }
 

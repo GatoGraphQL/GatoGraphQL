@@ -9,11 +9,11 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     public final const COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT = 'dataload-mymembers-table-edit';
     public final const COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW = 'dataload-mymembers-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW,
         );
     }
 
@@ -78,10 +78,10 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
         // Add the format attr
         $tables = array(
-            [self::class, self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT],
+            self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW,
         );
         if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;

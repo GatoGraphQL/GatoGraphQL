@@ -10,15 +10,15 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
     public final const COMPONENT_LAYOUT_PREVIEWPOST_STANCE_THUMBNAIL = 'layout-previewpost-stance-thumbnail';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT = 'layout-previewpost-stance-edit';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTREFERENCED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT,
         );
     }
 

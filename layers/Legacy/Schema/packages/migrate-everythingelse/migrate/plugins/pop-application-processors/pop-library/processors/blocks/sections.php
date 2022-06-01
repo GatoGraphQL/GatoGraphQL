@@ -7,13 +7,13 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
     public final const COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'block-singleauthors-scroll-thumbnail';
     public final const COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST = 'block-singleauthors-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST,
         );
     }
 

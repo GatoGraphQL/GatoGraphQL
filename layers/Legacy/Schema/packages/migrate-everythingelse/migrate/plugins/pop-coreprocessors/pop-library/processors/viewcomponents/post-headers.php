@@ -5,11 +5,11 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
     public final const COMPONENT_VIEWCOMPONENT_HEADER_POST = 'viewcomponent-header-post-';
     public final const COMPONENT_VIEWCOMPONENT_HEADER_POST_URL = 'viewcomponent-header-post-url';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_POST],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_POST_URL],
+            self::COMPONENT_VIEWCOMPONENT_HEADER_POST,
+            self::COMPONENT_VIEWCOMPONENT_HEADER_POST_URL,
         );
     }
 

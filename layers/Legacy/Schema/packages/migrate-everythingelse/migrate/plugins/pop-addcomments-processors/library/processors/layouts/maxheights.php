@@ -4,10 +4,10 @@ class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Proces
 {
     public final const COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS = 'maxheight-subcomponent-postcomments';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS],
+            self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS,
         );
     }
 

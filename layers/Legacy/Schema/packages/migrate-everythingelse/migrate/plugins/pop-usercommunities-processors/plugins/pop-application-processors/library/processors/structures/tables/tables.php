@@ -5,10 +5,10 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
 {
     public final const COMPONENT_TABLE_MYMEMBERS = 'table-mymembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLE_MYMEMBERS],
+            self::COMPONENT_TABLE_MYMEMBERS,
         );
     }
 

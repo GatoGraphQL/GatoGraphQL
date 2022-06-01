@@ -14,11 +14,11 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
     public final const COMPONENT_FILTERINPUTCONTAINER_MENUS = 'filterinputcontainer-menus';
     public final const COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT = 'filterinputcontainer-menucount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MENUS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT,
         );
     }
 

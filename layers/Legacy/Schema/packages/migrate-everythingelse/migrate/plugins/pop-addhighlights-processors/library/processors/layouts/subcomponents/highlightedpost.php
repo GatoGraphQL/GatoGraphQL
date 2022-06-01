@@ -5,11 +5,11 @@ class PoP_Module_Processor_HighlightedPostSubcomponentLayouts extends PoP_Module
     public final const COMPONENT_LAYOUT_HIGHLIGHTEDPOST_LINE = 'layout-highlightedpost-line';
     public final const COMPONENT_LAYOUT_HIGHLIGHTEDPOST_ADDONS = 'layout-highlightedpost-addons';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_HIGHLIGHTEDPOST_LINE],
-            [self::class, self::COMPONENT_LAYOUT_HIGHLIGHTEDPOST_ADDONS],
+            self::COMPONENT_LAYOUT_HIGHLIGHTEDPOST_LINE,
+            self::COMPONENT_LAYOUT_HIGHLIGHTEDPOST_ADDONS,
         );
     }
 

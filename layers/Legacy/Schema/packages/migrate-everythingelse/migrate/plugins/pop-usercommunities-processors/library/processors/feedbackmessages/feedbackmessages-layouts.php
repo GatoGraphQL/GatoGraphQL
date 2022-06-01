@@ -7,12 +7,12 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageLayouts extends PoP_Module_P
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS = 'layout-feedbackmessage-invitemembers';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP = 'layout-feedbackmessage-editmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWMEMBERS,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP,
         );
     }
 

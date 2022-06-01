@@ -4,10 +4,10 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
 {
     public final const COMPONENT_FILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'filterinputcontainer-mylocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYLOCATIONPOSTS],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYLOCATIONPOSTS,
         );
     }
 

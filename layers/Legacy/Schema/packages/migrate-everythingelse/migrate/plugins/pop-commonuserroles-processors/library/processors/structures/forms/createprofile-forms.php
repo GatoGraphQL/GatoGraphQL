@@ -5,11 +5,11 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
     public final const COMPONENT_FORM_PROFILEORGANIZATION_CREATE = 'form-profileorganization-create';
     public final const COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE = 'form-profileindividual-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE],
-            [self::class, self::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE],
+            self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE,
+            self::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE,
         );
     }
 

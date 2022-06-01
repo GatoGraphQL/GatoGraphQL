@@ -18,13 +18,13 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST = 'filterinputcontainer-admingenericcustompostlist';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT = 'filterinputcontainer-admingenericcustompostcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT,
         );
     }
 

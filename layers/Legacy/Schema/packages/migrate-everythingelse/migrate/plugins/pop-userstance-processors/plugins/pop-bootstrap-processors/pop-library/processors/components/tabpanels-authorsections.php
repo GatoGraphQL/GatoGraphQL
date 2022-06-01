@@ -7,13 +7,13 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
     public final const COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL = 'tabpanel-authorstances-neutral';
     public final const COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST = 'tabpanel-authorstances-against';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST],
+            self::COMPONENT_TABPANEL_AUTHORSTANCES,
+            self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO,
+            self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL,
+            self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST,
         );
     }
 

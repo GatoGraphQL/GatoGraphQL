@@ -6,10 +6,10 @@ class PoP_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_Car
 {
     public final const COMPONENT_CAROUSELINNER_USERS = 'carouselinner-users';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELINNER_USERS],
+            self::COMPONENT_CAROUSELINNER_USERS,
         );
     }
 

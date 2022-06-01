@@ -5,11 +5,11 @@ class UserStance_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Proce
     public final const COMPONENT_QUICKLINKGROUP_STANCEEDIT = 'quicklinkgroup-stanceedit';
     public final const COMPONENT_QUICKLINKGROUP_STANCECONTENT = 'quicklinkgroup-stancecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKGROUP_STANCEEDIT],
-            [self::class, self::COMPONENT_QUICKLINKGROUP_STANCECONTENT],
+            self::COMPONENT_QUICKLINKGROUP_STANCEEDIT,
+            self::COMPONENT_QUICKLINKGROUP_STANCECONTENT,
         );
     }
 

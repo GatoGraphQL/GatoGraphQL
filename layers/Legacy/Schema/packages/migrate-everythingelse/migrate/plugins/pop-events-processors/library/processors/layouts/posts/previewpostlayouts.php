@@ -20,25 +20,25 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED = 'layout-previewost-pastevent-related';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT = 'layout-previewost-pastevent-edit';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT,
         );
     }
 

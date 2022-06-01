@@ -17,17 +17,17 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public final const COMPONENT_BLOCK_AUTHORSUMMARY = 'block-authorsummary';
     public final const COMPONENT_BLOCK_TAG = 'block-tag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_HOME],
-            [self::class, self::COMPONENT_BLOCK_404],
-            [self::class, self::COMPONENT_BLOCK_BACKGROUNDMENU],
-            [self::class, self::COMPONENT_BLOCK_SINGLEPOST],
-            [self::class, self::COMPONENT_BLOCK_AUTHOR],
-            [self::class, self::COMPONENT_BLOCK_AUTHORDESCRIPTION],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSUMMARY],
-            [self::class, self::COMPONENT_BLOCK_TAG],
+            self::COMPONENT_BLOCK_HOME,
+            self::COMPONENT_BLOCK_404,
+            self::COMPONENT_BLOCK_BACKGROUNDMENU,
+            self::COMPONENT_BLOCK_SINGLEPOST,
+            self::COMPONENT_BLOCK_AUTHOR,
+            self::COMPONENT_BLOCK_AUTHORDESCRIPTION,
+            self::COMPONENT_BLOCK_AUTHORSUMMARY,
+            self::COMPONENT_BLOCK_TAG,
         );
     }
 

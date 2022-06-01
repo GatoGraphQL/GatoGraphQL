@@ -5,10 +5,10 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
 {
     public final const COMPONENT_WIDGET_MENU_ABOUT = 'widget-menu-about';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_MENU_ABOUT],
+            self::COMPONENT_WIDGET_MENU_ABOUT,
         );
     }
 

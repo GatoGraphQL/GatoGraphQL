@@ -5,11 +5,11 @@ class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Ap
     public final const COMPONENT_SCRIPT_STANCES = 'script-stances';
     public final const COMPONENT_SCRIPT_STANCESEMPTY = 'script-stancesempty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCRIPT_STANCES],
-            [self::class, self::COMPONENT_SCRIPT_STANCESEMPTY],
+            self::COMPONENT_SCRIPT_STANCES,
+            self::COMPONENT_SCRIPT_STANCESEMPTY,
         );
     }
     

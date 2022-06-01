@@ -4,10 +4,10 @@ class GD_URE_Custom_Module_Processor_ProfileIndividualLayouts extends GD_URE_Cus
 {
     public final const COMPONENT_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS = 'ure-layoutuser-profileindividual-details';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS],
+            self::COMPONENT_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS,
         );
     }
 }

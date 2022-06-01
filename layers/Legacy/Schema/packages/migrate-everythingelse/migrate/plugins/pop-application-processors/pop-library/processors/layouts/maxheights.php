@@ -4,10 +4,10 @@ class PoP_Module_Processor_MaxHeightLayouts extends PoP_Module_Processor_MaxHeig
 {
     public final const COMPONENT_LAYOUT_MAXHEIGHT_POSTCONTENT = 'layout-maxheight-postcontent';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MAXHEIGHT_POSTCONTENT],
+            self::COMPONENT_LAYOUT_MAXHEIGHT_POSTCONTENT,
         );
     }
 

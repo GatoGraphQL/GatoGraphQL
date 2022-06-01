@@ -4,10 +4,10 @@ class PoP_LocationPosts_RelatedContent_Module_Processor_SidebarMultiples extends
 {
     public final const COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR = 'multiple-single-locationpost-relatedcontentsidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR],
+            self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR,
         );
     }
 

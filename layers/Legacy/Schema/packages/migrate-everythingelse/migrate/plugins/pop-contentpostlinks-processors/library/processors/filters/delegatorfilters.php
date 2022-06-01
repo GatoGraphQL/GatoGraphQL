@@ -5,11 +5,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomDelegatorFilters extends PoP_M
     public final const COMPONENT_DELEGATORFILTER_CONTENTPOSTLINKS = 'delegatorfilter-contentpostlinks';
     public final const COMPONENT_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS = 'delegatorfilter-authorcontentpostlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_CONTENTPOSTLINKS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS],
+            self::COMPONENT_DELEGATORFILTER_CONTENTPOSTLINKS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS,
         );
     }
 

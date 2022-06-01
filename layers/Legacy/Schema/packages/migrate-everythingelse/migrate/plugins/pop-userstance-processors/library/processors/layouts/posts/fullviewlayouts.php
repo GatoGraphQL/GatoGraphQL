@@ -5,10 +5,10 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
 {
     public final const COMPONENT_LAYOUT_FULLVIEW_STANCE = 'layout-fullview-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_STANCE],
+            self::COMPONENT_LAYOUT_FULLVIEW_STANCE,
         );
     }
 

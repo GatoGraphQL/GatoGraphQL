@@ -12,17 +12,17 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
     public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL = 'dataload-stances-byorganizations-carousel';
     public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL = 'dataload-stances-byindividuals-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL,
         );
     }
 
@@ -85,20 +85,20 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST,
         );
         $carousels = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL,
         );
         if (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
@@ -144,16 +144,16 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
             case self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
                 $organizations = array(
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL],
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL,
                 );
                 $individuals = array(
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST,
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL,
                 );
                 if (in_array($component, $organizations)) {
                     $role = GD_URE_ROLE_ORGANIZATION;

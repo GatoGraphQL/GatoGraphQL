@@ -10,18 +10,18 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
     public final const COMPONENT_BLOCK_TABPANEL_MYCONTENT = 'block-mycontent-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYPOSTS = 'block-myposts-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_CONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_POSTS],
+            self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_CONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_POSTS,
 
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SEARCHUSERS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_USERS],
+            self::COMPONENT_BLOCK_TABPANEL_SEARCHUSERS,
+            self::COMPONENT_BLOCK_TABPANEL_USERS,
 
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_MYCONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_MYPOSTS,
         );
     }
 

@@ -5,10 +5,10 @@ class GD_Custom_EM_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
 {
     public final const COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE = 'multicomponent-form-locationpost-rightside';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE],
+            self::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE,
         );
     }
 

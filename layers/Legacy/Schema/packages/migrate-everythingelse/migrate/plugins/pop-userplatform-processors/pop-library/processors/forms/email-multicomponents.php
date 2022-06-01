@@ -6,12 +6,12 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
     public final const COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL = 'multicomponent-emailnotifications-general';
     public final const COMPONENT_MULTICOMPONENT_EMAILDIGESTS = 'multicomponent-emaildigests';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL],
-            [self::class, self::COMPONENT_MULTICOMPONENT_EMAILDIGESTS],
+            self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS,
+            self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL,
+            self::COMPONENT_MULTICOMPONENT_EMAILDIGESTS,
         );
     }
 
@@ -22,7 +22,7 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
         switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS:
                 $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL];
-                $ret[] = [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];
+                $ret[] = self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL;
                 // Allow PoP Social Network to hook in its modules
                 if ($forminputs = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_UserMultipleComponents:emailnotifications:modules',

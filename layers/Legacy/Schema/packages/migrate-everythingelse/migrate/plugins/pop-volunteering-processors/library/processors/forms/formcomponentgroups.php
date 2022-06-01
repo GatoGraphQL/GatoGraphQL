@@ -6,10 +6,10 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
 {
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER = 'formcomponentgroup-card-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER],
+            self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER,
         );
     }
 

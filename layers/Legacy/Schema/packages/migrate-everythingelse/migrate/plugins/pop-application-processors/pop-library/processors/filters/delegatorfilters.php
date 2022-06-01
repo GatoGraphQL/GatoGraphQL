@@ -21,27 +21,27 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
     public final const COMPONENT_DELEGATORFILTER_TAGS = 'delegatorfilter-tags';
     public final const COMPONENT_DELEGATORFILTER_USERS = 'delegatorfilter-users';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_CONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_POSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_USERS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_HOMECONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT],
+            self::COMPONENT_DELEGATORFILTER_TAGS,
+            self::COMPONENT_DELEGATORFILTER_CONTENT,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCONTENT,
+            self::COMPONENT_DELEGATORFILTER_POSTS,
+            self::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORPOSTS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_USERS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS,
+            self::COMPONENT_DELEGATORFILTER_MYCONTENT,
+            self::COMPONENT_DELEGATORFILTER_MYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT,
+            self::COMPONENT_DELEGATORFILTER_TAGCONTENT,
+            self::COMPONENT_DELEGATORFILTER_HOMECONTENT,
+            self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT,
         );
     }
 

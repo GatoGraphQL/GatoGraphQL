@@ -18,13 +18,13 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_STANCE_CREATEORUPDATE = 'dataload-stance-createorupdate';
     public final const COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE = 'dataload-singlepoststance-createorupdate';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_STANCE_UPDATE],
-            [self::class, self::COMPONENT_DATALOAD_STANCE_CREATE],
-            [self::class, self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
+            self::COMPONENT_DATALOAD_STANCE_UPDATE,
+            self::COMPONENT_DATALOAD_STANCE_CREATE,
+            self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE,
+            self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE,
         );
     }
 

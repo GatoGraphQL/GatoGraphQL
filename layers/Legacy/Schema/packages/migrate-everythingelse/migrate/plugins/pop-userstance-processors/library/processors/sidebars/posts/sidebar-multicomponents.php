@@ -5,11 +5,11 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
     public final const COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT = 'sidebarmulticomponent-stanceleft';
     public final const COMPONENT_SIDEBARMULTICOMPONENT_STANCERIGHT = 'sidebarmulticomponent-stanceright';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_STANCERIGHT],
+            self::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_STANCERIGHT,
         );
     }
 

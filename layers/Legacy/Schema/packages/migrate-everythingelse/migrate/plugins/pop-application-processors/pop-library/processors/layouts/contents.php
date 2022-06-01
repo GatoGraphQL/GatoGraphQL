@@ -8,14 +8,14 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     public final const COMPONENT_LAYOUT_CONTENT_COMMENT = 'layout-content-comment';
     public final const COMPONENT_LAYOUT_CONTENT_PAGE = 'layout-content-page';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_CONTENT_POST],
-            [self::class, self::COMPONENT_LAYOUT_CONTENT_POSTFEED],
-            [self::class, self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT],
-            [self::class, self::COMPONENT_LAYOUT_CONTENT_COMMENT],
-            [self::class, self::COMPONENT_LAYOUT_CONTENT_PAGE],
+            self::COMPONENT_LAYOUT_CONTENT_POST,
+            self::COMPONENT_LAYOUT_CONTENT_POSTFEED,
+            self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT,
+            self::COMPONENT_LAYOUT_CONTENT_COMMENT,
+            self::COMPONENT_LAYOUT_CONTENT_PAGE,
         );
     }
 

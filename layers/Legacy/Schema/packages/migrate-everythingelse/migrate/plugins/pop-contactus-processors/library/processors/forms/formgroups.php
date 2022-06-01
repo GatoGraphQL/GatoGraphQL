@@ -6,12 +6,12 @@ class PoP_ContactUs_Module_Processor_FormGroups extends PoP_Module_Processor_For
     public final const COMPONENT_FORMINPUTGROUP_SUBJECT = 'gf-forminputgroup-field-subject';
     public final const COMPONENT_FORMINPUTGROUP_MESSAGE = 'gf-forminputgroup-field-message';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_TOPIC],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_SUBJECT],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_MESSAGE],
+            self::COMPONENT_FORMINPUTGROUP_TOPIC,
+            self::COMPONENT_FORMINPUTGROUP_SUBJECT,
+            self::COMPONENT_FORMINPUTGROUP_MESSAGE,
         );
     }
 

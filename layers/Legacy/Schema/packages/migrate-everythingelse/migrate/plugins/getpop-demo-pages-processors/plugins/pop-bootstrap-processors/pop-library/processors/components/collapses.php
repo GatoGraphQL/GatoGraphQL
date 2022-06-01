@@ -6,10 +6,10 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
 {
     public final const COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP = 'getpopdemo-collapsecomponent-hometop';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP],
+            self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP,
         );
     }
 

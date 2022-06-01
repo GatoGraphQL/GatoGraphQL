@@ -4,10 +4,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages extends PoP
 {
     public final const COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE = 'feedbackmessage-useravatar-update';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE],
+            self::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE,
         );
     }
 

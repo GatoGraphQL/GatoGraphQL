@@ -8,14 +8,14 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
     public final const COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL = 'scrollinner-communities-thumbnail';
     public final const COMPONENT_SCROLLINNER_COMMUNITIES_LIST = 'scrollinner-communities-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST,
         );
     }
 

@@ -5,10 +5,10 @@ class PoP_ContactUs_Module_Processor_TextareaFormInputs extends PoP_Module_Proce
 {
     public final const COMPONENT_FORMINPUT_MESSAGE = 'gf-field-message';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_MESSAGE],
+            self::COMPONENT_FORMINPUT_MESSAGE,
         );
     }
 

@@ -31,14 +31,14 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID,
+            self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG,
+            self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING,
+            self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE,
+            self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING,
         );
     }
 

@@ -4,10 +4,10 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
 {
     public final const COMPONENT_WIDGETCOMPACT_STANCEINFO = 'widgetcompact-stance-info';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETCOMPACT_STANCEINFO],
+            self::COMPONENT_WIDGETCOMPACT_STANCEINFO,
         );
     }
 

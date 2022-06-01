@@ -23,27 +23,27 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public final const COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW = 'tag-socialmediaproviders-linkedin-preview';
     public final const COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW = 'user-socialmediaproviders-linkedin-preview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_FB],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_FB],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_FB],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_TWITTER],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_TWITTER],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_TWITTER],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_LINKEDIN],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW],
+            self::COMPONENT_POSTSOCIALMEDIA_FB,
+            self::COMPONENT_USERSOCIALMEDIA_FB,
+            self::COMPONENT_TAGSOCIALMEDIA_FB,
+            self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW,
+            self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW,
+            self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW,
+            self::COMPONENT_POSTSOCIALMEDIA_TWITTER,
+            self::COMPONENT_USERSOCIALMEDIA_TWITTER,
+            self::COMPONENT_TAGSOCIALMEDIA_TWITTER,
+            self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW,
+            self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW,
+            self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW,
+            self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN,
+            self::COMPONENT_USERSOCIALMEDIA_LINKEDIN,
+            self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN,
+            self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW,
+            self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW,
+            self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW,
         );
     }
 

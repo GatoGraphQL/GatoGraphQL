@@ -19,16 +19,16 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     public final const COMPONENT_LAYOUT_PAGETABS_AUTHOR = 'layout-pagetabs-author';
     public final const COMPONENT_LAYOUT_PAGETABS_404 = 'layout-pagetabs-404';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_HOME],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_TAG],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_PAGE],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_ROUTE],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_SINGLE],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_AUTHOR],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_404],
+            self::COMPONENT_LAYOUT_PAGETABS_HOME,
+            self::COMPONENT_LAYOUT_PAGETABS_TAG,
+            self::COMPONENT_LAYOUT_PAGETABS_PAGE,
+            self::COMPONENT_LAYOUT_PAGETABS_ROUTE,
+            self::COMPONENT_LAYOUT_PAGETABS_SINGLE,
+            self::COMPONENT_LAYOUT_PAGETABS_AUTHOR,
+            self::COMPONENT_LAYOUT_PAGETABS_404,
         );
     }
 

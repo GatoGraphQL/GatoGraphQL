@@ -4,7 +4,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
 {
     public final const COMPONENT_FORM_LOCATIONPOSTLINK = 'form-locationpostlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
             [GD_Custom_EM_Module_Processor_CreateUpdatePostForms::class, GD_Custom_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_LOCATIONPOSTLINK],

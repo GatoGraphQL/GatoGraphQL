@@ -5,11 +5,11 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
     public final const COMPONENT_TABPANEL_HIGHLIGHTS = 'tabpanel-highlights';
     public final const COMPONENT_TABPANEL_MYHIGHLIGHTS = 'tabpanel-myhighlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_HIGHLIGHTS],
-            [self::class, self::COMPONENT_TABPANEL_MYHIGHLIGHTS],
+            self::COMPONENT_TABPANEL_HIGHLIGHTS,
+            self::COMPONENT_TABPANEL_MYHIGHLIGHTS,
         );
     }
 
@@ -36,7 +36,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
                     $ret,
                     array(
                         [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW],
-                        // [self::class, self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_DETAILS],
+                        // self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_DETAILS,
                         [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_LIST],
                         [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL],
                     )

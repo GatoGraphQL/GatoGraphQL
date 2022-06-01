@@ -5,10 +5,10 @@ class PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs extends PoP_Mod
 {
     public final const COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL = 'forminput-cup-displayemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL],
+            self::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL,
         );
     }
 

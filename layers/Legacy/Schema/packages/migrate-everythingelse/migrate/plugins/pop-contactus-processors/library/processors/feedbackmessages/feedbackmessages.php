@@ -4,10 +4,10 @@ class PoP_ContactUs_Module_Processor_FeedbackMessages extends PoP_Module_Process
 {
     public final const COMPONENT_FEEDBACKMESSAGE_CONTACTUS = 'feedbackmessage-contactus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CONTACTUS],
+            self::COMPONENT_FEEDBACKMESSAGE_CONTACTUS,
         );
     }
 

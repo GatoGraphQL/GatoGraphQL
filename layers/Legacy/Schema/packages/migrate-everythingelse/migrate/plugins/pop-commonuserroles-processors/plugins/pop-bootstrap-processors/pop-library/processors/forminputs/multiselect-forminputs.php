@@ -7,12 +7,12 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
     public final const COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES = 'forminput-organizationcategories';
     public final const COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES = 'forminput-organizationtypes';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES,
         );
     }
 

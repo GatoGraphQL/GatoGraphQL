@@ -5,11 +5,11 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS = 'simplefilterinputcontainer-individuals';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS = 'simplefilterinputcontainer-organizations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS,
         );
     }
 

@@ -5,11 +5,11 @@ class PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples extends PoP_Modu
     public final const COMPONENT_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR = 'multiple-single-event-relatedcontentsidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR = 'multiple-single-pastevent-relatedcontentsidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR],
+            self::COMPONENT_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR,
         );
     }
 

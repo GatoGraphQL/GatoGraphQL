@@ -8,10 +8,10 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
 {
     public final const COMPONENT_DATALOAD_LATESTNOTIFICATIONS = 'dataload-notifications-latestnotifications';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS],
+            self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS,
         );
     }
 

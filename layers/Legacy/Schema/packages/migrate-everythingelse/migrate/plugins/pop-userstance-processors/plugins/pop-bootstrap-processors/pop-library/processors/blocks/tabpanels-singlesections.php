@@ -10,13 +10,13 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
     public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
     public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL,
         );
     }
 

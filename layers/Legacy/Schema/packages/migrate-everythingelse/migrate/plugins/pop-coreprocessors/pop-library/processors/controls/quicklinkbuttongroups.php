@@ -10,16 +10,16 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
     public final const COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL = 'quicklinkbuttongroup-comments-label';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE = 'quicklinkbuttongroup-tagshare';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE],
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE,
         );
     }
 

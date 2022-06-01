@@ -8,13 +8,13 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
     public final const COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST = 'controlgroup-blocktagmappostlist';
     public final const COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST = 'controlgroup-blockmapuserlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST],
+            self::COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST,
         );
     }
 

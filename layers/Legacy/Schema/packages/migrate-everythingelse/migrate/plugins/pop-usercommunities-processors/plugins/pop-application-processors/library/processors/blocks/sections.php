@@ -12,18 +12,18 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
     public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL,
         );
     }
 

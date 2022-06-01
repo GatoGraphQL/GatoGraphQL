@@ -9,13 +9,13 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
     public final const COMPONENT_SCROLLLAYOUT_POSTCOMMENT = 'layout-postcomment-scroll';
     public final const COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE = 'layout-postcomment-scroll-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_COMMENTS_LIST],
-            [self::class, self::COMPONENT_SCROLL_COMMENTS_ADD],
-            [self::class, self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT],
-            [self::class, self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE],
+            self::COMPONENT_SCROLL_COMMENTS_LIST,
+            self::COMPONENT_SCROLL_COMMENTS_ADD,
+            self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT,
+            self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE,
         );
     }
 

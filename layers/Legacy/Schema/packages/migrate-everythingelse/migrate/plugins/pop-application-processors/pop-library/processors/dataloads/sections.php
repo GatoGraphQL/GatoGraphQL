@@ -10,13 +10,13 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     public final const COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'dataload-singleauthors-scroll-thumbnail';
     public final const COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST = 'dataload-singleauthors-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST,
         );
     }
 
@@ -64,16 +64,16 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
 
         // Add the format attr
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;

@@ -4,10 +4,10 @@ class PoP_Module_Processor_LocationAddressLayouts extends PoP_Module_Processor_L
 {
     public final const COMPONENT_EM_LAYOUT_LOCATIONADDRESS = 'em-layout-address';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONADDRESS],
+            self::COMPONENT_EM_LAYOUT_LOCATIONADDRESS,
         );
     }
 }

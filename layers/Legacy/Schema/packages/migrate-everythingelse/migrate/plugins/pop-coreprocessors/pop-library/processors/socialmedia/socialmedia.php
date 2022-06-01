@@ -11,17 +11,17 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
     public final const COMPONENT_TAGSOCIALMEDIA = 'tag-socialmedia';
     public final const COMPONENT_TAGSOCIALMEDIA_COUNTER = 'tag-socialmedia-counter';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_COUNTER],
-            [self::class, self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA],
-            [self::class, self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_COUNTER],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_COUNTER],
+            self::COMPONENT_POSTSOCIALMEDIA,
+            self::COMPONENT_POSTSOCIALMEDIA_COUNTER,
+            self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA,
+            self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER,
+            self::COMPONENT_USERSOCIALMEDIA,
+            self::COMPONENT_USERSOCIALMEDIA_COUNTER,
+            self::COMPONENT_TAGSOCIALMEDIA,
+            self::COMPONENT_TAGSOCIALMEDIA_COUNTER,
         );
     }
 

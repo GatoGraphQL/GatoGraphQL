@@ -10,10 +10,10 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
 
     public final const COMPONENT_DATALOAD_CONTACTUSER = 'dataload-contactuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_CONTACTUSER],
+            self::COMPONENT_DATALOAD_CONTACTUSER,
         );
     }
 

@@ -8,10 +8,10 @@ class PoP_LocationPosts_Module_Processor_CustomSidebarDataloads extends PoP_Modu
 
     public final const COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR = 'dataload-single-locationpost-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
+            self::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR,
         );
     }
 

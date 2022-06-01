@@ -4,10 +4,10 @@ class PoP_Module_Processor_LocationViewComponentLinks extends PoP_Module_Process
 {
     public final const COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME = 'em-viewcomponent-link-locationiconname';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME],
+            self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME,
         );
     }
 

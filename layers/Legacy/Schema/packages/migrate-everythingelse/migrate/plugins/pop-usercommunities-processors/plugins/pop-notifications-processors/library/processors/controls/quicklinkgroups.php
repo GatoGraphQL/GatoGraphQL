@@ -4,10 +4,10 @@ class GD_URE_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_C
 {
     public final const COMPONENT_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY = 'ure-aal-quicklinkgroup-user-joinedcommunity';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY],
+            self::COMPONENT_UREAAL_QUICKLINKGROUP_USER_JOINEDCOMMUNITY,
         );
     }
 

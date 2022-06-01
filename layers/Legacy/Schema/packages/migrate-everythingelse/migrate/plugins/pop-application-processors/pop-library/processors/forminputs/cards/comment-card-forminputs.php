@@ -4,10 +4,10 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
 {
     public final const COMPONENT_FORMCOMPONENT_CARD_COMMENT = 'forminput-comment-card';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_COMMENT],
+            self::COMPONENT_FORMCOMPONENT_CARD_COMMENT,
         );
     }
 

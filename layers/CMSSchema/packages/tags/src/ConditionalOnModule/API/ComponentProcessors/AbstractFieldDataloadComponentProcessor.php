@@ -40,12 +40,12 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT,
         );
     }
 

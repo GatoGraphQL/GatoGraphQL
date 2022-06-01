@@ -6,11 +6,11 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
     public final const COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY = 'layout-checkpointmessage-profilecommunity';
     public final const COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP = 'layout-checkpointmessage-profilecommunityeditmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP],
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY,
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP,
         );
     }
 

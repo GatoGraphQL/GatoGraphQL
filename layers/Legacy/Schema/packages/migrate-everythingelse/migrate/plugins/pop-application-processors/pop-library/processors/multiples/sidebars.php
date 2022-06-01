@@ -24,30 +24,30 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
     public final const COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR = 'multiple-single-post-recommendedbysidebar';
     public final const COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR = 'multiple-homesection-content-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_USERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_TAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLEPAGE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_USERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_TAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLEPAGE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR,
+            self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR,
         );
     }
 
@@ -178,12 +178,12 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
         switch ($component->name) {
             case self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR:
             case self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR:
-                if ($component == [self::class, self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]) {
+                if ($component == self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $target_components = array(
                         '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                     );
-                } elseif ($component == [self::class, self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR]) {
+                } elseif ($component == self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $target_components = array(
                         '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],

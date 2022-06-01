@@ -10,11 +10,11 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
     public final const COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY = 'ure-anchorcontrol-contentsourcecommunity';
     public final const COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER = 'ure-anchorcontrol-contentsourceuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY],
-            [self::class, self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER],
+            self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY,
+            self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER,
         );
     }
 

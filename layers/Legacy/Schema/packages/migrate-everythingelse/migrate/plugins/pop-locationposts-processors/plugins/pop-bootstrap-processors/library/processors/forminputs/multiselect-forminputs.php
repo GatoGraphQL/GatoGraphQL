@@ -6,11 +6,11 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public final const COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES = 'forminput-locationpostcategories';
     public final const COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES = 'filterinput-locationpostcategories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES],
+            self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES,
+            self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES,
         );
     }
 

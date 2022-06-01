@@ -15,18 +15,18 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
     public final const COMPONENT_SINGLELAYOUT_FULLVIEW_HIGHLIGHT = 'singlelayout-fullview-highlight';
     public final const COMPONENT_SINGLELAYOUT_FULLVIEW_POST = 'singlelayout-fullview-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_POST],
-            [self::class, self::COMPONENT_AUTHORLAYOUT_FULLVIEW],
-            [self::class, self::COMPONENT_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT],
-            [self::class, self::COMPONENT_AUTHORLAYOUT_FULLVIEW_POST],
-            [self::class, self::COMPONENT_SINGLELAYOUT_FULLVIEW],
-            [self::class, self::COMPONENT_SINGLELAYOUT_FULLVIEW_HIGHLIGHT],
-            [self::class, self::COMPONENT_SINGLELAYOUT_FULLVIEW_POST],
+            self::COMPONENT_LAYOUT_FULLVIEW,
+            self::COMPONENT_LAYOUT_FULLVIEW_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_FULLVIEW_POST,
+            self::COMPONENT_AUTHORLAYOUT_FULLVIEW,
+            self::COMPONENT_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT,
+            self::COMPONENT_AUTHORLAYOUT_FULLVIEW_POST,
+            self::COMPONENT_SINGLELAYOUT_FULLVIEW,
+            self::COMPONENT_SINGLELAYOUT_FULLVIEW_HIGHLIGHT,
+            self::COMPONENT_SINGLELAYOUT_FULLVIEW_POST,
         );
     }
 

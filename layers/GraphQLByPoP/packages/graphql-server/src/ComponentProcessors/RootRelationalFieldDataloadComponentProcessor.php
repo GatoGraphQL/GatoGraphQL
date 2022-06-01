@@ -27,11 +27,11 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT,
         );
     }
 

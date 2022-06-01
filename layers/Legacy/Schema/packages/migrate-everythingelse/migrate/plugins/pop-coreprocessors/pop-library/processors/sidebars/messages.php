@@ -6,11 +6,11 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
     public final const COMPONENT_MESSAGE_NOREFERENCES = 'message-noreferences';
     public final const COMPONENT_MESSAGE_NOCONTACT = 'message-nocontact';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MESSAGE_NOREFERENCES],
-            [self::class, self::COMPONENT_MESSAGE_NOCONTACT],
+            self::COMPONENT_MESSAGE_NOREFERENCES,
+            self::COMPONENT_MESSAGE_NOCONTACT,
         );
     }
 

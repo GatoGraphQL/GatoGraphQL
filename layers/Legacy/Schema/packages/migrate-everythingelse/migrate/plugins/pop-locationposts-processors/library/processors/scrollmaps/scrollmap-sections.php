@@ -9,15 +9,15 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
     public final const COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP = 'scrollmap-taglocationposts-scrollmap';
     public final const COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-taglocationposts-horizontalscrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP],
-            [self::class, self::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP,
+            self::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP,
         );
     }
 

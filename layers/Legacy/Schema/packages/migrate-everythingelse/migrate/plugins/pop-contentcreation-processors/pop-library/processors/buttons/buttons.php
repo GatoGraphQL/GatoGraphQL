@@ -7,12 +7,12 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
     public final const COMPONENT_BUTTON_POSTVIEW = 'button-postview';
     public final const COMPONENT_BUTTON_POSTPREVIEW = 'button-postpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_POSTEDIT],
-            [self::class, self::COMPONENT_BUTTON_POSTVIEW],
-            [self::class, self::COMPONENT_BUTTON_POSTPREVIEW],
+            self::COMPONENT_BUTTON_POSTEDIT,
+            self::COMPONENT_BUTTON_POSTVIEW,
+            self::COMPONENT_BUTTON_POSTPREVIEW,
         );
     }
 

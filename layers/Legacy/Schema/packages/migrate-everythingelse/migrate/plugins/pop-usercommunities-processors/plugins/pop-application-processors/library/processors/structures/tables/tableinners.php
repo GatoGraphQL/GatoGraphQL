@@ -4,10 +4,10 @@ class PoP_UserCommunities_Module_Processor_TableInners extends PoP_Module_Proces
 {
     public final const COMPONENT_TABLEINNER_MYMEMBERS = 'tableinner-mymembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLEINNER_MYMEMBERS],
+            self::COMPONENT_TABLEINNER_MYMEMBERS,
         );
     }
 

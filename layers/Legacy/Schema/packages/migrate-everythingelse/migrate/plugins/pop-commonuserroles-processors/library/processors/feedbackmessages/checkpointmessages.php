@@ -5,11 +5,11 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Mo
     public final const COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'checkpointmessage-profileorganization';
     public final const COMPONENT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'checkpointmessage-profileindividual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL],
+            self::COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION,
+            self::COMPONENT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL,
         );
     }
 

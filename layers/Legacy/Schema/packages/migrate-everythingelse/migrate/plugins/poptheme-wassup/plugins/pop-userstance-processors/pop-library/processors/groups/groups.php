@@ -11,16 +11,16 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
     public final const COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA = 'group-userstance-author-widgetarea';
     public final const COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES = 'group-userstance-author-stanceslides';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_HOMETOP],
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA],
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES],
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE],
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_AUTHORTOP],
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA],
-            [self::class, self::COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES],
+            self::COMPONENT_USERSTANCE_GROUP_HOMETOP,
+            self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA,
+            self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES,
+            self::COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE,
+            self::COMPONENT_USERSTANCE_GROUP_AUTHORTOP,
+            self::COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA,
+            self::COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES,
         );
     }
 
@@ -31,7 +31,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         switch ($component->name) {
             case self::COMPONENT_USERSTANCE_GROUP_HOMETOP:
                 $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_COMPACTWELCOME];
-                $ret[] = [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA];
+                $ret[] = self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA;
 
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_CAROUSEL];
@@ -66,17 +66,17 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 break;
 
             case self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA:
-                $ret[] = [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES];
-                $ret[] = [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE];
+                $ret[] = self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES;
+                $ret[] = self::COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE;
                 break;
 
             case self::COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA:
-                $ret[] = [self::class, self::COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES];
+                $ret[] = self::COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES;
                 break;
 
             case self::COMPONENT_USERSTANCE_GROUP_AUTHORTOP:
                 $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_DESCRIPTION];
-                $ret[] = [self::class, self::COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA];
+                $ret[] = self::COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA;
                 break;
         }
 
@@ -132,7 +132,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
             case self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA:
                 $this->appendProp($component, $props, 'class', 'vt-home-widgetarea row');
 
-                $this->appendProp([[self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES]], $props, 'class', 'col-sm-12');
+                $this->appendProp([self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES], $props, 'class', 'col-sm-12');
                 $this->setProp(
                     [self::COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES],
                     $props,
@@ -143,7 +143,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                     )
                 );
 
-                $this->appendProp([[self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE]], $props, 'class', 'col-sm-12');
+                $this->appendProp([self::COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE], $props, 'class', 'col-sm-12');
                 break;
 
             case self::COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES:

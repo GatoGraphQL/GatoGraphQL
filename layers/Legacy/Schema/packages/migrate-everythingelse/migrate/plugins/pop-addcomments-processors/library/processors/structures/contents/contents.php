@@ -4,10 +4,10 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
 {
     public final const COMPONENT_CONTENT_COMMENTSINGLE = 'content-commentsingle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENT_COMMENTSINGLE],
+            self::COMPONENT_CONTENT_COMMENTSINGLE,
         );
     }
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)

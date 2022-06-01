@@ -4,10 +4,10 @@ class PoP_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor_Cu
 {
     public final const COMPONENT_LAYOUT_FULLUSER = 'layout-fulluser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLUSER],
+            self::COMPONENT_LAYOUT_FULLUSER,
         );
     }
 

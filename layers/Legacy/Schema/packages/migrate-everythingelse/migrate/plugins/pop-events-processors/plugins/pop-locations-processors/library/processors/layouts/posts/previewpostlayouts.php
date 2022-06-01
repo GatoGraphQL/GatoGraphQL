@@ -7,12 +7,12 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public final const COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS = 'layout-previewpost-event-horizontalmapdetails';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS = 'layout-previewost-pastevent-mapdetails';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS,
         );
     }
 

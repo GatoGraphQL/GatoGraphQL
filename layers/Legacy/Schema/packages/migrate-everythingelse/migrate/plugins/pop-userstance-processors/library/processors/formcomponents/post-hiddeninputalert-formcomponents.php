@@ -4,10 +4,10 @@ class PoP_UserStance_Module_Processor_PostHiddenInputAlertFormComponents extends
 {
     public final const COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_STANCETARGET = 'formcomponent-hiddeninputalert-stancetarget';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_STANCETARGET],
+            self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_STANCETARGET,
         );
     }
     

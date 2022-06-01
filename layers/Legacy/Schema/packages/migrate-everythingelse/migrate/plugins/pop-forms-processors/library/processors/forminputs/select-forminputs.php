@@ -36,13 +36,13 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         return $this->orderFilterInput ??= $this->instanceManager->getInstance(OrderFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_ORDERUSER],
-            [self::class, self::COMPONENT_FILTERINPUT_ORDERPOST],
-            [self::class, self::COMPONENT_FILTERINPUT_ORDERTAG],
-            [self::class, self::COMPONENT_FILTERINPUT_ORDERCOMMENT],
+            self::COMPONENT_FILTERINPUT_ORDERUSER,
+            self::COMPONENT_FILTERINPUT_ORDERPOST,
+            self::COMPONENT_FILTERINPUT_ORDERTAG,
+            self::COMPONENT_FILTERINPUT_ORDERCOMMENT,
         );
     }
 

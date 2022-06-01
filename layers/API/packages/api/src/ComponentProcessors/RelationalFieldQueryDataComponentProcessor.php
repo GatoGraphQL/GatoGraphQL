@@ -8,10 +8,10 @@ class RelationalFieldQueryDataComponentProcessor extends AbstractRelationalField
 {
     public final const COMPONENT_LAYOUT_RELATIONALFIELDS = 'layout-relationalfields';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_RELATIONALFIELDS],
+            self::COMPONENT_LAYOUT_RELATIONALFIELDS,
         );
     }
 }

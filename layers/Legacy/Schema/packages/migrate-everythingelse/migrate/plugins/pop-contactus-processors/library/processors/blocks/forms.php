@@ -4,10 +4,10 @@ class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlo
 {
     public final const COMPONENT_BLOCK_CONTACTUS = 'block-contactus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_CONTACTUS],
+            self::COMPONENT_BLOCK_CONTACTUS,
         );
     }
 

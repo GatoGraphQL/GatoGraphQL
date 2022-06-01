@@ -4,10 +4,10 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
 {
     public final const COMPONENT_FORMINNER_SHAREBYEMAIL = 'forminner-sharebyemail';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_SHAREBYEMAIL],
+            self::COMPONENT_FORMINNER_SHAREBYEMAIL,
         );
     }
 

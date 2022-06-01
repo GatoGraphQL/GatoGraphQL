@@ -19,18 +19,18 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     public final const COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST = 'blog-dataload-relationalfields-tagcontentlist';
     public final const COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST = 'blog-dataload-relationalfields-singleauthorlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST,
         );
     }
 

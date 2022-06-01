@@ -8,14 +8,14 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
     public final const COMPONENT_SCRIPT_REFERENCES = 'script-references';
     public final const COMPONENT_SCRIPT_REFERENCESEMPTY = 'script-referencesempty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCRIPT_SINGLECOMMENT],
-            [self::class, self::COMPONENT_SCRIPT_COMMENTS],
-            [self::class, self::COMPONENT_SCRIPT_COMMENTSEMPTY],
-            [self::class, self::COMPONENT_SCRIPT_REFERENCES],
-            [self::class, self::COMPONENT_SCRIPT_REFERENCESEMPTY],
+            self::COMPONENT_SCRIPT_SINGLECOMMENT,
+            self::COMPONENT_SCRIPT_COMMENTS,
+            self::COMPONENT_SCRIPT_COMMENTSEMPTY,
+            self::COMPONENT_SCRIPT_REFERENCES,
+            self::COMPONENT_SCRIPT_REFERENCESEMPTY,
         );
     }
 

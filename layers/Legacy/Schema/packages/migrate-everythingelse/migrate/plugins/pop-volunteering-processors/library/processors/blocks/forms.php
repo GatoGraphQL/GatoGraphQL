@@ -4,10 +4,10 @@ class PoP_Volunteering_Module_Processor_Blocks extends PoP_Module_Processor_Form
 {
     public final const COMPONENT_BLOCK_VOLUNTEER = 'block-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_VOLUNTEER],
+            self::COMPONENT_BLOCK_VOLUNTEER,
         );
     }
 

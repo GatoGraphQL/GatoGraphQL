@@ -4,10 +4,10 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
 {
     public final const COMPONENT_CAROUSEL_AUTHORMEMBERS = 'carousel-authormembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORMEMBERS],
+            self::COMPONENT_CAROUSEL_AUTHORMEMBERS,
         );
     }
 

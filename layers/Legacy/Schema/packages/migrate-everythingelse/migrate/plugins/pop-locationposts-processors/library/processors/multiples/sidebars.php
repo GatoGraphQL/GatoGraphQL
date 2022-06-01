@@ -8,13 +8,13 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
     public final const COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR = 'multiple-tag-locationposts-sidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR = 'multiple-single-locationpost-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR],
+            self::COMPONENT_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR,
         );
     }
 

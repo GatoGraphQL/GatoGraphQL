@@ -6,12 +6,12 @@ class PoP_Module_Processor_ShareMultiples extends PoP_Module_Processor_Multiples
     public final const COMPONENT_MULTIPLE_API = 'multiple-api';
     public final const COMPONENT_MULTIPLE_COPYSEARCHURL = 'multiple-copysearchurl';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_EMBED],
-            [self::class, self::COMPONENT_MULTIPLE_API],
-            [self::class, self::COMPONENT_MULTIPLE_COPYSEARCHURL],
+            self::COMPONENT_MULTIPLE_EMBED,
+            self::COMPONENT_MULTIPLE_API,
+            self::COMPONENT_MULTIPLE_COPYSEARCHURL,
         );
     }
     

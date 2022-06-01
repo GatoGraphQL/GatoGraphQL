@@ -7,13 +7,13 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
     public final const COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS,
+            self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS,
+            self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW,
+            self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW,
         );
     }
 
@@ -39,12 +39,12 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
 
         // Extra classes
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS,
+            self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW,
+            self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW,
         );
 
         $extra_class = '';

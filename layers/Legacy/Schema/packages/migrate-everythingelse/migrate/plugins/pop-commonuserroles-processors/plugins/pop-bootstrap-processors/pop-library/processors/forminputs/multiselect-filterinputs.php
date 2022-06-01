@@ -27,12 +27,12 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES,
         );
     }
 

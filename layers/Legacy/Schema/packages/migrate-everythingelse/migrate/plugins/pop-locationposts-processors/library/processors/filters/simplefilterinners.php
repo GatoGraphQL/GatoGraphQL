@@ -6,12 +6,12 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'simplefilterinputcontainer-authorlocationposts';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'simplefilterinputcontainer-taglocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS,
         );
     }
 

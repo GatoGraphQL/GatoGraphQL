@@ -28,12 +28,12 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS,
         );
     }
 

@@ -9,12 +9,12 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
     public final const COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT = 'feedbackmessageinner-createcontent';
     public final const COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT = 'feedbackmessageinner-updatecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_FLAG],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_FLAG,
+            self::COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT,
+            self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT,
         );
     }
 

@@ -5,10 +5,10 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
 {
     public final const COMPONENT_WIDGET_FORM_EVENTLINKDETAILS = 'widget-form-eventlink-details';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS],
+            self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS,
         );
     }
 
@@ -33,7 +33,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
                 }
 
                 // Comment Leo 16/01/2016: There's no need to ask for the LinkAccess since we don't show it anyway
-                // if ($component == [self::class, self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS]) {
+                // if ($component == self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS) {
                 //     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
                 // }
                 break;

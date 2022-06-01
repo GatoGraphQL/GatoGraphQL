@@ -4,10 +4,10 @@ class PoP_ContactUs_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Mod
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUS = 'layout-feedbackmessagealert-contactus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUS],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUS,
         );
     }
 

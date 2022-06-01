@@ -6,10 +6,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserBlocks extends PoP_Module_Pr
 {
     public final const COMPONENT_BLOCK_USERAVATAR_UPDATE = 'block-useravatar-update';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_USERAVATAR_UPDATE],
+            self::COMPONENT_BLOCK_USERAVATAR_UPDATE,
         );
     }
 

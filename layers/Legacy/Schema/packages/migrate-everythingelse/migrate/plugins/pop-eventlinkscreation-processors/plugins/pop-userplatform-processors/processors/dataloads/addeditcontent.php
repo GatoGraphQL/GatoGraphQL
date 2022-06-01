@@ -12,11 +12,11 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
     public final const COMPONENT_DATALOAD_EVENTLINK_UPDATE = 'dataload-eventlink-update';
     public final const COMPONENT_DATALOAD_EVENTLINK_CREATE = 'dataload-eventlink-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTLINK_UPDATE],
-            [self::class, self::COMPONENT_DATALOAD_EVENTLINK_CREATE],
+            self::COMPONENT_DATALOAD_EVENTLINK_UPDATE,
+            self::COMPONENT_DATALOAD_EVENTLINK_CREATE,
         );
     }
 

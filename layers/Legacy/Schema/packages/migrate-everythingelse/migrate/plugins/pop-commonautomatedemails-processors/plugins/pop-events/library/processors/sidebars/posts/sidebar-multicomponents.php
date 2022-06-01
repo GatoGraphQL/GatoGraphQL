@@ -4,10 +4,10 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PostMultipleSidebarComponents exten
 {
     public final const COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT = 'sidebarmulticomponent-automatedemails-event';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT],
+            self::COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT,
         );
     }
 

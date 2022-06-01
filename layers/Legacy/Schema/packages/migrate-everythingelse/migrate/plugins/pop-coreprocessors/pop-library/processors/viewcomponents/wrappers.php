@@ -9,13 +9,13 @@ class PoP_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Proces
     public final const COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-postconclusionsidebar-horizontal';
     public final const COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-subjugatedpostconclusionsidebar-horizontal';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG,
+            self::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL,
+            self::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL,
         );
     }
 

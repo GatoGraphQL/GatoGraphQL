@@ -4,10 +4,10 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
 {
     public final const COMPONENT_MULTICOMPONENT_LOCATIONMAP = 'multicomponent-locationmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_LOCATIONMAP],
+            self::COMPONENT_MULTICOMPONENT_LOCATIONMAP,
         );
     }
 

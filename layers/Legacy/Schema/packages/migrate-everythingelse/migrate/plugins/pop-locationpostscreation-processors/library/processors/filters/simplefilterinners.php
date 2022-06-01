@@ -4,10 +4,10 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
 {
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'simplefilterinputcontainer-mylocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS,
         );
     }
 

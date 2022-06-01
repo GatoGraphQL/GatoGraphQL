@@ -18,11 +18,11 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
     public final const COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
     public final const COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS,
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS,
         );
     }
 

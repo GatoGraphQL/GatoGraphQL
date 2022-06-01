@@ -4,10 +4,10 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
 {
     public final const COMPONENT_FORMINNER_STANCE = 'forminner-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_STANCE],
+            self::COMPONENT_FORMINNER_STANCE,
         );
     }
 

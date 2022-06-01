@@ -13,17 +13,17 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
     public final const COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL = 'block-stances-byorganizations-carousel';
     public final const COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL = 'block-stances-byindividuals-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL],
+            self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL,
+            self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL,
         );
     }
 

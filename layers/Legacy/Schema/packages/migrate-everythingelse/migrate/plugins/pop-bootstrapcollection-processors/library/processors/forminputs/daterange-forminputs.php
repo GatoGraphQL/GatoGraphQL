@@ -6,11 +6,11 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
     public final const COMPONENT_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
     public final const COMPONENT_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_DATERANGEPICKER],
-            [self::class, self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER],
+            self::COMPONENT_FORMINPUT_DATERANGEPICKER,
+            self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER,
         );
     }
 

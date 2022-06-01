@@ -4,10 +4,10 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts extends PoP
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER = 'layout-feedbackmessagealert-contactuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER,
         );
     }
 

@@ -6,11 +6,11 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
     public final const COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL = 'code-emailnotifications-networklabel';
     public final const COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL = 'code-emailnotifications-subscribedtopicslabel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL],
-            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL],
+            self::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL,
+            self::COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL,
         );
     }
 

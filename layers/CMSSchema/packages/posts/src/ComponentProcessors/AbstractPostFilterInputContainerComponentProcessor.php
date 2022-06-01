@@ -17,13 +17,13 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT,
         );
     }
 

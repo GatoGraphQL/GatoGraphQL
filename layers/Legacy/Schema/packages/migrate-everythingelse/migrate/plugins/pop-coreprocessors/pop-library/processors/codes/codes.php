@@ -6,10 +6,10 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
 {
     public final const COMPONENT_CODE_APPSHELL = 'code-appshell';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_APPSHELL],
+            self::COMPONENT_CODE_APPSHELL,
         );
     }
 

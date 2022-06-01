@@ -6,11 +6,11 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
     public final const COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES = 'forminputgroup-locationpostcategories';
     public final const COMPONENT_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES = 'filterinputgroup-locationpostcategories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES],
+            self::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES,
+            self::COMPONENT_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES,
         );
     }
 

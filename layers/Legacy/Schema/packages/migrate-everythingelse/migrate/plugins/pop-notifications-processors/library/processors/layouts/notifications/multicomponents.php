@@ -6,10 +6,10 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
 {
     public final const COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM = 'notifications-multicomponent-quicklinkgroup-bottom';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM],
+            self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM,
         );
     }
 

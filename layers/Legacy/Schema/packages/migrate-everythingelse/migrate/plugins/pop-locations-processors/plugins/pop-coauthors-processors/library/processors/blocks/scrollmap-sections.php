@@ -4,10 +4,10 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
 {
     public final const COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP = 'block-singleauthors-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP],
+            self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP,
         );
     }
 

@@ -16,21 +16,21 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
     public final const COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP = 'block-tagpastevents-scrollmap';
     public final const COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP = 'block-tagevents-horizontalscrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_BLOCK_EVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_USERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP,
         );
     }
 

@@ -17,22 +17,22 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-referencedby-appendtoscript-simpleview';
     public final const COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widget-referencedby-appendtoscript-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW],
+            self::COMPONENT_WIDGET_HIGHLIGHTS,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_WIDGET_REFERENCEDBY_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_REFERENCEDBY_FULLVIEW,
+            self::COMPONENT_WIDGET_REFERENCEDBY_DETAILS,
+            self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW,
         );
     }
 

@@ -8,13 +8,13 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
     public final const COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD = 'notifications-button-notification-markasread';
     public final const COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD = 'notifications-button-notification-markasunread';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK],
-            [self::class, self::COMPONENT_AAL_BUTTON_USERVIEW],
-            [self::class, self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD],
-            [self::class, self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD],
+            self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK,
+            self::COMPONENT_AAL_BUTTON_USERVIEW,
+            self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD,
+            self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD,
         );
     }
 

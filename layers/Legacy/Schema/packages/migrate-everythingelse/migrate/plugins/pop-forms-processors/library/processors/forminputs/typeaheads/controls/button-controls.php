@@ -4,10 +4,10 @@ class PoP_Module_Processor_TypeaheadButtonControls extends PoP_Module_Processor_
 {
     public final const COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH = 'buttoncontrol-typeaheadsearch';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH],
+            self::COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH,
         );
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)

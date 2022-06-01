@@ -5,10 +5,10 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
 {
     public final const COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP,
         );
     }
 
@@ -34,7 +34,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;

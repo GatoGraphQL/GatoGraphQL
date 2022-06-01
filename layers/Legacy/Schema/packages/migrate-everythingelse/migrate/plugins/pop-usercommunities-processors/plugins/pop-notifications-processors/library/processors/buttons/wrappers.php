@@ -6,11 +6,11 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
     public final const COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP = 'ure-aal-buttonwrapper-editmembership';
     public final const COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS = 'ure-aal-buttonwrapper-viewallmembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP],
-            [self::class, self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS],
+            self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP,
+            self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS,
         );
     }
 

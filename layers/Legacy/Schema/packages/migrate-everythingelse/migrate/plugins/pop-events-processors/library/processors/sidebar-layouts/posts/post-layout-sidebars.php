@@ -9,15 +9,15 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT = 'layout-postsidebarcompact-horizontal-event';
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT = 'layout-postsidebarcompact-horizontal-pastevent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT,
 
         );
     }

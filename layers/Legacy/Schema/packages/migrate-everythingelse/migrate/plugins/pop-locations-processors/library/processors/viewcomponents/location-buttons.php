@@ -9,15 +9,15 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS = 'em-viewcomponent-button-postsidebarlocations';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS = 'em-viewcomponent-button-usersidebarlocations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS,
         );
     }
 
