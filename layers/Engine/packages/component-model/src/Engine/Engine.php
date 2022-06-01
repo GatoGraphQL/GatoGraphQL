@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\Engine;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Checkpoints\CheckpointManagerInterface;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
@@ -74,7 +73,6 @@ class Engine implements EngineInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
-    private ?CheckpointManagerInterface $checkpointManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -157,14 +155,6 @@ class Engine implements EngineInterface
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
-    }
-    final public function setCheckpointManager(CheckpointManagerInterface $checkpointManager): void
-    {
-        $this->checkpointManager = $checkpointManager;
-    }
-    final protected function getCheckpointManager(): CheckpointManagerInterface
-    {
-        return $this->checkpointManager ??= $this->instanceManager->getInstance(CheckpointManagerInterface::class);
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
