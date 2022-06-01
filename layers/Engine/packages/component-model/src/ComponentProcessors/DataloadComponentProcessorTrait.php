@@ -32,6 +32,9 @@ trait DataloadComponentProcessorTrait
         return $ret;
     }
 
+    /**
+     * @return Component[]
+     */
     protected function getInnerSubcomponents(Component $component): array
     {
         return array();

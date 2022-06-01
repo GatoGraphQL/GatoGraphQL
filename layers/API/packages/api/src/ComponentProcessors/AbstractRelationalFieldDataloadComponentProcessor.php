@@ -10,6 +10,9 @@ use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 
 abstract class AbstractRelationalFieldDataloadComponentProcessor extends AbstractDataloadComponentProcessor
 {
+    /**
+     * @return Component[]
+     */
     protected function getInnerSubcomponents(Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
