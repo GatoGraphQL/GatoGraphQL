@@ -8,7 +8,7 @@ final class Component
 {
     function __construct(
         public readonly string $class,
-        public readonly string $variation,
+        public readonly string $name,
         public readonly array $atts = [],
     ) {        
     }
