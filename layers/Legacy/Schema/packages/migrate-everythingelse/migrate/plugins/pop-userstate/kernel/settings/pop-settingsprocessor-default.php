@@ -12,7 +12,7 @@ abstract class DefaultSettingsProcessorBase extends SettingsProcessorBase
         SettingsProcessorManagerFactory::getInstance()->setDefault($this);
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         $route = \PoP\Root\App::getState('route');
 

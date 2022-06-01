@@ -11,7 +11,7 @@ class PoP_PersistentDefinitionsSystem_UserState_Module_SettingsProcessor extends
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE => false,

@@ -12,7 +12,7 @@ class PoP_CommonUserRoles_UserState_Module_SettingsProcessor extends \PoPCMSSche
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION => false,

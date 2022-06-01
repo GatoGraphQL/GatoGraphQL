@@ -11,7 +11,7 @@ class PoP_LocationPostLinksCreation_UserState_Module_SettingsProcessor extends \
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK => PoP_ContentCreation_UserState_Utils::requireUserStateForContentcreationPages(),

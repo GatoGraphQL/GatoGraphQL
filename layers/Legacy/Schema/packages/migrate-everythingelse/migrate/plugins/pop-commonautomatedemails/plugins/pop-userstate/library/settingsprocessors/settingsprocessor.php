@@ -12,7 +12,7 @@ class PoP_CommonAutomatedEmails_UserState_Module_SettingsProcessor extends \PoPC
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => false,

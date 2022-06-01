@@ -11,7 +11,7 @@ class PoP_AAL_UserState_Module_SettingsProcessor extends \PoPCMSSchema\UserState
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS => true,

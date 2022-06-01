@@ -11,7 +11,7 @@ class PoP_PostsCreation_UserState_Module_SettingsProcessor extends \PoPCMSSchema
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_POSTSCREATION_ROUTE_ADDPOST => PoP_ContentCreation_UserState_Utils::requireUserStateForContentcreationPages(),
