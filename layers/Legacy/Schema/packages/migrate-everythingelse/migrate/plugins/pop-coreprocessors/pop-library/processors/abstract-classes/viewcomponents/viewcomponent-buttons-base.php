@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_BUTTON];
     }
 
-    public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         return null;
     }

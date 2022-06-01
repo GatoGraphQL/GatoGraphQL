@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     {
         return null;
     }
-    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         return null;
     }

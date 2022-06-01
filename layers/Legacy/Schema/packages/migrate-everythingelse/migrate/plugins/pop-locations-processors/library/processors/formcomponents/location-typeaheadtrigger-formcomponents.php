@@ -13,7 +13,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
         );
     }
 
-    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:

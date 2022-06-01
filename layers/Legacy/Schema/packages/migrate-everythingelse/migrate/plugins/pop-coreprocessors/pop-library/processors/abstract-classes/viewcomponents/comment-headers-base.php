@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_COMMENTPOST];
     }
 
-    public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
+    public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
         return null;
     }
