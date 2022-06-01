@@ -256,17 +256,17 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $this->getFieldUniqueID(...),
                 $nestedFields
             );
-            $nestedModule = [
+            $nestedComponent = new Component(
                 $component->processorClass,
                 $component->name,
                 [
                     self::COMPONENT_ATTS_FIELD_IDS => $nestedFieldIDs,
                 ]
-            ];
+            );
             $ret[] = RelationalComponentField::fromRelationalField(
                 $relationalField,
                 [
-                    $nestedModule,
+                    $nestedComponent,
                 ]
             );
         }
@@ -435,14 +435,14 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //     foreach ($leafFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
     //         $field = $fieldFragmentModelsTuple->getField();
     //         $location = $field->getLocation();
-    //         $nestedModule = [
+    //         $nestedComponent = new Component(
     //             $component->processorClass,
     //             $component->name,
     //             [
     //                 self::COMPONENT_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
     //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
     //             ]
-    //         ];
+    //         );
     //         /**
     //          * Create a new field that will evaluate if the fragment
     //          * must be applied or not. If applied, only then
@@ -451,7 +451,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
     //             'isTypeOrImplementsAll',
     //             [
-    //                 $nestedModule
+    //                 $nestedComponent
     //             ],
     //             // Create a unique alias to avoid conflicts
     //             sprintf(
@@ -497,18 +497,18 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         /** @var RelationalField */
     //         $relationalField = $fieldFragmentModelsTuple->getField();
     //         $location = $relationalField->getLocation();
-    //         $nestedModule = [
+    //         $nestedComponent = new Component(
     //             $component->processorClass,
     //             $component->name,
     //             [
     //                 self::COMPONENT_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
     //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
     //             ]
-    //         ];
+    //         );
     //         $nestedRelationalComponentField = RelationalComponentField::fromRelationalField(
     //             $relationalField,
     //             [
-    //                 $nestedModule
+    //                 $nestedComponent
     //             ],
     //         );
     //         /**
