@@ -8,7 +8,6 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
-use PoP\ComponentModel\CheckpointSets\CheckpointSets;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;

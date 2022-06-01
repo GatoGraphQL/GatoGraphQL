@@ -1,6 +1,6 @@
 <?php
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
-use PoPCMSSchema\UserState\CheckpointSets\DoingPostUserLoggedInAggregateCheckpoint;
+use PoPCMSSchema\UserState\Checkpoints\DoingPostUserLoggedInAggregateCheckpoint;
 
 class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
 {

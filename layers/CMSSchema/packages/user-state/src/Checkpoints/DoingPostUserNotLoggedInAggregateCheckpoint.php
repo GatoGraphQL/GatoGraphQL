@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UserState\CheckpointSets;
+namespace PoPCMSSchema\UserState\Checkpoints;
 
 use PoP\ComponentModel\Checkpoints\AbstractAggregateCheckpoint;
 use PoP\Engine\Checkpoints\DoingPostCheckpoint;
-use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoPCMSSchema\UserState\Checkpoints\UserNotLoggedInCheckpoint;
 
-class DoingPostUserLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoint
+class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoint
 {
-    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+    private ?UserNotLoggedInCheckpoint $userNotLoggedInCheckpoint = null;
     private ?DoingPostCheckpoint $doingPostCheckpoint = null;
 
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    final public function setUserNotLoggedInCheckpoint(UserNotLoggedInCheckpoint $userNotLoggedInCheckpoint): void
     {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+        $this->userNotLoggedInCheckpoint = $userNotLoggedInCheckpoint;
     }
-    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    final protected function getUserNotLoggedInCheckpoint(): UserNotLoggedInCheckpoint
     {
-        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+        return $this->userNotLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserNotLoggedInCheckpoint::class);
     }
     final public function setDoingPostCheckpoint(DoingPostCheckpoint $doingPostCheckpoint): void
     {
@@ -37,7 +37,7 @@ class DoingPostUserLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoi
     {
         return [
             $this->getDoingPostCheckpoint(),
-            $this->getUserLoggedInCheckpoint(),
+            $this->getUserNotLoggedInCheckpoint(),
         ];
     }
 }

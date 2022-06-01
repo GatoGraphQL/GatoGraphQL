@@ -1,6 +1,6 @@
 <?php
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
-use PoPCMSSchema\UserState\CheckpointSets\DoingPostUserLoggedInAggregateCheckpoint;
+use PoPCMSSchema\UserState\Checkpoints\DoingPostUserLoggedInAggregateCheckpoint;
 
 trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 {
