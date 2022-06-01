@@ -1899,7 +1899,7 @@ function getRelevantPage($component, &$props) {
 }
 ```
 
-A checkpoint is resolved through a [Checkpoint](#checkpointprocessor).
+A checkpoint is resolved through a [Checkpoint](#checkpoint).
 
 #### Checkpoint
 

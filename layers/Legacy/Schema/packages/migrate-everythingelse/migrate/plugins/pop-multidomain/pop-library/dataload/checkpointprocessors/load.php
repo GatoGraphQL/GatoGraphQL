@@ -1,4 +1,4 @@
 <?php
 
-require_once 'checkpointprocessor.php';
+require_once 'checkpoint.php';
 require_once 'settings.php';

@@ -2,8 +2,8 @@
 
 use PoP\ComponentModel\Facades\Checkpoints\CheckpointManagerFacade;
 
-$checkpointprocessor_manager = CheckpointManagerFacade::getInstance();
-$checkpointprocessor_manager->overrideProcessorClass(
+$checkpoint_manager = CheckpointManagerFacade::getInstance();
+$checkpoint_manager->overrideProcessorClass(
     PoP_Domain_Dataload_Checkpoint::class,
     PoP_MultiDomain_Dataload_Checkpoint::class,
     [
