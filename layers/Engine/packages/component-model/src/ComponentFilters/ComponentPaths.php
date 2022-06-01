@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFilters;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 
@@ -83,6 +84,10 @@ class ComponentPaths extends AbstractComponentFilter
         return true;
     }
 
+    /**
+     * @param Component[] $subcomponents
+     * @return Component[]
+     */
     public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
     {
         if (is_null($this->paths)) {

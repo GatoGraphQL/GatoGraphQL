@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFiltering;
 
-use PoP\ComponentModel\Configuration\Request;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
+use PoP\ComponentModel\Configuration\Request;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -139,6 +140,10 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return false;
     }
 
+    /**
+     * @param Component[] $subcomponents
+     * @return Component[]
+     */
     public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
     {
         if (!$this->initialized) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFiltering;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
 
 interface ComponentFilterManagerInterface
@@ -14,6 +15,10 @@ interface ComponentFilterManagerInterface
     public function getNotExcludedComponentSets(): ?array;
     public function setNeverExclude(bool $neverExclude): void;
     public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool;
+    /**
+     * @param Component[] $subcomponents
+     * @return Component[]
+     */
     public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array;
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
