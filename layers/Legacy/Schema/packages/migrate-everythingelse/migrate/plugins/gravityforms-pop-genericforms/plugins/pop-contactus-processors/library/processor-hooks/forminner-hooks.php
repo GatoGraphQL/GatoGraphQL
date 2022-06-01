@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
+
 class PoP_ContactUs_Module_Processor_GFFormInnerHooks
 {
     public function __construct()
@@ -18,7 +20,11 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
         );
     }
 
-    public function getLayoutSubcomponents($layouts, \PoP\ComponentModel\Component\Component $component)
+    /**
+     * @param Component[] $layouts
+     * @return Component[]
+     */
+    public function getLayoutSubcomponents(array $layouts, \PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component->name) {
             case PoP_ContactUs_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUS:
