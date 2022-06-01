@@ -32,7 +32,7 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceComponentsFromAppState(array $components): array
     {
         switch (App::getState('nature')) {
             case RequestNature::USER:

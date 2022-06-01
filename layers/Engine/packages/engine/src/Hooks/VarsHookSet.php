@@ -20,7 +20,7 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceComponentsFromAppState(array $components): array
     {
         // Removing fields changes the configuration
         /** @var ModuleConfiguration */
