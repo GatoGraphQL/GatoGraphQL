@@ -352,14 +352,14 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 fn (FieldInterface $field) => $this->getFieldUniqueID($field),
                 $fragmentModelListFields,
             );
-            $fragmentModelListNestedModule = [
+            $fragmentModelListNestedComponent = new Component(
                 $component->processorClass,
                 $component->name,
                 [
                     self::COMPONENT_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
                     self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
                 ]
-            ];
+            );
             $fragmentModelListFieldAliasFriendlyIDs = array_map(
                 fn (FieldInterface $field) => $this->getFieldUniqueID($field, true),
                 $fragmentModelListFields,
@@ -372,7 +372,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
                 'isTypeOrImplementsAll',
                 [
-                    $fragmentModelListNestedModule,
+                    $fragmentModelListNestedComponent,
                 ],
                 /**
                  * Create a unique alias to avoid conflicts.
