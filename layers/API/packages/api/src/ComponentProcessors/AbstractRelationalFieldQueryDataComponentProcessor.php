@@ -30,9 +30,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getFieldFragmentModelsTuples(?array $componentAtts): array
+    protected function getFieldFragmentModelsTuples(array $componentAtts): array
     {
-        if ($componentAtts === null) {
+        if ($componentAtts === []) {
             /**
              * There are not virtual component atts when loading the component
              * the first time (i.e. for the fields at the root level).
@@ -183,15 +183,15 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * Flag used to process the conditional field from the component or not
      */
-    public function ignoreConditionalFields(?array $componentAtts): bool
+    public function ignoreConditionalFields(array $componentAtts): bool
     {
-        return $componentAtts === null ? true : $componentAtts[self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
+        return $componentAtts === [] ? true : $componentAtts[self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
     }
 
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getLeafFieldFragmentModelsTuples(?array $componentAtts): array
+    protected function getLeafFieldFragmentModelsTuples(array $componentAtts): array
     {
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($componentAtts);
         return array_filter(
@@ -275,7 +275,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getRelationalFieldFragmentModelsTuples(?array $componentAtts): array
+    protected function getRelationalFieldFragmentModelsTuples(array $componentAtts): array
     {
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($componentAtts);
         return array_filter(
