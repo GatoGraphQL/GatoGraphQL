@@ -1,9 +1,9 @@
 <?php
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 
-class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
+class GD_ContentCreation_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_USERCANEDIT = 'checkpoint-usercanedit';
     public final const CHECKPOINT_EDITPOSTNONCE = 'checkpoint-editpostnonce';

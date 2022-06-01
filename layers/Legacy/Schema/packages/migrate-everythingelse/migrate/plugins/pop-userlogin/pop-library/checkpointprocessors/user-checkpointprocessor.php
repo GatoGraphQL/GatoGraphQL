@@ -1,9 +1,9 @@
 <?php
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
-class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
+class GD_UserLogin_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR = 'checkpoint-loggedinuser-isadministrator';
 

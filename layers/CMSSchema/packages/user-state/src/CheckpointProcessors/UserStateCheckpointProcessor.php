@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UserState\CheckpointProcessors;
+namespace PoPCMSSchema\UserState\Checkpoints;
 
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 
-class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
+class UserStateCheckpoint extends AbstractCheckpoint
 {
     public final const USERLOGGEDIN = 'userloggedin';
     public final const USERNOTLOGGEDIN = 'usernotloggedin';

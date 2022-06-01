@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
+use PoP\ComponentModel\Checkpoints\CheckpointManagerInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
@@ -73,7 +73,7 @@ class Engine implements EngineInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
-    private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
+    private ?CheckpointManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -157,13 +157,13 @@ class Engine implements EngineInterface
     {
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
-    final public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
+    final public function setCheckpointManager(CheckpointManagerInterface $checkpointProcessorManager): void
     {
         $this->checkpointProcessorManager = $checkpointProcessorManager;
     }
-    final protected function getCheckpointProcessorManager(): CheckpointProcessorManagerInterface
+    final protected function getCheckpointManager(): CheckpointManagerInterface
     {
-        return $this->checkpointProcessorManager ??= $this->instanceManager->getInstance(CheckpointProcessorManagerInterface::class);
+        return $this->checkpointProcessorManager ??= $this->instanceManager->getInstance(CheckpointManagerInterface::class);
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
@@ -1023,7 +1023,7 @@ class Engine implements EngineInterface
     {
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
-            $feedbackItemResolution = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
+            $feedbackItemResolution = $this->getCheckpointManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
             if ($feedbackItemResolution !== null) {
                 return $feedbackItemResolution;
             }

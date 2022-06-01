@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\CheckpointProcessors;
+namespace PoP\ComponentModel\Checkpoints;
 
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-interface CheckpointProcessorInterface
+interface CheckpointInterface
 {
     /**
      * @return array<array>

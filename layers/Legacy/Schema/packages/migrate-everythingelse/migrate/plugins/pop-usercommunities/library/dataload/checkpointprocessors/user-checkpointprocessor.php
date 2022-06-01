@@ -1,10 +1,10 @@
 <?php
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
+class PoP_UserCommunities_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY = 'checkpoint-loggedinuser-iscommunity';
     public final const CHECKPOINT_EDITINGCOMMUNITYMEMBER = 'checkpoint-editingcommunitymember';

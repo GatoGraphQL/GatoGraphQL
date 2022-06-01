@@ -1,12 +1,12 @@
 <?php
 
-use PoP\ComponentModel\Facades\CheckpointProcessors\CheckpointProcessorManagerFacade;
+use PoP\ComponentModel\Facades\Checkpoints\CheckpointManagerFacade;
 
-$checkpointprocessor_manager = CheckpointProcessorManagerFacade::getInstance();
+$checkpointprocessor_manager = CheckpointManagerFacade::getInstance();
 $checkpointprocessor_manager->overrideProcessorClass(
-    PoP_Domain_Dataload_CheckpointProcessor::class,
-    PoP_MultiDomain_Dataload_CheckpointProcessor::class,
+    PoP_Domain_Dataload_Checkpoint::class,
+    PoP_MultiDomain_Dataload_Checkpoint::class,
     [
-        PoP_Domain_Dataload_CheckpointProcessor::CHECKPOINT_DOMAINVALID,
+        PoP_Domain_Dataload_Checkpoint::CHECKPOINT_DOMAINVALID,
     ]
 );

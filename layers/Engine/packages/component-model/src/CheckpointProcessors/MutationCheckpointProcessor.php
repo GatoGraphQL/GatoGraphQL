@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\CheckpointProcessors;
+namespace PoP\ComponentModel\Checkpoints;
 
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
 
-class MutationCheckpointProcessor extends AbstractCheckpointProcessor
+class MutationCheckpoint extends AbstractCheckpoint
 {
     public final const ENABLED_MUTATIONS = 'enabled-mutations';
 

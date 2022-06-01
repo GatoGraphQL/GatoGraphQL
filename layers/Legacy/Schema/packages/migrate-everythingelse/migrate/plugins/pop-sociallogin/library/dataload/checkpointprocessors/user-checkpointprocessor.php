@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
+class GD_WSL_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_NONSOCIALLOGINUSER = 'wsl-checkpoint-nonsocialloginuser';
 

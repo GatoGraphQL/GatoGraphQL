@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
+class PoPCore_Dataload_Checkpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_PROFILEACCESS = 'checkpoint-profileaccess';
     public final const CHECKPOINT_PROFILEACCESS_SUBMIT = 'checkpoint-profileaccess-submit';

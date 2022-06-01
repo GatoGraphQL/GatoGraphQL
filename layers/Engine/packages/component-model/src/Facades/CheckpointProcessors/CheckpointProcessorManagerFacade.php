@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\CheckpointProcessors;
+namespace PoP\ComponentModel\Facades\Checkpoints;
 
 use PoP\Root\App;
-use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
+use PoP\ComponentModel\Checkpoints\CheckpointManagerInterface;
 
-class CheckpointProcessorManagerFacade
+class CheckpointManagerFacade
 {
-    public static function getInstance(): CheckpointProcessorManagerInterface
+    public static function getInstance(): CheckpointManagerInterface
     {
         /**
-         * @var CheckpointProcessorManagerInterface
+         * @var CheckpointManagerInterface
          */
-        $service = App::getContainer()->get(CheckpointProcessorManagerInterface::class);
+        $service = App::getContainer()->get(CheckpointManagerInterface::class);
         return $service;
     }
 }

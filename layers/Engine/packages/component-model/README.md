@@ -1899,17 +1899,17 @@ function getRelevantPage($component, &$props) {
 }
 ```
 
-A checkpoint is resolved through a [CheckpointProcessor](#checkpointprocessor).
+A checkpoint is resolved through a [Checkpoint](#checkpointprocessor).
 
-#### CheckpointProcessor
+#### Checkpoint
 
-A CheckpointProcessor is an object inheriting from class `AbstractCheckpointProcessor`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
+A Checkpoint is an object inheriting from class `AbstractCheckpoint`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
 
 For instance, to validate if the user IP is whitelisted can be implemented like this:
 
 ```php
 
-class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
+class Checkpoint extends \PoP\Engine\AbstractCheckpoint {
 
   const CHECKPOINT_WHITELISTEDIP = 'checkpoint-whitelistedip';
 

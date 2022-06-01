@@ -1,9 +1,9 @@
 <?php
 
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
+class GD_URE_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION = 'checkpoint-loggedinuser-isprofileorganization';
     public final const CHECKPOINT_LOGGEDINUSER_ISPROFILEINDIVIDUAL = 'checkpoint-loggedinuser-isprofileindividual';

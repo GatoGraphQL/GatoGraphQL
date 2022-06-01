@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\CheckpointProcessors;
+namespace PoP\Engine\Checkpoints;
 
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
 use PoP\Engine\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
 
-class RequestCheckpointProcessor extends AbstractCheckpointProcessor
+class RequestCheckpoint extends AbstractCheckpoint
 {
     public final const DOING_POST = 'doing-post';
 
