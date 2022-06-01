@@ -25,8 +25,7 @@ class PoP_Application_Hooks
         if (!(defined('POP_TAXONOMIES_INITIALIZED') && PoP_Application_Taxonomy_ConfigurationUtils::hookAllcontentComponents())) {
 
         	// First remove the post types as classes, and add them again with their terms
-        	if ($components = gdDataloadAllcontentComponents()) {
-
+        	if ($elements = gdDataloadAllcontentElements()) {
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         		$classes = array_values(array_diff(
         			$classes,
@@ -35,14 +34,14 @@ class PoP_Application_Hooks
             
 	            // Calculate all the terms automatically, by querying the category-like taxonomies from all searchable post types,
 		        // and getting all the terms (categories) within
-		        foreach ($components as $component) {
+		        foreach ($elements as $element) {
 		            // If it has categories, use it. Otherwise, only use the post type
-		            if ($terms = $component['terms']) {
+		            if ($terms = $element['terms']) {
 		                foreach ($terms as $term) {
-		                    $classes[] = $component['postType'].'-'.$term;
+		                    $classes[] = $element['postType'].'-'.$term;
 		                }
 		            } else {
-		                $classes[] = $component['postType'];
+		                $classes[] = $element['postType'];
 		            }
 		        }
 		    }
