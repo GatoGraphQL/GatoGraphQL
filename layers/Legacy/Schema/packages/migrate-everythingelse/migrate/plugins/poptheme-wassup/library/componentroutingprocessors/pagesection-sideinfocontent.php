@@ -77,7 +77,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     }
 
     /**
-     * @return array<array<string, mixed>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

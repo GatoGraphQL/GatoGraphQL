@@ -5,7 +5,7 @@ use PoP\ComponentModel\Component\Component;
 class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessorBase
 {
     /**
-     * @return array<array<string, mixed>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

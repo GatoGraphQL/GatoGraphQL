@@ -11,7 +11,7 @@ use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     /**
-     * @return array<array<string, mixed>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

@@ -24,7 +24,7 @@ interface ComponentRoutingProcessorInterface
     public function getStatePropertiesToSelectComponentByNature(): array;
 
     /**
-     * @return array<array<string, mixed>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array;
 }

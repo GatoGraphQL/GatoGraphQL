@@ -36,7 +36,7 @@ abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProc
     }
 
     /**
-     * @return array<array<string, mixed>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {
