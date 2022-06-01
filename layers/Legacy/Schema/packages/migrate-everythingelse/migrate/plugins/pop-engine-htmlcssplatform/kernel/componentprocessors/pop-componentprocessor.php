@@ -54,7 +54,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
         // if ($this->fixedId($component, $props)) {
         // 	$pagesection_settings_id = $props['pagesection-componentoutputname'];
         // 	$block_settings_id = $props['block-componentoutputname'];
@@ -196,7 +196,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-    // 	$componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+    // 	$componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
@@ -312,7 +312,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         if ($previousmodules_ids = $this->getProp($component, $props, 'previouscomponents-ids')) {
             // We receive entries of key => component, convert them to key => componentOutputName
             $ret[GD_JS_PREVIOUSCOMPONENTSIDS] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $previousmodules_ids
             );
         }

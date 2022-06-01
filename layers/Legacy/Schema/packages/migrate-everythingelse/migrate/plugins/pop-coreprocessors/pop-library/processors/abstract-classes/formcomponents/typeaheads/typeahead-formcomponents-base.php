@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $input = $this->getInputSubcomponent($component);
 
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $input = $this->getInputSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($input);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($input);
 
         return $ret;
     }

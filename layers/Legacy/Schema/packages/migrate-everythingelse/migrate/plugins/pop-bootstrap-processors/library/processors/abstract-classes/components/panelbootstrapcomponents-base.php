@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         // foreach ($this->getSubcomponents($component) as $subcomponent) {
 
-        //     $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
+        //     $subcomponentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
         //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
         //     $ret[$subcomponentOutputName]['data-initjs-targets'] = sprintf(
         //         '%s > %s',
@@ -82,7 +82,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
     //     foreach ($this->getSubcomponents($component) as $subcomponent) {
 
-    //         $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
+    //         $subcomponentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
     //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
     //         $ret[] = sprintf(
     //             '%s > %s > %s',
@@ -205,7 +205,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         if ($panel_components = $this->getPanelSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['panels'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $panel_components
             );
         }
@@ -223,9 +223,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
             foreach ($this->getPanelHeaders($component, $props) as $panelHeader) {
                 $header_subcomponent = $panelHeader['header-subcomponent'];
                 $subheader_subcomponents = $panelHeader['subheader-subcomponents'];
-                $headerSubcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($header_subcomponent);
+                $headerSubcomponentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($header_subcomponent);
                 $header = array(
-                    'componentoutputname' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($header_subcomponent)
+                    'componentoutputname' => \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($header_subcomponent)
                 );
                 if ($title = $titles[$headerSubcomponentFullName] ?? null) {
                     $header['title'] = $title;
@@ -240,9 +240,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                 if ($subheader_subcomponents) {
                     $subheaders = array();
                     foreach ($subheader_subcomponents as $subheader_subcomponent) {
-                        $subheaderSubcomponentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($subheader_subcomponent);
+                        $subheaderSubcomponentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($subheader_subcomponent);
                         $subheader = array(
-                            'componentoutputname' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subheader_subcomponent)
+                            'componentoutputname' => \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($subheader_subcomponent)
                         );
                         if ($title = $titles[$subheaderSubcomponentFullName] ?? null) {
                             $subheader['title'] = $title;
@@ -311,7 +311,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         $ret = parent::getMutableonmodelConfiguration($component, $props);
 
         if ($active_subcomponent = $this->getActivepanelSubcomponent($component)) {
-            $ret['active'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($active_subcomponent);
+            $ret['active'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($active_subcomponent);
         }
 
         return $ret;

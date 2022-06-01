@@ -57,13 +57,13 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
 
         $segmentedbuttons = $this->getSegmentedbuttonSubcomponents($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['segmentedbuttons'] = array_map(
-            \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...), 
+            \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...), 
             $segmentedbuttons
         );
 
         $segmentedbuttons = $this->getDropdownsegmentedbuttonSubcomponents($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
-            \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...), 
+            \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...), 
             $segmentedbuttons
         );
 

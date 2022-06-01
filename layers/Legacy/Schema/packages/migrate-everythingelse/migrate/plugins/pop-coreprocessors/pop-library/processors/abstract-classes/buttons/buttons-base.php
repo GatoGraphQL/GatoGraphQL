@@ -106,7 +106,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $buttoninner = $this->getButtoninnerSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['buttoninner'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($buttoninner);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['buttoninner'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($buttoninner);
 
         return $ret;
     }

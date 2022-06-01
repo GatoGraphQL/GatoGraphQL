@@ -102,11 +102,11 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         );
 
         if ($authors_component = $this->getAuthorsComponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($authors_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($authors_component);
             $ret['authors-sep'] = $this->getAuthorsSeparator($component, $props);
         }
         if ($layout_extra = $this->getLayoutExtraSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-extra'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($layout_extra);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-extra'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($layout_extra);
         }
 
         return $ret;

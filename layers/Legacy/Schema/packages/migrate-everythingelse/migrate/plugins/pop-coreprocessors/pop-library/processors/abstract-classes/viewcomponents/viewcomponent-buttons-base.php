@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
         }
 
         if ($header = $this->getHeaderSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($header);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['header'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($header);
         }
 
         return $ret;

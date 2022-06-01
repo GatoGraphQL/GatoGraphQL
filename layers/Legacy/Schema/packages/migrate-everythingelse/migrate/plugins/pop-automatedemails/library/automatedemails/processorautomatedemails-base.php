@@ -31,7 +31,7 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
     {
         $pagesection_settings_id = $this->getPagesectionSettingsid();
         $block_component = $this->getBlockComponent();
-        $block_settings_id = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($block_component);
+        $block_settings_id = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($block_component);
         $json = PoP_ServerSideRenderingFactory::getInstance()->getJson();
         return !empty($json['datasetcomponentdata']['combinedstate']['dbobjectids'][$pagesection_settings_id][$block_settings_id]);
     }
