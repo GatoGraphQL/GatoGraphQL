@@ -210,7 +210,7 @@ class Engine implements EngineInterface
         $engineState->backgroundload_urls[$url] = $targets;
     }
 
-    public function getEntryComponent(): array
+    public function getEntryComponent(): Component
     {
         $engineState = App::getEngineState();
 
@@ -1037,7 +1037,7 @@ class Engine implements EngineInterface
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

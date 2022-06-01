@@ -13,7 +13,7 @@ interface EngineInterface
 {
     public function getOutputData(): array;
     public function addBackgroundUrl(string $url, array $targets): void;
-    public function getEntryComponent(): array;
+    public function getEntryComponent(): Component;
     public function getExtraRoutes(): array;
     public function listExtraRouteVars(): array;
     public function generateDataAndPrepareResponse(): void;
@@ -28,6 +28,6 @@ interface EngineInterface
      * @param CheckpointInterface[] $checkpoints
      */
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution;
-    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array;
+    public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array;
     public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

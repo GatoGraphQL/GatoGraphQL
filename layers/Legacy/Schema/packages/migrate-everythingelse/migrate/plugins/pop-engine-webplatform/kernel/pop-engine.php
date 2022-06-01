@@ -1,14 +1,15 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engine
 {
@@ -124,7 +125,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         $ret = parent::getComponentData($root_component, $root_model_props, $root_props);
 
