@@ -671,7 +671,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void
     {
         // Add the current component's dbkeys
-        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
+        if ($this->getRelationalTypeResolver($component) !== null) {
             $dbkeys = $this->getDatabaseKeys($component, $props);
             foreach ($dbkeys as $field => $dbkey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
@@ -684,7 +684,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Propagate to all subcomponents which have no typeResolver
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
-        if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
+        if ($this->getProp($component, $props, 'succeeding-typeResolver') !== null) {
             $this->getComponentFilterManager()->prepareForPropagation($component, $props);
             foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
                 // @todo Pass the ComponentField directly, do not convert to string first
