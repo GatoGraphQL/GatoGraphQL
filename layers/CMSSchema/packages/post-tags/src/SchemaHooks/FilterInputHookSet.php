@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\SchemaHooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Posts\ComponentProcessors\AbstractPostFilterInputContainerComponentProcessor;
@@ -23,14 +24,14 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             ...$filterInputComponents,
-            [
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_TAG_SLUGS
-            ],
-            [
+            ),
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_TAG_IDS
-            ],
+            ),
         ];
     }
 }

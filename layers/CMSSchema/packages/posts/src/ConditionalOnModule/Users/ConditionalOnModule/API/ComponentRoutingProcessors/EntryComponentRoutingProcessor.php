@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
@@ -25,10 +26,10 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => [
+            $moduleConfiguration->getPostsRoute() => new Component(
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
-            ],
+            ),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::USER][$route][] = [

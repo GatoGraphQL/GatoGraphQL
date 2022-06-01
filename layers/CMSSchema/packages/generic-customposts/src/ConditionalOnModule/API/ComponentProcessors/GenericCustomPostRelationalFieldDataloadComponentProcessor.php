@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\GenericCustomPosts\ConditionalOnModule\API\ComponentProcessors;
 
-use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoPCMSSchema\GenericCustomPosts\ComponentProcessors\GenericCustomPostFilterInputContainerComponentProcessor;
 use PoPCMSSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
@@ -77,25 +78,25 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
-                return [
+                new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT:
-                return [
+                new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
-                return [
+                new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT:
-                return [
+                new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
-                ];
+                );
         }
 
         return parent::getFilterSubcomponent($component);

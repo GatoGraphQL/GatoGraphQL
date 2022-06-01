@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\CustomPostFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
@@ -30,10 +31,10 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
     {
         // Get the original config from above
         $targetModule = match ($component[1]) {
-            self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTLIST => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST],
-            self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTCOUNT => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT],
-            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTLIST => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST],
-            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTLIST => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST),
+            self::COMPONENT_FILTERINPUTCONTAINER_PAGELISTCOUNT => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT),
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTLIST => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST),
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT),
             default => null,
         };
         $filterInputComponents = parent::getFilterInputComponents($targetModule);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\SchemaHooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Categories\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
@@ -23,10 +24,10 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             ...$filterInputComponents,
-            [
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CATEGORY_IDS
-            ],
+            ),
         ];
     }
 }

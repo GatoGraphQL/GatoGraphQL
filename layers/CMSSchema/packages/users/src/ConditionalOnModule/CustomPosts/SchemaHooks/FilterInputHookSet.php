@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\SchemaHooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\AbstractCustomPostFilterInputContainerComponentProcessor;
@@ -30,18 +31,18 @@ class FilterInputHookSet extends AbstractHookSet
     public function getAuthorFilterInputComponents(): array
     {
         return [
-            [
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_AUTHOR_IDS
-            ],
-            [
+            ),
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_AUTHOR_SLUG
-            ],
-            [
+            ),
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS
-            ],
+            ),
         ];
     }
 }

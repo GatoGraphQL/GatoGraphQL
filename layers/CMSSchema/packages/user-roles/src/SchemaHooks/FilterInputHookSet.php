@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\SchemaHooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\UserRoles\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
@@ -39,14 +40,14 @@ class FilterInputHookSet extends AbstractHookSet
     public function getUserFilterInputComponents(): array
     {
         return [
-            [
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_USER_ROLES
-            ],
-            [
+            ),
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES
-            ],
+            ),
         ];
     }
 }

@@ -154,10 +154,10 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?\PoP\ComponentModel\Component\Component
     {
         return match ($fieldName) {
-            'genericCustomPost' => [
+            'genericCustomPost' => new Component(
                 CommonCustomPostFilterInputContainerComponentProcessor::class,
                 CommonCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE
-            ],
+            ),
             default => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
         };
     }

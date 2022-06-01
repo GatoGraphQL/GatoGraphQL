@@ -61,10 +61,10 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?\PoP\ComponentModel\Component\Component
     {
         return match ($fieldName) {
-            'post' => [
+            'post' => new Component(
                 CommonCustomPostFilterInputContainerComponentProcessor::class,
                 CommonCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS
-            ],
+            ),
             default => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
         };
     }
