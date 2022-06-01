@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_EM_Processors_ContentHooks
@@ -8,13 +7,13 @@ class PoPTheme_EM_Processors_ContentHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_component',
-            $this->contentInner(...),
+            $this->getContentInnerComponent(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, \PoP\ComponentModel\Component\Component $component)
+    public function getContentInnerComponent(\PoP\ComponentModel\Component\Component $inner, \PoP\ComponentModel\Component\Component $component): \PoP\ComponentModel\Component\Component
     {
         if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE])) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);

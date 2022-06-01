@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPCMSSchema\Posts\Facades\PostTypeAPIFacade;
@@ -10,13 +9,13 @@ class PoPTheme_LocationPostLinks_ContentHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_component',
-            $this->contentInner(...),
+            $this->getContentInnerComponent(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, \PoP\ComponentModel\Component\Component $component)
+    public function getContentInnerComponent(\PoP\ComponentModel\Component\Component $inner, \PoP\ComponentModel\Component\Component $component): \PoP\ComponentModel\Component\Component
     {
         if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE]) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();

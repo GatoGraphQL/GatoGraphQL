@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_AddHighlights_Processors_ContentHooks
@@ -8,13 +7,13 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_component',
-            $this->contentInner(...),
+            $this->getContentInnerComponent(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, \PoP\ComponentModel\Component\Component $component)
+    public function getContentInnerComponent(\PoP\ComponentModel\Component\Component $inner, \PoP\ComponentModel\Component\Component $component): \PoP\ComponentModel\Component\Component
     {
         if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE] || $component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_USERPOSTINTERACTION]) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -22,7 +21,8 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
             if ($customPostTypeAPI->getCustomPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
                 if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE])) {
                     return [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE];
-                } elseif (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_USERPOSTINTERACTION])) {
+                }
+                if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_USERPOSTINTERACTION])) {
                     return [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION];
                 }
             }

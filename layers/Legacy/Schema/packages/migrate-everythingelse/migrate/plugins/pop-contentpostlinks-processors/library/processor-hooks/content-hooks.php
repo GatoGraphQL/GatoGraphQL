@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class PoP_ContentPostLinks_ContentHooks
@@ -8,13 +7,13 @@ class PoP_ContentPostLinks_ContentHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_component',
-            $this->contentInner(...),
+            $this->getContentInnerComponent(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, \PoP\ComponentModel\Component\Component $component)
+    public function getContentInnerComponent(\PoP\ComponentModel\Component\Component $inner, \PoP\ComponentModel\Component\Component $component): \PoP\ComponentModel\Component\Component
     {
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
